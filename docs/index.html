@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Project Home — l5r10</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home">l5r10</a>
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" data-open="false">
+        <ul>
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Welcome to the l5r10 template</h1>
+        <p>A minimal static site scaffold ready for GitHub Pages.</p>
+        <p><a class="btn" href="#about">Learn more</a></p>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <h2>About</h2>
+      <p>This is a simple home page with a responsive navigation bar and lightweight JavaScript that works on GitHub Pages (no build step required).</p>
+    </section>
+
+    <section id="features" class="section container">
+      <h2>Features</h2>
+      <ul>
+        <li>Responsive navigation (hamburger on small screens)</li>
+        <li>Smooth scrolling</li>
+        <li>Active link highlight</li>
+        <li>No dependencies — plain HTML/CSS/JS</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <p>Add your contact details or a simple contact form here.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> l5r10</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
