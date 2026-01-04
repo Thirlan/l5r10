@@ -121,8 +121,8 @@ class HexMap {
     const offsetX = y % 2 === 1 ? hexWidth / 2 : 0;
     
     return {
-      x: x * hexWidth + offsetX + 10,
-      y: y * (hexHeight * 0.75) + 10
+      x: x * hexWidth + offsetX,
+      y: y * (hexHeight * 0.75)
     };
   }
 
@@ -142,15 +142,15 @@ class HexMap {
           const screenCoords = this.getHexScreenCoords(x, y);
           const spriteDims = tile.getSpriteDimensions();
 
-          // Draw the sprite from the tileset
+          // Draw the sprite from the tileset, centered on the hex position
           this.ctx.drawImage(
             tile.tileSet.image,
             spriteDims.x,
             spriteDims.y,
             spriteDims.width,
             spriteDims.height,
-            screenCoords.x,
-            screenCoords.y,
+            screenCoords.x - this.hexWidth / 2,
+            screenCoords.y - this.hexHeight / 2,
             this.hexWidth,
             this.hexHeight
           );
