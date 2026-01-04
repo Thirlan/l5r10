@@ -1,4 +1,4 @@
-import { HexMap } from '../js/map/hexmap.js';
+import HexMap from '../js/map/HexMap.js';
 import { LowResTileSet } from '../js/map/low_res_tileset.js';
 import { HexMapGenerator } from '../js/map/hexmap_generator.js';
 
