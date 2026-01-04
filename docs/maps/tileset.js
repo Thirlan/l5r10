@@ -9,13 +9,17 @@ class TileSet {
    * @param {number} pixelHeight - Pixel height of individual sprites
    * @param {number} rows - Number of sprite rows in the image
    * @param {number} columns - Number of sprite columns in the image
+   * @param {number} offsetX - X offset for tile positioning
+   * @param {number} offsetY - Y offset for tile positioning
    */
-  constructor(imgSource, pixelWidth, pixelHeight, rows, columns) {
+  constructor(imgSource, pixelWidth, pixelHeight, rows, columns, offsetX = 0, offsetY = 0) {
     this.imgSource = imgSource;
     this.pixelWidth = pixelWidth;
     this.pixelHeight = pixelHeight;
     this.rows = rows;
     this.columns = columns;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
     this.image = null;
     
     // Load the image
@@ -27,14 +31,16 @@ class TileSet {
    * Get the dimensions and coordinates of a sprite in the tileset
    * @param {number} row - Row index of the sprite
    * @param {number} column - Column index of the sprite
-   * @returns {Object} Object with x, y, width, and height properties
+   * @returns {Object} Object with x, y, width, height, offsetX, and offsetY properties
    */
   getDimensions(row, column) {
     return {
       x: column * this.pixelWidth,
       y: row * this.pixelHeight,
       width: this.pixelWidth,
-      height: this.pixelHeight
+      height: this.pixelHeight,
+      offsetX: this.offsetX,
+      offsetY: this.offsetY
     };
   }
 
@@ -79,7 +85,9 @@ class LowResTileSet {
             32,                    // Pixel width of each sprite
             48,                    // Pixel height of each sprite
             6,                     // Number of rows in the sprite sheet
-            8                     // Number of columns in the sprite sheet
+            8,                     // Number of columns in the sprite sheet
+            0,                     // X offset for tile positioning
+            16                     // Y offset for tile positioning
         );
     this.grassTile = new Tile(this.tileSet, 0, 0);
     this.grassLightForestTile = new Tile(this.tileSet, 0, 1);
@@ -352,14 +360,14 @@ class HexMap {
    * @param {number} column - Column position in the map grid
    * @returns {Object} Object with x and y screen coordinates
    */
-  getHexScreenCoords(row, column) {
+  getHexScreenCoords(row, column, tileOffsetX = 0, tileOffsetY = 0) {
     const hexWidth = this.hexWidth;
     const hexHeight = this.hexHeight;
     const offsetY = column % 2 === 1 ? hexHeight / 2 : 0;
     
     return {
-      x: column * hexWidth * 0.75,
-      y: row * hexHeight + offsetY
+      x: column * hexWidth * 0.75 - hexWidth / 2 + tileOffsetX,
+      y: row * hexHeight + offsetY - hexHeight / 2 + tileOffsetY
     };
   }
 
@@ -376,8 +384,8 @@ class HexMap {
       for (let c = 0; c < this.mapWidth; c++) {
         const tile = this.tiles[r] && this.tiles[r][c];
         if (tile && tile.tileSet.isLoaded()) {
-          const screenCoords = this.getHexScreenCoords(r, c);
           const spriteDims = tile.getSpriteDimensions();
+          const screenCoords = this.getHexScreenCoords(r, c, spriteDims.offsetX, spriteDims.offsetY);
 
           // Draw the sprite from the tileset, centered on the hex position
           this.ctx.drawImage(
