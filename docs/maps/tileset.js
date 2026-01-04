@@ -111,18 +111,18 @@ class HexMap {
 
   /**
    * Get the screen coordinates for a hex at the given map position
-   * @param {number} x - X position in the map grid
-   * @param {number} y - Y position in the map grid
+   * @param {number} row - Row position in the map grid
+   * @param {number} column - Column position in the map grid
    * @returns {Object} Object with x and y screen coordinates
    */
-  getHexScreenCoords(x, y) {
+  getHexScreenCoords(row, column) {
     const hexWidth = this.hexWidth;
     const hexHeight = this.hexHeight;
-    const offsetX = y % 2 === 1 ? hexWidth / 2 : 0;
+    const offsetY = column % 2 === 1 ? hexHeight / 2 : 0;
     
     return {
-      x: x * hexWidth + offsetX,
-      y: y * (hexHeight * 0.75)
+      x: column * hexWidth * 0.75,
+      y: row * hexHeight + offsetY
     };
   }
 
@@ -135,11 +135,11 @@ class HexMap {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Draw each tile
-    for (let y = 0; y < this.mapHeight; y++) {
-      for (let x = 0; x < this.mapWidth; x++) {
-        const tile = this.tiles[y] && this.tiles[y][x];
+    for (let r = 0; r < this.mapHeight; r++) {
+      for (let c = 0; c < this.mapWidth; c++) {
+        const tile = this.tiles[r] && this.tiles[r][c];
         if (tile && tile.tileSet.isLoaded()) {
-          const screenCoords = this.getHexScreenCoords(x, y);
+          const screenCoords = this.getHexScreenCoords(r, c);
           const spriteDims = tile.getSpriteDimensions();
 
           // Draw the sprite from the tileset, centered on the hex position
@@ -149,8 +149,8 @@ class HexMap {
             spriteDims.y,
             spriteDims.width,
             spriteDims.height,
-            screenCoords.x - this.hexWidth / 2,
-            screenCoords.y - this.hexHeight / 2,
+            screenCoords.x,
+            screenCoords.y,
             this.hexWidth,
             this.hexHeight
           );
