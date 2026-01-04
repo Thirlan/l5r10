@@ -63,6 +63,9 @@
     </style>
 </head>
 <body>
+  <header>
+    <nav class="navbar"></nav>
+  </header>
     <div class="warning" id="warning">
         <strong>Note:</strong> Add a tileset image to see the hex map with textures. 
         Place a sprite sheet image in the maps folder and update the image source path.
@@ -77,5 +80,11 @@
     </div>
 
     <script type="module" src="./map_main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("nav").load("navbar.html");
+    })
+  </script>
 </body>
 </html>

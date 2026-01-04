@@ -8,38 +8,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <a href="../index.html">l5r10</a>
-      <div class="dropdown">
-        <button class="dropbtn">Great Clans<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="../great_clans/crab.html">Crab</a>
-          <a href="../great_clans/crane.html">Crane</a>
-          <a href="../great_clans/dragon.html">Dragon</a>
-          <a href="../great_clans/lion.html">Lion</a>
-          <a href="../great_clans/phoenix.html">Phoenix</a>
-          <a href="../great_clans/scorpion.html">Scorpion</a>
-          <a href="../great_clans/unicorn.html">Unicorn</a>
-          <a href="../great_clans/imperial.html">Imperial</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Other Clans<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="mantis.html">Mantis</a>
-          <a href="ronin.html">Ronin</a>
-          <a href="monk.html">Monk</a>
-          <a href="centipede.html">Centipede</a>
-          <a href="fox.html">Fox</a>
-          <a href="badger.html">Badger</a>
-          <a href="dragonfly.html">Dragonfly</a>
-          <a href="falcon.html">Falcon</a>
-          <a href="hare.html">Hare</a>
-          <a href="sparrow.html">Sparrow</a>
-          <a href="tortoise.html">Tortoise</a>
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar"></nav>
   </header>
 
   <main>
@@ -80,5 +49,11 @@
   <footer>
       <p>Legend of the Five Rings - 10th Century</p>
   </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("nav").load("navbar.html");
+    })
+  </script>
 </body>
 </html>
