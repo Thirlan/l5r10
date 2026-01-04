@@ -9,47 +9,6 @@
 <body>
   <header>
     <nav class="navbar">
-      <a href="index.html">l5r10</a>
-      <div class="dropdown">
-        <button class="dropbtn">Great Clans<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="great_clans/crab.html">Crab</a>
-          <a href="great_clans/crane.html">Crane</a>
-          <a href="great_clans/dragon.html">Dragon</a>
-          <a href="great_clans/lion.html">Lion</a>
-          <a href="great_clans/phoenix.html">Phoenix</a>
-          <a href="great_clans/scorpion.html">Scorpion</a>
-          <a href="great_clans/unicorn.html">Unicorn</a>
-          <a href="great_clans/imperial.html">Imperial</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Other Clans<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="other_clans/mantis.html">Mantis</a>
-          <a href="other_clans/ronin.html">Ronin</a>
-          <a href="other_clans/monk.html">Monk</a>
-          <a href="other_clans/centipede.html">Centipede</a>
-          <a href="other_clans/fox.html">Fox</a>
-          <a href="other_clans/badger.html">Badger</a>
-          <a href="other_clans/dragonfly.html">Dragonfly</a>
-          <a href="other_clans/falcon.html">Falcon</a>
-          <a href="other_clans/hare.html">Hare</a>
-          <a href="other_clans/sparrow.html">Sparrow</a>
-          <a href="other_clans/tortoise.html">Tortoise</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Tools<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="maps/hexmap.html">Map</a>
-        </div>
-      <div class="dropdown">
-        <button class="dropbtn">Rules<i clas="fa fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="rules/base_classes.html">Base Classes</a>
-        </div>
-      </div>
     </nav>
   </header>
 
@@ -75,5 +34,10 @@
   <footer>
       <p>Legend of the Five Rings - 10th Century</p>
   </footer>
+  <script>
+    $(function() {
+      $("nav").load("navbar.html");
+    })
+  </script>
 </body>
 </html>
