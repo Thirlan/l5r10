@@ -90,7 +90,7 @@
         const generator = new HexMapGenerator(lowResTileSet);
         generator.generate(hexMap);
         
-        lowResTileSet.tileset.image.onload = function() {
+        lowResTileSet.tileSet.image.onload = function() {
             // Start rendering
             hexMap.animate();
         }
