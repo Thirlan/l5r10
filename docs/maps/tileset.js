@@ -151,8 +151,8 @@ class HexMap {
             spriteDims.height,
             screenCoords.x,
             screenCoords.y,
-            this.hexWidth,
-            this.hexHeight
+            spriteDims.width,
+            spriteDims.height
           );
         }
       }
