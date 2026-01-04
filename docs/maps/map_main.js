@@ -1,5 +1,5 @@
 import HexMap from '../js/map/HexMap.js';
-import LowResTileSet from '../js/map/LowResTileset.js';
+import LowResTileSet from '../js/map/LowResTileSet.js';
 import HexMapGenerator from '../js/map/HexMapGenerator.js';
 
 // Initialize the hex map
