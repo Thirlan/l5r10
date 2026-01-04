@@ -1,7 +1,7 @@
 /**
  * TileSet class - represents a sprite sheet for hex map tiles
  */
-class TileSet {
+export default class TileSet {
   /**
    * Constructor for TileSet
    * @param {string} imgSource - Path to the sprite image file
@@ -52,5 +52,3 @@ class TileSet {
     return this.image && this.image.complete;
   }
 }
-
-export { TileSet };

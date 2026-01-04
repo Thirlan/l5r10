@@ -3,7 +3,7 @@ import Tile from './tile.js';
 /**
  * HexMap class - manages and renders a hex-based map
  */
-class HexMap {
+export default class HexMap {
   /**
    * Constructor for HexMap
    * @param {string} canvasId - ID of the canvas element to render to
@@ -98,5 +98,3 @@ class HexMap {
     animate();
   }
 }
-
-export { HexMap };

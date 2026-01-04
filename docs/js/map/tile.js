@@ -3,7 +3,7 @@ import TileSet from './tileset.js';
 /**
  * Tile class - represents a single tile in the hex map
  */
-class Tile {
+export default class Tile {
   /**
    * Constructor for Tile
    * @param {TileSet} tileSet - The TileSet instance for this tile
@@ -24,5 +24,3 @@ class Tile {
     return this.tileSet.getDimensions(this.row, this.column);
   }
 }
-
-export { Tile };
