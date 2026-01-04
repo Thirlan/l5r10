@@ -1,4 +1,4 @@
-import Tile from './tile.js';
+import Tile from './Tile.js';
 
 /**
  * HexMap class - manages and renders a hex-based map

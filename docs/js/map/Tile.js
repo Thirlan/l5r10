@@ -1,4 +1,4 @@
-import TileSet from './tileset.js';
+import TileSet from './TileSet.js';
 
 /**
  * Tile class - represents a single tile in the hex map

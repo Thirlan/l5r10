@@ -1,5 +1,5 @@
-import TileSet from './tileset.js';
-import Tile from './tile.js';
+import TileSet from './TileSet.js';
+import Tile from './Tile.js';
 
 /**
  * LowResTileSet class - defines a specific low-resolution tileset and its tiles
