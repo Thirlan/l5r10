@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hex World Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4a9eff;
+        }
+
+        #mapCanvas {
+            border: 2px solid #4a9eff;
+            background-color: #222;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+        }
+
+        .info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .warning {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 100, 100, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 300px;
+            display: none;
+        }
+
+        .warning.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning" id="warning">
+        <strong>Note:</strong> Add a tileset image to see the hex map with textures. 
+        Place a sprite sheet image in the maps folder and update the image source path.
+    </div>
+
+    <div id="container">
+        <h1>Hex World Map</h1>
+        <canvas id="mapCanvas" width="1024" height="768"></canvas>
+        <div class="info">
+            <p>Hex-based world map system | Tiles are loaded from a TileSet sprite sheet</p>
+        </div>
+    </div>
+
+    <script src="tileset.js"></script>
+    <script>
+        // Initialize the hex map
+        const mapWidth = 16;
+        const mapHeight = 12;
+        const hexWidth = 64;
+        const hexHeight = 64;
+
+        const hexMap = new HexMap('mapCanvas', mapWidth, mapHeight, hexWidth, hexHeight);
+
+        // Create a tileset - you can replace this with your own sprite sheet image
+        // The image should be a sprite sheet with rows and columns of tiles
+        const tileset = new TileSet(
+            '../img/fantasyhextiles_v3.png',  // Path to your sprite sheet image
+            32,                    // Pixel width of each sprite
+            32,                    // Pixel height of each sprite
+            6,                     // Number of rows in the sprite sheet
+            8                      // Number of columns in the sprite sheet
+        );
+
+        // Load the image and populate the map with sample tiles
+        tileset.image.onload = function() {
+            // Create a sample map - each tile references the tileset and sprite row/column
+            for (let y = 0; y < mapHeight; y++) {
+                for (let x = 0; x < mapWidth; x++) {
+                    // Alternate between different sprite tiles (row 0-7, column 0-7)
+                    const spriteRow = Math.floor(Math.random() * tileset.rows);
+                    const spriteColumn = Math.floor(Math.random() * tileset.columns);
+                    
+                    const tile = new Tile(tileset, spriteRow, spriteColumn);
+                    hexMap.setTile(x, y, tile);
+                }
+            }
+            
+            // Start rendering
+            hexMap.animate();
+        };
+
+        // Handle image load error
+        tileset.image.onerror = function() {
+            const warning = document.getElementById('warning');
+            warning.classList.add('show');
+            
+            // Still render the map structure without textures
+            for (let y = 0; y < mapHeight; y++) {
+                for (let x = 0; x < mapWidth; x++) {
+                    const tile = new Tile(tileset, 0, 0);
+                    hexMap.setTile(x, y, tile);
+                }
+            }
+            
+            // Render hex outlines only
+            const ctx = hexMap.ctx;
+            const renderOutline = () => {
+                ctx.fillStyle = '#222';
+                ctx.fillRect(0, 0, hexMap.canvas.width, hexMap.canvas.height);
+                
+                ctx.strokeStyle = '#4a9eff';
+                ctx.lineWidth = 1;
+                
+                for (let y = 0; y < mapHeight; y++) {
+                    for (let x = 0; x < mapWidth; x++) {
+                        const coords = hexMap.getHexScreenCoords(x, y);
+                        drawHexOutline(ctx, coords.x, coords.y, hexWidth / 2);
+                    }
+                }
+                
+                requestAnimationFrame(renderOutline);
+            };
+            
+            renderOutline();
+        };
+
+        // Helper function to draw a hex outline
+        function drawHexOutline(ctx, centerX, centerY, size) {
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * 60) * Math.PI / 180;
+                const x = centerX + size * Math.cos(angle);
+                const y = centerY + size * Math.sin(angle);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
