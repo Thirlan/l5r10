@@ -5,7 +5,7 @@ import Tile from './tile.js';
  * LowResTileSet class - defines a specific low-resolution tileset and its tiles
  */
 
-class LowResTileSet {
+export default class LowResTileSet {
   constructor() {
     this.tileSet = new TileSet(
             '../img/fantasyhextiles_v3.png',  // Path to your sprite sheet image

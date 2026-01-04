@@ -1,4 +1,4 @@
-class HexMapGenerator {
+export default class HexMapGenerator {
   constructor(lowResTileSet) {
     this.lowResTileSet = lowResTileSet;
     this.seed = Math.random() * 10000;
