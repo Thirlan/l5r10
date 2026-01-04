@@ -196,4 +196,4 @@ class HexMapGenerator {
   }
 }
 
-export default HexMapGenerator;
+export { HexMapGenerator };

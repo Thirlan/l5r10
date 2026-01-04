@@ -53,4 +53,4 @@ class TileSet {
   }
 }
 
-export default TileSet;
+export { TileSet };

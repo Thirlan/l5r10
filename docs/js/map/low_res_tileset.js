@@ -46,4 +46,4 @@ class LowResTileSet {
   }
 }
 
-export default LowResTileSet;
+export { LowResTileSet };

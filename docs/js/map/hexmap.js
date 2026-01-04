@@ -98,3 +98,5 @@ class HexMap {
     animate();
   }
 }
+
+export { HexMap };
