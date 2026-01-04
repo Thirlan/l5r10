@@ -87,7 +87,7 @@ class LowResTileSet {
             6,                     // Number of rows in the sprite sheet
             8,                     // Number of columns in the sprite sheet
             0,                     // X offset for tile positioning
-            16                     // Y offset for tile positioning
+            -16                    // Y offset for tile positioning
         );
     this.grassTile = new Tile(this.tileSet, 0, 0);
     this.grassLightForestTile = new Tile(this.tileSet, 0, 1);
