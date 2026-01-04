@@ -81,8 +81,8 @@
         // Initialize the hex map
         const mapWidth = 16;
         const mapHeight = 12;
-        const hexWidth = 64;
-        const hexHeight = 64;
+        const hexWidth = 32;
+        const hexHeight = 32;
 
         const hexMap = new HexMap('mapCanvas', mapWidth, mapHeight, hexWidth, hexHeight);
 
@@ -91,9 +91,9 @@
         const tileset = new TileSet(
             '../img/fantasyhextiles_v3.png',  // Path to your sprite sheet image
             32,                    // Pixel width of each sprite
-            32,                    // Pixel height of each sprite
+            48,                    // Pixel height of each sprite
             6,                     // Number of rows in the sprite sheet
-            8                      // Number of columns in the sprite sheet
+            8                     // Number of columns in the sprite sheet
         );
 
         // Load the image and populate the map with sample tiles
