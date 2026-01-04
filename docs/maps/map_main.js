@@ -20,7 +20,7 @@ lowResTileSet.tileSet.image.onload = function() {
 }
 
 // Handle image load error
-lowResTileSet.tileset.image.onerror = function() {
+lowResTileSet.tileSet.image.onerror = function() {
     const warning = document.getElementById('warning');
     warning.classList.add('show');
 };
