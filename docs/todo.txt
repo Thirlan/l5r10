@@ -1,0 +1,134 @@
+Historic Effects on Character Options
+Because this is the 10th century in the setting, certain character options are different.
+
+- Maho and the Shadowlands Taint
+
+- Togashi Tattooed Order (pages 115-116): The Crane tattoo, Hawk tattoo, Ki-Rin tattoo, Scorpion Tattoo and Wolf tattoo
+can be activated a number of times per day equal to the ise zumi's school rank. All the tattoos are so large that they can
+never be used with armor.
+
+Changes to Advantages, Skills, Spells and Equipment
+- Tactician advantage (page 154): The Mass Battle system won’t be used, so this advantage provides +1k1 on Battle Skill
+rolls instead (the skill is still relevant for commanding groups and navigating the battlefield as an individual).
+- Fires of Purity spell (page 181): This spell has been removed. A replacement rank 1 Fire Spell (Gift of Amaterasu) taken
+from a supplement book is provided later in this document.
+- Armor (page 198): The TN penalties from all types of armor also apply to Spell Casting Rolls.
+- Naginata (page 202): The naginata has a DR of 3k3.
+- Wakizashi weapon (page 205): You may draw a wakizashi as part of the same action as a katana.
+
+
+New Advantage: Clever Duelist [Mental] (2 Points)
+You take an unorthodox approach to the art of iaijutsu. During iaijutsu duels, you may use your Intelligence Trait for
+Iaijutsu (Assessment) rolls and your Agility Trait for the iaijutsu strike roll.
+
+New Advantage: Fast as the River [Physical] (6 Points)
+You are impressively swift on your feet. Your Water Ring is considered 1 higher for purposes of how far you can move
+with Move actions.
+
+New Advantage: Goju Spy [Spiritual] (8 Points)
+You have agreed to serve as a spy for the mysterious “Goju” ninja family in exchange for their assistance. They gave you
+some training that seemed mundane, if dishonorable, but you’ve started to exhibit supernatural powers. In theory, you will
+be able to pay off your debt by providing a steady stream of sensitive information and committing the occasional act of
+sabotage over the next few years. This “advantage” has several effects:
+> You are considered a ninja.
+> You see perfectly in the dark, negating any penalties you would suffer from it.
+> While in darkness or deep shadow, you receive a +1k0 bonus to the total of Stealth Skill rolls.
+> Your facial features, voice, and even your height to a small extent have become ‘malleable’, allowing you to add +2k0 to
+all Acting Skill Rolls to disguise yourself.
+> You receive a +1k0 bonus on Attack rolls you make with ninjutsu weapons (including any weapons with the Ninja
+keyword). When you reach Insight Rank 3, you can make attacks with such weapons as a Simple Action rather than a
+Complex Action.
+> No spell or other power can detect that you have this Advantage.
+> You have the Blackmailed (by the Goju) disadvantage for no points. Agents of the Goju have a +1k1 bonus on all Skill
+and Spellcasting rolls made against you.
+
+New Advantage: Vigilant Eyes [Mental] (2 Point)
+Your attention to detail helps you anticipate the flow of combat. You may use your Perception Trait instead of your
+Reflexes Trait when making Initiative Rolls.
+
+New Spell: Gift of Amaterasu
+> Ring/Mastery: Fire 1 (Defense)
+> Range: 50’
+> Area of Effect: 50’ radius sphere (can be cast on a willing creature)
+> Duration: 10 minutes
+> Raises: Range (+25’ per Raise), Duration (+5 minutes per Raise)
+This spell is a prayer to Amaterasu, the Sun Goddess, asking her to bestow her favor on the caster in the form of radiant
+Fire kami. Once the prayer is completed, warm sunlight blazes down on the chosen area, bathing it in full daylight even if
+it is at night, indoors, or underground. The spell can also be cast on a willing creature, allowing the area of light to stay
+centered on the target while it moves, but the area of effect is reduced by half (after raises for range). This spell is
+particularly popular among shugenja who are assigned to assist in the protection of castles and other vital locations, since
+a sudden blaze of daylight can be a very effective deterrent to thieves, assassins, and spies.
+
+
+Section 2 – Other System House Rules
+Maximum Insight Rank and Experience Points
+The maximum Insight Rank will be 5. Players will receive 8 Experience Points per session. Sometimes there might be
+time-skips in the story when they will receive more.
+
+Money Stipends
+Once per in-game year, a character’s faction will provide him more money. The formula is the character’s starting koku
+(as specified by their School and relevant advantages) multiplied by the character’s Status, and then doubled. Ronin,
+monks, and similarly resourceless characters do not receive this benefit.
+
+Changes to Basic Rules
+- The 10 Dice Rule (page 77): If you would roll exactly 11 dice, you can still convert two rolled dice into one kept die,
+thereby bringing you down to 9 rolled dice.
+- Stances (page 84): Clarification - During the first round of the skirmish, everyone announces their chosen stance at the
+same time, so no one can make their choice based on what their enemies declared. If anyone forgets to declare their
+Stance, they are assumed to be in the Attack Stance.
+- Center Stance (page 84): You can take Free Actions in the Center Stance.
+- Disarm Maneuver (page 86): This maneuver only requires 2 Raises and does normal damage now. Kicking a weapon
+along the ground is a Free Action and sends it up to 10 feet away.
+- Grappled Conditional Effect (page 89): The grappling condition reduces Armor TN by 10, not to 5.
+- Improving Your Character (page 104): Each Skill Emphasis is worth 1 Insight.
+- Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
+the mount itself actually spends on movement. Further clarification, a rider can still use the Full Defense stance while
+benefiting from a mount’s full movement potential.
+
+New Rule: The Weight of Glory/Infamy
+Whenever a character makes a Social Skill Roll to influence someone, he may add half his Glory or Infamy Rank to the
+total of the roll (rounded down). This only works on people who recognize him, respect how he earned his fame, and
+would realistically care about it in the situation where the roll is made. The GM is the final arbiter.
+
+New Maneuvers
+- Brandish Ofuda (0 Raises): Ofuda are small holy talismans made to war against supernatural threats and some of them
+even work! If you have a genuine ofuda and are in the Defense or Full Defense stance, you may choose to sacrifice the
+armor TN bonuses you normally gain from the stance to brandish the ofuda while saying a prayer. The TN of harmful
+shugenja or maho-tsukai spells directed at you or allies within 20 feet is increased by half your Honor Rank (rounded
+down) if you are in Defense stance or your full Honor Rank if you are in Full Defense stance. This can also work on the
+supernatural powers of Shadowlands creatures but not gaijin magic.
+- Push (1 Raise): As part of a melee attack you shove your enemy backward, possibly into deadly circumstances. If
+successful, the attack deals normal damage and forces a Contested Strength Roll between the character and the target. If
+the character is successful, the target stumbles 10 feet backward.
+
+New Combat Conditional Effects
+- Cover: A character can benefit from cover only when an attack or other effect originates on the opposite side of
+something that block at least half his body. This provides a bonus to his Armor TN that ranges from +3 to +5 according to
+the GM’s judgment. Optionally, the GM may decide that certain spells that function like projectiles may suffer the cover
+bonus as a penalty to the Spellcasting Roll.
+- Flanking: A character gains a bonus of +5 on the total of melee Attack Rolls against an enemy if they have an active ally
+on the opposite side of that enemy and within melee range.
+- Impure: A shugenja who has disappointed the spirits is considered impure until he earns their forgiveness. He cannot
+add his School Rank or any Affinity to Spell Casting Rolls and those dice will not Explode. Shugenja who cast any maho
+spells can draw on the kansen instead of normal elemental kami and are immune to this condition.
+- Poor Visibility: A character trying to act in near darkness, fog, smoke, and similar situations where visibility is poor
+suffers a penalty of –1k1 to all ranged attack rolls and Perception-based rolls. At the GM’s discretion, some spells that
+function like projectiles might suffer a –5 penalty to their spellcasting rolls when being cast into or from an area of poor
+visibility.
+
+New NPC Technique: Peasant Vengeance
+This is not so much a school technique as a crude tactic that has been passed on by peasant renegades to give them a
+fighting chance against their samurai oppressors. It is mostly reserved for NPCs, but a ronin might pick it up under some
+circumstances. You gain the benefits of Flanking as long as you have at least one ally adjacent to the enemy, even if they
+are not on the opposite side. You lose 1 point of Honor each time you use this technique (but that doesn’t matter to
+peasants anyway, so...).
+
+Clarifications: The Commune Spell
+- It is common knowledge in the setting that the elemental kami do not recognize individuals, only bloodlines, so asking
+them to identify individuals is extremely difficult.
+- Elemental kami do not speak the Rokugani language, which is why shugenja have to learn theirs.
+- Elemental kami can reveal that someone is currently under the effects of a recently cast shugenja spell, but not maho or
+long-term supernatural effects like Advantages or Disadvantages. Courts are aware of this and sometimes have a
+shugenja on hand to check if someone is trying to magically enhance their performance before things like negotiations or
+contests. If cheating is suspected, then a polite pretext for a delay is thought up so that the spell’s duration can lapse.
+Identifying a spell through a spirit’s description might require a Spellcraft roll.
