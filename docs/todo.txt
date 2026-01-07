@@ -8,43 +8,11 @@ can be activated a number of times per day equal to the ise zumi's school rank. 
 never be used with armor.
 
 Changes to Advantages, Skills, Spells and Equipment
-- Tactician advantage (page 154): The Mass Battle system won’t be used, so this advantage provides +1k1 on Battle Skill
-rolls instead (the skill is still relevant for commanding groups and navigating the battlefield as an individual).
 - Fires of Purity spell (page 181): This spell has been removed. A replacement rank 1 Fire Spell (Gift of Amaterasu) taken
 from a supplement book is provided later in this document.
 - Armor (page 198): The TN penalties from all types of armor also apply to Spell Casting Rolls.
 - Naginata (page 202): The naginata has a DR of 3k3.
 - Wakizashi weapon (page 205): You may draw a wakizashi as part of the same action as a katana.
-
-
-New Advantage: Clever Duelist [Mental] (2 Points)
-You take an unorthodox approach to the art of iaijutsu. During iaijutsu duels, you may use your Intelligence Trait for
-Iaijutsu (Assessment) rolls and your Agility Trait for the iaijutsu strike roll.
-
-New Advantage: Fast as the River [Physical] (6 Points)
-You are impressively swift on your feet. Your Water Ring is considered 1 higher for purposes of how far you can move
-with Move actions.
-
-New Advantage: Goju Spy [Spiritual] (8 Points)
-You have agreed to serve as a spy for the mysterious “Goju” ninja family in exchange for their assistance. They gave you
-some training that seemed mundane, if dishonorable, but you’ve started to exhibit supernatural powers. In theory, you will
-be able to pay off your debt by providing a steady stream of sensitive information and committing the occasional act of
-sabotage over the next few years. This “advantage” has several effects:
-> You are considered a ninja.
-> You see perfectly in the dark, negating any penalties you would suffer from it.
-> While in darkness or deep shadow, you receive a +1k0 bonus to the total of Stealth Skill rolls.
-> Your facial features, voice, and even your height to a small extent have become ‘malleable’, allowing you to add +2k0 to
-all Acting Skill Rolls to disguise yourself.
-> You receive a +1k0 bonus on Attack rolls you make with ninjutsu weapons (including any weapons with the Ninja
-keyword). When you reach Insight Rank 3, you can make attacks with such weapons as a Simple Action rather than a
-Complex Action.
-> No spell or other power can detect that you have this Advantage.
-> You have the Blackmailed (by the Goju) disadvantage for no points. Agents of the Goju have a +1k1 bonus on all Skill
-and Spellcasting rolls made against you.
-
-New Advantage: Vigilant Eyes [Mental] (2 Point)
-Your attention to detail helps you anticipate the flow of combat. You may use your Perception Trait instead of your
-Reflexes Trait when making Initiative Rolls.
 
 New Spell: Gift of Amaterasu
 > Ring/Mastery: Fire 1 (Defense)
@@ -58,12 +26,6 @@ it is at night, indoors, or underground. The spell can also be cast on a willing
 centered on the target while it moves, but the area of effect is reduced by half (after raises for range). This spell is
 particularly popular among shugenja who are assigned to assist in the protection of castles and other vital locations, since
 a sudden blaze of daylight can be a very effective deterrent to thieves, assassins, and spies.
-
-
-Section 2 – Other System House Rules
-Maximum Insight Rank and Experience Points
-The maximum Insight Rank will be 5. Players will receive 8 Experience Points per session. Sometimes there might be
-time-skips in the story when they will receive more.
 
 Money Stipends
 Once per in-game year, a character’s faction will provide him more money. The formula is the character’s starting koku
