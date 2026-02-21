@@ -1,1 +1,29 @@
-todo
+extends Node2D
+
+@onready var tilemap = $TileMap
+
+const MAP_WIDTH = 10
+const MAP_HEIGHT = 10
+const TILE_ID = 0
+
+func _ready():
+    generate_map()
+
+func generate_map():
+    for x in MAP_WIDTH:
+        for y in MAP_HEIGHT:
+            tilemap.set_cell(0, Vector2i(x, y), TILE_ID)
+
+func _unhandled_input(event):
+    if event is InputEventMouseButton:
+        if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+            handle_click(event.position)
+
+func handle_click(mouse_position: Vector2):
+    var local_pos = tilemap.to_local(mouse_position)
+    var cell = tilemap.local_to_map(local_pos)
+
+    print("Clicked cell: ", cell)
+
+    highlight_cell(cell)
+
