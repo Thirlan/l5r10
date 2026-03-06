@@ -1,0 +1,177 @@
+/* General CSS for Legend of the Five Rings - Professional Japanese-inspired styling */
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif; /* Elegant serif font for traditional feel */
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%); /* Subtle gradient background */
+    color: #2c2c2c; /* Dark charcoal for readability */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(90deg, #8B0000 0%, #DC143C 50%, #8B0000 100%); /* Crimson gradient */
+    color: #FFD700; /* Gold text */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    color: #8B0000; /* Crimson */
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    border-bottom: 3px solid #FFD700; /* Gold underline */
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    color: #DC143C; /* Crimson red */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+h2::before {
+    content: "⚔️"; /* Sword emoji for samurai theme */
+    position: absolute;
+    left: -30px;
+    top: 0;
+}
+
+h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    color: #8B4513; /* Saddle brown */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-style: italic;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #DAA520; /* Goldenrod border */
+}
+
+th {
+    background: linear-gradient(90deg, #2c2c2c 0%, #4a4a4a 100%); /* Dark gradient */
+    color: #FFD700; /* Gold text */
+    padding: 15px 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #FFD700;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+td:hover {
+    background-color: rgba(218, 165, 32, 0.1); /* Light gold on hover */
+}
+
+tr:nth-child(even) {
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+img {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    background: linear-gradient(90deg, #2c2c2c 0%, #4a4a4a 100%);
+    color: #FFD700;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 3px solid #8B0000;
+    font-style: italic;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px 5px;
+    }
+    
+    img {
+        max-width: 80px;
+        max-height: 80px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Japanese-inspired decorative elements */
+h2::after {
+    content: "⚔️";
+    position: absolute;
+    right: -30px;
+    top: 0;
+}
+
+/* Subtle animation for interactive elements */
+a, button {
+    transition: all 0.3s ease;
+}
+
+a:hover, button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
