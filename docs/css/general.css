@@ -51,7 +51,6 @@ h2 {
 }
 
 h2::before {
-    content: "⚔️"; /* Sword emoji for samurai theme */
     position: absolute;
     left: -30px;
     top: 0;
@@ -108,16 +107,16 @@ tr:last-child td {
     border-bottom: none;
 }
 
-img {
-    max-width: 128px;
+.medium_icon {
+    width: 128px;
     max-height: 128px;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
 }
 
-img:hover {
-    transform: scale(1.05);
+.medium_icon:hover {
+    transform: scale(1.5);
 }
 
 footer {
@@ -144,8 +143,8 @@ footer {
         padding: 8px 5px;
     }
     
-    img {
-        max-width: 80px;
+    .medium_icon {
+        width: 80px;
         max-height: 80px;
     }
     
