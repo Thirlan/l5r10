@@ -1,137 +1,68 @@
   
-  class CharacterSheet {
-	
+  class SkillDatabase {
 	constructor() {
 		this.skillMap = new Map();
-		this.traitMap = new Map();
-		this.advDisMap = new Map();
-		this.traitPreference = new Map();
-		this.skillPreference = new Map();
-		this.advDisChoiceMap = new Map();
-		this.keywords = [];
-		this.honor = 0.0;
-		this.status = 0.0;
-		this.glory = 0.0;
-		this.taint = 0.0;
-		this.baseSalaryKoku = 0;
-		this.baseSalaryBu = 0;
-		this.baseSalaryZeni = 0;
-		
-		let aTrait = new Trait("void", 2, "void", 6);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set("void", 1);
-		aTrait = new Trait("stamina", 2, "earth", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("willpower", 2, "earth", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("reflexes", 2, "air", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("awareness", 2, "air", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("agility", 2, "fire", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("intelligence", 2, "fire", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("strength", 2, "water", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
-		aTrait = new Trait("perception", 2, "water", 4);
-		this.traitMap.set(aTrait.name, aTrait);
-		this.traitPreference.set(aTrait.name, 1);
 		
 		// High
 		let aSkill = new Skill("acting", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		
 		aSkill = new Skill("artisan - bonsai", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - gardening", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - ikebana", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - origami", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - painting", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - poetry", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - sculpture", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("artisan - tatooing", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		
 		aSkill = new Skill("calligraphy", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("courtier", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("divination", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("etiquette", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		
 		aSkill = new Skill("games - fortunes & winds", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("games - go", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("games - kemari", "high", "agility");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("games - letters", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("games - sadane", "high", "awareness");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("games - shogi", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		
 		aSkill = new Skill("investigation", "high", "perception");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		
 		aSkill = new Skill("lore - architecture", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - bushido", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - crab", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - crane", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - dragon", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - lion", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - mantis", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
-		this.skillPreference.set(aSkill.name, 0);
 		aSkill = new Skill("lore - phoenix", "high", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
 		this.skillPreference.set(aSkill.name, 0);
@@ -370,6 +301,69 @@
 		aSkill = new Skill("craft - poison", "low", "intelligence");
 		this.skillMap.set(aSkill.name, aSkill);
 		this.skillPreference.set(aSkill.name, 0);
+	}
+	
+	getSkills() {
+		return this.skillMap.values();
+	}
+	
+	getSkillsByTrait(traitName) {
+		let skills = [];
+		for (let skill of this.skillMap.values()) {
+			if (skill.trait === traitName) {
+				skills.push(skill);
+			}
+		}
+		return skills;
+	}
+}
+
+class CharacterSheet {
+	
+	constructor() {
+		this.skillDatabase = new SkillDatabase();
+		this.traitMap = this.skillDatabase.traitMap;
+		this.skillMap = this.skillDatabase.skillMap;
+		this.traitPreference = this.skillDatabase.traitPreference;
+		this.skillPreference = this.skillDatabase.skillPreference;
+		this.advDisMap = new Map();
+		this.advDisChoiceMap = new Map();
+		this.keywords = [];
+		this.honor = 0.0;
+		this.status = 0.0;
+		this.glory = 0.0;
+		this.taint = 0.0;
+		this.baseSalaryKoku = 0;
+		this.baseSalaryBu = 0;
+		this.baseSalaryZeni = 0;
+		
+		let aTrait = new Trait("void", 2, "void", 6);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set("void", 1);
+		aTrait = new Trait("stamina", 2, "earth", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("willpower", 2, "earth", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("reflexes", 2, "air", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("awareness", 2, "air", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("agility", 2, "fire", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("intelligence", 2, "fire", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("strength", 2, "water", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
+		aTrait = new Trait("perception", 2, "water", 4);
+		this.traitMap.set(aTrait.name, aTrait);
+		this.traitPreference.set(aTrait.name, 1);
 		
 		// Advantages
 		let aAdvDis = new AdvDis("absolute direction", "adv", "mental", 1, [], "", 148);
@@ -1036,10 +1030,6 @@
 	increaseTraitPreference(name) {
 		let traitPreferenceLevel = traitPreference.get(name);
 		traitPreference.set(name, traitPreferenceLevel+1);
-	}
-	
-	getSkills() {
-		return this.skillMap.values();
 	}
 	
 	getTraits() {
