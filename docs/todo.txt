@@ -2,30 +2,14 @@ Historic Effects on Character Options
 Because this is the 10th century in the setting, certain character options are different.
 
 - Maho
-
 - Togashi Tattooed Order (pages 115-116): The Crane tattoo, Hawk tattoo, Ki-Rin tattoo, Scorpion Tattoo and Wolf tattoo
 can be activated a number of times per day equal to the ise zumi's school rank. All the tattoos are so large that they can
 never be used with armor.
 
 Changes to Advantages, Skills, Spells and Equipment
-- Fires of Purity spell (page 181): This spell has been removed. A replacement rank 1 Fire Spell (Gift of Amaterasu) taken
-from a supplement book is provided later in this document.
 - Armor (page 198): The TN penalties from all types of armor also apply to Spell Casting Rolls.
 - Naginata (page 202): The naginata has a DR of 3k3.
 - Wakizashi weapon (page 205): You may draw a wakizashi as part of the same action as a katana.
-
-New Spell: Gift of Amaterasu
-> Ring/Mastery: Fire 1 (Defense)
-> Range: 50’
-> Area of Effect: 50’ radius sphere (can be cast on a willing creature)
-> Duration: 10 minutes
-> Raises: Range (+25’ per Raise), Duration (+5 minutes per Raise)
-This spell is a prayer to Amaterasu, the Sun Goddess, asking her to bestow her favor on the caster in the form of radiant
-Fire kami. Once the prayer is completed, warm sunlight blazes down on the chosen area, bathing it in full daylight even if
-it is at night, indoors, or underground. The spell can also be cast on a willing creature, allowing the area of light to stay
-centered on the target while it moves, but the area of effect is reduced by half (after raises for range). This spell is
-particularly popular among shugenja who are assigned to assist in the protection of castles and other vital locations, since
-a sudden blaze of daylight can be a very effective deterrent to thieves, assassins, and spies.
 
 Money Stipends
 Once per in-game year, a character’s faction will provide him more money. The formula is the character’s starting koku
