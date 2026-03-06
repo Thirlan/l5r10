@@ -119,6 +119,13 @@ tr:last-child td {
     transform: scale(1.05);
 }
 
+.spell-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
 .clan_mon {
     display: block;
     margin: 0 auto 20px;
