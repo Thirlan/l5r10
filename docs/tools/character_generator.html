@@ -1,688 +1,1108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Character Creation Form</title>
-<style>
-  body {
-    font-family: "Segoe UI", sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 20px;
-  }
-  h2 {
-    border-bottom: 2px solid #444;
-    margin-top: 40px;
-    padding-bottom: 5px;
-  }
-  form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px 40px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  label {
-    font-weight: 600;
-  }
-  select {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 10px;
-    background: #fff;
-  }
-  th, td {
-    border: 1px solid #ccc;
-    padding: 8px 10px;
-    text-align: left;
-  }
-  th {
-    background-color: #f1f1f1;
-  }
-  .output-section {
-    margin-top: 40px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  .readonly-table td:first-child {
-    width: 200px;
-    font-weight: bold;
-  }
-</style>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Character Generator</title>
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/general.css">
 </head>
 <body>
-  
-<h1>Character Sheet</h1>
-<form id="characterForm">
-	<h2>Background</h2>
-	</br>
-  <!-- Background -->
-  <label for="caste">Caste:</label>
-  <select id="casteInput">
-    <option>Choose</option>
-    <option>Kuge (Imperial Family and Daimyos)</option>
-    <option>Buke (Samurai)</option>
-    <option>Monastic</option>
-    <option>Heimin (Peasants)</option>
-    <option>Artisans</option>
-    <option>Merchants</option>
-    <option>Eta</option>
-    <option>Gaijin</option>
-  </select>
+  <header>
+    <nav class="navbar"></nav>
+  </header>
+  <main>
+    <h1>Character Generator</h1>
+    <form id="characterForm" name="characterForm">
+      <h2>Background</h2><br>
+      <!-- Background -->
+       <label for="caste">Caste:</label> <select id="casteInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Kuge (Imperial Family and Daimyos)
+        </option>
+        <option>
+          Buke (Samurai)
+        </option>
+        <option>
+          Monastic
+        </option>
+        <option>
+          Heimin (Peasants)
+        </option>
+        <option>
+          Artisans
+        </option>
+        <option>
+          Merchants
+        </option>
+        <option>
+          Eta
+        </option>
+        <option>
+          Gaijin
+        </option>
+      </select> <label for="clan">Clan:</label> <select id="clanInput" disabled>
+        <option>
+          None
+        </option>
+      </select> <label for="family">Family:</label> <select id="familyInput" disabled>
+        <option>
+          None
+        </option>
+      </select> <label for="school">School:</label> <select id="schoolInput" disabled>
+        <option>
+          None
+        </option>
+      </select> <label for="schoolSkill">Free School Skill:</label> <select id="schoolSkillInput" disabled hide="">
+        <option>
+          None
+        </option>
+      </select> <label for="schoolSkill2">Free School Skill:</label> <select id="schoolSkill2Input" disabled>
+        <option>
+          None
+        </option>
+      </select> <label for="schoolSkill3">Free School Skill:</label> <select id="schoolSkill3Input" disabled hide="">
+        <option>
+          None
+        </option>
+      </select> <label for="weapon">Weapon of Choice:</label> <select id="weaponInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          jiujutsu
+        </option>
+        <option>
+          chain weapons
+        </option>
+        <option>
+          heavy weapons
+        </option>
+        <option>
+          kenjutsu
+        </option>
+        <option>
+          knives
+        </option>
+        <option>
+          kyujutsu
+        </option>
+        <option>
+          ninjutsu
+        </option>
+        <option>
+          polearms
+        </option>
+        <option>
+          spears
+        </option>
+        <option>
+          staves
+        </option>
+        <option>
+          war fan
+        </option>
+      </select> <!-- Family Circumstances -->
+      <h2>Family</h2><br>
+      <label for="marital">Marital Status:</label> <select id="maritalInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Single
+        </option>
+        <option>
+          Married
+        </option>
+        <option>
+          Divorced
+        </option>
+        <option>
+          Widowed
+        </option>
+      </select> <label for="spouseFamily">Spouse Family Name:</label> <input id="spouseFamilyInput" type="text" disabled> <label for="Marriage Situation">Marriage Situation:</label> <select id="maritalSituationInput" disabled>
+        <option>
+          Choose
+        </option>
+        <option>
+          Normal
+        </option>
+        <option>
+          Bitter Betrothal
+        </option>
+        <option>
+          Blissful Betrothal
+        </option>
+      </select> <label for="imperialSpouse">Imperial Spouse:</label> <input id="imperialSpouseInput" type="checkbox" disabled> <label for="dependantSpouse">Spouse Dependant (disadvantage - 2):</label> <input id="dependantSpouseInput" type="checkbox" disabled> <label for="dependantParent">Parent Dependant (disadvantage - 4):</label> <input id="dependantParentsInput" type="checkbox"> <label for="dependantChild">Child Dependant (disadvantage - 6):</label> <input id="dependantChildInput" type="checkbox"> <!-- Finances -->
+      <h2>Finances</h2><br>
+      <label for="wealth">Wealth:</label> <select id="wealthInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          none
+        </option>
+        <option>
+          seven fortune's curse - daikoku
+        </option>
+        <option>
+          wealthy - 1
+        </option>
+        <option>
+          wealthy - 2
+        </option>
+        <option>
+          wealthy - 3
+        </option>
+        <option>
+          wealthy - 4
+        </option>
+        <option>
+          wealthy - 5
+        </option>
+      </select> <label for="gentry">Gentry:</label> <select id="gentryInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          none
+        </option>
+        <option>
+          gentry - village
+        </option>
+        <option>
+          gentry - large village
+        </option>
+        <option>
+          gentry - unique holding
+        </option>
+        <option>
+          gentry - town
+        </option>
+        <option>
+          gentry - city
+        </option>
+        <option>
+          gentry - province
+        </option>
+      </select> <!-- Physical -->
+      <h2>Physical</h2><br>
+      <label for="sex">Sex:</label> <select id="sexInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Male
+        </option>
+        <option>
+          Female
+        </option>
+      </select> <label for="age">Age:</label> <select id="ageInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Teenager (13 to 16)
+        </option>
+        <option>
+          Gempukku (16 to 18)
+        </option>
+        <option>
+          Adult (18 to 24)
+        </option>
+        <option>
+          Senior (24 to 40)
+        </option>
+        <option>
+          Venerable (40+)
+        </option>
+      </select> <label for="size">Size:</label> <select id="sizeInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Small
+        </option>
+        <option>
+          Average
+        </option>
+        <option>
+          Large
+        </option>
+      </select> <label for="eyeColor">Eye Color:</label> <select id="eyeColorInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Brown
+        </option>
+        <option>
+          Light Brown
+        </option>
+        <option>
+          Green
+        </option>
+        <option>
+          Light Green
+        </option>
+        <option>
+          Blue
+        </option>
+        <option>
+          Light Blue
+        </option>
+        <option>
+          Grey
+        </option>
+      </select> <label for="hairColor">Hair Color:</label> <select id="hairColorInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Black
+        </option>
+        <option>
+          Brown
+        </option>
+        <option>
+          Light Brown
+        </option>
+        <option>
+          Red
+        </option>
+        <option>
+          Blonde
+        </option>
+        <option>
+          White
+        </option>
+        <option>
+          Grey
+        </option>
+      </select> <label for="hairStyle">Hair Style:</label> <select id="hairStyleInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Chon-mage
+        </option>
+        <option>
+          Oicho-mage
+        </option>
+        <option>
+          Chasen-mage
+        </option>
+        <option>
+          Koma-mage
+        </option>
+        <option>
+          Yaro-mage
+        </option>
+        <option>
+          Wakashu-mage
+        </option>
+        <option>
+          Motodori-mage
+        </option>
+        <option>
+          Ichō-mage
+        </option>
+        <option>
+          Futatsu-mage
+        </option>
+        <option>
+          Yui-mage
+        </option>
+        <option>
+          Ronin-mage
+        </option>
+        <option>
+          Kabuki-mage
+        </option>
+        <option>
+          Merchant-mage
+        </option>
+        <option>
+          Artisan-mage
+        </option>
+        <option>
+          Farmer-mage
+        </option>
+        <option>
+          Shaved
+        </option>
+        <option>
+          Two-Block Haircut
+        </option>
+        <option>
+          Mash Hair
+        </option>
+        <option>
+          Center Part
+        </option>
+        <option>
+          Wolf Cut
+        </option>
+        <option>
+          Soft Perm
+        </option>
+        <option>
+          Short Textured Crop
+        </option>
+        <option>
+          Undercut
+        </option>
+        <option>
+          Long Layered
+        </option>
+        <option>
+          Buzz Cut
+        </option>
+        <option>
+          Spiky Short Hair
+        </option>
+        <option>
+          Curtain Hair
+        </option>
+        <option>
+          Fade Haircut
+        </option>
+        <option>
+          K-Pop Inspired Layered
+        </option>
+        <option>
+          Man Bun
+        </option>
+        <option>
+          Ponytail
+        </option><!--Women-->
+        <option>
+          Shimada-mage
+        </option>
+        <option>
+          Taka-Shimada-mage
+        </option>
+        <option>
+          Tsubushi-Shimada-mage
+        </option>
+        <option>
+          Maru-mage
+        </option>
+        <option>
+          Yoko-Hyogo
+        </option>
+        <option>
+          Tate-Hyogo
+        </option>
+        <option>
+          Katsuyama-mage
+        </option>
+        <option>
+          ofuku
+        </option>
+        <option>
+          Wareshinobu
+        </option>
+        <option>
+          Momoware
+        </option>
+        <option>
+          Kogai-mage
+        </option>
+        <option>
+          Gikei
+        </option>
+        <option>
+          Taregami
+        </option>
+        <option>
+          Yuiwata
+        </option>
+        <option>
+          Oshidori
+        </option>
+        <option>
+          Hime cut
+        </option>
+        <option>
+          Japanese bob
+        </option>
+        <option>
+          Layered Medium cut
+        </option>
+        <option>
+          Long straight with bangs
+        </option>
+        <option>
+          Airy bangs
+        </option>
+        <option>
+          Wolf cut
+        </option>
+        <option>
+          Shag cut
+        </option>
+        <option>
+          Kawai Twin Tails
+        </option>
+        <option>
+          Low Ponytail
+        </option>
+        <option>
+          Messy Bun
+        </option>
+        <option>
+          Straight Lob
+        </option>
+        <option>
+          Soft Perm Waves
+        </option>
+        <option>
+          Half-Up Half-Down
+        </option>
+        <option>
+          Curtain Bangs with Long Hair
+        </option>
+        <option>
+          Ponytail
+        </option>
+      </select> <label for="facialHair">Facial Hair:</label> <select id="facialHairInput" disabled>
+        <option>
+          Choose
+        </option>
+        <option>
+          None
+        </option>
+        <option>
+          Goatee
+        </option>
+        <option>
+          Mutton Chops
+        </option>
+        <option>
+          Full Beard - Short
+        </option>
+        <option>
+          Full Beard - Long
+        </option>
+        <option>
+          Mustache
+        </option>
+      </select> <!-- Personality -->
+      <h2>Personality</h2><br>
+      <label for="hobby">Hobby:</label> <select id="hobbyInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          Animal Handling - Dogs
+        </option>
+        <option>
+          Animal Handling - Horses
+        </option>
+        <option>
+          Animal Handling - Falcons
+        </option>
+        <option>
+          Animal Handling - Big Cats
+        </option>
+        <option>
+          Artisan - Bonsai
+        </option>
+        <option>
+          Artisan - Gardening
+        </option>
+        <option>
+          Artisan - Ikebana
+        </option>
+        <option>
+          Artisan - Origami
+        </option>
+        <option>
+          Artisan - Painting
+        </option>
+        <option>
+          Artisan - Poetry
+        </option>
+        <option>
+          Artisan - Sculpture
+        </option>
+        <option>
+          Artisan - Tatooing
+        </option>
+        <option>
+          Athletics - Climbing
+        </option>
+        <option>
+          Athletics - Running
+        </option>
+        <option>
+          Athletics - Swimming
+        </option>
+        <option>
+          Athletics - Throwing
+        </option>
+        <option>
+          Calligraphy - Cipher (include Commerce - Mathematics)
+        </option>
+        <option>
+          Calligraphy - High Rokugani
+        </option>
+        <option>
+          Commerce - Mathematics
+        </option>
+        <option>
+          Craft - Cooking
+        </option>
+        <option>
+          Craft - Fishing
+        </option>
+        <option>
+          Craft - Pottery
+        </option>
+        <option>
+          Craft - Tailoring
+        </option>
+        <option>
+          Divination - Astrology
+        </option>
+        <option>
+          Divination - Kawaru
+        </option>
+        <option>
+          Drinking (disadvantage Compulsion)
+        </option>
+        <option>
+          Gambling (disadvantage Compulsion)
+        </option>
+        <option>
+          Game - Kemari
+        </option>
+        <option>
+          Game - Fortunes & Winds
+        </option>
+        <option>
+          Game - Go
+        </option>
+        <option>
+          Game - Letters
+        </option>
+        <option>
+          Game - Sadane
+        </option>
+        <option>
+          Game - Shogi
+        </option>
+        <option>
+          Horsemanship - Rokugani Pony (include animal handling - horse)
+        </option>
+        <option>
+          Horsemanship - Gaijin Riding Horse (include animal handling - horse)
+        </option>
+        <option>
+          Horsemanship - Utaku Steed (include animal handling - horse)
+        </option>
+        <option>
+          Hunting - Tracking
+        </option>
+        <option>
+          Intimidation - Torture (include disadvantage Fascination)
+        </option>
+        <option>
+          Jiujutsu - Grappling
+        </option>
+        <option>
+          Jiujutsu - Martial Arts
+        </option>
+        <option>
+          Kyujutsu - Dai-Kyu
+        </option>
+        <option>
+          Kyujutsu - Yumi (include Horsemanship)
+        </option>
+        <option>
+          Medicine - Herbalism
+        </option>
+        <option>
+          Meditation - Fasting
+        </option>
+        <option>
+          Lore - Anatomy (include disadvantage Fascination)
+        </option>
+        <option>
+          Lore - Architecture
+        </option>
+        <option>
+          Lore - Bushido
+        </option>
+        <option>
+          Lore - Elements
+        </option>
+        <option>
+          Lore - Ghosts
+        </option>
+        <option>
+          Lore - Nature
+        </option>
+        <option>
+          Lore - Heraldry
+        </option>
+        <option>
+          Lore - History
+        </option>
+        <option>
+          Lore - Spirit Realms
+        </option>
+        <option>
+          Lore - Theology
+        </option>
+        <option>
+          Perform - Biwa
+        </option>
+        <option>
+          Perform - Dance
+        </option>
+        <option>
+          Perform - Flute
+        </option>
+        <option>
+          Perform - Drums
+        </option>
+        <option>
+          Perform - Puppeteer
+        </option>
+        <option>
+          Perform - Shamisen
+        </option>
+        <option>
+          Perform - Song
+        </option>
+        <option>
+          Perform - Storytelling
+        </option>
+        <option>
+          Sleight of Hands - Prestidigitation
+        </option>
+        <option>
+          Tea Ceremony
+        </option>
+        <option>
+          Temptation - Seduction (include disadvantage Lechery)
+        </option>
+      </select> <label for="characterFlaw">Character Flaw:</label> <select id="characterFlawInput">
+        <option>
+          Choose
+        </option>
+        <option>
+          antisocial - 2
+        </option>
+        <option>
+          antisocial - 4
+        </option>
+        <option>
+          ascetic
+        </option>
+        <option>
+          brash
+        </option>
+        <option>
+          bland
+        </option>
+        <option>
+          can't lie
+        </option>
+        <option>
+          consumed - control
+        </option>
+        <option>
+          consumed - determination
+        </option>
+        <option>
+          consumed - insight
+        </option>
+        <option>
+          consumed - knowledge
+        </option>
+        <option>
+          consumed - perfection
+        </option>
+        <option>
+          consumed - strength
+        </option>
+        <option>
+          consumed - will
+        </option>
+        <option>
+          contrary
+        </option>
+        <option>
+          driven
+        </option>
+        <option>
+          fascination
+        </option>
+        <option>
+          failure of bushido - compassion
+        </option>
+        <option>
+          failure of bushido - courage
+        </option>
+        <option>
+          failure of bushido - courtesy
+        </option>
+        <option>
+          failure of bushido - honesty
+        </option>
+        <option>
+          failure of bushido - honor
+        </option>
+        <option>
+          failure of bushido - sincerity
+        </option>
+        <option>
+          greedy
+        </option>
+        <option>
+          gullible
+        </option>
+        <option>
+          idealistic
+        </option>
+        <option>
+          insensitive
+        </option>
+        <option>
+          jealousy
+        </option>
+        <option>
+          lechery
+        </option>
+        <option>
+          obtuse
+        </option>
+        <option>
+          overconfident
+        </option>
+        <option>
+          rumormonger
+        </option>
+        <option>
+          soft-hearted
+        </option>
+      </select>
+    </form>
+    <div class="output-section">
+      <h2>Character</h2>
+      <h3>Background</h3>
+      <table class="readonly-table" id="backgroundTable">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <td id="nameOutput"></td>
+          </tr>
+          <tr>
+            <th>Age</th>
+            <td id="ageOutput">0</td>
+          </tr>
+          <tr>
+            <th>Personality</th>
+            <td id="personalityOutput"></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Status</h3>
+      <table class="readonly-table" id="backgroundTable">
+        <tbody>
+          <tr>
+            <th>Status</th>
+            <td id="statusOutput">0</td>
+          </tr>
+          <tr>
+            <th>Glory</th>
+            <td id="gloryOutput">0</td>
+          </tr>
+          <tr>
+            <th>Honor</th>
+            <td id="honorOutput">0</td>
+          </tr>
+          <tr>
+            <th>Taint</th>
+            <td id="taintOutput">0</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Rank</h3>
+      <table class="readonly-table" id="rankTable">
+        <tbody>
+          <tr>
+            <th>Exp Spent</th>
+            <td id="expSpentOutput">0</td>
+          </tr>
+          <tr>
+            <th>Insight</th>
+            <td id="insightOutput">0</td>
+          </tr>
+          <tr>
+            <th>Rank</th>
+            <td id="rankOutput">1</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Stats</h3>
+      <table class="readonly-table" id="characterTable">
+        <tbody>
+          <tr>
+            <th>Ring</th>
+            <th>Trait</th>
+            <th>Rank</th>
+            <th>Increase</th>
+            <th>Base</th>
+            <th>Family</th>
+            <th>School</th>
+            <th>Exp</th>
+            <th>Insight</th>
+          </tr>
+          <tr>
+            <th colspan="2">Earth Ring</th>
+            <th id="earthRingRankOutput">0</th>
+            <th colspan="5"></th>
+            <th id="earthRingInsightOutput">0</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Stamina</td>
+            <td id="staminaRankOutput">0</td>
+            <td id="staminaIncreaseOutput">0</td>
+            <td id="staminaBaseOutput">0</td>
+            <td id="staminaFamilyOutput">0</td>
+            <td id="staminaSchoolOutput">0</td>
+            <td id="staminaExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Willpower</td>
+            <td id="willpowerRankOutput">0</td>
+            <td id="willpowerIncreaseOutput">0</td>
+            <td id="willpowerBaseOutput">0</td>
+            <td id="willpowerFamilyOutput">0</td>
+            <td id="willpowerSchoolOutput">0</td>
+            <td id="willpowerExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th colspan="2">Air Ring</th>
+            <th id="airRingRankOutput">0</th>
+            <th colspan="5"></th>
+            <th id="airRingInsightOutput">0</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Reflexes</td>
+            <td id="reflexesRankOutput">0</td>
+            <td id="reflexesIncreaseOutput">0</td>
+            <td id="reflexesBaseOutput">0</td>
+            <td id="reflexesFamilyOutput">0</td>
+            <td id="reflexesSchoolOutput">0</td>
+            <td id="reflexesExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Awareness</td>
+            <td id="awarenessRankOutput">0</td>
+            <td id="awarenessIncreaseOutput">0</td>
+            <td id="awarenessBaseOutput">0</td>
+            <td id="awarenessFamilyOutput">0</td>
+            <td id="awarenessSchoolOutput">0</td>
+            <td id="awarenessExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th colspan="2">Fire Ring</th>
+            <th id="fireRingRankOutput">0</th>
+            <th colspan="5"></th>
+            <th id="fireRingInsightOutput">0</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Agility</td>
+            <td id="agilityRankOutput">0</td>
+            <td id="agilityIncreaseOutput">0</td>
+            <td id="agilityBaseOutput">0</td>
+            <td id="agilityFamilyOutput">0</td>
+            <td id="agilitySchoolOutput">0</td>
+            <td id="agilityExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Intelligence</td>
+            <td id="intelligenceRankOutput">0</td>
+            <td id="intelligenceIncreaseOutput">0</td>
+            <td id="intelligenceBaseOutput">0</td>
+            <td id="intelligenceFamilyOutput">0</td>
+            <td id="intelligenceSchoolOutput">0</td>
+            <td id="intelligenceExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th colspan="2">Water Ring</th>
+            <th id="waterRingRankOutput">0</th>
+            <th colspan="5"></th>
+            <th id="waterRingInsightOutput">0</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Strength</td>
+            <td id="strengthRankOutput">0</td>
+            <td id="strengthIncreaseOutput">0</td>
+            <td id="strengthBaseOutput">0</td>
+            <td id="strengthFamilyOutput">0</td>
+            <td id="strengthSchoolOutput">0</td>
+            <td id="strengthExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Perception</td>
+            <td id="perceptionRankOutput">0</td>
+            <td id="perceptionIncreaseOutput">0</td>
+            <td id="perceptionBaseOutput">0</td>
+            <td id="perceptionFamilyOutput">0</td>
+            <td id="perceptionSchoolOutput">0</td>
+            <td id="perceptionExpOutput">0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th colspan="2">Void Ring</th>
+            <th id="voidRankOutput">0</th>
+            <th id="voidIncreaseOutput">0</th>
+            <th id="voidBaseOutput">0</th>
+            <th id="voidFamilyOutput">0</th>
+            <th id="voidSchoolOutput">0</th>
+            <th id="voidExpOutput">0</th>
+            <th id="voidInsightOutput">0</th>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Income</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Frequency</th>
+            <th>Koku</th>
+            <th>Bu</th>
+            <th>Zeni</th>
+          </tr>
+        </thead>
+        <tbody id="incomeTable">
+          <tr>
+            <td>Starting</td>
+            <td id="kokuOutput">0</td>
+            <td id="buOutput">0</td>
+            <td id="zeniOutput">0</td>
+          </tr>
+          <tr>
+            <td>Monthly</td>
+            <td id="monthKokuOutput">0</td>
+            <td id="monthBuOutput">0</td>
+            <td id="monthZeniOutput">0</td>
+          </tr>
+          <tr>
+            <td>Yearly</td>
+            <td id="yearKokuOutput">0</td>
+            <td id="yearBuOutput">0</td>
+            <td id="yearZeniOutput">0</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Skills</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Trait</th>
+            <th>Roll</th>
+            <th>Keep</th>
+            <th>Rank</th>
+            <th>Emphasis</th>
+            <th>School Rank</th>
+            <th>School Emphasis</th>
+            <th>Exp</th>
+            <th>Insight</th>
+          </tr>
+        </thead>
+        <tbody id="skillsTable">
+          <tr>
+            <td colspan="11">No skills yet.</td>
+          </tr>
+        </tbody>
+      </table>&lt;
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Exp</th>
+            <th>Detail</th>
+            <th>Affinity</th>
+            <th>Page</th>
+          </tr>
+        </thead>
+        <tbody id="advantagesTableOuput">
+          <tr>
+            <td colspan="6">None</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Disadvantages</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Exp</th>
+            <th>Detail</th>
+            <th>Affinity</th>
+            <th>Page</th>
+          </tr>
+        </thead>
+        <tbody id="disadvantagesTableOuput">
+          <tr>
+            <td colspan="6">None</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Text form</h3>
+      <table>
+        <tbody id="textFormTable">
+          <tr>
+            <th colspan="3">Text</th>
+            <td id="textFormOuput"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <label for="clan">Clan:</label>
-  <select id="clanInput" disabled>
-    <option>None</option>
-  </select>
-
-  <label for="family">Family:</label>
-  <select id="familyInput" disabled>
-    <option>None</option>
-  </select>
-
-  <label for="school">School:</label>
-  <select id="schoolInput" disabled>
-    <option>None</option>
-  </select>
-  
-  <label for="schoolSkill">Free School Skill:</label>
-  <select id="schoolSkillInput" disabled hide>
-    <option>None</option>
-  </select>
-  
-  <label for="schoolSkill2">Free School Skill:</label>
-  <select id="schoolSkill2Input" disabled>
-    <option>None</option>
-  </select>
-  
-  <label for="schoolSkill3">Free School Skill:</label>
-  <select id="schoolSkill3Input" disabled hide>
-    <option>None</option>
-  </select>
-  
-  <label for="weapon">Weapon of Choice:</label>
-  <select id="weaponInput">
-    <option>Choose</option>
-    <option>jiujutsu</option>
-    <option>chain weapons</option>
-    <option>heavy weapons</option>
-    <option>kenjutsu</option>
-    <option>knives</option>
-    <option>kyujutsu</option>
-    <option>ninjutsu</option>
-    <option>polearms</option>
-    <option>spears</option>
-    <option>staves</option>
-    <option>war fan</option>
-  </select>
-  
-  <!-- Family Circumstances -->
-  <h2>Family</h2>
-  <br />
-  
-  <label for="marital">Marital Status:</label>
-  <select id="maritalInput">
-    <option>Choose</option>
-    <option>Single</option>
-    <option>Married</option>
-    <option>Divorced</option>
-    <option>Widowed</option>
-  </select>
-  
-  <label for="spouseFamily">Spouse Family Name:</label>
-  <input id="spouseFamilyInput" type="text" disabled />
-  
-  <label for="Marriage Situation">Marriage Situation:</label>
-  <select id="maritalSituationInput" disabled>
-    <option>Choose</option>
-    <option>Normal</option>
-    <option>Bitter Betrothal</option>
-    <option>Blissful Betrothal</option>
-  </select>
-  
-  <label for="imperialSpouse">Imperial Spouse:</label>
-  <input id="imperialSpouseInput" type="checkbox" disabled />
-  
-  <label for="dependantSpouse">Spouse Dependant (disadvantage -  2):</label>
-  <input id="dependantSpouseInput" type="checkbox" disabled />
-  
-  <label for="dependantParent">Parent Dependant (disadvantage - 4):</label>
-  <input id="dependantParentsInput" type="checkbox" />
-  
-  <label for="dependantChild">Child Dependant (disadvantage - 6):</label>
-  <input id="dependantChildInput" type="checkbox" />
-
-  <!-- Finances -->
-  <h2>Finances</h2>
-  <br />
-
-  <label for="wealth">Wealth:</label>
-  <select id="wealthInput">
-    <option>Choose</option>
-    <option>none</option>
-    <option>seven fortune's curse - daikoku</option>
-    <option>wealthy - 1</option>
-    <option>wealthy - 2</option>
-    <option>wealthy - 3</option>
-    <option>wealthy - 4</option>
-    <option>wealthy - 5</option>
-  </select>
-
-  <label for="gentry">Gentry:</label>
-  <select id="gentryInput">
-    <option>Choose</option>
-    <option>none</option>
-    <option>gentry - village</option>
-    <option>gentry - large village</option>
-    <option>gentry - unique holding</option>
-    <option>gentry - town</option>
-    <option>gentry - city</option>
-    <option>gentry - province</option>
-  </select>
-
-  <!-- Physical -->
-  <h2>Physical</h2>
-  <br />
-
-  <label for="sex">Sex:</label>
-  <select id="sexInput">
-    <option>Choose</option>
-    <option>Male</option>
-    <option>Female</option>
-  </select>
-  
-  <label for="age">Age:</label>
-  <select id="ageInput">
-    <option>Choose</option>
-    <option>Teenager (13 to 16)</option>
-    <option>Gempukku (16 to 18)</option>
-    <option>Adult (18 to 24)</option>
-    <option>Senior (24 to 40)</option>
-    <option>Venerable (40+)</option>
-  </select>
-
-  <label for="size">Size:</label>
-  <select id="sizeInput">
-    <option>Choose</option>
-    <option>Small</option>
-    <option>Average</option>
-    <option>Large</option>
-  </select>
-
-  <label for="eyeColor">Eye Color:</label>
-  <select id="eyeColorInput">
-    <option>Choose</option>
-    <option>Brown</option>
-    <option>Light Brown</option>
-    <option>Green</option>
-    <option>Light Green</option>
-    <option>Blue</option>
-    <option>Light Blue</option>
-    <option>Grey</option>
-  </select>
-
-  <label for="hairColor">Hair Color:</label>
-  <select id="hairColorInput">
-    <option>Choose</option>
-    <option>Black</option>
-    <option>Brown</option>
-    <option>Light Brown</option>
-    <option>Red</option>
-    <option>Blonde</option>
-    <option>White</option>
-    <option>Grey</option>
-  </select>
-
-  <label for="hairStyle">Hair Style:</label>
-  <select id="hairStyleInput">
-    <option>Choose</option>
-    <option>Chon-mage</option>
-    <option>Oicho-mage</option>
-    <option>Chasen-mage</option>
-    <option>Koma-mage</option>
-    <option>Yaro-mage</option>
-    <option>Wakashu-mage</option>
-    <option>Motodori-mage</option>
-    <option>Ichō-mage</option>
-    <option>Futatsu-mage</option>
-    <option>Yui-mage</option>
-    <option>Ronin-mage</option>
-    <option>Kabuki-mage</option>
-    <option>Merchant-mage</option>
-    <option>Artisan-mage</option>
-    <option>Farmer-mage</option>
-    <option>Shaved</option>
-    <option>Two-Block Haircut</option>
-    <option>Mash Hair</option>
-    <option>Center Part</option>
-    <option>Wolf Cut</option>
-    <option>Soft Perm</option>
-    <option>Short Textured Crop</option>
-    <option>Undercut</option>
-    <option>Long Layered</option>
-    <option>Buzz Cut</option>
-    <option>Spiky Short Hair</option>
-    <option>Curtain Hair</option>
-    <option>Fade Haircut</option>
-    <option>K-Pop Inspired Layered</option>
-    <option>Man Bun</option>
-    <option>Ponytail</option>
-	<!--Women-->
-	<option>Shimada-mage</option>
-	<option>Taka-Shimada-mage</option>
-	<option>Tsubushi-Shimada-mage</option>
-	<option>Maru-mage</option>
-	<option>Yoko-Hyogo</option>
-	<option>Tate-Hyogo</option>
-	<option>Katsuyama-mage</option>
-	<option>ofuku</option>
-	<option>Wareshinobu</option>
-	<option>Momoware</option>
-	<option>Kogai-mage</option>
-	<option>Gikei</option>
-	<option>Taregami</option>
-	<option>Yuiwata</option>
-	<option>Oshidori</option>
-	<option>Hime cut</option>
-	<option>Japanese bob</option>
-	<option>Layered Medium cut</option>
-	<option>Long straight with bangs</option>
-	<option>Airy bangs</option>
-	<option>Wolf cut</option>
-	<option>Shag cut</option>
-	<option>Kawai Twin Tails</option>
-	<option>Low Ponytail</option>
-	<option>Messy Bun</option>
-	<option>Straight Lob</option>
-	<option>Soft Perm Waves</option>
-	<option>Half-Up Half-Down</option>
-	<option>Curtain Bangs with Long Hair</option>
-    <option>Ponytail</option>
-  </select>
-
-  <label for="facialHair">Facial Hair:</label>
-  <select id="facialHairInput" disabled>
-    <option>Choose</option>
-    <option>None</option>
-    <option>Goatee</option>
-    <option>Mutton Chops</option>
-    <option>Full Beard - Short</option>
-    <option>Full Beard - Long</option>
-    <option>Mustache</option>
-  </select>
-  
-  <!-- Personality -->
-  <h2>Personality</h2>
-  <br />
-  
-  <label for="hobby">Hobby:</label>
-  <select id="hobbyInput">
-    <option>Choose</option>
-	<option>Animal Handling - Dogs</option>
-	<option>Animal Handling - Horses</option>
-	<option>Animal Handling - Falcons</option>
-	<option>Animal Handling - Big Cats</option>
-    <option>Artisan - Bonsai</option>
-    <option>Artisan - Gardening</option>
-    <option>Artisan - Ikebana</option>
-    <option>Artisan - Origami</option>
-    <option>Artisan - Painting</option>
-    <option>Artisan - Poetry</option>
-    <option>Artisan - Sculpture</option>
-    <option>Artisan - Tatooing</option>
-    <option>Athletics - Climbing</option>
-    <option>Athletics - Running</option>
-    <option>Athletics - Swimming</option>
-    <option>Athletics - Throwing</option>
-	<option>Calligraphy - Cipher (include Commerce - Mathematics)</option>
-	<option>Calligraphy - High Rokugani</option>
-	<option>Commerce - Mathematics</option>
-	<option>Craft - Cooking</option>
-	<option>Craft - Fishing</option>
-	<option>Craft - Pottery</option>
-	<option>Craft - Tailoring</option>
-    <option>Divination - Astrology</option>
-    <option>Divination - Kawaru</option>
-	<option>Drinking (disadvantage Compulsion)</option>
-	<option>Gambling (disadvantage Compulsion)</option>
-    <option>Game - Kemari</option>
-    <option>Game - Fortunes & Winds</option>
-    <option>Game - Go</option>
-    <option>Game - Letters</option>
-    <option>Game - Sadane</option>
-    <option>Game - Shogi</option>
-	<option>Horsemanship - Rokugani Pony (include animal handling - horse)</option>
-	<option>Horsemanship - Gaijin Riding Horse (include animal handling - horse)</option>
-	<option>Horsemanship - Utaku Steed (include animal handling - horse)</option>
-    <option>Hunting - Tracking</option>
-	<option>Intimidation - Torture (include disadvantage Fascination)</option>
-    <option>Jiujutsu - Grappling</option>
-    <option>Jiujutsu - Martial Arts</option>
-	<option>Kyujutsu - Dai-Kyu</option>
-	<option>Kyujutsu - Yumi (include Horsemanship)</option>
-    <option>Medicine - Herbalism</option>
-    <option>Meditation - Fasting</option>
-    <option>Lore - Anatomy (include disadvantage Fascination)</option>
-    <option>Lore - Architecture</option>
-    <option>Lore - Bushido</option>
-    <option>Lore - Elements</option>
-    <option>Lore - Ghosts</option>
-    <option>Lore - Nature</option>
-    <option>Lore - Heraldry</option>
-    <option>Lore - History</option>
-    <option>Lore - Spirit Realms</option>
-    <option>Lore - Theology</option>
-    <option>Perform - Biwa</option>
-    <option>Perform - Dance</option>
-    <option>Perform - Flute</option>
-    <option>Perform - Drums</option>
-    <option>Perform - Puppeteer</option>
-    <option>Perform - Shamisen</option>
-    <option>Perform - Song</option>
-    <option>Perform - Storytelling</option>
-	<option>Sleight of Hands - Prestidigitation</option>
-    <option>Tea Ceremony</option>
-	<option>Temptation - Seduction (include disadvantage Lechery)</option>
-  </select>
-  
-  <label for="characterFlaw">Character Flaw:</label>
-  <select id="characterFlawInput">
-    <option>Choose</option>
-    <option>antisocial - 2</option>
-    <option>antisocial - 4</option>
-    <option>ascetic</option>
-    <option>brash</option>
-    <option>bland</option>
-    <option>can't lie</option>
-    <option>consumed - control</option>
-    <option>consumed - determination</option>
-    <option>consumed - insight</option>
-    <option>consumed - knowledge</option>
-    <option>consumed - perfection</option>
-    <option>consumed - strength</option>
-    <option>consumed - will</option>
-    <option>contrary</option>
-    <option>driven</option>
-    <option>fascination</option>
-    <option>failure of bushido - compassion</option>
-    <option>failure of bushido - courage</option>
-    <option>failure of bushido - courtesy</option>
-    <option>failure of bushido - honesty</option>
-    <option>failure of bushido - honor</option>
-    <option>failure of bushido - sincerity</option>
-    <option>greedy</option>
-    <option>gullible</option>
-    <option>idealistic</option>
-    <option>insensitive</option>
-    <option>jealousy</option>
-    <option>lechery</option>
-    <option>obtuse</option>
-    <option>overconfident</option>
-    <option>rumormonger</option>
-    <option>soft-hearted</option>
-  </select>
-</form>
-
-<div class="output-section">
-  <h2>Character</h2>
-  
-  <h3>Background</h3>
-  <table class="readonly-table" id="backgroundTable">
-    <tbody>
-	  <tr><th>Name</th><td id="nameOutput"></td></tr>
-	  <tr><th>Age</th><td id="ageOutput">0</td></tr>
-	  <tr><th>Personality</th><td id="personalityOutput"></td></tr>
-    </tbody>
-  </table>
-  
-  <h3>Status</h3>
-  <table class="readonly-table" id="backgroundTable">
-    <tbody>
-	  <tr><th>Status</th><td id="statusOutput">0</td></tr>
-	  <tr><th>Glory</th><td id="gloryOutput">0</td></tr>
-	  <tr><th>Honor</th><td id="honorOutput">0</td></tr>
-	  <tr><th>Taint</th><td id="taintOutput">0</td></tr>
-    </tbody>
-  </table>
-  
-  <h3>Rank</h3>
-  <table class="readonly-table" id="rankTable">
-    <tbody>
-      <tr><th>Exp Spent</th><td id="expSpentOutput">0</td></tr>
-      <tr><th>Insight</th><td id="insightOutput">0</td></tr>
-      <tr><th>Rank</th><td id="rankOutput">1</td></tr>
-    </tbody>
-  </table>
-  
-  <h3>Stats</h3>
-  
-  <table class="readonly-table" id="characterTable">
-    <tbody>
-		<tr>
-			<th>Ring</th>
-			<th>Trait</th>
-			<th>Rank</th>
-			<th>Increase</th>
-			<th>Base</th>
-			<th>Family</th>
-			<th>School</th>
-			<th>Exp</th>
-			<th>Insight</th>
-		</tr>
-		<tr>
-			<th colspan="2">Earth Ring</th>
-			<th id="earthRingRankOutput">0</th>
-			<th colspan="5"></th>
-			<th id="earthRingInsightOutput">0</th>
-		</tr>
-		<tr>
-			<td></td>
-			<td>Stamina</td>
-			<td id="staminaRankOutput">0</td>
-			<td id="staminaIncreaseOutput">0</td>
-			<td id="staminaBaseOutput">0</td>
-			<td id="staminaFamilyOutput">0</td>
-			<td id="staminaSchoolOutput">0</td>
-			<td id="staminaExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Willpower</td>
-		<td id="willpowerRankOutput">0</td>
-			<td id="willpowerIncreaseOutput">0</td>
-			<td id="willpowerBaseOutput">0</td>
-			<td id="willpowerFamilyOutput">0</td>
-			<td id="willpowerSchoolOutput">0</td>
-			<td id="willpowerExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-			<th colspan="2">Air Ring</th>
-			<th id="airRingRankOutput">0</th>
-			<th colspan="5"></th>
-			<th id="airRingInsightOutput">0</th>
-      <tr>
-		<td></td>
-		<td>Reflexes</td>
-			<td id="reflexesRankOutput">0</td>
-			<td id="reflexesIncreaseOutput">0</td>
-			<td id="reflexesBaseOutput">0</td>
-			<td id="reflexesFamilyOutput">0</td>
-			<td id="reflexesSchoolOutput">0</td>
-			<td id="reflexesExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Awareness</td>
-			<td id="awarenessRankOutput">0</td>
-			<td id="awarenessIncreaseOutput">0</td>
-			<td id="awarenessBaseOutput">0</td>
-			<td id="awarenessFamilyOutput">0</td>
-			<td id="awarenessSchoolOutput">0</td>
-			<td id="awarenessExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-			<th colspan="2">Fire Ring</th>
-			<th id="fireRingRankOutput">0</th>
-			<th colspan="5"></th>
-			<th id="fireRingInsightOutput">0</th>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Agility</td>
-			<td id="agilityRankOutput">0</td>
-			<td id="agilityIncreaseOutput">0</td>
-			<td id="agilityBaseOutput">0</td>
-			<td id="agilityFamilyOutput">0</td>
-			<td id="agilitySchoolOutput">0</td>
-			<td id="agilityExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Intelligence</td>
-			<td id="intelligenceRankOutput">0</td>
-			<td id="intelligenceIncreaseOutput">0</td>
-			<td id="intelligenceBaseOutput">0</td>
-			<td id="intelligenceFamilyOutput">0</td>
-			<td id="intelligenceSchoolOutput">0</td>
-			<td id="intelligenceExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<th colspan="2">Water Ring</th>
-			<th id="waterRingRankOutput">0</th>
-			<th colspan="5"></th>
-			<th id="waterRingInsightOutput">0</th>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Strength</td>
-			<td id="strengthRankOutput">0</td>
-			<td id="strengthIncreaseOutput">0</td>
-			<td id="strengthBaseOutput">0</td>
-			<td id="strengthFamilyOutput">0</td>
-			<td id="strengthSchoolOutput">0</td>
-			<td id="strengthExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<td></td>
-		<td>Perception</td>
-			<td id="perceptionRankOutput">0</td>
-			<td id="perceptionIncreaseOutput">0</td>
-			<td id="perceptionBaseOutput">0</td>
-			<td id="perceptionFamilyOutput">0</td>
-			<td id="perceptionSchoolOutput">0</td>
-			<td id="perceptionExpOutput">0</td>
-			<td></td>
-		</tr>
-      <tr>
-		<th colspan="2">Void Ring</th>
-			<th id="voidRankOutput">0</th>
-			<th id="voidIncreaseOutput">0</th>
-			<th id="voidBaseOutput">0</th>
-			<th id="voidFamilyOutput">0</th>
-			<th id="voidSchoolOutput">0</th>
-			<th id="voidExpOutput">0</th>
-			<th id="voidInsightOutput">0</th>
-		</tr>
-    </tbody>
-  </table>
-  
-  <h3>Income</h3>
-  <table>
-    <thead>
-      <tr><th>Frequency</th><th>Koku</th><th>Bu</th><th>Zeni</th></tr>
-    </thead>
-    <tbody id="incomeTable">
-		<tr>
-			<td>Starting</td>
-			<td id="kokuOutput">0</th>
-			<td id="buOutput">0</td>
-			<td id="zeniOutput">0</td>
-		</tr>
-		<tr>
-			<td>Monthly</td>
-			<td id="monthKokuOutput">0</th>
-			<td id="monthBuOutput">0</td>
-			<td id="monthZeniOutput">0</td>
-		</tr>
-		<tr>
-			<td>Yearly</td>
-			<td id="yearKokuOutput">0</th>
-			<td id="yearBuOutput">0</td>
-			<td id="yearZeniOutput">0</td>
-		</tr>
-	</tbody>
-  </table>
-
-  <h3>Skills</h3>
-  <table>
-    <thead>
-      <tr>
-		<th>Type</th>
-		<th>Name</th>
-		<th>Trait</th>
-		<th>Roll</th>
-		<th>Keep</th>
-		<th>Rank</th>
-		<th>Emphasis</th>
-		<th>School Rank</th>
-		<th>School Emphasis</th>
-		<th>Exp</th>
-		<th>Insight</th>
-		</tr>
-    </thead>
-    <tbody id="skillsTable">
-		<tr><td colspan="11">No skills yet.</td></tr>
-	</tbody>
-  </table>
-
-  <h3>Advantages</h3>
-<script src="js/character_generator/classes.js"></script>
-<script src="js/character_generator/data.js"></script>
-<script src="js/character_generator/main.js"></script>
-		newRow.append(affinityCell);
-		newRow.append(pageCell);
-		if(aAdvDis.type == "adv") {
-			advTable.appendChild(newRow);
-		} else {
-			disTable.appendChild(newRow);
-		}
-	}
-	
-	// Rank
-	document.getElementById('expSpentOutput').textContent = character.getExp();
-	if(form.expInput.value != 'Choose') {
-		document.getElementById('expRemainingOutput').textContent = form.expInput.value - character.getExp();
-	}
-	document.getElementById('insightOutput').textContent = character.getInsight();
-	document.getElementById('rankOutput').textContent = character.getRank();
-  };
-
-  form.querySelectorAll('select').forEach(sel => {
-    sel.addEventListener('change', updateOutput);
-  });
-  
-  form.querySelectorAll('input').forEach(sel => {
-    sel.addEventListener('change', updateOutput);
-  });
-</script>
-
+  </main>
+  <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+  </footer>
+    <script src="js/character_generator/classes.js"></script> 
+    <script src="js/character_generator/data.js"></script> 
+    <script src="js/character_generator/main.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <script>
+    $(function() {
+      $("nav").load("/l5r10/navbar.html");
+    })
+    </script>
+  </main>
 </body>
 </html>

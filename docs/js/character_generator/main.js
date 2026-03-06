@@ -537,58 +537,6 @@ sexSelect.addEventListener('change', function() {
   document.getElementById('nameOutput').textContent = name;
 });
 
-
-// === MBTI Personality Generator ===
-function generatePersonalityDescription() {
-
-  const ei = document.getElementById("eiInput").value;
-  const si = document.getElementById("siInput").value;
-  const tf = document.getElementById("tfInput").value;
-  const jp = document.getElementById("jpInput").value;
-  
-  if (ei == "Choose" || si == "Choose" || tf == "Choose" || jp == "Choose") {
-	return;
-	}
-
-  // Convert dropdowns to MBTI letters
-  const e = ei === "Extraversion" ? "E" : "I";
-  const s = si === "Sensing" ? "S" : "N";
-  const t = tf === "Thinking" ? "T" : "F";
-  const j = jp === "Judging" ? "J" : "P";
-  const mbti = `${e}${s}${t}${j}`;
-
-  // Descriptions for each MBTI type
-  const descriptions = {
-    "ISTJ": "Responsible, detail-oriented, and dependable. Values duty and tradition.",
-    "ISFJ": "Warm, conscientious, and loyal. Strives to protect and serve others quietly.",
-    "INFJ": "Idealistic and insightful. Guided by strong principles and empathy.",
-    "INTJ": "Strategic, independent, and visionary. Excels at long-term planning.",
-    "ISTP": "Practical and adaptable. Solves problems with calm logic under pressure.",
-    "ISFP": "Gentle, artistic, and reserved. Appreciates harmony and personal freedom.",
-    "INFP": "Creative and deeply idealistic. Driven by inner values and compassion.",
-    "INTP": "Analytical and curious. Enjoys exploring complex ideas and systems.",
-    "ESTP": "Energetic and bold. Thrives on excitement and quick action.",
-    "ESFP": "Lively, spontaneous, and sociable. Enjoys living in the moment.",
-    "ENFP": "Charismatic and imaginative. Seeks inspiration and new possibilities.",
-    "ENTP": "Inventive, clever, and outspoken. Loves to debate and innovate.",
-    "ESTJ": "Organized, assertive, and efficient. Natural leader with strong work ethic.",
-    "ESFJ": "Caring, responsible, and cooperative. Values harmony and social order.",
-    "ENFJ": "Charismatic and empathetic. Inspires others with passion and understanding.",
-    "ENTJ": "Commanding, strategic, and decisive. Natural leader who drives change."
-  };
-
-  // Choose the description or a default message
-  const description = descriptions[mbti] || "Unique blend of traits. Balanced and adaptable personality.";
-
-  // Update output section
-  document.getElementById("personalityOutput").textContent = `${mbti} — ${description}`;
-}
-
-// === Listen for any change in MBTI dropdowns ===
-document.getElementById("eiInput").addEventListener("change", generatePersonalityDescription);
-document.getElementById("siInput").addEventListener("change", generatePersonalityDescription);
-document.getElementById("tfInput").addEventListener("change", generatePersonalityDescription);
-document.getElementById("jpInput").addEventListener("change", generatePersonalityDescription);
   
   const updateOutput = () => {
 	
@@ -608,97 +556,52 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
 		break;
 	}
 	
-	// Education level
-	switch (form.educationInput.value) {
-	case 'Exceptional':
-		character.increaseSkill("lore - heraldry", 1);
-		character.increaseSkill("commerce", 1);
-	case 'Above Average':
-		character.increaseSkill("calligraphy", 1);
-		switch (form.clanInput.value.toLowerCase()) {
-		case 'crab':
-			character.increaseSkill("lore - crab", 1);
-			break;
-		case 'crane':
-			character.increaseSkill("lore - crane", 1);
-			break;
-		case 'dragon':
-			character.increaseSkill("lore - dragon", 1);
-			break;
-		case 'lion':
-			character.increaseSkill("lore - lion", 1);
-			break;
-		case 'mantis':
-			character.increaseSkill("lore - mantis", 1);
-			break;
-		case 'phoenix':
-			character.increaseSkill("lore - phoenix", 1);
-			break;
-		case 'scorpion':
-			character.increaseSkill("lore - scorpion", 1);
-			break;
-		case 'unicorn':
-			character.increaseSkill("lore - unicorn", 1);
-			break;
-		default:
-			break;
-		}
-	case 'Average':
-		character.increaseSkill("lore - history", 1);
-	case 'Basic':
-		character.increaseSkill("etiquette", 1);
-	case 'None':
-	default:
-		// Nothing
-	  break;
-	}
-	
 	// hobby
 	switch (form.hobbyInput.value) {
 	case 'Animal Handling - Horses':
-		character.increasePreferredSkill("animal handling", 2, "horses");
+		character.increasePreferredSkill("animal handling", 1, "horses");
 		break;
 	case 'Animal Handling - Falcons':
-		character.increasePreferredSkill("animal handling", 2, "falcons");
+		character.increasePreferredSkill("animal handling", 1, "falcons");
 		break;
 	case 'Animal Handling - Big Cats':
-		character.increasePreferredSkill("animal handling", 2, "big cats");
+		character.increasePreferredSkill("animal handling", 1, "big cats");
 		break;
 	case 'Artisan - Bonsai':
-		character.increasePreferredSkill("artisan - bonsai", 2, "bonsai");
+		character.increasePreferredSkill("artisan - bonsai", 1, "bonsai");
 		break;
 	case 'Artisan - Gardening':
-		character.increasePreferredSkill("artisan - gardening", 2, "gardening");
+		character.increasePreferredSkill("artisan - gardening", 1, "gardening");
 		break;
 	case 'Artisan - Ikebana':
-		character.increasePreferredSkill("artisan - ikebana", 2, "ikebana");
+		character.increasePreferredSkill("artisan - ikebana", 1, "ikebana");
 		break;
 	case 'Artisan - Origami':
-		character.increasePreferredSkill("artisan - origami", 2, "origami");
+		character.increasePreferredSkill("artisan - origami", 1, "origami");
 		break;
 	case 'Artisan - Painting':
-		character.increasePreferredSkill("artisan - painting", 2, "painting");
+		character.increasePreferredSkill("artisan - painting", 1, "painting");
 		break;
 	case 'Artisan - Poetry':
-		character.increasePreferredSkill("artisan - poetry", 2, "poetry");
+		character.increasePreferredSkill("artisan - poetry", 1, "poetry");
 		break;
 	case 'Artisan - Sculpture':
-		character.increasePreferredSkill("artisan - sculpture", 2, "sculpture");
+		character.increasePreferredSkill("artisan - sculpture", 1, "sculpture");
 		break;
 	case 'Artisan - Tatooing':
-		character.increasePreferredSkill("artisan - tatooing", 2, "tatooing");
+		character.increasePreferredSkill("artisan - tatooing", 1, "tatooing");
 		break;
 	case 'Athletics - Climbing':
-		character.increasePreferredSkill("athletics", 2, "climbing");
+		character.increasePreferredSkill("athletics", 1, "climbing");
 		break;
 	case 'Athletics - Running':
-		character.increasePreferredSkill("athletics", 2, "running");
+		character.increasePreferredSkill("athletics", 1, "running");
 		break;
 	case 'Athletics - Swimming':
-		character.increasePreferredSkill("athletics", 2, "swimming");
+		character.increasePreferredSkill("athletics", 1, "swimming");
 		break;
 	case 'Athletics - Throwing':
-		character.increasePreferredSkill("athletics", 2, "throwing");
+		character.increasePreferredSkill("athletics", 1, "throwing");
 		break;
 	case 'Calligraphy - Cipher (include Commerce - Mathematics)':
 		character.increasePreferredSkill("calligraphy", 1, "cipher");
@@ -708,25 +611,25 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
 		character.increasePreferredSkill("calligraphy", 1, "high rokugani");
 		break;
 	case 'Commerce - Mathematics':
-		character.increasePreferredSkill("commerce", 2, "mathematics");
+		character.increasePreferredSkill("commerce", 1, "mathematics");
 		break;
 	case 'Craft - Cooking':
-		character.increasePreferredSkill("craft - cooking", 2, "cooking");
+		character.increasePreferredSkill("craft - cooking", 1, "cooking");
 		break;
 	case 'Craft - Fishing':
-		character.increasePreferredSkill("craft - fishing", 2, "fishing");
+		character.increasePreferredSkill("craft - fishing", 1, "fishing");
 		break;
 	case 'Craft - Pottery':
-		character.increasePreferredSkill("craft - pottery", 2, "pottery");
+		character.increasePreferredSkill("craft - pottery", 1, "pottery");
 		break;
 	case 'Craft - Tailoring':
-		character.increasePreferredSkill("craft - tailoring", 2, "tailoring");
+		character.increasePreferredSkill("craft - tailoring", 1, "tailoring");
 		break;
 	case 'Divination - Astrology':
-		character.increasePreferredSkill("divination", 2, "astrology");
+		character.increasePreferredSkill("divination", 1, "astrology");
 		break;
 	case 'Divination - Kawaru':
-		character.increasePreferredSkill("divination", 2, "kawaru");
+		character.increasePreferredSkill("divination", 1, "kawaru");
 		break;
 	case 'Drinking (disadvantage Compulsion)':
 		character.addAdvDis("compulsion - 2", "alcoholic");
@@ -735,22 +638,22 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
 		character.addAdvDis("compulsion - 2", "gambling");
 		break;
 	case 'Games - Kemari':
-		character.increasePreferredSkill("games - kemari", 2, "kemari");
+		character.increasePreferredSkill("games - kemari", 1, "kemari");
 		break;
 	case 'Games - Fortunes & Winds':
-		character.increasePreferredSkill("games - fortunes & winds", 2, "fortunes & winds");
+		character.increasePreferredSkill("games - fortunes & winds", 1, "fortunes & winds");
 		break;
 	case 'Games - Go':
-		character.increasePreferredSkill("games - go", 2, "go");
+		character.increasePreferredSkill("games - go", 1, "go");
 		break;
 	case 'Games - Letters':
-		character.increasePreferredSkill("games - letters", 2, "letters");
+		character.increasePreferredSkill("games - letters", 1, "letters");
 		break;
 	case 'Games - Sadane':
-		character.increasePreferredSkill("games - sadane", 2, "sadane");
+		character.increasePreferredSkill("games - sadane", 1, "sadane");
 		break;
 	case 'Games - Shogi':
-		character.increasePreferredSkill("games - shogi", 2, "shogi");
+		character.increasePreferredSkill("games - shogi", 1, "shogi");
 		break;
 	case 'Horsemanship - Rokugani Pony (include animal handling - horse)':
 		character.increasePreferredSkill("horsemanship", 1, "rokugani pony");
@@ -765,91 +668,91 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
 		character.increasePreferredSkill("animal handling", 1, "horse");
 		break;
 	case 'Hunting':
-		character.increasePreferredSkill("hunting", 2, "tracking");
+		character.increasePreferredSkill("hunting", 1, "tracking");
 		break;
 	case 'Intimidation - Torture (include disadvantage Fascination)':
-		character.increasePreferredSkill("intimidation", 2, "torture");
+		character.increasePreferredSkill("intimidation", 1, "torture");
 		character.addAdvDis("fascination", "torture");
 		break;
 	case 'Jiujutsu - Grappling':
-		character.increasePreferredSkill("jiujutsu", 2, "grappling");
+		character.increasePreferredSkill("jiujutsu", 1, "grappling");
 		break;
 	case 'Jiujutsu - Martial Arts':
-		character.increasePreferredSkill("jiujutsu", 2, "martial arts");
+		character.increasePreferredSkill("jiujutsu", 1, "martial arts");
 		break;
 	case 'Kyujutsu - Dai-Kyu':
-		character.increasePreferredSkill("kyujutsu", 2, "dai-kyu");
+		character.increasePreferredSkill("kyujutsu", 1, "dai-kyu");
 		break;
 	case 'Kyujutsu - Yumi (include Horsemanship)':
 		character.increasePreferredSkill("kyujutsu", 1, "yumi");
 		character.increasePreferredSkill("horsemanship", 1);
 		break;
 	case 'Medicine - Herbalism':
-		character.increasePreferredSkill("medicine", 2, "herbalism");
+		character.increasePreferredSkill("medicine", 1, "herbalism");
 		break;
 	case 'Meditation':
-		character.increasePreferredSkill("meditation", 2, "fasting");
+		character.increasePreferredSkill("meditation", 1, "fasting");
 		break;
 	case 'Lore - Anatomy (include disadvantage Fascination)':
-		character.increasePreferredSkill("lore - anatomy", 2, "anatomy");
+		character.increasePreferredSkill("lore - anatomy", 1, "anatomy");
 		character.addAdvDis("fascination", "anatomy");
 		break;
 	case 'Lore - Architecture':
-		character.increasePreferredSkill("lore - architecture", 2, "architecture");
+		character.increasePreferredSkill("lore - architecture", 1, "architecture");
 		break;
 	case 'Lore - Bushido':
-		character.increasePreferredSkill("lore - bushido", 2, "bushido");
+		character.increasePreferredSkill("lore - bushido", 1, "bushido");
 		break;
 	case 'Lore - Elements':
-		character.increasePreferredSkill("lore - elements", 2, "elements");
+		character.increasePreferredSkill("lore - elements", 1, "elements");
 		break;
 	case 'Lore - Ghosts':
-		character.increasePreferredSkill("lore - ghosts", 2, "ghosts");
+		character.increasePreferredSkill("lore - ghosts", 1, "ghosts");
 		break;
 	case 'Lore - Nature':
-		character.increasePreferredSkill("lore - nature", 2, "nature");
+		character.increasePreferredSkill("lore - nature", 1, "nature");
 		break;
 	case 'Lore - Heraldry':
-		character.increasePreferredSkill("lore - heraldry", 2, "heraldry");
+		character.increasePreferredSkill("lore - heraldry", 1, "heraldry");
 		break;
 	case 'Lore - History':
-		character.increasePreferredSkill("lore - history", 2, "history");
+		character.increasePreferredSkill("lore - history", 1, "history");
 		break;
 	case 'Lore - Spirit Realms':
-		character.increasePreferredSkill("lore - spirit realms", 2, "spirit realms");
+		character.increasePreferredSkill("lore - spirit realms", 1, "spirit realms");
 		break;
 	case 'Lore - Theology':
-		character.increasePreferredSkill("lore - theology", 2, "theology");
+		character.increasePreferredSkill("lore - theology", 1, "theology");
 		break;
 	case 'Perform - Biwa':
-		character.increasePreferredSkill("perform - biwa", 2, "biwa");
+		character.increasePreferredSkill("perform - biwa", 1, "biwa");
 		break;
 	case 'Perform - Dance':
-		character.increasePreferredSkill("perform - dance", 2, "dance");
+		character.increasePreferredSkill("perform - dance", 1, "dance");
 		break;
 	case 'Perform - Drums':
-		character.increasePreferredSkill("perform - drums", 2, "drums");
+		character.increasePreferredSkill("perform - drums", 1, "drums");
 		break;
 	case 'Perform - Puppeteer':
-		character.increasePreferredSkill("perform - puppeteer", 2, "puppeteer");
+		character.increasePreferredSkill("perform - puppeteer", 1, "puppeteer");
 		break;
 	case 'Perform - Shamisen':
-		character.increasePreferredSkill("perform - shamisen", 2, "shamisen");
+		character.increasePreferredSkill("perform - shamisen", 1, "shamisen");
 		break;
 	case 'Perform - Song':
-		character.increasePreferredSkill("perform - song", 2, "song");
+		character.increasePreferredSkill("perform - song", 1, "song");
 		break;
 	case 'Perform - Storytelling':
-		character.increasePreferredSkill("perform - storytelling", 2, "storytelling");
+		character.increasePreferredSkill("perform - storytelling", 1, "storytelling");
 		break;
 	case 'Sleight of Hands - Prestidigitation':
-		character.increasePreferredSkill("sleight of hands", 2, "prestidigitation");
+		character.increasePreferredSkill("sleight of hands", 1, "prestidigitation");
 		break;
 	case 'Tea Ceremony':
-		character.increasePreferredSkill("tea ceremony", 2);
+		character.increasePreferredSkill("tea ceremony", 1);
 		break;
 	case 'Temptation - Seduction (include disadvantage Lechery)':
-		character.increasePreferredSkill("temptation", 2, "seduction");
+		character.increasePreferredSkill("temptation", 1, "seduction");
 		character.addAdvDis("lechery");
 		break;
 	default:
@@ -1681,135 +1584,6 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
 		break;
 	}
 	
-	// health
-	switch(form.healthInput.value) {
-		case 'Sickly':
-			character.addAdvDis("bad health");
-		case 'Below Average':
-			character.addAdvDis("weakness - stamina");
-			break;
-		case 'Legendary':
-			switch(form.clanInput.value) {
-				case 'Crab':
-				case 'Lion':
-					character.addAdvDis("seven fortunes' - bishamon");
-					break;
-				case 'Scorpion':
-				default:
-					character.addAdvDis("seven fortunes' - jurojin");
-					break;
-			}
-			character.addAdvDis("fame", "Legendary Health");
-			character.increaseTrait("stamina", 1);
-			character.increaseTrait("strength", 1);
-			character.increaseTrait("agility", 1);
-			character.increaseTrait("reflexes", 1);
-			character.increaseSkill("athletics", 1);
-		case 'Exceptional':
-			character.increaseTrait("stamina", 1);
-			character.increaseTrait("strength", 1);
-			character.increaseTrait("agility", 1);
-			character.increaseTrait("reflexes", 1);
-			character.increaseSkill("athletics", 1);
-		case 'Above Average':
-			character.increaseTrait("stamina", 1);
-			character.increaseTrait("strength", 1);
-			character.increaseTrait("agility", 1);
-			character.increaseTrait("reflexes", 1);
-			character.increaseSkill("athletics", 1);
-	default:
-		// nothing
-		break;
-	}
-	
-	// Intelligence
-	switch(form.intelligenceInput.value) {
-	case 'Retarded':
-		character.addAdvDis("frail mind");
-	case 'Below Average':
-		character.addAdvDis("weakness - intelligence");
-		break;
-	case 'Legendary':
-		character.addAdvDis("fame", "Legendary Intellect");		
-		switch(form.clanInput.value) {
-			case 'Scorpion':
-				character.addAdvDis("crafty");
-				break;
-			case 'Dragon':
-				character.addAdvDis("clear thinker");
-				break;
-			case 'Phoenix':
-				character.addAdvDis("sage");
-				break;
-			case 'Lion':
-				character.addAdvDis("tactician");
-				break;
-			default:
-				character.addAdvDis("precise memory");
-				break;
-		}
-		character.increaseTrait("intelligence", 1);
-		character.increaseTrait("perception", 1);
-		character.increaseTrait("willpower", 1);
-	case 'Exceptional':
-		character.increaseTrait("intelligence", 1);
-		character.increaseTrait("perception", 1);
-		character.increaseTrait("willpower", 1);
-	case 'Above Average':
-		character.increaseTrait("intelligence", 1);
-		character.increaseTrait("perception", 1);
-		character.increaseTrait("willpower", 1);
-		break;
-	default:
-		break;
-	}
-	
-	// MBTI adjustments
-	const ei = document.getElementById("eiInput").value;
-	const si = document.getElementById("siInput").value;
-	const tf = document.getElementById("tfInput").value;
-	const jp = document.getElementById("jpInput").value;
-	
-	if(ei == "Extraversion") {
-		if(character.getTrait("awareness").getTotalRank() < 5) {
-			character.increaseTrait("awareness", 1);
-		}
-	} else if (ei == "Introversion") {
-		if(character.getTrait("willpower").getTotalRank() < 5) {
-			character.increaseTrait("willpower", 1);
-		}
-	}
-	
-	if(si == "Sensing") {
-		if(character.getTrait("perception").getTotalRank() < 5) {
-			character.increaseTrait("perception", 1);
-		}
-	} else if (si == "Intuition") {
-		if(character.getTrait("awareness").getTotalRank() < 5) {
-			character.increaseTrait("awareness", 1);
-		}
-	}
-	
-	if(tf == "Thinking") {
-		if(character.getTrait("intelligence").getTotalRank() < 5) {
-			character.increaseTrait("intelligence", 1);
-		}
-	} else if (tf == "Feeling") {
-		if(character.getTrait("willpower").getTotalRank() < 5) {
-			character.increaseTrait("willpower", 1);
-		}
-	}
-	
-	if(jp == "Judging") {
-		if(character.getTrait("intelligence").getTotalRank() < 5) {
-			character.increaseTrait("intelligence", 1);
-		}
-	} else if (jp == "Perceiving") {
-		if(character.getTrait("perception").getTotalRank() < 5) {
-			character.increaseTrait("perception", 1);
-		}
-	}
-	
 	// status
 	document.getElementById('statusOutput').textContent = character.getStatus();
 	document.getElementById('gloryOutput').textContent = character.getGlory();
@@ -1947,9 +1721,9 @@ document.getElementById("jpInput").addEventListener("change", generatePersonalit
   };
 
   form.querySelectorAll('select').forEach(sel => {
-
-  form.querySelectorAll('input').forEach(sel => {
     sel.addEventListener('change', updateOutput);
   });
-  sel.addEventListener('change', updateOutput);
+  
+  form.querySelectorAll('input').forEach(sel => {
+    sel.addEventListener('change', updateOutput);
   });
