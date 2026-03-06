@@ -62,13 +62,3 @@ fighting chance against their samurai oppressors. It is mostly reserved for NPCs
 circumstances. You gain the benefits of Flanking as long as you have at least one ally adjacent to the enemy, even if they
 are not on the opposite side. You lose 1 point of Honor each time you use this technique (but that doesn’t matter to
 peasants anyway, so...).
-
-Clarifications: The Commune Spell
-- It is common knowledge in the setting that the elemental kami do not recognize individuals, only bloodlines, so asking
-them to identify individuals is extremely difficult.
-- Elemental kami do not speak the Rokugani language, which is why shugenja have to learn theirs.
-- Elemental kami can reveal that someone is currently under the effects of a recently cast shugenja spell, but not maho or
-long-term supernatural effects like Advantages or Disadvantages. Courts are aware of this and sometimes have a
-shugenja on hand to check if someone is trying to magically enhance their performance before things like negotiations or
-contests. If cheating is suspected, then a polite pretext for a delay is thought up so that the spell’s duration can lapse.
-Identifying a spell through a spirit’s description might require a Spellcraft roll.
