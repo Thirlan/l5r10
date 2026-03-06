@@ -1,15 +1,9 @@
 Historic Effects on Character Options
 Because this is the 10th century in the setting, certain character options are different.
 
-- Maho
 - Togashi Tattooed Order (pages 115-116): The Crane tattoo, Hawk tattoo, Ki-Rin tattoo, Scorpion Tattoo and Wolf tattoo
 can be activated a number of times per day equal to the ise zumi's school rank. All the tattoos are so large that they can
 never be used with armor.
-
-Changes to Advantages, Skills, Spells and Equipment
-- Armor (page 198): The TN penalties from all types of armor also apply to Spell Casting Rolls.
-- Naginata (page 202): The naginata has a DR of 3k3.
-- Wakizashi weapon (page 205): You may draw a wakizashi as part of the same action as a katana.
 
 Money Stipends
 Once per in-game year, a character’s faction will provide him more money. The formula is the character’s starting koku
