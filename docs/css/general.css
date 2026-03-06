@@ -108,15 +108,15 @@ tr:last-child td {
 }
 
 .medium_icon {
-    width: 128px;
-    max-height: 256px;
+    width: 256px;
+    max-height: 512px;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
 }
 
 .medium_icon:hover {
-    transform: scale(1.5);
+    transform: scale(1.05);
 }
 
 footer {
@@ -145,7 +145,7 @@ footer {
     
     .medium_icon {
         width: 80px;
-        max-height: 80px;
+        max-height: 256px;
     }
     
     h1 {
@@ -159,7 +159,6 @@ footer {
 
 /* Japanese-inspired decorative elements */
 h2::after {
-    content: "⚔️";
     position: absolute;
     right: -30px;
     top: 0;
