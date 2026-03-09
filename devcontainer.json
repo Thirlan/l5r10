@@ -40,7 +40,8 @@
     }
   },
   "remoteEnv": {
-    "NODE_ENV": "development"
+    "NODE_ENV": "development",
+    "CLOUDFLARE_API_TOKEN": "${localEnv:CLOUDFLARE_API_TOKEN}"
   },
   "postCreateCommand": "npm install -g pnpm wrangler && pnpm install",
   "postStartCommand": "pnpm install",
