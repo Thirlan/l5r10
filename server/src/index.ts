@@ -18,10 +18,31 @@ import {
   getPlayerCharactersHandler,
   getCampaignCharactersHandler,
 } from './routes/characters'
+import {
+  loginWithGoogleHandler,
+  loginWithDiscordHandler,
+  googleCallbackHandler,
+  discordCallbackHandler,
+  logoutHandler,
+  currentUserHandler,
+} from './routes/auth'
 
-interface Env {
+export interface Env {
   DB: D1Database
-  // Bindings will be added here as we expand:
+  // Authentication environment variables
+  AUTH_EMAIL_ENABLED?: string
+  AUTH_GOOGLE_ENABLED?: string
+  AUTH_GOOGLE_CLIENT_ID?: string
+  AUTH_GOOGLE_CLIENT_SECRET?: string
+  AUTH_GOOGLE_REDIRECT_URI?: string
+  AUTH_DISCORD_ENABLED?: string
+  AUTH_DISCORD_CLIENT_ID?: string
+  AUTH_DISCORD_CLIENT_SECRET?: string
+  AUTH_DISCORD_REDIRECT_URI?: string
+  JWT_SECRET?: string
+  JWT_EXPIRES_IN?: string
+  SESSION_EXPIRES_IN?: string
+  // Future bindings:
   // - STORAGE: R2Bucket
   // - RATE_LIMITER: RateLimiterNamespace
 }
@@ -105,6 +126,31 @@ export default {
         env,
         campaignCharactersMatch[1],
       )
+    }
+
+    // Authentication routes
+    if (url.pathname === '/auth/google' && method === 'GET') {
+      return loginWithGoogleHandler(request, env)
+    }
+
+    if (url.pathname === '/auth/discord' && method === 'GET') {
+      return loginWithDiscordHandler(request, env)
+    }
+
+    if (url.pathname === '/auth/callback/google' && method === 'GET') {
+      return googleCallbackHandler(request, env)
+    }
+
+    if (url.pathname === '/auth/callback/discord' && method === 'GET') {
+      return discordCallbackHandler(request, env)
+    }
+
+    if (url.pathname === '/auth/logout' && method === 'GET') {
+      return logoutHandler(request)
+    }
+
+    if (url.pathname === '/auth/me' && method === 'GET') {
+      return currentUserHandler(request, env)
     }
 
     // 404 Not Found

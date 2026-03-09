@@ -157,7 +157,7 @@ Session 10 Create initial tables: - users - characters - campaigns (COMPLETED)
 
 Week 3 -- Authentication
 
-Session 11 Install Auth.js.
+Session 11 Install Auth.js. (COMPLETED)
 
 Providers: - email - Google - Discord
 
