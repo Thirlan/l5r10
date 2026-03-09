@@ -71,3 +71,7 @@ State Management:
 Hex Grid Math:
 
 - Honeycomb
+
+
+## Folder structure
+/docs: contains a plain old html page hosted on https://thirlan.github/io/l5r10. This is entirely separate from the tactical game.
