@@ -138,9 +138,9 @@ Session 5 Configure linting: - ESLint - Prettier
 
 Week 2 -- Cloudflare Setup
 
-Session 6 - create Cloudflare account - install Wrangler CLI
+Session 6 - create Cloudflare account - install Wrangler CLI (COMPLETED)
 
-Session 7 - create Workers project - deploy first worker
+Session 7 - create Workers project - deploy first worker (COMPLETED)
 
 Session 8 - create API endpoint `/api/ping` - verify frontend
 communication
