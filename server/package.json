@@ -1,0 +1,19 @@
+{
+  "name": "@l5r-tactics/server",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@l5r-tactics/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240321.0",
+    "typescript": "^5.3.3",
+    "wrangler": "^4.71.0"
+  }
+}
