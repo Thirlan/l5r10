@@ -1,0 +1,23 @@
+{
+  "name": "l5r-tactics",
+  "version": "0.1.0",
+  "description": "L5R Tactical RPG - Turn-based hex grid tactical combat",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm --parallel -r run build",
+    "lint": "pnpm --parallel -r run lint"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3"
+  }
+}
