@@ -167,11 +167,11 @@ Session 11 Install Auth.js. (COMPLETED)
 
 Providers: - email - Google - Discord
 
-Session 12 Create D1 user mapping table.
+Session 12 Create D1 user mapping table. (COMPLETED)
 
-Session 13 Create login page using React + Tailwind.
+Session 13 Create login page using React + Tailwind. (COMPLETED)
 
-Session 14 Add authenticated routes:
+Session 14 Add authenticated routes: (COMPLETED)
 
 -   /dashboard
 -   /campaigns
