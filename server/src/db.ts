@@ -207,3 +207,93 @@ export async function getCharactersByCampaign(
     return []
   }
 }
+
+/**
+ * Link an OAuth provider to a user
+ */
+export async function createOAuthProvider(
+  db: D1Database,
+  id: string,
+  userId: string,
+  provider: 'google' | 'discord',
+  providerId: string,
+  email?: string,
+  displayName?: string,
+  avatarUrl?: string,
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const result = await db
+      .prepare(
+        `INSERT INTO oauth_providers 
+        (id, user_id, provider, provider_id, email, display_name, avatar_url) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      )
+      .bind(id, userId, provider, providerId, email || null, displayName || null, avatarUrl || null)
+      .run()
+
+    return { success: !!result.success }
+  } catch (error) {
+    console.error('Error creating OAuth provider link:', error)
+    return { success: false, error: String(error) }
+  }
+}
+
+/**
+ * Get OAuth provider by provider ID
+ */
+export async function getOAuthProviderByProviderId(
+  db: D1Database,
+  provider: 'google' | 'discord',
+  providerId: string,
+): Promise<{ id: string; user_id: string; provider: string; provider_id: string; email?: string } | null> {
+  try {
+    const result = await db
+      .prepare('SELECT * FROM oauth_providers WHERE provider = ? AND provider_id = ?')
+      .bind(provider, providerId)
+      .first()
+
+    return result as any
+  } catch (error) {
+    console.error('Error fetching OAuth provider:', error)
+    return null
+  }
+}
+
+/**
+ * Get all OAuth providers for a user
+ */
+export async function getUserOAuthProviders(
+  db: D1Database,
+  userId: string,
+): Promise<any[]> {
+  try {
+    const result = await db
+      .prepare('SELECT * FROM oauth_providers WHERE user_id = ?')
+      .bind(userId)
+      .all()
+
+    return result.results as any[]
+  } catch (error) {
+    console.error('Error fetching user OAuth providers:', error)
+    return []
+  }
+}
+
+/**
+ * Update last login for OAuth provider
+ */
+export async function updateOAuthProviderLastLogin(
+  db: D1Database,
+  providerId: string,
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const result = await db
+      .prepare('UPDATE oauth_providers SET last_login = CURRENT_TIMESTAMP WHERE id = ?')
+      .bind(providerId)
+      .run()
+
+    return { success: !!result.success }
+  } catch (error) {
+    return { success: false, error: String(error) }
+  }
+}

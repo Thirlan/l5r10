@@ -16,7 +16,13 @@ import {
   getDiscordUserInfo,
 } from '../auth/oauth'
 import { createToken, JWTPayload, createSetCookieHeader, getTokenExpiration } from '../auth/jwt'
-import { createUser, getUserByEmail } from '../db'
+import { 
+  createUser, 
+  getUserByEmail, 
+  createOAuthProvider,
+  getOAuthProviderByProviderId,
+  updateOAuthProviderLastLogin,
+} from '../db'
 
 /**
  * GET /auth/google
@@ -119,6 +125,25 @@ export async function googleCallbackHandler(
       user = { id: userId, email: userInfo.email, username: userInfo.name || userInfo.email }
     }
 
+    // Create or link OAuth provider
+    const existingOAuth = await getOAuthProviderByProviderId(env.DB, 'google', userInfo.sub)
+    if (!existingOAuth) {
+      const oauthId = `oauth_google_${Date.now()}`
+      await createOAuthProvider(
+        env.DB,
+        oauthId,
+        user.id,
+        'google',
+        userInfo.sub,
+        userInfo.email,
+        userInfo.name,
+        userInfo.picture,
+      )
+    } else {
+      // Update last login
+      await updateOAuthProviderLastLogin(env.DB, existingOAuth.id)
+    }
+
     // Create session token
     const payload: JWTPayload = {
       userId: user.id,
@@ -189,6 +214,25 @@ export async function discordCallbackHandler(
       const userId = `user_${Date.now()}`
       await createUser(env.DB, userId, email, userInfo.username)
       user = { id: userId, email, username: userInfo.username }
+    }
+
+    // Create or link OAuth provider
+    const existingOAuth = await getOAuthProviderByProviderId(env.DB, 'discord', userInfo.id)
+    if (!existingOAuth) {
+      const oauthId = `oauth_discord_${Date.now()}`
+      await createOAuthProvider(
+        env.DB,
+        oauthId,
+        user.id,
+        'discord',
+        userInfo.id,
+        userInfo.email,
+        userInfo.username,
+        userInfo.avatar ? `https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.png` : undefined,
+      )
+    } else {
+      // Update last login
+      await updateOAuthProviderLastLogin(env.DB, existingOAuth.id)
     }
 
     // Create session token
