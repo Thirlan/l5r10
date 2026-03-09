@@ -4,10 +4,40 @@ Cloudflare Workers API server for the L5R Tactical RPG.
 
 ## Setup
 
+Prerequisites:
+- Cloudflare account with Workers enabled
+- Wrangler CLI (`npm install -g wrangler`)
+
+Install dependencies:
+
 ```bash
 cd server
 pnpm install
 ```
+
+## Database
+
+This project uses **Cloudflare D1** (serverless SQL database) for persistent storage.
+
+### Creating the Database
+
+See [D1_SETUP.md](./D1_SETUP.md) for detailed instructions on:
+- Creating D1 databases (development and production)
+- Applying database migrations
+- Using the database in API endpoints
+- Troubleshooting
+
+Quick start:
+```bash
+# Create development database
+wrangler d1 create l5r-tactics-dev
+
+# Copy the database ID from output and update wrangler.toml
+# Then apply migrations:
+wrangler d1 execute l5r-tactics-dev --file migrations/0001_init.sql
+```
+
+Database utilities are in `src/db.ts` with helper functions for users, campaigns, characters, and battles.
 
 ## Development
 
@@ -18,6 +48,15 @@ pnpm dev
 ```
 
 This starts `wrangler dev` on `http://localhost:8787` by default.
+
+With local database:
+```bash
+# First apply migrations locally
+wrangler d1 execute l5r-tactics-dev --local --file migrations/0001_init.sql
+
+# Then run with local database
+wrangler dev --local
+```
 
 ## API Endpoints
 

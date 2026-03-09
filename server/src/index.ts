@@ -4,8 +4,8 @@
  */
 
 interface Env {
+  DB: D1Database
   // Bindings will be added here as we expand:
-  // - DATABASE: D1Database
   // - STORAGE: R2Bucket
   // - RATE_LIMITER: RateLimiterNamespace
 }
