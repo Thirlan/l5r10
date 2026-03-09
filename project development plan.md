@@ -115,24 +115,24 @@ Development cadence:
 
 ------------------------------------------------------------------------
 
-# Month 1 -- Foundation (COMPLETED)
+# Month 1 -- Foundation
 
 Goal: establish the base project infrastructure.
 
-Week 1
+Week 1  (COMPLETED)
 
 Session 1 - initialize git repo - create monorepo - install Node -
-configure pnpm workspace
+configure pnpm workspace (COMPLETED)
 
-Session 2 - create React app using Vite - install React + TypeScript
+Session 2 - create React app using Vite - install React + TypeScript (COMPLETED)
 
 Session 3 Install frontend libraries: - Tailwind CSS - Zustand -
-PixiJS - Honeycomb
+PixiJS - Honeycomb (COMPLETED)
 
 Session 4 Create shared TypeScript module for: - shared types - dice
-engine - rules
+engine - rules (COMPLETED)
 
-Session 5 Configure linting: - ESLint - Prettier
+Session 5 Configure linting: - ESLint - Prettier (COMPLETED)
 
 ------------------------------------------------------------------------
 
@@ -145,7 +145,7 @@ Session 7 - create Workers project - deploy first worker (COMPLETED)
 Session 8 - create API endpoint `/api/ping` - verify frontend (COMPLETED)
 communication
 
-Session 9 - create Cloudflare D1 database
+Session 9 - create Cloudflare D1 database (COMPLETED)
 
 Session 10 Create initial tables: - users - characters - campaigns
 

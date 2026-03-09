@@ -3,6 +3,22 @@
  * Cloudflare Workers
  */
 
+import {
+  createUserHandler,
+  getUserHandler,
+  getUserByEmailHandler,
+} from './routes/users'
+import {
+  createCampaignHandler,
+  getCampaignHandler,
+  getGMCampaignsHandler,
+} from './routes/campaigns'
+import {
+  createCharacterHandler,
+  getPlayerCharactersHandler,
+  getCampaignCharactersHandler,
+} from './routes/characters'
+
 interface Env {
   DB: D1Database
   // Bindings will be added here as we expand:
@@ -36,6 +52,59 @@ export default {
 
     if (url.pathname === '/api/health') {
       return handleHealth(request, env)
+    }
+
+    // User routes
+    if (url.pathname === '/api/users' && method === 'POST') {
+      return createUserHandler(request, env)
+    }
+
+    const userIdMatch = url.pathname.match(/^\/api\/users\/([^/]+)$/)
+    if (userIdMatch && method === 'GET') {
+      return getUserHandler(request, env, userIdMatch[1])
+    }
+
+    const userEmailMatch = url.pathname.match(/^\/api\/users\/email\/(.+)$/)
+    if (userEmailMatch && method === 'GET') {
+      return getUserByEmailHandler(request, env, userEmailMatch[1])
+    }
+
+    // Campaign routes
+    if (url.pathname === '/api/campaigns' && method === 'POST') {
+      return createCampaignHandler(request, env)
+    }
+
+    const campaignIdMatch = url.pathname.match(/^\/api\/campaigns\/([^/]+)$/)
+    if (campaignIdMatch && method === 'GET') {
+      return getCampaignHandler(request, env, campaignIdMatch[1])
+    }
+
+    const gmCampaignsMatch = url.pathname.match(/^\/api\/campaigns\/gm\/([^/]+)$/)
+    if (gmCampaignsMatch && method === 'GET') {
+      return getGMCampaignsHandler(request, env, gmCampaignsMatch[1])
+    }
+
+    // Character routes
+    if (url.pathname === '/api/characters' && method === 'POST') {
+      return createCharacterHandler(request, env)
+    }
+
+    const playerCharactersMatch = url.pathname.match(
+      /^\/api\/characters\/player\/([^/]+)$/,
+    )
+    if (playerCharactersMatch && method === 'GET') {
+      return getPlayerCharactersHandler(request, env, playerCharactersMatch[1])
+    }
+
+    const campaignCharactersMatch = url.pathname.match(
+      /^\/api\/characters\/campaign\/([^/]+)$/,
+    )
+    if (campaignCharactersMatch && method === 'GET') {
+      return getCampaignCharactersHandler(
+        request,
+        env,
+        campaignCharactersMatch[1],
+      )
     }
 
     // 404 Not Found
