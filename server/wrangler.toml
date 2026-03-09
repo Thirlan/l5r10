@@ -6,8 +6,8 @@ compatibility_flags = ["nodejs_compat"]
 # Database binding
 [[d1_databases]]
 binding = "DB"
-database_name = "l5r-tactics"
-database_id = "placeholder-replace-after-creation"
+database_name = "l5r-tactics-dev"
+database_id = "76d3ef46-675c-4cf4-bfdb-4f977d24fc26"
 migrations_dir = "./migrations"
 
 [env.development]
@@ -17,7 +17,7 @@ route = "https://dev-api.example.com/*"
 [[env.development.d1_databases]]
 binding = "DB"
 database_name = "l5r-tactics-dev"
-database_id = "placeholder-replace-after-creation"
+database_id = "76d3ef46-675c-4cf4-bfdb-4f977d24fc26"
 migrations_dir = "./migrations"
 
 [env.production]
