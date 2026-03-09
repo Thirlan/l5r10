@@ -115,7 +115,7 @@ Development cadence:
 
 ------------------------------------------------------------------------
 
-# Month 1 -- Foundation
+# Month 1 -- Foundation (COMPLETED)
 
 Goal: establish the base project infrastructure.
 
