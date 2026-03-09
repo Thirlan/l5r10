@@ -158,6 +158,12 @@ Session 10 Create initial tables: - users - characters - campaigns (COMPLETED)
 Week 3 -- Authentication
 
 Session 11 Install Auth.js. (COMPLETED)
+- Installed authentication packages (jsonwebtoken, jwt-decode, google-auth-library)
+- Created authentication modules (config, oauth, jwt)
+- Implemented OAuth2 routes for Google and Discord (/auth/google, /auth/discord, /auth/callback/*)
+- Created login page component with provider buttons
+- Integrated with existing user database (auto-create users on OAuth login)
+- Session management with HTTP-only cookies
 
 Providers: - email - Google - Discord
 
