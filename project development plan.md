@@ -176,13 +176,13 @@ Session 14 Add authenticated routes: (COMPLETED)
 -   /dashboard
 -   /campaigns
 
-Session 15 Test login persistence.
+Session 15 Test login persistence. (COMPLETED)
 
 ------------------------------------------------------------------------
 
 Week 4 -- Rendering
 
-Session 16 Install PixiJS and embed canvas.
+Session 16 Install PixiJS and embed canvas. (COMPLETED)
 
 Session 17 Create viewport system: - zoom - pan - resize
 

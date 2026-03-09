@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage'
 import OAuthCallback from './pages/OAuthCallback'
 import Dashboard from './pages/Dashboard'
 import Campaigns from './pages/Campaigns'
+import GameBoard from './pages/GameBoard'
 import ProtectedRoute from './components/ProtectedRoute'
 
 export function App() {
@@ -37,6 +38,15 @@ export function App() {
           element={
             <ProtectedRoute>
               <Campaigns />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/game/:campaignId?"
+          element={
+            <ProtectedRoute>
+              <GameBoard />
             </ProtectedRoute>
           }
         />
