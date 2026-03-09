@@ -12,9 +12,12 @@
     "@l5r-tactics/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^7.13.1",
     "zustand": "^4.4.6",
     "pixi.js": "^8.1.5",
-    "honeycomb-grid": "^3.1.4"
+    "honeycomb-grid": "^3.1.4",
+    "jsonwebtoken": "^9.0.3",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
     "@types/pixi.js": "^5.0.0",

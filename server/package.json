@@ -9,7 +9,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@l5r-tactics/shared": "workspace:*"
+    "@l5r-tactics/shared": "workspace:*",
+    "google-auth-library": "^10.6.1",
+    "jsonwebtoken": "^9.0.3",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240321.0",

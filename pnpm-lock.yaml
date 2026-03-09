@@ -7,19 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      google-auth-library:
-        specifier: ^10.6.1
-        version: 10.6.1
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
-      jwt-decode:
-        specifier: ^4.0.0
-        version: 4.0.0
-      react-router-dom:
-        specifier: ^7.13.1
-        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.13.2
@@ -45,6 +32,12 @@ importers:
       honeycomb-grid:
         specifier: ^3.1.4
         version: 3.1.8
+      jsonwebtoken:
+        specifier: ^9.0.3
+        version: 9.0.3
+      jwt-decode:
+        specifier: ^4.0.0
+        version: 4.0.0
       pixi.js:
         specifier: ^8.1.5
         version: 8.16.0
@@ -54,6 +47,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-router-dom:
+        specifier: ^7.13.1
+        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zustand:
         specifier: ^4.4.6
         version: 4.5.7(@types/react@18.3.28)(react@18.3.1)
@@ -91,6 +87,15 @@ importers:
       '@l5r-tactics/shared':
         specifier: workspace:*
         version: link:../shared
+      google-auth-library:
+        specifier: ^10.6.1
+        version: 10.6.1
+      jsonwebtoken:
+        specifier: ^9.0.3
+        version: 9.0.3
+      jwt-decode:
+        specifier: ^4.0.0
+        version: 4.0.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20240321.0
