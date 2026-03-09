@@ -24,7 +24,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({ campaignId }) => {
     entities: 0,
   })
 
-  const handlePixiReady = (app: PIXI.Application<HTMLCanvasElement>) => {
+  const handlePixiReady = (app: PIXI.Application) => {
     appRef.current = app
 
     // Create main container
@@ -36,13 +36,14 @@ export const GameBoard: React.FC<GameBoardProps> = ({ campaignId }) => {
     graphics.lineStyle(1, 0x333333)
     
     const gridSize = 50
-    for (let x = 0; x < app.canvas.width; x += gridSize) {
+    const canvas = app.canvas as HTMLCanvasElement
+    for (let x = 0; x < canvas.width; x += gridSize) {
       graphics.moveTo(x, 0)
-      graphics.lineTo(x, app.canvas.height)
+      graphics.lineTo(x, canvas.height)
     }
-    for (let y = 0; y < app.canvas.height; y += gridSize) {
+    for (let y = 0; y < canvas.height; y += gridSize) {
       graphics.moveTo(0, y)
-      graphics.lineTo(app.canvas.width, y)
+      graphics.lineTo(canvas.width, y)
     }
     
     mainContainer.addChild(graphics)
@@ -50,7 +51,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({ campaignId }) => {
     // Add center point indicator
     const center = new PIXI.Graphics()
     center.lineStyle(2, 0x00ff00)
-    center.arc(app.canvas.width / 2, app.canvas.height / 2, 10, 0, Math.PI * 2)
+    center.arc(canvas.width / 2, canvas.height / 2, 10, 0, Math.PI * 2)
     mainContainer.addChild(center)
 
     // Add FPS ticker
