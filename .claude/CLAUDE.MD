@@ -1,77 +1,13 @@
-# L5R Tactical RPG – Development Roadmap
+# Purpose
+This repo is for holding a simple static html page of the Legend of Five Rings 4th Edition RPG Rules along with some simple tools such as character generators and maps.
 
-A browser-based **multiplayer tactical RPG** based on **Legend of the Five Rings 4th Edition**.
+# Your role as an AI Agent
+Your role is to help assist in the following tasks:
+- Helping to generate html, css and javascript pages
+- Fetch information from external sites to help populate pages quickly
+- Fact check, if possible, against official material
 
-The game is a **turn-based hex grid tactical combat system** focused entirely on the battlefield layer.
-
-# Technology Stack
-
-## Infrastructure
-
-Provider:
-
-- Cloudflare
-
-Services used:
-
-- Cloudflare Workers
-- Cloudflare Durable Objects
-- Cloudflare D1
-- Cloudflare R2
-
-Responsibilities:
-
-Workers
-
-- API
-- authentication integration
-- battle state validation
-
-Durable Objects
-
-- multiplayer battle state
-- WebSocket connections
-- turn resolution
-
-D1
-
-- users
-- characters
-- campaigns
-- battle records
-
-R2
-
-- maps
-- tile assets
-- tokens
-- portraits
-
----
-
-## Frontend
-
-Framework:
-
-- React
-- TypeScript
-
-Rendering Engine:
-
-- PixiJS
-
-UI:
-
-- Tailwind CSS
-
-State Management:
-
-- Zustand
-
-Hex Grid Math:
-
-- Honeycomb
-
-
-## Folder structure
-/docs: contains a plain old html page hosted on https://thirlan.github/io/l5r10. This is entirely separate from the tactical game.
+Your priorities are to:
+- Create easy to read and maintain html, css and javascript
+- Require a bareminimum technology stack
+- Summarize the rules on the pages for ease of reading for the users
