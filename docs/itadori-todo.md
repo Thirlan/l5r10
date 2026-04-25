@@ -450,8 +450,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
   - Gain +5 to your to-hit TN (enemy's difficulty to hit you)
 
 #### Round 1 & 2 - Resolution
-- Higher roll of the two chosen actions gets their chosen benefit
-- Both actions are resolved before moving to next round
+- Higher roll of the two chosen actions gets their chosen benefit then move to next round
 - Each ring plays a role in different action options
 
 #### Final Round - Striking Phase
