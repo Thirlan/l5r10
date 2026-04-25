@@ -144,18 +144,17 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ## Movement & Initiative
 
 ### Movement Simplification
-- **Problem:** Movement rules are unnecessarily complex
-- **Implementation:** Simplify using sidebar in core book
+- **Problem:** Movement rules are unnecessarily complex, characters move slowly and difference between high water rinkgs and low water rings too high, allowing for kiting
+- **Implementation:** reduce the gap in movement between water ranks and make all actions the same movement
 - **Proposed Formula (Water Ring based):**
-  - 1 Water = 25 feet
-  - 2 Water = 30 feet
-  - 3 Water = 35 feet
-  - 4 Water = 40 feet
-  - 5 Water = 45 feet
-- **Alternative:** Free Action movement = `Water x 10` (matching Simple Action movement)
+  - 4 squares + 1 Water = 5 squares (25 feet)
+  - 4 squares + 2 Water = 6 squares (30 feet)
+  - 4 squares + 3 Water = 7 squares (35 feet)
+  - 4 squares + 4 Water = 8 squares (40 feet)
+  - 4 squares + 5 Water = 9 squares (45 feet)
+- **All actions have same movement ** = Simple and Free use the formula above
   - Certain techniques and abilities will need adjustment
 - **Status:** Not Started
-- **Notes:** Need to test which formula feels better
 
 ### Initiative for Mounted Combat
 - **Change:** Roll both character's and mount's initiative
