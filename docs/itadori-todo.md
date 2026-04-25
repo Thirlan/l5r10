@@ -297,7 +297,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Status:** Requires Implementation
 
 ### +5 Insight to Rank 5 skills
-- **Change:** All skills lose mastery but rank 5 gives +5 insight
+- **Change:** All skills lose mastery bonuses but rank 5 gives +5 insight
 - **Reasoning:** Difficult to gain insight from skills alone, forcing people to dump into Traits/Rings to rank up. Traits are also already too valuable.
 - **Status:** Not Started
 
