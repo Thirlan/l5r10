@@ -34,7 +34,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ### Full Attack Stance Modification
 - **Proposed Change:**
-  - Modify bonus from `+1k1` to `+1k1` (may need playtesting)
+  - Modify bonus from `+2k1` to `+1k1` (may need playtesting)
   - Add user's Fire Ring to the total of the roll
   - Ensure it's useable while mounted by default
   - Fire Ring now has a special purpose in combat (currently the only ring that doesn't)
