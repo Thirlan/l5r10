@@ -443,11 +443,14 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
   - Learn 2 traits or skills
   - Opposing player indicates what they will NOT pick next round
   
-- **Draw** (Fire - Agility + Kenjutsu)
+- **Readiness** (Fire - Agility + Kenjutsu)
   - Gain +5 to your hit roll
   
 - **Dodge** (Air - Reflexes + Defense)
   - Gain +5 to your to-hit TN (enemy's difficulty to hit you)
+
+- **Endure** (Earth - Willpower + Meditation)
+  - Ignore all roll penalties for the remainder of the duel
 
 #### Round 1 & 2 - Resolution
 - Higher roll of the two chosen actions gets their chosen benefit then move to next round
