@@ -519,27 +519,17 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ## Brainstorming & Additional Ideas
 
 ### Combat Enhancements
-- **Terrain Effects:** Consider adding simple terrain modifiers to combat (high ground, obstacles)
-- **Called Shots:** Optional rules for targeting specific locations (risky but potentially higher reward)
-- **Weapon Mastery Benefits:** Could tied skills progress unlock special maneuvers?
 - **Positioning System:** Simplified grid or range brackets for important tactical info
 
-### Magic System Expansions
-- **Spell Components:** Should certain powerful spells require material components?
-- **Ritual Casting:** Allow spells to be cast as rituals for reduced TN but longer casting time
-- **Spell Schools:** Group spells by theme (Fire spells, Healing spells, etc.) for easier reference
-- **Custom Spells:** Framework for GMs to create balanced new spells?
 
 ### Courtier Expansion Ideas
 - **Duel of Wits:** Formal courtier combat using Skill checks and rhetoric
-- **Intrigue Track:** Track active schemes and their progress toward completion
-- **Faction System:** Leverage clan politics for additional mechanics rewards
 - **Trade Goods System:** Detailed commerce rules for Unicorn and Crab merchants
 
 ### Character Advancement Alternatives
-- **Milestone Advancement:** Consider offering milestone-based progression as alternative to XP
-- **School-Specific Trees:** Each school gets unique visual/mechanical progression tree
-- **Specialization Paths:** At certain ranks, choose narrow specialization vs. broad knowledge
+
+
+
 
 ### New Player Experience
 - **Quick Start Rules:** Create essential 1-2 page rules summary for new players
@@ -548,38 +538,15 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ### Mechanical Variants
 - **Simplified Void Point System:** Consider capping Void points at 3 for balance
-- **Simplified Honor System:** Optional rules for groups that don't want honor tracking
-- **Fast Combat Optional Rules:** Allow experienced players to skip some combat details
-- **Sanity/Stress System:** Optional mechanics for psychological impact of Shadowlands
 
 ### Setting Integration
 - **Clan Authenticity Audit:** Ensure all mechanics reflect clan FFG/L5R canon
-- **Historical Accuracy:** Review weapon stats against actual historical sources
 - **Flavor Text Integration:** Add cultural context to each major mechanical system
 - **NPC Templates:** Pre-built stat blocks for common NPC types
 
 ### Documentation Improvements
 - **Visual Reference Charts:** Quick-lookup charts for modifiers, combat, spells
-- **Decision Trees:** "Pick your character concept" flowcharts leading to optimal builds
 - **Failure Mode Examples:** Show what happens when rolls fail, not just successes
-- **Tools & Resources:** Index of recommended dice rollers, character sheet tools
-
----
-
-## Glossary of Terms
-
-- **Bushi:** Warrior class character
-- **Shugenja:** Spell-casting priest class character
-- **Courtier:** Political/social influence class character
-- **Monk:** Religious warrior class character
-- **Dueling:** Formal one-on-one combat (Iaijitsu, Shugenja duel, or Courtier challenge)
-- **Raise:** Spending extra dice to add bonus effects to a roll
-- **Void Points:** Special resource points used for re-rolls and special abilities
-- **Rings:** Five core attributes (Air, Earth, Fire, Water, Void)
-- **Traits:** Secondary attributes reflecting skill and quality
-- **Shadowlands Taint:** Corruption from exposure to Shadowlands
-- **Fame/Glory:** Reputation and renown trait
-- **Insight Rank:** Level of character advancement and magical knowledge
 
 ---
 
