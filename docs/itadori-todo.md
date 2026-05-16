@@ -529,6 +529,10 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - Mounted/Higher: +3TN instead of +1k0
 - Prone: -5TN instead of -2k0
 
+## Void
+- Remove ability to give +1k0 and removal of unskilled penalties to unskilled skill rolls (this helps make skills more valuable)
+- Can no longer use void to give +1k1 to unskilled skill roles (this helps make skills more valuable)
+
 ---
 
 ## Brainstorming & Additional Ideas
