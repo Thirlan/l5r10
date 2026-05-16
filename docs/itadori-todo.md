@@ -83,9 +83,9 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 #### Small Unarmed Weapons
 - **Tonfa, Nunchaku, Jo, Machi-Kanshisha:**
   - Consolidate to same rules: `0k2` damage, small category
-  - All use Jiujutsu skill
+  - All use Staves skill
 - **Tsubute (Throwing Stones):**
-  - Move under Jiujutsu skill
+  - Move under Athletics (throw) skill
   - Damage: `0k1`
   - Flavor: Just stones being thrown
 - **Status:** Not Started
