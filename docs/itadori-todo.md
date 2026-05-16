@@ -160,7 +160,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ## Mounted Combat
 
 ### Horse Armor
-- Mentioned in the rules, but not sure if the armor exists in the rules
+- animals may use light armor only
 
 ### Initiative for Mounted Combat
 - **Change:** Roll both character's and mount's initiative
@@ -521,6 +521,13 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
   - What makes a Monk fundamentally different
   - Why both use onmyōji elements
 - **Status:** Not Started
+
+## Combat - Conditional effects
+- Blinded: -15TN instead of -3k3 for ranged and -5TN instead of -1k1 for melee
+- Dazed: -5TN instead of -3k0
+- Fasting: Remove and just use Fatigued for lack of food and water
+- Mounted/Higher: +3TN instead of +1k0
+- Prone: -5TN instead of -2k0
 
 ---
 
