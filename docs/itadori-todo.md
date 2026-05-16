@@ -165,6 +165,9 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ## Mounted Combat
 
+### Horse Armor
+- Mentioned in the rules, but not sure if the armor exists in the rules
+
 ### Horsemanship Damage Check
 - **New Rule:** Every time you take damage, roll Horsemanship
 - **TN:** Equal to damage dealt (minus armor reduction)
