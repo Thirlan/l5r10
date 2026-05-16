@@ -481,6 +481,12 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ---
 
+## Skills
+
+### Assess Skill
+- Create new skill Assess (Perception) for determining physical traits and skills of a charater
+- For Mental traits and skills, use Investigation (Awareness). Investigation (Perception) continues to do what it use to do, but can no longer be used to determine if someone is lying, instead it is Investigation (Awareness). In addition Reading someone's true emotions is no longer Etiquette (Awareness), but Investigation (Awareness).
+
 ## Documentation & Clarity
 
 ### Single Source of Information Goal
