@@ -155,18 +155,18 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
   - Certain techniques and abilities will need adjustment
 - **Status:** Not Started
 
-### Initiative for Mounted Combat
-- **Change:** Roll both character's and mount's initiative
-- **Result:** Use the LOWER of the two rolls for both
-- **Benefit:** Aligns mount and character on same initiative, simplifying actions
-- **Status:** Not Started
-
 ---
 
 ## Mounted Combat
 
 ### Horse Armor
 - Mentioned in the rules, but not sure if the armor exists in the rules
+
+### Initiative for Mounted Combat
+- **Change:** Roll both character's and mount's initiative
+- **Result:** Use the LOWER of the two rolls for both
+- **Benefit:** Aligns mount and character on same initiative, simplifying actions
+- **Status:** Not Started
 
 ### Horsemanship Damage Check
 - **New Rule:** Every time you take damage, roll Horsemanship
