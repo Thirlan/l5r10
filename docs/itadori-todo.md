@@ -240,15 +240,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Consideration:** May reduce the distinction between rank capabilities
 - **Status:** On Hold - Needs Community Input
 
-### Insight Rank System (Radical Change)
-- **Radical Proposal:** Eliminate Insight Ranks entirely
-- **Alternative System:** 
-  - Techniques/spells granted when sensei determines readiness
-  - Maximum one per in-game year
-- **Rationale:** Techniques already bound to setting and RP considerations
-- **Assessment:** "Too extreme" - current decision to keep as-is
-- **Status:** Rejected (but keep as reference for future consideration)
-
 ### Shugenja Balance
 - **Problem:** Shugenja considered overpowered in 4e
 - **Factors:**
