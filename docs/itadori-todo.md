@@ -285,7 +285,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ## Traits & Rankings
 
 ### Maximum Rank Cap - Partial Implementation
-- **Decision Made:** Cap: Traits, Skills, Fear, and Shadowland Taint at 5 ranks maximum
+- **Decision Made:** Cap: Traits, Skills, Fear at 5 ranks maximum
 - **Reasoning:** Matches 1st edition design; designers of 4e regret not doing this
 - **Math Impact:** Character power no longer breaks down as quickly during advancement
 - **NOT Capped (Reasoning Below):**
