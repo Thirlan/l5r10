@@ -49,12 +49,11 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Mitigation Needed:** Add mechanics to protect shugenja (see "Attacks of Opportunity" below)
 - **Status:** Not Started
 
-### Attacks of Opportunity
+### Defense Zoning
 - **Implementation:**
-  - Defense skill rank 3: Bushi may make attacks of opportunity while in Defense Stance
-  - Helps balance the loss of shugenja free-casting
+  - Defense Stance: When a character is in defense stance, if any other character wishes to move into a square within the reach of their weapon (e.g. 1 square around them for Katana and 2 for Spears, which have reach), then they must expend an addition move 5"/1square to move into that square
   - Creates tactical depth
-- **Consideration:** May add D&D-like complexity; monitor for system bloat
+- **Consideration:** This prevents characters from rushing past defenders and straight to the backline to attack the Shugenjas or helpless NPCs that are being guarded.
 - **Status:** Not Started
 
 ### To-Hit TN Calculation (Optional)
