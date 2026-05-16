@@ -524,6 +524,9 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - Remove ability to give +1k0 and removal of unskilled penalties to unskilled skill rolls (this helps make skills more valuable)
 - Can no longer use void to give +1k1 to unskilled skill roles (this helps make skills more valuable)
 
+## Powers to reuse
+- Duty (7 points) You may spend a Void Point on any Skill Roll or Spell Casting Roll to negate all TN penalties for that roll, including Wound penalties
+
 ---
 
 ## Brainstorming & Additional Ideas
