@@ -160,7 +160,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ## Mounted Combat
 
 ### Horse Armor
-- animals may use light armor only
+- animals may use light armor only. Keyword: barding / barded
 
 ### Initiative for Mounted Combat
 - **Change:** Roll both character's and mount's initiative
