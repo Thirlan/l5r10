@@ -23,45 +23,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ---
 
 ## Combat Stances & Mechanics
-
-### Remove Full Defense and Center Stances
-- **Problem:** These stances add complexity for minimal benefit and were added late in 4e development against some staff wishes
-- **Implementation:**
-  - Remove Full Defense and Center Stance completely
-  - Start combat in Attack Stance by default
-  - Revert to previous edition's simpler stance system
-- **Status:** Not Started
-
-### Full Attack Stance Modification
-- **Proposed Change:**
-  - Modify bonus from `+2k1` to `+1k1` (may need playtesting)
-  - Add user's Fire Ring to the total of the roll
-  - Ensure it's useable while mounted by default
-  - Fire Ring now has a special purpose in combat (currently the only ring that doesn't)
-- **Benefit:** Balances ring usage; Fire Ring now matters in combat calculations
-- **Status:** Not Started
-
-### Defense Stance Modification
-- **Changes:**
-  - Remove spellcasting ability during Defense Stance
-  - This nerfs shugenja balance (currently considered overpowered in 4e)
-  - Aligns with 1st edition standards
-- **Mitigation Needed:** Add mechanics to protect shugenja (see "Attacks of Opportunity" below)
-- **Status:** Not Started
-
-### Defense Zoning
-- **Implementation:**
-  - Defense Stance: When a character is in defense stance, if any other character wishes to move into a square within the reach of their weapon (e.g. 1 square around them for Katana and 2 for Spears, which have reach), then they must expend an addition move 5"/1square to move into that square
-  - Creates tactical depth
-- **Consideration:** This prevents characters from rushing past defenders and straight to the backline to attack the Shugenjas or helpless NPCs that are being guarded.
-- **Status:** Not Started
-
-### To-Hit TN Calculation (Optional)
-- **Consideration:** Current calculation: `5 + 5 x Reflexes` 
-- **Alternative (Not Decided):** `5 x Air Ring + 2 x Defense Skill`
-- **Current Decision:** Keep base armor TN calculation simple; Air Ring contribution to Defense Stance is sufficient
-- **Status:** On Hold - Insufficient data
-
 ---
 
 ## Weapons & Equipment
@@ -136,23 +97,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ### Scroll Casting Requirements
 - **New Rule:** If casting a spell from a scroll, you need both hands
 - **Mastery Bonus:** Mastering the spell reduces requirement to one hand
-- **Status:** Not Started
-
----
-
-## Movement & Initiative
-
-### Movement Simplification
-- **Problem:** Movement rules are unnecessarily complex, characters move slowly and difference between high water rinkgs and low water rings too high, allowing for kiting
-- **Implementation:** reduce the gap in movement between water ranks and make all actions the same movement
-- **Proposed Formula (Water Ring based):**
-  - 4 squares + 1 Water = 5 squares (25 feet)
-  - 4 squares + 2 Water = 6 squares (30 feet)
-  - 4 squares + 3 Water = 7 squares (35 feet)
-  - 4 squares + 4 Water = 8 squares (40 feet)
-  - 4 squares + 5 Water = 9 squares (45 feet)
-- **All actions have same movement ** = Simple and Free use the formula above
-  - Certain techniques and abilities will need adjustment
 - **Status:** Not Started
 
 ---
