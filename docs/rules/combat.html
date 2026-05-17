@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Combat</title>
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/general.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar"></nav>
+  </header>
+
+  <main>
+    <h1>Combat</h1>
+    <p>The rules below are based on the 4th edition of Legend of the Five Rings, with a number of house rules drawn from the Itadori revisions (movement simplification, removal of Full Defense and Center stances, conflation of Fasting into Fatigued, and the conditional effect adjustments).</p>
+
+    <h2>Definition of Terms</h2>
+    <ul>
+      <li><strong>Action:</strong> Anything a character does that takes some amount of focused effort. Actions come in three sizes &mdash; <em>Free</em>, <em>Simple</em>, and <em>Complex</em> &mdash; and most things that happen in combat are resolved through one or more Actions.</li>
+      <li><strong>Initiative:</strong> The score that determines the order in which characters act during combat. A character's Initiative is rolled at the start of combat as <em>Insight Rank + Reflexes</em>, keeping a number of dice equal to Reflexes. The total of that roll is the character's Initiative score for the duration of the skirmish.</li>
+      <li><strong>Round:</strong> A single pass through the Initiative order. Every participant gets one Turn per Round. A Round represents roughly six seconds of in-fiction time.</li>
+      <li><strong>Turn:</strong> A character's portion of a Round. On a character's Turn they may take one Complex Action <em>or</em> two Simple Actions, plus any number of Free Actions (within reason), and they may move as described under <a href="#move-action">Move Action</a>.</li>
+    </ul>
+
+    <h2>Sequence of Events</h2>
+    <h3>Initiative</h3>
+    <p>At the start of combat each participant rolls Initiative (Insight Rank + Reflexes, keeping Reflexes). Ties are broken by the higher Reflexes Trait, then by Void Ring, then by a contested roll. The resulting order is used for every Round of the encounter unless an effect modifies it. Characters begin combat in <strong>Attack Stance</strong> by default.</p>
+    <p><strong>Mounted Initiative:</strong> When a character is mounted, both the rider and the mount roll Initiative and the <em>lower</em> of the two results is used for both, so that rider and mount act on the same count.</p>
+
+    <h3>Turns</h3>
+    <p>Beginning with the highest Initiative and proceeding down, each character takes their Turn. On their Turn a character chooses or changes a Stance (a Free Action), spends their Actions, and resolves any movement. When every character has acted the Round ends, durations tick down, and a new Round begins at the top of the Initiative order.</p>
+
+    <h3>Reactions</h3>
+    <p>A Reaction is something a character does <em>outside</em> their own Turn in response to another character's action. Common Reactions include being attacked (rolling damage soak / wound checks), being targeted by certain Maneuvers (such as Disarm or Knockdown contests), and triggered abilities or School Techniques that explicitly say they happen as a Reaction. Reactions do not cost Actions but they may have their own per-Round limits as noted in the ability that grants them.</p>
+
+    <h2>Attack and Defense</h2>
+    <h3>Attack Roll</h3>
+    <p>An attack is a Skill Roll using the appropriate weapon Skill (Kenjutsu for swords, Kyujutsu for bows, Polearms for spears and naginata, Jiujutsu for unarmed, and so on) combined with a Trait &mdash; usually <strong>Agility</strong> for melee and ranged weapons, or <strong>Reflexes</strong> for thrown weapons and a few special techniques. The roll is <em>(Trait + Skill)k(Trait)</em>, attempting to meet or exceed the target's Armor TN.</p>
+    <p>If the attack succeeds, the attacker rolls the weapon's damage dice plus the rolled dice for their Strength Trait (or other Trait specified by the weapon) and the defender must make a Wound Check.</p>
+
+    <h3>Defense (Armor TN)</h3>
+    <p>A character's <strong>Armor TN</strong> is the target number an attacker must meet to hit them. It is built from:</p>
+    <ul>
+      <li><strong>Base:</strong> 5 + (Reflexes &times; 5).</li>
+      <li><strong>Defense Skill:</strong> Add the character's ranks in the <em>Defense</em> Skill to their Armor TN at all times.</li>
+      <li><strong>Armor:</strong> Add the Armor TN bonus of any worn armor (Ashigaru +3, Light +5, Heavy +10, etc.).</li>
+      <li><strong>Stance:</strong> Defense Stance adds <em>(Air Ring + Defense Skill) &times; 5</em> instead of the normal Defense Skill bonus. Full Attack Stance reduces Armor TN by 10.</li>
+      <li><strong>Cover, position, and conditions:</strong> See the <a href="#conditional-effects">Conditional Effects</a> table for situational modifiers.</li>
+    </ul>
+    <p>Armor also provides a flat <strong>Damage Reduction</strong> that is subtracted from the total damage of every attack that hits.</p>
+
+    <h2>Wounds</h2>
+    <p>Each character has a number of <strong>Wound Levels</strong>, each with a threshold equal to <em>Earth Ring &times; 2</em> (the first level, Healthy, is larger). When a character takes damage, compare their <em>accumulated</em> Wounds to the levels below. The wound level a character currently occupies imposes the listed penalty on all rolls.</p>
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Penalty</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Healthy</td><td>+0</td><td>The character is unharmed or only superficially marked.</td></tr>
+        <tr><td>Nicked</td><td>+3 TN to all rolls</td><td>Minor cuts and bruises that begin to sting.</td></tr>
+        <tr><td>Grazed</td><td>+5 TN to all rolls</td><td>Real wounds; the character is feeling the fight.</td></tr>
+        <tr><td>Hurt</td><td>+10 TN to all rolls</td><td>Significant injuries; concentration is becoming difficult.</td></tr>
+        <tr><td>Injured</td><td>+15 TN to all rolls</td><td>Serious damage that hampers everything the character attempts.</td></tr>
+        <tr><td>Crippled</td><td>+20 TN, may only take a single Simple Action per Turn</td><td>The character can barely fight on.</td></tr>
+        <tr><td>Down</td><td>+40 TN, may take no Actions other than a single Free Action</td><td>The character has collapsed and is fighting to stay conscious.</td></tr>
+        <tr><td>Out</td><td>&mdash;</td><td>The character is unconscious. Further damage may kill them; whether the character lives or dies is at the GM's discretion (or the attacker's intent).</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Healing Wounds</h3>
+    <ul>
+      <li><strong>Natural Rest:</strong> A character at rest heals an amount of Wounds equal to their Stamina &times; their Insight Rank each day. A full day of bed rest doubles this.</li>
+      <li><strong>Medicine:</strong> An ally with the Medicine Skill may roll Medicine / Intelligence (TN 15) once per day per patient. On a success the patient heals additional Wounds equal to the roll's raises plus the healer's School Rank. The Medicine (Wound Treatment) Emphasis is the standard application.</li>
+      <li><strong>Out Characters:</strong> A character at the Out level requires a successful Medicine roll (TN 20) within minutes or risks death; otherwise they remain unconscious until brought back above Out by healing.</li>
+      <li><strong>Void Points:</strong> Spending a Void Point on a Wound Check adds +1k1 to the roll, which can avoid taking on a worse Wound level for that hit.</li>
+    </ul>
+
+    <h2 id="stances">Stances</h2>
+    <p>A character begins combat in <strong>Attack Stance</strong> and may change Stance once per Turn as a Free Action at the start of their Turn. <em>Full Defense Stance and Center Stance have been removed from this campaign.</em></p>
+    <h3>Attack Stance</h3>
+    <p>The default, balanced posture. No bonuses and no penalties. A character in Attack Stance acts normally.</p>
+    <h3>Full Attack Stance</h3>
+    <p>The character commits fully to the offensive. They gain <strong>+1k1</strong> to all attack rolls and add their <strong>Fire Ring</strong> to the total of each attack roll. In exchange, their Armor TN is reduced by 10. Full Attack Stance is usable while mounted.</p>
+    <h3>Defense Stance</h3>
+    <p>The character focuses entirely on protecting themselves. They add <em>(Air Ring + Defense Skill) &times; 5</em> to their Armor TN (replacing the normal Defense Skill bonus to TN) but may take only Free Actions and a single Simple Action that turn. <strong>Spells cannot be cast while in Defense Stance.</strong></p>
+    <p><strong>Defense Zoning:</strong> While in Defense Stance, any other character that wishes to move into a square within the reach of the defender's weapon (1 square for a katana, 2 for spears and other reach weapons) must spend an additional 1 square / 5 feet of movement to enter that square.</p>
+
+    <h2 id="actions">Actions</h2>
+    <p>On their Turn a character may take <strong>one Complex Action</strong> <em>or</em> <strong>two Simple Actions</strong>, plus any number of Free Actions (the GM may rule that a string of Free Actions becomes a Simple Action). A character may also move as described under <a href="#move-action">Move Action</a>.</p>
+
+    <h3>Free Actions</h3>
+    <table>
+      <thead><tr><th>Example</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Change Stance</td><td>Once per Turn, at the start of the Turn.</td></tr>
+        <tr><td>Speak a few sentences</td><td>Brief communication, including a short command.</td></tr>
+        <tr><td>Drop an item</td><td>Letting go of a weapon, scroll, or torch.</td></tr>
+        <tr><td>Spend a Void Point</td><td>To gain its benefit on a roll.</td></tr>
+        <tr><td>Activate a Free Action ability</td><td>School Techniques and Advantages that are labelled Free Action.</td></tr>
+        <tr><td>Maintain an active spell</td><td>If the spell allows free-action maintenance.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Simple Actions</h3>
+    <table>
+      <thead><tr><th>Example</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Attack with a melee weapon</td><td>One attack roll with a weapon already in hand.</td></tr>
+        <tr><td>Draw or sheathe a weapon</td><td>Or ready any item carried at the belt.</td></tr>
+        <tr><td>Reload a small ranged weapon</td><td>Nock an arrow, ready a thrown weapon, etc.</td></tr>
+        <tr><td>Move</td><td>See <a href="#move-action">Move Action</a>.</td></tr>
+        <tr><td>Stand up from prone</td><td>Provokes nothing by default.</td></tr>
+        <tr><td>Apply Guard to an ally</td><td>See <a href="#maneuvers">Maneuvers: Guard</a>.</td></tr>
+        <tr><td>Initiate or continue a Grapple</td><td>See <a href="#grappling">Grappling</a>.</td></tr>
+        <tr><td>Activate a Simple Action ability</td><td>School Techniques labelled Simple Action.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Complex Actions</h3>
+    <table>
+      <thead><tr><th>Example</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Aim and fire a bow</td><td>Drawing and loosing a yumi is a single Complex Action.</td></tr>
+        <tr><td>Reload a heavy ranged weapon</td><td>Reloading any large or mechanical ranged weapon.</td></tr>
+        <tr><td>Cast a Spell</td><td>Unless the spell explicitly says otherwise; not usable in Defense Stance.</td></tr>
+        <tr><td>Perform a Maneuver</td><td>Most Maneuvers in the <a href="#maneuvers">Maneuvers</a> section are Complex.</td></tr>
+        <tr><td>Full Attack (Throw a Spear)</td><td>Spears may be thrown as a Complex Action while in Full Attack Stance.</td></tr>
+        <tr><td>Administer first aid</td><td>Medicine Skill roll to stabilise or heal an ally.</td></tr>
+        <tr><td>Activate a Complex Action ability</td><td>School Techniques labelled Complex Action.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="move-action">Move Action</h2>
+    <p><em>Movement has been simplified under the Itadori revisions: every kind of Move Action grants the same movement allowance, and the gap between low and high Water Rings has been narrowed.</em></p>
+    <h3>Movement Allowance</h3>
+    <p>A character's movement allowance per Move Action is <strong>4 squares + Water Ring</strong> (each square is 5 feet).</p>
+    <table>
+      <thead><tr><th>Water Ring</th><th>Squares per Move Action</th><th>Feet</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>5</td><td>25 ft</td></tr>
+        <tr><td>2</td><td>6</td><td>30 ft</td></tr>
+        <tr><td>3</td><td>7</td><td>35 ft</td></tr>
+        <tr><td>4</td><td>8</td><td>40 ft</td></tr>
+        <tr><td>5</td><td>9</td><td>45 ft</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Types of Move Action</h3>
+    <ul>
+      <li><strong>Free Move:</strong> Up to the movement allowance once per Turn, taken as part of any Simple or Complex Action. This represents stepping around the battlefield while still fighting or casting.</li>
+      <li><strong>Simple Move:</strong> A Simple Action spent purely on movement. Grants the full movement allowance again.</li>
+      <li><strong>Complex Move (Full Run):</strong> A Complex Action spent running. Grants the full movement allowance, plus the character may not take any other Action this Turn other than Free Actions.</li>
+    </ul>
+    <p>Because every Move Action provides the same allowance, characters can stack a Free Move with a Simple Move to cover a larger distance while still being able to take a Simple Action, or take all three to dash a long way in a single Turn.</p>
+
+    <h3>Terrain Difficulty</h3>
+    <table>
+      <thead><tr><th>Terrain</th><th>Cost</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Basic</td><td>1 square per square</td><td>Flat ground, open road, dojo floor, light grass.</td></tr>
+        <tr><td>Moderate</td><td>2 squares per square</td><td>Mud, shallow water, light undergrowth, gravel slopes, broken paving, snow.</td></tr>
+        <tr><td>Difficult</td><td>3 squares per square (and may require a Skill Roll)</td><td>Dense forest, deep snow, knee-deep water, sheer rubble, climbing.</td></tr>
+      </tbody>
+    </table>
+    <p>Entering a square covered by an enemy's Defense Zoning costs an additional 1 square on top of any terrain cost.</p>
+
+    <h2 id="maneuvers">Maneuvers</h2>
+    <p>Maneuvers are special options layered on top of an attack. Unless otherwise noted a Maneuver is taken as part of an attack roll and is declared <em>before</em> dice are rolled. Most Maneuvers either modify the attack with a number of Raises or replace the attack's normal effect.</p>
+    <h3>Called Shot</h3>
+    <p>Add Raises to your attack roll to target a specific location (an arm, a leg, a weapon, an item being carried). Effects are determined by the GM &mdash; a successful arm shot might force a Disarm contest, a leg shot might trigger Knockdown, and so on. Typical cost: 2 Raises.</p>
+    <h3>Disarm</h3>
+    <p>Make an attack roll at +2 Raises. If the attack hits, the defender must make a contested Strength or weapon-Skill / Reflexes roll against the attacker's roll or drop their weapon into an adjacent square.</p>
+    <h3>Extra Attacks</h3>
+    <p>An attacker may take an additional attack with a 5 Raise penalty on the original attack. School Techniques and abilities that grant "attack twice" replace this and allow a second Simple-Action attack on the same Turn without the Raise cost.</p>
+    <h3>Feint</h3>
+    <p>Add Raises to your attack roll. If the attack hits, on the attacker's <em>next</em> Turn the defender's Armor TN is reduced by 5 for each Raise spent on the Feint. Typical cost: 1+ Raises.</p>
+    <h3>Guard</h3>
+    <p>Simple Action. Designate one adjacent ally. Until the start of your next Turn the guarded ally gains <strong>+10 to their Armor TN</strong>, but your own Armor TN is reduced by 5. You may end the Guard early as a Free Action.</p>
+    <h3>Increase Damage</h3>
+    <p>Add Raises to your attack roll. For each Raise spent, add +1k0 to the damage roll if the attack hits.</p>
+    <h3>Knockdown</h3>
+    <p>Make an attack roll at +2 Raises. If the attack hits, the defender must succeed at a contested Strength or Athletics / Reflexes roll against the attacker's attack total or fall <strong>Prone</strong>.</p>
+
+    <h2 id="grappling">Grappling</h2>
+    <p>Grappling uses the Jiujutsu Skill (with Strength or Agility, depending on the action). A grapple is resolved through a series of contested rolls. While grappled, both characters share each other's space and neither may take normal weapon attacks except as noted under <em>Hit</em>.</p>
+    <ul>
+      <li><strong>Initiate:</strong> Simple Action. Make a Jiujutsu / Agility attack against the target's Armor TN. On a hit, both characters become <em>Grappled</em> until one escapes or throws the other.</li>
+      <li><strong>Hit:</strong> Simple Action, only while Grappled. Make a contested Jiujutsu / Strength roll against the opponent's Jiujutsu / Strength. On a success, deal damage equal to (Strength)k(Strength), or use a small weapon already in hand.</li>
+      <li><strong>Throw:</strong> Complex Action, only while Grappled. Make a contested Jiujutsu / Strength roll. On a success, the opponent is moved to an adjacent square of the attacker's choice and falls Prone; the grapple ends.</li>
+      <li><strong>Break:</strong> Simple Action, only while Grappled. Make a contested Jiujutsu / Strength or Athletics / Strength roll. On a success, the grapple ends and the character may take a Free Move.</li>
+      <li><strong>Pass:</strong> Simple Action, only while Grappled. Make a contested Jiujutsu / Reflexes roll. On a success, change the position of the grapple so that the character moves around the opponent (useful for getting past a defender into a square that was previously denied).</li>
+    </ul>
+
+    <h2 id="conditional-effects">Conditional Effects</h2>
+    <p>Conditional Effects are temporary states that modify a character's rolls and Armor TN. Where a 4th edition effect originally used a dice-pool penalty, the Itadori revisions use a flat TN penalty instead.</p>
+    <table>
+      <thead>
+        <tr><th>Effect</th><th>Description</th><th>Mechanical Penalty</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blind</td>
+          <td>The character cannot see their target (darkness, a hood, sand thrown in the eyes).</td>
+          <td>+15 TN to ranged attack rolls; +5 TN to melee attack rolls.</td>
+        </tr>
+        <tr>
+          <td>Dazed</td>
+          <td>A sharp blow or shock has rattled the character.</td>
+          <td>+5 TN to all rolls until the start of their next Turn.</td>
+        </tr>
+        <tr>
+          <td>Entangled</td>
+          <td>Bound by rope, net, vines, or similar.</td>
+          <td>Cannot move from current square; +10 TN to all physical rolls until freed.</td>
+        </tr>
+        <tr>
+          <td>Fatigued</td>
+          <td>Exhausted from sustained effort, lack of sleep, or lack of food and water (this state subsumes the old <em>Fasting</em> condition).</td>
+          <td>+5 TN to all rolls; recovers with a full night's rest, or food and water for the fasting case.</td>
+        </tr>
+        <tr>
+          <td>Grappled</td>
+          <td>Locked in a grapple with at least one opponent (see <a href="#grappling">Grappling</a>).</td>
+          <td>Cannot move from current square; may only take grappling actions, Free Actions, or attack with a small weapon already in hand.</td>
+        </tr>
+        <tr>
+          <td>Mounted / Higher</td>
+          <td>The character is on a horse or otherwise at a meaningful height advantage over their target.</td>
+          <td>Attackers <em>below</em> the character suffer +3 TN to attack them in melee. The mounted character may use horseback weapons normally.</td>
+        </tr>
+        <tr>
+          <td>Prone</td>
+          <td>The character is on the ground.</td>
+          <td>+5 TN to attack rolls made by the prone character; melee attacks against them are made at &minus;5 TN, ranged attacks at +5 TN. Standing up is a Simple Action.</td>
+        </tr>
+        <tr>
+          <td>Stunned</td>
+          <td>Completely incapacitated for a brief moment by a particularly nasty effect.</td>
+          <td>The character cannot take any Actions (including Free Actions) until the start of their next Turn, and their Armor TN is reduced by 10.</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("nav").load("/l5r10/navbar.html");
+    })
+  </script>
+</body>
+</html>
