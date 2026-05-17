@@ -17,9 +17,9 @@ thereby bringing you down to 9 rolled dice.
 same time, so no one can make their choice based on what their enemies declared. If anyone forgets to declare their
 Stance, they are assumed to be in the Attack Stance.
 - Center Stance (page 84): You can take Free Actions in the Center Stance.
-- Disarm Maneuver (page 86): This maneuver only requires 2 Raises and does normal damage now. Kicking a weapon
+- [DONE] Disarm Maneuver (page 86): This maneuver only requires 2 Raises and does normal damage now. Kicking a weapon
 along the ground is a Free Action and sends it up to 10 feet away.
-- Grappled Conditional Effect (page 89): The grappling condition reduces Armor TN by 10, not to 5.
+- [DONE] Grappled Conditional Effect (page 89): The grappling condition reduces Armor TN by 10, not to 5.
 - Improving Your Character (page 104): Each Skill Emphasis is worth 1 Insight.
 - Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
 the mount itself actually spends on movement. Further clarification, a rider can still use the Full Defense stance while
@@ -37,21 +37,21 @@ armor TN bonuses you normally gain from the stance to brandish the ofuda while s
 shugenja or maho-tsukai spells directed at you or allies within 20 feet is increased by half your Honor Rank (rounded
 down) if you are in Defense stance or your full Honor Rank if you are in Full Defense stance. This can also work on the
 supernatural powers of Shadowlands creatures but not gaijin magic.
-- Push (1 Raise): As part of a melee attack you shove your enemy backward, possibly into deadly circumstances. If
+- [DONE] Push (1 Raise): As part of a melee attack you shove your enemy backward, possibly into deadly circumstances. If
 successful, the attack deals normal damage and forces a Contested Strength Roll between the character and the target. If
 the character is successful, the target stumbles 10 feet backward.
 
 New Combat Conditional Effects
-- Cover: A character can benefit from cover only when an attack or other effect originates on the opposite side of
+- [DONE] Cover: A character can benefit from cover only when an attack or other effect originates on the opposite side of
 something that block at least half his body. This provides a bonus to his Armor TN that ranges from +3 to +5 according to
 the GM’s judgment. Optionally, the GM may decide that certain spells that function like projectiles may suffer the cover
 bonus as a penalty to the Spellcasting Roll.
-- Flanking: A character gains a bonus of +5 on the total of melee Attack Rolls against an enemy if they have an active ally
+- [DONE] Flanking: A character gains a bonus of +5 on the total of melee Attack Rolls against an enemy if they have an active ally
 on the opposite side of that enemy and within melee range.
 - Impure: A shugenja who has disappointed the spirits is considered impure until he earns their forgiveness. He cannot
 add his School Rank or any Affinity to Spell Casting Rolls and those dice will not Explode. Shugenja who cast any maho
 spells can draw on the kansen instead of normal elemental kami and are immune to this condition.
-- Poor Visibility: A character trying to act in near darkness, fog, smoke, and similar situations where visibility is poor
+- [DONE] Poor Visibility: A character trying to act in near darkness, fog, smoke, and similar situations where visibility is poor
 suffers a penalty of –1k1 to all ranged attack rolls and Perception-based rolls. At the GM’s discretion, some spells that
 function like projectiles might suffer a –5 penalty to their spellcasting rolls when being cast into or from an area of poor
 visibility.
