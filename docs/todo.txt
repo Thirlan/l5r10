@@ -16,9 +16,6 @@ thereby bringing you down to 9 rolled dice.
 - Stances (page 84): Clarification - During the first round of the skirmish, everyone announces their chosen stance at the
 same time, so no one can make their choice based on what their enemies declared. If anyone forgets to declare their
 Stance, they are assumed to be in the Attack Stance.
-- Center Stance (page 84): You can take Free Actions in the Center Stance.
-- [DONE] Disarm Maneuver (page 86): This maneuver only requires 2 Raises and does normal damage now. Kicking a weapon
-along the ground is a Free Action and sends it up to 10 feet away.
 - [DONE] Grappled Conditional Effect (page 89): The grappling condition reduces Armor TN by 10, not to 5.
 - Improving Your Character (page 104): Each Skill Emphasis is worth 1 Insight.
 - Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
