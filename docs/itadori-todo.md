@@ -8,9 +8,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ---
 
 ## Table of Contents
-1. [Combat Stances & Mechanics](#combat-stances--mechanics)
-2. [Weapons & Equipment](#weapons--equipment)
-3. [Movement & Initiative](#movement--initiative)
 4. [Mounted Combat](#mounted-combat)
 5. [Core Mechanics Overhaul](#core-mechanics-overhaul)
 6. [Magic & Spell System](#magic--spell-system)
@@ -21,65 +18,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 11. [Documentation & Clarity](#documentation--clarity)
 
 ---
-
-## Combat Stances & Mechanics
----
-
-## Weapons & Equipment
-
-### Weapon Category Consolidation
-
-#### Small Blades Consolidation
-- **Group Together:** Jitte/Sai, Tanto/Aiguchi, Kama, Shuriken/Kunai
-- **Create:** "Small Blades" weapon category
-- **Suggested Implementation:** Unified damage calculation, same skill usage
-- **Status:** Not Started
-
-#### Small Unarmed Weapons
-- **Tonfa, Nunchaku, Jo, Machi-Kanshisha:**
-  - Consolidate to same rules: `0k2` damage, small category
-  - All use Staves skill
-- **Tsubute (Throwing Stones):**
-  - Move under Athletics (throw) skill
-  - Damage: `0k1`
-  - Flavor: Just stones being thrown
-- **Status:** Not Started
-
-#### Polearm and Spear Consolidation
-- **Consolidate categories:** Combine polearms and spears into single category
-- **Unified stats:** Naginata, Bisento, Nagamaki → `3k3` damage
-- **Special Ability:** Spears can be thrown with full attack
-- **Reach Bonuses:** Add reach bonuses to longer weapons like spears and polearms
-- **Consolidations:**
-  - Combine Sade-Garami and Sasumata stats
-  - Combine Mai Chong with Yari
-  - Combine Nage-Yari with Yari
-- **Status:** Not Started
-
-#### Chain Weapons Consolidation
-- **Consolidate:** All chain weapons into one category
-- **Suggested Implementation:** Same damage, effects, and skill usage
-- **Status:** Not Started
-
-#### Heavy Weapons Consolidation
-- **Consolidate:** All heavy weapons into one category
-- **Unified Stats:**
-  - `3k3` damage
-  - Ignore 2 armor reduction
-  - +5 bonus on knockdown attempts
-  - Optional: Consider `1k4` damage variant for playtesting
-- **Status:** Not Started
-
-#### Blowgun Classification
-- **Change:** Move blowgun under Kyujutsu skill
-- **Make it:** Small weapon classification
-- **Status:** Not Started
-
-### Arrow Mechanics
-- **Proposed change:** Apply D&D's two-tier range system
-- **Implementation:** Flat -5 penalty past short range to simulate disadvantage
-- **Armor Piercing Arrows:** Should ignore armor reduction
-- **Status:** Not Started
 
 ### Scroll Casting Requirements
 - **New Rule:** If casting a spell from a scroll, you need both hands
