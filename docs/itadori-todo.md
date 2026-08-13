@@ -106,12 +106,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ### Horse Armor
 - animals may use light armor only. Keyword: barding / barded
 
-### Initiative for Mounted Combat
-- **Change:** Roll both character's and mount's initiative
-- **Result:** Use the LOWER of the two rolls for both
-- **Benefit:** Aligns mount and character on same initiative, simplifying actions
-- **Status:** Not Started
-
 ### Horsemanship Damage Check
 - **New Rule:** Every time you take damage, roll Horsemanship
 - **TN:** Equal to damage dealt (minus armor reduction)
