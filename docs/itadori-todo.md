@@ -35,11 +35,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Suggested Implementation:** Unified damage calculation, same skill usage
 - **Status:** Not Started
 
-#### Scimitar Standardization
-- **Change:** Make Scimitar use same rules as Katana
-- **Goal:** Simplify weapon variety; reduce stat-checking
-- **Status:** Not Started
-
 #### Small Unarmed Weapons
 - **Tonfa, Nunchaku, Jo, Machi-Kanshisha:**
   - Consolidate to same rules: `0k2` damage, small category
@@ -78,14 +73,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 #### Blowgun Classification
 - **Change:** Move blowgun under Kyujutsu skill
 - **Make it:** Small weapon classification
-- **Status:** Not Started
-
-#### Weapons to Remove
-- **Remove Sang Kauw:** No longer needed
-- **Remove Kumade:** No longer needed
-- **Remove Parangu:** No longer needed
-- **Remove Ninja-To:** No longer needed
-- **Remove Warfans:** No longer needed
 - **Status:** Not Started
 
 ### Arrow Mechanics
