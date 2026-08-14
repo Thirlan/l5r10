@@ -55,13 +55,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ## Core Mechanics Overhaul
 
-### Free Raises Removal
-- **Problem:** "Free Raises" concept is confusing and provides minimal gain
-- **Solution:** Remove the concept entirely
-- **Replacement:** Use simple +5 bonus to rolls when it would come up
-- **Special Exception:** Void point limit for normal raises can be ignored in these +5 cases
-- **Status:** Not Started
-
 ### Degrees of Success
 - **New Concept:** Add "degrees of success" mechanics
 - **When Used:** Situations where Raises don't make sense but high rolls should matter
