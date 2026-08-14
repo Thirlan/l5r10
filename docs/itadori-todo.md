@@ -62,12 +62,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Implementation Details:** TBD
 - **Status:** Not Started
 
-### Reflexes Over-Usage Reduction
-- **Problem:** Reflexes trait is too dominant, used in most ranged attack rolls
-- **Solution:** Remove Reflexes from most ranged attack rolls
-- **Benefit:** Encourages more diverse character building
-- **Status:** Not Started
-
 ### Dice Addition/Subtraction Balancing
 - **Problem:** Many effects add or subtract dice, causing potential die pool explosions
 - **Solution:** Convert most dice additions/subtractions to flat numerical bonuses/penalties
@@ -411,6 +405,109 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 ### Documentation Improvements
 - **Visual Reference Charts:** Quick-lookup charts for modifiers, combat, spells
 - **Failure Mode Examples:** Show what happens when rolls fail, not just successes
+
+---
+
+## Powers to consider for other uses
+
+This section contains all skill Mastery Abilities extracted from the skills documentation. These powers could potentially be adapted for other uses such as techniques, advantages, or other character advancement mechanics.
+
+### High Skills
+
+#### Divination (Intelligence)
+- **Rank 5:** A second Divination Skill Roll may be made without the cost of spending a Void Point. All other conditions for making the second Skill Roll still apply.
+
+#### Lore Gaijin Culture (Intelligence / Awareness)
+- **Rank 3:** Can speak that culture's language.
+
+#### Medicine (Intelligence)
+- **Rank 5:** The amount of Wounds healed on a successful Medicine roll is increased by +1k0.
+
+#### Meditation (Void)
+- **Rank 3:** A successful Meditation Skill Roll restores up to 2 Void Points.
+- **Rank 7:** A successful Meditation Skill Roll restores up to 3 Void Points.
+
+### Bugei Skills
+
+#### Athletics (Strength)
+- **Rank 3:** Moderate Terrain no longer impedes movement, and movement across Difficult Terrain reduces the character's Water Ring by 1 instead of 2.
+- **Rank 5:** The character no longer suffers movement penalties regardless of terrain.
+- **Rank 7:** The character may add 5 feet to the total of one Move Action per Round (this does not increase his maximum possible movement per round).
+
+#### Battle (Perception)
+- **Rank 5:** The character adds his Battle Skill Rank to his Initiative Score during Skirmishes.
+
+#### Defense (Reflexes)
+- **Rank 3:** The character may retain the result of a previous Defense / Reflexes roll rather than make a new roll if the Full Defense Stance is being maintained in subsequent rounds.
+- **Rank 5:** The character's Armor TN is considered 3 higher in Defense and Full Defense Stances.
+- **Rank 7:** One Simple Action may be taken while in the Full Defense Stance (no attacks may be made).
+
+#### Horsemanship (Agility)
+- **Rank 3:** The character may utilize the Full Attack Stance when on horseback.
+- **Rank 5:** Mounting a horse is a Simple Action rather than a Complex Action, and dismounting is a Free Action rather than a Simple Action.
+- **Rank 7:** Mounting a horse is a Free Action rather than a Simple Action.
+
+#### Survival (Perception)
+- **Rank 5:** The character receives a bonus of +1k0 to the total of all Stealth Skill Rolls made in wilderness environments.
+
+#### Iaijutsu (Reflexes)
+- **Rank 3:** Readying a katana is a Free Action rather than a Simple Action.
+
+#### Jiujutsu (Agility)
+- **Rank 3:** The damage of all unarmed attacks is increased by +1k0.
+- **Rank 5:** Use of Jiujutsu confers a +5 TR toward initiating a Grapple.
+
+#### Chain Weapons (Agility)
+- **Rank 3:** Chain weapons may be used to initiate a Grapple.
+- **Rank 5:** Characters wielding a chain weapon gain a bonus of +1k0 on Contested Rolls against opponents who are entangled or Grappled via their weapon.
+- **Rank 7:** Use of a Chain weapon confers one +5 TR toward use of the Disarm or Knockdown Maneuver.
+
+#### Heavy Weapons (Agility)
+- **Rank 3:** Opponents with a Reduction Rating have their rating reduced by 2 when attacked with a heavy weapon.
+- **Rank 5:** Use of a heavy weapon confers one +5 TR toward use of the Knockdown Maneuver.
+- **Rank 7:** Damage dice explode on a result of 9 and 10 when using heavy weapons.
+
+#### Kenjutsu (Agility)
+- **Rank 3:** The total of all damage rolls made with a sword is increased by 1k0.
+- **Rank 5:** A sword may be readied as a Free Action rather than a Simple Action.
+- **Rank 7:** Damage dice explode on a result of a 9 and 10 when using a sword.
+
+#### Small Blades (Agility)
+- **Rank 3:** Off-hand penalties do not apply when using a knife.
+- **Rank 5:** Use of a sai or jitte confers one +5 TR toward use of the Disarm Maneuver.
+- **Rank 7:** Use of any knife confers a +5 TR towards use of the Extra Attack Maneuver.
+
+#### Kyujutsu (Agility)
+- **Rank 3:** Stringing a bow for use is a Simple Action rather than a Complex Action.
+- **Rank 5:** The maximum range of any bow is increased by 50%.
+- **Rank 7:** When using any bow, the Strength of the bow is increased by 1.
+
+#### Polearms (Agility)
+- **Rank 3:** During the first round of a skirmish, a character wielding a polearm gains a bonus of +5 to his Initiative Score. This lasts for only the first round.
+- **Rank 5:** Damage rolls made with polearms against mounted or significantly larger opponents is increased by +1k0.
+- **Rank 7:** Polearms may be readied as a Free Action.
+
+#### Staves (Agility)
+- **Rank 3:** Opponents' armor bonuses are no longer doubled against staff attacks.
+- **Rank 5:** Use of a staff confers one +5 TR toward use of the Knockdown Maneuver.
+- **Rank 7:** Staves that are large may be readied as a Free Action instead of a Simple Action. Staves that are small gain a bonus to damage rolls equal to +1k0.
+
+### Merchant Skills
+
+#### Animal Handling (Awareness)
+- **Rank 3:** Commonly domesticated animals such as dogs, horses, or falcons may be trained for use by others.
+- **Rank 5:** Trained animals still in possession of the trainer may be commanded to attack a target of his choosing. The animal will flee for its life if badly wounded regardless of commands issued.
+- **Rank 7:** Animals trained by the character may be issued commands non-verbally.
+
+### Low Skills
+
+#### Sleight of Hand (Agility)
+- **Rank 5:** The character may use the Conceal Emphasis to conceal small weapons.
+
+#### Stealth (Agility)
+- **Rank 3:** A character's Simple Move Actions while using Stealth allow him to move a distance equal to his Water x 5.
+- **Rank 5:** A character's Simple Move Actions while using Stealth allow him to move a distance equal to his Water x 10.
+- **Rank 7:** A character using Stealth may make Free Move Actions as normal.
 
 ---
 
