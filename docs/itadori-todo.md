@@ -134,23 +134,10 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Most Interesting Skill Masteries:** Move these to other character advancement aspects
 - **Status:** Requires Implementation
 
-### +5 Insight to Rank 5 skills
-- **Change:** All skills lose mastery bonuses but rank 5 gives +5 insight
-- **Reasoning:** Difficult to gain insight from skills alone, forcing people to dump into Traits/Rings to rank up. Traits are also already too valuable.
-- **Status:** Not Started
-
 ### Fame/Glory Renaming
 - **Change:** Rename "Glory" trait to "Fame"
 - **Benefit:** More efficiently encapsulates vestigial Infamy rules
 - **Implementation:** Global find-and-replace throughout documents
-- **Status:** Not Started
-
-### Low Skill Category Replacement
-- **Current Category Name:** "Low Skill"
-- **Problem:** "Low" is a strong negative value judgment; creates wrong expectations
-- **Proposed Name:** "Dubious Skill"
-- **Benefit:** Better indicates context-dependent honor loss (sometimes costs honor, sometimes doesn't)
-- **Examples:** Commerce, Temptation, Courtesies
 - **Status:** Not Started
 
 ---
