@@ -8,15 +8,6 @@ Because this is the 10th century in the setting, certain character options are d
 can be activated a number of times per day equal to the ise zumi's school rank. All the tattoos are so large that they can
 never be used with armor.
 
-Money Stipends
-Once per in-game year, a character’s faction will provide him more money. The formula is the character’s starting koku
-(as specified by their School and relevant advantages) multiplied by the character’s Status, and then doubled. Ronin,
-monks, and similarly resourceless characters do not receive this benefit.
-
-Changes to Basic Rules
-- The 10 Dice Rule (page 77): If you would roll exactly 11 dice, you can still convert two rolled dice into one kept die,
-thereby bringing you down to 9 rolled dice.
-- Improving Your Character (page 104): Each Skill Emphasis is worth 1 Insight.
 - Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
 the mount itself actually spends on movement. Further clarification, a rider can still use the Full Defense stance while
 benefiting from a mount’s full movement potential.
