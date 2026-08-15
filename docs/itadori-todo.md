@@ -14,7 +14,6 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 7. [Character Advancement](#character-advancement)
 8. [Traits & Rankings](#traits--rankings)
 9. [Courtier Schools & Political Leverage](#courtier-schools--political-leverage)
-10. [Dueling System](#dueling-system)
 11. [Documentation & Clarity](#documentation--clarity)
 
 ---
@@ -105,34 +104,7 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - **Alternative Rejected:** Annual (in-game year) requirement considered "too extreme"
 - **Status:** Currently Accepted
 
-### "Attack Twice" Technique Distribution
-- **Problem:** Power gap between schools getting "attack twice" at rank 3 vs rank 4 is too significant
-- **Solution:** All combat-focused schools must have "attack twice" at rank 3 if not already there
-- **Affected Schools:** TBD - Requires review of each combat school
-- **Status:** Not Started
-
-### Courtier Schools Rank 4 Options
-- **Proposal:** All courtier schools get a rank 4 choice:
-  - Make two attacks per round, OR
-  - Low-level shugenja power
-- **Benefit:** Gives courtiersMore combat utility and options
-- **Status:** Not Started
-
----
-
 ## Traits & Rankings
-
-### Maximum Rank Cap - Partial Implementation
-- **Decision Made:** Cap: Traits, Skills, Fear at 5 ranks maximum
-- **Reasoning:** Matches 1st edition design; designers of 4e regret not doing this
-- **Math Impact:** Character power no longer breaks down as quickly during advancement
-- **NOT Capped (Reasoning Below):**
-  - Honor (10 ranks): Too difficult to track honor loss penalties; characters would hit cap too fast
-  - Shadowland Taint (10 ranks): Similar bookkeeping problems as Honor
-  - Fame/Glory (10 ranks): Not rolled, capping provides no mechanical value
-- **Character Features Needing Recalculation:** TBD - Requires audit of all features
-- **Most Interesting Skill Masteries:** Move these to other character advancement aspects
-- **Status:** Requires Implementation
 
 ### Fame/Glory Renaming
 - **Change:** Rename "Glory" trait to "Fame"
@@ -254,57 +226,15 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ---
 
-## Dueling System
+## Other abilities
 
-### Problem Statement
-- **Issue:** With the exception of Void points, duels have no decision points for either bushi or shugenja
-- **Gap:** No courtier dueling system exists
-- **Objective:** Create meaningful choices that involve all 5 rings
+### Dots
+- There are few dots in the game
 
-### Iaijitsu Duel Structure
-
-#### Round 1 & 2 - Action Selection Phase
-**Each player chooses ONE of the following actions, then reveals simultaneously:**
-
-- **Focus** (Void + Meditation)
-  - Gain +5 to your Iaijitsu strike roll
-  
-- **Assess** (Water - Perception + Battle)
-  - Learn 2 traits or skills
-  - Opposing player indicates what they will NOT pick next round
-  
-- **Readiness** (Fire - Agility + Kenjutsu)
-  - Gain +5 to your hit roll
-  
-- **Dodge** (Air - Reflexes + Defense)
-  - Gain +5 to your to-hit TN (enemy's difficulty to hit you)
-
-- **Endure** (Earth - Willpower + Meditation)
-  - Ignore all roll penalties for the remainder of the duel
-
-#### Round 1 & 2 - Resolution
-- Higher roll of the two chosen actions gets their chosen benefit then move to next round
-- Each ring plays a role in different action options
-
-#### Final Round - Striking Phase
-- Both roll Iaijitsu + Reflexes
-- Difference < 5: Both strike simultaneously
-- Difference ≥ 5: Higher roller strikes first
-- Follow normal combat resolution
-
-### Courtier Dueling System
-- **Status:** Needs Complete Design
-- **Considerations:**
-  - What traits/skills matter (Etiquette, Courtesies, Politics?)
-  - How to involve all rings
-  - Victory conditions beyond striking damage
-
-### Implementation Status
-- **Iaijitsu System:** Ready for playtesting
-- **Courtier System:** Needs Design
-- **Integration:** Needs clarification on how courtiers engage in non-combat duels
-
----
+### Random powers
+- When using void to gain +1k1 it can be increased to +2k2 for specific skills (consider for coutiers)
+- When you spend void to gain armor, gain more armor
+- 
 
 ## Skills
 
