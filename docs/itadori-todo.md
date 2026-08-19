@@ -244,27 +244,12 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 ## Documentation & Clarity
 
-### Single Source of Information Goal
-- **Problem:** Rules poorly organized across main rulebook, errata, and source books
-- **Solution:** Create unified document
-- **Benefits:** Easier for players to find information
-- **Status:** This project in progress
-
 ### Clarification Additions
 - **Problem Examples:**
   - Various courtier classes reference honor loss for using Commerce but no explanation exists
   - Confusion between Shugenja (Shinto priest + Onmyōji) and Monk (Buddhist monk + Onmyōji)
 - **Solution:** Add clarifying sentences and examples where needed
 - **Status:** Needs systematic review
-
-### Bloat Reduction
-- **Goal:** Make rulebook shorter and faster to reference
-- **Strategy:** "Take half your ideas and throw them away to avoid feature creep"
-- **Actions:**
-  - Remove unnecessary complexity (stances, free raises, etc.)
-  - Consolidate overlapping rules
-  - Simplify without losing depth
-- **Status:** In Progress
 
 ### Shugenja vs. Monk Distinction
 - **Problem:** Book has difficulty explaining subtle distinctions
@@ -282,29 +267,30 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 - Mounted/Higher: +3TN instead of +1k0
 - Prone: -5TN instead of -2k0
 
-## Void
-- Remove ability to give +1k0 and removal of unskilled penalties to unskilled skill rolls (this helps make skills more valuable)
-- Can no longer use void to give +1k1 to unskilled skill roles (this helps make skills more valuable)
-
 ## Powers to reuse
 - Duty (7 points) You may spend a Void Point on any Skill Roll or Spell Casting Roll to negate all TN penalties for that roll, including Wound penalties
+
+# other ideas
+- you may move favors from one person to another
+- Followers you buy or gain have +1k0 to their skill
+- For every rank 3 and above Lore: Gaijin Culture, you are assumed to have made a contact with that culture with trade goods and gain 1 favor every 3 months with that culture 
+You may transform favors into 3 koku without honor loss instead of the the 10 with 1 honor loss.
+You may exchange the favors for items from those cultures, with the exception of gunpowder, which is banned.
+- Everytime you succeed and one or more of your dice explode for skill X, you gain a favor with that individual or clan.
+- Ikoma, every time one or more members of your party gain one or more fame, you gain one glory dice that you keep and may spend to add to any roll. You may accumulate glory dice.
+- Travelling salesman, you may make a commerce roll in a town to determine if someone needs a specific good or needs to deliver a specific good. If you succeed you either gain a package to resell or the need to buy and send something back to the original town. If you succeed, you generate  favor with the town you took the offer from and the town you finished the task in.
+- Raise: 1 favor when you succeed on your subtype roll that also exploded
+
 
 ---
 
 ## Brainstorming & Additional Ideas
 
-### Combat Enhancements
-- **Positioning System:** Simplified grid or range brackets for important tactical info
-
 
 ### Courtier Expansion Ideas
-- **Duel of Wits:** Formal courtier combat using Skill checks and rhetoric
 - **Trade Goods System:** Detailed commerce rules for Unicorn and Crab merchants
 
 ### Character Advancement Alternatives
-
-
-
 
 ### New Player Experience
 - **Quick Start Rules:** Create essential 1-2 page rules summary for new players
@@ -426,8 +412,3 @@ This section contains all skill Mastery Abilities extracted from the skills docu
 - **Rank 5:** A character's Simple Move Actions while using Stealth allow him to move a distance equal to his Water x 10.
 - **Rank 7:** A character using Stealth may make Free Move Actions as normal.
 
----
-
-## Version History
-- **v0.1** - 2026-04-25: Initial compilation from discussion channel
-- Current Status: Organization phase, decisions needed on marked items
