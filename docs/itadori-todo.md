@@ -280,6 +280,7 @@ You may exchange the favors for items from those cultures, with the exception of
 - Ikoma, every time one or more members of your party gain one or more fame, you gain one glory dice that you keep and may spend to add to any roll. You may accumulate glory dice.
 - Travelling salesman, you may make a commerce roll in a town to determine if someone needs a specific good or needs to deliver a specific good. If you succeed you either gain a package to resell or the need to buy and send something back to the original town. If you succeed, you generate  favor with the town you took the offer from and the town you finished the task in.
 - Raise: 1 favor when you succeed on your subtype roll that also exploded
+- Upon entering a village, town or city, you may make a one time raise while in the city when perform a gift giving to transfer 1 favor from one person or clan to the receiver of the gift.
 
 
 ---
