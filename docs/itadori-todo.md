@@ -282,6 +282,10 @@ You may exchange the favors for items from those cultures, with the exception of
 - Raise: 1 favor when you succeed on your subtype roll that also exploded
 - Upon entering a village, town or city, you may make a one time raise while in the city when perform a gift giving to transfer 1 favor from one person or clan to the receiver of the gift.
 - You may add double your skill rank when performing an assist
+- Reverse Taunt: Make a creature attack another person than yourself
+- Temporary hit points
+- Moving people on your turn
+- Charm creature effects
 
 ---
 
