@@ -78,12 +78,12 @@ table {
 }
 
 th {
-    background: linear-gradient(90deg, #2c2c2c 0%, #4a4a4a 100%); /* Dark gradient */
+    background: linear-gradient(0deg, #2c2c2c 0%, #4a4a4a 100%); /* Dark gradient */
     color: #FFD700; /* Gold text */
     padding: 15px 10px;
     text-align: left;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 2px solid #FFD700;

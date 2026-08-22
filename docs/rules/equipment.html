@@ -46,7 +46,7 @@
             <td>+3</td>
             <td>1</td>
             <td>5 koku</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/light_armor.jpg" alt="Light"></td>
@@ -55,7 +55,13 @@
             <td>3</td>
             <td>25 koku</td>
             <td><ul>
-                <li>Wearing light armor increases the TN of all Spell casting, Athletics and Stealth rolls by +5TN</li>
+                <li>-5 TR to the following Skill rolls:
+                    <ul>
+                        <li>Spell casting</li>
+                        <li>Athletics</li>
+                        <li>Stealth</li>
+                    </ul>
+                </li>
                 <li>Animals, which includes horses, may wear light armor.</li>
             </ul></td>
         </tr>
@@ -65,7 +71,17 @@
             <td>+10</td>
             <td>5</td>
             <td>40 koku</td>
-            <td>Wearing heavy armor increases the TN of all Spell casting rolls or Skill Rolls using Agility or Reflexes by 5</td>
+            <td>
+                <ul>
+                    <li>-5 TR to:
+                        <ul>
+                            <li>Skill rolls using Agility</li>
+                            <li>Skill rolls using Reflexes</li>
+                            <li>Spell casting rolls</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/riding_armor.jpg" alt="Riding"></td>
@@ -73,12 +89,125 @@
             <td>+4, +12 armor while on horseback</td>
             <td>4</td>
             <td>55 koku</td>
-            <td>Wearing riding armor increases the TN of all Spell casting, rolls or Skill Rolls using Agility and Reflexes by 5, except on horseback.</td>
+            <td>
+                <ul>
+                    <li>Counts as Heavy Armor</li>
+                    <li>-5 TR to spell casting rolls</li>
+                    <li>While on foot -5 TR to:
+                        <ul>
+                            <li>Skill rolls using Agility</li>
+                            <li>Skill rolls using Reflexes</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Weapon sizes</h2>
+    <p>Weapon sizes affect certain skill rolls:</p>
+    <ul>
+        <li><b>Conceal</b>: Sleight of Hand skill rolls to conceal the weapon on yourself.</li>
+        <li><b>Sneak</b>: Stealth skill rolls to move quietly while carrying the weapon.</li>
+        <li><b>Tight spaces</b>: Penalty to attack rolls in a tight corridor (i.e. only 1 sq / 5' wide) or low ceilings (1 sq / 5').</li>
+        <li><b>Hands</b>: Indicates whether the weapon is typically wielded with one or two hands.</li>
+    </ul>
+    <table>
+        <tr><th>Size</th><th>Conceal</th><th>Sneak</th><th>Tight spaces</th><th>Hands</th></tr>
+        <tr>
+            <td>Small</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>One handed</td>
+        </tr>
+        <tr>
+            <td>Medium</td>
+            <td>-10</td>
+            <td>-5</td>
+            <td>-</td>
+            <td>One handed</td>
+        </tr>
+        <tr>
+            <td>Large</td>
+            <td>-20</td>
+            <td>-10</td>
+            <td>-5</td>
+            <td>Two handed</td>
+        </tr>
+    </table>
+
+    <h2>Ranged weapons</h2>
+    <p>Attacking a target within a ranged weapon's Minimum Range or outside its Effective Range suffers a -5 TR to attack rolls.</p>
+    <h3>Distance in squares</h3>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Minimum</th>
+            <th>Effective</th>
+            <th>Max</th>
+        </tr>
+        <tr>
+            <td>Very Short</td>
+            <td>-</td>
+            <td>3</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Short</td>
+            <td>-</td>
+            <td>5</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Medium</td>
+            <td>1</td>
+            <td>10</td>
+            <td>52</td>
+        </tr>
+        <tr>
+            <td>Long</td>
+            <td>2</td>
+            <td>52</td>
+            <td>100</td>
+        </tr>
+    </table>
+    <h3>Distances in feet</h3>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Minimum</th>
+            <th>Effective</th>
+            <th>Max</th>
+        </tr>
+        <tr>
+            <td>Very Short</td>
+            <td>-</td>
+            <td>15'</td>
+            <td>30'</td>
+        </tr>
+        <tr>
+            <td>Short</td>
+            <td>-</td>
+            <td>25'</td>
+            <td>50'</td>
+        </tr>
+        <tr>
+            <td>Medium</td>
+            <td>5'</td>
+            <td>50'</td>
+            <td>260'</td>
+        </tr>
+        <tr>
+            <td>Long</td>
+            <td>10'</td>
+            <td>260'</td>
+            <td>500'</td>
         </tr>
     </table>
     
     <h2>Kyujutsu</h2>
-    <p>When targeting someone past Medium Range the user incurs a -5 TR on their weapon skill roll to hit.</p>
+    <p>Weapons that provide range.</p>
     <table>
         <tr>
             <th>Image</th>
@@ -86,8 +215,8 @@
             <th>Size</th>
             <th>Weapon Strength</th>
             <th>Minimum Strength</th>
-            <th>Medium Range</th>
-            <th>Max Range</th>
+            <th>Range</th>
+            <th>Keywords</th>
             <th>Cost</th>
             <th>Special</th>
         </tr>
@@ -96,11 +225,11 @@
             <td>Han-kyu</td>
             <td>medium</td>
             <td>2</td>
-            <td>0</td>
-            <td>10 sq / 50'</td>
-            <td>52 sq /260'</td>
+            <td>1</td>
+            <td>Medium</td>
+            <td>-</td>
             <td>6 koku</td>
-            <td>small size when unstrung.</td>
+            <td>Counts as small size when unstrung.</td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/dai_kyu.jpg" alt="Dai-kyu"></td>
@@ -108,29 +237,29 @@
             <td>large</td>
             <td>4</td>
             <td>3</td>
-            <td>52 sq / 260'</td>
-            <td>100 sq / 500'</td>
+            <td>Long</td>
+            <td>-</td>
             <td>25 koku</td>
-            <td><ul>
-                <li>Cannot be fired at targets within 2 sq / 10' from you.</li>
-                <li>Cannot be used indoors.</li>
-                <li>Adds -5 TR to sneak rolls regardless of whether it is equipped or not.</li>
-            </ul></td>
+            <td></td>
         </tr>
+        
         <tr>
             <td><img class="medium_icon" src="../img/equipment/blowgun.jpg" alt="Blowgun"></td>
             <td>Blowgun</td>
             <td>small</td>
             <td>0</td>
-            <td>0</td>
-            <td>4 sq /20'</td>
-            <td>10 sq / 50'</td>
+            <td>1</td>
+            <td>Short</td>
+            <td>Ninja</td>
             <td>8 zeni</td>
-            <td><ul>
-                <li>Must have poison applied to darts to cause damage.</li>
-                <li>Triples Bonus to Armor TN from armor.</li>
-                <li>Can be used as a breathing tube to hide underwater.</li>
-            </ul></td>
+            <td>
+                <ul>
+                    <li>See darts below.</li>
+                    <li>-5 TR against targets wearing armor.</li>
+                    <li>Can be used as a breathing tube to hide underwater.</li>
+                    <li>Using this weapon causes <a href="../rules/honor.html#minor-honor-loss">minor honor loss</a>.</li>
+                </ul>
+            </td>
         </tr>
     </table>
 
@@ -149,7 +278,7 @@
             <td>1k1</td>
             <td>2bu</td>
             <td><ul>
-                <li>Ignores the Armor TN bonus provided by armor.</li>
+                <li>Ignores Armor bonuses.</li>
                 <li>Ignores Damage Reduction from Armors.</li>
             </ul></td>
         </tr>
@@ -159,7 +288,7 @@
             <td>2k3</td>
             <td>5bu</td>
             <td><ul>
-                <li>Double the Armor TN bonus provided by armor.</li>
+                <li>-5 TR to attack rolls against targets with armor.</li>
                 <li>Range halved.</li>
             </ul></td>
         </tr>
@@ -167,37 +296,48 @@
             <td><img class="medium_icon" src="../img/equipment/whistling_bulb.jpg" alt="Humming Bulb"></td>
             <td>Humming Bulb</td>
             <td>0k1</td>
-            <td>5bu</td>
+            <td>5 bu</td>
             <td>Makes a loud whistling sound</td>
         </tr>
         <tr>
             <td></td>
             <td>Rope Cutter</td>
             <td>1k1</td>
-            <td>3bu</td>
+            <td>3 bu</td>
             <td><ul>
-                <li>+10 TR for Called shots against inanimate objects.</li>
-                <li>Range halved.</li>
+                <li>+5 TR to attack rolls for Called shots against inanimate objects.</li>
+                <li>Range is one category lower (i.e. Long becomes Medium)</li>
             </ul></td>
         </tr>
         <tr>
             <td></td>
             <td>Willow Leaf</td>
             <td>2k2</td>
-            <td>1bu</td>
+            <td>1 bu</td>
             <td>None</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Poison Darts</td>
+            <td>1</td>
+            <td>1 bu</td>
+            <td>
+                <ul>
+                    <li>Must have poison applied to darts to cause damage.</li>
+                </ul>
+            </td>
         </tr>
     </table>
 
     <h2>Athletics</h2>
+    <p>Category of unusual and crude weapons that require athletics.</p>
     <table>
         <tr>
             <th>Image</th>
             <th>Name</th>
             <th>Size</th>
             <th>Damage</th>
-            <th>Medium Range</th>
-            <th>Max Range</th>
+            <th>Range</th>
             <th>Cost</th>
             <th>Special</th>
         </tr>
@@ -205,22 +345,17 @@
             <td><img class="medium_icon" src="../img/equipment/tsubute.jpg" alt="Tsubute"></td>
             <td>Tsubute (aka a rock)</td>
             <td>Small</td>
-            <td>flat 4 damage</td>
-            <td>3 sq / 15'</td>
-            <td>6 sq / 30'</td>
+            <td>flat 4</td>
+            <td>Short</td>
             <td>0</td>
             <td>Weapon of last resort or used to create a distraction/noise from a distance.</td>
         </tr>
     </table>
 
     <h2>Small Blades</h2>
-    <p>All small blades can be:</p>
+    <p>All small blades can be thrown:</p>
     <ul>
-        <li>thrown 5 squares / 25'</li>
-        <ul>
-            <li>Does not add user's strength to the damage when thrown.</li>
-        </ul>
-        <li>Concealed.</li>
+        <li>Does not add user's strength to the damage when thrown.</li>
     </ul>
     <table>
         <tr>
@@ -228,6 +363,7 @@
             <th>Name</th>
             <th>Size</th>
             <th>Damage</th>
+            <th>Range</th>
             <th>Keywords</th>
             <th>Cost</th>
             <th>Special</th>
@@ -237,9 +373,10 @@
             <td>Jitte & Sai</td>
             <td>small</td>
             <td>1k1</td>
+            <td>Short</td>
             <td></td>
             <td>1 koku</td>
-            <td></td>
+            <td>-5 TR to attack rolls when thrown.</td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/tanto.jpg" alt="Aiguchi & Tanto"></td>
@@ -249,28 +386,37 @@
             <td></td>
             <td></td>
             <td></td>
+            <td>-5 TR to attack rolls when thrown.</td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/kama.jpg" alt="Kama"></td>
-            <td>Kama</td>
+            <td>War Kama</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
+            <td>-5 TR to attack rolls when thrown.</td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/shuriken.jpg" alt="Shuriken"></td>
             <td>Shuriken</td>
+            <td>small</td>
+            <td>1k1</td>
             <td></td>
-            <td></td>
-            <td></td>
+            <td>Ninja</td>
             <td>2 bu</td>
-            <td>Can only be thrown;</td>
+            <td>
+                <ul>
+                    <li>Can only be thrown</li>
+                    <li>Using this weapon causes <a href="../rules/honor.html#minor-honor-loss">minor honor loss</a>.</li>
+                </ul>
+            </td>
         </tr>
     </table>
 
     <h2>Swords</h2>
+    <p>The most standard purpose weapons with good damage.</p>
     <table>
         <tr>
             <th>Image</th>
@@ -288,7 +434,11 @@
             <td>3k2</td>
             <td>Samurai</td>
             <td>cannot be bought. (Effective value : 25 koku)</td>
-            <td>Can spend a void point to increase damage by 1k1.</td>
+            <td>Spend 1 void: +1k1 to damage rating for the turn. Requirement:
+            <ul>
+                <li>Honor > 2</li>
+            </ul>
+            </td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/no-dachi.jpg" alt="No-Dachi"></td>
@@ -297,7 +447,7 @@
             <td>3k3</td>
             <td>-</td>
             <td>30 koku</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/scimitar.jpg" alt="Scimitar"></td>
@@ -306,7 +456,11 @@
             <td>3k2</td>
             <td>-</td>
             <td>20 koku</td>
-            <td>Can spend a void point to increase damage by 1k1.</td>
+            <td>Spend 1 void: +1k1 to damage rating for the turn. Requirement:
+            <ul>
+                <li>Unicorn</li>
+                <li>Honor > 2</li>
+            </ul>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/wakizashi.jpg" alt="Wakizashi"></td>
@@ -315,11 +469,28 @@
             <td>2k2</td>
             <td>Samurai</td>
             <td>15 koku</td>
-            <td>You may draw a wakizashi as part of the same action as a katana. Can be thrown up to 20' as a ranged weapon.</td>
+            <td>
+                <ul>
+                    <li>You may draw a wakizashi as part of the same action as a katana.</li>
+                    <li>Can be thrown as a ranged weapon
+                        <ul>
+                            <li>Very Short range</li>
+                            <li>-5 TR to attack rolls when thrown</li>
+                        </ul>
+                </ul>
+            </td>
         </tr>
     </table>
 
     <h2>Chain Weapons</h2>
+    <p>Exotic but versatile weapons for infiltration and disablement.</p>
+    <ul>
+        <li>-1k1 to damage rating rolls against targets wearing armor.</li>
+        <li>Can be used to initiate a grapple</li>
+        <li>Has reach</li>
+        <li>Can be tied to a rope to create a grappling hook and give +5 TR when climbing</li>
+        <li>Counts as small for concealment</li>
+    </ul>
     <table>
         <tr>
             <th>Image</th>
@@ -334,16 +505,19 @@
             <td><img class="medium_icon" src="../img/equipment/kusarigama.jpg" alt="Kusarigama"></td>
             <td>Kusarigama</td>
             <td>Large</td>
-            <td>0k2</td>
+            <td>1k2</td>
             <td>-</td>
             <td>5 koku</td>
-            <td>Doubles Bonus to Armor TN from armor.</td>
+            <td></td>
         </tr>
     </table>
 
     <h2>Heavy Weapons</h2>
-    <p>(under consideration) Ignore 2 armor reduction.</p>
-    <p>(under consideration) +5 on knockdown attempts.</p>
+    <p>Weapons meant for high damage, armor penetration, and knockdown effects.</p>
+    <ul>
+        <li>Ignore armor reduction</li>
+        <li>+5 TR to attack rolls on knockdown attempts.</li>
+    </ul>
     <table>
         <tr>
             <th>Image</th>
@@ -359,9 +533,9 @@
             <td>Dai-tsuchi</td>
             <td>Large</td>
             <td>0k4</td>
-            <td>-</td>
+            <td></td>
             <td>15 koku</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/ono.jpg" alt="Ono"></td>
@@ -402,7 +576,7 @@
             <td>3k3</td>
             <td>Samurai</td>
             <td>10 koku</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/sasumata.jpg" alt="Sasumata"></td>
@@ -417,10 +591,15 @@
             <td><img class="medium_icon" src="../img/equipment/lance.jpg" alt="Lance"></td>
             <td>Lance</td>
             <td>Large</td>
-            <td>3k4</td>
+            <td>1k2</td>
             <td>-</td>
             <td>20 koku</td>
-            <td>Damage reduced to 1k2 when not charging on horseback. Using without charging imposes a penality of 5 on horseback and 10 on foot.</td>
+            <td>
+                <ul>
+                    <li>while charging on horseback: 3k4 damage rating</li>
+                    <li>while on foot: -10 TR to attack rolls</li>
+                </ul>
+            </td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/yari.jpg" alt="Yari"></td>
@@ -429,11 +608,18 @@
             <td>2k2</td>
             <td>-</td>
             <td>5 koku</td>
-            <td>Can be thrown up to 50' as a ranged weapon. Damage rating when thrown is 1k2. Can be thrown in full attack stance.</td>
+            <td>Can be thrown:
+                <ul>
+                    <li>Short Range</li>
+                    <li>1k2 Damage Rating</li>
+                    <li>Can be thrown in full attack</li>
+                </ul>
+            </td>
         </tr>
     </table>
 
     <h2>Staves</h2>
+    <p>Cheap and unassuming weapons favored by monks and those of the peasant class in desperate need for self-defense.</p>
     <table>
         <tr>
             <th>Image</th>
@@ -451,7 +637,7 @@
             <td>1k2</td>
             <td>-</td>
             <td>3 bu</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/jo.jpg" alt="Jo"></td>
@@ -460,7 +646,7 @@
             <td>0k2</td>
             <td>-</td>
             <td>2 bu</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/machi-kanshisha.png" alt="Machi-kanshisha"></td>
@@ -469,7 +655,7 @@
             <td>0k2</td>
             <td>-</td>
             <td>20 koku</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/nunchaku.jpg" alt="Nunchaku"></td>
@@ -478,7 +664,7 @@
             <td>0k2</td>
             <td>Peasant</td>
             <td>2 bu</td>
-            <td>none</td>
+            <td></td>
         </tr>
         <tr>
             <td><img class="medium_icon" src="../img/equipment/tonfa.jpg" alt="Tonfa"></td>
@@ -487,7 +673,7 @@
             <td>0k2</td>
             <td>Peasant</td>
             <td>2 bu</td>
-            <td>none</td>
+            <td></td>
         </tr>
     </table>
     
