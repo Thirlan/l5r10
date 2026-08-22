@@ -286,6 +286,7 @@ You may exchange the favors for items from those cultures, with the exception of
 - Temporary hit points
 - Moving people on your turn
 - Charm creature effects
+- You cannot spend Void Points to negate Wounds.
 
 ---
 
