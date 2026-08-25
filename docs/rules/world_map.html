@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>World Map</title>
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/general.css" />
+  <link rel="stylesheet" href="../css/world-map-grid.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar"></nav>
+  </header>
+
+  <main>
+    <h1>Interactive World Map</h1>
+    
+    <div class="map-grid-container">
+      <img id="worldMap" src="../map/rokugan_900_small.png" alt="Rokugan Map" />
+      <canvas id="mapCanvas"></canvas>
+    </div>
+
+    <div class="map-controls">
+      <!-- Terrain Layer -->
+      <div class="control-panel">
+        <h3>Terrain Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Mountain', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #8B7355;"></span>Mountain
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Ocean', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #4169E1;"></span>Ocean
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'River', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #1E90FF;"></span>River
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Forest', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #228B22;"></span>Forest
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Plains', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #90EE90;"></span>Plains
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Hills', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #DAA520;"></span>Hills
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Deserts', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #F4A460;"></span>Deserts
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Marsh', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #556B2F;"></span>Marsh
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Shadowlands', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #2F4F4F;"></span>Shadowlands
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Deep Ocean', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #00008B;"></span>Deep Ocean
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Snow', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #F0F8FF;"></span>Snow
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'City', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+          <span class="terrain-color" style="background-color: #FF6347;"></span>City
+        </button>
+      </div>
+
+      <!-- Clan Layer -->
+      <div class="control-panel">
+        <h3>Clan Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crane', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #87CEEB;"></span>Crane
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Lion', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #8B4513;"></span>Lion
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crab', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #00008B;"></span>Crab
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Dragon', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #90EE90;"></span>Dragon
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Unicorn', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #800080;"></span>Unicorn
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Scorpion', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #FF0000;"></span>Scorpion
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Imperial', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #FFFFFF; border: 2px solid #333;"></span>Imperial
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Shadowlands', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #000000;"></span>Shadowlands
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Phoenix', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #FFA500;"></span>Phoenix
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Mantis', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #006400;"></span>Mantis
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Minor Clan', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
+          <span class="terrain-color" style="background-color: #808080;"></span>Minor Clan
+        </button>
+      </div>
+
+      <!-- Infrastructure Layer -->
+      <div class="control-panel">
+        <h3>Infrastructure Layer</h3>
+        <div class="control-section">
+          <label>Road Directions:</label>
+          <div class="road-selector" id="roadSelector">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Layer & File Operations -->
+      <div class="control-panel">
+        <h3>Text Layer</h3>
+        <div class="control-section">
+          <label for="fontSize">Font Size:</label>
+          <input type="number" id="fontSize" min="8" max="48" value="16" onchange="mapGrid.setFontSize(this.value)">
+        </div>
+        <button class="tool-button" onclick="mapGrid.selectTool('text', null, 'text'); updateActiveButton(this); mapGrid.currentLayer='text';">
+          Add Text
+        </button>
+
+        <h3 style="margin-top: 20px;">File Operations</h3>
+        <div class="action-buttons">
+          <button class="save-btn" onclick="mapGrid.exportToFile();">Save Map</button>
+          <button class="load-btn" onclick="document.getElementById('fileInput').click();">Load Map</button>
+          <button class="clear-btn" onclick="mapGrid.clearAllLayers();">Clear All</button>
+        </div>
+        <input type="file" id="fileInput" accept=".json" onchange="handleFileSelect(event)">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Legend of the Five Rings - 10th Century</p>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../scripts/world-map-grid.js"></script>
+  <script>
+    $(function() {
+      $("nav").load("/l5r10/navbar.html");
+    });
+
+    // Initialize road selector buttons
+    function initializeRoadSelector() {
+      if (!mapGrid) return;
+      
+      const selector = document.getElementById('roadSelector');
+      selector.innerHTML = '';
+      
+      mapGrid.roadPatterns.forEach((pattern, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'tool-button';
+        btn.textContent = pattern.name;
+        btn.onclick = () => {
+          mapGrid.selectTool('road', index, 'infrastructure');
+          updateActiveButton(btn);
+          mapGrid.currentLayer = 'infrastructure';
+        };
+        selector.appendChild(btn);
+      });
+    }
+
+    function updateActiveButton(btn) {
+      document.querySelectorAll('.tool-button.active').forEach(b => {
+        if (b !== btn) b.classList.remove('active');
+      });
+      btn.classList.add('active');
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        mapGrid.importFromFile(file);
+      }
+    }
+
+    // Initialize when map grid is ready
+    const initTimer = setInterval(() => {
+      if (typeof mapGrid !== 'undefined' && mapGrid !== null) {
+        initializeRoadSelector();
+        clearInterval(initTimer);
+      }
+    }, 100);
+  </script>
+</body>
+</html>
