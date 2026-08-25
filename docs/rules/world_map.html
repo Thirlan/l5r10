@@ -15,10 +15,18 @@
 
   <main>
     <h1>Interactive World Map</h1>
-    
+
+    <div class="zoom-controls">
+      <button type="button" onclick="mapGrid.zoomOut()">− Zoom Out</button>
+      <span id="zoomLevel">100%</span>
+      <button type="button" onclick="mapGrid.zoomIn()">+ Zoom In</button>
+      <button type="button" onclick="mapGrid.resetZoom()">100%</button>
+      <button type="button" onclick="mapGrid.fitToWidth()">Fit Width</button>
+      <span class="hint">Ctrl + mouse wheel to zoom · right-click a cell to erase it on the active layer</span>
+    </div>
+
     <div class="map-grid-container">
-      <img id="worldMap" src="../map/rokugan_900_small.png" alt="Rokugan Map" />
-      <canvas id="mapCanvas"></canvas>
+      <canvas id="mapCanvas" data-map-src="../img/map/rokugan_900_small.png"></canvas>
     </div>
 
     <div class="map-controls">

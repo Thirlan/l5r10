@@ -1,26 +1,26 @@
+const GRID_SIZE = 32;
+
 class WorldMapGrid {
-  constructor(mapImageSelector, canvasSelector) {
-    this.mapImage = document.querySelector(mapImageSelector);
+  constructor(imageSrc, canvasSelector) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext('2d');
-    this.gridSize = 64;
-    
-    // Layer data structure: { terrain: {}, clans: {}, infrastructure: {}, text: {} }
+    this.gridSize = GRID_SIZE;
+    this.zoom = 0.35;
+    this.minZoom = 0.1;
+    this.maxZoom = 4;
+
     this.layers = {
       terrain: {},
       clans: {},
       infrastructure: {},
       text: {}
     };
-    
-    // Current tool and layer
-    this.currentTool = null;
+
     this.currentLayer = 'terrain';
     this.currentValue = null;
     this.fontSize = 16;
     this.isDrawing = false;
-    
-    // Color definitions
+
     this.terrainColors = {
       Mountain: '#8B7355',
       Ocean: '#4169E1',
@@ -35,7 +35,7 @@ class WorldMapGrid {
       Snow: '#F0F8FF',
       City: '#FF6347'
     };
-    
+
     this.clanColors = {
       Crane: '#87CEEB',
       Lion: '#8B4513',
@@ -49,239 +49,245 @@ class WorldMapGrid {
       Mantis: '#006400',
       'Minor Clan': '#808080'
     };
-    
+
+    // Endpoints are offsets from the cell centre, in map pixels.
+    const h = GRID_SIZE / 2;
     this.roadPatterns = [
-      { name: '0° (Horizontal)', angle: 0, length: 64 },
-      { name: '45°', angle: 45, length: 64 },
-      { name: '90° (Vertical)', angle: 90, length: 64 },
-      { name: '135°', angle: 135, length: 64 },
-      { name: '0° (Top to Center)', angle: 0, length: 32, startY: -16 },
-      { name: '45° (Top-Right)', angle: 45, length: 32, startX: 16, startY: -16 },
-      { name: '90° (Right to Center)', angle: 90, length: 32, startX: 16 },
-      { name: '135° (Bottom-Right)', angle: 135, length: 32, startX: 16, startY: 16 },
-      { name: '180° (Bottom to Center)', angle: 180, length: 32, startY: 16 },
-      { name: '225° (Bottom-Left)', angle: 225, length: 32, startX: -16, startY: 16 },
-      { name: '270° (Left to Center)', angle: 270, length: 32, startX: -16 },
-      { name: '315° (Top-Left)', angle: 315, length: 32, startX: -16, startY: -16 }
+      { name: '32px 0\u00b0 through centre', from: [-h, 0], to: [h, 0] },
+      { name: '32px 45\u00b0 through centre', from: [-h, h], to: [h, -h] },
+      { name: '32px 90\u00b0 through centre', from: [0, -h], to: [0, h] },
+      { name: '32px 135\u00b0 through centre', from: [-h, -h], to: [h, h] },
+      { name: '16px top centre to centre', from: [0, -h], to: [0, 0] },
+      { name: '16px top-right corner to centre', from: [h, -h], to: [0, 0] },
+      { name: '16px right centre to centre', from: [h, 0], to: [0, 0] },
+      { name: '16px bottom-right corner to centre', from: [h, h], to: [0, 0] },
+      { name: '16px bottom centre to centre', from: [0, h], to: [0, 0] },
+      { name: '16px bottom-left corner to centre', from: [-h, h], to: [0, 0] },
+      { name: '16px left centre to centre', from: [-h, 0], to: [0, 0] },
+      { name: '16px top-left corner to centre', from: [-h, -h], to: [0, 0] }
     ];
-    
-    this.setupCanvas();
-    this.setupEventListeners();
-    this.draw();
-  }
-  
-  setupCanvas() {
+
+    this.mapImage = new Image();
     this.mapImage.onload = () => {
-      this.canvas.width = this.mapImage.width;
-      this.canvas.height = this.mapImage.height;
-      this.draw();
+      this.mapWidth = this.mapImage.naturalWidth;
+      this.mapHeight = this.mapImage.naturalHeight;
+      this.applyZoom();
     };
-    
-    if (this.mapImage.complete) {
-      this.canvas.width = this.mapImage.width;
-      this.canvas.height = this.mapImage.height;
-    }
+    this.mapImage.src = imageSrc;
+
+    this.setupEventListeners();
   }
-  
+
   setupEventListeners() {
-    this.canvas.addEventListener('mousedown', (e) => this.onCanvasMouseDown(e));
-    this.canvas.addEventListener('mousemove', (e) => this.onCanvasMouseMove(e));
+    this.canvas.addEventListener('mousedown', (e) => {
+      this.isDrawing = true;
+      this.paintAt(e);
+    });
+    this.canvas.addEventListener('mousemove', (e) => {
+      if (this.isDrawing) this.paintAt(e);
+    });
     this.canvas.addEventListener('mouseup', () => this.isDrawing = false);
     this.canvas.addEventListener('mouseleave', () => this.isDrawing = false);
+    this.canvas.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      const cell = this.getGridCell(e);
+      this.clearCell(cell.x, cell.y);
+    });
+    this.canvas.addEventListener('wheel', (e) => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
+    }, { passive: false });
   }
-  
-  getGridCell(x, y) {
+
+  getGridCell(event) {
     const rect = this.canvas.getBoundingClientRect();
-    const canvasX = (x - rect.left) * (this.canvas.width / rect.width);
-    const canvasY = (y - rect.top) * (this.canvas.height / rect.height);
-    
-    const cellX = Math.floor(canvasX / this.gridSize);
-    const cellY = Math.floor(canvasY / this.gridSize);
-    
-    return { x: cellX, y: cellY, canvasX, canvasY };
+    const mapX = (event.clientX - rect.left) / this.zoom;
+    const mapY = (event.clientY - rect.top) / this.zoom;
+    return { x: Math.floor(mapX / this.gridSize), y: Math.floor(mapY / this.gridSize) };
   }
-  
+
   getCellKey(x, y) {
     return `${x},${y}`;
   }
-  
-  onCanvasMouseDown(e) {
-    this.isDrawing = true;
-    if (this.currentTool) {
-      const { x, y } = this.getGridCell(e.clientX, e.clientY);
-      this.paintCell(x, y);
-    }
-  }
-  
-  onCanvasMouseMove(e) {
-    if (this.isDrawing && this.currentTool) {
-      const { x, y } = this.getGridCell(e.clientX, e.clientY);
-      this.paintCell(x, y);
-    }
-  }
-  
-  paintCell(x, y) {
-    const key = this.getCellKey(x, y);
-    
+
+  paintAt(event) {
+    if (!this.currentLayer) return;
+    const { x, y } = this.getGridCell(event);
+    if (x < 0 || y < 0) return;
+
     if (this.currentLayer === 'text') {
-      // Text is handled differently
-      this.showTextInput(x, y);
+      this.isDrawing = false;
+      const text = prompt('Enter text:');
+      if (text) {
+        this.layers.text[this.getCellKey(x, y)] = { text, fontSize: Number(this.fontSize) };
+        this.draw();
+      }
       return;
     }
-    
-    if (this.currentLayer === 'terrain') {
-      this.layers.terrain[key] = this.currentValue;
-    } else if (this.currentLayer === 'clans') {
-      this.layers.clans[key] = this.currentValue;
-    } else if (this.currentLayer === 'infrastructure') {
-      this.layers.infrastructure[key] = this.currentValue;
-    }
-    
+
+    if (this.currentValue === null) return;
+    this.layers[this.currentLayer][this.getCellKey(x, y)] = this.currentValue;
     this.draw();
   }
-  
-  showTextInput(x, y) {
-    const text = prompt('Enter text:');
-    if (text) {
-      const key = this.getCellKey(x, y);
-      this.layers.text[key] = {
-        text: text,
-        fontSize: this.fontSize
-      };
-      this.isDrawing = false;
-      this.draw();
-    }
-  }
-  
-  selectTool(tool, value, layer) {
-    this.currentTool = tool;
+
+  selectTool(_tool, value, layer) {
     this.currentValue = value;
     this.currentLayer = layer;
   }
-  
+
   setFontSize(size) {
-    this.fontSize = size;
+    this.fontSize = Number(size);
   }
-  
+
+  setZoom(zoom) {
+    this.zoom = Math.min(this.maxZoom, Math.max(this.minZoom, zoom));
+    this.applyZoom();
+  }
+
+  zoomIn() {
+    this.setZoom(this.zoom * 1.25);
+  }
+
+  zoomOut() {
+    this.setZoom(this.zoom / 1.25);
+  }
+
+  resetZoom() {
+    this.setZoom(1);
+  }
+
+  fitToWidth() {
+    const available = this.canvas.parentElement.clientWidth;
+    if (available && this.mapWidth) this.setZoom(available / this.mapWidth);
+  }
+
+  applyZoom() {
+    if (!this.mapWidth) return;
+    this.canvas.width = Math.round(this.mapWidth * this.zoom);
+    this.canvas.height = Math.round(this.mapHeight * this.zoom);
+    this.draw();
+    const label = document.getElementById('zoomLevel');
+    if (label) label.textContent = `${Math.round(this.zoom * 100)}%`;
+  }
+
   clearCell(x, y) {
-    const key = this.getCellKey(x, y);
-    if (this.currentLayer === 'terrain') {
-      delete this.layers.terrain[key];
-    } else if (this.currentLayer === 'clans') {
-      delete this.layers.clans[key];
-    } else if (this.currentLayer === 'infrastructure') {
-      delete this.layers.infrastructure[key];
-    } else if (this.currentLayer === 'text') {
-      delete this.layers.text[key];
-    }
+    delete this.layers[this.currentLayer][this.getCellKey(x, y)];
     this.draw();
   }
-  
+
   draw() {
-    // Clear canvas
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
-    // Draw terrain layer
+    if (!this.mapWidth) return;
+    const ctx = this.ctx;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.scale(this.zoom, this.zoom);
+
+    ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
+
     Object.entries(this.layers.terrain).forEach(([key, terrain]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawCellBorder(x, y, this.terrainColors[terrain], 2);
+      this.fillCell(x, y, this.terrainColors[terrain]);
     });
-    
-    // Draw clan layer
+
     Object.entries(this.layers.clans).forEach(([key, clan]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawCellBorder(x, y, this.clanColors[clan], 3);
+      this.drawCellBorder(x, y, this.clanColors[clan]);
     });
-    
-    // Draw infrastructure layer
-    Object.entries(this.layers.infrastructure).forEach(([key, roadPattern]) => {
+
+    Object.entries(this.layers.infrastructure).forEach(([key, patternIndex]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawRoad(x, y, roadPattern);
+      this.drawRoad(x, y, patternIndex);
     });
-    
-    // Draw text layer (on top of everything)
+
+    this.drawGrid();
+
     Object.entries(this.layers.text).forEach(([key, data]) => {
       const [x, y] = key.split(',').map(Number);
       this.drawText(x, y, data.text, data.fontSize);
     });
-    
-    // Draw grid lines
-    this.drawGrid();
   }
-  
+
   drawGrid() {
-    this.ctx.strokeStyle = '#CCCCCC';
-    this.ctx.lineWidth = 0.5;
-    
-    for (let x = 0; x <= this.canvas.width; x += this.gridSize) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(x, 0);
-      this.ctx.lineTo(x, this.canvas.height);
-      this.ctx.stroke();
+    const ctx = this.ctx;
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
+    ctx.lineWidth = 1 / this.zoom;
+
+    for (let x = 0; x <= this.mapWidth; x += this.gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, this.mapHeight);
+      ctx.stroke();
     }
-    
-    for (let y = 0; y <= this.canvas.height; y += this.gridSize) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, y);
-      this.ctx.lineTo(this.canvas.width, y);
-      this.ctx.stroke();
+    for (let y = 0; y <= this.mapHeight; y += this.gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(this.mapWidth, y);
+      ctx.stroke();
     }
   }
-  
-  drawCellBorder(x, y, color, lineWidth) {
-    const px = x * this.gridSize;
-    const py = y * this.gridSize;
-    
+
+  fillCell(x, y, color) {
+    if (!color) return;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+  }
+
+  drawCellBorder(x, y, color) {
+    if (!color) return;
+    const inset = 1;
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = lineWidth;
-    this.ctx.strokeRect(px, py, this.gridSize, this.gridSize);
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeRect(
+      x * this.gridSize + inset,
+      y * this.gridSize + inset,
+      this.gridSize - inset * 2,
+      this.gridSize - inset * 2
+    );
   }
-  
+
   drawRoad(x, y, patternIndex) {
     const pattern = this.roadPatterns[patternIndex];
-    const centerX = (x * this.gridSize) + (this.gridSize / 2);
-    const centerY = (y * this.gridSize) + (this.gridSize / 2);
-    
-    const startX = pattern.startX || 0;
-    const startY = pattern.startY || 0;
-    
-    const angle = (pattern.angle * Math.PI) / 180;
-    const length = pattern.length;
-    
-    const endX = startX + length * Math.cos(angle);
-    const endY = startY + length * Math.sin(angle);
-    
-    this.ctx.strokeStyle = '#8B4513';
-    this.ctx.lineWidth = 4;
+    if (!pattern) return;
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
+
+    this.ctx.strokeStyle = '#5C3A1E';
+    this.ctx.lineWidth = 3;
+    this.ctx.lineCap = 'round';
     this.ctx.beginPath();
-    this.ctx.moveTo(centerX + startX, centerY + startY);
-    this.ctx.lineTo(centerX + endX, centerY + endY);
+    this.ctx.moveTo(cx + pattern.from[0], cy + pattern.from[1]);
+    this.ctx.lineTo(cx + pattern.to[0], cy + pattern.to[1]);
     this.ctx.stroke();
   }
-  
+
   drawText(x, y, text, fontSize) {
-    const px = (x * this.gridSize) + (this.gridSize / 2);
-    const py = (y * this.gridSize) + (this.gridSize / 2);
-    
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
+
     this.ctx.font = `bold ${fontSize}px Arial`;
-    this.ctx.fillStyle = '#000000';
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'middle';
-    
-    // Draw text with white outline for better readability
     this.ctx.strokeStyle = '#FFFFFF';
-    this.ctx.lineWidth = 3;
-    this.ctx.strokeText(text, px, py);
-    this.ctx.fillText(text, px, py);
+    this.ctx.lineWidth = Math.max(2, fontSize / 6);
+    this.ctx.strokeText(text, cx, cy);
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fillText(text, cx, cy);
   }
-  
+
   saveToJSON() {
     return JSON.stringify(this.layers, null, 2);
   }
-  
+
   loadFromJSON(jsonString) {
     try {
-      this.layers = JSON.parse(jsonString);
+      const parsed = JSON.parse(jsonString);
+      this.layers = {
+        terrain: parsed.terrain || {},
+        clans: parsed.clans || {},
+        infrastructure: parsed.infrastructure || {},
+        text: parsed.text || {}
+      };
       this.draw();
       return true;
     } catch (e) {
@@ -289,10 +295,9 @@ class WorldMapGrid {
       return false;
     }
   }
-  
+
   exportToFile() {
-    const json = this.saveToJSON();
-    const blob = new Blob([json], { type: 'application/json' });
+    const blob = new Blob([this.saveToJSON()], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -300,39 +305,29 @@ class WorldMapGrid {
     a.click();
     URL.revokeObjectURL(url);
   }
-  
+
   importFromFile(file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      if (this.loadFromJSON(e.target.result)) {
-        alert('Map loaded successfully!');
-      } else {
+      if (!this.loadFromJSON(e.target.result)) {
         alert('Failed to load map. Please check the file format.');
       }
     };
     reader.readAsText(file);
   }
-  
+
   clearAllLayers() {
     if (confirm('Are you sure you want to clear all layers?')) {
-      this.layers = {
-        terrain: {},
-        clans: {},
-        infrastructure: {},
-        text: {}
-      };
+      this.layers = { terrain: {}, clans: {}, infrastructure: {}, text: {} };
       this.draw();
     }
   }
 }
 
-// Initialize on page load
 let mapGrid;
 document.addEventListener('DOMContentLoaded', () => {
-  const mapImage = document.querySelector('#worldMap');
   const canvas = document.querySelector('#mapCanvas');
-  
-  if (mapImage && canvas) {
-    mapGrid = new WorldMapGrid('#worldMap', '#mapCanvas');
+  if (canvas) {
+    mapGrid = new WorldMapGrid(canvas.dataset.mapSrc, '#mapCanvas');
   }
 });
