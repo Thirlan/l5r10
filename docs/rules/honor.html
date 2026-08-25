@@ -116,6 +116,78 @@
     <p>Example: a Courtier sincerely promised another clan to honor the peace treaty (Sincerity - major), but a few months later their superior asks them to violate one of the clauses (Duty - major). This could pit Duty and Sincerity of equal level, so they would cancel out. The Samurai must then make their own decision of which to follow.</p>
     <p>Example: A Samurai uses the low skill of Temptation with seduction (Courtesy - minor) to have their target steal the horse in front of them (crime - major). In this case they will only lose the honor from being an accomplice to a major crime.</p>
 
+    <h3>Honor Gain</h3>
+    <p>The look up table below provides the gains for the 3 bands of honor:</p>
+    <ul>
+      <li>Low for ranks 0 to 3</li>
+      <li>Medium for ranks 4 to 7</li>
+      <li>High for ranks 8 to 10</li>
+    </ul>
+    <p>Honor gains are harder to achieve than honor losses. Major acts are ~2 times more honorable than minor ones and Greater acts are exactly 2 times more honorable than major ones.</p>
+    <p>There are special cases of honor, covered by Special, where the act may confer both honor loss and gains depending on your honor rank. The best example of this is Courtesy where you are expected to ignore dishonorable behavior from others, but for a truly honorable person (High ranks 8 to 10), such acts will be insufferable.</p>
+    <table>
+      <tr>
+        <th>Level</th>
+        <th>0-3</th>
+        <th>4-7</th>
+        <th>8-10</th>
+      </tr>
+      <tr>
+        <td>Minor</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>Major</td>
+        <td>4</td>
+        <td>2</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Greater</td>
+        <td>8</td>
+        <td>4</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Special</td>
+        <td>2</td>
+        <td>0</td>
+        <td>-1</td>
+      </tr>
+    </table>
+
+    <h3>Honor loss</h3>
+    <p>Major acts are considered twice as dishonorable as minor ones and blasphemous acts are considered four times as dishonorable as minor ones.</p>
+    <p>The table below indicates the honor you would lose based on the level and your current honor rank.</p>
+    <table>
+      <tr>
+        <th>Level</th>
+        <th>0-3</th>
+        <th>4-7</th>
+        <th>8-10</th>
+      </tr>
+      <tr>
+        <td>Minor</td>
+        <td>-1</td>
+        <td>-2</td>
+        <td>-3</td>
+      </tr>
+      <tr>
+        <td>Major</td>
+        <td>-2</td>
+        <td>-4</td>
+        <td>-6</td>
+      </tr>
+      <tr>
+        <td>Greater</td>
+        <td>-4</td>
+        <td>-8</td>
+        <td>-12</td>
+      </tr>
+    </table>
+
     <h2>Examples of Honorable and Dishonorable actions</h2>
     <p>For more examples go <a href="honor_examples.html">[here]</a></p>
 
@@ -241,82 +313,6 @@
       <tr><td>Minor</td><td>Going through the motions of duty while deliberately withholding genuine effort (e.g. using the lowest dice when healing an obnoxious official). </td></tr>
       <tr><td>Major</td><td>Manipulating another into dishonorable behavior</td></tr>
       <tr><td>Blasphemous</td><td>Using false commitments to cause the deaths, ruin, or disgrace of others.</td></tr>
-    </table>
-
-    <h3>Honor Gain</h3>
-    <p>Honor gains are harder to achieve than honor losses. Major acts are ~2 times more honorable than minor ones and exceptional acts are exactly 2 times more honorable than major ones.</p>
-    <p>The table below indicates the honor you would gain based on the level and your current honor rank.</p>
-    <p>There are special cases of honor, covered by Special, where the act may confer both honor loss and gains depending on your honor rank. The best example of this is Courtesy where you are expected to ignore dishonorable behavior from others, but for a truly honorable person, such acts will be insufferable.</p>
-    <table>
-      <tr>
-        <th>Level</th>
-        <th>0-3</th>
-        <th>4-6</th>
-        <th>7-8</th>
-        <th>9-10</th>
-      </tr>
-      <tr>
-        <td>Minor</td>
-        <td>3</td>
-        <td>2</td>
-        <td>1</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>Major</td>
-        <td>6</td>
-        <td>4</td>
-        <td>2</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>Greater</td>
-        <td>12</td>
-        <td>8</td>
-        <td>4</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>Special</td>
-        <td>2</td>
-        <td>1</td>
-        <td>0</td>
-        <td>-1</td>
-      </tr>
-    </table>
-
-    <h3>Honor loss</h3>
-    <p>Major acts are considered twice as dishonorable as minor ones and blasphemous acts are considered four times as dishonorable as minor ones.</p>
-    <p>The table below indicates the honor you would lose based on the level and your current honor rank.</p>
-    <table>
-      <tr>
-        <th>Level</th>
-        <th>0-3</th>
-        <th>4-6</th>
-        <th>7-8</th>
-        <th>9-10</th>
-      </tr>
-      <tr>
-        <td>Minor</td>
-        <td>-1</td>
-        <td>-2</td>
-        <td>-3</td>
-        <td>-4</td>
-      </tr>
-      <tr>
-        <td>Major</td>
-        <td>-2</td>
-        <td>-4</td>
-        <td>-6</td>
-        <td>-8</td>
-      </tr>
-      <tr>
-        <td>Greater</td>
-        <td>-4</td>
-        <td>-8</td>
-        <td>-12</td>
-        <td>-16</td>
-      </tr>
     </table>
     
   </main>
