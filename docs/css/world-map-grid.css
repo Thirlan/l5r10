@@ -123,7 +123,8 @@
 }
 
 .control-section input[type="range"],
-.control-section input[type="number"] {
+.control-section input[type="number"],
+.control-section select {
   width: 100%;
   padding: 5px;
   box-sizing: border-box;

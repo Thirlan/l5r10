@@ -120,6 +120,21 @@
         <button class="tool-button" onclick="mapGrid.selectTool('erase', null, 'erase'); updateActiveButton(this);">
           Erase Tile (all layers)
         </button>
+
+        <h3 style="margin-top: 20px;">Brush Size</h3>
+        <div class="control-section">
+          <label for="brushSize">Tiles painted per click:</label>
+          <select id="brushSize" onchange="mapGrid.setBrushSize(this.value)">
+            <option value="1">1 x 1</option>
+            <option value="2">2 x 2</option>
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+            <option value="6">6 x 6</option>
+            <option value="7">7 x 7</option>
+            <option value="8">8 x 8</option>
+          </select>
+        </div>
       </div>
 
       <!-- Text Layer & File Operations -->

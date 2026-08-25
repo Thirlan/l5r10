@@ -19,6 +19,7 @@ class WorldMapGrid {
     this.currentLayer = 'terrain';
     this.currentValue = null;
     this.fontSize = 16;
+    this.brushSize = 1;
     this.isDrawing = false;
 
     this.terrainColors = {
@@ -99,11 +100,6 @@ class WorldMapGrid {
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
 
-    if (this.currentLayer === 'erase') {
-      this.eraseCell(x, y);
-      return;
-    }
-
     if (this.currentLayer === 'text') {
       this.isDrawing = false;
       const text = prompt('Enter text:');
@@ -114,9 +110,35 @@ class WorldMapGrid {
       return;
     }
 
-    if (this.currentValue === null) return;
-    this.layers[this.currentLayer][this.getCellKey(x, y)] = this.currentValue;
+    if (this.currentLayer !== 'erase' && this.currentValue === null) return;
+
+    this.brushCells(x, y).forEach(([cx, cy]) => {
+      if (this.currentLayer === 'erase') {
+        const key = this.getCellKey(cx, cy);
+        Object.values(this.layers).forEach((layer) => delete layer[key]);
+      } else {
+        this.layers[this.currentLayer][this.getCellKey(cx, cy)] = this.currentValue;
+      }
+    });
     this.draw();
+  }
+
+  // Odd brush sizes centre on the cursor; even ones extend right and down.
+  brushCells(x, y) {
+    const offset = Math.floor((this.brushSize - 1) / 2);
+    const cells = [];
+    for (let dy = 0; dy < this.brushSize; dy++) {
+      for (let dx = 0; dx < this.brushSize; dx++) {
+        const cx = x - offset + dx;
+        const cy = y - offset + dy;
+        if (cx >= 0 && cy >= 0) cells.push([cx, cy]);
+      }
+    }
+    return cells;
+  }
+
+  setBrushSize(size) {
+    this.brushSize = Math.min(8, Math.max(1, Number(size) || 1));
   }
 
   selectTool(_tool, value, layer) {
@@ -161,12 +183,6 @@ class WorldMapGrid {
 
   clearCell(x, y) {
     delete this.layers[this.currentLayer][this.getCellKey(x, y)];
-    this.draw();
-  }
-
-  eraseCell(x, y) {
-    const key = this.getCellKey(x, y);
-    Object.values(this.layers).forEach((layer) => delete layer[key]);
     this.draw();
   }
 
