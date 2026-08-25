@@ -113,11 +113,13 @@ class WorldMapGrid {
     if (this.currentLayer !== 'erase' && this.currentValue === null) return;
 
     this.brushCells(x, y).forEach(([cx, cy]) => {
+      const key = this.getCellKey(cx, cy);
       if (this.currentLayer === 'erase') {
-        const key = this.getCellKey(cx, cy);
-        Object.values(this.layers).forEach((layer) => delete layer[key]);
+        // currentValue names a single layer to erase, or null to erase them all.
+        const targets = this.currentValue ? [this.layers[this.currentValue]] : Object.values(this.layers);
+        targets.forEach((layer) => delete layer[key]);
       } else {
-        this.layers[this.currentLayer][this.getCellKey(cx, cy)] = this.currentValue;
+        this.layers[this.currentLayer][key] = this.currentValue;
       }
     });
     this.draw();
@@ -239,8 +241,11 @@ class WorldMapGrid {
 
   fillCell(x, y, color) {
     if (!color) return;
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.8;
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+    this.ctx.restore();
   }
 
   drawCellBorder(x, y, color) {

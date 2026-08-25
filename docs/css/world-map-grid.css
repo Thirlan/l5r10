@@ -101,6 +101,23 @@
   content: '✓ ';
 }
 
+.tool-button.erase-button {
+  margin-top: 10px;
+  background-color: #fdecea;
+  border-color: #d9534f;
+  color: #a02a26;
+  font-weight: bold;
+}
+
+.tool-button.erase-button:hover {
+  background-color: #f9d6d2;
+}
+
+.tool-button.erase-button.active {
+  background-color: #d9534f;
+  color: #ffffff;
+}
+
 .terrain-color {
   display: inline-block;
   width: 12px;

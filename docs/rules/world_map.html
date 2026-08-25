@@ -69,6 +69,9 @@
         <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'City', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
           <span class="terrain-color" style="background-color: #FF6347;"></span>City
         </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'terrain', 'erase'); updateActiveButton(this);">
+          Erase Terrain
+        </button>
       </div>
 
       <!-- Clan Layer -->
@@ -107,6 +110,9 @@
         <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Minor Clan', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
           <span class="terrain-color" style="background-color: #808080;"></span>Minor Clan
         </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'clans', 'erase'); updateActiveButton(this);">
+          Erase Clan
+        </button>
       </div>
 
       <!-- Infrastructure Layer -->
@@ -115,9 +121,12 @@
         <button class="tool-button" onclick="mapGrid.selectTool('road', 'Road', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #f1b17d;"></span>Road
         </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'infrastructure', 'erase'); updateActiveButton(this);">
+          Erase Road
+        </button>
 
         <h3 style="margin-top: 20px;">Erase</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('erase', null, 'erase'); updateActiveButton(this);">
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', null, 'erase'); updateActiveButton(this);">
           Erase Tile (all layers)
         </button>
 
@@ -146,6 +155,9 @@
         </div>
         <button class="tool-button" onclick="mapGrid.selectTool('text', null, 'text'); updateActiveButton(this); mapGrid.currentLayer='text';">
           Add Text
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'text', 'erase'); updateActiveButton(this);">
+          Erase Text
         </button>
 
         <h3 style="margin-top: 20px;">File Operations</h3>
