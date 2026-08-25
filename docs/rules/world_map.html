@@ -112,12 +112,14 @@
       <!-- Infrastructure Layer -->
       <div class="control-panel">
         <h3>Infrastructure Layer</h3>
-        <div class="control-section">
-          <label>Road Directions:</label>
-          <div class="road-selector" id="roadSelector">
-            <!-- Populated by JavaScript -->
-          </div>
-        </div>
+        <button class="tool-button" onclick="mapGrid.selectTool('road', 'Road', 'infrastructure'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #f1b17d;"></span>Road
+        </button>
+
+        <h3 style="margin-top: 20px;">Erase</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('erase', null, 'erase'); updateActiveButton(this);">
+          Erase Tile (all layers)
+        </button>
       </div>
 
       <!-- Text Layer & File Operations -->
@@ -153,26 +155,6 @@
       $("nav").load("/l5r10/navbar.html");
     });
 
-    // Initialize road selector buttons
-    function initializeRoadSelector() {
-      if (!mapGrid) return;
-      
-      const selector = document.getElementById('roadSelector');
-      selector.innerHTML = '';
-      
-      mapGrid.roadPatterns.forEach((pattern, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'tool-button';
-        btn.textContent = pattern.name;
-        btn.onclick = () => {
-          mapGrid.selectTool('road', index, 'infrastructure');
-          updateActiveButton(btn);
-          mapGrid.currentLayer = 'infrastructure';
-        };
-        selector.appendChild(btn);
-      });
-    }
-
     function updateActiveButton(btn) {
       document.querySelectorAll('.tool-button.active').forEach(b => {
         if (b !== btn) b.classList.remove('active');
@@ -186,14 +168,6 @@
         mapGrid.importFromFile(file);
       }
     }
-
-    // Initialize when map grid is ready
-    const initTimer = setInterval(() => {
-      if (typeof mapGrid !== 'undefined' && mapGrid !== null) {
-        initializeRoadSelector();
-        clearInterval(initTimer);
-      }
-    }, 100);
   </script>
 </body>
 </html>

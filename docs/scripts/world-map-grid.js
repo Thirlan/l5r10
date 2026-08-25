@@ -50,23 +50,6 @@ class WorldMapGrid {
       'Minor Clan': '#808080'
     };
 
-    // Endpoints are offsets from the cell centre, in map pixels.
-    const h = GRID_SIZE / 2;
-    this.roadPatterns = [
-      { name: '32px 0\u00b0 through centre', from: [-h, 0], to: [h, 0] },
-      { name: '32px 45\u00b0 through centre', from: [-h, h], to: [h, -h] },
-      { name: '32px 90\u00b0 through centre', from: [0, -h], to: [0, h] },
-      { name: '32px 135\u00b0 through centre', from: [-h, -h], to: [h, h] },
-      { name: '16px top centre to centre', from: [0, -h], to: [0, 0] },
-      { name: '16px top-right corner to centre', from: [h, -h], to: [0, 0] },
-      { name: '16px right centre to centre', from: [h, 0], to: [0, 0] },
-      { name: '16px bottom-right corner to centre', from: [h, h], to: [0, 0] },
-      { name: '16px bottom centre to centre', from: [0, h], to: [0, 0] },
-      { name: '16px bottom-left corner to centre', from: [-h, h], to: [0, 0] },
-      { name: '16px left centre to centre', from: [-h, 0], to: [0, 0] },
-      { name: '16px top-left corner to centre', from: [-h, -h], to: [0, 0] }
-    ];
-
     this.mapImage = new Image();
     this.mapImage.onload = () => {
       this.mapWidth = this.mapImage.naturalWidth;
@@ -115,6 +98,11 @@ class WorldMapGrid {
     if (!this.currentLayer) return;
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
+
+    if (this.currentLayer === 'erase') {
+      this.eraseCell(x, y);
+      return;
+    }
 
     if (this.currentLayer === 'text') {
       this.isDrawing = false;
@@ -176,6 +164,12 @@ class WorldMapGrid {
     this.draw();
   }
 
+  eraseCell(x, y) {
+    const key = this.getCellKey(x, y);
+    Object.values(this.layers).forEach((layer) => delete layer[key]);
+    this.draw();
+  }
+
   draw() {
     if (!this.mapWidth) return;
     const ctx = this.ctx;
@@ -195,9 +189,9 @@ class WorldMapGrid {
       this.drawCellBorder(x, y, this.clanColors[clan]);
     });
 
-    Object.entries(this.layers.infrastructure).forEach(([key, patternIndex]) => {
+    Object.entries(this.layers.infrastructure).forEach(([key]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawRoad(x, y, patternIndex);
+      this.drawRoad(x, y);
     });
 
     this.drawGrid();
@@ -246,19 +240,34 @@ class WorldMapGrid {
     );
   }
 
-  drawRoad(x, y, patternIndex) {
-    const pattern = this.roadPatterns[patternIndex];
-    if (!pattern) return;
+  drawRoad(x, y) {
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
 
     this.ctx.strokeStyle = '#5C3A1E';
+    this.ctx.fillStyle = '#5C3A1E';
     this.ctx.lineWidth = 3;
     this.ctx.lineCap = 'round';
-    this.ctx.beginPath();
-    this.ctx.moveTo(cx + pattern.from[0], cy + pattern.from[1]);
-    this.ctx.lineTo(cx + pattern.to[0], cy + pattern.to[1]);
-    this.ctx.stroke();
+
+    // Only forward neighbours, so each connection is drawn once.
+    const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
+    forward.forEach(([dx, dy]) => {
+      if (!(this.getCellKey(x + dx, y + dy) in this.layers.infrastructure)) return;
+      this.ctx.beginPath();
+      this.ctx.moveTo(cx, cy);
+      this.ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
+      this.ctx.stroke();
+    });
+
+    const isolated = forward
+      .flatMap(([dx, dy]) => [[dx, dy], [-dx, -dy]])
+      .every(([dx, dy]) => !(this.getCellKey(x + dx, y + dy) in this.layers.infrastructure));
+
+    if (isolated) {
+      this.ctx.beginPath();
+      this.ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
   }
 
   drawText(x, y, text, fontSize) {
