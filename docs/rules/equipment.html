@@ -30,6 +30,36 @@
     <p>Example: Doji Haru's Doji Courtier school provides him with 10 starting Koku. He is still a common Samurai with status 1 and as such receives: 1 koku, 3 bu, 3 Zeni</p>
     <p>To receive this stipend, a Samurai must present themselves to their designated clan official in a given village, town or city. It is possible for a given location to have no such individual, requiring the samurai to travel to the nearest location where one is available.</p>
 
+    <h3>Monthly stipends Calculator</h3>
+    <div style="border: 1px solid #ccc; padding: 20px; margin: 20px 0; border-radius: 5px; background-color: #f9f9f9;">
+      <form onsubmit="calculateStipend(event)">
+        <fieldset>
+          <legend>School Income</legend>
+          <div style="margin-bottom: 10px;">
+            <label>Koku: <input type="number" id="incomeKoku" value="0" min="0" step="1" style="width: 60px;"></label>
+            <label style="margin-left: 15px;">Bu: <input type="number" id="incomeBu" value="0" min="0" max="4" step="1" style="width: 60px;"></label>
+            <label style="margin-left: 15px;">Zeni: <input type="number" id="incomeZeni" value="0" min="0" max="9" step="1" style="width: 60px;"></label>
+          </div>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Status</legend>
+          <div style="margin-bottom: 15px;">
+            <label>Status: <input type="number" id="status" value="1" min="1" step="1" style="width: 60px;"></label>
+          </div>
+        </fieldset>
+        
+        <button type="submit" style="padding: 8px 16px; font-size: 1em; cursor: pointer;">Calculate Monthly Stipend</button>
+      </form>
+      
+      <div id="result" style="margin-top: 20px; display: none;">
+        <h4>Monthly Stipend:</h4>
+        <p style="font-size: 1.2em;"><strong><span id="resultKoku">0</span> Koku, <span id="resultBu">0</span> Bu, <span id="resultZeni">0</span> Zeni</strong></p>
+      </div>
+    </div>
+    
+    <script src="../scripts/stipend-calculator.js"></script>
+
     <h2>Armor</h2>
     <table>
         <tr>
