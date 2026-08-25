@@ -25,13 +25,12 @@ class WorldMapGrid {
     this.terrainColors = {
       Mountain: '#8B7355',
       Ocean: '#4169E1',
-      River: '#1E90FF',
+      Water: '#1E90FF',
       Forest: '#228B22',
       Plains: '#90EE90',
       Hills: '#DAA520',
       Deserts: '#F4A460',
       Marsh: '#556B2F',
-      Shadowlands: '#2F4F4F',
       'Deep Ocean': '#00008B',
       Snow: '#F0F8FF',
       City: '#FF6347'
