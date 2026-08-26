@@ -1,10 +1,10 @@
-const GRID_SIZE = 32;
+const DEFAULT_GRID_SIZE = 16;
 
 class WorldMapGrid {
-  constructor(imageSrc, canvasSelector) {
+  constructor(imageSrc, canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext('2d');
-    this.gridSize = GRID_SIZE;
+    this.gridSize = Number.isFinite(gridSize) && gridSize > 0 ? gridSize : DEFAULT_GRID_SIZE;
     this.zoom = 0.35;
     this.minZoom = 0.1;
     this.maxZoom = 4;
@@ -357,6 +357,7 @@ let mapGrid;
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.querySelector('#mapCanvas');
   if (canvas) {
-    mapGrid = new WorldMapGrid(canvas.dataset.mapSrc, '#mapCanvas');
+    const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
+    mapGrid = new WorldMapGrid(canvas.dataset.mapSrc, '#mapCanvas', gridSize);
   }
 });
