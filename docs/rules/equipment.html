@@ -33,6 +33,20 @@
     <h3>Monthly stipends Calculator</h3>
     <div style="border: 1px solid #ccc; padding: 20px; margin: 20px 0; border-radius: 5px; background-color: #f9f9f9;">
       <form onsubmit="calculateStipend(event)">
+                <fieldset>
+                    <legend>School</legend>
+                    <div style="margin-bottom: 10px;">
+                        <label for="clan">Clan:</label>
+                        <select id="clan" required>
+                            <option value="">Select a clan</option>
+                        </select>
+                        <label for="school" style="margin-left: 15px;">School:</label>
+                        <select id="school" required disabled>
+                            <option value="">Select a clan first</option>
+                        </select>
+                    </div>
+                </fieldset>
+
         <fieldset>
           <legend>School Income</legend>
           <div style="margin-bottom: 10px;">
