@@ -97,7 +97,7 @@
       <button type="button" onclick="mapViewer.zoomIn()">+ Zoom In</button>
       <button type="button" onclick="mapViewer.resetZoom()">100%</button>
       <button type="button" onclick="mapViewer.fitToWidth()">Fit Width</button>
-      <span class="hint">Ctrl + mouse wheel to zoom &middot; click to set start, click again to set destination</span>
+      <span class="hint">Ctrl + mouse wheel to zoom &middot; first click sets the start; each additional click adds a waypoint (last click is the destination)</span>
     </div>
 
     <div class="map-grid-container">
@@ -126,6 +126,7 @@
         <h3>Route</h3>
         <div class="button-row">
           <button type="button" onclick="mapViewer.computePath()">Reroll</button>
+          <button type="button" onclick="mapViewer.removeLastWaypoint()">Undo Waypoint</button>
           <button type="button" onclick="mapViewer.clearPath()">Clear Path</button>
         </div>
         <div id="pathSummary">Click a starting tile.</div>

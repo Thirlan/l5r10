@@ -29,7 +29,7 @@ class WorldMapViewer {
     };
 
     this.startCell = null;
-    this.endCell = null;
+    this.waypoints = [];
     this.pathResult = null;
 
     this.terrainColors = {
@@ -103,7 +103,7 @@ class WorldMapViewer {
 
   setStrategy(strategy) {
     this.strategy = strategy;
-    if (this.startCell && this.endCell) this.computePath();
+    if (this.startCell && this.waypoints.length) this.computePath();
   }
 
   setSkillConfig(skill, patch) {
@@ -116,27 +116,34 @@ class WorldMapViewer {
     if (cell.x < 0 || cell.y < 0) return;
     if (!this.startCell) {
       this.startCell = cell;
-      this.endCell = null;
+      this.waypoints = [];
       this.pathResult = null;
-    } else if (!this.endCell) {
-      this.endCell = cell;
-      this.computePath();
+      this.render();
+      this.updateResultDisplay();
       return;
-    } else {
-      this.startCell = cell;
-      this.endCell = null;
-      this.pathResult = null;
     }
-    this.render();
-    this.updateResultDisplay();
+    this.waypoints.push(cell);
+    this.computePath();
   }
 
   clearPath() {
     this.startCell = null;
-    this.endCell = null;
+    this.waypoints = [];
     this.pathResult = null;
     this.render();
     this.updateResultDisplay();
+  }
+
+  removeLastWaypoint() {
+    if (!this.waypoints.length) return;
+    this.waypoints.pop();
+    if (this.waypoints.length) {
+      this.computePath();
+    } else {
+      this.pathResult = null;
+      this.render();
+      this.updateResultDisplay();
+    }
   }
 
   getGridCell(event) {
@@ -346,9 +353,20 @@ class WorldMapViewer {
   }
 
   computePath() {
-    if (!this.startCell || !this.endCell) return;
-    const path = this.findPath(this.startCell, this.endCell);
-    this.pathResult = path ? this.simulate(path) : { path: [], totalMinutes: 0, totalZeni: 0, mishaps: new Set(), dayMarkers: new Map(), failed: true };
+    if (!this.startCell || !this.waypoints.length) return;
+    const anchors = [this.startCell, ...this.waypoints];
+    const combined = [anchors[0]];
+    for (let i = 1; i < anchors.length; i++) {
+      const segment = this.findPath(anchors[i - 1], anchors[i]);
+      if (!segment) {
+        this.pathResult = { path: [], totalMinutes: 0, totalZeni: 0, mishaps: new Set(), dayMarkers: new Map(), failed: true, failedSegment: i };
+        this.render();
+        this.updateResultDisplay();
+        return;
+      }
+      for (let j = 1; j < segment.length; j++) combined.push(segment[j]);
+    }
+    this.pathResult = this.simulate(combined);
     this.render();
     this.updateResultDisplay();
   }
@@ -357,13 +375,14 @@ class WorldMapViewer {
     const el = document.getElementById('pathSummary');
     if (!el) return;
     if (!this.pathResult) {
-      el.textContent = this.startCell && !this.endCell
-        ? 'Start selected — click a destination tile.'
+      el.textContent = this.startCell
+        ? 'Start selected — click waypoints; the last click is the destination.'
         : 'Click a starting tile.';
       return;
     }
     if (this.pathResult.failed) {
-      el.textContent = 'No route found between the selected tiles.';
+      const segNote = this.pathResult.failedSegment != null ? ` between waypoints ${this.pathResult.failedSegment - 1} and ${this.pathResult.failedSegment}` : '';
+      el.textContent = `No route found${segNote}.`;
       return;
     }
     const m = this.pathResult.totalMinutes;
@@ -375,7 +394,8 @@ class WorldMapViewer {
       `<strong>Time:</strong> ${days} d ${hours} h ${mins} m &nbsp;&middot;&nbsp; ` +
       `<strong>Cost:</strong> ${cur.koku} koku, ${cur.bu} bu, ${cur.zeni} zeni &nbsp;&middot;&nbsp; ` +
       `<strong>Mishaps:</strong> ${this.pathResult.mishaps.size} &nbsp;&middot;&nbsp; ` +
-      `<strong>Tiles:</strong> ${this.pathResult.path.length - 1}`;
+      `<strong>Tiles:</strong> ${this.pathResult.path.length - 1} &nbsp;&middot;&nbsp; ` +
+      `<strong>Waypoints:</strong> ${this.waypoints.length}`;
   }
 
   setZoom(z) { this.zoom = Math.min(this.maxZoom, Math.max(this.minZoom, z)); this.applyZoom(); }
@@ -447,7 +467,10 @@ class WorldMapViewer {
     }
 
     if (this.startCell) this.drawMarker(this.startCell, '#22DD22');
-    if (this.endCell) this.drawMarker(this.endCell, '#DD2222');
+    for (let i = 0; i < this.waypoints.length; i++) {
+      const isLast = i === this.waypoints.length - 1;
+      this.drawMarker(this.waypoints[i], isLast ? '#DD2222' : '#FFAA00');
+    }
 
     for (const [key, data] of Object.entries(this.layers.text)) {
       const [x, y] = key.split(',').map(Number);
