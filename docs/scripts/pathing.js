@@ -39,9 +39,10 @@ class L5RPathing {
     if (!toData || toData.cost === null) return null;
 
     const toWater = WATER_TERRAINS.has(toT);
-    const sailingCheck = { skill: 'sailing', tn: toData.tn, penalty: MISHAP_PENALTY_MIN };
-    const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN };
-    const tileCheck = (toData.skill && toData.tn !== null) ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN } : null;
+    const tileProb = toData.prob ?? 1;
+    const sailingCheck = { skill: 'sailing', tn: toData.tn, penalty: MISHAP_PENALTY_MIN, probability: tileProb };
+    const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN, probability: 1 };
+    const tileCheck = (toData.skill && toData.tn !== null) ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN, probability: tileProb } : null;
 
     if (fromMode === MODE_FOOT) {
       if (!toWater) return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
@@ -62,19 +63,23 @@ class L5RPathing {
     return null;
   }
 
-  // Cached Monte Carlo failure probability for a skill check.
+  // P(mishap) = P(check triggered) * P(fail the check). Fail probability is Monte-Carlo cached per skill/TN/config.
   mishapProbability(check) {
     if (!check) return 0;
     const cfg = this.skillConfig[check.skill];
     if (!cfg) return 0;
     const cacheKey = `${check.skill}|${check.tn}|${cfg.roll}|${cfg.keep}|${cfg.mod}|${cfg.rerollOnes ? 1 : 0}|${cfg.explodeOnNines ? 1 : 0}`;
-    if (this._probCache.has(cacheKey)) return this._probCache.get(cacheKey);
-    const trials = 300;
-    let fails = 0;
-    for (let i = 0; i < trials; i++) if (L5RDice.rollKeep(cfg) < check.tn) fails++;
-    const p = fails / trials;
-    this._probCache.set(cacheKey, p);
-    return p;
+    let failProb;
+    if (this._probCache.has(cacheKey)) {
+      failProb = this._probCache.get(cacheKey);
+    } else {
+      const trials = 300;
+      let fails = 0;
+      for (let i = 0; i < trials; i++) if (L5RDice.rollKeep(cfg) < check.tn) fails++;
+      failProb = fails / trials;
+      this._probCache.set(cacheKey, failProb);
+    }
+    return (check.probability ?? 1) * failProb;
   }
 
   // Octile distance keeps the heuristic admissible for 8-connected movement.
@@ -151,7 +156,7 @@ class L5RPathing {
       const diag = from.x !== to.x && from.y !== to.y;
       let tileMinutes = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
 
-      if (trans.check) {
+      if (trans.check && Math.random() < (trans.check.probability ?? 1)) {
         const cfg = this.skillConfig[trans.check.skill];
         if (cfg && L5RDice.rollKeep(cfg) < trans.check.tn) {
           mishaps.add(`${to.x},${to.y}`);

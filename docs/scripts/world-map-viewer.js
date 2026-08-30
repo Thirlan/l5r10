@@ -83,6 +83,8 @@ class WorldMapViewer {
       this.terrainCosts[(entry.Terrain || '').toLowerCase()] = {
         cost: numOrNull(entry['Cost Minutes']),
         costRoad: numOrNull(entry['Cost With Road Minutes']),
+        prob: numOrNull(entry.Probability),
+        probRoad: numOrNull(entry['Probability with road']),
         skill: (entry.Skill || '').toLowerCase(),
         tn: numOrNull(entry.TN),
         tnRoad: numOrNull(entry['TN with road']),
@@ -149,7 +151,7 @@ class WorldMapViewer {
   cellTerrain(cx, cy) { return this.layers.terrain[`${cx},${cy}`] || null; }
   cellHasRoad(cx, cy) { return Object.prototype.hasOwnProperty.call(this.layers.infrastructure, `${cx},${cy}`); }
 
-  // Costs, skill, TN and zeni for entering a tile (road-adjusted, water tiles ignore roads).
+  // Costs, skill, TN, zeni and check probability for entering a tile (road-adjusted, water tiles ignore roads).
   tileData(cx, cy) {
     const terrain = this.cellTerrain(cx, cy);
     if (!terrain) return null;
@@ -162,7 +164,8 @@ class WorldMapViewer {
       cost: hasRoad && data.costRoad !== null ? data.costRoad : data.cost,
       zeni: hasRoad && data.zeniRoad !== null ? data.zeniRoad : data.zeni,
       skill: data.skill,
-      tn: hasRoad && data.tnRoad !== null ? data.tnRoad : data.tn
+      tn: hasRoad && data.tnRoad !== null ? data.tnRoad : data.tn,
+      prob: hasRoad && data.probRoad !== null ? data.probRoad : data.prob
     };
   }
 
