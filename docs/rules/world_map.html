@@ -149,7 +149,7 @@
           <tbody id="skillRows"></tbody>
         </table>
         <div style="margin-top: 10px;">
-          <label>Swim TN: <input type="number" id="swimTNInput" min="1" value="15" style="width: 4em;"></label>
+          <label>Swim TN: <input type="number" id="swimTNInput" min="1" style="width: 4em;"></label>
           <span style="font-size: 0.85em; color: #666; margin-left: 8px;">GM adjusts for equipment, weight, currents, etc.</span>
         </div>
         <p style="font-size: 0.85em; color: #666; margin: 8px 0 0;">
@@ -179,16 +179,17 @@
         { key: 'swim',        label: 'Swim' }
       ];
       for (const { key, label } of skills) {
+        const cfg = mapViewer.skillConfig[key];
         const tr = document.createElement('tr');
         tr.innerHTML =
           `<td>${label}</td>` +
-          `<td><input type="number" min="1" value="3" data-skill="${key}" data-field="roll"></td>` +
-          `<td><input type="number" min="1" value="2" data-skill="${key}" data-field="keep"></td>` +
-          `<td><input type="number" value="0" data-skill="${key}" data-field="mod"></td>` +
-          `<td><input type="checkbox" data-skill="${key}" data-field="rerollOnes"></td>` +
-          `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"></td>` +
+          `<td><input type="number" min="1" value="${cfg.roll}" data-skill="${key}" data-field="roll"></td>` +
+          `<td><input type="number" min="1" value="${cfg.keep}" data-skill="${key}" data-field="keep"></td>` +
+          `<td><input type="number" value="${cfg.mod}" data-skill="${key}" data-field="mod"></td>` +
+          `<td><input type="checkbox" data-skill="${key}" data-field="rerollOnes"${cfg.rerollOnes ? ' checked' : ''}></td>` +
+          `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"${cfg.explodeOnNines ? ' checked' : ''}></td>` +
           (key === 'swim'
-            ? `<td><input type="checkbox" data-skill="${key}" data-field="allowed"></td>`
+            ? `<td><input type="checkbox" data-skill="${key}" data-field="allowed"${cfg.allowed ? ' checked' : ''}></td>`
             : `<td></td>`);
         tbody.appendChild(tr);
       }
@@ -201,6 +202,7 @@
         mapViewer.setSkillConfig(skill, { [field]: value });
         mapViewer._probCache = null;
       });
+      document.getElementById('swimTNInput').value = mapViewer.skillConfig.swim.tn;
       document.getElementById('swimTNInput').addEventListener('change', (e) => {
         mapViewer.setSkillConfig('swim', { tn: Number(e.target.value) || 0 });
         mapViewer._probCache = null;
