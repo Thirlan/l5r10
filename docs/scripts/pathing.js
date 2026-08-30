@@ -24,18 +24,30 @@ class L5RPathing {
     this._probCache = new Map();
   }
 
-  // Assume travellers starting on a water tile are already aboard a boat.
+  // Assume travellers starting on a water tile are aboard a boat unless the tile is a bridge (has a road).
   initialMode(cell) {
     const terrain = this.getTerrain(cell.x, cell.y);
-    return terrain && WATER_TERRAINS.has(terrain) ? MODE_BOAT : MODE_FOOT;
+    if (!terrain || !WATER_TERRAINS.has(terrain)) return MODE_FOOT;
+    const data = this.getTileData(cell.x, cell.y, MODE_FOOT);
+    return data && data.hasRoad ? MODE_FOOT : MODE_BOAT;
   }
 
-  // Returns { toMode, cost, check } for entering `to` from `from` in `fromMode`, or null if the move is forbidden.
-  transition(from, fromMode, to) {
+  // Returns every valid { toMode, cost, check } for entering `to` from `from` in `fromMode`.
+  transitions(from, fromMode, to) {
+    const results = [];
+    for (const toMode of [MODE_FOOT, MODE_BOAT, MODE_SWIM]) {
+      const t = this.transitionAs(from, fromMode, to, toMode);
+      if (t) results.push(t);
+    }
+    return results;
+  }
+
+  // Returns { toMode, cost, check } for a specific from/to mode pair, or null if the move isn't allowed.
+  transitionAs(from, fromMode, to, toMode) {
     const fromT = this.getTerrain(from.x, from.y);
     const toT = this.getTerrain(to.x, to.y);
     if (!fromT || !toT) return null;
-    const toData = this.getTileData(to.x, to.y);
+    const toData = this.getTileData(to.x, to.y, toMode);
     if (!toData || toData.cost === null) return null;
 
     const toWater = WATER_TERRAINS.has(toT);
@@ -44,20 +56,31 @@ class L5RPathing {
     const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN, probability: 1 };
     const tileCheck = (toData.skill && toData.tn !== null) ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN, probability: tileProb } : null;
 
-    if (fromMode === MODE_FOOT) {
-      if (!toWater) return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
-      if (fromT === 'City') return { toMode: MODE_BOAT, cost: toData.cost + BOAT_BOARDING_MIN, check: sailingCheck };
-      if (toT === 'Water' && this.skillConfig.swim.allowed) return { toMode: MODE_SWIM, cost: toData.cost, check: swimCheck };
+    if (toMode === MODE_FOOT) {
+      if (fromMode === MODE_FOOT) {
+        if (!toWater) return { toMode, cost: toData.cost, check: tileCheck };
+        // Water tile requires a bridge for foot travel.
+        if (toData.hasRoad) return { toMode, cost: toData.cost, check: tileCheck };
+        return null;
+      }
+      if (fromMode === MODE_BOAT) return toT === 'City' ? { toMode, cost: toData.cost, check: tileCheck } : null;
+      if (fromMode === MODE_SWIM) return !toWater ? { toMode, cost: toData.cost, check: tileCheck } : null;
       return null;
     }
-    if (fromMode === MODE_BOAT) {
-      if (toWater) return { toMode: MODE_BOAT, cost: toData.cost, check: sailingCheck };
-      if (toT === 'City') return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
+    if (toMode === MODE_BOAT) {
+      if (fromMode === MODE_FOOT) {
+        if (fromT === 'City' && toWater) return { toMode, cost: toData.cost + BOAT_BOARDING_MIN, check: sailingCheck };
+        return null;
+      }
+      if (fromMode === MODE_BOAT) return toWater ? { toMode, cost: toData.cost, check: sailingCheck } : null;
       return null;
     }
-    if (fromMode === MODE_SWIM) {
-      if (toT === 'Water') return { toMode: MODE_SWIM, cost: toData.cost, check: swimCheck };
-      if (!toWater) return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
+    if (toMode === MODE_SWIM) {
+      if (fromMode === MODE_FOOT) {
+        if (toT === 'Water' && this.skillConfig.swim.allowed) return { toMode, cost: toData.cost, check: swimCheck };
+        return null;
+      }
+      if (fromMode === MODE_SWIM) return toT === 'Water' ? { toMode, cost: toData.cost, check: swimCheck } : null;
       return null;
     }
     return null;
@@ -120,19 +143,19 @@ class L5RPathing {
 
       for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
         const next = { x: cur.cell.x + dx, y: cur.cell.y + dy };
-        const trans = this.transition(cur.cell, cur.mode, next);
-        if (!trans) continue;
-        const diag = dx !== 0 && dy !== 0;
-        let step = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
-        if (this.strategy === 'safe' && trans.check) {
-          step += this.mishapProbability(trans.check) * trans.check.penalty;
-        }
-        const tentative = gScore.get(curKey) + step;
-        const nk = key(next, trans.toMode);
-        if (tentative < (gScore.get(nk) ?? Infinity)) {
-          gScore.set(nk, tentative);
-          cameFrom.set(nk, curKey);
-          open.set(nk, { cell: next, mode: trans.toMode, f: tentative + this.heuristic(next, end) });
+        for (const trans of this.transitions(cur.cell, cur.mode, next)) {
+          const diag = dx !== 0 && dy !== 0;
+          let step = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
+          if (this.strategy === 'safe' && trans.check) {
+            step += this.mishapProbability(trans.check) * trans.check.penalty;
+          }
+          const tentative = gScore.get(curKey) + step;
+          const nk = key(next, trans.toMode);
+          if (tentative < (gScore.get(nk) ?? Infinity)) {
+            gScore.set(nk, tentative);
+            cameFrom.set(nk, curKey);
+            open.set(nk, { cell: next, mode: trans.toMode, f: tentative + this.heuristic(next, end) });
+          }
         }
       }
     }
@@ -151,7 +174,7 @@ class L5RPathing {
     for (let i = 1; i < path.length; i++) {
       const from = path[i - 1];
       const to = path[i];
-      const trans = this.transition(from, from.mode, to);
+      const trans = this.transitionAs(from, from.mode, to, to.mode);
       if (!trans) continue;
       const diag = from.x !== to.x && from.y !== to.y;
       let tileMinutes = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
@@ -165,7 +188,7 @@ class L5RPathing {
       }
 
       totalMinutes += tileMinutes;
-      const toData = this.getTileData(to.x, to.y);
+      const toData = this.getTileData(to.x, to.y, from.mode);
       totalZeni += toData?.zeni ?? 0;
       clock += tileMinutes;
 

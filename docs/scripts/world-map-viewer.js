@@ -151,13 +151,15 @@ class WorldMapViewer {
   cellTerrain(cx, cy) { return this.layers.terrain[`${cx},${cy}`] || null; }
   cellHasRoad(cx, cy) { return Object.prototype.hasOwnProperty.call(this.layers.infrastructure, `${cx},${cy}`); }
 
-  // Costs, skill, TN, zeni and check probability for entering a tile (road-adjusted, water tiles ignore roads).
-  tileData(cx, cy) {
+  // Costs, skill, TN, zeni and check probability for entering a tile.
+  // Bridges (roads on water tiles) apply only when the traveller is on foot; boats/swimmers ignore them.
+  tileData(cx, cy, mode) {
     const terrain = this.cellTerrain(cx, cy);
     if (!terrain) return null;
     const data = this.terrainCosts[terrain.toLowerCase()];
     if (!data) return null;
-    const hasRoad = !WATER_TERRAINS.has(terrain) && this.cellHasRoad(cx, cy);
+    const isWater = WATER_TERRAINS.has(terrain);
+    const hasRoad = this.cellHasRoad(cx, cy) && (!isWater || mode === 'foot');
     return {
       terrain,
       hasRoad,
@@ -173,7 +175,7 @@ class WorldMapViewer {
     if (!this.startCell || !this.waypoints.length) return;
     const pather = new L5RPathing({
       getTerrain: (x, y) => this.cellTerrain(x, y),
-      getTileData: (x, y) => this.tileData(x, y),
+      getTileData: (x, y, mode) => this.tileData(x, y, mode),
       skillConfig: this.skillConfig,
       strategy: this.strategy
     });
