@@ -25,7 +25,7 @@ class WorldMapViewer {
       survival:    { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
       sailing:     { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
       investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 15 }
+      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 20 }
     };
 
     this.startCell = null;
@@ -209,24 +209,6 @@ class WorldMapViewer {
     return { skill: t.skill, tn: t.tn, penalty: MISHAP_PENALTY_MIN };
   }
 
-  rollOne(cfg) {
-    let total = 0;
-    let d = 1 + Math.floor(Math.random() * 10);
-    if (cfg.rerollOnes && d === 1) d = 1 + Math.floor(Math.random() * 10);
-    total += d;
-    while (d === 10 || (cfg.explodeOnNines && d === 9)) {
-      d = 1 + Math.floor(Math.random() * 10);
-      total += d;
-    }
-    return total;
-  }
-
-  rollDice(cfg) {
-    const results = [];
-    for (let i = 0; i < cfg.roll; i++) results.push(this.rollOne(cfg));
-    results.sort((a, b) => b - a);
-    return results.slice(0, cfg.keep).reduce((s, v) => s + v, 0) + cfg.mod;
-  }
 
   // Cached Monte Carlo failure probability for the tile-and-transition's skill check.
   mishapProbability(from, to) {
@@ -239,7 +221,7 @@ class WorldMapViewer {
     if (this._probCache.has(cacheKey)) return this._probCache.get(cacheKey);
     const trials = 300;
     let fails = 0;
-    for (let i = 0; i < trials; i++) if (this.rollDice(cfg) < check.tn) fails++;
+    for (let i = 0; i < trials; i++) if (L5RDice.rollKeep(cfg) < check.tn) fails++;
     const p = fails / trials;
     this._probCache.set(cacheKey, p);
     return p;
@@ -324,7 +306,7 @@ class WorldMapViewer {
       const check = this.skillCheckForMove(from, to);
       if (check) {
         const cfg = this.skillConfig[check.skill];
-        if (cfg && this.rollDice(cfg) < check.tn) {
+        if (cfg && L5RDice.rollKeep(cfg) < check.tn) {
           mishaps.add(`${to.x},${to.y}`);
           tileMinutes += check.penalty;
         }
