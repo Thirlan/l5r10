@@ -202,7 +202,12 @@ class L5RPathing {
         const sleep = nextMorning - clock;
         totalMinutes += sleep;
         clock = nextMorning;
-        daysElapsed += 1;
+      }
+
+      // Day markers roll over at 08:00, whether we slept overnight or sailed through it.
+      const newDays = Math.floor((clock - DAY_START_MIN) / MINUTES_PER_DAY);
+      if (newDays > daysElapsed) {
+        daysElapsed = newDays;
         dayMarkers.set(`${to.x},${to.y}`, `${daysElapsed}d`);
       }
     }
