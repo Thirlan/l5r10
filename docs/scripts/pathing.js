@@ -2,7 +2,7 @@ const MODE_FOOT = 'foot';
 const MODE_BOAT = 'boat';
 const MODE_SWIM = 'swim';
 
-const MISHAP_PENALTY_MIN = 180;
+const MISHAP_PENALTY_MIN = 1440;
 const SWIM_PENALTY_MIN = 10000;
 const BOAT_BOARDING_MIN = 300;
 const DIAGONAL_COST_MULTIPLIER = 1.41;
