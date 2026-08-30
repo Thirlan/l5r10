@@ -1,3 +1,8 @@
+const MODE_FOOT = 'foot';
+const MODE_BOAT = 'boat';
+const MODE_SWIM = 'swim';
+const BOAT_BOARDING_MIN = 300;
+
 const VIEWER_GRID_SIZE = 16;
 const WATER_TERRAINS = new Set(['Water', 'Ocean', 'Deep Ocean']);
 const DAY_START_MIN = 8 * 60;
@@ -173,46 +178,47 @@ class WorldMapViewer {
     };
   }
 
-  // Water/Ocean/Deep Ocean can only be entered/exited via a City tile; Swim (if allowed) opens Water tiles too.
-  canTraverse(from, to) {
+  // Assume travelers on a water starting tile are already aboard a boat.
+  initialMode(cell) {
+    const terrain = this.cellTerrain(cell.x, cell.y);
+    return terrain && WATER_TERRAINS.has(terrain) ? MODE_BOAT : MODE_FOOT;
+  }
+
+  // Returns { toMode, cost, check } for entering `to` from `from` in `fromMode`, or null if the move is forbidden.
+  transition(from, fromMode, to) {
     const fromT = this.cellTerrain(from.x, from.y);
     const toT = this.cellTerrain(to.x, to.y);
-    if (!fromT || !toT) return false;
-    const fromWater = WATER_TERRAINS.has(fromT);
+    if (!fromT || !toT) return null;
+    const toData = this.tileData(to.x, to.y);
+    if (!toData || toData.cost === null) return null;
+
     const toWater = WATER_TERRAINS.has(toT);
-    if (fromWater === toWater) return true;
-    const other = fromWater ? toT : fromT;
-    if (other === 'City') return true;
-    const water = fromWater ? fromT : toT;
-    if (water === 'Water' && this.skillConfig.swim.allowed) return true;
-    return false;
-  }
+    const sailingCheck = { skill: 'sailing', tn: toData.tn, penalty: MISHAP_PENALTY_MIN };
+    const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN };
+    const tileCheck = (toData.skill && toData.tn !== null) ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN } : null;
 
-  edgeCost(from, to) {
-    const t = this.tileData(to.x, to.y);
-    if (!t || t.cost === null) return null;
-    let cost = t.cost;
-    const fromT = this.cellTerrain(from.x, from.y);
-    if (t.terrain === 'Water' && fromT !== 'City') cost += 300;
-    return cost;
-  }
-
-  // Skill/TN/penalty for entering `to` from `from` — Swim overrides Water tiles that aren't reached from a City.
-  skillCheckForMove(from, to) {
-    const t = this.tileData(to.x, to.y);
-    if (!t) return null;
-    const fromT = this.cellTerrain(from.x, from.y);
-    if (t.terrain === 'Water' && fromT !== 'City') {
-      return { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN };
+    if (fromMode === MODE_FOOT) {
+      if (!toWater) return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
+      if (fromT === 'City') return { toMode: MODE_BOAT, cost: toData.cost + BOAT_BOARDING_MIN, check: sailingCheck };
+      if (toT === 'Water' && this.skillConfig.swim.allowed) return { toMode: MODE_SWIM, cost: toData.cost, check: swimCheck };
+      return null;
     }
-    if (!t.skill || t.tn === null) return null;
-    return { skill: t.skill, tn: t.tn, penalty: MISHAP_PENALTY_MIN };
+    if (fromMode === MODE_BOAT) {
+      if (toWater) return { toMode: MODE_BOAT, cost: toData.cost, check: sailingCheck };
+      if (toT === 'City') return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
+      return null;
+    }
+    if (fromMode === MODE_SWIM) {
+      if (toT === 'Water') return { toMode: MODE_SWIM, cost: toData.cost, check: swimCheck };
+      if (!toWater) return { toMode: MODE_FOOT, cost: toData.cost, check: tileCheck };
+      return null;
+    }
+    return null;
   }
 
 
-  // Cached Monte Carlo failure probability for the tile-and-transition's skill check.
-  mishapProbability(from, to) {
-    const check = this.skillCheckForMove(from, to);
+  // Cached Monte Carlo failure probability for a skill check.
+  mishapProbability(check) {
     if (!check) return 0;
     const cfg = this.skillConfig[check.skill];
     if (!cfg) return 0;
@@ -227,15 +233,14 @@ class WorldMapViewer {
     return p;
   }
 
-  findPath(start, end) {
-    const key = (c) => `${c.x},${c.y}`;
-    const startKey = key(start);
-    const endKey = key(end);
+  findPath(start, end, startMode) {
+    const key = (c, m) => `${c.x},${c.y}|${m}`;
     if (!this.cellTerrain(start.x, start.y) || !this.cellTerrain(end.x, end.y)) return null;
 
+    const startKey = key(start, startMode);
     const gScore = new Map([[startKey, 0]]);
     const cameFrom = new Map();
-    const open = new Map([[startKey, { cell: start, f: this.heuristic(start, end) }]]);
+    const open = new Map([[startKey, { cell: start, mode: startMode, f: this.heuristic(start, end) }]]);
 
     while (open.size) {
       let curKey = null;
@@ -245,34 +250,33 @@ class WorldMapViewer {
       }
       open.delete(curKey);
 
-      if (curKey === endKey) {
-        const path = [cur.cell];
+      if (cur.cell.x === end.x && cur.cell.y === end.y) {
+        const path = [{ x: cur.cell.x, y: cur.cell.y, mode: cur.mode }];
         let k = curKey;
         while (cameFrom.has(k)) {
           k = cameFrom.get(k);
-          const [x, y] = k.split(',').map(Number);
-          path.unshift({ x, y });
+          const [xy, mode] = k.split('|');
+          const [x, y] = xy.split(',').map(Number);
+          path.unshift({ x, y, mode });
         }
         return path;
       }
 
       for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
         const next = { x: cur.cell.x + dx, y: cur.cell.y + dy };
-        if (!this.canTraverse(cur.cell, next)) continue;
-        const base = this.edgeCost(cur.cell, next);
-        if (base === null) continue;
+        const trans = this.transition(cur.cell, cur.mode, next);
+        if (!trans) continue;
         const diag = dx !== 0 && dy !== 0;
-        let step = Math.round(base * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
-        if (this.strategy === 'safe') {
-          const check = this.skillCheckForMove(cur.cell, next);
-          if (check) step += this.mishapProbability(cur.cell, next) * check.penalty;
+        let step = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
+        if (this.strategy === 'safe' && trans.check) {
+          step += this.mishapProbability(trans.check) * trans.check.penalty;
         }
         const tentative = gScore.get(curKey) + step;
-        const nk = key(next);
+        const nk = key(next, trans.toMode);
         if (tentative < (gScore.get(nk) ?? Infinity)) {
           gScore.set(nk, tentative);
           cameFrom.set(nk, curKey);
-          open.set(nk, { cell: next, f: tentative + this.heuristic(next, end) });
+          open.set(nk, { cell: next, mode: trans.toMode, f: tentative + this.heuristic(next, end) });
         }
       }
     }
@@ -286,7 +290,7 @@ class WorldMapViewer {
     return (Math.max(dx, dy) + (DIAGONAL_COST_MULTIPLIER - 1) * Math.min(dx, dy)) * 100;
   }
 
-  // Walks the path once, rolling skill dice per tile and accumulating time, cost, mishaps, day markers.
+  // Walks the mode-tagged path once, rolling skill dice per tile and accumulating time, cost, mishaps, day markers.
   simulate(path) {
     const mishaps = new Set();
     const dayMarkers = new Map();
@@ -298,22 +302,22 @@ class WorldMapViewer {
     for (let i = 1; i < path.length; i++) {
       const from = path[i - 1];
       const to = path[i];
-      const base = this.edgeCost(from, to);
-      const t = this.tileData(to.x, to.y);
+      const trans = this.transition(from, from.mode, to);
+      if (!trans) continue;
       const diag = from.x !== to.x && from.y !== to.y;
-      let tileMinutes = Math.round(base * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
+      let tileMinutes = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
 
-      const check = this.skillCheckForMove(from, to);
-      if (check) {
-        const cfg = this.skillConfig[check.skill];
-        if (cfg && L5RDice.rollKeep(cfg) < check.tn) {
+      if (trans.check) {
+        const cfg = this.skillConfig[trans.check.skill];
+        if (cfg && L5RDice.rollKeep(cfg) < trans.check.tn) {
           mishaps.add(`${to.x},${to.y}`);
-          tileMinutes += check.penalty;
+          tileMinutes += trans.check.penalty;
         }
       }
 
       totalMinutes += tileMinutes;
-      totalZeni += t.zeni ?? 0;
+      const toData = this.tileData(to.x, to.y);
+      totalZeni += toData?.zeni ?? 0;
       clock += tileMinutes;
 
       const timeOfDay = ((clock % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
@@ -337,9 +341,10 @@ class WorldMapViewer {
   computePath() {
     if (!this.startCell || !this.waypoints.length) return;
     const anchors = [this.startCell, ...this.waypoints];
-    const combined = [anchors[0]];
+    let currentMode = this.initialMode(anchors[0]);
+    const combined = [{ x: anchors[0].x, y: anchors[0].y, mode: currentMode }];
     for (let i = 1; i < anchors.length; i++) {
-      const segment = this.findPath(anchors[i - 1], anchors[i]);
+      const segment = this.findPath(anchors[i - 1], anchors[i], currentMode);
       if (!segment) {
         this.pathResult = { path: [], totalMinutes: 0, totalZeni: 0, mishaps: new Set(), dayMarkers: new Map(), failed: true, failedSegment: i };
         this.render();
@@ -347,6 +352,7 @@ class WorldMapViewer {
         return;
       }
       for (let j = 1; j < segment.length; j++) combined.push(segment[j]);
+      currentMode = segment[segment.length - 1].mode;
     }
     this.pathResult = this.simulate(combined);
     this.render();
