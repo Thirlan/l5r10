@@ -1,12 +1,12 @@
 Terrain,Cost Minutes,Cost With Road Minutes,Probability,Probability with road,Skill,TN,TN with road,Cost Zeni,Cost Zeni with road
-mountain,660,300,0.50,0.15,survival,20,10,0,1
+mountain,660,300,0.50,0.15,survival,25,10,0,1
 ocean,100,,0.01,,sailing,15,,2,
 water,120,,0.01,,sailing,10,,5,
 forest,390,180,0.40,0.1,survival,15,5,0,1
 plains,300,138,0.30,0.05,survival,5,0,0,1
 hills,360,180,0.35,0.05,survival,10,0,0,1
-deserts,450,240,0.50,0.1,survival,20,10,0,1
-marsh,660,240,0.50,0.15,survival,20,10,0,1
+deserts,450,240,0.50,0.1,survival,25,10,0,1
+marsh,660,240,0.50,0.15,survival,25,10,0,1
 deep ocean,100,,0.10,,sailing,20,,10,
 snow,510,210,0.50,0.15,survival,20,10,0,1
 city,300,138,0.1,0.1,investigate,10,10,1,3
