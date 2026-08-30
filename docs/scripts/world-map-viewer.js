@@ -23,7 +23,7 @@ class WorldMapViewer {
 
     this.skillConfig = {
       survival:    { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      sailing:     { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
+      sailing:     { roll: 6, keep: 3, mod: 0, rerollOnes: false, explodeOnNines: false },
       investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
       swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 20 }
     };
