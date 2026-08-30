@@ -287,6 +287,11 @@ You may exchange the favors for items from those cultures, with the exception of
 - Moving people on your turn
 - Charm creature effects
 - You cannot spend Void Points to negate Wounds.
+- Ranged weapons should use Perception
+- Heavy should use Stamina
+- Void should only regenerate during the morning with a successfull mediation roll
+- Fortunes blessings should be a temporary advantage and not an advantage
+- Bishamon's Blessing (5 Points) (Crab, Lion): The Fortune of Strength has taken notice of your might, and has favored you with his blessings. Whenever you make a successfull attack roll with three or more Raises for the Increased Damage Maneuver (i.e. +3k0), you gain one additional +1k0 in damage. You also gain a bonus of +1k0 to the total of any Strength Trait Rolls.
 
 ---
 
