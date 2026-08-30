@@ -142,12 +142,17 @@
               <th>Mod</th>
               <th>Reroll 1s</th>
               <th>Explode 9s</th>
+              <th>Allowed</th>
             </tr>
           </thead>
           <tbody id="skillRows"></tbody>
         </table>
+        <div style="margin-top: 10px;">
+          <label>Swim TN: <input type="number" id="swimTNInput" min="1" value="15" style="width: 4em;"></label>
+          <span style="font-size: 0.85em; color: #666; margin-left: 8px;">GM adjusts for equipment, weight, currents, etc.</span>
+        </div>
         <p style="font-size: 0.85em; color: #666; margin: 8px 0 0;">
-          Each tile you enter rolls the tile's skill against its TN. A failed roll marks the tile red and adds 120 minutes.
+          Each tile you enter rolls the tile's skill against its TN. A failed roll marks the tile red and adds a mishap penalty of 1 day as you recover (Swim failure is fatal).
         </p>
       </div>
     </div>
@@ -168,7 +173,8 @@
       const skills = [
         { key: 'survival',    label: 'Survival' },
         { key: 'sailing',     label: 'Sailing' },
-        { key: 'investigate', label: 'Investigation' }
+        { key: 'investigate', label: 'Investigation' },
+        { key: 'swim',        label: 'Swim' }
       ];
       for (const { key, label } of skills) {
         const tr = document.createElement('tr');
@@ -178,7 +184,10 @@
           `<td><input type="number" min="1" value="2" data-skill="${key}" data-field="keep"></td>` +
           `<td><input type="number" value="0" data-skill="${key}" data-field="mod"></td>` +
           `<td><input type="checkbox" data-skill="${key}" data-field="rerollOnes"></td>` +
-          `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"></td>`;
+          `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"></td>` +
+          (key === 'swim'
+            ? `<td><input type="checkbox" data-skill="${key}" data-field="allowed"></td>`
+            : `<td></td>`);
         tbody.appendChild(tr);
       }
       tbody.addEventListener('change', (e) => {
@@ -188,6 +197,10 @@
         if (!skill || !field) return;
         const value = input.type === 'checkbox' ? input.checked : Number(input.value) || 0;
         mapViewer.setSkillConfig(skill, { [field]: value });
+        mapViewer._probCache = null;
+      });
+      document.getElementById('swimTNInput').addEventListener('change', (e) => {
+        mapViewer.setSkillConfig('swim', { tn: Number(e.target.value) || 0 });
         mapViewer._probCache = null;
       });
     });

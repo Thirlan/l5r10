@@ -3,7 +3,8 @@ const WATER_TERRAINS = new Set(['Water', 'Ocean', 'Deep Ocean']);
 const DAY_START_MIN = 8 * 60;
 const DAY_END_MIN = 18 * 60;
 const MINUTES_PER_DAY = 24 * 60;
-const MISHAP_PENALTY_MIN = 180;
+const MISHAP_PENALTY_MIN = 1440;
+const SWIM_PENALTY_MIN = 10000;
 
 class WorldMapViewer {
   constructor(imageSrc, canvasSelector, gridSize = VIEWER_GRID_SIZE) {
@@ -23,7 +24,8 @@ class WorldMapViewer {
     this.skillConfig = {
       survival:    { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
       sailing:     { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false }
+      investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
+      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 15 }
     };
 
     this.startCell = null;
@@ -164,16 +166,19 @@ class WorldMapViewer {
     };
   }
 
-  // Ocean can only be entered/exited via a City tile; movement within Ocean stays open.
+  // Water/Ocean/Deep Ocean can only be entered/exited via a City tile; Swim (if allowed) opens Water tiles too.
   canTraverse(from, to) {
     const fromT = this.cellTerrain(from.x, from.y);
     const toT = this.cellTerrain(to.x, to.y);
     if (!fromT || !toT) return false;
-    if ((fromT === 'Ocean') !== (toT === 'Ocean')) {
-      const other = fromT === 'Ocean' ? toT : fromT;
-      if (other !== 'City') return false;
-    }
-    return true;
+    const fromWater = WATER_TERRAINS.has(fromT);
+    const toWater = WATER_TERRAINS.has(toT);
+    if (fromWater === toWater) return true;
+    const other = fromWater ? toT : fromT;
+    if (other === 'City') return true;
+    const water = fromWater ? fromT : toT;
+    if (water === 'Water' && this.skillConfig.swim.allowed) return true;
+    return false;
   }
 
   edgeCost(from, to) {
@@ -183,6 +188,18 @@ class WorldMapViewer {
     const fromT = this.cellTerrain(from.x, from.y);
     if (t.terrain === 'Water' && fromT !== 'City') cost += 300;
     return cost;
+  }
+
+  // Skill/TN/penalty for entering `to` from `from` — Swim overrides Water tiles that aren't reached from a City.
+  skillCheckForMove(from, to) {
+    const t = this.tileData(to.x, to.y);
+    if (!t) return null;
+    const fromT = this.cellTerrain(from.x, from.y);
+    if (t.terrain === 'Water' && fromT !== 'City') {
+      return { skill: 'swim', tn: this.skillConfig.swim.tn, penalty: SWIM_PENALTY_MIN };
+    }
+    if (!t.skill || t.tn === null) return null;
+    return { skill: t.skill, tn: t.tn, penalty: MISHAP_PENALTY_MIN };
   }
 
   rollOne(cfg) {
@@ -204,20 +221,20 @@ class WorldMapViewer {
     return results.slice(0, cfg.keep).reduce((s, v) => s + v, 0) + cfg.mod;
   }
 
-  // Cached Monte Carlo mishap probability for the current skill configs.
-  mishapProbability(cx, cy) {
-    const t = this.tileData(cx, cy);
-    if (!t || !t.skill || t.tn === null) return 0;
-    const cfg = this.skillConfig[t.skill];
+  // Cached Monte Carlo failure probability for the tile-and-transition's skill check.
+  mishapProbability(from, to) {
+    const check = this.skillCheckForMove(from, to);
+    if (!check) return 0;
+    const cfg = this.skillConfig[check.skill];
     if (!cfg) return 0;
-    const key = `${t.skill}|${t.tn}|${cfg.roll}|${cfg.keep}|${cfg.mod}|${cfg.rerollOnes ? 1 : 0}|${cfg.explodeOnNines ? 1 : 0}`;
+    const cacheKey = `${check.skill}|${check.tn}|${cfg.roll}|${cfg.keep}|${cfg.mod}|${cfg.rerollOnes ? 1 : 0}|${cfg.explodeOnNines ? 1 : 0}`;
     if (!this._probCache) this._probCache = new Map();
-    if (this._probCache.has(key)) return this._probCache.get(key);
+    if (this._probCache.has(cacheKey)) return this._probCache.get(cacheKey);
     const trials = 300;
     let fails = 0;
-    for (let i = 0; i < trials; i++) if (this.rollDice(cfg) < t.tn) fails++;
+    for (let i = 0; i < trials; i++) if (this.rollDice(cfg) < check.tn) fails++;
     const p = fails / trials;
-    this._probCache.set(key, p);
+    this._probCache.set(cacheKey, p);
     return p;
   }
 
@@ -256,7 +273,10 @@ class WorldMapViewer {
         const base = this.edgeCost(cur.cell, next);
         if (base === null) continue;
         let step = base;
-        if (this.strategy === 'safe') step += this.mishapProbability(next.x, next.y) * MISHAP_PENALTY_MIN;
+        if (this.strategy === 'safe') {
+          const check = this.skillCheckForMove(cur.cell, next);
+          if (check) step += this.mishapProbability(cur.cell, next) * check.penalty;
+        }
         const tentative = gScore.get(curKey) + step;
         const nk = key(next);
         if (tentative < (gScore.get(nk) ?? Infinity)) {
@@ -287,11 +307,12 @@ class WorldMapViewer {
       const t = this.tileData(to.x, to.y);
       let tileMinutes = base;
 
-      if (t.skill && t.tn !== null) {
-        const cfg = this.skillConfig[t.skill];
-        if (cfg && this.rollDice(cfg) < t.tn) {
+      const check = this.skillCheckForMove(from, to);
+      if (check) {
+        const cfg = this.skillConfig[check.skill];
+        if (cfg && this.rollDice(cfg) < check.tn) {
           mishaps.add(`${to.x},${to.y}`);
-          tileMinutes += MISHAP_PENALTY_MIN;
+          tileMinutes += check.penalty;
         }
       }
 
@@ -414,7 +435,7 @@ class WorldMapViewer {
       this.drawPath(this.pathResult.path);
       for (const [key, label] of this.pathResult.dayMarkers) {
         const [x, y] = key.split(',').map(Number);
-        this.drawText(x, y, label, 14);
+        this.drawText(x, y, label, 8);
       }
     }
 
