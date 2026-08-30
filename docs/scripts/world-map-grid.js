@@ -201,10 +201,7 @@ class WorldMapGrid {
       this.fillCell(x, y, this.terrainColors[terrain]);
     });
 
-    Object.entries(this.layers.clans).forEach(([key, clan]) => {
-      const [x, y] = key.split(',').map(Number);
-      this.drawCellBorder(x, y, this.clanColors[clan]);
-    });
+    this.drawClanBoundaries();
 
     Object.entries(this.layers.infrastructure).forEach(([key]) => {
       const [x, y] = key.split(',').map(Number);
@@ -247,17 +244,104 @@ class WorldMapGrid {
     this.ctx.restore();
   }
 
-  drawCellBorder(x, y, color) {
-    if (!color) return;
-    const inset = 1;
-    this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeRect(
-      x * this.gridSize + inset,
-      y * this.gridSize + inset,
-      this.gridSize - inset * 2,
-      this.gridSize - inset * 2
-    );
+  drawClanBoundaries() {
+    const cellsByClan = {};
+    for (const [key, clan] of Object.entries(this.layers.clans)) {
+      if (!cellsByClan[clan]) cellsByClan[clan] = new Set();
+      cellsByClan[clan].add(key);
+    }
+
+    const size = this.gridSize;
+
+    for (const [clan, cells] of Object.entries(cellsByClan)) {
+      const color = this.clanColors[clan];
+      if (!color) continue;
+      const polygons = this.traceClanPolygons(cells);
+      if (!polygons.length) continue;
+
+      this.ctx.save();
+      this.ctx.lineJoin = 'miter';
+      this.ctx.lineCap = 'square';
+
+      // Clip to the clan's cells so strokes on the boundary path only paint the inside half.
+      const clip = new Path2D();
+      for (const key of cells) {
+        const [cx, cy] = key.split(',').map(Number);
+        clip.rect(cx * size, cy * size, size, size);
+      }
+      this.ctx.clip(clip);
+
+      const strokePath = new Path2D();
+      for (const poly of polygons) {
+        strokePath.moveTo(poly[0][0], poly[0][1]);
+        for (let i = 1; i < poly.length; i++) strokePath.lineTo(poly[i][0], poly[i][1]);
+        strokePath.closePath();
+      }
+
+      this.ctx.strokeStyle = color;
+      this.ctx.lineWidth = 12 / this.zoom;
+      this.ctx.stroke(strokePath);
+
+      this.ctx.strokeStyle = this.tintClanColor(color);
+      this.ctx.lineWidth = 6 / this.zoom;
+      this.ctx.stroke(strokePath);
+
+      // Neutral edge is drawn last and narrowest so shared boundaries are draw-order independent.
+      this.ctx.strokeStyle = '#444444';
+      this.ctx.lineWidth = 2 / this.zoom;
+      this.ctx.stroke(strokePath);
+
+      this.ctx.restore();
+    }
+  }
+
+  // Chains directed cell-boundary edges (clockwise, interior on the right) into closed polygons.
+  traceClanPolygons(cellSet) {
+    const size = this.gridSize;
+    const edges = new Map();
+    const addEdge = (a, b) => {
+      if (!edges.has(a)) edges.set(a, []);
+      edges.get(a).push(b);
+    };
+    const has = (cx, cy) => cellSet.has(`${cx},${cy}`);
+
+    for (const key of cellSet) {
+      const [cx, cy] = key.split(',').map(Number);
+      if (!has(cx, cy - 1)) addEdge(`${cx},${cy}`, `${cx + 1},${cy}`);
+      if (!has(cx + 1, cy)) addEdge(`${cx + 1},${cy}`, `${cx + 1},${cy + 1}`);
+      if (!has(cx, cy + 1)) addEdge(`${cx + 1},${cy + 1}`, `${cx},${cy + 1}`);
+      if (!has(cx - 1, cy)) addEdge(`${cx},${cy + 1}`, `${cx},${cy}`);
+    }
+
+    const polygons = [];
+    while (edges.size) {
+      const start = edges.keys().next().value;
+      const polygon = [start];
+      let current = start;
+      while (true) {
+        const nexts = edges.get(current);
+        const next = nexts.pop();
+        if (!nexts.length) edges.delete(current);
+        polygon.push(next);
+        if (next === start) break;
+        current = next;
+      }
+      polygons.push(polygon.map((v) => v.split(',').map((n) => Number(n) * size)));
+    }
+    return polygons;
+  }
+
+  // Mixes 55% toward white, or toward dark grey when the source is already very light (Imperial).
+  tintClanColor(hex) {
+    const c = hex.replace('#', '');
+    if (c.length !== 6) return '#FFFFFF';
+    const r = parseInt(c.slice(0, 2), 16);
+    const g = parseInt(c.slice(2, 4), 16);
+    const b = parseInt(c.slice(4, 6), 16);
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    const target = luminance > 200 ? 90 : 255;
+    const mix = (channel) => Math.round(channel + (target - channel) * 0.55);
+    return `#${[mix(r), mix(g), mix(b)].map((n) => n.toString(16).padStart(2, '0')).join('')}`;
   }
 
   drawRoad(x, y) {
