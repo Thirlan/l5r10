@@ -5,7 +5,7 @@ const DAY_END_MIN = 18 * 60;
 const MINUTES_PER_DAY = 24 * 60;
 const MISHAP_PENALTY_MIN = 1440;
 const SWIM_PENALTY_MIN = 10000;
-
+const DIAGONAL_COST_MULTIPLIER = 1.41;
 class WorldMapViewer {
   constructor(imageSrc, canvasSelector, gridSize = VIEWER_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
@@ -267,12 +267,13 @@ class WorldMapViewer {
         return path;
       }
 
-      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
         const next = { x: cur.cell.x + dx, y: cur.cell.y + dy };
         if (!this.canTraverse(cur.cell, next)) continue;
         const base = this.edgeCost(cur.cell, next);
         if (base === null) continue;
-        let step = base;
+        const diag = dx !== 0 && dy !== 0;
+        let step = Math.round(base * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
         if (this.strategy === 'safe') {
           const check = this.skillCheckForMove(cur.cell, next);
           if (check) step += this.mishapProbability(cur.cell, next) * check.penalty;
@@ -289,7 +290,12 @@ class WorldMapViewer {
     return null;
   }
 
-  heuristic(a, b) { return (Math.abs(a.x - b.x) + Math.abs(a.y - b.y)) * 100; }
+  // Octile distance keeps the heuristic admissible for 8-connected movement.
+  heuristic(a, b) {
+    const dx = Math.abs(a.x - b.x);
+    const dy = Math.abs(a.y - b.y);
+    return (Math.max(dx, dy) + (DIAGONAL_COST_MULTIPLIER - 1) * Math.min(dx, dy)) * 100;
+  }
 
   // Walks the path once, rolling skill dice per tile and accumulating time, cost, mishaps, day markers.
   simulate(path) {
@@ -305,7 +311,8 @@ class WorldMapViewer {
       const to = path[i];
       const base = this.edgeCost(from, to);
       const t = this.tileData(to.x, to.y);
-      let tileMinutes = base;
+      const diag = from.x !== to.x && from.y !== to.y;
+      let tileMinutes = Math.round(base * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
 
       const check = this.skillCheckForMove(from, to);
       if (check) {
