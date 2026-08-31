@@ -81,6 +81,8 @@
     }
     .skill-table input[type=number] { width: 3.5em; }
     .skill-table input[type=checkbox] { margin: 0 4px 0 0; }
+    .path-events { margin-top: 10px; overflow-x: auto; }
+    .path-events table { min-width: 780px; }
   </style>
 </head>
 <body>
@@ -117,10 +119,10 @@
           <label class="radio"><input type="radio" name="viewMode" value="clan" onchange="mapViewer.setViewMode(this.value)"> Clan</label>
         </div>
 
-        <h3>Route Strategy</h3>
+        <h3>Route Path</h3>
         <div class="radio-row">
-          <label class="radio"><input type="radio" name="strategy" value="risky" checked onchange="mapViewer.setStrategy(this.value)"> Risky (shortest)</label>
-          <label class="radio"><input type="radio" name="strategy" value="safe" onchange="mapViewer.setStrategy(this.value)"> Least Risky</label>
+          <label class="radio"><input type="checkbox" onchange="mapViewer.setRoutePreference('includeRisk', this.checked)"> Safest</label>
+          <label class="radio"><input type="checkbox" onchange="mapViewer.setRoutePreference('includeMoney', this.checked)"> Cheapest</label>
         </div>
 
         <h3>Route</h3>
@@ -130,9 +132,25 @@
           <button type="button" onclick="mapViewer.clearPath()">Clear Path</button>
         </div>
         <div id="pathSummary">Click a starting tile.</div>
+        <div class="path-events">
+          <table id="pathEvents" class="skill-table" hidden>
+            <thead>
+              <tr><th>Day</th><th>Coord</th><th>Event</th><th>Mode</th><th>Terrain</th><th>Clan</th><th>Skill</th><th>TN</th><th>Result</th><th>Cost</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="viewer-panel">
+        <h3>Travel Papers</h3>
+        <table class="skill-table">
+          <thead>
+            <tr><th>Clan</th><th>Papers</th><th>Avoid</th></tr>
+          </thead>
+          <tbody id="clanRows"></tbody>
+        </table>
+
         <h3>Skill Rolls</h3>
         <table class="skill-table">
           <thead>
@@ -177,7 +195,9 @@
         { key: 'survival',    label: 'Survival' },
         { key: 'sailing',     label: 'Sailing' },
         { key: 'investigate', label: 'Investigation' },
-        { key: 'swim',        label: 'Swim' }
+        { key: 'swim',        label: 'Swim' },
+        { key: 'sneak',       label: 'Sneak' },
+        { key: 'forgery',     label: 'Forgery' }
       ];
       for (const { key, label } of skills) {
         const cfg = mapViewer.skillConfig[key];
@@ -189,7 +209,7 @@
           `<td><input type="number" value="${cfg.mod}" data-skill="${key}" data-field="mod"></td>` +
           `<td><input type="checkbox" data-skill="${key}" data-field="rerollOnes"${cfg.rerollOnes ? ' checked' : ''}></td>` +
           `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"${cfg.explodeOnNines ? ' checked' : ''}></td>` +
-          (key === 'swim'
+          (['swim', 'sneak', 'forgery'].includes(key)
             ? `<td><input type="checkbox" data-skill="${key}" data-field="allowed"${cfg.allowed ? ' checked' : ''}></td>`
             : `<td></td>`);
         tbody.appendChild(tr);
@@ -207,6 +227,24 @@
       document.getElementById('swimTNInput').addEventListener('change', (e) => {
         mapViewer.setSkillConfig('swim', { tn: Number(e.target.value) || 0 });
         mapViewer._probCache = null;
+      });
+
+      const clanRows = document.getElementById('clanRows');
+      for (const clan of Object.keys(mapViewer.travelPapers)) {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          `<td>${clan}</td>` +
+          `<td><input type="checkbox" data-clan="${clan}" data-field="papers" checked></td>` +
+          `<td><input type="checkbox" data-clan="${clan}" data-field="avoid"></td>`;
+        clanRows.appendChild(tr);
+      }
+      clanRows.addEventListener('change', (e) => {
+        const input = e.target;
+        const clan = input.dataset.clan;
+        if (!clan) return;
+        if (input.dataset.field === 'papers') mapViewer.travelPapers[clan] = input.checked;
+        if (input.dataset.field === 'avoid') mapViewer.avoidClans[clan] = input.checked;
+        if (mapViewer.startCell && mapViewer.waypoints.length) mapViewer.computePath();
       });
     });
   </script>

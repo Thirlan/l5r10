@@ -12,13 +12,15 @@ class WorldMapViewer {
     this.terrainCosts = {};
 
     this.viewMode = 'default';
-    this.strategy = 'risky';
+    this.routePreferences = { includeRisk: false, includeMoney: false };
 
     this.skillConfig = {
       survival:    { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
       sailing:     { roll: 6, keep: 3, mod: 0, rerollOnes: false, explodeOnNines: false },
       investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 20 }
+      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 20 },
+      sneak:       { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false },
+      forgery:     { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false }
     };
 
     this.startCell = null;
@@ -35,6 +37,8 @@ class WorldMapViewer {
       Unicorn: '#800080', Scorpion: '#FF0000', Imperial: '#FFFFFF',
       Shadowlands: '#000000', Phoenix: '#FFA500', Mantis: '#006400', 'Minor Clan': '#808080'
     };
+    this.travelPapers = Object.fromEntries(Object.keys(this.clanColors).filter((clan) => clan !== 'Shadowlands').map((clan) => [clan, true]));
+    this.avoidClans = {};
 
     this.mapImage = new Image();
     this.mapImage.onload = () => {
@@ -96,8 +100,9 @@ class WorldMapViewer {
 
   setViewMode(mode) { this.viewMode = mode; this.render(); }
 
-  setStrategy(strategy) {
-    this.strategy = strategy;
+  setRoutePreference(preference, enabled) {
+    if (!(preference in this.routePreferences)) return;
+    this.routePreferences[preference] = enabled;
     if (this.startCell && this.waypoints.length) this.computePath();
   }
 
@@ -149,6 +154,7 @@ class WorldMapViewer {
   }
 
   cellTerrain(cx, cy) { return this.layers.terrain[`${cx},${cy}`] || null; }
+  cellClan(cx, cy) { return this.layers.clans[`${cx},${cy}`] || null; }
   cellHasRoad(cx, cy) { return Object.prototype.hasOwnProperty.call(this.layers.infrastructure, `${cx},${cy}`); }
 
   // Costs, skill, TN, zeni and check probability for entering a tile.
@@ -176,8 +182,11 @@ class WorldMapViewer {
     const pather = new L5RPathing({
       getTerrain: (x, y) => this.cellTerrain(x, y),
       getTileData: (x, y, mode) => this.tileData(x, y, mode),
+      getClan: (x, y) => this.cellClan(x, y),
       skillConfig: this.skillConfig,
-      strategy: this.strategy
+      travelPapers: this.travelPapers,
+      avoidClans: this.avoidClans,
+      ...this.routePreferences
     });
     this.pathResult = pather.computeRoute(this.startCell, this.waypoints);
     this.render();
@@ -187,16 +196,19 @@ class WorldMapViewer {
 
   updateResultDisplay() {
     const el = document.getElementById('pathSummary');
+    const eventTable = document.getElementById('pathEvents');
     if (!el) return;
     if (!this.pathResult) {
       el.textContent = this.startCell
         ? 'Start selected — click waypoints; the last click is the destination.'
         : 'Click a starting tile.';
+      if (eventTable) eventTable.hidden = true;
       return;
     }
     if (this.pathResult.failed) {
       const segNote = this.pathResult.failedSegment != null ? ` between waypoints ${this.pathResult.failedSegment - 1} and ${this.pathResult.failedSegment}` : '';
       el.textContent = `No route found${segNote}.`;
+      if (eventTable) eventTable.hidden = true;
       return;
     }
     const m = this.pathResult.totalMinutes;
@@ -210,6 +222,15 @@ class WorldMapViewer {
       `<strong>Mishaps:</strong> ${this.pathResult.mishaps.size} &nbsp;&middot;&nbsp; ` +
       `<strong>Tiles:</strong> ${this.pathResult.path.length - 1} &nbsp;&middot;&nbsp; ` +
       `<strong>Waypoints:</strong> ${this.waypoints.length}`;
+    if (eventTable) {
+      const rows = this.pathResult.events.map((event) =>
+        `<tr><td>${event.day}</td><td>${event.coord}</td><td>${event.event}</td><td>${event.mode}</td>` +
+        `<td>${event.terrain}</td><td>${event.clan}</td><td>${event.skill}</td><td>${event.tn}</td>` +
+        `<td>${event.result}</td><td>${event.cost}</td></tr>`
+      ).join('');
+      eventTable.querySelector('tbody').innerHTML = rows;
+      eventTable.hidden = false;
+    }
   }
 
   setZoom(z) { this.zoom = Math.min(this.maxZoom, Math.max(this.minZoom, z)); this.applyZoom(); }
