@@ -1,10 +1,14 @@
 terrain
-- infrastructure
-- mode of transport
-- event
-- skill for event
-- event chance
-- event tn
-- toll
-- inn
+- infrastructure rules
+  - transport mode rules
+    - travel time
+    - lodging cost
+    - toll cost
+    - event table:
+      - event
+        - name
+        - probability
+        - skill
+        - tn
+
 
