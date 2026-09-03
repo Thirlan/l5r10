@@ -13,12 +13,14 @@ class WorldMapGrid {
       terrain: {},
       clans: {},
       infrastructure: {},
+      settlements: {},
       text: {}
     };
 
     this.currentLayer = 'terrain';
     this.currentValue = null;
     this.fontSize = 16;
+    this.settlementLanguage = 'english';
     this.brushSize = 1;
     this.isDrawing = false;
 
@@ -57,6 +59,10 @@ class WorldMapGrid {
       this.applyZoom();
     };
     this.mapImage.src = imageSrc;
+
+    this.farmImage = new Image();
+    this.farmImage.onload = () => this.draw();
+    this.farmImage.src = '../img/map/farm.png';
 
     this.setupEventListeners();
   }
@@ -117,6 +123,8 @@ class WorldMapGrid {
         // currentValue names a single layer to erase, or null to erase them all.
         const targets = this.currentValue ? [this.layers[this.currentValue]] : Object.values(this.layers);
         targets.forEach((layer) => delete layer[key]);
+      } else if (this.currentLayer === 'settlements') {
+        this.layers.settlements[key] = this.createSettlement(this.currentValue);
       } else {
         this.layers[this.currentLayer][key] = this.currentValue;
       }
@@ -149,6 +157,20 @@ class WorldMapGrid {
 
   setFontSize(size) {
     this.fontSize = Number(size);
+  }
+
+  setSettlementLanguage(language) {
+    if (!['english', 'rokugani'].includes(language)) return;
+    this.settlementLanguage = language;
+    this.draw();
+  }
+
+  createSettlement(type) {
+    return {
+      type,
+      englishName: document.getElementById('settlementEnglishName').value.trim(),
+      rokuganiName: document.getElementById('settlementRokuganiName').value.trim()
+    };
   }
 
   setZoom(zoom) {
@@ -207,6 +229,8 @@ class WorldMapGrid {
       const [x, y] = key.split(',').map(Number);
       this.drawRoad(x, y);
     });
+
+    this.drawSettlements();
 
     this.drawGrid();
 
@@ -374,6 +398,112 @@ class WorldMapGrid {
     }
   }
 
+  drawSettlements() {
+    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
+      const [x, y] = key.split(',').map(Number);
+      this.drawSettlement(x, y, settlement);
+    });
+  }
+
+  drawSettlement(x, y, settlement) {
+    const { type, englishName = '', rokuganiName = '' } = settlement;
+    const size = this.gridSize;
+    const cx = x * size + size / 2;
+    const cy = y * size + size / 2;
+    const clan = this.layers.clans[this.getCellKey(x, y)];
+    const clanColor = this.clanColors[clan] || '#444444';
+    const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
+    const color = neutralColors[type] || clanColor;
+    const ctx = this.ctx;
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.strokeStyle = '#222222';
+    ctx.lineWidth = 1 / this.zoom;
+
+    if (type === 'Village' || type === 'City' || type === 'Capital') {
+      ctx.beginPath();
+      ctx.arc(cx, cy, type === 'Village' ? 3 : 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      if (type === 'Capital') {
+        ctx.fillStyle = '#222222';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (type === 'Fortification' || type === 'Castle' || type === 'Kyuden') {
+      const side = type === 'Fortification' ? 6 : 10;
+      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
+      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
+      if (type === 'Kyuden') {
+        ctx.fillStyle = '#222222';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy);
+    } else if (type === 'Mine') {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 5);
+      ctx.lineTo(cx - 5, cy + 4);
+      ctx.lineTo(cx + 5, cy + 4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    } else if (type === 'Lumber Mill') {
+      for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
+    } else if (type === 'Farm' && this.farmImage.complete && this.farmImage.naturalWidth) {
+      ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
+    }
+    ctx.restore();
+
+    const name = this.settlementLanguage === 'english' ? englishName : rokuganiName;
+    const label = this.settlementLanguage === 'english' ? this.englishSettlementType(type) : this.rokuganiSettlementType(type);
+    this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(type));
+  }
+
+  drawFortificationConnections(x, y, cx, cy) {
+    const ctx = this.ctx;
+    const neighbours = [[1, 0], [0, 1], [1, 1], [1, -1]];
+    ctx.beginPath();
+    neighbours.forEach(([dx, dy]) => {
+      const neighbour = this.layers.settlements[this.getCellKey(x + dx, y + dy)];
+      if (neighbour?.type !== 'Fortification') return;
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
+    });
+    ctx.stroke();
+  }
+
+  drawSettlementLabel(cx, cy, label, name, fontSize) {
+    if (!name) return;
+    this.drawMapText(name, cx, cy + this.gridSize / 2 + fontSize / 2, fontSize);
+    if (label) this.drawMapText(label, cx, cy + this.gridSize / 2 + fontSize * 1.5, fontSize);
+  }
+
+  settlementFontSize(type) {
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8 }[type] || 8;
+  }
+
+  englishSettlementType(type) {
+    return type === 'Kyuden' ? 'Palace' : type;
+  }
+
+  rokuganiSettlementType(type) {
+    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō' }[type] || type;
+  }
+
+  drawMapText(text, x, y, fontSize) {
+    this.ctx.font = `bold ${fontSize}px Arial`;
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'middle';
+    this.ctx.strokeStyle = '#FFFFFF';
+    this.ctx.lineWidth = Math.max(2, fontSize / 6);
+    this.ctx.strokeText(text, x, y);
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fillText(text, x, y);
+  }
+
   drawText(x, y, text, fontSize) {
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
@@ -399,6 +529,7 @@ class WorldMapGrid {
         terrain: parsed.terrain || {},
         clans: parsed.clans || {},
         infrastructure: parsed.infrastructure || {},
+        settlements: parsed.settlements || {},
         text: parsed.text || {}
       };
       this.draw();
@@ -431,7 +562,7 @@ class WorldMapGrid {
 
   clearAllLayers() {
     if (confirm('Are you sure you want to clear all layers?')) {
-      this.layers = { terrain: {}, clans: {}, infrastructure: {}, text: {} };
+      this.layers = { terrain: {}, clans: {}, infrastructure: {}, settlements: {}, text: {} };
       this.draw();
     }
   }

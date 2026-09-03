@@ -119,6 +119,12 @@
           <label class="radio"><input type="radio" name="viewMode" value="clan" onchange="mapViewer.setViewMode(this.value)"> Clan</label>
         </div>
 
+        <h3>Settlement Names</h3>
+        <div class="radio-row">
+          <label class="radio"><input type="radio" name="settlementLanguage" value="english" checked onchange="mapViewer.setSettlementLanguage(this.value)"> English</label>
+          <label class="radio"><input type="radio" name="settlementLanguage" value="rokugani" onchange="mapViewer.setSettlementLanguage(this.value)"> Rokugani</label>
+        </div>
+
         <h3>Route Path</h3>
         <div class="radio-row">
           <label class="radio"><input type="checkbox" onchange="mapViewer.setRoutePreference('includeRisk', this.checked)"> Safest</label>

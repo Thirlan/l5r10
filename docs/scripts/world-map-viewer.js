@@ -8,10 +8,11 @@ class WorldMapViewer {
     this.minZoom = 0.1;
     this.maxZoom = 4;
 
-    this.layers = { terrain: {}, clans: {}, infrastructure: {}, text: {} };
+    this.layers = { terrain: {}, clans: {}, infrastructure: {}, settlements: {}, text: {} };
     this.terrainCosts = {};
 
     this.viewMode = 'default';
+    this.settlementLanguage = 'english';
     this.routePreferences = { includeRisk: false, includeMoney: false };
 
     this.skillConfig = {
@@ -48,6 +49,10 @@ class WorldMapViewer {
     };
     this.mapImage.src = imageSrc;
 
+    this.farmImage = new Image();
+    this.farmImage.onload = () => this.render();
+    this.farmImage.src = '../img/map/farm.png';
+
     this.setupEventListeners();
   }
 
@@ -68,6 +73,7 @@ class WorldMapViewer {
       terrain: parsed.terrain || {},
       clans: parsed.clans || {},
       infrastructure: parsed.infrastructure || {},
+      settlements: parsed.settlements || {},
       text: parsed.text || {}
     };
     this.render();
@@ -99,6 +105,12 @@ class WorldMapViewer {
   }
 
   setViewMode(mode) { this.viewMode = mode; this.render(); }
+
+  setSettlementLanguage(language) {
+    if (!['english', 'rokugani'].includes(language)) return;
+    this.settlementLanguage = language;
+    this.render();
+  }
 
   setRoutePreference(preference, enabled) {
     if (!(preference in this.routePreferences)) return;
@@ -287,6 +299,8 @@ class WorldMapViewer {
       this.drawRoad(x, y);
     }
 
+    this.drawSettlements();
+
     this.drawGrid();
 
     if (this.pathResult && this.pathResult.path.length) {
@@ -357,6 +371,110 @@ class WorldMapViewer {
       this.ctx.arc(cx, cy, 2, 0, Math.PI * 2);
       this.ctx.fill();
     }
+  }
+
+  drawSettlements() {
+    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
+      const [x, y] = key.split(',').map(Number);
+      this.drawSettlement(x, y, settlement);
+    });
+  }
+
+  drawSettlement(x, y, settlement) {
+    const { type, englishName = '', rokuganiName = '' } = settlement;
+    const size = this.gridSize;
+    const cx = x * size + size / 2;
+    const cy = y * size + size / 2;
+    const clan = this.layers.clans[`${x},${y}`];
+    const clanColor = this.clanColors[clan] || '#444444';
+    const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
+    const color = neutralColors[type] || clanColor;
+    const ctx = this.ctx;
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.strokeStyle = '#222222';
+    ctx.lineWidth = 1 / this.zoom;
+
+    if (type === 'Village' || type === 'City' || type === 'Capital') {
+      ctx.beginPath();
+      ctx.arc(cx, cy, type === 'Village' ? 3 : 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      if (type === 'Capital') {
+        ctx.fillStyle = '#222222';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (type === 'Fortification' || type === 'Castle' || type === 'Kyuden') {
+      const side = type === 'Fortification' ? 6 : 10;
+      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
+      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
+      if (type === 'Kyuden') {
+        ctx.fillStyle = '#222222';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy);
+    } else if (type === 'Mine') {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 5);
+      ctx.lineTo(cx - 5, cy + 4);
+      ctx.lineTo(cx + 5, cy + 4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    } else if (type === 'Lumber Mill') {
+      for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
+    } else if (type === 'Farm' && this.farmImage.complete && this.farmImage.naturalWidth) {
+      ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
+    }
+    ctx.restore();
+
+    const name = this.settlementLanguage === 'english' ? englishName : rokuganiName;
+    const label = this.settlementLanguage === 'english' ? this.englishSettlementType(type) : this.rokuganiSettlementType(type);
+    if (name) {
+      const fontSize = this.settlementFontSize(type);
+      this.drawMapText(name, cx, cy + size / 2 + fontSize / 2, fontSize);
+      this.drawMapText(label, cx, cy + size / 2 + fontSize * 1.5, fontSize);
+    }
+  }
+
+  drawFortificationConnections(x, y, cx, cy) {
+    const ctx = this.ctx;
+    const neighbours = [[1, 0], [0, 1], [1, 1], [1, -1]];
+    ctx.beginPath();
+    neighbours.forEach(([dx, dy]) => {
+      const neighbour = this.layers.settlements[`${x + dx},${y + dy}`];
+      if (neighbour?.type !== 'Fortification') return;
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
+    });
+    ctx.stroke();
+  }
+
+  settlementFontSize(type) {
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8 }[type] || 8;
+  }
+
+  englishSettlementType(type) {
+    return type === 'Kyuden' ? 'Palace' : type;
+  }
+
+  rokuganiSettlementType(type) {
+    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō' }[type] || type;
+  }
+
+  drawMapText(text, x, y, fontSize) {
+    this.ctx.font = `bold ${fontSize}px Arial`;
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'middle';
+    this.ctx.strokeStyle = '#FFFFFF';
+    this.ctx.lineWidth = Math.max(2, fontSize / 6);
+    this.ctx.strokeText(text, x, y);
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fillText(text, x, y);
   }
 
   drawText(x, y, text, fontSize) {
