@@ -13,7 +13,7 @@ const DAY_START_MIN = 8 * 60;
 const DAY_END_MIN = 18 * 60;
 const MINUTES_PER_DAY = 24 * 60;
 
-const WATER_TERRAINS = new Set(['Water', 'Ocean', 'Deep Ocean']);
+const WATER_TERRAINS = new Set(['Water', 'Coastal Water', 'Ocean']);
 
 // Mode-aware A* + trip simulator. Consumes a small map-query interface so it stays UI-agnostic.
 // Config: { getTerrain, getTileData, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }

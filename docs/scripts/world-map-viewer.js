@@ -29,9 +29,9 @@ class WorldMapViewer {
     this.pathResult = null;
 
     this.terrainColors = {
-      Mountain: '#8B7355', Ocean: '#4169E1', Water: '#1E90FF', Forest: '#228B22',
+      Mountain: '#8B7355', 'Coastal Water': '#4169E1', Water: '#1E90FF', Forest: '#228B22',
       Plains: '#90EE90', Hills: '#DAA520', Deserts: '#F4A460', Marsh: '#556B2F',
-      'Deep Ocean': '#00008B', Snow: '#F0F8FF', City: '#FF6347'
+      Ocean: '#00008B', Waste: '#777777', Snow: '#F0F8FF', City: '#FF6347'
     };
     this.clanColors = {
       Crab: { border: '#00008B', fill: '#808080' },
@@ -64,6 +64,8 @@ class WorldMapViewer {
       this.applyZoom();
     };
     this.mapImage.src = imageSrc;
+
+    this.terrainImages = this.loadTerrainImages(() => this.render());
 
     this.farmImage = new Image();
     this.farmImage.onload = () => this.render();
@@ -295,7 +297,7 @@ class WorldMapViewer {
     if (terrainAlpha > 0) {
       for (const [key, name] of Object.entries(this.layers.terrain)) {
         const [x, y] = key.split(',').map(Number);
-        this.fillCell(x, y, this.terrainColors[name], terrainAlpha);
+        this.drawTerrainCell(x, y, name, terrainAlpha);
       }
     }
 
@@ -354,6 +356,35 @@ class WorldMapViewer {
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
     this.ctx.restore();
+  }
+
+  loadTerrainImages(onLoad) {
+    const filenames = {
+      Plains: 'plain.png',
+      Water: 'water.png',
+      Deserts: 'desert.png',
+      'Coastal Water': 'coastal_water.png',
+      Ocean: 'ocean.png',
+      Waste: 'waste.png'
+    };
+    return Object.fromEntries(Object.entries(filenames).map(([terrain, filename]) => {
+      const image = new Image();
+      image.onload = onLoad;
+      image.src = `../img/map/${filename}`;
+      return [terrain, image];
+    }));
+  }
+
+  drawTerrainCell(x, y, terrain, alpha) {
+    const image = this.terrainImages[terrain];
+    if (image?.complete && image.naturalWidth) {
+      this.ctx.save();
+      this.ctx.globalAlpha = alpha;
+      this.ctx.drawImage(image, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+      this.ctx.restore();
+      return;
+    }
+    this.fillCell(x, y, this.terrainColors[terrain], alpha);
   }
 
   drawGrid() {
