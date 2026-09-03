@@ -72,6 +72,10 @@ class WorldMapGrid {
     this.farmImage.onload = () => this.draw();
     this.farmImage.src = '../img/map/farm.png';
 
+    this.mineImage = new Image();
+    this.mineImage.onload = () => this.draw();
+    this.mineImage.src = '../img/map/mine.png';
+
     this.setupEventListeners();
   }
 
@@ -452,14 +456,8 @@ class WorldMapGrid {
         ctx.fill();
       }
       if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, borderColor);
-    } else if (type === 'Mine') {
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - 5);
-      ctx.lineTo(cx - 5, cy + 4);
-      ctx.lineTo(cx + 5, cy + 4);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
+    } else if (type === 'Mine' && this.mineImage.complete && this.mineImage.naturalWidth) {
+      ctx.drawImage(this.mineImage, cx - 6, cy - 6, 12, 12);
     } else if (type === 'Lumber Mill') {
       for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
     } else if (type === 'Farm' && this.farmImage.complete && this.farmImage.naturalWidth) {
