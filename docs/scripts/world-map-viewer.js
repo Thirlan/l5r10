@@ -34,9 +34,25 @@ class WorldMapViewer {
       'Deep Ocean': '#00008B', Snow: '#F0F8FF', City: '#FF6347'
     };
     this.clanColors = {
-      Crane: '#87CEEB', Lion: '#8B4513', Crab: '#00008B', Dragon: '#90EE90',
-      Unicorn: '#800080', Scorpion: '#FF0000', Imperial: '#FFFFFF',
-      Shadowlands: '#000000', Phoenix: '#FFA500', Mantis: '#006400', 'Minor Clan': '#808080'
+      Crab: { border: '#00008B', fill: '#808080' },
+      Crane: { border: '#008080', fill: '#FFFFFF' },
+      Dragon: { border: '#228B22', fill: '#FFFF00' },
+      Lion: { border: '#8B4513', fill: '#D4A017' },
+      Phoenix: { border: '#FFD700', fill: '#FFA500' },
+      Scorpion: { border: '#FF0000', fill: '#000000' },
+      Unicorn: { border: '#800080', fill: '#FFFF00' },
+      Imperial: { border: '#D4AF37', fill: '#FFFFFF' },
+      Hare: { border: '#FF0000', fill: '#FFFFFF' },
+      Centipede: { border: '#FFA500', fill: '#8B4513' },
+      Fox: { border: '#C4A484', fill: '#808080' },
+      Badger: { border: '#808080', fill: '#000000' },
+      Dragonfly: { border: '#00008B', fill: '#FFFF00' },
+      Falcon: { border: '#228B22', fill: '#808080' },
+      Sparrow: { border: '#F0E68C', fill: '#000000' },
+      Tortoise: { border: '#000033', fill: '#FFFF00' },
+      Mantis: { border: '#006400', fill: '#90EE90' },
+      Shadowlands: { border: '#000000', fill: '#444444' },
+      'Minor Clan': { border: '#808080', fill: '#B0B0B0' }
     };
     this.travelPapers = Object.fromEntries(Object.keys(this.clanColors).filter((clan) => clan !== 'Shadowlands').map((clan) => [clan, true]));
     this.avoidClans = {};
@@ -286,11 +302,11 @@ class WorldMapViewer {
       }
       const fillAlpha = this.viewMode === 'clan' ? 0.4 : 0.15;
       for (const [clan, cells] of Object.entries(cellsByClan)) {
-        const color = this.clanColors[clan];
-        if (!color) continue;
+        const colors = this.clanColors[clan];
+        if (!colors) continue;
         const polygons = this.traceClanPolygons(cells);
         if (!polygons.length) continue;
-        this.drawClanShape(cells, polygons, color, fillAlpha);
+        this.drawClanShape(cells, polygons, colors, fillAlpha);
       }
     }
 
@@ -386,7 +402,7 @@ class WorldMapViewer {
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
     const clan = settlement.clan || this.layers.clans[`${x},${y}`];
-    const clanColor = this.clanColors[clan] || '#444444';
+    const clanColor = this.clanColors[clan]?.border || '#444444';
     const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
     const color = neutralColors[type] || clanColor;
     const ctx = this.ctx;
@@ -530,11 +546,11 @@ class WorldMapViewer {
     ctx.restore();
   }
 
-  drawClanShape(cells, polygons, color, fillAlpha) {
+  drawClanShape(cells, polygons, colors, fillAlpha) {
     const size = this.gridSize;
     this.ctx.save();
     this.ctx.globalAlpha = fillAlpha;
-    this.ctx.fillStyle = color;
+    this.ctx.fillStyle = colors.fill;
     for (const key of cells) {
       const [cx, cy] = key.split(',').map(Number);
       this.ctx.fillRect(cx * size, cy * size, size, size);
@@ -556,10 +572,10 @@ class WorldMapViewer {
     }
     this.ctx.lineJoin = 'miter';
     this.ctx.lineCap = 'square';
-    this.ctx.strokeStyle = color;
+    this.ctx.strokeStyle = colors.border;
     this.ctx.lineWidth = 12 / this.zoom;
     this.ctx.stroke(stroke);
-    this.ctx.strokeStyle = this.tintClanColor(color);
+    this.ctx.strokeStyle = colors.fill;
     this.ctx.lineWidth = 6 / this.zoom;
     this.ctx.stroke(stroke);
     this.ctx.strokeStyle = '#444444';
