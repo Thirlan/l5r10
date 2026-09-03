@@ -385,7 +385,7 @@ class WorldMapViewer {
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
-    const clan = this.layers.clans[`${x},${y}`];
+    const clan = settlement.clan || this.layers.clans[`${x},${y}`];
     const clanColor = this.clanColors[clan] || '#444444';
     const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
     const color = neutralColors[type] || clanColor;
@@ -416,7 +416,7 @@ class WorldMapViewer {
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
-      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy);
+      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, color);
     } else if (type === 'Mine') {
       ctx.beginPath();
       ctx.moveTo(cx, cy - 5);
@@ -441,9 +441,13 @@ class WorldMapViewer {
     }
   }
 
-  drawFortificationConnections(x, y, cx, cy) {
+  drawFortificationConnections(x, y, cx, cy, color) {
     const ctx = this.ctx;
     const neighbours = [[1, 0], [0, 1], [1, 1], [1, -1]];
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3 / this.zoom;
+    ctx.lineCap = 'round';
     ctx.beginPath();
     neighbours.forEach(([dx, dy]) => {
       const neighbour = this.layers.settlements[`${x + dx},${y + dy}`];
@@ -452,6 +456,7 @@ class WorldMapViewer {
       ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
     });
     ctx.stroke();
+    ctx.restore();
   }
 
   settlementFontSize(type) {
