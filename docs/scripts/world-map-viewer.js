@@ -35,7 +35,7 @@ class WorldMapViewer {
     };
     this.clanColors = {
       Crab: { border: '#00008B', fill: '#808080' },
-      Crane: { border: '#008080', fill: '#FFFFFF' },
+      Crane: { border: '#87CEEB', fill: '#FFFFFF' },
       Dragon: { border: '#228B22', fill: '#FFFF00' },
       Lion: { border: '#8B4513', fill: '#D4A017' },
       Phoenix: { border: '#FFD700', fill: '#FFA500' },
@@ -402,13 +402,15 @@ class WorldMapViewer {
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
     const clan = settlement.clan || this.layers.clans[`${x},${y}`];
-    const clanColor = this.clanColors[clan]?.border || '#444444';
+    const clanColors = this.clanColors[clan] || { border: '#444444', fill: '#DDDDDD' };
     const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
-    const color = neutralColors[type] || clanColor;
+    const isNeutral = type in neutralColors;
+    const fillColor = neutralColors[type] || clanColors.fill;
+    const borderColor = isNeutral ? '#222222' : clanColors.border;
     const ctx = this.ctx;
     ctx.save();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = '#222222';
+    ctx.fillStyle = fillColor;
+    ctx.strokeStyle = borderColor;
     ctx.lineWidth = 1 / this.zoom;
 
     if (type === 'Village' || type === 'City' || type === 'Capital') {
@@ -417,7 +419,7 @@ class WorldMapViewer {
       ctx.fill();
       ctx.stroke();
       if (type === 'Capital') {
-        ctx.fillStyle = '#222222';
+        ctx.fillStyle = borderColor;
         ctx.beginPath();
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
@@ -427,12 +429,12 @@ class WorldMapViewer {
       ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
       ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
       if (type === 'Kyuden') {
-        ctx.fillStyle = '#222222';
+        ctx.fillStyle = borderColor;
         ctx.beginPath();
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
-      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, color);
+      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, borderColor);
     } else if (type === 'Mine') {
       ctx.beginPath();
       ctx.moveTo(cx, cy - 5);
