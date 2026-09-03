@@ -1,0 +1,15 @@
+terrain
+- infrastructure rules
+  - transport mode rules
+    - lodging cost
+    - toll cost
+    - night/day rules
+      - travel time
+      - event table:
+        - event
+          - name
+          - probability
+          - skill
+          - tn
+
+
