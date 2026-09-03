@@ -401,7 +401,7 @@ class WorldMapViewer {
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
-    const clan = settlement.clan || this.layers.clans[`${x},${y}`];
+    const clan = this.layers.clans[`${x},${y}`];
     const clanColors = this.clanColors[clan] || { border: '#444444', fill: '#DDDDDD' };
     const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
     const isNeutral = type in neutralColors;
