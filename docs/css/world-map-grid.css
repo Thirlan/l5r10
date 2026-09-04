@@ -209,6 +209,23 @@
   background: center / contain no-repeat url('../img/map/farm.png');
 }
 
+.settlement-small-shrine,
+.settlement-large-shrine {
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  margin-left: 1px;
+  margin-right: 9px;
+  background: center / contain no-repeat url('../img/map/shrine.png');
+}
+
+.settlement-large-shrine {
+  width: 16px;
+  height: 16px;
+  margin-left: -1px;
+  margin-right: 7px;
+}
+
 .control-section {
   margin-bottom: 15px;
 }

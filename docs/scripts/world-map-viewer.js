@@ -54,6 +54,11 @@ class WorldMapViewer {
       Shadowlands: { border: '#000000', fill: '#444444' },
       'Minor Clan': { border: '#808080', fill: '#B0B0B0' }
     };
+    this.infrastructureStyles = {
+      Road: { color: '#5C3A1E', lineWidth: 3, markerRadius: 2 },
+      Footpath: { color: '#A97443', lineWidth: 1.5, markerRadius: 1.5 }
+    };
+    this.shrineIconCache = {};
     this.travelPapers = Object.fromEntries(Object.keys(this.clanColors).filter((clan) => clan !== 'Shadowlands').map((clan) => [clan, true]));
     this.avoidClans = {};
 
@@ -74,6 +79,10 @@ class WorldMapViewer {
     this.mineImage = new Image();
     this.mineImage.onload = () => this.render();
     this.mineImage.src = '../img/map/mine.png';
+
+    this.shrineImage = new Image();
+    this.shrineImage.onload = () => this.render();
+    this.shrineImage.src = '../img/map/shrine.png';
 
     this.setupEventListeners();
   }
@@ -316,9 +325,9 @@ class WorldMapViewer {
       }
     }
 
-    for (const key of Object.keys(this.layers.infrastructure)) {
+    for (const [key, infrastructure] of Object.entries(this.layers.infrastructure)) {
       const [x, y] = key.split(',').map(Number);
-      this.drawRoad(x, y);
+      this.drawInfrastructure(x, y, infrastructure);
     }
 
     this.drawSettlements();
@@ -345,7 +354,7 @@ class WorldMapViewer {
 
     for (const [key, data] of Object.entries(this.layers.text)) {
       const [x, y] = key.split(',').map(Number);
-      this.drawText(x, y, data.text, data.fontSize);
+      this.drawText(x, y, this.textContent(data), data.fontSize);
     }
   }
 
@@ -399,16 +408,22 @@ class WorldMapViewer {
     }
   }
 
-  drawRoad(x, y) {
+  drawInfrastructure(x, y, infrastructure) {
+    const style = this.infrastructureStyles[infrastructure] || this.infrastructureStyles.Road;
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
-    this.ctx.strokeStyle = '#5C3A1E';
-    this.ctx.fillStyle = '#5C3A1E';
-    this.ctx.lineWidth = 3 / this.zoom;
+    this.ctx.strokeStyle = style.color;
+    this.ctx.fillStyle = style.color;
+    this.ctx.lineWidth = style.lineWidth / this.zoom;
     this.ctx.lineCap = 'round';
     const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
     forward.forEach(([dx, dy]) => {
-      if (!(`${x + dx},${y + dy}` in this.layers.infrastructure)) return;
+      const neighbour = this.layers.infrastructure[`${x + dx},${y + dy}`];
+      if (!neighbour) return;
+      const neighbourStyle = this.infrastructureStyles[neighbour] || this.infrastructureStyles.Road;
+      const segmentStyle = style.lineWidth <= neighbourStyle.lineWidth ? style : neighbourStyle;
+      this.ctx.strokeStyle = segmentStyle.color;
+      this.ctx.lineWidth = segmentStyle.lineWidth / this.zoom;
       this.ctx.beginPath();
       this.ctx.moveTo(cx, cy);
       this.ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
@@ -416,10 +431,10 @@ class WorldMapViewer {
     });
     const isolated = forward
       .flatMap(([dx, dy]) => [[dx, dy], [-dx, -dy]])
-      .every(([dx, dy]) => !(`${x + dx},${y + dy}` in this.layers.infrastructure));
+      .every(([dx, dy]) => !this.layers.infrastructure[`${x + dx},${y + dy}`]);
     if (isolated) {
       this.ctx.beginPath();
-      this.ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+      this.ctx.arc(cx, cy, style.markerRadius, 0, Math.PI * 2);
       this.ctx.fill();
     }
   }
@@ -427,12 +442,16 @@ class WorldMapViewer {
   drawSettlements() {
     Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawSettlement(x, y, settlement);
+      this.drawSettlementMarker(x, y, settlement);
+    });
+    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
+      const [x, y] = key.split(',').map(Number);
+      this.drawSettlementText(x, y, settlement);
     });
   }
 
-  drawSettlement(x, y, settlement) {
-    const { type, englishName = '', rokuganiName = '' } = settlement;
+  drawSettlementMarker(x, y, settlement) {
+    const { type } = settlement;
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
@@ -470,6 +489,8 @@ class WorldMapViewer {
         ctx.fill();
       }
       if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, borderColor);
+    }  else if (type === 'Small Shrine' || type === 'Large Shrine') {
+      this.drawShrine(cx, cy, clanColors.border, type === 'Small Shrine' ? 0.75 : 1);
     } else if (type === 'Mine' && this.mineImage.complete && this.mineImage.naturalWidth) {
       ctx.drawImage(this.mineImage, cx - 6, cy - 6, 12, 12);
     } else if (type === 'Lumber Mill') {
@@ -478,6 +499,13 @@ class WorldMapViewer {
       ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
     }
     ctx.restore();
+  }
+
+  drawSettlementText(x, y, settlement) {
+    const { type, englishName = '', rokuganiName = '' } = settlement;
+    const size = this.gridSize;
+    const cx = x * size + size / 2;
+    const cy = y * size + size / 2;
 
     const name = this.settlementLanguage === 'english' ? englishName : rokuganiName;
     const label = this.settlementLanguage === 'english' ? this.englishSettlementType(type) : this.rokuganiSettlementType(type);
@@ -486,6 +514,27 @@ class WorldMapViewer {
       this.drawMapText(name, cx, cy + size / 2 + fontSize / 2, fontSize);
       this.drawMapText(label, cx, cy + size / 2 + fontSize * 1.5, fontSize);
     }
+  }
+
+  drawShrine(cx, cy, color, scale) {
+    if (!this.shrineImage.complete || !this.shrineImage.naturalWidth) return;
+    const image = this.shrineIcon(color, scale);
+    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
+  }
+
+  shrineIcon(color, scale) {
+    const key = `${color}:${scale}`;
+    if (this.shrineIconCache[key]) return this.shrineIconCache[key];
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(this.shrineImage.naturalWidth * scale);
+    canvas.height = Math.round(this.shrineImage.naturalHeight * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(this.shrineImage, 0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.shrineIconCache[key] = canvas;
+    return canvas;
   }
 
   drawFortificationConnections(x, y, cx, cy, color) {
@@ -507,7 +556,7 @@ class WorldMapViewer {
   }
 
   settlementFontSize(type) {
-    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8 }[type] || 8;
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8, 'Small Shrine': 8, 'Large Shrine': 10 }[type] || 8;
   }
 
   englishSettlementType(type) {
@@ -515,10 +564,18 @@ class WorldMapViewer {
   }
 
   rokuganiSettlementType(type) {
-    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō' }[type] || type;
+    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō', 'Small Shrine': 'Shōsha', 'Large Shrine': 'Taisha' }[type] || type;
+  }
+
+  textContent(data) {
+    if (typeof data === 'string') return data;
+    return this.settlementLanguage === 'english'
+      ? data.englishText || data.text || data.rokuganiText || ''
+      : data.rokuganiText || data.text || data.englishText || '';
   }
 
   drawMapText(text, x, y, fontSize) {
+    if (!text) return;
     this.ctx.font = `bold ${fontSize}px Arial`;
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'middle';
@@ -530,6 +587,7 @@ class WorldMapViewer {
   }
 
   drawText(x, y, text, fontSize) {
+    if (!text) return;
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
     this.ctx.font = `bold ${fontSize}px Arial`;

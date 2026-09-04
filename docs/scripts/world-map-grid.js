@@ -61,6 +61,12 @@ class WorldMapGrid {
       'Minor Clan': { border: '#808080', fill: '#B0B0B0' }
     };
 
+    this.infrastructureStyles = {
+      Road: { color: '#5C3A1E', lineWidth: 3, markerRadius: 2 },
+      Footpath: { color: '#A97443', lineWidth: 1.5, markerRadius: 1.5 }
+    };
+    this.shrineIconCache = {};
+
     this.mapImage = new Image();
     this.mapImage.onload = () => {
       this.mapWidth = this.mapImage.naturalWidth;
@@ -78,6 +84,10 @@ class WorldMapGrid {
     this.mineImage = new Image();
     this.mineImage.onload = () => this.draw();
     this.mineImage.src = '../img/map/mine.png';
+
+    this.shrineImage = new Image();
+    this.shrineImage.onload = () => this.draw();
+    this.shrineImage.src = '../img/map/shrine.png';
 
     this.setupEventListeners();
   }
@@ -121,12 +131,9 @@ class WorldMapGrid {
     if (x < 0 || y < 0) return;
 
     if (this.currentLayer === 'text') {
-      this.isDrawing = false;
-      const text = prompt('Enter text:');
-      if (text) {
-        this.layers.text[this.getCellKey(x, y)] = { text, fontSize: Number(this.fontSize) };
-        this.draw();
-      }
+      const textEntry = this.createTextEntry();
+      if (textEntry.englishText || textEntry.rokuganiText) this.layers.text[this.getCellKey(x, y)] = textEntry;
+      this.draw();
       return;
     }
 
@@ -188,6 +195,14 @@ class WorldMapGrid {
     };
   }
 
+  createTextEntry() {
+    return {
+      englishText: document.getElementById('textEnglish').value.trim(),
+      rokuganiText: document.getElementById('textRokugani').value.trim(),
+      fontSize: Number(this.fontSize)
+    };
+  }
+
   setZoom(zoom) {
     this.zoom = Math.min(this.maxZoom, Math.max(this.minZoom, zoom));
     this.applyZoom();
@@ -240,9 +255,9 @@ class WorldMapGrid {
 
     this.drawClanBoundaries();
 
-    Object.entries(this.layers.infrastructure).forEach(([key]) => {
+    Object.entries(this.layers.infrastructure).forEach(([key, infrastructure]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawRoad(x, y);
+      this.drawInfrastructure(x, y, infrastructure);
     });
 
     this.drawSettlements();
@@ -251,7 +266,7 @@ class WorldMapGrid {
 
     Object.entries(this.layers.text).forEach(([key, data]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawText(x, y, data.text, data.fontSize);
+      this.drawText(x, y, this.textContent(data), data.fontSize);
     });
   }
 
@@ -409,19 +424,25 @@ class WorldMapGrid {
     return `#${[mix(r), mix(g), mix(b)].map((n) => n.toString(16).padStart(2, '0')).join('')}`;
   }
 
-  drawRoad(x, y) {
+  drawInfrastructure(x, y, infrastructure) {
+    const style = this.infrastructureStyles[infrastructure] || this.infrastructureStyles.Road;
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
 
-    this.ctx.strokeStyle = '#5C3A1E';
-    this.ctx.fillStyle = '#5C3A1E';
-    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = style.color;
+    this.ctx.fillStyle = style.color;
+    this.ctx.lineWidth = style.lineWidth;
     this.ctx.lineCap = 'round';
 
     // Only forward neighbours, so each connection is drawn once.
     const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
     forward.forEach(([dx, dy]) => {
-      if (!(this.getCellKey(x + dx, y + dy) in this.layers.infrastructure)) return;
+      const neighbour = this.layers.infrastructure[this.getCellKey(x + dx, y + dy)];
+      if (!neighbour) return;
+      const neighbourStyle = this.infrastructureStyles[neighbour] || this.infrastructureStyles.Road;
+      const segmentStyle = style.lineWidth <= neighbourStyle.lineWidth ? style : neighbourStyle;
+      this.ctx.strokeStyle = segmentStyle.color;
+      this.ctx.lineWidth = segmentStyle.lineWidth;
       this.ctx.beginPath();
       this.ctx.moveTo(cx, cy);
       this.ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
@@ -430,11 +451,11 @@ class WorldMapGrid {
 
     const isolated = forward
       .flatMap(([dx, dy]) => [[dx, dy], [-dx, -dy]])
-      .every(([dx, dy]) => !(this.getCellKey(x + dx, y + dy) in this.layers.infrastructure));
+      .every(([dx, dy]) => !this.layers.infrastructure[this.getCellKey(x + dx, y + dy)]);
 
     if (isolated) {
       this.ctx.beginPath();
-      this.ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+      this.ctx.arc(cx, cy, style.markerRadius, 0, Math.PI * 2);
       this.ctx.fill();
     }
   }
@@ -442,12 +463,16 @@ class WorldMapGrid {
   drawSettlements() {
     Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
       const [x, y] = key.split(',').map(Number);
-      this.drawSettlement(x, y, settlement);
+      this.drawSettlementMarker(x, y, settlement);
+    });
+    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
+      const [x, y] = key.split(',').map(Number);
+      this.drawSettlementText(x, y, settlement);
     });
   }
 
-  drawSettlement(x, y, settlement) {
-    const { type, englishName = '', rokuganiName = '' } = settlement;
+  drawSettlementMarker(x, y, settlement) {
+    const { type } = settlement;
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
@@ -491,12 +516,41 @@ class WorldMapGrid {
       for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
     } else if (type === 'Farm' && this.farmImage.complete && this.farmImage.naturalWidth) {
       ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
+    } else if (type === 'Small Shrine' || type === 'Large Shrine') {
+      this.drawShrine(cx, cy, clanColors.border, type === 'Small Shrine' ? 0.75 : 1);
     }
     ctx.restore();
+  }
+
+  drawSettlementText(x, y, settlement) {
+    const { type, englishName = '', rokuganiName = '' } = settlement;
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
 
     const name = this.settlementLanguage === 'english' ? englishName : rokuganiName;
     const label = this.settlementLanguage === 'english' ? this.englishSettlementType(type) : this.rokuganiSettlementType(type);
     this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(type));
+  }
+
+  drawShrine(cx, cy, color, scale) {
+    if (!this.shrineImage.complete || !this.shrineImage.naturalWidth) return;
+    const image = this.shrineIcon(color, scale);
+    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
+  }
+
+  shrineIcon(color, scale) {
+    const key = `${color}:${scale}`;
+    if (this.shrineIconCache[key]) return this.shrineIconCache[key];
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(this.shrineImage.naturalWidth * scale);
+    canvas.height = Math.round(this.shrineImage.naturalHeight * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(this.shrineImage, 0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.shrineIconCache[key] = canvas;
+    return canvas;
   }
 
   drawFortificationConnections(x, y, cx, cy, color) {
@@ -524,7 +578,7 @@ class WorldMapGrid {
   }
 
   settlementFontSize(type) {
-    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8 }[type] || 8;
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8, 'Small Shrine': 8, 'Large Shrine': 10 }[type] || 8;
   }
 
   englishSettlementType(type) {
@@ -532,10 +586,18 @@ class WorldMapGrid {
   }
 
   rokuganiSettlementType(type) {
-    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō' }[type] || type;
+    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō', 'Small Shrine': 'Shōsha', 'Large Shrine': 'Taisha' }[type] || type;
+  }
+
+  textContent(data) {
+    if (typeof data === 'string') return data;
+    return this.settlementLanguage === 'english'
+      ? data.englishText || data.text || data.rokuganiText || ''
+      : data.rokuganiText || data.text || data.englishText || '';
   }
 
   drawMapText(text, x, y, fontSize) {
+    if (!text) return;
     this.ctx.font = `bold ${fontSize}px Arial`;
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'middle';
@@ -547,6 +609,7 @@ class WorldMapGrid {
   }
 
   drawText(x, y, text, fontSize) {
+    if (!text) return;
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
 

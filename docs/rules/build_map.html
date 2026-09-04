@@ -142,8 +142,11 @@
         <button class="tool-button" onclick="mapGrid.selectTool('road', 'Road', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #f1b17d;"></span>Road
         </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('footpath', 'Footpath', 'infrastructure'); updateActiveButton(this);">
+          <span class="terrain-color" style="background: linear-gradient(to bottom, transparent 40%, #A97443 40% 60%, transparent 60%);"></span>Footpath
+        </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'infrastructure', 'erase'); updateActiveButton(this);">
-          Erase Road
+          Erase Infrastructure
         </button>
 
         <h3 style="margin-top: 20px;">Erase</h3>
@@ -179,6 +182,8 @@
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Mine', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-mine"></span>Mine</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Lumber Mill', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-lumber-mill"></span>Lumber Mill</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Farm', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-farm"></span>Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Small Temple', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-small-temple"></span>Small Shrine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Large Temple', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-large-temple"></span>Large Shrine</button>
         <div class="control-section" style="margin-top: 15px;">
           <label for="settlementEnglishName">English Name</label>
           <input type="text" id="settlementEnglishName">
@@ -198,6 +203,14 @@
       <!-- Text Layer & File Operations -->
       <div class="control-panel">
         <h3>Text Layer</h3>
+        <div class="control-section">
+          <label for="textEnglish">English Text</label>
+          <input type="text" id="textEnglish">
+        </div>
+        <div class="control-section">
+          <label for="textRokugani">Rokugani Text</label>
+          <input type="text" id="textRokugani">
+        </div>
         <div class="control-section">
           <label for="fontSize">Font Size:</label>
           <input type="number" id="fontSize" min="8" max="48" value="16" onchange="mapGrid.setFontSize(this.value)">
