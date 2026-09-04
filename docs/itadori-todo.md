@@ -5,6 +5,9 @@ A comprehensive rewrite of Legend of the Five Rings 4th edition rules to clarify
 
 **Edition Name:** Itadori Edition (temporary - references the collaborative nature of this project)
 
+
+Note: Cities have populations of 10,000 as per the Atlas entry in Sunda Mizu (Clear Water Village, really a city)
+
 ---
 
 ## Table of Contents
