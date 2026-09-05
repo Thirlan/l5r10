@@ -1,5 +1,6 @@
 const MODE_FOOT = 'foot';
-const MODE_BOAT = 'boat';
+const MODE_RIVER_BOAT = 'river boat';
+const MODE_SHIP = 'ship';
 const MODE_SWIM = 'swim';
 
 const MISHAP_PENALTY_MIN = 1440;
@@ -18,9 +19,10 @@ const WATER_TERRAINS = new Set(['Water', 'Coastal Water', 'Ocean']);
 // Mode-aware A* + trip simulator. Consumes a small map-query interface so it stays UI-agnostic.
 // Config: { getTerrain, getTileData, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }
 class L5RPathing {
-  constructor({ getTerrain, getTileData, getClan = () => null, skillConfig, travelPapers = {}, avoidClans = {}, includeRisk = false, includeMoney = false }) {
+  constructor({ getTerrain, getTileData, getInfrastructure = () => null, getClan = () => null, skillConfig, travelPapers = {}, avoidClans = {}, includeRisk = false, includeMoney = false }) {
     this.getTerrain = getTerrain;
     this.getTileData = getTileData;
+    this.getInfrastructure = getInfrastructure;
     this.getClan = getClan;
     this.skillConfig = skillConfig;
     this.travelPapers = travelPapers;
@@ -35,13 +37,14 @@ class L5RPathing {
     const terrain = this.getTerrain(cell.x, cell.y);
     if (!terrain || !WATER_TERRAINS.has(terrain)) return MODE_FOOT;
     const data = this.getTileData(cell.x, cell.y, MODE_FOOT);
-    return data && data.hasRoad ? MODE_FOOT : MODE_BOAT;
+    if (data && data.hasRoad) return MODE_FOOT;
+    return terrain === 'Water' ? MODE_RIVER_BOAT : MODE_SHIP;
   }
 
   // Returns every valid { toMode, cost, zeni, checks, avoidPenalty } for entering `to` from `from` in `fromMode`.
   transitions(from, fromMode, to) {
     const results = [];
-    for (const toMode of [MODE_FOOT, MODE_BOAT, MODE_SWIM]) {
+    for (const toMode of [MODE_FOOT, MODE_RIVER_BOAT, MODE_SHIP, MODE_SWIM]) {
       const t = this.transitionAs(from, fromMode, to, toMode);
       if (t) results.push(t);
     }
@@ -57,6 +60,7 @@ class L5RPathing {
     if (!toData || toData.cost === null) return null;
 
     const toWater = WATER_TERRAINS.has(toT);
+    const fromInfrastructure = this.getInfrastructure(from.x, from.y);
     const tileProb = toData.prob ?? 1;
     const sailingCheck = { skill: 'sailing', tn: toData.tn, timePenalty: MISHAP_PENALTY_MIN, riskPenalty: MISHAP_PENALTY_MIN, probability: tileProb };
     const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, timePenalty: 0, riskPenalty: DEATH_PENALTY, probability: 1 };
@@ -87,20 +91,34 @@ class L5RPathing {
         if (toData.hasRoad) return transition(tileCheck ? [tileCheck] : []);
         return null;
       }
-      if (fromMode === MODE_BOAT) return toT === 'City' ? transition(tileCheck ? [tileCheck] : []) : null;
+      if (fromMode === MODE_RIVER_BOAT || fromMode === MODE_SHIP) {
+        return toT === 'City' ? transition(tileCheck ? [tileCheck] : []) : null;
+      }
       if (fromMode === MODE_SWIM) return !toWater ? transition(tileCheck ? [tileCheck] : []) : null;
       return null;
     }
-    if (toMode === MODE_BOAT) {
+    if (toMode === MODE_RIVER_BOAT) {
       if (fromMode === MODE_FOOT) {
-        if (fromT === 'City' && toWater) {
+        if (toT === 'Water' && ['Small Port', 'Large Port'].includes(fromInfrastructure)) {
           const result = transition([sailingCheck]);
           result.cost += BOAT_BOARDING_MIN;
           return result;
         }
         return null;
       }
-      if (fromMode === MODE_BOAT) return toWater ? transition([sailingCheck]) : null;
+      if (fromMode === MODE_RIVER_BOAT) return toT === 'Water' ? transition([sailingCheck]) : null;
+      return null;
+    }
+    if (toMode === MODE_SHIP) {
+      if (fromMode === MODE_FOOT) {
+        if (toWater && fromInfrastructure === 'Large Port') {
+          const result = transition([sailingCheck]);
+          result.cost += BOAT_BOARDING_MIN;
+          return result;
+        }
+        return null;
+      }
+      if (fromMode === MODE_SHIP) return toWater ? transition([sailingCheck]) : null;
       return null;
     }
     if (toMode === MODE_SWIM) {
