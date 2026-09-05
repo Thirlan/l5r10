@@ -63,7 +63,9 @@ class WorldMapGrid {
 
     this.infrastructureStyles = {
       Road: { color: '#5C3A1E', lineWidth: 3, markerRadius: 2 },
-      Footpath: { color: '#A97443', lineWidth: 1.5, markerRadius: 1.5 }
+      Footpath: { color: '#A97443', lineWidth: 1.5, markerRadius: 1.5 },
+      'Small Port': { color: '#D2B48C', marker: 'p' },
+      'Large Port': { color: '#8B4513', marker: 'P' }
     };
     this.shrineIconCache = {};
 
@@ -429,6 +431,17 @@ class WorldMapGrid {
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
 
+    if (style.marker) {
+      this.ctx.save();
+      this.ctx.fillStyle = style.color;
+      this.ctx.font = `bold ${this.gridSize * 0.75}px Arial`;
+      this.ctx.textAlign = 'left';
+      this.ctx.textBaseline = 'top';
+      this.ctx.fillText(style.marker, x * this.gridSize + 1, y * this.gridSize + 1);
+      this.ctx.restore();
+      return;
+    }
+
     this.ctx.strokeStyle = style.color;
     this.ctx.fillStyle = style.color;
     this.ctx.lineWidth = style.lineWidth;
@@ -438,7 +451,7 @@ class WorldMapGrid {
     const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
     forward.forEach(([dx, dy]) => {
       const neighbour = this.layers.infrastructure[this.getCellKey(x + dx, y + dy)];
-      if (!neighbour) return;
+      if (!this.isPathInfrastructure(neighbour)) return;
       const neighbourStyle = this.infrastructureStyles[neighbour] || this.infrastructureStyles.Road;
       const segmentStyle = style.lineWidth <= neighbourStyle.lineWidth ? style : neighbourStyle;
       this.ctx.strokeStyle = segmentStyle.color;
@@ -451,13 +464,17 @@ class WorldMapGrid {
 
     const isolated = forward
       .flatMap(([dx, dy]) => [[dx, dy], [-dx, -dy]])
-      .every(([dx, dy]) => !this.layers.infrastructure[this.getCellKey(x + dx, y + dy)]);
+      .every(([dx, dy]) => !this.isPathInfrastructure(this.layers.infrastructure[this.getCellKey(x + dx, y + dy)]));
 
     if (isolated) {
       this.ctx.beginPath();
       this.ctx.arc(cx, cy, style.markerRadius, 0, Math.PI * 2);
       this.ctx.fill();
     }
+  }
+
+  isPathInfrastructure(infrastructure) {
+    return infrastructure === 'Road' || infrastructure === 'Footpath';
   }
 
   drawSettlements() {
