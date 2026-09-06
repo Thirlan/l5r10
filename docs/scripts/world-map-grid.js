@@ -14,6 +14,7 @@ class WorldMapGrid {
     this.layerMaps = {};
 
     this.grid = {}; // Key "x,y" -> { terrain, climate, vegetation, river, resource, infrastructure, clan, settlement, englishName, rokuganiName, text }
+    this.tileImageMap = {};
 
     this.currentLayer = "terrain";
     this.currentValue = null;
@@ -43,8 +44,6 @@ class WorldMapGrid {
     this.shrineImage.onload = () => this.draw();
     this.shrineImage.src = "../img/map/shrine.png";
 
-    this.terrainImages = {};
-
     this.setupEventListeners();
     this.loadLayersConfig();
   }
@@ -58,7 +57,8 @@ class WorldMapGrid {
         this.drawOrder = this.layersConfig.drawOrder;
       }
       this.buildLayerMaps();
-      this.terrainImages = this.loadTerrainImages(() => this.draw());
+
+      await this.loadMapTileImages();
 
       const dataUrl = this.canvas.dataset.mapData;
       if (dataUrl) {
@@ -68,6 +68,23 @@ class WorldMapGrid {
       this.draw();
     } catch (err) {
       console.error("Failed to load layers.json:", err);
+    }
+  }
+
+  async loadMapTileImages() {
+    try {
+      const res = await fetch("../scripts/map_tile_img.json");
+      if (!res.ok) return;
+      const entries = await res.json();
+      for (const entry of entries) {
+        const key = entry.terrain + "," + entry.climate + "," + entry.vegetation;
+        const img = new Image();
+        img.onload = () => this.draw();
+        img.src = entry.image;
+        this.tileImageMap[key] = img;
+      }
+    } catch (err) {
+      console.error("Failed to load map_tile_img.json:", err);
     }
   }
 
@@ -101,21 +118,6 @@ class WorldMapGrid {
     } catch (e) {
       console.error("Failed to load map data from URL:", e);
     }
-  }
-
-  loadTerrainImages(onLoad) {
-    if (!this.layerMaps.terrain) return {};
-    const images = {};
-    for (const item of this.layerMaps.terrain.def.values) {
-      if (item.image) {
-        const img = new Image();
-        img.onload = onLoad;
-        img.src = item.image;
-        images[item.id] = img;
-        images[item.name] = img;
-      }
-    }
-    return images;
   }
 
   setupEventListeners() {
@@ -316,10 +318,12 @@ class WorldMapGrid {
 
     ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
 
+    // Render base tile layer (combination of terrain, climate, vegetation)
+    this.drawBaseTiles();
+
+    // Render remaining layers
     for (const layerName of this.drawOrder) {
-      if (layerName === "terrain") this.drawTerrainLayer();
-      else if (layerName === "vegetation") this.drawVegetationLayer();
-      else if (layerName === "river") this.drawRiverLayer();
+      if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "resource") this.drawResourceLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
@@ -330,45 +334,21 @@ class WorldMapGrid {
     this.drawGrid();
   }
 
-  drawTerrainLayer() {
+  drawBaseTiles() {
     for (const [key, cell] of Object.entries(this.grid)) {
-      if (cell.terrain === undefined) continue;
       const [x, y] = key.split(",").map(Number);
-      this.drawTerrainCell(x, y, cell.terrain);
+      const t = cell.terrain ?? 0;
+      const c = cell.climate ?? 0;
+      const isWater = (t === 3 || t === 4 || t === 5);
+      const v = isWater ? 0 : (cell.vegetation ?? 0);
+
+      const tileKey = t + "," + c + "," + v;
+      const img = this.tileImageMap[tileKey];
+
+      if (img && img.complete && img.naturalWidth) {
+        this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+      }
     }
-  }
-
-  drawTerrainCell(x, y, terrainId) {
-    const map = this.layerMaps.terrain;
-    if (!map) return;
-    const item = map.idToItem[terrainId];
-    if (!item) return;
-
-    const img = this.terrainImages[terrainId] || this.terrainImages[item.name];
-    if (img && img.complete && img.naturalWidth) {
-      this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-    } else if (item.color) {
-      this.fillCell(x, y, item.color, 0.8);
-    }
-  }
-
-  drawVegetationLayer() {
-    for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.vegetation) continue;
-      const [x, y] = key.split(",").map(Number);
-      this.drawVegetationCell(x, y, cell.vegetation);
-    }
-  }
-
-  drawVegetationCell(x, y, vegId) {
-    const map = this.layerMaps.vegetation;
-    if (!map) return;
-    const item = map.idToItem[vegId];
-    if (!item || item.id === 0) return;
-
-    const alphas = { 1: 0.35, 2: 0.5, 3: 0.7 };
-    const color = item.color || "#228B22";
-    this.fillCell(x, y, color, alphas[item.id] || 0.5);
   }
 
   drawRiverLayer() {

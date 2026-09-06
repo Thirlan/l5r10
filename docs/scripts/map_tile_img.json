@@ -1,0 +1,974 @@
+[
+  {
+    "terrain": 0,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/flat_temperate_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/flat_temperate_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/flat_temperate_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/flat_temperate_3.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/flat_tropical_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/flat_tropical_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/flat_tropical_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/flat_tropical_3.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/flat_subtropical_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/flat_subtropical_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/flat_subtropical_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/flat_subtropical_3.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/flat_desert_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/flat_desert_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/flat_desert_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/flat_desert_3.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/flat_cold_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/flat_cold_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/flat_cold_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/flat_cold_3.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/flat_freezing_0.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/flat_freezing_1.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/flat_freezing_2.png"
+  },
+  {
+    "terrain": 0,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/flat_freezing_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/hills_temperate_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/hills_temperate_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/hills_temperate_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/hills_temperate_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/hills_tropical_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/hills_tropical_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/hills_tropical_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/hills_tropical_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/hills_subtropical_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/hills_subtropical_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/hills_subtropical_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/hills_subtropical_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/hills_desert_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/hills_desert_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/hills_desert_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/hills_desert_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/hills_cold_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/hills_cold_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/hills_cold_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/hills_cold_3.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/hills_freezing_0.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/hills_freezing_1.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/hills_freezing_2.png"
+  },
+  {
+    "terrain": 1,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/hills_freezing_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/mountains_temperate_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/mountains_temperate_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/mountains_temperate_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/mountains_temperate_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/mountains_tropical_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/mountains_tropical_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/mountains_tropical_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/mountains_tropical_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/mountains_subtropical_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/mountains_subtropical_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/mountains_subtropical_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/mountains_subtropical_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/mountains_desert_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/mountains_desert_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/mountains_desert_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/mountains_desert_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/mountains_cold_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/mountains_cold_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/mountains_cold_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/mountains_cold_3.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/mountains_freezing_0.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/mountains_freezing_1.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/mountains_freezing_2.png"
+  },
+  {
+    "terrain": 2,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/mountains_freezing_3.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/water_temperate_0.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/water_tropical_0.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/water_subtropical_0.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/water_desert_0.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/water_cold_0.png"
+  },
+  {
+    "terrain": 3,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/water_freezing_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_temperate_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_tropical_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_subtropical_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_desert_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_cold_0.png"
+  },
+  {
+    "terrain": 4,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/coastal_water_freezing_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/ocean_temperate_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/ocean_tropical_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/ocean_subtropical_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/ocean_desert_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/ocean_cold_0.png"
+  },
+  {
+    "terrain": 5,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/ocean_freezing_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/valley_temperate_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/valley_temperate_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/valley_temperate_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/valley_temperate_3.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/valley_tropical_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/valley_tropical_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/valley_tropical_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/valley_tropical_3.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/valley_subtropical_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/valley_subtropical_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/valley_subtropical_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/valley_subtropical_3.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/valley_desert_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/valley_desert_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/valley_desert_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/valley_desert_3.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/valley_cold_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/valley_cold_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/valley_cold_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/valley_cold_3.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/valley_freezing_0.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/valley_freezing_1.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/valley_freezing_2.png"
+  },
+  {
+    "terrain": 6,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/valley_freezing_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_temperate_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_temperate_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_temperate_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_temperate_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_tropical_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_tropical_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_tropical_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_tropical_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_subtropical_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_subtropical_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_subtropical_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_subtropical_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_desert_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_desert_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_desert_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_desert_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_cold_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_cold_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_cold_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_cold_3.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/wetlands_freezing_0.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/wetlands_freezing_1.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/wetlands_freezing_2.png"
+  },
+  {
+    "terrain": 7,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/wetlands_freezing_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 0,
+    "vegetation": 0,
+    "image": "../img/map/city_temperate_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 0,
+    "vegetation": 1,
+    "image": "../img/map/city_temperate_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 0,
+    "vegetation": 2,
+    "image": "../img/map/city_temperate_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 0,
+    "vegetation": 3,
+    "image": "../img/map/city_temperate_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 1,
+    "vegetation": 0,
+    "image": "../img/map/city_tropical_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 1,
+    "vegetation": 1,
+    "image": "../img/map/city_tropical_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 1,
+    "vegetation": 2,
+    "image": "../img/map/city_tropical_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 1,
+    "vegetation": 3,
+    "image": "../img/map/city_tropical_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 2,
+    "vegetation": 0,
+    "image": "../img/map/city_subtropical_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 2,
+    "vegetation": 1,
+    "image": "../img/map/city_subtropical_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 2,
+    "vegetation": 2,
+    "image": "../img/map/city_subtropical_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 2,
+    "vegetation": 3,
+    "image": "../img/map/city_subtropical_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 3,
+    "vegetation": 0,
+    "image": "../img/map/city_desert_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 3,
+    "vegetation": 1,
+    "image": "../img/map/city_desert_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 3,
+    "vegetation": 2,
+    "image": "../img/map/city_desert_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 3,
+    "vegetation": 3,
+    "image": "../img/map/city_desert_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 4,
+    "vegetation": 0,
+    "image": "../img/map/city_cold_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 4,
+    "vegetation": 1,
+    "image": "../img/map/city_cold_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 4,
+    "vegetation": 2,
+    "image": "../img/map/city_cold_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 4,
+    "vegetation": 3,
+    "image": "../img/map/city_cold_3.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 5,
+    "vegetation": 0,
+    "image": "../img/map/city_freezing_0.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 5,
+    "vegetation": 1,
+    "image": "../img/map/city_freezing_1.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 5,
+    "vegetation": 2,
+    "image": "../img/map/city_freezing_2.png"
+  },
+  {
+    "terrain": 8,
+    "climate": 5,
+    "vegetation": 3,
+    "image": "../img/map/city_freezing_3.png"
+  }
+]

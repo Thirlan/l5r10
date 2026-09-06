@@ -16,6 +16,7 @@ class WorldMapViewer {
 
     this.grid = {};
     this.terrainCosts = {};
+    this.tileImageMap = {};
 
     this.viewMode = "default";
     this.settlementLanguage = "english";
@@ -58,8 +59,6 @@ class WorldMapViewer {
     this.shrineImage.onload = () => this.render();
     this.shrineImage.src = "../img/map/shrine.png";
 
-    this.terrainImages = {};
-
     this.setupEventListeners();
     this.loadLayersConfig();
   }
@@ -73,7 +72,8 @@ class WorldMapViewer {
         this.drawOrder = this.layersConfig.drawOrder;
       }
       this.buildLayerMaps();
-      this.terrainImages = this.loadTerrainImages(() => this.render());
+
+      await this.loadMapTileImages();
 
       if (this.layerMaps.clan) {
         this.travelPapers = {};
@@ -93,6 +93,23 @@ class WorldMapViewer {
       this.render();
     } catch (err) {
       console.error("Failed to load layers.json in WorldMapViewer:", err);
+    }
+  }
+
+  async loadMapTileImages() {
+    try {
+      const res = await fetch("../scripts/map_tile_img.json");
+      if (!res.ok) return;
+      const entries = await res.json();
+      for (const entry of entries) {
+        const key = entry.terrain + "," + entry.climate + "," + entry.vegetation;
+        const img = new Image();
+        img.onload = () => this.render();
+        img.src = entry.image;
+        this.tileImageMap[key] = img;
+      }
+    } catch (err) {
+      console.error("Failed to load map_tile_img.json in WorldMapViewer:", err);
     }
   }
 
@@ -117,21 +134,6 @@ class WorldMapViewer {
     }
   }
 
-  loadTerrainImages(onLoad) {
-    if (!this.layerMaps.terrain) return {};
-    const images = {};
-    for (const item of this.layerMaps.terrain.def.values) {
-      if (item.image) {
-        const img = new Image();
-        img.onload = onLoad;
-        img.src = item.image;
-        images[item.id] = img;
-        images[item.name] = img;
-      }
-    }
-    return images;
-  }
-
   setupEventListeners() {
     this.canvas.addEventListener("click", (e) => this.onCanvasClick(e));
     this.canvas.addEventListener("wheel", (e) => {
@@ -146,7 +148,6 @@ class WorldMapViewer {
     if (!res.ok) throw new Error("Failed to load map JSON: " + res.status);
     const parsed = await res.json();
     if (parsed.terrain) {
-      // Convert legacy structure if loaded
       this.grid = {};
       const allKeys = new Set();
       for (const lName of Object.keys(parsed)) {
@@ -321,7 +322,6 @@ class WorldMapViewer {
     return ["Road", "Footpath"].includes(infra);
   }
 
-  // Cost lookup key resolution for pathing:
   tileCostKey(cx, cy) {
     const cell = this.cellData(cx, cy);
     if (!cell) return null;
@@ -357,7 +357,7 @@ class WorldMapViewer {
     const data = this.terrainCosts[lookupKey] || this.terrainCosts[terrain.toLowerCase()];
     if (!data) return null;
 
-    const isWater = WATER_TERRAINS.has(terrain.toLowerCase());
+    const isWater = WATER_TERRAINS_SET.has(terrain.toLowerCase()) || WATER_TERRAINS_SET.has(terrain);
     const hasRoad = this.cellHasRoad(cx, cy) && (!isWater || mode === "foot");
     return {
       terrain,
@@ -453,18 +453,18 @@ class WorldMapViewer {
     ctx.scale(this.zoom, this.zoom);
     ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
 
+    // Draw base map tile images
+    this.drawBaseTiles();
+
+    // Draw remaining layers
     for (const layerName of this.drawOrder) {
-      if (layerName === "terrain" && this.viewMode !== "clan") this.drawTerrainLayer();
-      else if (layerName === "vegetation") this.drawVegetationLayer();
-      else if (layerName === "river") this.drawRiverLayer();
+      if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "resource") this.drawResourceLayer();
       else if (layerName === "settlement") this.drawSettlements();
       else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
       else if (layerName === "text") this.drawTextLayer();
     }
-
-    if (this.viewMode === "climate") this.drawClimateOverlay();
 
     this.drawGrid();
 
@@ -481,41 +481,20 @@ class WorldMapViewer {
     }
   }
 
-  drawTerrainLayer() {
-    const alpha = this.viewMode === "terrain" ? 0.85 : 0.25;
+  drawBaseTiles() {
     for (const [key, cell] of Object.entries(this.grid)) {
-      if (cell.terrain === undefined) continue;
       const [x, y] = key.split(",").map(Number);
-      const item = this.layerMaps.terrain ? this.layerMaps.terrain.idToItem[cell.terrain] : null;
-      if (!item) continue;
-      const img = this.terrainImages[cell.terrain] || this.terrainImages[item.name];
+      const t = cell.terrain ?? 0;
+      const c = cell.climate ?? 0;
+      const isWater = (t === 3 || t === 4 || t === 5);
+      const v = isWater ? 0 : (cell.vegetation ?? 0);
+
+      const tileKey = t + "," + c + "," + v;
+      const img = this.tileImageMap[tileKey];
+
       if (img && img.complete && img.naturalWidth) {
         this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-      } else if (item.color) {
-        this.fillCell(x, y, item.color, alpha);
       }
-    }
-  }
-
-  drawClimateOverlay() {
-    for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.climate) continue;
-      const [x, y] = key.split(",").map(Number);
-      const item = this.layerMaps.climate ? this.layerMaps.climate.idToItem[cell.climate] : null;
-      if (item && item.color) {
-        this.fillCell(x, y, item.color, 0.45);
-      }
-    }
-  }
-
-  drawVegetationLayer() {
-    for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.vegetation) continue;
-      const [x, y] = key.split(",").map(Number);
-      const item = this.layerMaps.vegetation ? this.layerMaps.vegetation.idToItem[cell.vegetation] : null;
-      if (!item || item.id === 0) continue;
-      const alphas = { 1: 0.35, 2: 0.5, 3: 0.7 };
-      this.fillCell(x, y, item.color || "#228B22", alphas[item.id] || 0.5);
     }
   }
 

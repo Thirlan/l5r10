@@ -128,6 +128,17 @@
   border-radius: 2px;
 }
 
+.control-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid #333;
+  vertical-align: middle;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
 .settlement-icon {
   position: relative;
   display: inline-block;

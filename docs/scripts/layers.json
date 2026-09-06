@@ -29,11 +29,11 @@
       "id": "climate",
       "name": "Climate Layer",
       "values": [
-        { "id": 0, "name": "temperate", "color": "#A0E0A0" },
-        { "id": 1, "name": "tropical", "color": "#FF8C00" },
-        { "id": 2, "name": "subtropical", "color": "#FFA500" },
+        { "id": 0, "name": "temperate", "color": "#2E5A44" },
+        { "id": 1, "name": "tropical", "color": "#7FFF00" },
+        { "id": 2, "name": "subtropical", "color": "#4F7942" },
         { "id": 3, "name": "desert", "color": "#F4A460" },
-        { "id": 4, "name": "cold", "color": "#ADD8E6" },
+        { "id": 4, "name": "cold", "color": "#8B5A2B" },
         { "id": 5, "name": "freezing", "color": "#F0F8FF" }
       ]
     },
