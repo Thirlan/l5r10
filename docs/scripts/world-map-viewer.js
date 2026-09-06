@@ -1,18 +1,24 @@
 const VIEWER_GRID_SIZE = 16;
+const WATER_TERRAINS_SET = typeof WATER_TERRAINS !== "undefined" ? WATER_TERRAINS : new Set(["water", "coastal water", "ocean"]);
+
 class WorldMapViewer {
   constructor(imageSrc, canvasSelector, gridSize = VIEWER_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext("2d");
     this.gridSize = gridSize;
     this.zoom = 0.5;
     this.minZoom = 0.1;
     this.maxZoom = 4;
 
-    this.layers = { terrain: {}, clans: {}, infrastructure: {}, settlements: {}, text: {} };
+    this.layersConfig = null;
+    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "resource", "settlement", "clan", "text"];
+    this.layerMaps = {};
+
+    this.grid = {};
     this.terrainCosts = {};
 
-    this.viewMode = 'default';
-    this.settlementLanguage = 'english';
+    this.viewMode = "default";
+    this.settlementLanguage = "english";
     this.routePreferences = { includeRisk: false, includeMoney: false };
 
     this.skillConfig = {
@@ -28,40 +34,8 @@ class WorldMapViewer {
     this.waypoints = [];
     this.pathResult = null;
 
-    this.terrainColors = {
-      Mountain: '#8B7355', 'Coastal Water': '#4169E1', Water: '#1E90FF', Forest: '#228B22',
-      Plains: '#90EE90', Hills: '#DAA520', Deserts: '#F4A460', Marsh: '#556B2F',
-      Ocean: '#00008B', Waste: '#777777', Snow: '#F0F8FF', City: '#FF6347'
-    };
-    this.clanColors = {
-      Crab: { border: '#00008B', fill: '#808080' },
-      Crane: { border: '#87CEEB', fill: '#FFFFFF' },
-      Dragon: { border: '#228B22', fill: '#FFFF00' },
-      Lion: { border: '#8B4513', fill: '#D4A017' },
-      Phoenix: { border: '#FFD700', fill: '#FFA500' },
-      Scorpion: { border: '#FF0000', fill: '#000000' },
-      Unicorn: { border: '#800080', fill: '#FFFF00' },
-      Imperial: { border: '#D4AF37', fill: '#FFFFFF' },
-      Hare: { border: '#FF0000', fill: '#FFFFFF' },
-      Centipede: { border: '#FFA500', fill: '#8B4513' },
-      Fox: { border: '#C4A484', fill: '#808080' },
-      Badger: { border: '#808080', fill: '#000000' },
-      Dragonfly: { border: '#00008B', fill: '#FFFF00' },
-      Falcon: { border: '#228B22', fill: '#808080' },
-      Sparrow: { border: '#F0E68C', fill: '#000000' },
-      Tortoise: { border: '#000033', fill: '#FFFF00' },
-      Mantis: { border: '#006400', fill: '#90EE90' },
-      Shadowlands: { border: '#000000', fill: '#444444' },
-      'Minor Clan': { border: '#808080', fill: '#B0B0B0' }
-    };
-    this.infrastructureStyles = {
-      Road: { color: '#5C3A1E', lineWidth: 3, markerRadius: 2 },
-      Footpath: { color: '#A97443', lineWidth: 1.5, markerRadius: 1.5 },
-      'Small Port': { color: '#D2B48C', marker: 'p' },
-      'Large Port': { color: '#8B4513', marker: 'P' }
-    };
     this.shrineIconCache = {};
-    this.travelPapers = Object.fromEntries(Object.keys(this.clanColors).filter((clan) => clan !== 'Shadowlands').map((clan) => [clan, true]));
+    this.travelPapers = {};
     this.avoidClans = {};
 
     this.mapImage = new Image();
@@ -72,26 +46,95 @@ class WorldMapViewer {
     };
     this.mapImage.src = imageSrc;
 
-    this.terrainImages = this.loadTerrainImages(() => this.render());
-
     this.farmImage = new Image();
     this.farmImage.onload = () => this.render();
-    this.farmImage.src = '../img/map/farm.png';
+    this.farmImage.src = "../img/map/farm.png";
 
     this.mineImage = new Image();
     this.mineImage.onload = () => this.render();
-    this.mineImage.src = '../img/map/mine.png';
+    this.mineImage.src = "../img/map/mine.png";
 
     this.shrineImage = new Image();
     this.shrineImage.onload = () => this.render();
-    this.shrineImage.src = '../img/map/shrine.png';
+    this.shrineImage.src = "../img/map/shrine.png";
+
+    this.terrainImages = {};
 
     this.setupEventListeners();
+    this.loadLayersConfig();
+  }
+
+  async loadLayersConfig() {
+    try {
+      const res = await fetch("../scripts/layers.json");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      this.layersConfig = await res.json();
+      if (this.layersConfig.drawOrder) {
+        this.drawOrder = this.layersConfig.drawOrder;
+      }
+      this.buildLayerMaps();
+      this.terrainImages = this.loadTerrainImages(() => this.render());
+
+      if (this.layerMaps.clan) {
+        this.travelPapers = {};
+        for (const item of this.layerMaps.clan.def.values) {
+          if (item.name && item.name !== "none" && item.name !== "Shadowlands") {
+            this.travelPapers[item.name] = true;
+          }
+        }
+      }
+
+      const dataUrl = this.canvas.dataset.mapData;
+      if (dataUrl) await this.loadMap(dataUrl);
+
+      const travelUrl = this.canvas.dataset.travelCosts;
+      if (travelUrl) await this.loadCosts(travelUrl);
+
+      this.render();
+    } catch (err) {
+      console.error("Failed to load layers.json in WorldMapViewer:", err);
+    }
+  }
+
+  buildLayerMaps() {
+    if (!this.layersConfig || !this.layersConfig.layers) return;
+    for (const [layerKey, layerDef] of Object.entries(this.layersConfig.layers)) {
+      const nameToId = {};
+      const idToName = {};
+      const idToItem = {};
+      const nameToItem = {};
+
+      for (const item of layerDef.values) {
+        nameToId[item.name] = item.id;
+        nameToId[item.name.toLowerCase()] = item.id;
+        idToName[item.id] = item.name;
+        idToItem[item.id] = item;
+        nameToItem[item.name] = item;
+        nameToItem[item.name.toLowerCase()] = item;
+      }
+
+      this.layerMaps[layerKey] = { nameToId, idToName, idToItem, nameToItem, def: layerDef };
+    }
+  }
+
+  loadTerrainImages(onLoad) {
+    if (!this.layerMaps.terrain) return {};
+    const images = {};
+    for (const item of this.layerMaps.terrain.def.values) {
+      if (item.image) {
+        const img = new Image();
+        img.onload = onLoad;
+        img.src = item.image;
+        images[item.id] = img;
+        images[item.name] = img;
+      }
+    }
+    return images;
   }
 
   setupEventListeners() {
-    this.canvas.addEventListener('click', (e) => this.onCanvasClick(e));
-    this.canvas.addEventListener('wheel', (e) => {
+    this.canvas.addEventListener("click", (e) => this.onCanvasClick(e));
+    this.canvas.addEventListener("wheel", (e) => {
       if (!e.ctrlKey) return;
       e.preventDefault();
       this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
@@ -100,39 +143,80 @@ class WorldMapViewer {
 
   async loadMap(jsonUrl) {
     const res = await fetch(jsonUrl);
-    if (!res.ok) throw new Error(`Failed to load map JSON: ${res.status}`);
+    if (!res.ok) throw new Error("Failed to load map JSON: " + res.status);
     const parsed = await res.json();
-    this.layers = {
-      terrain: parsed.terrain || {},
-      clans: parsed.clans || {},
-      infrastructure: parsed.infrastructure || {},
-      settlements: parsed.settlements || {},
-      text: parsed.text || {}
-    };
+    if (parsed.terrain) {
+      // Convert legacy structure if loaded
+      this.grid = {};
+      const allKeys = new Set();
+      for (const lName of Object.keys(parsed)) {
+        for (const k of Object.keys(parsed[lName])) allKeys.add(k);
+      }
+      for (const k of allKeys) {
+        const t = parsed.terrain ? parsed.terrain[k] : null;
+        const c = parsed.clans ? parsed.clans[k] : null;
+        const i = parsed.infrastructure ? parsed.infrastructure[k] : null;
+        const s = parsed.settlements ? parsed.settlements[k] : null;
+        const txt = parsed.text ? parsed.text[k] : null;
+
+        let tId = 0, cId = 0, vId = 0, rId = 0, resId = 0;
+        if (t && this.layerMaps.terrain) {
+          const tLower = t.toLowerCase();
+          if (tLower === "forest") { tId = 0; vId = 3; }
+          else if (tLower === "deserts" || tLower === "desert") { tId = 0; cId = 3; }
+          else if (tLower === "plains") { tId = 0; }
+          else if (tLower === "marsh") { tId = 7; }
+          else if (tLower === "waste") { tId = 0; resId = 13; }
+          else if (tLower === "snow") { tId = 0; cId = 5; }
+          else { tId = this.layerMaps.terrain.nameToId[tLower] ?? 0; }
+        }
+        this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId, resource: resId };
+        if (i && this.layerMaps.infrastructure) {
+          this.grid[k].infrastructure = this.layerMaps.infrastructure.nameToId[i.toLowerCase()];
+        }
+        if (c && this.layerMaps.clan) {
+          this.grid[k].clan = this.layerMaps.clan.nameToId[c.toLowerCase()];
+        }
+        if (s) {
+          if (typeof s === "string" && this.layerMaps.settlement) {
+            this.grid[k].settlement = this.layerMaps.settlement.nameToId[s.toLowerCase()];
+          } else if (typeof s === "object") {
+            if (this.layerMaps.settlement) {
+              this.grid[k].settlement = this.layerMaps.settlement.nameToId[(s.type || "").toLowerCase()];
+            }
+            if (s.englishName) this.grid[k].englishName = s.englishName;
+            if (s.rokuganiName) this.grid[k].rokuganiName = s.rokuganiName;
+          }
+        }
+        if (txt) this.grid[k].text = txt;
+      }
+    } else {
+      this.grid = parsed;
+    }
     this.render();
   }
 
   async loadCosts(csvUrl) {
     const res = await fetch(csvUrl);
-    if (!res.ok) throw new Error(`Failed to load travel lookup CSV: ${res.status}`);
+    if (!res.ok) throw new Error("Failed to load travel lookup CSV: " + res.status);
     const text = await res.text();
     const lines = text.trim().split(/\r?\n/);
-    const cols = lines.shift().split(',').map((s) => s.trim());
+    const cols = lines.shift().split(",").map((s) => s.trim());
     this.terrainCosts = {};
     for (const line of lines) {
-      const values = line.split(',').map((s) => s.trim());
+      const values = line.split(",").map((s) => s.trim());
       const entry = {};
       cols.forEach((c, i) => { entry[c] = values[i]; });
-      this.terrainCosts[(entry.Terrain || '').toLowerCase()] = {
-        cost: numOrNull(entry['Cost Minutes']),
-        costRoad: numOrNull(entry['Cost With Road Minutes']),
+      this.terrainCosts[(entry.Terrain || "").toLowerCase()] = {
+        cost: numOrNull(entry["Cost Minutes"]),
+        costRoad: numOrNull(entry["Cost With Road Minutes"]),
         prob: numOrNull(entry.Probability),
-        probRoad: numOrNull(entry['Probability with road']),
-        skill: (entry.Skill || '').toLowerCase(),
+        probRoad: numOrNull(entry["Probability with road"]),
+        skill: (entry.Skill || "").toLowerCase(),
         tn: numOrNull(entry.TN),
-        tnRoad: numOrNull(entry['TN with road']),
-        zeni: numOrNull(entry['Cost Zeni']),
-        zeniRoad: numOrNull(entry['Cost Zeni with road'])
+        tnRoad: numOrNull(entry["TN with road"]),
+        zeni: numOrNull(entry["Cost Zeni"]),
+        zeniRoad: numOrNull(entry["Cost Zeni with road"])
       };
     }
   }
@@ -140,7 +224,7 @@ class WorldMapViewer {
   setViewMode(mode) { this.viewMode = mode; this.render(); }
 
   setSettlementLanguage(language) {
-    if (!['english', 'rokugani'].includes(language)) return;
+    if (!["english", "rokugani"].includes(language)) return;
     this.settlementLanguage = language;
     this.render();
   }
@@ -198,20 +282,83 @@ class WorldMapViewer {
     return { x: Math.floor(mapX / this.gridSize), y: Math.floor(mapY / this.gridSize) };
   }
 
-  cellTerrain(cx, cy) { return this.layers.terrain[`${cx},${cy}`] || null; }
-  cellClan(cx, cy) { return this.layers.clans[`${cx},${cy}`] || null; }
-  cellInfrastructure(cx, cy) { return this.layers.infrastructure[`${cx},${cy}`] || null; }
-  cellHasRoad(cx, cy) { return ['Road', 'Footpath'].includes(this.cellInfrastructure(cx, cy)); }
+  cellData(cx, cy) {
+    return this.grid[cx + "," + cy] || null;
+  }
 
-  // Costs, skill, TN, zeni and check probability for entering a tile.
-  // Bridges (roads on water tiles) apply only when the traveller is on foot; boats/swimmers ignore them.
+  cellTerrain(cx, cy) {
+    const cell = this.cellData(cx, cy);
+    if (!cell) return null;
+    let tName = cell.terrain;
+    if (typeof tName === "number" && this.layerMaps.terrain) {
+      tName = this.layerMaps.terrain.idToName[tName] || "flat";
+    }
+    return tName || "flat";
+  }
+
+  cellClan(cx, cy) {
+    const cell = this.cellData(cx, cy);
+    if (!cell || !cell.clan) return null;
+    let cName = cell.clan;
+    if (typeof cName === "number" && this.layerMaps.clan) {
+      cName = this.layerMaps.clan.idToName[cName];
+    }
+    return cName || null;
+  }
+
+  cellInfrastructure(cx, cy) {
+    const cell = this.cellData(cx, cy);
+    if (!cell || !cell.infrastructure) return null;
+    let iName = cell.infrastructure;
+    if (typeof iName === "number" && this.layerMaps.infrastructure) {
+      iName = this.layerMaps.infrastructure.idToName[iName];
+    }
+    return iName || null;
+  }
+
+  cellHasRoad(cx, cy) {
+    const infra = this.cellInfrastructure(cx, cy);
+    return ["Road", "Footpath"].includes(infra);
+  }
+
+  // Cost lookup key resolution for pathing:
+  tileCostKey(cx, cy) {
+    const cell = this.cellData(cx, cy);
+    if (!cell) return null;
+
+    const terrainName = (this.cellTerrain(cx, cy) || "flat").toLowerCase();
+    const vegVal = cell.vegetation || 0;
+    const climateVal = cell.climate || 0;
+
+    let vegName = "";
+    if (typeof vegVal === "number" && this.layerMaps.vegetation) {
+      vegName = (this.layerMaps.vegetation.idToName[vegVal] || "").toLowerCase();
+    }
+    let climateName = "";
+    if (typeof climateVal === "number" && this.layerMaps.climate) {
+      climateName = (this.layerMaps.climate.idToName[climateVal] || "").toLowerCase();
+    }
+
+    if (vegName.includes("forest")) return "forest";
+    if (climateName === "desert") return "deserts";
+    if (climateName === "freezing") return "snow";
+    if (terrainName === "wetlands") return "marsh";
+    if (terrainName === "flat") return "plains";
+    if (terrainName === "valley") return "hills";
+
+    return terrainName;
+  }
+
   tileData(cx, cy, mode) {
     const terrain = this.cellTerrain(cx, cy);
     if (!terrain) return null;
-    const data = this.terrainCosts[terrain.toLowerCase()];
+
+    const lookupKey = this.tileCostKey(cx, cy);
+    const data = this.terrainCosts[lookupKey] || this.terrainCosts[terrain.toLowerCase()];
     if (!data) return null;
-    const isWater = WATER_TERRAINS.has(terrain);
-    const hasRoad = this.cellHasRoad(cx, cy) && (!isWater || mode === 'foot');
+
+    const isWater = WATER_TERRAINS.has(terrain.toLowerCase());
+    const hasRoad = this.cellHasRoad(cx, cy) && (!isWater || mode === "foot");
     return {
       terrain,
       hasRoad,
@@ -240,21 +387,20 @@ class WorldMapViewer {
     this.updateResultDisplay();
   }
 
-
   updateResultDisplay() {
-    const el = document.getElementById('pathSummary');
-    const eventTable = document.getElementById('pathEvents');
+    const el = document.getElementById("pathSummary");
+    const eventTable = document.getElementById("pathEvents");
     if (!el) return;
     if (!this.pathResult) {
       el.textContent = this.startCell
-        ? 'Start selected — click waypoints; the last click is the destination.'
-        : 'Click a starting tile.';
+        ? "Start selected — click waypoints; the last click is the destination."
+        : "Click a starting tile.";
       if (eventTable) eventTable.hidden = true;
       return;
     }
     if (this.pathResult.failed) {
-      const segNote = this.pathResult.failedSegment != null ? ` between waypoints ${this.pathResult.failedSegment - 1} and ${this.pathResult.failedSegment}` : '';
-      el.textContent = `No route found${segNote}.`;
+      const segNote = this.pathResult.failedSegment != null ? " between waypoints " + (this.pathResult.failedSegment - 1) + " and " + this.pathResult.failedSegment : "";
+      el.textContent = "No route found" + segNote + ".";
       if (eventTable) eventTable.hidden = true;
       return;
     }
@@ -264,18 +410,18 @@ class WorldMapViewer {
     const mins = m % 60;
     const cur = L5RCurrency.fromZeni(this.pathResult.totalZeni);
     el.innerHTML =
-      `<strong>Time:</strong> ${days} d ${hours} h ${mins} m &nbsp;&middot;&nbsp; ` +
-      `<strong>Cost:</strong> ${cur.koku} koku, ${cur.bu} bu, ${cur.zeni} zeni &nbsp;&middot;&nbsp; ` +
-      `<strong>Mishaps:</strong> ${this.pathResult.mishaps.size} &nbsp;&middot;&nbsp; ` +
-      `<strong>Tiles:</strong> ${this.pathResult.path.length - 1} &nbsp;&middot;&nbsp; ` +
-      `<strong>Waypoints:</strong> ${this.waypoints.length}`;
+      "<strong>Time:</strong> " + days + " d " + hours + " h " + mins + " m &nbsp;&middot;&nbsp; " +
+      "<strong>Cost:</strong> " + cur.koku + " koku, " + cur.bu + " bu, " + cur.zeni + " zeni &nbsp;&middot;&nbsp; " +
+      "<strong>Mishaps:</strong> " + this.pathResult.mishaps.size + " &nbsp;&middot;&nbsp; " +
+      "<strong>Tiles:</strong> " + (this.pathResult.path.length - 1) + " &nbsp;&middot;&nbsp; " +
+      "<strong>Waypoints:</strong> " + this.waypoints.length;
     if (eventTable) {
       const rows = this.pathResult.events.map((event) =>
-        `<tr><td>${event.day}</td><td>${event.coord}</td><td>${event.event}</td><td>${event.mode}</td>` +
-        `<td>${event.terrain}</td><td>${event.clan}</td><td>${event.skill}</td><td>${event.tn}</td>` +
-        `<td>${event.result}</td><td>${event.cost}</td></tr>`
-      ).join('');
-      eventTable.querySelector('tbody').innerHTML = rows;
+        "<tr><td>" + event.day + "</td><td>" + event.coord + "</td><td>" + event.event + "</td><td>" + event.mode + "</td>" +
+        "<td>" + event.terrain + "</td><td>" + event.clan + "</td><td>" + event.skill + "</td><td>" + event.tn + "</td>" +
+        "<td>" + event.result + "</td><td>" + event.cost + "</td></tr>"
+      ).join("");
+      eventTable.querySelector("tbody").innerHTML = rows;
       eventTable.hidden = false;
     }
   }
@@ -284,6 +430,7 @@ class WorldMapViewer {
   zoomIn() { this.setZoom(this.zoom * 1.25); }
   zoomOut() { this.setZoom(this.zoom / 1.25); }
   resetZoom() { this.setZoom(1); }
+
   fitToWidth() {
     const available = this.canvas.parentElement.clientWidth;
     if (available && this.mapWidth) this.setZoom(available / this.mapWidth);
@@ -294,8 +441,8 @@ class WorldMapViewer {
     this.canvas.width = Math.round(this.mapWidth * this.zoom);
     this.canvas.height = Math.round(this.mapHeight * this.zoom);
     this.render();
-    const label = document.getElementById('zoomLevel');
-    if (label) label.textContent = `${Math.round(this.zoom * 100)}%`;
+    const label = document.getElementById("zoomLevel");
+    if (label) label.textContent = Math.round(this.zoom * 100) + "%";
   }
 
   render() {
@@ -306,392 +453,262 @@ class WorldMapViewer {
     ctx.scale(this.zoom, this.zoom);
     ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
 
-    const terrainAlpha = this.viewMode === 'terrain' ? 0.85 : this.viewMode === 'clan' ? 0 : 0.2;
-    if (terrainAlpha > 0) {
-      for (const [key, name] of Object.entries(this.layers.terrain)) {
-        const [x, y] = key.split(',').map(Number);
-        this.drawTerrainCell(x, y, name, terrainAlpha);
-      }
+    for (const layerName of this.drawOrder) {
+      if (layerName === "terrain" && this.viewMode !== "clan") this.drawTerrainLayer();
+      else if (layerName === "vegetation") this.drawVegetationLayer();
+      else if (layerName === "river") this.drawRiverLayer();
+      else if (layerName === "infrastructure") this.drawInfrastructureLayer();
+      else if (layerName === "resource") this.drawResourceLayer();
+      else if (layerName === "settlement") this.drawSettlements();
+      else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
+      else if (layerName === "text") this.drawTextLayer();
     }
 
-    if (this.viewMode !== 'terrain') {
-      const cellsByClan = {};
-      for (const [key, clan] of Object.entries(this.layers.clans)) {
-        (cellsByClan[clan] ||= new Set()).add(key);
-      }
-      const fillAlpha = this.viewMode === 'clan' ? 0.4 : 0.15;
-      for (const [clan, cells] of Object.entries(cellsByClan)) {
-        const colors = this.clanColors[clan];
-        if (!colors) continue;
-        const polygons = this.traceClanPolygons(cells);
-        if (!polygons.length) continue;
-        this.drawClanShape(cells, polygons, colors, fillAlpha);
-      }
-    }
-
-    for (const [key, infrastructure] of Object.entries(this.layers.infrastructure)) {
-      const [x, y] = key.split(',').map(Number);
-      this.drawInfrastructure(x, y, infrastructure);
-    }
-
-    this.drawSettlements();
+    if (this.viewMode === "climate") this.drawClimateOverlay();
 
     this.drawGrid();
 
     if (this.pathResult && this.pathResult.path.length) {
       for (const key of this.pathResult.mishaps) {
-        const [x, y] = key.split(',').map(Number);
-        this.fillCell(x, y, '#FF0000', 0.55);
+        const [x, y] = key.split(",").map(Number);
+        this.fillCell(x, y, "#FF0000", 0.55);
       }
       this.drawPath(this.pathResult.path);
       for (const [key, label] of this.pathResult.dayMarkers) {
-        const [x, y] = key.split(',').map(Number);
+        const [x, y] = key.split(",").map(Number);
         this.drawText(x, y, label, 8);
       }
     }
-
-    if (this.startCell) this.drawMarker(this.startCell, '#22DD22');
-    for (let i = 0; i < this.waypoints.length; i++) {
-      const isLast = i === this.waypoints.length - 1;
-      this.drawMarker(this.waypoints[i], isLast ? '#DD2222' : '#FFAA00');
-    }
-
-    for (const [key, data] of Object.entries(this.layers.text)) {
-      const [x, y] = key.split(',').map(Number);
-      this.drawText(x, y, this.textContent(data), data.fontSize);
-    }
   }
 
-  fillCell(x, y, color, alpha = 1) {
-    if (!color) return;
-    this.ctx.save();
-    this.ctx.globalAlpha = alpha;
-    this.ctx.fillStyle = color;
-    this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-    this.ctx.restore();
-  }
-
-  loadTerrainImages(onLoad) {
-    const filenames = {
-      Plains: 'plain.png',
-      Water: 'water.png',
-      Deserts: 'desert.png',
-      'Coastal Water': 'coastal_water.png',
-      Ocean: 'ocean.png',
-      Waste: 'waste.png'
-    };
-    return Object.fromEntries(Object.entries(filenames).map(([terrain, filename]) => {
-      const image = new Image();
-      image.onload = onLoad;
-      image.src = `../img/map/${filename}`;
-      return [terrain, image];
-    }));
-  }
-
-  drawTerrainCell(x, y, terrain, alpha) {
-    const image = this.terrainImages[terrain];
-    if (image?.complete && image.naturalWidth) {
-      this.ctx.save();
-      this.ctx.globalAlpha = alpha;
-      this.ctx.drawImage(image, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-      this.ctx.restore();
-      return;
-    }
-    this.fillCell(x, y, this.terrainColors[terrain], alpha);
-  }
-
-  drawGrid() {
-    const ctx = this.ctx;
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)';
-    ctx.lineWidth = 1 / this.zoom;
-    for (let x = 0; x <= this.mapWidth; x += this.gridSize) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.mapHeight); ctx.stroke();
-    }
-    for (let y = 0; y <= this.mapHeight; y += this.gridSize) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.mapWidth, y); ctx.stroke();
+  drawTerrainLayer() {
+    const alpha = this.viewMode === "terrain" ? 0.85 : 0.25;
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (cell.terrain === undefined) continue;
+      const [x, y] = key.split(",").map(Number);
+      const item = this.layerMaps.terrain ? this.layerMaps.terrain.idToItem[cell.terrain] : null;
+      if (!item) continue;
+      const img = this.terrainImages[cell.terrain] || this.terrainImages[item.name];
+      if (img && img.complete && img.naturalWidth) {
+        this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+      } else if (item.color) {
+        this.fillCell(x, y, item.color, alpha);
+      }
     }
   }
 
-  drawInfrastructure(x, y, infrastructure) {
-    const style = this.infrastructureStyles[infrastructure] || this.infrastructureStyles.Road;
+  drawClimateOverlay() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.climate) continue;
+      const [x, y] = key.split(",").map(Number);
+      const item = this.layerMaps.climate ? this.layerMaps.climate.idToItem[cell.climate] : null;
+      if (item && item.color) {
+        this.fillCell(x, y, item.color, 0.45);
+      }
+    }
+  }
+
+  drawVegetationLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.vegetation) continue;
+      const [x, y] = key.split(",").map(Number);
+      const item = this.layerMaps.vegetation ? this.layerMaps.vegetation.idToItem[cell.vegetation] : null;
+      if (!item || item.id === 0) continue;
+      const alphas = { 1: 0.35, 2: 0.5, 3: 0.7 };
+      this.fillCell(x, y, item.color || "#228B22", alphas[item.id] || 0.5);
+    }
+  }
+
+  drawRiverLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.river) continue;
+      const [x, y] = key.split(",").map(Number);
+      const item = this.layerMaps.river ? this.layerMaps.river.idToItem[cell.river] : null;
+      if (!item || item.id === 0) continue;
+
+      const cx = x * this.gridSize + this.gridSize / 2;
+      const cy = y * this.gridSize + this.gridSize / 2;
+      const ctx = this.ctx;
+
+      ctx.save();
+      ctx.strokeStyle = item.color || "#1E90FF";
+      ctx.lineWidth = item.lineWidth || (cell.river === 2 ? 4 : 2);
+      ctx.lineCap = "round";
+
+      const neighbors = [[1,0], [0,1], [-1,0], [0,-1]];
+      let connected = false;
+      for (const [dx, dy] of neighbors) {
+        const neighborCell = this.grid[(x + dx) + "," + (y + dy)];
+        if (neighborCell && neighborCell.river) {
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(cx + dx * (this.gridSize / 2), cy + dy * (this.gridSize / 2));
+          ctx.stroke();
+          connected = true;
+        }
+      }
+
+      if (!connected) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, ctx.lineWidth, 0, Math.PI * 2);
+        ctx.fillStyle = ctx.strokeStyle;
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  drawResourceLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.resource) continue;
+      const [x, y] = key.split(",").map(Number);
+      const item = this.layerMaps.resource ? this.layerMaps.resource.idToItem[cell.resource] : null;
+      if (!item || item.id === 0) continue;
+
+      const cx = x * this.gridSize + this.gridSize / 2;
+      const cy = y * this.gridSize + this.gridSize / 2;
+      const ctx = this.ctx;
+
+      ctx.save();
+      ctx.fillStyle = item.color || "#FFD700";
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#000000";
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      if (item.badge) {
+        ctx.font = "bold 7px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#000000";
+        ctx.fillText(item.badge, cx, cy - 5);
+      }
+      ctx.restore();
+    }
+  }
+
+  drawInfrastructureLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.infrastructure) continue;
+      const [x, y] = key.split(",").map(Number);
+      this.drawInfrastructure(x, y, cell.infrastructure);
+    }
+  }
+
+  drawInfrastructure(x, y, infraVal) {
+    const map = this.layerMaps.infrastructure;
+    let item = null;
+    if (map) {
+      item = typeof infraVal === "number" ? map.idToItem[infraVal] : map.nameToItem[String(infraVal).toLowerCase()];
+    }
+    if (!item) {
+      const styles = {
+        Road: { color: "#5C3A1E", lineWidth: 3 },
+        Footpath: { color: "#A97443", lineWidth: 1.5 },
+        "Small Port": { color: "#D2B48C", marker: "p" },
+        "Large Port": { color: "#8B4513", marker: "P" }
+      };
+      item = styles[infraVal] || styles.Road;
+    }
+
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
-    if (style.marker) {
-      this.ctx.save();
-      this.ctx.fillStyle = style.color;
-      this.ctx.font = `bold ${this.gridSize * 0.75}px Arial`;
-      this.ctx.textAlign = 'left';
-      this.ctx.textBaseline = 'top';
-      this.ctx.fillText(style.marker, x * this.gridSize + 1, y * this.gridSize + 1);
-      this.ctx.restore();
+    const ctx = this.ctx;
+
+    if (item.marker) {
+      ctx.save();
+      ctx.fillStyle = item.color || "#5C3A1E";
+      ctx.font = "bold " + (this.gridSize * 0.75) + "px Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText(item.marker, x * this.gridSize + 1, y * this.gridSize + 1);
+      ctx.restore();
       return;
     }
-    this.ctx.strokeStyle = style.color;
-    this.ctx.fillStyle = style.color;
-    this.ctx.lineWidth = style.lineWidth / this.zoom;
-    this.ctx.lineCap = 'round';
+
+    ctx.save();
+    ctx.strokeStyle = item.color || "#5C3A1E";
+    ctx.lineWidth = item.lineWidth || 2;
+    ctx.lineCap = "round";
+
     const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
     forward.forEach(([dx, dy]) => {
-      const neighbour = this.layers.infrastructure[`${x + dx},${y + dy}`];
-      if (!this.isPathInfrastructure(neighbour)) return;
-      const neighbourStyle = this.infrastructureStyles[neighbour] || this.infrastructureStyles.Road;
-      const segmentStyle = style.lineWidth <= neighbourStyle.lineWidth ? style : neighbourStyle;
-      this.ctx.strokeStyle = segmentStyle.color;
-      this.ctx.lineWidth = segmentStyle.lineWidth / this.zoom;
-      this.ctx.beginPath();
-      this.ctx.moveTo(cx, cy);
-      this.ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
-      this.ctx.stroke();
-    });
-    const isolated = forward
-      .flatMap(([dx, dy]) => [[dx, dy], [-dx, -dy]])
-      .every(([dx, dy]) => !this.isPathInfrastructure(this.layers.infrastructure[`${x + dx},${y + dy}`]));
-    if (isolated) {
-      this.ctx.beginPath();
-      this.ctx.arc(cx, cy, style.markerRadius, 0, Math.PI * 2);
-      this.ctx.fill();
-    }
-  }
-
-  isPathInfrastructure(infrastructure) {
-    return infrastructure === 'Road' || infrastructure === 'Footpath';
-  }
-
-  drawSettlements() {
-    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
-      const [x, y] = key.split(',').map(Number);
-      this.drawSettlementMarker(x, y, settlement);
-    });
-    Object.entries(this.layers.settlements).forEach(([key, settlement]) => {
-      const [x, y] = key.split(',').map(Number);
-      this.drawSettlementText(x, y, settlement);
-    });
-  }
-
-  drawSettlementMarker(x, y, settlement) {
-    const { type } = settlement;
-    const size = this.gridSize;
-    const cx = x * size + size / 2;
-    const cy = y * size + size / 2;
-    const clan = this.layers.clans[`${x},${y}`];
-    const clanColors = this.clanColors[clan] || { border: '#444444', fill: '#DDDDDD' };
-    const neutralColors = { Mine: '#4B4B4B', 'Lumber Mill': '#8B5A2B' };
-    const isNeutral = type in neutralColors;
-    const fillColor = neutralColors[type] || clanColors.fill;
-    const borderColor = isNeutral ? '#222222' : clanColors.border;
-    const ctx = this.ctx;
-    ctx.save();
-    ctx.fillStyle = fillColor;
-    ctx.strokeStyle = borderColor;
-    ctx.lineWidth = 1 / this.zoom;
-
-    if (type === 'Village' || type === 'City' || type === 'Capital') {
+      const neighbourCell = this.grid[(x + dx) + "," + (y + dy)];
+      if (!neighbourCell || !neighbourCell.infrastructure) return;
       ctx.beginPath();
-      ctx.arc(cx, cy, type === 'Village' ? 3 : 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-      if (type === 'Capital') {
-        ctx.fillStyle = borderColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    } else if (type === 'Fortification' || type === 'Castle' || type === 'Kyuden') {
-      const side = type === 'Fortification' ? 6 : 10;
-      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
-      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
-      if (type === 'Kyuden') {
-        ctx.fillStyle = borderColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      if (type === 'Fortification') this.drawFortificationConnections(x, y, cx, cy, borderColor);
-    }  else if (type === 'Small Shrine' || type === 'Large Shrine') {
-      this.drawShrine(cx, cy, clanColors.border, type === 'Small Shrine' ? 0.75 : 1);
-    } else if (type === 'Mine' && this.mineImage.complete && this.mineImage.naturalWidth) {
-      ctx.drawImage(this.mineImage, cx - 6, cy - 6, 12, 12);
-    } else if (type === 'Lumber Mill') {
-      for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
-    } else if (type === 'Farm' && this.farmImage.complete && this.farmImage.naturalWidth) {
-      ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
-    }
-    ctx.restore();
-  }
-
-  drawSettlementText(x, y, settlement) {
-    const { type, englishName = '', rokuganiName = '' } = settlement;
-    const size = this.gridSize;
-    const cx = x * size + size / 2;
-    const cy = y * size + size / 2;
-
-    const name = this.settlementLanguage === 'english' ? englishName : rokuganiName;
-    const label = this.settlementLanguage === 'english' ? this.englishSettlementType(type) : this.rokuganiSettlementType(type);
-    if (name) {
-      const fontSize = this.settlementFontSize(type);
-      this.drawMapText(name, cx, cy + size / 2 + fontSize / 2, fontSize);
-      this.drawMapText(label, cx, cy + size / 2 + fontSize * 1.5, fontSize);
-    }
-  }
-
-  drawShrine(cx, cy, color, scale) {
-    if (!this.shrineImage.complete || !this.shrineImage.naturalWidth) return;
-    const image = this.shrineIcon(color, scale);
-    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
-  }
-
-  shrineIcon(color, scale) {
-    const key = `${color}:${scale}`;
-    if (this.shrineIconCache[key]) return this.shrineIconCache[key];
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.round(this.shrineImage.naturalWidth * scale);
-    canvas.height = Math.round(this.shrineImage.naturalHeight * scale);
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(this.shrineImage, 0, 0, canvas.width, canvas.height);
-    ctx.globalCompositeOperation = 'source-in';
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    this.shrineIconCache[key] = canvas;
-    return canvas;
-  }
-
-  drawFortificationConnections(x, y, cx, cy, color) {
-    const ctx = this.ctx;
-    const neighbours = [[1, 0], [0, 1], [1, 1], [1, -1]];
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3 / this.zoom;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    neighbours.forEach(([dx, dy]) => {
-      const neighbour = this.layers.settlements[`${x + dx},${y + dy}`];
-      if (neighbour?.type !== 'Fortification') return;
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
+      ctx.stroke();
     });
-    ctx.stroke();
+
     ctx.restore();
   }
 
-  settlementFontSize(type) {
-    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, 'Lumber Mill': 8, Farm: 8, 'Small Shrine': 8, 'Large Shrine': 10 }[type] || 8;
-  }
-
-  englishSettlementType(type) {
-    return type === 'Kyuden' ? 'Palace' : type;
-  }
-
-  rokuganiSettlementType(type) {
-    return { Village: 'Mura', City: 'Toshi', Capital: 'Shuto', Fortification: '', Castle: 'Shiro', Kyuden: 'Kyuden', Mine: 'Kōzan', 'Lumber Mill': 'Seizaijo', Farm: 'Nōjō', 'Small Shrine': 'Shōsha', 'Large Shrine': 'Taisha' }[type] || type;
-  }
-
-  textContent(data) {
-    if (typeof data === 'string') return data;
-    return this.settlementLanguage === 'english'
-      ? data.englishText || data.text || data.rokuganiText || ''
-      : data.rokuganiText || data.text || data.englishText || '';
-  }
-
-  drawMapText(text, x, y, fontSize) {
-    if (!text) return;
-    this.ctx.font = `bold ${fontSize}px Arial`;
-    this.ctx.textAlign = 'center';
-    this.ctx.textBaseline = 'middle';
-    this.ctx.strokeStyle = '#FFFFFF';
-    this.ctx.lineWidth = Math.max(2, fontSize / 6);
-    this.ctx.strokeText(text, x, y);
-    this.ctx.fillStyle = '#000000';
-    this.ctx.fillText(text, x, y);
-  }
-
-  drawText(x, y, text, fontSize) {
-    if (!text) return;
-    const cx = x * this.gridSize + this.gridSize / 2;
-    const cy = y * this.gridSize + this.gridSize / 2;
-    this.ctx.font = `bold ${fontSize}px Arial`;
-    this.ctx.textAlign = 'center';
-    this.ctx.textBaseline = 'middle';
-    this.ctx.strokeStyle = '#FFFFFF';
-    this.ctx.lineWidth = Math.max(2, fontSize / 6);
-    this.ctx.strokeText(text, cx, cy);
-    this.ctx.fillStyle = '#000000';
-    this.ctx.fillText(text, cx, cy);
-  }
-
-  drawPath(path) {
-    const ctx = this.ctx;
-    ctx.save();
-    ctx.strokeStyle = '#FFD500';
-    ctx.lineWidth = 6 / this.zoom;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    const s = this.gridSize;
-    for (let i = 0; i < path.length; i++) {
-      const px = path[i].x * s + s / 2;
-      const py = path[i].y * s + s / 2;
-      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  drawClanLayer() {
+    const cellsByClan = {};
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.clan) continue;
+      const cVal = cell.clan;
+      let clanName = cVal;
+      if (typeof cVal === "number" && this.layerMaps.clan) {
+        clanName = this.layerMaps.clan.idToName[cVal] || cVal;
+      }
+      if (clanName && clanName !== "none") {
+        (cellsByClan[clanName] ||= new Set()).add(key);
+      }
     }
-    ctx.stroke();
-    ctx.strokeStyle = '#8A6000';
-    ctx.lineWidth = 2 / this.zoom;
-    ctx.stroke();
-    ctx.restore();
-  }
 
-  drawMarker(cell, color) {
-    const ctx = this.ctx;
-    const s = this.gridSize;
-    ctx.save();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = '#000000';
-    ctx.lineWidth = 2 / this.zoom;
-    ctx.beginPath();
-    ctx.arc(cell.x * s + s / 2, cell.y * s + s / 2, s / 2 - 1, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.restore();
+    const fillAlpha = this.viewMode === "clan" ? 0.4 : 0.15;
+    for (const [clan, cells] of Object.entries(cellsByClan)) {
+      const colors = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[clan.toLowerCase()] : { border: "#00008B", fill: "#808080" };
+      if (!colors) continue;
+      const polygons = this.traceClanPolygons(cells);
+      if (!polygons.length) continue;
+      this.drawClanShape(cells, polygons, colors, fillAlpha);
+    }
   }
 
   drawClanShape(cells, polygons, colors, fillAlpha) {
     const size = this.gridSize;
     this.ctx.save();
-    this.ctx.globalAlpha = fillAlpha;
-    this.ctx.fillStyle = colors.fill;
-    for (const key of cells) {
-      const [cx, cy] = key.split(',').map(Number);
-      this.ctx.fillRect(cx * size, cy * size, size, size);
-    }
-    this.ctx.globalAlpha = 1;
+    this.ctx.lineJoin = "miter";
+    this.ctx.lineCap = "square";
 
     const clip = new Path2D();
     for (const key of cells) {
-      const [cx, cy] = key.split(',').map(Number);
+      const [cx, cy] = key.split(",").map(Number);
       clip.rect(cx * size, cy * size, size, size);
     }
     this.ctx.clip(clip);
 
-    const stroke = new Path2D();
+    const path = new Path2D();
     for (const poly of polygons) {
-      stroke.moveTo(poly[0][0], poly[0][1]);
-      for (let i = 1; i < poly.length; i++) stroke.lineTo(poly[i][0], poly[i][1]);
-      stroke.closePath();
+      path.moveTo(poly[0][0], poly[0][1]);
+      for (let i = 1; i < poly.length; i++) path.lineTo(poly[i][0], poly[i][1]);
+      path.closePath();
     }
-    this.ctx.lineJoin = 'miter';
-    this.ctx.lineCap = 'square';
-    this.ctx.strokeStyle = colors.border;
-    this.ctx.lineWidth = 12 / this.zoom;
-    this.ctx.stroke(stroke);
-    this.ctx.strokeStyle = colors.fill;
+
+    if (colors.fill && fillAlpha > 0) {
+      this.ctx.fillStyle = colors.fill;
+      this.ctx.globalAlpha = fillAlpha;
+      this.ctx.fill(path);
+      this.ctx.globalAlpha = 1.0;
+    }
+
+    this.ctx.strokeStyle = colors.border || "#00008B";
     this.ctx.lineWidth = 6 / this.zoom;
-    this.ctx.stroke(stroke);
-    this.ctx.strokeStyle = '#444444';
-    this.ctx.lineWidth = 2 / this.zoom;
-    this.ctx.stroke(stroke);
+    this.ctx.stroke(path);
+
+    this.ctx.strokeStyle = "#444444";
+    this.ctx.lineWidth = 1.5 / this.zoom;
+    this.ctx.stroke(path);
+
     this.ctx.restore();
   }
 
-  // Chains directed cell-boundary edges (clockwise, interior on the right) into closed polygons.
   traceClanPolygons(cellSet) {
     const size = this.gridSize;
     const edges = new Map();
@@ -699,14 +716,16 @@ class WorldMapViewer {
       if (!edges.has(a)) edges.set(a, []);
       edges.get(a).push(b);
     };
-    const has = (cx, cy) => cellSet.has(`${cx},${cy}`);
+    const has = (cx, cy) => cellSet.has(cx + "," + cy);
+
     for (const key of cellSet) {
-      const [cx, cy] = key.split(',').map(Number);
-      if (!has(cx, cy - 1)) addEdge(`${cx},${cy}`, `${cx + 1},${cy}`);
-      if (!has(cx + 1, cy)) addEdge(`${cx + 1},${cy}`, `${cx + 1},${cy + 1}`);
-      if (!has(cx, cy + 1)) addEdge(`${cx + 1},${cy + 1}`, `${cx},${cy + 1}`);
-      if (!has(cx - 1, cy)) addEdge(`${cx},${cy + 1}`, `${cx},${cy}`);
+      const [cx, cy] = key.split(",").map(Number);
+      if (!has(cx, cy - 1)) addEdge(cx + "," + cy, (cx + 1) + "," + cy);
+      if (!has(cx + 1, cy)) addEdge((cx + 1) + "," + cy, (cx + 1) + "," + (cy + 1));
+      if (!has(cx, cy + 1)) addEdge((cx + 1) + "," + (cy + 1), cx + "," + (cy + 1));
+      if (!has(cx - 1, cy)) addEdge(cx + "," + (cy + 1), cx + "," + cy);
     }
+
     const polygons = [];
     while (edges.size) {
       const start = edges.keys().next().value;
@@ -720,45 +739,232 @@ class WorldMapViewer {
         if (next === start) break;
         current = next;
       }
-      polygons.push(polygon.map((v) => v.split(',').map((n) => Number(n) * size)));
+      polygons.push(polygon.map((v) => v.split(",").map((n) => Number(n) * size)));
     }
     return polygons;
   }
 
-  // Mixes 55% toward white, or toward dark grey when the source is already very light.
-  tintClanColor(hex) {
-    const c = hex.replace('#', '');
-    if (c.length !== 6) return '#FFFFFF';
-    const r = parseInt(c.slice(0, 2), 16);
-    const g = parseInt(c.slice(2, 4), 16);
-    const b = parseInt(c.slice(4, 6), 16);
-    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    const target = luminance > 200 ? 90 : 255;
-    const mix = (channel) => Math.round(channel + (target - channel) * 0.55);
-    return `#${[mix(r), mix(g), mix(b)].map((n) => n.toString(16).padStart(2, '0')).join('')}`;
+  drawSettlements() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.settlement) continue;
+      const [x, y] = key.split(",").map(Number);
+      this.drawSettlementMarker(x, y, cell);
+    }
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.settlement) continue;
+      const [x, y] = key.split(",").map(Number);
+      this.drawSettlementText(x, y, cell);
+    }
+  }
+
+  drawSettlementMarker(x, y, cell) {
+    const { settlement: setVal } = cell;
+    let typeName = setVal;
+    if (typeof setVal === "number" && this.layerMaps.settlement) {
+      typeName = this.layerMaps.settlement.idToName[setVal] || setVal;
+    }
+
+    const size = this.gridSize;
+    const cx = x * size + size / 2;
+    const cy = y * size + size / 2;
+
+    const clanName = this.cellClan(x, y);
+    const clanColors = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[String(clanName).toLowerCase()] : { border: "#444444", fill: "#DDDDDD" };
+
+    const neutralColors = { Mine: "#4B4B4B", "Lumber Mill": "#8B5A2B" };
+    const isNeutral = typeName in neutralColors;
+    const fillColor = neutralColors[typeName] || (clanColors ? clanColors.fill : "#DDDDDD") || "#DDDDDD";
+    const borderColor = isNeutral ? "#222222" : (clanColors ? clanColors.border : "#444444") || "#444444";
+
+    const ctx = this.ctx;
+    ctx.save();
+    ctx.fillStyle = fillColor;
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = 1 / this.zoom;
+
+    if (typeName === "Village" || typeName === "City" || typeName === "Capital") {
+      ctx.beginPath();
+      ctx.arc(cx, cy, typeName === "Village" ? 3 : 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      if (typeName === "Capital") {
+        ctx.fillStyle = borderColor;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (typeName === "Fortification" || typeName === "Castle" || typeName === "Kyuden") {
+      const side = typeName === "Fortification" ? 6 : 10;
+      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
+      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
+      if (typeName === "Kyuden") {
+        ctx.fillStyle = borderColor;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (typeName === "Mine" && this.mineImage.complete && this.mineImage.naturalWidth) {
+      ctx.drawImage(this.mineImage, cx - 6, cy - 6, 12, 12);
+    } else if (typeName === "Lumber Mill") {
+      for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
+    } else if (typeName === "Farm" && this.farmImage.complete && this.farmImage.naturalWidth) {
+      ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
+    } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
+      this.drawShrine(cx, cy, borderColor, typeName === "Small Shrine" ? 0.75 : 1);
+    }
+    ctx.restore();
+  }
+
+  drawSettlementText(x, y, cell) {
+    const { settlement: setVal, englishName = "", rokuganiName = "" } = cell;
+    let typeName = setVal;
+    if (typeof setVal === "number" && this.layerMaps.settlement) {
+      typeName = this.layerMaps.settlement.idToName[setVal] || setVal;
+    }
+
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
+
+    const name = this.settlementLanguage === "english" ? englishName : rokuganiName;
+    const label = this.settlementLanguage === "english" ? this.englishSettlementType(typeName) : this.rokuganiSettlementType(typeName);
+    this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(typeName));
+  }
+
+  drawShrine(cx, cy, color, scale) {
+    if (!this.shrineImage.complete || !this.shrineImage.naturalWidth) return;
+    const image = this.shrineIcon(color, scale);
+    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
+  }
+
+  shrineIcon(color, scale) {
+    const key = color + ":" + scale;
+    if (this.shrineIconCache[key]) return this.shrineIconCache[key];
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(this.shrineImage.naturalWidth * scale);
+    canvas.height = Math.round(this.shrineImage.naturalHeight * scale);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(this.shrineImage, 0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = "source-in";
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.shrineIconCache[key] = canvas;
+    return canvas;
+  }
+
+  drawSettlementLabel(cx, cy, label, name, fontSize) {
+    if (!name) return;
+    this.drawMapText(name, cx, cy + this.gridSize / 2 + fontSize / 2, fontSize);
+    if (label) this.drawMapText(label, cx, cy + this.gridSize / 2 + fontSize * 1.5, fontSize);
+  }
+
+  settlementFontSize(type) {
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, "Lumber Mill": 8, Farm: 8, "Small Shrine": 8, "Large Shrine": 10 }[type] || 8;
+  }
+
+  englishSettlementType(type) {
+    return type === "Kyuden" ? "Palace" : type;
+  }
+
+  rokuganiSettlementType(type) {
+    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", Mine: "Kōzan", "Lumber Mill": "Seizaijo", Farm: "Nōjō", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
+  }
+
+  drawTextLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.text) continue;
+      const [x, y] = key.split(",").map(Number);
+      this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 16);
+    }
+  }
+
+  textContent(data) {
+    if (typeof data === "string") return data;
+    return this.settlementLanguage === "english"
+      ? data.englishText || data.text || data.rokuganiText || ""
+      : data.rokuganiText || data.text || data.englishText || "";
+  }
+
+  drawMapText(text, x, y, fontSize) {
+    if (!text) return;
+    this.ctx.font = "bold " + fontSize + "px Arial";
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
+    this.ctx.strokeStyle = "#FFFFFF";
+    this.ctx.lineWidth = Math.max(2, fontSize / 6);
+    this.ctx.strokeText(text, x, y);
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillText(text, x, y);
+  }
+
+  drawText(x, y, text, fontSize) {
+    if (!text) return;
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
+
+    this.ctx.font = "bold " + fontSize + "px Arial";
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
+    this.ctx.strokeStyle = "#FFFFFF";
+    this.ctx.lineWidth = Math.max(2, fontSize / 6);
+    this.ctx.strokeText(text, cx, cy);
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillText(text, cx, cy);
+  }
+
+  drawGrid() {
+    const ctx = this.ctx;
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.35)";
+    ctx.lineWidth = 1 / this.zoom;
+
+    for (let x = 0; x <= this.mapWidth; x += this.gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, this.mapHeight);
+      ctx.stroke();
+    }
+    for (let y = 0; y <= this.mapHeight; y += this.gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(this.mapWidth, y);
+      ctx.stroke();
+    }
+  }
+
+  fillCell(x, y, color, alpha = 0.8) {
+    if (!color) return;
+    this.ctx.save();
+    this.ctx.globalAlpha = alpha;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+    this.ctx.restore();
+  }
+
+  drawPath(path) {
+    if (!path || path.length < 2) return;
+    const ctx = this.ctx;
+    ctx.save();
+    ctx.strokeStyle = "#FF0000";
+    ctx.lineWidth = 3 / this.zoom;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+
+    const start = path[0];
+    ctx.moveTo(start.x * this.gridSize + this.gridSize / 2, start.y * this.gridSize + this.gridSize / 2);
+    for (let i = 1; i < path.length; i++) {
+      const p = path[i];
+      ctx.lineTo(p.x * this.gridSize + this.gridSize / 2, p.y * this.gridSize + this.gridSize / 2);
+    }
+    ctx.stroke();
+    ctx.restore();
   }
 }
 
-function numOrNull(v) {
-  if (v === '' || v === undefined || v === null) return null;
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
-}
-
 let mapViewer;
-document.addEventListener('DOMContentLoaded', async () => {
-  const canvas = document.querySelector('#mapCanvas');
-  if (!canvas) return;
-  const gridSize = Number.parseInt(canvas.dataset.gridSize, 10) || VIEWER_GRID_SIZE;
-  mapViewer = new WorldMapViewer(canvas.dataset.mapSrc, '#mapCanvas', gridSize);
-  try {
-    await Promise.all([
-      mapViewer.loadMap(canvas.dataset.mapData),
-      mapViewer.loadCosts(canvas.dataset.travelCosts)
-    ]);
-  } catch (err) {
-    console.error(err);
-    const summary = document.getElementById('pathSummary');
-    if (summary) summary.textContent = `Failed to load map data: ${err.message}`;
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.querySelector("#mapCanvas");
+  if (canvas) {
+    const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
+    mapViewer = new WorldMapViewer(canvas.dataset.mapSrc, "#mapCanvas", gridSize);
   }
 });

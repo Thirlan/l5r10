@@ -33,40 +33,31 @@
       <!-- Terrain Layer -->
       <div class="control-panel">
         <h3>Terrain Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Mountain', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #8B7355;"></span>Mountain
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'flat', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #90EE90;"></span>Flat
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Coastal Water', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #4169E1;"></span>Coastal Water
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Water', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #1E90FF;"></span>Water
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Forest', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #228B22;"></span>Forest
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Plains', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #90EE90;"></span>Plains
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Hills', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'hills', 'terrain'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #DAA520;"></span>Hills
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Deserts', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #F4A460;"></span>Deserts
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'mountains', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #8B7355;"></span>Mountains
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Marsh', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #556B2F;"></span>Marsh
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'water', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #1E90FF;"></span>Water
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Ocean', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'coastal water', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #4169E1;"></span>Coastal Water
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'ocean', 'terrain'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #00008B;"></span>Ocean
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Waste', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #777777;"></span>Waste
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'valley', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #6B8E23;"></span>Valley
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'Snow', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
-          <span class="terrain-color" style="background-color: #F0F8FF;"></span>Snow
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'wetlands', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #556B2F;"></span>Wetlands
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'City', 'terrain'); updateActiveButton(this); mapGrid.currentLayer='terrain';">
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'city', 'terrain'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #FF6347;"></span>City
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'terrain', 'erase'); updateActiveButton(this);">
@@ -74,81 +65,103 @@
         </button>
       </div>
 
-      <!-- Clan Layer -->
+      <!-- Climate Layer -->
       <div class="control-panel">
-        <h3>Clan Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crane', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #87CEEB;"></span>Crane
+        <h3>Climate Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'temperate', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #A0E0A0;"></span>Temperate
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Lion', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #D4A017; border-color: #8B4513;"></span>Lion
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'tropical', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FF8C00;"></span>Tropical
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crab', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #808080; border-color: #00008B;"></span>Crab
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'subtropical', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFA500;"></span>Subtropical
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Dragon', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFF00; border-color: #228B22;"></span>Dragon
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'desert', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #F4A460;"></span>Desert
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Unicorn', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFF00; border-color: #800080;"></span>Unicorn
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'cold', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #ADD8E6;"></span>Cold
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Scorpion', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #000000; border-color: #FF0000;"></span>Scorpion
+        <button class="tool-button" onclick="mapGrid.selectTool('climate', 'freezing', 'climate'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #F0F8FF;"></span>Freezing
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Imperial', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #D4AF37;"></span>Imperial
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'climate', 'erase'); updateActiveButton(this);">
+          Erase Climate
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Shadowlands', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #000000;"></span>Shadowlands
+      </div>
+
+      <!-- Vegetation Layer -->
+      <div class="control-panel">
+        <h3>Vegetation Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'none', 'vegetation'); updateActiveButton(this);">
+          None
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Phoenix', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFA500; border-color: #FFD700;"></span>Phoenix
+        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'light forest', 'vegetation'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #90EE90;"></span>Light Forest
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Mantis', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #006400;"></span>Mantis
+        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'forest', 'vegetation'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #3CB371;"></span>Forest
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Hare', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #FF0000;"></span>Hare
+        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'dense forest', 'vegetation'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #228B22;"></span>Dense Forest
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Centipede', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #8B4513; border-color: #FFA500;"></span>Centipede
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'vegetation', 'erase'); updateActiveButton(this);">
+          Erase Vegetation
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Fox', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #808080; border-color: #C4A484;"></span>Fox
+      </div>
+
+      <!-- River Layer -->
+      <div class="control-panel">
+        <h3>River Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('river', 'none', 'river'); updateActiveButton(this);">
+          None
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Badger', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #000000; border-color: #808080;"></span>Badger
+        <button class="tool-button" onclick="mapGrid.selectTool('river', 'small river', 'river'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #1E90FF;"></span>Small River
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Dragonfly', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFF00; border-color: #00008B;"></span>Dragonfly
+        <button class="tool-button" onclick="mapGrid.selectTool('river', 'large river', 'river'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #00008B;"></span>Large River
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Falcon', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #808080; border-color: #228B22;"></span>Falcon
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'river', 'erase'); updateActiveButton(this);">
+          Erase River
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Sparrow', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #000000; border-color: #F0E68C;"></span>Sparrow
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Tortoise', 'clans'); updateActiveButton(this); mapGrid.currentLayer='clans';">
-          <span class="terrain-color" style="background-color: #FFFF00; border-color: #000033;"></span>Tortoise
-        </button>
-        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'clans', 'erase'); updateActiveButton(this);">
-          Erase Clan
+      </div>
+
+      <!-- Resource Layer -->
+      <div class="control-panel">
+        <h3>Resource Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'jade', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #00A86B;"></span>Jade</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'iron', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #708090;"></span>Iron</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'gemstones', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #E6E6FA;"></span>Gemstones</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'stone', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #A9A9A9;"></span>Stone</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'copper', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #B87333;"></span>Copper</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'silver', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #C0C0C0;"></span>Silver</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'gold', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #FFD700;"></span>Gold</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'fish', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #1E90FF;"></span>Fish</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'crab', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #FF4500;"></span>Crab</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'spices', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #D2691E;"></span>Spices</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'fertile', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #32CD32;"></span>Fertile</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'infertile', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #8B0000;"></span>Infertile</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'pearls', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #F0E68C;"></span>Pearls</button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'resource', 'erase'); updateActiveButton(this);">
+          Erase Resource
         </button>
       </div>
 
       <!-- Infrastructure Layer -->
       <div class="control-panel">
         <h3>Infrastructure Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('road', 'Road', 'infrastructure'); updateActiveButton(this);">
+        <button class="tool-button" onclick="mapGrid.selectTool('infrastructure', 'Road', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #f1b17d;"></span>Road
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('footpath', 'Footpath', 'infrastructure'); updateActiveButton(this);">
+        <button class="tool-button" onclick="mapGrid.selectTool('infrastructure', 'Footpath', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background: linear-gradient(to bottom, transparent 40%, #A97443 40% 60%, transparent 60%);"></span>Footpath
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('small-port', 'Small Port', 'infrastructure'); updateActiveButton(this);">
+        <button class="tool-button" onclick="mapGrid.selectTool('infrastructure', 'Small Port', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #D2B48C;"></span>Small Port
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('large-port', 'Large Port', 'infrastructure'); updateActiveButton(this);">
+        <button class="tool-button" onclick="mapGrid.selectTool('infrastructure', 'Large Port', 'infrastructure'); updateActiveButton(this);">
           <span class="terrain-color" style="background-color: #8B4513;"></span>Large Port
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'infrastructure', 'erase'); updateActiveButton(this);">
@@ -176,20 +189,82 @@
         </div>
       </div>
 
+      <!-- Clan Layer -->
+      <div class="control-panel">
+        <h3>Clan Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crane', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #87CEEB;"></span>Crane
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Lion', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #D4A017; border-color: #8B4513;"></span>Lion
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Crab', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #808080; border-color: #00008B;"></span>Crab
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Dragon', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFF00; border-color: #228B22;"></span>Dragon
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Unicorn', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFF00; border-color: #800080;"></span>Unicorn
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Scorpion', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #000000; border-color: #FF0000;"></span>Scorpion
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Imperial', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #D4AF37;"></span>Imperial
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Shadowlands', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #000000;"></span>Shadowlands
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Phoenix', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFA500; border-color: #FFD700;"></span>Phoenix
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Mantis', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #006400;"></span>Mantis
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Hare', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFFFF; border-color: #FF0000;"></span>Hare
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Centipede', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #8B4513; border-color: #FFA500;"></span>Centipede
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Fox', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #808080; border-color: #C4A484;"></span>Fox
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Badger', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #000000; border-color: #808080;"></span>Badger
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Dragonfly', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFF00; border-color: #00008B;"></span>Dragonfly
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Falcon', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #808080; border-color: #228B22;"></span>Falcon
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Sparrow', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #000000; border-color: #F0E68C;"></span>Sparrow
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('clan', 'Tortoise', 'clan'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #FFFF00; border-color: #000033;"></span>Tortoise
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'clan', 'erase'); updateActiveButton(this);">
+          Erase Clan
+        </button>
+      </div>
+
       <!-- Settlement Layer -->
       <div class="control-panel">
         <h3>Settlement Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Village', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-village"></span>Village</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'City', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-city"></span>City</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Capital', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-capital"></span>Capital</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Fortification', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-fortification"></span>Fortification</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Castle', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-castle"></span>Castle</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Kyuden', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-kyuden"></span>Kyuden</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Mine', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-mine"></span>Mine</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Lumber Mill', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-lumber-mill"></span>Lumber Mill</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Farm', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-farm"></span>Farm</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Small Shrine', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-small-shrine"></span>Small Shrine</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Large Shrine', 'settlements'); updateActiveButton(this);"><span class="settlement-icon settlement-large-shrine"></span>Large Shrine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Village', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-village"></span>Village</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'City', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-city"></span>City</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Capital', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-capital"></span>Capital</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Fortification', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-fortification"></span>Fortification</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Castle', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-castle"></span>Castle</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Kyuden', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-kyuden"></span>Kyuden</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Mine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-mine"></span>Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Lumber Mill', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-lumber-mill"></span>Lumber Mill</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Farm', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-farm"></span>Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Small Shrine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-small-shrine"></span>Small Shrine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Large Shrine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-large-shrine"></span>Large Shrine</button>
         <div class="control-section" style="margin-top: 15px;">
           <label for="settlementEnglishName">English Name</label>
           <input type="text" id="settlementEnglishName">
@@ -203,7 +278,7 @@
           <label><input type="radio" name="settlementLanguage" value="english" checked onchange="mapGrid.setSettlementLanguage(this.value)"> English</label>
           <label><input type="radio" name="settlementLanguage" value="rokugani" onchange="mapGrid.setSettlementLanguage(this.value)"> Rokugani</label>
         </div>
-        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'settlements', 'erase'); updateActiveButton(this);">Erase Settlement</button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'settlement', 'erase'); updateActiveButton(this);">Erase Settlement</button>
       </div>
 
       <!-- Text Layer & File Operations -->

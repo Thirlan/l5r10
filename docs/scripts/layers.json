@@ -1,0 +1,134 @@
+{
+  "drawOrder": [
+    "terrain",
+    "vegetation",
+    "river",
+    "infrastructure",
+    "resource",
+    "settlement",
+    "clan",
+    "text"
+  ],
+  "layers": {
+    "terrain": {
+      "id": "terrain",
+      "name": "Terrain Layer",
+      "values": [
+        { "id": 0, "name": "flat", "color": "#90EE90", "image": "../img/map/plain.png" },
+        { "id": 1, "name": "hills", "color": "#DAA520", "image": "../img/map/hills.png" },
+        { "id": 2, "name": "mountains", "color": "#8B7355", "image": "../img/map/mountain.png" },
+        { "id": 3, "name": "water", "color": "#1E90FF", "image": "../img/map/water.png" },
+        { "id": 4, "name": "coastal water", "color": "#4169E1", "image": "../img/map/coastal_water.png" },
+        { "id": 5, "name": "ocean", "color": "#00008B", "image": "../img/map/ocean.png" },
+        { "id": 6, "name": "valley", "color": "#6B8E23", "image": "../img/map/valley.png" },
+        { "id": 7, "name": "wetlands", "color": "#556B2F", "image": "../img/map/wetlands.png" },
+        { "id": 8, "name": "city", "color": "#FF6347", "image": "../img/map/city.png" }
+      ]
+    },
+    "climate": {
+      "id": "climate",
+      "name": "Climate Layer",
+      "values": [
+        { "id": 0, "name": "temperate", "color": "#A0E0A0" },
+        { "id": 1, "name": "tropical", "color": "#FF8C00" },
+        { "id": 2, "name": "subtropical", "color": "#FFA500" },
+        { "id": 3, "name": "desert", "color": "#F4A460" },
+        { "id": 4, "name": "cold", "color": "#ADD8E6" },
+        { "id": 5, "name": "freezing", "color": "#F0F8FF" }
+      ]
+    },
+    "vegetation": {
+      "id": "vegetation",
+      "name": "Vegetation Layer",
+      "values": [
+        { "id": 0, "name": "none", "color": null },
+        { "id": 1, "name": "light forest", "color": "#90EE90" },
+        { "id": 2, "name": "forest", "color": "#3CB371" },
+        { "id": 3, "name": "dense forest", "color": "#228B22" }
+      ]
+    },
+    "river": {
+      "id": "river",
+      "name": "River Layer",
+      "values": [
+        { "id": 0, "name": "none", "color": null },
+        { "id": 1, "name": "small river", "color": "#1E90FF", "lineWidth": 2 },
+        { "id": 2, "name": "large river", "color": "#00008B", "lineWidth": 4 }
+      ]
+    },
+    "resource": {
+      "id": "resource",
+      "name": "Resource Layer",
+      "values": [
+        { "id": 0, "name": "none", "color": null },
+        { "id": 1, "name": "jade", "color": "#00A86B", "badge": "J" },
+        { "id": 2, "name": "iron", "color": "#708090", "badge": "Fe" },
+        { "id": 3, "name": "gemstones", "color": "#E6E6FA", "badge": "Gem" },
+        { "id": 4, "name": "stone", "color": "#A9A9A9", "badge": "St" },
+        { "id": 5, "name": "copper", "color": "#B87333", "badge": "Cu" },
+        { "id": 6, "name": "silver", "color": "#C0C0C0", "badge": "Ag" },
+        { "id": 7, "name": "gold", "color": "#FFD700", "badge": "Au" },
+        { "id": 8, "name": "fish", "color": "#1E90FF", "badge": "Fish" },
+        { "id": 9, "name": "crab", "color": "#FF4500", "badge": "Crab" },
+        { "id": 10, "name": "spices", "color": "#D2691E", "badge": "Spice" },
+        { "id": 11, "name": "fertile", "color": "#32CD32", "badge": "Fert" },
+        { "id": 12, "name": "infertile", "color": "#8B0000", "badge": "Inf" },
+        { "id": 13, "name": "pearls", "color": "#F0E68C", "badge": "Prl" }
+      ]
+    },
+    "infrastructure": {
+      "id": "infrastructure",
+      "name": "Infrastructure Layer",
+      "values": [
+        { "id": 0, "name": "none", "color": null },
+        { "id": 1, "name": "Road", "color": "#5C3A1E", "lineWidth": 3 },
+        { "id": 2, "name": "Footpath", "color": "#A97443", "lineWidth": 1.5 },
+        { "id": 3, "name": "Small Port", "color": "#D2B48C", "marker": "p" },
+        { "id": 4, "name": "Large Port", "color": "#8B4513", "marker": "P" }
+      ]
+    },
+    "clan": {
+      "id": "clan",
+      "name": "Clan Layer",
+      "values": [
+        { "id": 0, "name": "none", "border": null, "fill": null },
+        { "id": 1, "name": "Crab", "border": "#00008B", "fill": "#808080" },
+        { "id": 2, "name": "Crane", "border": "#87CEEB", "fill": "#FFFFFF" },
+        { "id": 3, "name": "Dragon", "border": "#228B22", "fill": "#FFFF00" },
+        { "id": 4, "name": "Lion", "border": "#8B4513", "fill": "#D4A017" },
+        { "id": 5, "name": "Phoenix", "border": "#FFD700", "fill": "#FFA500" },
+        { "id": 6, "name": "Scorpion", "border": "#FF0000", "fill": "#000000" },
+        { "id": 7, "name": "Unicorn", "border": "#800080", "fill": "#FFFF00" },
+        { "id": 8, "name": "Imperial", "border": "#D4AF37", "fill": "#FFFFFF" },
+        { "id": 9, "name": "Hare", "border": "#FF0000", "fill": "#FFFFFF" },
+        { "id": 10, "name": "Centipede", "border": "#FFA500", "fill": "#8B4513" },
+        { "id": 11, "name": "Fox", "border": "#C4A484", "fill": "#808080" },
+        { "id": 12, "name": "Badger", "border": "#808080", "fill": "#000000" },
+        { "id": 13, "name": "Dragonfly", "border": "#00008B", "fill": "#FFFF00" },
+        { "id": 14, "name": "Falcon", "border": "#228B22", "fill": "#808080" },
+        { "id": 15, "name": "Sparrow", "border": "#F0E68C", "fill": "#000000" },
+        { "id": 16, "name": "Tortoise", "border": "#000033", "fill": "#FFFF00" },
+        { "id": 17, "name": "Mantis", "border": "#006400", "fill": "#90EE90" },
+        { "id": 18, "name": "Shadowlands", "border": "#000000", "fill": "#444444" }
+      ]
+    },
+    "settlement": {
+      "id": "settlement",
+      "name": "Settlement Layer",
+      "values": [
+        { "id": 0, "name": "none" },
+        { "id": 1, "name": "Village", "englishType": "Village", "rokuganiType": "Mura" },
+        { "id": 2, "name": "City", "englishType": "City", "rokuganiType": "Toshi" },
+        { "id": 3, "name": "Capital", "englishType": "Capital", "rokuganiType": "Shuto" },
+        { "id": 4, "name": "Fortification", "englishType": "Fortification", "rokuganiType": "" },
+        { "id": 5, "name": "Castle", "englishType": "Castle", "rokuganiType": "Shiro" },
+        { "id": 6, "name": "Kyuden", "englishType": "Palace", "rokuganiType": "Kyuden" },
+        { "id": 7, "name": "Mine", "englishType": "Mine", "rokuganiType": "Kōzan" },
+        { "id": 8, "name": "Lumber Mill", "englishType": "Lumber Mill", "rokuganiType": "Seizaijo" },
+        { "id": 9, "name": "Farm", "englishType": "Farm", "rokuganiType": "Nōjō" },
+        { "id": 10, "name": "Small Shrine", "englishType": "Small Shrine", "rokuganiType": "Shōsha" },
+        { "id": 11, "name": "Large Shrine", "englishType": "Large Shrine", "rokuganiType": "Taisha" }
+      ]
+    }
+  }
+}
