@@ -187,7 +187,7 @@ class WorldMapGrid {
         } else {
           const layerToErase = this.currentValue;
           const cell = this.grid[cellKey];
-          if (["terrain", "climate", "vegetation", "river", "resource"].includes(layerToErase)) {
+          if (["terrain", "climate", "vegetation", "river", "resource", "animal", "spirit", "shadowland", "crime"].includes(layerToErase)) {
             cell[layerToErase] = 0;
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
@@ -210,7 +210,7 @@ class WorldMapGrid {
           if (mapped !== undefined) valId = mapped;
         }
 
-        if (["terrain", "climate", "vegetation", "river", "resource"].includes(this.currentLayer)) {
+        if (["terrain", "climate", "vegetation", "river", "resource", "animal", "spirit", "shadowland", "crime"].includes(this.currentLayer)) {
           cell[this.currentLayer] = valId ?? 0;
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
@@ -248,6 +248,7 @@ class WorldMapGrid {
   selectTool(layer, value, toolLayer) {
     this.currentValue = value;
     this.currentLayer = toolLayer || layer;
+    this.draw();
   }
 
   setFontSize(size) {
@@ -329,6 +330,11 @@ class WorldMapGrid {
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "clan") this.drawClanBoundariesLayer();
       else if (layerName === "text") this.drawTextLayer();
+    }
+
+    const activeOverlay = this.getActiveOverlayLayer();
+    if (activeOverlay) {
+      this.drawOverlayLayer(activeOverlay);
     }
 
     this.drawGrid();
@@ -776,6 +782,39 @@ class WorldMapGrid {
     }
   }
 
+  getActiveOverlayLayer() {
+    const overlayLayers = ["animal", "spirit", "shadowland", "crime"];
+    if (overlayLayers.includes(this.currentLayer)) {
+      return this.currentLayer;
+    }
+    if (this.currentLayer === "erase" && overlayLayers.includes(this.currentValue)) {
+      return this.currentValue;
+    }
+    return null;
+  }
+
+  drawOverlayLayer(layerName) {
+    const map = this.layerMaps[layerName];
+    for (const [key, cell] of Object.entries(this.grid)) {
+      const val = cell[layerName];
+      if (!val || val === "none" || val === 0) continue;
+      const [x, y] = key.split(",").map(Number);
+      let color = null;
+      if (map) {
+        const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
+        if (item && item.color) color = item.color;
+      }
+      if (!color) {
+        if (val === 1 || val === "low") color = "rgba(255, 128, 128, 0.45)";
+        else if (val === 2 || val === "medium") color = "rgba(255, 0, 0, 0.55)";
+        else if (val === 3 || val === "high") color = "rgba(75, 0, 130, 0.65)";
+      }
+      if (color) {
+        this.fillCell(x, y, color, 1.0);
+      }
+    }
+  }
+
   fillCell(x, y, color, alpha = 0.8) {
     if (!color) return;
     this.ctx.save();
@@ -835,6 +874,15 @@ class WorldMapGrid {
             }
           }
           if (txt) this.grid[k].text = txt;
+          for (const oName of ["animal", "spirit", "shadowland", "crime"]) {
+            if (parsed[oName] && parsed[oName][k] !== undefined) {
+              let oVal = parsed[oName][k];
+              if (typeof oVal === "string" && this.layerMaps[oName]) {
+                oVal = this.layerMaps[oName].nameToId[oVal.toLowerCase()] ?? 0;
+              }
+              this.grid[k][oName] = oVal;
+            }
+          }
         }
       } else {
         this.grid = parsed;

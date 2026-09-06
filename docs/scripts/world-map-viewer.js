@@ -190,6 +190,15 @@ class WorldMapViewer {
           }
         }
         if (txt) this.grid[k].text = txt;
+        for (const oName of ["animal", "spirit", "shadowland", "crime"]) {
+          if (parsed[oName] && parsed[oName][k] !== undefined) {
+            let oVal = parsed[oName][k];
+            if (typeof oVal === "string" && this.layerMaps[oName]) {
+              oVal = this.layerMaps[oName].nameToId[oVal.toLowerCase()] ?? 0;
+            }
+            this.grid[k][oName] = oVal;
+          }
+        }
       }
     } else {
       this.grid = parsed;
@@ -464,6 +473,10 @@ class WorldMapViewer {
       else if (layerName === "settlement") this.drawSettlements();
       else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
       else if (layerName === "text") this.drawTextLayer();
+    }
+
+    if (["animal", "spirit", "shadowland", "crime"].includes(this.viewMode)) {
+      this.drawOverlayLayer(this.viewMode);
     }
 
     this.drawGrid();
@@ -906,6 +919,28 @@ class WorldMapViewer {
       ctx.moveTo(0, y);
       ctx.lineTo(this.mapWidth, y);
       ctx.stroke();
+    }
+  }
+
+  drawOverlayLayer(layerName) {
+    const map = this.layerMaps[layerName];
+    for (const [key, cell] of Object.entries(this.grid)) {
+      const val = cell[layerName];
+      if (!val || val === "none" || val === 0) continue;
+      const [x, y] = key.split(",").map(Number);
+      let color = null;
+      if (map) {
+        const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
+        if (item && item.color) color = item.color;
+      }
+      if (!color) {
+        if (val === 1 || val === "low") color = "rgba(255, 128, 128, 0.45)";
+        else if (val === 2 || val === "medium") color = "rgba(255, 0, 0, 0.55)";
+        else if (val === 3 || val === "high") color = "rgba(75, 0, 130, 0.65)";
+      }
+      if (color) {
+        this.fillCell(x, y, color, 1.0);
+      }
     }
   }
 

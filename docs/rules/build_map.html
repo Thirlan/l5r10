@@ -281,6 +281,86 @@
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'settlement', 'erase'); updateActiveButton(this);">Erase Settlement</button>
       </div>
 
+      <!-- Animal Layer -->
+      <div class="control-panel">
+        <h3>Animal Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'none', 'animal'); updateActiveButton(this);">
+          None
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'low', 'animal'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 128, 128, 0.6);"></span>Low
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'medium', 'animal'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.7);"></span>Medium
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'high', 'animal'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(75, 0, 130, 0.8);"></span>High
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'animal', 'erase'); updateActiveButton(this);">
+          Erase Animal
+        </button>
+      </div>
+
+      <!-- Spirit Layer -->
+      <div class="control-panel">
+        <h3>Spirit Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'none', 'spirit'); updateActiveButton(this);">
+          None
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'low', 'spirit'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 128, 128, 0.6);"></span>Low
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'medium', 'spirit'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.7);"></span>Medium
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'high', 'spirit'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(75, 0, 130, 0.8);"></span>High
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'spirit', 'erase'); updateActiveButton(this);">
+          Erase Spirit
+        </button>
+      </div>
+
+      <!-- Shadowland Layer -->
+      <div class="control-panel">
+        <h3>Shadowland Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'none', 'shadowland'); updateActiveButton(this);">
+          None
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'low', 'shadowland'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 128, 128, 0.6);"></span>Low
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'medium', 'shadowland'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.7);"></span>Medium
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'high', 'shadowland'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(75, 0, 130, 0.8);"></span>High
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'shadowland', 'erase'); updateActiveButton(this);">
+          Erase Shadowland
+        </button>
+      </div>
+
+      <!-- Crime Layer -->
+      <div class="control-panel">
+        <h3>Crime Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'none', 'crime'); updateActiveButton(this);">
+          None
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'low', 'crime'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 128, 128, 0.6);"></span>Low
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'medium', 'crime'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.7);"></span>Medium
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'high', 'crime'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(75, 0, 130, 0.8);"></span>High
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'crime', 'erase'); updateActiveButton(this);">
+          Erase Crime
+        </button>
+      </div>
+
       <!-- Text Layer & File Operations -->
       <div class="control-panel">
         <h3>Text Layer</h3>
