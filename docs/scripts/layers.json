@@ -4,7 +4,6 @@
     "vegetation",
     "river",
     "infrastructure",
-    "resource",
     "settlement",
     "clan",
     "text"
@@ -152,95 +151,6 @@
           "name": "large river",
           "color": "#00008B",
           "lineWidth": 4
-        }
-      ]
-    },
-    "resource": {
-      "id": "resource",
-      "name": "Resource Layer",
-      "values": [
-        {
-          "id": 0,
-          "name": "none",
-          "color": null
-        },
-        {
-          "id": 1,
-          "name": "jade",
-          "color": "#00A86B",
-          "badge": "J"
-        },
-        {
-          "id": 2,
-          "name": "iron",
-          "color": "#708090",
-          "badge": "Fe"
-        },
-        {
-          "id": 3,
-          "name": "gemstones",
-          "color": "#E6E6FA",
-          "badge": "Gem"
-        },
-        {
-          "id": 4,
-          "name": "stone",
-          "color": "#A9A9A9",
-          "badge": "St"
-        },
-        {
-          "id": 5,
-          "name": "copper",
-          "color": "#B87333",
-          "badge": "Cu"
-        },
-        {
-          "id": 6,
-          "name": "silver",
-          "color": "#C0C0C0",
-          "badge": "Ag"
-        },
-        {
-          "id": 7,
-          "name": "gold",
-          "color": "#FFD700",
-          "badge": "Au"
-        },
-        {
-          "id": 8,
-          "name": "fish",
-          "color": "#1E90FF",
-          "badge": "Fish"
-        },
-        {
-          "id": 9,
-          "name": "crab",
-          "color": "#FF4500",
-          "badge": "Crab"
-        },
-        {
-          "id": 10,
-          "name": "spices",
-          "color": "#D2691E",
-          "badge": "Spice"
-        },
-        {
-          "id": 11,
-          "name": "fertile",
-          "color": "#32CD32",
-          "badge": "Fert"
-        },
-        {
-          "id": 12,
-          "name": "infertile",
-          "color": "#8B0000",
-          "badge": "Inf"
-        },
-        {
-          "id": 13,
-          "name": "pearls",
-          "color": "#F0E68C",
-          "badge": "Prl"
         }
       ]
     },
@@ -445,21 +355,24 @@
         },
         {
           "id": 7,
-          "name": "Mine",
-          "englishType": "Mine",
-          "rokuganiType": "Kōzan"
+          "name": "Iron Mine",
+          "englishType": "Iron Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/iron_mine.png"
         },
         {
           "id": 8,
           "name": "Lumber Mill",
           "englishType": "Lumber Mill",
-          "rokuganiType": "Seizaijo"
+          "rokuganiType": "Seizaijo",
+          "image": "../img/map/lumber_mill.png"
         },
         {
           "id": 9,
-          "name": "Farm",
-          "englishType": "Farm",
-          "rokuganiType": "Nōjō"
+          "name": "Rice Paddy",
+          "englishType": "Rice Paddy",
+          "rokuganiType": "Tanbo",
+          "image": "../img/map/rice_paddy.png"
         },
         {
           "id": 10,
@@ -472,6 +385,209 @@
           "name": "Large Shrine",
           "englishType": "Large Shrine",
           "rokuganiType": "Taisha"
+        },
+        {
+          "id": 12,
+          "name": "Grain Farm",
+          "englishType": "Grain Farm",
+          "rokuganiType": "",
+          "image": "../img/map/grain_farm.png"
+        },
+        {
+          "id": 13,
+          "name": "Silk Farm",
+          "englishType": "Silk Farm",
+          "rokuganiType": "",
+          "image": "../img/map/silk_farm.png"
+        },
+        {
+          "id": 14,
+          "name": "Tea Plantation",
+          "englishType": "Tea Plantation",
+          "rokuganiType": "",
+          "image": "../img/map/tea_plantation.png"
+        },
+        {
+          "id": 15,
+          "name": "Hemp Farm",
+          "englishType": "Hemp Farm",
+          "rokuganiType": "",
+          "image": "../img/map/hemp_farm.png"
+        },
+        {
+          "id": 16,
+          "name": "Cotton Farm",
+          "englishType": "Cotton Farm",
+          "rokuganiType": "",
+          "image": "../img/map/cotton_farm.png"
+        },
+        {
+          "id": 17,
+          "name": "Fruit Orchard",
+          "englishType": "Fruit Orchard",
+          "rokuganiType": "",
+          "image": "../img/map/fruit_orchard.png"
+        },
+        {
+          "id": 18,
+          "name": "Sheep Pasture",
+          "englishType": "Sheep Pasture",
+          "rokuganiType": "",
+          "image": "../img/map/sheep_pasture.png"
+        },
+        {
+          "id": 19,
+          "name": "Goat Pasture",
+          "englishType": "Goat Pasture",
+          "rokuganiType": "",
+          "image": "../img/map/goat_pasture.png"
+        },
+        {
+          "id": 20,
+          "name": "Horse Ranch",
+          "englishType": "Horse Ranch",
+          "rokuganiType": "",
+          "image": "../img/map/horse_ranch.png"
+        },
+        {
+          "id": 21,
+          "name": "Cattle Farm",
+          "englishType": "Cattle Farm",
+          "rokuganiType": "",
+          "image": "../img/map/cattle_farm.png"
+        },
+        {
+          "id": 22,
+          "name": "Salt Works",
+          "englishType": "Salt Works",
+          "rokuganiType": "",
+          "image": "../img/map/salt_works.png"
+        },
+        {
+          "id": 23,
+          "name": "Nut Grove",
+          "englishType": "Nut Grove",
+          "rokuganiType": "",
+          "image": "../img/map/nut_grove.png"
+        },
+        {
+          "id": 24,
+          "name": "Mushroom Farm",
+          "englishType": "Mushroom Farm",
+          "rokuganiType": "",
+          "image": "../img/map/mushroom_farm.png"
+        },
+        {
+          "id": 25,
+          "name": "Spice Farm",
+          "englishType": "Spice Farm",
+          "rokuganiType": "",
+          "image": "../img/map/spice_farm.png"
+        },
+        {
+          "id": 26,
+          "name": "Poultry Farm",
+          "englishType": "Poultry Farm",
+          "rokuganiType": "",
+          "image": "../img/map/chicken_farm.png"
+        },
+        {
+          "id": 27,
+          "name": "Poppy Farm",
+          "englishType": "Poppy Farm",
+          "rokuganiType": "",
+          "image": "../img/map/poppy_farm.png"
+        },
+        {
+          "id": 28,
+          "name": "Dye Crop Farm",
+          "englishType": "Dye Crop Farm",
+          "rokuganiType": "",
+          "image": "../img/map/dye_crop_farm.png"
+        },
+        {
+          "id": 29,
+          "name": "Jade Mine",
+          "englishType": "Jade Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/jade_mine.png"
+        },
+        {
+          "id": 30,
+          "name": "Copper Mine",
+          "englishType": "Copper Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/copper_mine.png"
+        },
+        {
+          "id": 31,
+          "name": "Gold Mine",
+          "englishType": "Gold Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/gold_mine.png"
+        },
+        {
+          "id": 32,
+          "name": "Silver Mine",
+          "englishType": "Silver Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/silver_mine.png"
+        },
+        {
+          "id": 33,
+          "name": "Coal Mine",
+          "englishType": "Coal Mine",
+          "rokuganiType": "",
+          "image": "../img/map/coal_mine.png"
+        },
+        {
+          "id": 34,
+          "name": "Clay Pit",
+          "englishType": "Clay Pit",
+          "rokuganiType": "",
+          "image": "../img/map/clay_pit.png"
+        },
+        {
+          "id": 35,
+          "name": "Gemstone Mine",
+          "englishType": "Gemstone Mine",
+          "rokuganiType": "Kōzan",
+          "image": "../img/map/gemstone_mine.png"
+        },
+        {
+          "id": 36,
+          "name": "Stone Quarry",
+          "englishType": "Stone Quarry",
+          "rokuganiType": "",
+          "image": "../img/map/stone_quarry.png"
+        },
+        {
+          "id": 37,
+          "name": "Fishing Boat",
+          "englishType": "Fishing Boat",
+          "rokuganiType": "",
+          "image": "../img/map/fishing_boat.png"
+        },
+        {
+          "id": 38,
+          "name": "Crab Boat",
+          "englishType": "Crab Boat",
+          "rokuganiType": "",
+          "image": "../img/map/crab_boat.png"
+        },
+        {
+          "id": 39,
+          "name": "Pearl Divers",
+          "englishType": "Pearl Divers",
+          "rokuganiType": "",
+          "image": "../img/map/pearl_divers.png"
+        },
+        {
+          "id": 40,
+          "name": "Scallop Boats",
+          "englishType": "Scallop Boats",
+          "rokuganiType": "",
+          "image": "../img/map/scallop_boat.png"
         }
       ]
     },

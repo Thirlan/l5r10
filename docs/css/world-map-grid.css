@@ -200,26 +200,6 @@
   margin-right: 9px;
 }
 
-.settlement-mine::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 0;
-  height: 0;
-  border-right: 6px solid transparent;
-  border-bottom: 11px solid #4b4b4b;
-  border-left: 6px solid transparent;
-}
-
-.settlement-lumber-mill {
-  background: repeating-linear-gradient(to bottom, #8b5a2b 0 2px, transparent 2px 4px);
-}
-
-.settlement-farm {
-  background: center / contain no-repeat url('../img/map/farm.png');
-}
-
 .settlement-small-shrine,
 .settlement-large-shrine {
   box-sizing: border-box;

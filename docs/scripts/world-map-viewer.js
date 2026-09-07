@@ -11,7 +11,7 @@ class WorldMapViewer {
     this.maxZoom = 4;
 
     this.layersConfig = null;
-    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "resource", "settlement", "clan", "text"];
+    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "settlement", "clan", "text"];
     this.layerMaps = {};
 
     this.grid = {};
@@ -47,13 +47,7 @@ class WorldMapViewer {
     };
     this.mapImage.src = imageSrc;
 
-    this.farmImage = new Image();
-    this.farmImage.onload = () => this.render();
-    this.farmImage.src = "../img/map/farm.png";
-
-    this.mineImage = new Image();
-    this.mineImage.onload = () => this.render();
-    this.mineImage.src = "../img/map/mine.png";
+    this.settlementImages = {};
 
     this.shrineImage = new Image();
     this.shrineImage.onload = () => this.render();
@@ -160,18 +154,18 @@ class WorldMapViewer {
         const s = parsed.settlements ? parsed.settlements[k] : null;
         const txt = parsed.text ? parsed.text[k] : null;
 
-        let tId = 0, cId = 0, vId = 0, rId = 0, resId = 0;
+        let tId = 0, cId = 0, vId = 0, rId = 0;
         if (t && this.layerMaps.terrain) {
           const tLower = t.toLowerCase();
           if (tLower === "forest") { tId = 0; vId = 3; }
           else if (tLower === "deserts" || tLower === "desert") { tId = 0; cId = 3; }
           else if (tLower === "plains") { tId = 0; }
           else if (tLower === "marsh") { tId = 7; }
-          else if (tLower === "waste") { tId = 0; resId = 13; }
+          else if (tLower === "waste") { tId = 0; }
           else if (tLower === "snow") { tId = 0; cId = 5; }
           else { tId = this.layerMaps.terrain.nameToId[tLower] ?? 0; }
         }
-        this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId, resource: resId };
+        this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };
         if (i && this.layerMaps.infrastructure) {
           this.grid[k].infrastructure = this.layerMaps.infrastructure.nameToId[i.toLowerCase()];
         }
@@ -469,7 +463,6 @@ class WorldMapViewer {
     for (const layerName of this.drawOrder) {
       if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
-      else if (layerName === "resource") this.drawResourceLayer();
       else if (layerName === "settlement") this.drawSettlements();
       else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
       else if (layerName === "text") this.drawTextLayer();
@@ -547,37 +540,6 @@ class WorldMapViewer {
         ctx.fill();
       }
 
-      ctx.restore();
-    }
-  }
-
-  drawResourceLayer() {
-    for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.resource) continue;
-      const [x, y] = key.split(",").map(Number);
-      const item = this.layerMaps.resource ? this.layerMaps.resource.idToItem[cell.resource] : null;
-      if (!item || item.id === 0) continue;
-
-      const cx = x * this.gridSize + this.gridSize / 2;
-      const cy = y * this.gridSize + this.gridSize / 2;
-      const ctx = this.ctx;
-
-      ctx.save();
-      ctx.fillStyle = item.color || "#FFD700";
-      ctx.beginPath();
-      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = "#000000";
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-
-      if (item.badge) {
-        ctx.font = "bold 7px Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000000";
-        ctx.fillText(item.badge, cx, cy - 5);
-      }
       ctx.restore();
     }
   }
@@ -762,11 +724,10 @@ class WorldMapViewer {
 
     const clanName = this.cellClan(x, y);
     const clanColors = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[String(clanName).toLowerCase()] : { border: "#444444", fill: "#DDDDDD" };
+    const setItem = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(typeName).toLowerCase()] : null;
 
-    const neutralColors = { Mine: "#4B4B4B", "Lumber Mill": "#8B5A2B" };
-    const isNeutral = typeName in neutralColors;
-    const fillColor = neutralColors[typeName] || (clanColors ? clanColors.fill : "#DDDDDD") || "#DDDDDD";
-    const borderColor = isNeutral ? "#222222" : (clanColors ? clanColors.border : "#444444") || "#444444";
+    const fillColor = (clanColors ? clanColors.fill : "#DDDDDD") || "#DDDDDD";
+    const borderColor = (clanColors ? clanColors.border : "#444444") || "#444444";
 
     const ctx = this.ctx;
     ctx.save();
@@ -795,14 +756,11 @@ class WorldMapViewer {
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
-    } else if (typeName === "Mine" && this.mineImage.complete && this.mineImage.naturalWidth) {
-      ctx.drawImage(this.mineImage, cx - 6, cy - 6, 12, 12);
-    } else if (typeName === "Lumber Mill") {
-      for (let row = -1; row <= 1; row++) ctx.fillRect(cx - 5, cy + row * 4 - 1, 10, 2);
-    } else if (typeName === "Farm" && this.farmImage.complete && this.farmImage.naturalWidth) {
-      ctx.drawImage(this.farmImage, cx - 6, cy - 6, 12, 12);
     } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
       this.drawShrine(cx, cy, borderColor, typeName === "Small Shrine" ? 0.75 : 1);
+    } else if (setItem && setItem.image) {
+      const img = this.settlementImage(setItem.image);
+      if (img.complete && img.naturalWidth) ctx.drawImage(img, cx - 6, cy - 6, 12, 12);
     }
     ctx.restore();
   }
@@ -820,6 +778,17 @@ class WorldMapViewer {
     const name = this.settlementLanguage === "english" ? englishName : rokuganiName;
     const label = this.settlementLanguage === "english" ? this.englishSettlementType(typeName) : this.rokuganiSettlementType(typeName);
     this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(typeName));
+  }
+
+  settlementImage(src) {
+    let img = this.settlementImages[src];
+    if (!img) {
+      img = new Image();
+      img.onload = () => this.render();
+      img.src = src;
+      this.settlementImages[src] = img;
+    }
+    return img;
   }
 
   drawShrine(cx, cy, color, scale) {
@@ -850,15 +819,19 @@ class WorldMapViewer {
   }
 
   settlementFontSize(type) {
-    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, Mine: 8, "Lumber Mill": 8, Farm: 8, "Small Shrine": 8, "Large Shrine": 10 }[type] || 8;
+    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, "Lumber Mill": 8, "Small Shrine": 8, "Large Shrine": 10 }[type] || 8;
   }
 
   englishSettlementType(type) {
+    const item = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(type).toLowerCase()] : null;
+    if (item && item.englishType !== undefined) return item.englishType;
     return type === "Kyuden" ? "Palace" : type;
   }
 
   rokuganiSettlementType(type) {
-    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", Mine: "Kōzan", "Lumber Mill": "Seizaijo", Farm: "Nōjō", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
+    const item = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(type).toLowerCase()] : null;
+    if (item && item.rokuganiType !== undefined) return item.rokuganiType;
+    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", "Lumber Mill": "Seizaijo", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
   }
 
   drawTextLayer() {

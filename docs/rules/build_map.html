@@ -122,27 +122,6 @@
         </button>
       </div>
 
-      <!-- Resource Layer -->
-      <div class="control-panel">
-        <h3>Resource Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'jade', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #00A86B;"></span>Jade</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'iron', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #708090;"></span>Iron</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'gemstones', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #E6E6FA;"></span>Gemstones</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'stone', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #A9A9A9;"></span>Stone</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'copper', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #B87333;"></span>Copper</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'silver', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #C0C0C0;"></span>Silver</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'gold', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #FFD700;"></span>Gold</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'fish', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #1E90FF;"></span>Fish</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'crab', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #FF4500;"></span>Crab</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'spices', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #D2691E;"></span>Spices</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'fertile', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #32CD32;"></span>Fertile</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'infertile', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #8B0000;"></span>Infertile</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('resource', 'pearls', 'resource'); updateActiveButton(this);"><span class="terrain-color" style="background-color: #F0E68C;"></span>Pearls</button>
-        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'resource', 'erase'); updateActiveButton(this);">
-          Erase Resource
-        </button>
-      </div>
-
       <!-- Infrastructure Layer -->
       <div class="control-panel">
         <h3>Infrastructure Layer</h3>
@@ -254,9 +233,6 @@
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Fortification', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-fortification"></span>Fortification</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Castle', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-castle"></span>Castle</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Kyuden', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-kyuden"></span>Kyuden</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Mine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-mine"></span>Mine</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Lumber Mill', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-lumber-mill"></span>Lumber Mill</button>
-        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Farm', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-farm"></span>Farm</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Small Shrine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-small-shrine"></span>Small Shrine</button>
         <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Large Shrine', 'settlement'); updateActiveButton(this);"><span class="settlement-icon settlement-large-shrine"></span>Large Shrine</button>
         <div class="control-section" style="margin-top: 15px;">
@@ -273,6 +249,43 @@
           <label><input type="radio" name="settlementLanguage" value="rokugani" onchange="mapGrid.setSettlementLanguage(this.value)"> Rokugani</label>
         </div>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'settlement', 'erase'); updateActiveButton(this);">Erase Settlement</button>
+      </div>
+
+      <!-- Settlement Resources -->
+      <div class="control-panel">
+        <h3>Settlement (resources)</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Rice Paddy', 'settlement'); updateActiveButton(this);"><img src="../img/map/rice_paddy.png" class="control-icon" alt="" />Rice Paddy</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Grain Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/grain_farm.png" class="control-icon" alt="" />Grain Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Silk Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/silk_farm.png" class="control-icon" alt="" />Silk Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Tea Plantation', 'settlement'); updateActiveButton(this);"><img src="../img/map/tea_plantation.png" class="control-icon" alt="" />Tea Plantation</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Hemp Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/hemp_farm.png" class="control-icon" alt="" />Hemp Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Cotton Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/cotton_farm.png" class="control-icon" alt="" />Cotton Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Fruit Orchard', 'settlement'); updateActiveButton(this);"><img src="../img/map/fruit_orchard.png" class="control-icon" alt="" />Fruit Orchard</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Sheep Pasture', 'settlement'); updateActiveButton(this);"><img src="../img/map/sheep_pasture.png" class="control-icon" alt="" />Sheep Pasture</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Goat Pasture', 'settlement'); updateActiveButton(this);"><img src="../img/map/goat_pasture.png" class="control-icon" alt="" />Goat Pasture</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Horse Ranch', 'settlement'); updateActiveButton(this);"><img src="../img/map/horse_ranch.png" class="control-icon" alt="" />Horse Ranch</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Cattle Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/cattle_farm.png" class="control-icon" alt="" />Cattle Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Salt Works', 'settlement'); updateActiveButton(this);"><img src="../img/map/salt_works.png" class="control-icon" alt="" />Salt Works</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Nut Grove', 'settlement'); updateActiveButton(this);"><img src="../img/map/nut_grove.png" class="control-icon" alt="" />Nut Grove</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Mushroom Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/mushroom_farm.png" class="control-icon" alt="" />Mushroom Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Spice Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/spice_farm.png" class="control-icon" alt="" />Spice Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Poultry Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/chicken_farm.png" class="control-icon" alt="" />Poultry Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Poppy Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/poppy_farm.png" class="control-icon" alt="" />Poppy Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Dye Crop Farm', 'settlement'); updateActiveButton(this);"><img src="../img/map/dye_crop_farm.png" class="control-icon" alt="" />Dye Crop Farm</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Jade Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/jade_mine.png" class="control-icon" alt="" />Jade Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Iron Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/iron_mine.png" class="control-icon" alt="" />Iron Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Copper Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/copper_mine.png" class="control-icon" alt="" />Copper Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Gold Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/gold_mine.png" class="control-icon" alt="" />Gold Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Silver Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/silver_mine.png" class="control-icon" alt="" />Silver Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Coal Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/coal_mine.png" class="control-icon" alt="" />Coal Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Clay Pit', 'settlement'); updateActiveButton(this);"><img src="../img/map/clay_pit.png" class="control-icon" alt="" />Clay Pit</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Gemstone Mine', 'settlement'); updateActiveButton(this);"><img src="../img/map/gemstone_mine.png" class="control-icon" alt="" />Gemstone Mine</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Stone Quarry', 'settlement'); updateActiveButton(this);"><img src="../img/map/stone_quarry.png" class="control-icon" alt="" />Stone Quarry</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Fishing Boat', 'settlement'); updateActiveButton(this);"><img src="../img/map/fishing_boat.png" class="control-icon" alt="" />Fishing Boat</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Crab Boat', 'settlement'); updateActiveButton(this);"><img src="../img/map/crab_boat.png" class="control-icon" alt="" />Crab Boat</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Pearl Divers', 'settlement'); updateActiveButton(this);"><img src="../img/map/pearl_divers.png" class="control-icon" alt="" />Pearl Divers</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Scallop Boats', 'settlement'); updateActiveButton(this);"><img src="../img/map/scallop_boat.png" class="control-icon" alt="" />Scallop Boats</button>
+        <button class="tool-button" onclick="mapGrid.selectTool('settlement', 'Lumber Mill', 'settlement'); updateActiveButton(this);"><img src="../img/map/lumber_mill.png" class="control-icon" alt="" />Lumber Mill</button>
       </div>
 
       <!-- Animal Layer -->
