@@ -29,7 +29,7 @@ class L5RPathing {
     this.avoidClans = avoidClans;
     this.includeRisk = includeRisk;
     this.includeMoney = includeMoney;
-    this._probCache = new Map();
+    this.eventEngine = new TravelEventEngine(skillConfig);
   }
 
   // Assume travellers starting on a water tile are aboard a boat unless the tile is a bridge (has a road).
@@ -132,44 +132,6 @@ class L5RPathing {
     return null;
   }
 
-  // P(mishap) = P(check triggered) * P(fail the check). Fail probability is Monte-Carlo cached per skill/TN/config.
-  mishapProbability(check) {
-    if (!check) return 0;
-    const skill = this.checkSkill(check);
-    if (!skill) return check.probability ?? 1;
-    const cfg = this.skillConfig[skill];
-    if (!cfg) return 0;
-    const cacheKey = `${skill}|${check.tn}|${cfg.roll}|${cfg.keep}|${cfg.mod}|${cfg.rerollOnes ? 1 : 0}|${cfg.explodeOnNines ? 1 : 0}`;
-    let failProb;
-    if (this._probCache.has(cacheKey)) {
-      failProb = this._probCache.get(cacheKey);
-    } else {
-      const trials = 300;
-      let fails = 0;
-      for (let i = 0; i < trials; i++) if (L5RDice.rollKeep(cfg) < check.tn) fails++;
-      failProb = fails / trials;
-      this._probCache.set(cacheKey, failProb);
-    }
-    return (check.probability ?? 1) * failProb;
-  }
-
-  checkSkill(check) {
-    if (!check.skills) return check.skill;
-    const allowedSkills = check.skills.filter((skill) => this.skillConfig[skill]?.allowed);
-    return allowedSkills.length
-      ? allowedSkills.reduce((best, candidate) => this.skillScore(candidate) > this.skillScore(best) ? candidate : best)
-      : null;
-  }
-
-  skillScore(skill) {
-    const cfg = this.skillConfig[skill];
-    const keepScore = 5*cfg.keep;
-    const unkeptScore = 2*(cfg.roll-cfg.keep);
-    const rerollOnesScore = cfg.rerollOnes? cfg.roll : 0;
-    const explodeOnNinesScore = cfg.explodeOnNines? 2*cfg.roll : 0;
-    return cfg ? keepScore + unkeptScore + rerollOnesScore + explodeOnNinesScore + cfg.mod : -Infinity;
-  }
-
   // Octile distance keeps the heuristic admissible for 8-connected movement.
   heuristic(a, b) {
     const dx = Math.abs(a.x - b.x);
@@ -214,7 +176,7 @@ class L5RPathing {
           if (this.includeMoney) step += trans.zeni;
           if (this.includeRisk) {
             step += trans.avoidPenalty;
-            step += trans.checks.reduce((risk, check) => risk + this.mishapProbability(check) * check.riskPenalty, 0);
+            step += trans.checks.reduce((risk, check) => risk + this.eventEngine.mishapProbability(check) * check.riskPenalty, 0);
           }
           const tentative = gScore.get(curKey) + step;
           const nk = key(next, trans.toMode);
@@ -252,17 +214,13 @@ class L5RPathing {
       const eventRows = [];
 
       for (const check of trans.checks) {
-        const skill = this.checkSkill(check);
-        const cfg = this.skillConfig[skill];
-        if (Math.random() >= (check.probability ?? 1)) continue;
-        const result = cfg ? L5RDice.rollKeep(cfg) : 0;
-        const failsCheck = !cfg || result < check.tn;
-        if (failsCheck) {
+        const event = this.eventEngine.resolveCheck(check, toData.terrain);
+        if (!event) continue;
+        if (event.failed) {
           mishaps.add(`${to.x},${to.y}`);
           tileMinutes += check.timePenalty;
         }
-        const event = this.eventName(check, toData.terrain);
-        if (event) eventRows.push({ event, skill: skill || '', tn: check.tn, result });
+        if (event.event) eventRows.push(event);
       }
 
       totalMinutes += tileMinutes;
@@ -303,13 +261,6 @@ class L5RPathing {
     }
 
     return { path, totalMinutes, totalZeni, mishaps, dayMarkers, events };
-  }
-
-  eventName(check, terrain) {
-    if (check.skills) return 'Papers';
-    if (check.skill === 'survival') return 'Survival';
-    if (check.skill === 'investigate' && terrain === 'City') return 'Pick Pocket';
-    return '';
   }
 
   // Chains A* segments through the waypoints, keeping the transport mode continuous across segment boundaries.
