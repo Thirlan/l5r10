@@ -22,14 +22,7 @@ class WorldMapViewer {
     this.settlementLanguage = "english";
     this.routePreferences = { includeRisk: false, includeMoney: false };
 
-    this.skillConfig = {
-      survival:    { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      sailing:     { roll: 6, keep: 3, mod: 0, rerollOnes: false, explodeOnNines: false },
-      investigate: { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false },
-      swim:        { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false, tn: 20 },
-      sneak:       { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false },
-      forgery:     { roll: 3, keep: 2, mod: 0, rerollOnes: false, explodeOnNines: false, allowed: false }
-    };
+    this.skillConfig = TravelEventEngine.defaultSkillConfig();
 
     this.startCell = null;
     this.waypoints = [];
