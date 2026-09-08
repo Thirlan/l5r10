@@ -907,9 +907,10 @@ class WorldMapViewer {
         if (item && item.color) color = item.color;
       }
       if (!color) {
-        if (val === 1 || val === "low") color = "rgba(255, 128, 128, 0.45)";
-        else if (val === 2 || val === "medium") color = "rgba(255, 0, 0, 0.55)";
-        else if (val === 3 || val === "high") color = "rgba(75, 0, 130, 0.65)";
+        if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
+        else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
+        else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
+        else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
       }
       if (color) {
         this.fillCell(x, y, color, 1.0);

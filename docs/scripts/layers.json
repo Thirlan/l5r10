@@ -603,17 +603,22 @@
         {
           "id": 1,
           "name": "low",
-          "color": "rgba(255, 128, 128, 0.45)"
+          "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
           "name": "medium",
-          "color": "rgba(255, 0, 0, 0.55)"
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 3,
           "name": "high",
-          "color": "rgba(75, 0, 130, 0.65)"
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 4,
+          "name": "extreme",
+          "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
     },
@@ -629,17 +634,22 @@
         {
           "id": 1,
           "name": "low",
-          "color": "rgba(255, 128, 128, 0.45)"
+          "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
           "name": "medium",
-          "color": "rgba(255, 0, 0, 0.55)"
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 3,
           "name": "high",
-          "color": "rgba(75, 0, 130, 0.65)"
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 4,
+          "name": "extreme",
+          "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
     },
@@ -655,17 +665,22 @@
         {
           "id": 1,
           "name": "low",
-          "color": "rgba(255, 128, 128, 0.45)"
+          "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
           "name": "medium",
-          "color": "rgba(255, 0, 0, 0.55)"
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 3,
           "name": "high",
-          "color": "rgba(75, 0, 130, 0.65)"
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 4,
+          "name": "extreme",
+          "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
     },
@@ -681,17 +696,22 @@
         {
           "id": 1,
           "name": "low",
-          "color": "rgba(255, 128, 128, 0.45)"
+          "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
           "name": "medium",
-          "color": "rgba(255, 0, 0, 0.55)"
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 3,
           "name": "high",
-          "color": "rgba(75, 0, 130, 0.65)"
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 4,
+          "name": "extreme",
+          "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
     }
