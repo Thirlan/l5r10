@@ -1,0 +1,86 @@
+{
+  "crime": {
+    "levels": {
+      "none": { "probability": 0.00001 },
+      "low": { "probability": 0.0001 },
+      "medium": { "probability": 0.001 },
+      "high": { "probability": 0.01 },
+      "extreme": { "probability": 0.3 }
+    },
+    "spotCheck": {
+      "options": [
+        { "skill": "investigate", "TN": 20 }
+      ]
+    },
+    "evadeCheck": {
+      "options": [
+        { "skill": "Sneak", "TN": 20 },
+        { "skill": "Horsemanship", "TN": 20, "travelModeRequirement": "horseback" },
+        { "skill": "Lore: Underworld", "TN": 20 }
+      ]
+    }
+  },
+  "animals": {
+    "levels": {
+      "none": { "probability": 0.00001 },
+      "low": { "probability": 0.0001 },
+      "medium": { "probability": 0.001 },
+      "high": { "probability": 0.01 },
+      "extreme": { "probability": 0.3 }
+    },
+    "spotCheck": {
+      "options": [
+        { "skill": "investigate", "TN": 20 }
+      ]
+    },
+    "evadeCheck": {
+      "options": [
+        { "skill": "Sneak", "TN": 20 },
+        { "skill": "Horsemanship", "TN": 20, "travelModeRequirement": "horseback" },
+        { "skill": "Lore: Animal", "TN": 20 }
+      ]
+    }
+  },
+  "shadowland": {
+    "levels": {
+      "none": { "probability": 0.00001 },
+      "low": { "probability": 0.0001 },
+      "medium": { "probability": 0.001 },
+      "high": { "probability": 0.01 },
+      "extreme": { "probability": 0.3 }
+    },
+    "spotCheck": {
+      "options": [
+        { "skill": "investigate", "TN": 20 }
+      ]
+    },
+    "evadeCheck": {
+      "options": [
+        { "skill": "Sneak", "TN": 20 },
+        { "skill": "Horsemanship", "TN": 20, "travelModeRequirement": "horseback" },
+        { "skill": "Lore: Shadowlands", "TN": 20 }
+      ]
+    }
+  },
+  "spirit": {
+    "levels": {
+      "none": { "probability": 0.00001 },
+      "low": { "probability": 0.0001 },
+      "medium": { "probability": 0.001 },
+      "high": { "probability": 0.01 },
+      "extreme": { "probability": 0.3 }
+    },
+    "spotCheck": {
+      "options": [
+        { "skill": "investigate", "TN": 20 }
+      ]
+    },
+    "evadeCheck": {
+      "options": [
+        { "skill": "Sneak", "TN": 20 },
+        { "skill": "Horsemanship", "TN": 20, "travelModeRequirement": "horseback" },
+        { "skill": "Lore: Theology", "TN": 20 }
+      ]
+    }
+  }
+}
