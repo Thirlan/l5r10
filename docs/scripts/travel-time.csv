@@ -1,19 +1,16 @@
 Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastructure
 216,horse,temperate,flat,none,none,none
 143,horse,*,flat,*,*,Road
-173,horse,temperate,flat,none,*,Footpath
+173,horse,*,flat,*,*,Footpath
 248,horse,temperate,flat,none,small river,none
 227,horse,temperate,flat,none,large river,none
 227,horse,temperate,flat,light forest,none,none
-181,horse,temperate,flat,light forest,*,Footpath
 261,horse,temperate,flat,light forest,small river,none
 238,horse,temperate,flat,light forest,large river,none
 248,horse,temperate,flat,forest,none,none
-199,horse,temperate,flat,forest,*,Footpath
 286,horse,temperate,flat,forest,small river,none
 261,horse,temperate,flat,forest,large river,none
 281,horse,temperate,flat,dense forest,none,none
-225,horse,temperate,flat,dense forest,*,Footpath
 323,horse,temperate,flat,dense forest,small river,none
 295,horse,temperate,flat,dense forest,large river,none
 259,horse,temperate,hills,none,none,none
@@ -35,19 +32,16 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 354,horse,temperate,hills,dense forest,large river,none
 432,horse,temperate,mountains,none,none,none
 285,horse,*,mountains,*,*,Road
-346,horse,temperate,mountains,none,*,Footpath
+346,horse,*,mountains,*,*,Footpath
 497,horse,temperate,mountains,none,small river,none
 454,horse,temperate,mountains,none,large river,none
 454,horse,temperate,mountains,light forest,none,none
-363,horse,temperate,mountains,light forest,*,Footpath
 522,horse,temperate,mountains,light forest,small river,none
 476,horse,temperate,mountains,light forest,large river,none
 497,horse,temperate,mountains,forest,none,none
-397,horse,temperate,mountains,forest,*,Footpath
 571,horse,temperate,mountains,forest,small river,none
 522,horse,temperate,mountains,forest,large river,none
 562,horse,temperate,mountains,dense forest,none,none
-449,horse,temperate,mountains,dense forest,*,Footpath
 646,horse,temperate,mountains,dense forest,small river,none
 590,horse,temperate,mountains,dense forest,large river,none
 -1,horse,temperate,water,none,none,none
@@ -61,52 +55,42 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,temperate,ocean,none,*,Footpath
 238,horse,temperate,valley,none,none,none
 157,horse,*,valley,*,*,Road
-190,horse,temperate,valley,none,*,Footpath
+190,horse,*,valley,*,*,Footpath
 273,horse,temperate,valley,none,small river,none
 249,horse,temperate,valley,none,large river,none
 249,horse,temperate,valley,light forest,none,none
-200,horse,temperate,valley,light forest,*,Footpath
 287,horse,temperate,valley,light forest,small river,none
 262,horse,temperate,valley,light forest,large river,none
 273,horse,temperate,valley,forest,none,none
-219,horse,temperate,valley,forest,*,Footpath
 314,horse,temperate,valley,forest,small river,none
 287,horse,temperate,valley,forest,large river,none
 309,horse,temperate,valley,dense forest,none,none
-247,horse,temperate,valley,dense forest,*,Footpath
 355,horse,temperate,valley,dense forest,small river,none
 324,horse,temperate,valley,dense forest,large river,none
 475,horse,temperate,wetlands,none,none,none
 314,horse,*,wetlands,*,*,Road
-380,horse,temperate,wetlands,none,*,Footpath
+380,horse,*,wetlands,*,*,Footpath
 546,horse,temperate,wetlands,none,small river,none
 499,horse,temperate,wetlands,none,large river,none
 499,horse,temperate,wetlands,light forest,none,none
-399,horse,temperate,wetlands,light forest,*,Footpath
 574,horse,temperate,wetlands,light forest,small river,none
 524,horse,temperate,wetlands,light forest,large river,none
 546,horse,temperate,wetlands,forest,none,none
-437,horse,temperate,wetlands,forest,*,Footpath
 628,horse,temperate,wetlands,forest,small river,none
 574,horse,temperate,wetlands,forest,large river,none
 618,horse,temperate,wetlands,dense forest,none,none
-494,horse,temperate,wetlands,dense forest,*,Footpath
 710,horse,temperate,wetlands,dense forest,small river,none
 649,horse,temperate,wetlands,dense forest,large river,none
 227,horse,tropical,flat,none,none,none
-181,horse,tropical,flat,none,*,Footpath
 261,horse,tropical,flat,none,small river,none
 238,horse,tropical,flat,none,large river,none
 238,horse,tropical,flat,light forest,none,none
-191,horse,tropical,flat,light forest,*,Footpath
 274,horse,tropical,flat,light forest,small river,none
 250,horse,tropical,flat,light forest,large river,none
 261,horse,tropical,flat,forest,none,none
-209,horse,tropical,flat,forest,*,Footpath
 300,horse,tropical,flat,forest,small river,none
 274,horse,tropical,flat,forest,large river,none
 295,horse,tropical,flat,dense forest,none,none
-236,horse,tropical,flat,dense forest,*,Footpath
 339,horse,tropical,flat,dense forest,small river,none
 310,horse,tropical,flat,dense forest,large river,none
 272,horse,tropical,hills,none,none,none
@@ -126,19 +110,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 407,horse,tropical,hills,dense forest,small river,none
 371,horse,tropical,hills,dense forest,large river,none
 454,horse,tropical,mountains,none,none,none
-363,horse,tropical,mountains,none,*,Footpath
 522,horse,tropical,mountains,none,small river,none
 476,horse,tropical,mountains,none,large river,none
 476,horse,tropical,mountains,light forest,none,none
-381,horse,tropical,mountains,light forest,*,Footpath
 548,horse,tropical,mountains,light forest,small river,none
 500,horse,tropical,mountains,light forest,large river,none
 522,horse,tropical,mountains,forest,none,none
-417,horse,tropical,mountains,forest,*,Footpath
 600,horse,tropical,mountains,forest,small river,none
 548,horse,tropical,mountains,forest,large river,none
 590,horse,tropical,mountains,dense forest,none,none
-472,horse,tropical,mountains,dense forest,*,Footpath
 678,horse,tropical,mountains,dense forest,small river,none
 619,horse,tropical,mountains,dense forest,large river,none
 -1,horse,tropical,water,none,none,none
@@ -151,51 +131,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,tropical,ocean,none,*,Road
 -1,horse,tropical,ocean,none,*,Footpath
 249,horse,tropical,valley,none,none,none
-200,horse,tropical,valley,none,*,Footpath
 287,horse,tropical,valley,none,small river,none
 262,horse,tropical,valley,none,large river,none
 262,horse,tropical,valley,light forest,none,none
-210,horse,tropical,valley,light forest,*,Footpath
 301,horse,tropical,valley,light forest,small river,none
 275,horse,tropical,valley,light forest,large river,none
 287,horse,tropical,valley,forest,none,none
-230,horse,tropical,valley,forest,*,Footpath
 330,horse,tropical,valley,forest,small river,none
 301,horse,tropical,valley,forest,large river,none
 324,horse,tropical,valley,dense forest,none,none
-259,horse,tropical,valley,dense forest,*,Footpath
 373,horse,tropical,valley,dense forest,small river,none
 341,horse,tropical,valley,dense forest,large river,none
 499,horse,tropical,wetlands,none,none,none
-399,horse,tropical,wetlands,none,*,Footpath
 574,horse,tropical,wetlands,none,small river,none
 524,horse,tropical,wetlands,none,large river,none
 524,horse,tropical,wetlands,light forest,none,none
-419,horse,tropical,wetlands,light forest,*,Footpath
 602,horse,tropical,wetlands,light forest,small river,none
 550,horse,tropical,wetlands,light forest,large river,none
 574,horse,tropical,wetlands,forest,none,none
-459,horse,tropical,wetlands,forest,*,Footpath
 660,horse,tropical,wetlands,forest,small river,none
 602,horse,tropical,wetlands,forest,large river,none
 649,horse,tropical,wetlands,dense forest,none,none
-519,horse,tropical,wetlands,dense forest,*,Footpath
 746,horse,tropical,wetlands,dense forest,small river,none
 681,horse,tropical,wetlands,dense forest,large river,none
 222,horse,subtropical,flat,none,none,none
-178,horse,subtropical,flat,none,*,Footpath
 256,horse,subtropical,flat,none,small river,none
 234,horse,subtropical,flat,none,large river,none
 234,horse,subtropical,flat,light forest,none,none
-187,horse,subtropical,flat,light forest,*,Footpath
 269,horse,subtropical,flat,light forest,small river,none
 245,horse,subtropical,flat,light forest,large river,none
 256,horse,subtropical,flat,forest,none,none
-205,horse,subtropical,flat,forest,*,Footpath
 294,horse,subtropical,flat,forest,small river,none
 269,horse,subtropical,flat,forest,large river,none
 289,horse,subtropical,flat,dense forest,none,none
-231,horse,subtropical,flat,dense forest,*,Footpath
 333,horse,subtropical,flat,dense forest,small river,none
 304,horse,subtropical,flat,dense forest,large river,none
 267,horse,subtropical,hills,none,none,none
@@ -215,19 +183,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 399,horse,subtropical,hills,dense forest,small river,none
 364,horse,subtropical,hills,dense forest,large river,none
 445,horse,subtropical,mountains,none,none,none
-356,horse,subtropical,mountains,none,*,Footpath
 512,horse,subtropical,mountains,none,small river,none
 467,horse,subtropical,mountains,none,large river,none
 467,horse,subtropical,mountains,light forest,none,none
-374,horse,subtropical,mountains,light forest,*,Footpath
 537,horse,subtropical,mountains,light forest,small river,none
 491,horse,subtropical,mountains,light forest,large river,none
 512,horse,subtropical,mountains,forest,none,none
-409,horse,subtropical,mountains,forest,*,Footpath
 588,horse,subtropical,mountains,forest,small river,none
 537,horse,subtropical,mountains,forest,large river,none
 578,horse,subtropical,mountains,dense forest,none,none
-463,horse,subtropical,mountains,dense forest,*,Footpath
 665,horse,subtropical,mountains,dense forest,small river,none
 607,horse,subtropical,mountains,dense forest,large river,none
 -1,horse,subtropical,water,none,none,none
@@ -240,51 +204,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,subtropical,ocean,none,*,Road
 -1,horse,subtropical,ocean,none,*,Footpath
 245,horse,subtropical,valley,none,none,none
-196,horse,subtropical,valley,none,*,Footpath
 281,horse,subtropical,valley,none,small river,none
 257,horse,subtropical,valley,none,large river,none
 257,horse,subtropical,valley,light forest,none,none
-206,horse,subtropical,valley,light forest,*,Footpath
 296,horse,subtropical,valley,light forest,small river,none
 270,horse,subtropical,valley,light forest,large river,none
 281,horse,subtropical,valley,forest,none,none
-225,horse,subtropical,valley,forest,*,Footpath
 324,horse,subtropical,valley,forest,small river,none
 296,horse,subtropical,valley,forest,large river,none
 318,horse,subtropical,valley,dense forest,none,none
-255,horse,subtropical,valley,dense forest,*,Footpath
 366,horse,subtropical,valley,dense forest,small river,none
 334,horse,subtropical,valley,dense forest,large river,none
 489,horse,subtropical,wetlands,none,none,none
-392,horse,subtropical,wetlands,none,*,Footpath
 563,horse,subtropical,wetlands,none,small river,none
 514,horse,subtropical,wetlands,none,large river,none
 514,horse,subtropical,wetlands,light forest,none,none
-411,horse,subtropical,wetlands,light forest,*,Footpath
 591,horse,subtropical,wetlands,light forest,small river,none
 540,horse,subtropical,wetlands,light forest,large river,none
 563,horse,subtropical,wetlands,forest,none,none
-450,horse,subtropical,wetlands,forest,*,Footpath
 647,horse,subtropical,wetlands,forest,small river,none
 591,horse,subtropical,wetlands,forest,large river,none
 636,horse,subtropical,wetlands,dense forest,none,none
-509,horse,subtropical,wetlands,dense forest,*,Footpath
 732,horse,subtropical,wetlands,dense forest,small river,none
 668,horse,subtropical,wetlands,dense forest,large river,none
 259,horse,desert,flat,none,none,none
-207,horse,desert,flat,none,*,Footpath
 298,horse,desert,flat,none,small river,none
 272,horse,desert,flat,none,large river,none
 272,horse,desert,flat,light forest,none,none
-218,horse,desert,flat,light forest,*,Footpath
 313,horse,desert,flat,light forest,small river,none
 286,horse,desert,flat,light forest,large river,none
 298,horse,desert,flat,forest,none,none
-238,horse,desert,flat,forest,*,Footpath
 343,horse,desert,flat,forest,small river,none
 313,horse,desert,flat,forest,large river,none
 337,horse,desert,flat,dense forest,none,none
-270,horse,desert,flat,dense forest,*,Footpath
 388,horse,desert,flat,dense forest,small river,none
 354,horse,desert,flat,dense forest,large river,none
 311,horse,desert,hills,none,none,none
@@ -304,19 +256,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 465,horse,desert,hills,dense forest,small river,none
 425,horse,desert,hills,dense forest,large river,none
 518,horse,desert,mountains,none,none,none
-415,horse,desert,mountains,none,*,Footpath
 596,horse,desert,mountains,none,small river,none
 544,horse,desert,mountains,none,large river,none
 544,horse,desert,mountains,light forest,none,none
-435,horse,desert,mountains,light forest,*,Footpath
 626,horse,desert,mountains,light forest,small river,none
 572,horse,desert,mountains,light forest,large river,none
 596,horse,desert,mountains,forest,none,none
-477,horse,desert,mountains,forest,*,Footpath
 686,horse,desert,mountains,forest,small river,none
 626,horse,desert,mountains,forest,large river,none
 674,horse,desert,mountains,dense forest,none,none
-539,horse,desert,mountains,dense forest,*,Footpath
 775,horse,desert,mountains,dense forest,small river,none
 708,horse,desert,mountains,dense forest,large river,none
 -1,horse,desert,water,none,none,none
@@ -329,51 +277,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,desert,ocean,none,*,Road
 -1,horse,desert,ocean,none,*,Footpath
 285,horse,desert,valley,none,none,none
-228,horse,desert,valley,none,*,Footpath
 328,horse,desert,valley,none,small river,none
 299,horse,desert,valley,none,large river,none
 299,horse,desert,valley,light forest,none,none
-240,horse,desert,valley,light forest,*,Footpath
 344,horse,desert,valley,light forest,small river,none
 314,horse,desert,valley,light forest,large river,none
 328,horse,desert,valley,forest,none,none
-262,horse,desert,valley,forest,*,Footpath
 377,horse,desert,valley,forest,small river,none
 344,horse,desert,valley,forest,large river,none
 371,horse,desert,valley,dense forest,none,none
-297,horse,desert,valley,dense forest,*,Footpath
 426,horse,desert,valley,dense forest,small river,none
 389,horse,desert,valley,dense forest,large river,none
 570,horse,desert,wetlands,none,none,none
-456,horse,desert,wetlands,none,*,Footpath
 656,horse,desert,wetlands,none,small river,none
 599,horse,desert,wetlands,none,large river,none
 599,horse,desert,wetlands,light forest,none,none
-479,horse,desert,wetlands,light forest,*,Footpath
 689,horse,desert,wetlands,light forest,small river,none
 629,horse,desert,wetlands,light forest,large river,none
 656,horse,desert,wetlands,forest,none,none
-525,horse,desert,wetlands,forest,*,Footpath
 754,horse,desert,wetlands,forest,small river,none
 689,horse,desert,wetlands,forest,large river,none
 741,horse,desert,wetlands,dense forest,none,none
-593,horse,desert,wetlands,dense forest,*,Footpath
 853,horse,desert,wetlands,dense forest,small river,none
 778,horse,desert,wetlands,dense forest,large river,none
 238,horse,cold,flat,none,none,none
-190,horse,cold,flat,none,*,Footpath
 273,horse,cold,flat,none,small river,none
 249,horse,cold,flat,none,large river,none
 249,horse,cold,flat,light forest,none,none
-200,horse,cold,flat,light forest,*,Footpath
 287,horse,cold,flat,light forest,small river,none
 262,horse,cold,flat,light forest,large river,none
 273,horse,cold,flat,forest,none,none
-219,horse,cold,flat,forest,*,Footpath
 314,horse,cold,flat,forest,small river,none
 287,horse,cold,flat,forest,large river,none
 309,horse,cold,flat,dense forest,none,none
-247,horse,cold,flat,dense forest,*,Footpath
 355,horse,cold,flat,dense forest,small river,none
 324,horse,cold,flat,dense forest,large river,none
 285,horse,cold,hills,none,none,none
@@ -393,19 +329,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 426,horse,cold,hills,dense forest,small river,none
 389,horse,cold,hills,dense forest,large river,none
 475,horse,cold,mountains,none,none,none
-380,horse,cold,mountains,none,*,Footpath
 546,horse,cold,mountains,none,small river,none
 499,horse,cold,mountains,none,large river,none
 499,horse,cold,mountains,light forest,none,none
-399,horse,cold,mountains,light forest,*,Footpath
 574,horse,cold,mountains,light forest,small river,none
 524,horse,cold,mountains,light forest,large river,none
 546,horse,cold,mountains,forest,none,none
-437,horse,cold,mountains,forest,*,Footpath
 628,horse,cold,mountains,forest,small river,none
 574,horse,cold,mountains,forest,large river,none
 618,horse,cold,mountains,dense forest,none,none
-494,horse,cold,mountains,dense forest,*,Footpath
 710,horse,cold,mountains,dense forest,small river,none
 649,horse,cold,mountains,dense forest,large river,none
 -1,horse,cold,water,none,none,none
@@ -418,51 +350,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,cold,ocean,none,*,Road
 -1,horse,cold,ocean,none,*,Footpath
 261,horse,cold,valley,none,none,none
-209,horse,cold,valley,none,*,Footpath
 301,horse,cold,valley,none,small river,none
 274,horse,cold,valley,none,large river,none
 274,horse,cold,valley,light forest,none,none
-220,horse,cold,valley,light forest,*,Footpath
 316,horse,cold,valley,light forest,small river,none
 288,horse,cold,valley,light forest,large river,none
 301,horse,cold,valley,forest,none,none
-240,horse,cold,valley,forest,*,Footpath
 346,horse,cold,valley,forest,small river,none
 316,horse,cold,valley,forest,large river,none
 340,horse,cold,valley,dense forest,none,none
-272,horse,cold,valley,dense forest,*,Footpath
 391,horse,cold,valley,dense forest,small river,none
 357,horse,cold,valley,dense forest,large river,none
 523,horse,cold,wetlands,none,none,none
-418,horse,cold,wetlands,none,*,Footpath
 601,horse,cold,wetlands,none,small river,none
 549,horse,cold,wetlands,none,large river,none
 549,horse,cold,wetlands,light forest,none,none
-439,horse,cold,wetlands,light forest,*,Footpath
 631,horse,cold,wetlands,light forest,small river,none
 576,horse,cold,wetlands,light forest,large river,none
 601,horse,cold,wetlands,forest,none,none
-481,horse,cold,wetlands,forest,*,Footpath
 691,horse,cold,wetlands,forest,small river,none
 631,horse,cold,wetlands,forest,large river,none
 680,horse,cold,wetlands,dense forest,none,none
-544,horse,cold,wetlands,dense forest,*,Footpath
 781,horse,cold,wetlands,dense forest,small river,none
 714,horse,cold,wetlands,dense forest,large river,none
 270,horse,freezing,flat,none,none,none
-216,horse,freezing,flat,none,*,Footpath
 310,horse,freezing,flat,none,small river,none
 284,horse,freezing,flat,none,large river,none
 284,horse,freezing,flat,light forest,none,none
-227,horse,freezing,flat,light forest,*,Footpath
 326,horse,freezing,flat,light forest,small river,none
 298,horse,freezing,flat,light forest,large river,none
 310,horse,freezing,flat,forest,none,none
-248,horse,freezing,flat,forest,*,Footpath
 357,horse,freezing,flat,forest,small river,none
 326,horse,freezing,flat,forest,large river,none
 351,horse,freezing,flat,dense forest,none,none
-281,horse,freezing,flat,dense forest,*,Footpath
 404,horse,freezing,flat,dense forest,small river,none
 369,horse,freezing,flat,dense forest,large river,none
 324,horse,freezing,hills,none,none,none
@@ -482,19 +402,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 484,horse,freezing,hills,dense forest,small river,none
 442,horse,freezing,hills,dense forest,large river,none
 540,horse,freezing,mountains,none,none,none
-432,horse,freezing,mountains,none,*,Footpath
 621,horse,freezing,mountains,none,small river,none
 567,horse,freezing,mountains,none,large river,none
 567,horse,freezing,mountains,light forest,none,none
-454,horse,freezing,mountains,light forest,*,Footpath
 652,horse,freezing,mountains,light forest,small river,none
 595,horse,freezing,mountains,light forest,large river,none
 621,horse,freezing,mountains,forest,none,none
-497,horse,freezing,mountains,forest,*,Footpath
 714,horse,freezing,mountains,forest,small river,none
 652,horse,freezing,mountains,forest,large river,none
 702,horse,freezing,mountains,dense forest,none,none
-562,horse,freezing,mountains,dense forest,*,Footpath
 807,horse,freezing,mountains,dense forest,small river,none
 737,horse,freezing,mountains,dense forest,large river,none
 -1,horse,freezing,water,none,none,none
@@ -507,52 +423,41 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,horse,freezing,ocean,none,*,Road
 -1,horse,freezing,ocean,none,*,Footpath
 297,horse,freezing,valley,none,none,none
-238,horse,freezing,valley,none,*,Footpath
 342,horse,freezing,valley,none,small river,none
 312,horse,freezing,valley,none,large river,none
 312,horse,freezing,valley,light forest,none,none
-249,horse,freezing,valley,light forest,*,Footpath
 359,horse,freezing,valley,light forest,small river,none
 327,horse,freezing,valley,light forest,large river,none
 342,horse,freezing,valley,forest,none,none
-273,horse,freezing,valley,forest,*,Footpath
 393,horse,freezing,valley,forest,small river,none
 359,horse,freezing,valley,forest,large river,none
 386,horse,freezing,valley,dense forest,none,none
-309,horse,freezing,valley,dense forest,*,Footpath
 444,horse,freezing,valley,dense forest,small river,none
 405,horse,freezing,valley,dense forest,large river,none
 594,horse,freezing,wetlands,none,none,none
-475,horse,freezing,wetlands,none,*,Footpath
 683,horse,freezing,wetlands,none,small river,none
 624,horse,freezing,wetlands,none,large river,none
 624,horse,freezing,wetlands,light forest,none,none
-499,horse,freezing,wetlands,light forest,*,Footpath
 717,horse,freezing,wetlands,light forest,small river,none
 655,horse,freezing,wetlands,light forest,large river,none
 683,horse,freezing,wetlands,forest,none,none
-546,horse,freezing,wetlands,forest,*,Footpath
 786,horse,freezing,wetlands,forest,small river,none
 717,horse,freezing,wetlands,forest,large river,none
 772,horse,freezing,wetlands,dense forest,none,none
-618,horse,freezing,wetlands,dense forest,*,Footpath
 888,horse,freezing,wetlands,dense forest,small river,none
 811,horse,freezing,wetlands,dense forest,large river,none
 300,foot,temperate,flat,none,none,none
 198,foot,*,flat,*,*,Road
-240,foot,temperate,flat,none,*,Footpath
+240,foot,*,flat,*,*,Footpath
 345,foot,temperate,flat,none,small river,none
 315,foot,temperate,flat,none,large river,none
 315,foot,temperate,flat,light forest,none,none
-252,foot,temperate,flat,light forest,*,Footpath
 362,foot,temperate,flat,light forest,small river,none
 331,foot,temperate,flat,light forest,large river,none
 345,foot,temperate,flat,forest,none,none
-276,foot,temperate,flat,forest,*,Footpath
 397,foot,temperate,flat,forest,small river,none
 362,foot,temperate,flat,forest,large river,none
 390,foot,temperate,flat,dense forest,none,none
-312,foot,temperate,flat,dense forest,*,Footpath
 448,foot,temperate,flat,dense forest,small river,none
 410,foot,temperate,flat,dense forest,large river,none
 360,foot,temperate,hills,none,none,none
@@ -574,19 +479,16 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 491,foot,temperate,hills,dense forest,large river,none
 600,foot,temperate,mountains,none,none,none
 396,foot,*,mountains,*,*,Road
-480,foot,temperate,mountains,none,*,Footpath
+480,foot,*,mountains,*,*,Footpath
 690,foot,temperate,mountains,none,small river,none
 630,foot,temperate,mountains,none,large river,none
 630,foot,temperate,mountains,light forest,none,none
-504,foot,temperate,mountains,light forest,*,Footpath
 724,foot,temperate,mountains,light forest,small river,none
 662,foot,temperate,mountains,light forest,large river,none
 690,foot,temperate,mountains,forest,none,none
-552,foot,temperate,mountains,forest,*,Footpath
 793,foot,temperate,mountains,forest,small river,none
 724,foot,temperate,mountains,forest,large river,none
 780,foot,temperate,mountains,dense forest,none,none
-624,foot,temperate,mountains,dense forest,*,Footpath
 897,foot,temperate,mountains,dense forest,small river,none
 819,foot,temperate,mountains,dense forest,large river,none
 -1,foot,temperate,water,none,none,none
@@ -600,52 +502,42 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,temperate,ocean,none,*,Footpath
 330,foot,temperate,valley,none,none,none
 218,foot,*,valley,*,*,Road
-264,foot,temperate,valley,none,*,Footpath
+264,foot,*,valley,*,*,Footpath
 379,foot,temperate,valley,none,small river,none
 346,foot,temperate,valley,none,large river,none
 346,foot,temperate,valley,light forest,none,none
-277,foot,temperate,valley,light forest,*,Footpath
 398,foot,temperate,valley,light forest,small river,none
 364,foot,temperate,valley,light forest,large river,none
 379,foot,temperate,valley,forest,none,none
-304,foot,temperate,valley,forest,*,Footpath
 436,foot,temperate,valley,forest,small river,none
 398,foot,temperate,valley,forest,large river,none
 429,foot,temperate,valley,dense forest,none,none
-343,foot,temperate,valley,dense forest,*,Footpath
 493,foot,temperate,valley,dense forest,small river,none
 450,foot,temperate,valley,dense forest,large river,none
 660,foot,temperate,wetlands,none,none,none
 436,foot,*,wetlands,*,*,Road
-528,foot,temperate,wetlands,none,*,Footpath
+528,foot,*,wetlands,*,*,Footpath
 759,foot,temperate,wetlands,none,small river,none
 693,foot,temperate,wetlands,none,large river,none
 693,foot,temperate,wetlands,light forest,none,none
-554,foot,temperate,wetlands,light forest,*,Footpath
 797,foot,temperate,wetlands,light forest,small river,none
 728,foot,temperate,wetlands,light forest,large river,none
 759,foot,temperate,wetlands,forest,none,none
-607,foot,temperate,wetlands,forest,*,Footpath
 873,foot,temperate,wetlands,forest,small river,none
 797,foot,temperate,wetlands,forest,large river,none
 858,foot,temperate,wetlands,dense forest,none,none
-686,foot,temperate,wetlands,dense forest,*,Footpath
 987,foot,temperate,wetlands,dense forest,small river,none
 901,foot,temperate,wetlands,dense forest,large river,none
 315,foot,tropical,flat,none,none,none
-252,foot,tropical,flat,none,*,Footpath
 362,foot,tropical,flat,none,small river,none
 331,foot,tropical,flat,none,large river,none
 331,foot,tropical,flat,light forest,none,none
-265,foot,tropical,flat,light forest,*,Footpath
 380,foot,tropical,flat,light forest,small river,none
 347,foot,tropical,flat,light forest,large river,none
 362,foot,tropical,flat,forest,none,none
-290,foot,tropical,flat,forest,*,Footpath
 417,foot,tropical,flat,forest,small river,none
 380,foot,tropical,flat,forest,large river,none
 410,foot,tropical,flat,dense forest,none,none
-328,foot,tropical,flat,dense forest,*,Footpath
 471,foot,tropical,flat,dense forest,small river,none
 430,foot,tropical,flat,dense forest,large river,none
 378,foot,tropical,hills,none,none,none
@@ -665,19 +557,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 565,foot,tropical,hills,dense forest,small river,none
 516,foot,tropical,hills,dense forest,large river,none
 630,foot,tropical,mountains,none,none,none
-504,foot,tropical,mountains,none,*,Footpath
 724,foot,tropical,mountains,none,small river,none
 662,foot,tropical,mountains,none,large river,none
 662,foot,tropical,mountains,light forest,none,none
-529,foot,tropical,mountains,light forest,*,Footpath
 761,foot,tropical,mountains,light forest,small river,none
 695,foot,tropical,mountains,light forest,large river,none
 724,foot,tropical,mountains,forest,none,none
-580,foot,tropical,mountains,forest,*,Footpath
 833,foot,tropical,mountains,forest,small river,none
 761,foot,tropical,mountains,forest,large river,none
 819,foot,tropical,mountains,dense forest,none,none
-655,foot,tropical,mountains,dense forest,*,Footpath
 942,foot,tropical,mountains,dense forest,small river,none
 860,foot,tropical,mountains,dense forest,large river,none
 -1,foot,tropical,water,none,none,none
@@ -690,51 +578,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,tropical,ocean,none,*,Road
 -1,foot,tropical,ocean,none,*,Footpath
 346,foot,tropical,valley,none,none,none
-277,foot,tropical,valley,none,*,Footpath
 398,foot,tropical,valley,none,small river,none
 364,foot,tropical,valley,none,large river,none
 364,foot,tropical,valley,light forest,none,none
-291,foot,tropical,valley,light forest,*,Footpath
 418,foot,tropical,valley,light forest,small river,none
 382,foot,tropical,valley,light forest,large river,none
 398,foot,tropical,valley,forest,none,none
-319,foot,tropical,valley,forest,*,Footpath
 458,foot,tropical,valley,forest,small river,none
 418,foot,tropical,valley,forest,large river,none
 450,foot,tropical,valley,dense forest,none,none
-360,foot,tropical,valley,dense forest,*,Footpath
 518,foot,tropical,valley,dense forest,small river,none
 473,foot,tropical,valley,dense forest,large river,none
 693,foot,tropical,wetlands,none,none,none
-554,foot,tropical,wetlands,none,*,Footpath
 797,foot,tropical,wetlands,none,small river,none
 728,foot,tropical,wetlands,none,large river,none
 728,foot,tropical,wetlands,light forest,none,none
-582,foot,tropical,wetlands,light forest,*,Footpath
 837,foot,tropical,wetlands,light forest,small river,none
 764,foot,tropical,wetlands,light forest,large river,none
 797,foot,tropical,wetlands,forest,none,none
-638,foot,tropical,wetlands,forest,*,Footpath
 916,foot,tropical,wetlands,forest,small river,none
 837,foot,tropical,wetlands,forest,large river,none
 901,foot,tropical,wetlands,dense forest,none,none
-721,foot,tropical,wetlands,dense forest,*,Footpath
 1036,foot,tropical,wetlands,dense forest,small river,none
 946,foot,tropical,wetlands,dense forest,large river,none
 309,foot,subtropical,flat,none,none,none
-247,foot,subtropical,flat,none,*,Footpath
 355,foot,subtropical,flat,none,small river,none
 324,foot,subtropical,flat,none,large river,none
 324,foot,subtropical,flat,light forest,none,none
-260,foot,subtropical,flat,light forest,*,Footpath
 373,foot,subtropical,flat,light forest,small river,none
 341,foot,subtropical,flat,light forest,large river,none
 355,foot,subtropical,flat,forest,none,none
-284,foot,subtropical,flat,forest,*,Footpath
 409,foot,subtropical,flat,forest,small river,none
 373,foot,subtropical,flat,forest,large river,none
 402,foot,subtropical,flat,dense forest,none,none
-321,foot,subtropical,flat,dense forest,*,Footpath
 462,foot,subtropical,flat,dense forest,small river,none
 422,foot,subtropical,flat,dense forest,large river,none
 371,foot,subtropical,hills,none,none,none
@@ -754,19 +630,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 554,foot,subtropical,hills,dense forest,small river,none
 506,foot,subtropical,hills,dense forest,large river,none
 618,foot,subtropical,mountains,none,none,none
-494,foot,subtropical,mountains,none,*,Footpath
 711,foot,subtropical,mountains,none,small river,none
 649,foot,subtropical,mountains,none,large river,none
 649,foot,subtropical,mountains,light forest,none,none
-519,foot,subtropical,mountains,light forest,*,Footpath
 746,foot,subtropical,mountains,light forest,small river,none
 681,foot,subtropical,mountains,light forest,large river,none
 711,foot,subtropical,mountains,forest,none,none
-569,foot,subtropical,mountains,forest,*,Footpath
 817,foot,subtropical,mountains,forest,small river,none
 746,foot,subtropical,mountains,forest,large river,none
 803,foot,subtropical,mountains,dense forest,none,none
-643,foot,subtropical,mountains,dense forest,*,Footpath
 924,foot,subtropical,mountains,dense forest,small river,none
 844,foot,subtropical,mountains,dense forest,large river,none
 -1,foot,subtropical,water,none,none,none
@@ -779,51 +651,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,subtropical,ocean,none,*,Road
 -1,foot,subtropical,ocean,none,*,Footpath
 340,foot,subtropical,valley,none,none,none
-272,foot,subtropical,valley,none,*,Footpath
 391,foot,subtropical,valley,none,small river,none
 357,foot,subtropical,valley,none,large river,none
 357,foot,subtropical,valley,light forest,none,none
-286,foot,subtropical,valley,light forest,*,Footpath
 410,foot,subtropical,valley,light forest,small river,none
 375,foot,subtropical,valley,light forest,large river,none
 391,foot,subtropical,valley,forest,none,none
-313,foot,subtropical,valley,forest,*,Footpath
 450,foot,subtropical,valley,forest,small river,none
 410,foot,subtropical,valley,forest,large river,none
 442,foot,subtropical,valley,dense forest,none,none
-353,foot,subtropical,valley,dense forest,*,Footpath
 508,foot,subtropical,valley,dense forest,small river,none
 464,foot,subtropical,valley,dense forest,large river,none
 680,foot,subtropical,wetlands,none,none,none
-544,foot,subtropical,wetlands,none,*,Footpath
 782,foot,subtropical,wetlands,none,small river,none
 714,foot,subtropical,wetlands,none,large river,none
 714,foot,subtropical,wetlands,light forest,none,none
-571,foot,subtropical,wetlands,light forest,*,Footpath
 821,foot,subtropical,wetlands,light forest,small river,none
 749,foot,subtropical,wetlands,light forest,large river,none
 782,foot,subtropical,wetlands,forest,none,none
-625,foot,subtropical,wetlands,forest,*,Footpath
 899,foot,subtropical,wetlands,forest,small river,none
 821,foot,subtropical,wetlands,forest,large river,none
 884,foot,subtropical,wetlands,dense forest,none,none
-707,foot,subtropical,wetlands,dense forest,*,Footpath
 1016,foot,subtropical,wetlands,dense forest,small river,none
 928,foot,subtropical,wetlands,dense forest,large river,none
 360,foot,desert,flat,none,none,none
-288,foot,desert,flat,none,*,Footpath
 414,foot,desert,flat,none,small river,none
 378,foot,desert,flat,none,large river,none
 378,foot,desert,flat,light forest,none,none
-302,foot,desert,flat,light forest,*,Footpath
 435,foot,desert,flat,light forest,small river,none
 397,foot,desert,flat,light forest,large river,none
 414,foot,desert,flat,forest,none,none
-331,foot,desert,flat,forest,*,Footpath
 476,foot,desert,flat,forest,small river,none
 435,foot,desert,flat,forest,large river,none
 468,foot,desert,flat,dense forest,none,none
-374,foot,desert,flat,dense forest,*,Footpath
 538,foot,desert,flat,dense forest,small river,none
 491,foot,desert,flat,dense forest,large river,none
 432,foot,desert,hills,none,none,none
@@ -843,19 +703,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 646,foot,desert,hills,dense forest,small river,none
 590,foot,desert,hills,dense forest,large river,none
 720,foot,desert,mountains,none,none,none
-576,foot,desert,mountains,none,*,Footpath
 828,foot,desert,mountains,none,small river,none
 756,foot,desert,mountains,none,large river,none
 756,foot,desert,mountains,light forest,none,none
-605,foot,desert,mountains,light forest,*,Footpath
 869,foot,desert,mountains,light forest,small river,none
 794,foot,desert,mountains,light forest,large river,none
 828,foot,desert,mountains,forest,none,none
-662,foot,desert,mountains,forest,*,Footpath
 952,foot,desert,mountains,forest,small river,none
 869,foot,desert,mountains,forest,large river,none
 936,foot,desert,mountains,dense forest,none,none
-749,foot,desert,mountains,dense forest,*,Footpath
 1076,foot,desert,mountains,dense forest,small river,none
 983,foot,desert,mountains,dense forest,large river,none
 -1,foot,desert,water,none,none,none
@@ -868,51 +724,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,desert,ocean,none,*,Road
 -1,foot,desert,ocean,none,*,Footpath
 396,foot,desert,valley,none,none,none
-317,foot,desert,valley,none,*,Footpath
 455,foot,desert,valley,none,small river,none
 416,foot,desert,valley,none,large river,none
 416,foot,desert,valley,light forest,none,none
-333,foot,desert,valley,light forest,*,Footpath
 478,foot,desert,valley,light forest,small river,none
 437,foot,desert,valley,light forest,large river,none
 455,foot,desert,valley,forest,none,none
-364,foot,desert,valley,forest,*,Footpath
 524,foot,desert,valley,forest,small river,none
 478,foot,desert,valley,forest,large river,none
 515,foot,desert,valley,dense forest,none,none
-412,foot,desert,valley,dense forest,*,Footpath
 592,foot,desert,valley,dense forest,small river,none
 541,foot,desert,valley,dense forest,large river,none
 792,foot,desert,wetlands,none,none,none
-634,foot,desert,wetlands,none,*,Footpath
 911,foot,desert,wetlands,none,small river,none
 832,foot,desert,wetlands,none,large river,none
 832,foot,desert,wetlands,light forest,none,none
-665,foot,desert,wetlands,light forest,*,Footpath
 956,foot,desert,wetlands,light forest,small river,none
 873,foot,desert,wetlands,light forest,large river,none
 911,foot,desert,wetlands,forest,none,none
-729,foot,desert,wetlands,forest,*,Footpath
 1047,foot,desert,wetlands,forest,small river,none
 956,foot,desert,wetlands,forest,large river,none
 1030,foot,desert,wetlands,dense forest,none,none
-824,foot,desert,wetlands,dense forest,*,Footpath
 1184,foot,desert,wetlands,dense forest,small river,none
 1081,foot,desert,wetlands,dense forest,large river,none
 330,foot,cold,flat,none,none,none
-264,foot,cold,flat,none,*,Footpath
 380,foot,cold,flat,none,small river,none
 346,foot,cold,flat,none,large river,none
 346,foot,cold,flat,light forest,none,none
-277,foot,cold,flat,light forest,*,Footpath
 398,foot,cold,flat,light forest,small river,none
 364,foot,cold,flat,light forest,large river,none
 380,foot,cold,flat,forest,none,none
-304,foot,cold,flat,forest,*,Footpath
 436,foot,cold,flat,forest,small river,none
 398,foot,cold,flat,forest,large river,none
 429,foot,cold,flat,dense forest,none,none
-343,foot,cold,flat,dense forest,*,Footpath
 493,foot,cold,flat,dense forest,small river,none
 450,foot,cold,flat,dense forest,large river,none
 396,foot,cold,hills,none,none,none
@@ -932,19 +776,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 592,foot,cold,hills,dense forest,small river,none
 541,foot,cold,hills,dense forest,large river,none
 660,foot,cold,mountains,none,none,none
-528,foot,cold,mountains,none,*,Footpath
 759,foot,cold,mountains,none,small river,none
 693,foot,cold,mountains,none,large river,none
 693,foot,cold,mountains,light forest,none,none
-554,foot,cold,mountains,light forest,*,Footpath
 797,foot,cold,mountains,light forest,small river,none
 728,foot,cold,mountains,light forest,large river,none
 759,foot,cold,mountains,forest,none,none
-607,foot,cold,mountains,forest,*,Footpath
 873,foot,cold,mountains,forest,small river,none
 797,foot,cold,mountains,forest,large river,none
 858,foot,cold,mountains,dense forest,none,none
-686,foot,cold,mountains,dense forest,*,Footpath
 987,foot,cold,mountains,dense forest,small river,none
 901,foot,cold,mountains,dense forest,large river,none
 -1,foot,cold,water,none,none,none
@@ -957,51 +797,39 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,cold,ocean,none,*,Road
 -1,foot,cold,ocean,none,*,Footpath
 363,foot,cold,valley,none,none,none
-290,foot,cold,valley,none,*,Footpath
 417,foot,cold,valley,none,small river,none
 381,foot,cold,valley,none,large river,none
 381,foot,cold,valley,light forest,none,none
-305,foot,cold,valley,light forest,*,Footpath
 438,foot,cold,valley,light forest,small river,none
 400,foot,cold,valley,light forest,large river,none
 417,foot,cold,valley,forest,none,none
-334,foot,cold,valley,forest,*,Footpath
 480,foot,cold,valley,forest,small river,none
 438,foot,cold,valley,forest,large river,none
 472,foot,cold,valley,dense forest,none,none
-378,foot,cold,valley,dense forest,*,Footpath
 543,foot,cold,valley,dense forest,small river,none
 495,foot,cold,valley,dense forest,large river,none
 726,foot,cold,wetlands,none,none,none
-581,foot,cold,wetlands,none,*,Footpath
 835,foot,cold,wetlands,none,small river,none
 762,foot,cold,wetlands,none,large river,none
 762,foot,cold,wetlands,light forest,none,none
-610,foot,cold,wetlands,light forest,*,Footpath
 877,foot,cold,wetlands,light forest,small river,none
 800,foot,cold,wetlands,light forest,large river,none
 835,foot,cold,wetlands,forest,none,none
-668,foot,cold,wetlands,forest,*,Footpath
 960,foot,cold,wetlands,forest,small river,none
 877,foot,cold,wetlands,forest,large river,none
 944,foot,cold,wetlands,dense forest,none,none
-755,foot,cold,wetlands,dense forest,*,Footpath
 1085,foot,cold,wetlands,dense forest,small river,none
 991,foot,cold,wetlands,dense forest,large river,none
 375,foot,freezing,flat,none,none,none
-300,foot,freezing,flat,none,*,Footpath
 431,foot,freezing,flat,none,small river,none
 394,foot,freezing,flat,none,large river,none
 394,foot,freezing,flat,light forest,none,none
-315,foot,freezing,flat,light forest,*,Footpath
 453,foot,freezing,flat,light forest,small river,none
 413,foot,freezing,flat,light forest,large river,none
 431,foot,freezing,flat,forest,none,none
-345,foot,freezing,flat,forest,*,Footpath
 496,foot,freezing,flat,forest,small river,none
 453,foot,freezing,flat,forest,large river,none
 488,foot,freezing,flat,dense forest,none,none
-390,foot,freezing,flat,dense forest,*,Footpath
 561,foot,freezing,flat,dense forest,small river,none
 512,foot,freezing,flat,dense forest,large river,none
 450,foot,freezing,hills,none,none,none
@@ -1021,19 +849,15 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 673,foot,freezing,hills,dense forest,small river,none
 614,foot,freezing,hills,dense forest,large river,none
 750,foot,freezing,mountains,none,none,none
-600,foot,freezing,mountains,none,*,Footpath
 862,foot,freezing,mountains,none,small river,none
 788,foot,freezing,mountains,none,large river,none
 788,foot,freezing,mountains,light forest,none,none
-630,foot,freezing,mountains,light forest,*,Footpath
 906,foot,freezing,mountains,light forest,small river,none
 827,foot,freezing,mountains,light forest,large river,none
 862,foot,freezing,mountains,forest,none,none
-690,foot,freezing,mountains,forest,*,Footpath
 992,foot,freezing,mountains,forest,small river,none
 906,foot,freezing,mountains,forest,large river,none
 975,foot,freezing,mountains,dense forest,none,none
-780,foot,freezing,mountains,dense forest,*,Footpath
 1121,foot,freezing,mountains,dense forest,small river,none
 1024,foot,freezing,mountains,dense forest,large river,none
 -1,foot,freezing,water,none,none,none
@@ -1046,35 +870,27 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,foot,freezing,ocean,none,*,Road
 -1,foot,freezing,ocean,none,*,Footpath
 412,foot,freezing,valley,none,none,none
-330,foot,freezing,valley,none,*,Footpath
 474,foot,freezing,valley,none,small river,none
 433,foot,freezing,valley,none,large river,none
 433,foot,freezing,valley,light forest,none,none
-346,foot,freezing,valley,light forest,*,Footpath
 498,foot,freezing,valley,light forest,small river,none
 455,foot,freezing,valley,light forest,large river,none
 474,foot,freezing,valley,forest,none,none
-379,foot,freezing,valley,forest,*,Footpath
 546,foot,freezing,valley,forest,small river,none
 498,foot,freezing,valley,forest,large river,none
 536,foot,freezing,valley,dense forest,none,none
-429,foot,freezing,valley,dense forest,*,Footpath
 617,foot,freezing,valley,dense forest,small river,none
 563,foot,freezing,valley,dense forest,large river,none
 825,foot,freezing,wetlands,none,none,none
-660,foot,freezing,wetlands,none,*,Footpath
 949,foot,freezing,wetlands,none,small river,none
 866,foot,freezing,wetlands,none,large river,none
 866,foot,freezing,wetlands,light forest,none,none
-693,foot,freezing,wetlands,light forest,*,Footpath
 996,foot,freezing,wetlands,light forest,small river,none
 910,foot,freezing,wetlands,light forest,large river,none
 949,foot,freezing,wetlands,forest,none,none
-759,foot,freezing,wetlands,forest,*,Footpath
 1091,foot,freezing,wetlands,forest,small river,none
 996,foot,freezing,wetlands,forest,large river,none
 1072,foot,freezing,wetlands,dense forest,none,none
-858,foot,freezing,wetlands,dense forest,*,Footpath
 1233,foot,freezing,wetlands,dense forest,small river,none
 1126,foot,freezing,wetlands,dense forest,large river,none
 -1,river boat,temperate,flat,none,none,none
