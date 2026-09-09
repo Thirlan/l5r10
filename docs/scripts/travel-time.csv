@@ -3638,10 +3638,10 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,temperate,water,none,none,none
 -1,caravan,temperate,water,none,*,Road
 -1,caravan,temperate,water,none,*,Footpath
--1,caravan,temperate,coastal water,none,none,none
+-1,caravan,*,coastal water,*,none,none
 -1,caravan,temperate,coastal water,none,*,Road
 -1,caravan,temperate,coastal water,none,*,Footpath
--1,caravan,temperate,ocean,none,none,none
+-1,caravan,*,ocean,*,none,none
 -1,caravan,temperate,ocean,none,*,Road
 -1,caravan,temperate,ocean,none,*,Footpath
 370,caravan,temperate,valley,none,none,none
@@ -3747,10 +3747,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,tropical,water,none,none,none
 -1,caravan,tropical,water,none,*,Road
 -1,caravan,tropical,water,none,*,Footpath
--1,caravan,tropical,coastal water,none,none,none
 -1,caravan,tropical,coastal water,none,*,Road
 -1,caravan,tropical,coastal water,none,*,Footpath
--1,caravan,tropical,ocean,none,none,none
 -1,caravan,tropical,ocean,none,*,Road
 -1,caravan,tropical,ocean,none,*,Footpath
 388,caravan,tropical,valley,none,none,none
@@ -3856,10 +3854,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,subtropical,water,none,none,none
 -1,caravan,subtropical,water,none,*,Road
 -1,caravan,subtropical,water,none,*,Footpath
--1,caravan,subtropical,coastal water,none,none,none
 -1,caravan,subtropical,coastal water,none,*,Road
 -1,caravan,subtropical,coastal water,none,*,Footpath
--1,caravan,subtropical,ocean,none,none,none
 -1,caravan,subtropical,ocean,none,*,Road
 -1,caravan,subtropical,ocean,none,*,Footpath
 381,caravan,subtropical,valley,none,none,none
@@ -3965,10 +3961,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,desert,water,none,none,none
 -1,caravan,desert,water,none,*,Road
 -1,caravan,desert,water,none,*,Footpath
--1,caravan,desert,coastal water,none,none,none
 -1,caravan,desert,coastal water,none,*,Road
 -1,caravan,desert,coastal water,none,*,Footpath
--1,caravan,desert,ocean,none,none,none
 -1,caravan,desert,ocean,none,*,Road
 -1,caravan,desert,ocean,none,*,Footpath
 444,caravan,desert,valley,none,none,none
@@ -4074,10 +4068,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,cold,water,none,none,none
 -1,caravan,cold,water,none,*,Road
 -1,caravan,cold,water,none,*,Footpath
--1,caravan,cold,coastal water,none,none,none
 -1,caravan,cold,coastal water,none,*,Road
 -1,caravan,cold,coastal water,none,*,Footpath
--1,caravan,cold,ocean,none,none,none
 -1,caravan,cold,ocean,none,*,Road
 -1,caravan,cold,ocean,none,*,Footpath
 407,caravan,cold,valley,none,none,none
@@ -4183,10 +4175,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,caravan,freezing,water,none,none,none
 -1,caravan,freezing,water,none,*,Road
 -1,caravan,freezing,water,none,*,Footpath
--1,caravan,freezing,coastal water,none,none,none
 -1,caravan,freezing,coastal water,none,*,Road
 -1,caravan,freezing,coastal water,none,*,Footpath
--1,caravan,freezing,ocean,none,none,none
 -1,caravan,freezing,ocean,none,*,Road
 -1,caravan,freezing,ocean,none,*,Footpath
 462,caravan,freezing,valley,none,none,none
@@ -4292,10 +4282,10 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,temperate,water,none,none,none
 -1,army,temperate,water,none,*,Road
 -1,army,temperate,water,none,*,Footpath
--1,army,temperate,coastal water,none,none,none
+-1,army,*,coastal water,*,none,none
 -1,army,temperate,coastal water,none,*,Road
 -1,army,temperate,coastal water,none,*,Footpath
--1,army,temperate,ocean,none,none,none
+-1,army,*,ocean,*,none,none
 -1,army,temperate,ocean,none,*,Road
 -1,army,temperate,ocean,none,*,Footpath
 403,army,temperate,valley,none,none,none
@@ -4401,10 +4391,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,tropical,water,none,none,none
 -1,army,tropical,water,none,*,Road
 -1,army,tropical,water,none,*,Footpath
--1,army,tropical,coastal water,none,none,none
 -1,army,tropical,coastal water,none,*,Road
 -1,army,tropical,coastal water,none,*,Footpath
--1,army,tropical,ocean,none,none,none
 -1,army,tropical,ocean,none,*,Road
 -1,army,tropical,ocean,none,*,Footpath
 423,army,tropical,valley,none,none,none
@@ -4510,10 +4498,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,subtropical,water,none,none,none
 -1,army,subtropical,water,none,*,Road
 -1,army,subtropical,water,none,*,Footpath
--1,army,subtropical,coastal water,none,none,none
 -1,army,subtropical,coastal water,none,*,Road
 -1,army,subtropical,coastal water,none,*,Footpath
--1,army,subtropical,ocean,none,none,none
 -1,army,subtropical,ocean,none,*,Road
 -1,army,subtropical,ocean,none,*,Footpath
 415,army,subtropical,valley,none,none,none
@@ -4619,10 +4605,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,desert,water,none,none,none
 -1,army,desert,water,none,*,Road
 -1,army,desert,water,none,*,Footpath
--1,army,desert,coastal water,none,none,none
 -1,army,desert,coastal water,none,*,Road
 -1,army,desert,coastal water,none,*,Footpath
--1,army,desert,ocean,none,none,none
 -1,army,desert,ocean,none,*,Road
 -1,army,desert,ocean,none,*,Footpath
 483,army,desert,valley,none,none,none
@@ -4728,10 +4712,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,cold,water,none,none,none
 -1,army,cold,water,none,*,Road
 -1,army,cold,water,none,*,Footpath
--1,army,cold,coastal water,none,none,none
 -1,army,cold,coastal water,none,*,Road
 -1,army,cold,coastal water,none,*,Footpath
--1,army,cold,ocean,none,none,none
 -1,army,cold,ocean,none,*,Road
 -1,army,cold,ocean,none,*,Footpath
 443,army,cold,valley,none,none,none
@@ -4837,10 +4819,8 @@ Time to travel,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastru
 -1,army,freezing,water,none,none,none
 -1,army,freezing,water,none,*,Road
 -1,army,freezing,water,none,*,Footpath
--1,army,freezing,coastal water,none,none,none
 -1,army,freezing,coastal water,none,*,Road
 -1,army,freezing,coastal water,none,*,Footpath
--1,army,freezing,ocean,none,none,none
 -1,army,freezing,ocean,none,*,Road
 -1,army,freezing,ocean,none,*,Footpath
 503,army,freezing,valley,none,none,none
