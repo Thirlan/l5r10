@@ -50,12 +50,6 @@
           "image": "../img/map/ocean.png"
         },
         {
-          "id": 6,
-          "name": "valley",
-          "color": "#6B8E23",
-          "image": "../img/map/valley.png"
-        },
-        {
           "id": 7,
           "name": "wetlands",
           "color": "#556B2F",
@@ -357,7 +351,7 @@
           "id": 7,
           "name": "Iron Mine",
           "englishType": "Iron Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/iron_mine.png"
         },
         {
@@ -378,7 +372,7 @@
           "id": 10,
           "name": "Small Shrine",
           "englishType": "Small Shrine",
-          "rokuganiType": "Shōsha"
+          "rokuganiType": "Sh\u014dsha"
         },
         {
           "id": 11,
@@ -509,28 +503,28 @@
           "id": 29,
           "name": "Jade Mine",
           "englishType": "Jade Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/jade_mine.png"
         },
         {
           "id": 30,
           "name": "Copper Mine",
           "englishType": "Copper Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/copper_mine.png"
         },
         {
           "id": 31,
           "name": "Gold Mine",
           "englishType": "Gold Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/gold_mine.png"
         },
         {
           "id": 32,
           "name": "Silver Mine",
           "englishType": "Silver Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/silver_mine.png"
         },
         {
@@ -551,7 +545,7 @@
           "id": 35,
           "name": "Gemstone Mine",
           "englishType": "Gemstone Mine",
-          "rokuganiType": "Kōzan",
+          "rokuganiType": "K\u014dzan",
           "image": "../img/map/gemstone_mine.png"
         },
         {

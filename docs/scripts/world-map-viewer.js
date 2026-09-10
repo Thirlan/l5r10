@@ -340,7 +340,6 @@ class WorldMapViewer {
     if (climateName === "freezing") return "snow";
     if (terrainName === "wetlands") return "marsh";
     if (terrainName === "flat") return "plains";
-    if (terrainName === "valley") return "hills";
 
     return terrainName;
   }
