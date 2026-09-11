@@ -820,7 +820,7 @@ class WorldMapGrid {
             else if (tLower === "plains") { tId = 0; }
             else if (tLower === "marsh") { tId = 7; }
             else if (tLower === "waste") { tId = 0; }
-            else if (tLower === "snow") { tId = 0; cId = 5; }
+            else if (tLower === "snow") { tId = 0; cId = 4; }
             else { tId = this.layerMaps.terrain.nameToId[tLower] ?? 0; }
           }
           this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };

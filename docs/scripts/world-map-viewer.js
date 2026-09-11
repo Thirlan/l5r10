@@ -155,7 +155,7 @@ class WorldMapViewer {
           else if (tLower === "plains") { tId = 0; }
           else if (tLower === "marsh") { tId = 7; }
           else if (tLower === "waste") { tId = 0; }
-          else if (tLower === "snow") { tId = 0; cId = 5; }
+          else if (tLower === "snow") { tId = 0; cId = 4; }
           else { tId = this.layerMaps.terrain.nameToId[tLower] ?? 0; }
         }
         this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };
@@ -335,9 +335,9 @@ class WorldMapViewer {
       climateName = (this.layerMaps.climate.idToName[climateVal] || "").toLowerCase();
     }
 
-    if (vegName.includes("forest")) return "forest";
+    if (vegName === "light" || vegName === "dense") return "forest";
     if (climateName === "desert") return "deserts";
-    if (climateName === "freezing") return "snow";
+    if (climateName === "polar") return "snow";
     if (terrainName === "wetlands") return "marsh";
     if (terrainName === "flat") return "plains";
 

@@ -78,24 +78,14 @@
           "color": "#7FFF00"
         },
         {
-          "id": 2,
-          "name": "subtropical",
-          "color": "#4F7942"
-        },
-        {
           "id": 3,
           "name": "desert",
           "color": "#F4A460"
         },
         {
           "id": 4,
-          "name": "cold",
+          "name": "polar",
           "color": "#8B5A2B"
-        },
-        {
-          "id": 5,
-          "name": "freezing",
-          "color": "#F0F8FF"
         }
       ]
     },
@@ -110,17 +100,12 @@
         },
         {
           "id": 1,
-          "name": "light forest",
+          "name": "light",
           "color": "#90EE90"
         },
         {
-          "id": 2,
-          "name": "forest",
-          "color": "#3CB371"
-        },
-        {
           "id": 3,
-          "name": "dense forest",
+          "name": "dense",
           "color": "#228B22"
         }
       ]
