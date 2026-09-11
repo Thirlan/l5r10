@@ -149,14 +149,7 @@ class WorldMapViewer {
 
         let tId = 0, cId = 0, vId = 0, rId = 0;
         if (t && this.layerMaps.terrain) {
-          const tLower = t.toLowerCase();
-          if (tLower === "forest") { tId = 0; vId = 3; }
-          else if (tLower === "deserts" || tLower === "desert") { tId = 0; cId = 3; }
-          else if (tLower === "plains") { tId = 0; }
-          else if (tLower === "marsh") { tId = 7; }
-          else if (tLower === "waste") { tId = 0; }
-          else if (tLower === "snow") { tId = 0; cId = 4; }
-          else { tId = this.layerMaps.terrain.nameToId[tLower] ?? 0; }
+          tId = this.layerMaps.terrain.nameToId[t.toLowerCase()] ?? 0;
         }
         this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };
         if (i && this.layerMaps.infrastructure) {
@@ -335,11 +328,9 @@ class WorldMapViewer {
       climateName = (this.layerMaps.climate.idToName[climateVal] || "").toLowerCase();
     }
 
-    if (vegName === "light" || vegName === "dense") return "forest";
-    if (climateName === "desert") return "deserts";
-    if (climateName === "polar") return "snow";
-    if (terrainName === "wetlands") return "marsh";
-    if (terrainName === "flat") return "plains";
+    if (vegName === "light" || vegName === "dense") return "vegetation";
+    if (climateName === "desert" || climateName === "polar") return climateName;
+    if (terrainName === "wetlands" || terrainName === "flat") return terrainName;
 
     return terrainName;
   }
