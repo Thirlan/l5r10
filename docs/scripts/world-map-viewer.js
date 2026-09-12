@@ -1,6 +1,12 @@
 const VIEWER_GRID_SIZE = 16;
 const WATER_TERRAINS_SET = typeof WATER_TERRAINS !== "undefined" ? WATER_TERRAINS : new Set(["water", "coastal water", "ocean"]);
 
+function numOrNull(val) {
+  if (val === undefined || val === null || val === "") return null;
+  const num = Number(val);
+  return Number.isNaN(num) ? null : num;
+}
+
 class WorldMapViewer {
   constructor(imageSrc, canvasSelector, gridSize = VIEWER_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
