@@ -1,752 +1,752 @@
-schema,kmph,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastructure
-kmph-v1,4.6,horse,temperate,flat,none,none,none
-kmph-v1,7.0,horse,*,flat,*,*,Road
-kmph-v1,5.8,horse,*,flat,*,*,Footpath
-kmph-v1,4.4,horse,temperate,flat,none,river,none
-kmph-v1,3.6,horse,temperate,flat,vegetation,none,none
-kmph-v1,3.4,horse,temperate,flat,vegetation,river,none
-kmph-v1,3.9,horse,temperate,hills,none,none,none
-kmph-v1,5.9,horse,*,hills,*,*,Road
-kmph-v1,4.8,horse,temperate,hills,none,*,Footpath
-kmph-v1,3.7,horse,temperate,hills,none,river,none
-kmph-v1,3.0,horse,temperate,hills,vegetation,none,none
-kmph-v1,3.7,horse,temperate,hills,vegetation,*,Footpath
-kmph-v1,2.8,horse,temperate,hills,vegetation,river,none
-kmph-v1,2.3,horse,temperate,mountains,none,none,none
-kmph-v1,3.5,horse,*,mountains,*,*,Road
-kmph-v1,2.9,horse,*,mountains,*,*,Footpath
-kmph-v1,2.2,horse,temperate,mountains,none,river,none
-kmph-v1,1.8,horse,temperate,mountains,vegetation,none,none
-kmph-v1,1.7,horse,temperate,mountains,vegetation,river,none
-kmph-v1,-1,horse,temperate,water,none,none,none
-kmph-v1,-1,horse,temperate,water,none,*,Road
-kmph-v1,-1,horse,temperate,water,none,*,Footpath
-kmph-v1,-1,horse,temperate,coastal water,none,none,none
-kmph-v1,-1,horse,temperate,coastal water,none,*,Road
-kmph-v1,-1,horse,temperate,coastal water,none,*,Footpath
-kmph-v1,-1,horse,temperate,ocean,none,none,none
-kmph-v1,-1,horse,temperate,ocean,none,*,Road
-kmph-v1,-1,horse,temperate,ocean,none,*,Footpath
-kmph-v1,2.1,horse,temperate,wetlands,none,none,none
-kmph-v1,3.2,horse,*,wetlands,*,*,Road
-kmph-v1,2.6,horse,*,wetlands,*,*,Footpath
-kmph-v1,2.0,horse,temperate,wetlands,none,river,none
-kmph-v1,1.6,horse,temperate,wetlands,vegetation,none,none
-kmph-v1,1.5,horse,temperate,wetlands,vegetation,river,none
-kmph-v1,4.4,horse,tropical,flat,none,none,none
-kmph-v1,4.2,horse,tropical,flat,none,river,none
-kmph-v1,3.4,horse,tropical,flat,vegetation,none,none
-kmph-v1,3.2,horse,tropical,flat,vegetation,river,none
-kmph-v1,3.7,horse,tropical,hills,none,none,none
-kmph-v1,4.6,horse,tropical,hills,none,*,Footpath
-kmph-v1,3.5,horse,tropical,hills,none,river,none
-kmph-v1,2.8,horse,tropical,hills,vegetation,none,none
-kmph-v1,3.5,horse,tropical,hills,vegetation,*,Footpath
-kmph-v1,2.7,horse,tropical,hills,vegetation,river,none
-kmph-v1,2.2,horse,tropical,mountains,none,none,none
-kmph-v1,2.1,horse,tropical,mountains,none,river,none
-kmph-v1,1.7,horse,tropical,mountains,vegetation,none,none
-kmph-v1,1.6,horse,tropical,mountains,vegetation,river,none
-kmph-v1,-1,horse,tropical,water,none,none,none
-kmph-v1,-1,horse,tropical,water,none,*,Road
-kmph-v1,-1,horse,tropical,water,none,*,Footpath
-kmph-v1,-1,horse,tropical,coastal water,none,none,none
-kmph-v1,-1,horse,tropical,coastal water,none,*,Road
-kmph-v1,-1,horse,tropical,coastal water,none,*,Footpath
-kmph-v1,-1,horse,tropical,ocean,none,none,none
-kmph-v1,-1,horse,tropical,ocean,none,*,Road
-kmph-v1,-1,horse,tropical,ocean,none,*,Footpath
-kmph-v1,2.0,horse,tropical,wetlands,none,none,none
-kmph-v1,1.9,horse,tropical,wetlands,none,river,none
-kmph-v1,1.5,horse,tropical,wetlands,vegetation,none,none
-kmph-v1,1.5,horse,tropical,wetlands,vegetation,river,none
-kmph-v1,4.5,horse,subtropical,flat,none,none,none
-kmph-v1,4.3,horse,subtropical,flat,none,river,none
-kmph-v1,3.5,horse,subtropical,flat,vegetation,none,none
-kmph-v1,3.3,horse,subtropical,flat,vegetation,river,none
-kmph-v1,3.7,horse,subtropical,hills,none,none,none
-kmph-v1,4.7,horse,subtropical,hills,none,*,Footpath
-kmph-v1,3.6,horse,subtropical,hills,none,river,none
-kmph-v1,2.9,horse,subtropical,hills,vegetation,none,none
-kmph-v1,3.6,horse,subtropical,hills,vegetation,*,Footpath
-kmph-v1,2.8,horse,subtropical,hills,vegetation,river,none
-kmph-v1,2.2,horse,subtropical,mountains,none,none,none
-kmph-v1,2.1,horse,subtropical,mountains,none,river,none
-kmph-v1,1.7,horse,subtropical,mountains,vegetation,none,none
-kmph-v1,1.6,horse,subtropical,mountains,vegetation,river,none
-kmph-v1,-1,horse,subtropical,water,none,none,none
-kmph-v1,-1,horse,subtropical,water,none,*,Road
-kmph-v1,-1,horse,subtropical,water,none,*,Footpath
-kmph-v1,-1,horse,subtropical,coastal water,none,none,none
-kmph-v1,-1,horse,subtropical,coastal water,none,*,Road
-kmph-v1,-1,horse,subtropical,coastal water,none,*,Footpath
-kmph-v1,-1,horse,subtropical,ocean,none,none,none
-kmph-v1,-1,horse,subtropical,ocean,none,*,Road
-kmph-v1,-1,horse,subtropical,ocean,none,*,Footpath
-kmph-v1,2.0,horse,subtropical,wetlands,none,none,none
-kmph-v1,1.9,horse,subtropical,wetlands,none,river,none
-kmph-v1,1.6,horse,subtropical,wetlands,vegetation,none,none
-kmph-v1,1.5,horse,subtropical,wetlands,vegetation,river,none
-kmph-v1,3.9,horse,desert,flat,none,none,none
-kmph-v1,3.7,horse,desert,flat,none,river,none
-kmph-v1,3.0,horse,desert,flat,vegetation,none,none
-kmph-v1,2.8,horse,desert,flat,vegetation,river,none
-kmph-v1,3.2,horse,desert,hills,none,none,none
-kmph-v1,4.0,horse,desert,hills,none,*,Footpath
-kmph-v1,3.1,horse,desert,hills,none,river,none
-kmph-v1,2.5,horse,desert,hills,vegetation,none,none
-kmph-v1,3.1,horse,desert,hills,vegetation,*,Footpath
-kmph-v1,2.4,horse,desert,hills,vegetation,river,none
-kmph-v1,1.9,horse,desert,mountains,none,none,none
-kmph-v1,1.8,horse,desert,mountains,none,river,none
-kmph-v1,1.5,horse,desert,mountains,vegetation,none,none
-kmph-v1,1.4,horse,desert,mountains,vegetation,river,none
-kmph-v1,-1,horse,desert,water,none,none,none
-kmph-v1,-1,horse,desert,water,none,*,Road
-kmph-v1,-1,horse,desert,water,none,*,Footpath
-kmph-v1,-1,horse,desert,coastal water,none,none,none
-kmph-v1,-1,horse,desert,coastal water,none,*,Road
-kmph-v1,-1,horse,desert,coastal water,none,*,Footpath
-kmph-v1,-1,horse,desert,ocean,none,none,none
-kmph-v1,-1,horse,desert,ocean,none,*,Road
-kmph-v1,-1,horse,desert,ocean,none,*,Footpath
-kmph-v1,1.8,horse,desert,wetlands,none,none,none
-kmph-v1,1.7,horse,desert,wetlands,none,river,none
-kmph-v1,1.4,horse,desert,wetlands,vegetation,none,none
-kmph-v1,1.3,horse,desert,wetlands,vegetation,river,none
-kmph-v1,4.2,horse,cold,flat,none,none,none
-kmph-v1,4.0,horse,cold,flat,none,river,none
-kmph-v1,3.2,horse,cold,flat,vegetation,none,none
-kmph-v1,3.1,horse,cold,flat,vegetation,river,none
-kmph-v1,3.5,horse,cold,hills,none,none,none
-kmph-v1,4.4,horse,cold,hills,none,*,Footpath
-kmph-v1,3.3,horse,cold,hills,none,river,none
-kmph-v1,2.7,horse,cold,hills,vegetation,none,none
-kmph-v1,3.4,horse,cold,hills,vegetation,*,Footpath
-kmph-v1,2.6,horse,cold,hills,vegetation,river,none
-kmph-v1,2.1,horse,cold,mountains,none,none,none
-kmph-v1,2.0,horse,cold,mountains,none,river,none
-kmph-v1,1.6,horse,cold,mountains,vegetation,none,none
-kmph-v1,1.5,horse,cold,mountains,vegetation,river,none
-kmph-v1,-1,horse,cold,water,none,none,none
-kmph-v1,-1,horse,cold,water,none,*,Road
-kmph-v1,-1,horse,cold,water,none,*,Footpath
-kmph-v1,-1,horse,cold,coastal water,none,none,none
-kmph-v1,-1,horse,cold,coastal water,none,*,Road
-kmph-v1,-1,horse,cold,coastal water,none,*,Footpath
-kmph-v1,-1,horse,cold,ocean,none,none,none
-kmph-v1,-1,horse,cold,ocean,none,*,Road
-kmph-v1,-1,horse,cold,ocean,none,*,Footpath
-kmph-v1,1.9,horse,cold,wetlands,none,none,none
-kmph-v1,1.8,horse,cold,wetlands,none,river,none
-kmph-v1,1.5,horse,cold,wetlands,vegetation,none,none
-kmph-v1,1.4,horse,cold,wetlands,vegetation,river,none
-kmph-v1,3.7,horse,freezing,flat,none,none,none
-kmph-v1,3.5,horse,freezing,flat,none,river,none
-kmph-v1,2.9,horse,freezing,flat,vegetation,none,none
-kmph-v1,2.7,horse,freezing,flat,vegetation,river,none
-kmph-v1,3.1,horse,freezing,hills,none,none,none
-kmph-v1,3.9,horse,freezing,hills,none,*,Footpath
-kmph-v1,2.9,horse,freezing,hills,none,river,none
-kmph-v1,2.4,horse,freezing,hills,vegetation,none,none
-kmph-v1,3.0,horse,freezing,hills,vegetation,*,Footpath
-kmph-v1,2.3,horse,freezing,hills,vegetation,river,none
-kmph-v1,1.9,horse,freezing,mountains,none,none,none
-kmph-v1,1.8,horse,freezing,mountains,none,river,none
-kmph-v1,1.4,horse,freezing,mountains,vegetation,none,none
-kmph-v1,1.4,horse,freezing,mountains,vegetation,river,none
-kmph-v1,-1,horse,freezing,water,none,none,none
-kmph-v1,-1,horse,freezing,water,none,*,Road
-kmph-v1,-1,horse,freezing,water,none,*,Footpath
-kmph-v1,-1,horse,freezing,coastal water,none,none,none
-kmph-v1,-1,horse,freezing,coastal water,none,*,Road
-kmph-v1,-1,horse,freezing,coastal water,none,*,Footpath
-kmph-v1,-1,horse,freezing,ocean,none,none,none
-kmph-v1,-1,horse,freezing,ocean,none,*,Road
-kmph-v1,-1,horse,freezing,ocean,none,*,Footpath
-kmph-v1,1.7,horse,freezing,wetlands,none,none,none
-kmph-v1,1.6,horse,freezing,wetlands,none,river,none
-kmph-v1,1.3,horse,freezing,wetlands,vegetation,none,none
-kmph-v1,1.2,horse,freezing,wetlands,vegetation,river,none
-kmph-v1,3.3,foot,temperate,flat,none,none,none
-kmph-v1,5.0,foot,*,flat,*,*,Road
-kmph-v1,4.1,foot,*,flat,*,*,Footpath
-kmph-v1,3.1,foot,temperate,flat,none,river,none
-kmph-v1,2.5,foot,temperate,flat,vegetation,none,none
-kmph-v1,2.4,foot,temperate,flat,vegetation,river,none
-kmph-v1,2.8,foot,temperate,hills,none,none,none
-kmph-v1,4.2,foot,*,hills,*,*,Road
-kmph-v1,3.4,foot,temperate,hills,none,*,Footpath
-kmph-v1,2.6,foot,temperate,hills,none,river,none
-kmph-v1,2.1,foot,temperate,hills,vegetation,none,none
-kmph-v1,2.6,foot,temperate,hills,vegetation,*,Footpath
-kmph-v1,2.0,foot,temperate,hills,vegetation,river,none
-kmph-v1,1.6,foot,temperate,mountains,none,none,none
-kmph-v1,2.5,foot,*,mountains,*,*,Road
-kmph-v1,2.1,foot,*,mountains,*,*,Footpath
-kmph-v1,1.6,foot,temperate,mountains,none,river,none
-kmph-v1,1.3,foot,temperate,mountains,vegetation,none,none
-kmph-v1,1.2,foot,temperate,mountains,vegetation,river,none
-kmph-v1,-1,foot,temperate,water,none,none,none
-kmph-v1,-1,foot,temperate,water,none,*,Road
-kmph-v1,-1,foot,temperate,water,none,*,Footpath
-kmph-v1,-1,foot,temperate,coastal water,none,none,none
-kmph-v1,-1,foot,temperate,coastal water,none,*,Road
-kmph-v1,-1,foot,temperate,coastal water,none,*,Footpath
-kmph-v1,-1,foot,temperate,ocean,none,none,none
-kmph-v1,-1,foot,temperate,ocean,none,*,Road
-kmph-v1,-1,foot,temperate,ocean,none,*,Footpath
-kmph-v1,1.5,foot,temperate,wetlands,none,none,none
-kmph-v1,2.3,foot,*,wetlands,*,*,Road
-kmph-v1,1.9,foot,*,wetlands,*,*,Footpath
-kmph-v1,1.4,foot,temperate,wetlands,none,river,none
-kmph-v1,1.2,foot,temperate,wetlands,vegetation,none,none
-kmph-v1,1.1,foot,temperate,wetlands,vegetation,river,none
-kmph-v1,3.1,foot,tropical,flat,none,none,none
-kmph-v1,3.0,foot,tropical,flat,none,river,none
-kmph-v1,2.4,foot,tropical,flat,vegetation,none,none
-kmph-v1,2.3,foot,tropical,flat,vegetation,river,none
-kmph-v1,2.6,foot,tropical,hills,none,none,none
-kmph-v1,3.3,foot,tropical,hills,none,*,Footpath
-kmph-v1,2.5,foot,tropical,hills,none,river,none
-kmph-v1,2.0,foot,tropical,hills,vegetation,none,none
-kmph-v1,2.5,foot,tropical,hills,vegetation,*,Footpath
-kmph-v1,1.9,foot,tropical,hills,vegetation,river,none
-kmph-v1,1.6,foot,tropical,mountains,none,none,none
-kmph-v1,1.5,foot,tropical,mountains,none,river,none
-kmph-v1,1.2,foot,tropical,mountains,vegetation,none,none
-kmph-v1,1.2,foot,tropical,mountains,vegetation,river,none
-kmph-v1,-1,foot,tropical,water,none,none,none
-kmph-v1,-1,foot,tropical,water,none,*,Road
-kmph-v1,-1,foot,tropical,water,none,*,Footpath
-kmph-v1,-1,foot,tropical,coastal water,none,none,none
-kmph-v1,-1,foot,tropical,coastal water,none,*,Road
-kmph-v1,-1,foot,tropical,coastal water,none,*,Footpath
-kmph-v1,-1,foot,tropical,ocean,none,none,none
-kmph-v1,-1,foot,tropical,ocean,none,*,Road
-kmph-v1,-1,foot,tropical,ocean,none,*,Footpath
-kmph-v1,1.4,foot,tropical,wetlands,none,none,none
-kmph-v1,1.4,foot,tropical,wetlands,none,river,none
-kmph-v1,1.1,foot,tropical,wetlands,vegetation,none,none
-kmph-v1,1.0,foot,tropical,wetlands,vegetation,river,none
-kmph-v1,3.2,foot,subtropical,flat,none,none,none
-kmph-v1,3.1,foot,subtropical,flat,none,river,none
-kmph-v1,2.5,foot,subtropical,flat,vegetation,none,none
-kmph-v1,2.3,foot,subtropical,flat,vegetation,river,none
-kmph-v1,2.7,foot,subtropical,hills,none,none,none
-kmph-v1,3.3,foot,subtropical,hills,none,*,Footpath
-kmph-v1,2.5,foot,subtropical,hills,none,river,none
-kmph-v1,2.1,foot,subtropical,hills,vegetation,none,none
-kmph-v1,2.6,foot,subtropical,hills,vegetation,*,Footpath
-kmph-v1,2.0,foot,subtropical,hills,vegetation,river,none
-kmph-v1,1.6,foot,subtropical,mountains,none,none,none
-kmph-v1,1.5,foot,subtropical,mountains,none,river,none
-kmph-v1,1.2,foot,subtropical,mountains,vegetation,none,none
-kmph-v1,1.2,foot,subtropical,mountains,vegetation,river,none
-kmph-v1,-1,foot,subtropical,water,none,none,none
-kmph-v1,-1,foot,subtropical,water,none,*,Road
-kmph-v1,-1,foot,subtropical,water,none,*,Footpath
-kmph-v1,-1,foot,subtropical,coastal water,none,none,none
-kmph-v1,-1,foot,subtropical,coastal water,none,*,Road
-kmph-v1,-1,foot,subtropical,coastal water,none,*,Footpath
-kmph-v1,-1,foot,subtropical,ocean,none,none,none
-kmph-v1,-1,foot,subtropical,ocean,none,*,Road
-kmph-v1,-1,foot,subtropical,ocean,none,*,Footpath
-kmph-v1,1.5,foot,subtropical,wetlands,none,none,none
-kmph-v1,1.4,foot,subtropical,wetlands,none,river,none
-kmph-v1,1.1,foot,subtropical,wetlands,vegetation,none,none
-kmph-v1,1.1,foot,subtropical,wetlands,vegetation,river,none
-kmph-v1,2.8,foot,desert,flat,none,none,none
-kmph-v1,2.6,foot,desert,flat,none,river,none
-kmph-v1,2.1,foot,desert,flat,vegetation,none,none
-kmph-v1,2.0,foot,desert,flat,vegetation,river,none
-kmph-v1,2.3,foot,desert,hills,none,none,none
-kmph-v1,2.9,foot,desert,hills,none,*,Footpath
-kmph-v1,2.2,foot,desert,hills,none,river,none
-kmph-v1,1.8,foot,desert,hills,vegetation,none,none
-kmph-v1,2.2,foot,desert,hills,vegetation,*,Footpath
-kmph-v1,1.7,foot,desert,hills,vegetation,river,none
-kmph-v1,1.4,foot,desert,mountains,none,none,none
-kmph-v1,1.3,foot,desert,mountains,none,river,none
-kmph-v1,1.1,foot,desert,mountains,vegetation,none,none
-kmph-v1,1.0,foot,desert,mountains,vegetation,river,none
-kmph-v1,-1,foot,desert,water,none,none,none
-kmph-v1,-1,foot,desert,water,none,*,Road
-kmph-v1,-1,foot,desert,water,none,*,Footpath
-kmph-v1,-1,foot,desert,coastal water,none,none,none
-kmph-v1,-1,foot,desert,coastal water,none,*,Road
-kmph-v1,-1,foot,desert,coastal water,none,*,Footpath
-kmph-v1,-1,foot,desert,ocean,none,none,none
-kmph-v1,-1,foot,desert,ocean,none,*,Road
-kmph-v1,-1,foot,desert,ocean,none,*,Footpath
-kmph-v1,1.2,foot,desert,wetlands,none,none,none
-kmph-v1,1.2,foot,desert,wetlands,none,river,none
-kmph-v1,1.0,foot,desert,wetlands,vegetation,none,none
-kmph-v1,0.9,foot,desert,wetlands,vegetation,river,none
-kmph-v1,3.0,foot,cold,flat,none,none,none
-kmph-v1,2.9,foot,cold,flat,none,river,none
-kmph-v1,2.3,foot,cold,flat,vegetation,none,none
-kmph-v1,2.2,foot,cold,flat,vegetation,river,none
-kmph-v1,2.5,foot,cold,hills,none,none,none
-kmph-v1,3.1,foot,cold,hills,none,*,Footpath
-kmph-v1,2.4,foot,cold,hills,none,river,none
-kmph-v1,1.9,foot,cold,hills,vegetation,none,none
-kmph-v1,2.4,foot,cold,hills,vegetation,*,Footpath
-kmph-v1,1.8,foot,cold,hills,vegetation,river,none
-kmph-v1,1.5,foot,cold,mountains,none,none,none
-kmph-v1,1.4,foot,cold,mountains,none,river,none
-kmph-v1,1.2,foot,cold,mountains,vegetation,none,none
-kmph-v1,1.1,foot,cold,mountains,vegetation,river,none
-kmph-v1,-1,foot,cold,water,none,none,none
-kmph-v1,-1,foot,cold,water,none,*,Road
-kmph-v1,-1,foot,cold,water,none,*,Footpath
-kmph-v1,-1,foot,cold,coastal water,none,none,none
-kmph-v1,-1,foot,cold,coastal water,none,*,Road
-kmph-v1,-1,foot,cold,coastal water,none,*,Footpath
-kmph-v1,-1,foot,cold,ocean,none,none,none
-kmph-v1,-1,foot,cold,ocean,none,*,Road
-kmph-v1,-1,foot,cold,ocean,none,*,Footpath
-kmph-v1,1.4,foot,cold,wetlands,none,none,none
-kmph-v1,1.3,foot,cold,wetlands,none,river,none
-kmph-v1,1.0,foot,cold,wetlands,vegetation,none,none
-kmph-v1,1.0,foot,cold,wetlands,vegetation,river,none
-kmph-v1,2.6,foot,freezing,flat,none,none,none
-kmph-v1,2.5,foot,freezing,flat,none,river,none
-kmph-v1,2.0,foot,freezing,flat,vegetation,none,none
-kmph-v1,1.9,foot,freezing,flat,vegetation,river,none
-kmph-v1,2.2,foot,freezing,hills,none,none,none
-kmph-v1,2.8,foot,freezing,hills,none,*,Footpath
-kmph-v1,2.1,foot,freezing,hills,none,river,none
-kmph-v1,1.7,foot,freezing,hills,vegetation,none,none
-kmph-v1,2.1,foot,freezing,hills,vegetation,*,Footpath
-kmph-v1,1.6,foot,freezing,hills,vegetation,river,none
-kmph-v1,1.3,foot,freezing,mountains,none,none,none
-kmph-v1,1.3,foot,freezing,mountains,none,river,none
-kmph-v1,1.0,foot,freezing,mountains,vegetation,none,none
-kmph-v1,1.0,foot,freezing,mountains,vegetation,river,none
-kmph-v1,-1,foot,freezing,water,none,none,none
-kmph-v1,-1,foot,freezing,water,none,*,Road
-kmph-v1,-1,foot,freezing,water,none,*,Footpath
-kmph-v1,-1,foot,freezing,coastal water,none,none,none
-kmph-v1,-1,foot,freezing,coastal water,none,*,Road
-kmph-v1,-1,foot,freezing,coastal water,none,*,Footpath
-kmph-v1,-1,foot,freezing,ocean,none,none,none
-kmph-v1,-1,foot,freezing,ocean,none,*,Road
-kmph-v1,-1,foot,freezing,ocean,none,*,Footpath
-kmph-v1,1.2,foot,freezing,wetlands,none,none,none
-kmph-v1,1.1,foot,freezing,wetlands,none,river,none
-kmph-v1,0.9,foot,freezing,wetlands,vegetation,none,none
-kmph-v1,0.9,foot,freezing,wetlands,vegetation,river,none
-kmph-v1,-1,river boat,*,flat,*,none,*
-kmph-v1,4.0,river boat,*,flat,*,river,*
-kmph-v1,-1,river boat,*,hills,*,none,*
-kmph-v1,-1,river boat,*,hills,*,*,*
-kmph-v1,2.8,river boat,*,hills,*,river,*
-kmph-v1,-1,river boat,*,mountains,*,none,*
-kmph-v1,-1,river boat,*,mountains,*,*,*
-kmph-v1,-1,river boat,*,mountains,*,river,*
-kmph-v1,6.5,river boat,*,water,*,none,*
-kmph-v1,7.4,river boat,*,coastal water,*,none,*
-kmph-v1,-1,river boat,*,ocean,*,none,*
-kmph-v1,-1,river boat,*,wetlands,*,none,*
-kmph-v1,-1,river boat,*,wetlands,*,*,*
-kmph-v1,1.6,river boat,*,wetlands,*,river,*
-kmph-v1,-1,ship,*,flat,*,none,*
-kmph-v1,-1,ship,*,flat,*,*,*
-kmph-v1,-1,ship,*,flat,*,river,*
-kmph-v1,-1,ship,*,hills,*,none,*
-kmph-v1,-1,ship,*,hills,*,*,*
-kmph-v1,-1,ship,*,hills,*,river,*
-kmph-v1,-1,ship,*,mountains,*,none,*
-kmph-v1,-1,ship,*,mountains,*,*,*
-kmph-v1,-1,ship,*,mountains,*,river,*
-kmph-v1,6.6,ship,*,water,*,none,*
-kmph-v1,8.1,ship,*,coastal water,*,none,*
-kmph-v1,9.0,ship,*,ocean,*,none,*
-kmph-v1,-1,ship,*,wetlands,*,none,*
-kmph-v1,-1,ship,*,wetlands,*,*,*
-kmph-v1,-1,ship,*,wetlands,*,river,*
-kmph-v1,2.6,caravan,temperate,flat,none,none,none
-kmph-v1,4.0,caravan,*,flat,*,*,Road
-kmph-v1,3.3,caravan,temperate,flat,none,*,Footpath
-kmph-v1,2.5,caravan,temperate,flat,none,river,none
-kmph-v1,2.0,caravan,temperate,flat,vegetation,none,none
-kmph-v1,2.5,caravan,temperate,flat,vegetation,*,Footpath
-kmph-v1,1.9,caravan,temperate,flat,vegetation,river,none
-kmph-v1,2.2,caravan,temperate,hills,none,none,none
-kmph-v1,3.3,caravan,*,hills,*,*,Road
-kmph-v1,2.7,caravan,temperate,hills,none,*,Footpath
-kmph-v1,2.1,caravan,temperate,hills,none,river,none
-kmph-v1,1.7,caravan,temperate,hills,vegetation,none,none
-kmph-v1,2.1,caravan,temperate,hills,vegetation,*,Footpath
-kmph-v1,1.6,caravan,temperate,hills,vegetation,river,none
-kmph-v1,1.3,caravan,temperate,mountains,none,none,none
-kmph-v1,2.0,caravan,*,mountains,*,*,Road
-kmph-v1,1.7,caravan,temperate,mountains,none,*,Footpath
-kmph-v1,1.3,caravan,temperate,mountains,none,river,none
-kmph-v1,1.0,caravan,temperate,mountains,vegetation,none,none
-kmph-v1,1.3,caravan,temperate,mountains,vegetation,*,Footpath
-kmph-v1,1.0,caravan,temperate,mountains,vegetation,river,none
-kmph-v1,-1,caravan,temperate,water,none,none,none
-kmph-v1,-1,caravan,temperate,water,none,*,Road
-kmph-v1,-1,caravan,temperate,water,none,*,Footpath
-kmph-v1,-1,caravan,*,coastal water,*,none,none
-kmph-v1,-1,caravan,temperate,coastal water,none,*,Road
-kmph-v1,-1,caravan,temperate,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,*,ocean,*,none,none
-kmph-v1,-1,caravan,temperate,ocean,none,*,Road
-kmph-v1,-1,caravan,temperate,ocean,none,*,Footpath
-kmph-v1,1.2,caravan,temperate,wetlands,none,none,none
-kmph-v1,1.8,caravan,*,wetlands,*,*,Road
-kmph-v1,1.5,caravan,temperate,wetlands,none,*,Footpath
-kmph-v1,1.1,caravan,temperate,wetlands,none,river,none
-kmph-v1,0.9,caravan,temperate,wetlands,vegetation,none,none
-kmph-v1,1.2,caravan,temperate,wetlands,vegetation,*,Footpath
-kmph-v1,0.9,caravan,temperate,wetlands,vegetation,river,none
-kmph-v1,2.5,caravan,tropical,flat,none,none,none
-kmph-v1,3.1,caravan,tropical,flat,none,*,Footpath
-kmph-v1,2.4,caravan,tropical,flat,none,river,none
-kmph-v1,1.9,caravan,tropical,flat,vegetation,none,none
-kmph-v1,2.4,caravan,tropical,flat,vegetation,*,Footpath
-kmph-v1,1.8,caravan,tropical,flat,vegetation,river,none
-kmph-v1,2.1,caravan,tropical,hills,none,none,none
-kmph-v1,2.6,caravan,tropical,hills,none,*,Footpath
-kmph-v1,2.0,caravan,tropical,hills,none,river,none
-kmph-v1,1.6,caravan,tropical,hills,vegetation,none,none
-kmph-v1,2.0,caravan,tropical,hills,vegetation,*,Footpath
-kmph-v1,1.5,caravan,tropical,hills,vegetation,river,none
-kmph-v1,1.3,caravan,tropical,mountains,none,none,none
-kmph-v1,1.6,caravan,tropical,mountains,none,*,Footpath
-kmph-v1,1.2,caravan,tropical,mountains,none,river,none
-kmph-v1,1.0,caravan,tropical,mountains,vegetation,none,none
-kmph-v1,1.2,caravan,tropical,mountains,vegetation,*,Footpath
-kmph-v1,0.9,caravan,tropical,mountains,vegetation,river,none
-kmph-v1,-1,caravan,tropical,water,none,none,none
-kmph-v1,-1,caravan,tropical,water,none,*,Road
-kmph-v1,-1,caravan,tropical,water,none,*,Footpath
-kmph-v1,-1,caravan,tropical,coastal water,none,*,Road
-kmph-v1,-1,caravan,tropical,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,tropical,ocean,none,*,Road
-kmph-v1,-1,caravan,tropical,ocean,none,*,Footpath
-kmph-v1,1.1,caravan,tropical,wetlands,none,none,none
-kmph-v1,1.4,caravan,tropical,wetlands,none,*,Footpath
-kmph-v1,1.1,caravan,tropical,wetlands,none,river,none
-kmph-v1,0.9,caravan,tropical,wetlands,vegetation,none,none
-kmph-v1,1.1,caravan,tropical,wetlands,vegetation,*,Footpath
-kmph-v1,0.8,caravan,tropical,wetlands,vegetation,river,none
-kmph-v1,2.6,caravan,subtropical,flat,none,none,none
-kmph-v1,3.2,caravan,subtropical,flat,none,*,Footpath
-kmph-v1,2.4,caravan,subtropical,flat,none,river,none
-kmph-v1,2.0,caravan,subtropical,flat,vegetation,none,none
-kmph-v1,2.5,caravan,subtropical,flat,vegetation,*,Footpath
-kmph-v1,1.9,caravan,subtropical,flat,vegetation,river,none
-kmph-v1,2.1,caravan,subtropical,hills,none,none,none
-kmph-v1,2.7,caravan,subtropical,hills,none,*,Footpath
-kmph-v1,2.0,caravan,subtropical,hills,none,river,none
-kmph-v1,1.6,caravan,subtropical,hills,vegetation,none,none
-kmph-v1,2.1,caravan,subtropical,hills,vegetation,*,Footpath
-kmph-v1,1.6,caravan,subtropical,hills,vegetation,river,none
-kmph-v1,1.3,caravan,subtropical,mountains,none,none,none
-kmph-v1,1.6,caravan,subtropical,mountains,none,*,Footpath
-kmph-v1,1.2,caravan,subtropical,mountains,none,river,none
-kmph-v1,1.0,caravan,subtropical,mountains,vegetation,none,none
-kmph-v1,1.2,caravan,subtropical,mountains,vegetation,*,Footpath
-kmph-v1,0.9,caravan,subtropical,mountains,vegetation,river,none
-kmph-v1,-1,caravan,subtropical,water,none,none,none
-kmph-v1,-1,caravan,subtropical,water,none,*,Road
-kmph-v1,-1,caravan,subtropical,water,none,*,Footpath
-kmph-v1,-1,caravan,subtropical,coastal water,none,*,Road
-kmph-v1,-1,caravan,subtropical,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,subtropical,ocean,none,*,Road
-kmph-v1,-1,caravan,subtropical,ocean,none,*,Footpath
-kmph-v1,1.2,caravan,subtropical,wetlands,none,none,none
-kmph-v1,1.5,caravan,subtropical,wetlands,none,*,Footpath
-kmph-v1,1.1,caravan,subtropical,wetlands,none,river,none
-kmph-v1,0.9,caravan,subtropical,wetlands,vegetation,none,none
-kmph-v1,1.1,caravan,subtropical,wetlands,vegetation,*,Footpath
-kmph-v1,0.9,caravan,subtropical,wetlands,vegetation,river,none
-kmph-v1,2.2,caravan,desert,flat,none,none,none
-kmph-v1,2.7,caravan,desert,flat,none,*,Footpath
-kmph-v1,2.1,caravan,desert,flat,none,river,none
-kmph-v1,1.7,caravan,desert,flat,vegetation,none,none
-kmph-v1,2.1,caravan,desert,flat,vegetation,*,Footpath
-kmph-v1,1.6,caravan,desert,flat,vegetation,river,none
-kmph-v1,1.8,caravan,desert,hills,none,none,none
-kmph-v1,2.3,caravan,desert,hills,none,*,Footpath
-kmph-v1,1.7,caravan,desert,hills,none,river,none
-kmph-v1,1.4,caravan,desert,hills,vegetation,none,none
-kmph-v1,1.8,caravan,desert,hills,vegetation,*,Footpath
-kmph-v1,1.3,caravan,desert,hills,vegetation,river,none
-kmph-v1,1.1,caravan,desert,mountains,none,none,none
-kmph-v1,1.4,caravan,desert,mountains,none,*,Footpath
-kmph-v1,1.0,caravan,desert,mountains,none,river,none
-kmph-v1,0.8,caravan,desert,mountains,vegetation,none,none
-kmph-v1,1.1,caravan,desert,mountains,vegetation,*,Footpath
-kmph-v1,0.8,caravan,desert,mountains,vegetation,river,none
-kmph-v1,-1,caravan,desert,water,none,none,none
-kmph-v1,-1,caravan,desert,water,none,*,Road
-kmph-v1,-1,caravan,desert,water,none,*,Footpath
-kmph-v1,-1,caravan,desert,coastal water,none,*,Road
-kmph-v1,-1,caravan,desert,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,desert,ocean,none,*,Road
-kmph-v1,-1,caravan,desert,ocean,none,*,Footpath
-kmph-v1,1.0,caravan,desert,wetlands,none,none,none
-kmph-v1,1.3,caravan,desert,wetlands,none,*,Footpath
-kmph-v1,1.0,caravan,desert,wetlands,none,river,none
-kmph-v1,0.8,caravan,desert,wetlands,vegetation,none,none
-kmph-v1,1.0,caravan,desert,wetlands,vegetation,*,Footpath
-kmph-v1,0.7,caravan,desert,wetlands,vegetation,river,none
-kmph-v1,2.4,caravan,cold,flat,none,none,none
-kmph-v1,3.0,caravan,cold,flat,none,*,Footpath
-kmph-v1,2.3,caravan,cold,flat,none,river,none
-kmph-v1,1.9,caravan,cold,flat,vegetation,none,none
-kmph-v1,2.3,caravan,cold,flat,vegetation,*,Footpath
-kmph-v1,1.8,caravan,cold,flat,vegetation,river,none
-kmph-v1,2.0,caravan,cold,hills,none,none,none
-kmph-v1,2.5,caravan,cold,hills,none,*,Footpath
-kmph-v1,1.9,caravan,cold,hills,none,river,none
-kmph-v1,1.5,caravan,cold,hills,vegetation,none,none
-kmph-v1,1.9,caravan,cold,hills,vegetation,*,Footpath
-kmph-v1,1.5,caravan,cold,hills,vegetation,river,none
-kmph-v1,1.2,caravan,cold,mountains,none,none,none
-kmph-v1,1.5,caravan,cold,mountains,none,*,Footpath
-kmph-v1,1.1,caravan,cold,mountains,none,river,none
-kmph-v1,0.9,caravan,cold,mountains,vegetation,none,none
-kmph-v1,1.2,caravan,cold,mountains,vegetation,*,Footpath
-kmph-v1,0.9,caravan,cold,mountains,vegetation,river,none
-kmph-v1,-1,caravan,cold,water,none,none,none
-kmph-v1,-1,caravan,cold,water,none,*,Road
-kmph-v1,-1,caravan,cold,water,none,*,Footpath
-kmph-v1,-1,caravan,cold,coastal water,none,*,Road
-kmph-v1,-1,caravan,cold,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,cold,ocean,none,*,Road
-kmph-v1,-1,caravan,cold,ocean,none,*,Footpath
-kmph-v1,1.1,caravan,cold,wetlands,none,none,none
-kmph-v1,1.4,caravan,cold,wetlands,none,*,Footpath
-kmph-v1,1.0,caravan,cold,wetlands,none,river,none
-kmph-v1,0.8,caravan,cold,wetlands,vegetation,none,none
-kmph-v1,1.0,caravan,cold,wetlands,vegetation,*,Footpath
-kmph-v1,0.8,caravan,cold,wetlands,vegetation,river,none
-kmph-v1,2.1,caravan,freezing,flat,none,none,none
-kmph-v1,2.6,caravan,freezing,flat,none,*,Footpath
-kmph-v1,2.0,caravan,freezing,flat,none,river,none
-kmph-v1,1.6,caravan,freezing,flat,vegetation,none,none
-kmph-v1,2.0,caravan,freezing,flat,vegetation,*,Footpath
-kmph-v1,1.5,caravan,freezing,flat,vegetation,river,none
-kmph-v1,1.8,caravan,freezing,hills,none,none,none
-kmph-v1,2.2,caravan,freezing,hills,none,*,Footpath
-kmph-v1,1.7,caravan,freezing,hills,none,river,none
-kmph-v1,1.4,caravan,freezing,hills,vegetation,none,none
-kmph-v1,1.7,caravan,freezing,hills,vegetation,*,Footpath
-kmph-v1,1.3,caravan,freezing,hills,vegetation,river,none
-kmph-v1,1.1,caravan,freezing,mountains,none,none,none
-kmph-v1,1.3,caravan,freezing,mountains,none,*,Footpath
-kmph-v1,1.0,caravan,freezing,mountains,none,river,none
-kmph-v1,0.8,caravan,freezing,mountains,vegetation,none,none
-kmph-v1,1.0,caravan,freezing,mountains,vegetation,*,Footpath
-kmph-v1,0.8,caravan,freezing,mountains,vegetation,river,none
-kmph-v1,-1,caravan,freezing,water,none,none,none
-kmph-v1,-1,caravan,freezing,water,none,*,Road
-kmph-v1,-1,caravan,freezing,water,none,*,Footpath
-kmph-v1,-1,caravan,freezing,coastal water,none,*,Road
-kmph-v1,-1,caravan,freezing,coastal water,none,*,Footpath
-kmph-v1,-1,caravan,freezing,ocean,none,*,Road
-kmph-v1,-1,caravan,freezing,ocean,none,*,Footpath
-kmph-v1,1.0,caravan,freezing,wetlands,none,none,none
-kmph-v1,1.2,caravan,freezing,wetlands,none,*,Footpath
-kmph-v1,0.9,caravan,freezing,wetlands,none,river,none
-kmph-v1,0.7,caravan,freezing,wetlands,vegetation,none,none
-kmph-v1,0.9,caravan,freezing,wetlands,vegetation,*,Footpath
-kmph-v1,0.7,caravan,freezing,wetlands,vegetation,river,none
-kmph-v1,3.0,army,temperate,flat,none,none,none
-kmph-v1,4.5,army,*,flat,*,*,Road
-kmph-v1,3.7,army,temperate,flat,none,*,Footpath
-kmph-v1,2.8,army,temperate,flat,none,river,none
-kmph-v1,2.3,army,temperate,flat,vegetation,none,none
-kmph-v1,2.9,army,temperate,flat,vegetation,*,Footpath
-kmph-v1,2.2,army,temperate,flat,vegetation,river,none
-kmph-v1,2.5,army,temperate,hills,none,none,none
-kmph-v1,3.8,army,*,hills,*,*,Road
-kmph-v1,3.1,army,temperate,hills,none,*,Footpath
-kmph-v1,2.4,army,temperate,hills,none,river,none
-kmph-v1,1.9,army,temperate,hills,vegetation,none,none
-kmph-v1,2.4,army,temperate,hills,vegetation,*,Footpath
-kmph-v1,1.8,army,temperate,hills,vegetation,river,none
-kmph-v1,1.5,army,temperate,mountains,none,none,none
-kmph-v1,2.3,army,*,mountains,*,*,Road
-kmph-v1,1.9,army,temperate,mountains,none,*,Footpath
-kmph-v1,1.4,army,temperate,mountains,none,river,none
-kmph-v1,1.1,army,temperate,mountains,vegetation,none,none
-kmph-v1,1.4,army,temperate,mountains,vegetation,*,Footpath
-kmph-v1,1.1,army,temperate,mountains,vegetation,river,none
-kmph-v1,-1,army,temperate,water,none,none,none
-kmph-v1,-1,army,temperate,water,none,*,Road
-kmph-v1,-1,army,temperate,water,none,*,Footpath
-kmph-v1,-1,army,*,coastal water,*,none,none
-kmph-v1,-1,army,temperate,coastal water,none,*,Road
-kmph-v1,-1,army,temperate,coastal water,none,*,Footpath
-kmph-v1,-1,army,*,ocean,*,none,none
-kmph-v1,-1,army,temperate,ocean,none,*,Road
-kmph-v1,-1,army,temperate,ocean,none,*,Footpath
-kmph-v1,1.4,army,temperate,wetlands,none,none,none
-kmph-v1,2.1,army,*,wetlands,*,*,Road
-kmph-v1,1.7,army,temperate,wetlands,none,*,Footpath
-kmph-v1,1.3,army,temperate,wetlands,none,river,none
-kmph-v1,1.0,army,temperate,wetlands,vegetation,none,none
-kmph-v1,1.3,army,temperate,wetlands,vegetation,*,Footpath
-kmph-v1,1.0,army,temperate,wetlands,vegetation,river,none
-kmph-v1,2.8,army,tropical,flat,none,none,none
-kmph-v1,3.5,army,tropical,flat,none,*,Footpath
-kmph-v1,2.7,army,tropical,flat,none,river,none
-kmph-v1,2.2,army,tropical,flat,vegetation,none,none
-kmph-v1,2.7,army,tropical,flat,vegetation,*,Footpath
-kmph-v1,2.1,army,tropical,flat,vegetation,river,none
-kmph-v1,2.4,army,tropical,hills,none,none,none
-kmph-v1,3.0,army,tropical,hills,none,*,Footpath
-kmph-v1,2.2,army,tropical,hills,none,river,none
-kmph-v1,1.8,army,tropical,hills,vegetation,none,none
-kmph-v1,2.3,army,tropical,hills,vegetation,*,Footpath
-kmph-v1,1.7,army,tropical,hills,vegetation,river,none
-kmph-v1,1.4,army,tropical,mountains,none,none,none
-kmph-v1,1.8,army,tropical,mountains,none,*,Footpath
-kmph-v1,1.3,army,tropical,mountains,none,river,none
-kmph-v1,1.1,army,tropical,mountains,vegetation,none,none
-kmph-v1,1.4,army,tropical,mountains,vegetation,*,Footpath
-kmph-v1,1.0,army,tropical,mountains,vegetation,river,none
-kmph-v1,-1,army,tropical,water,none,none,none
-kmph-v1,-1,army,tropical,water,none,*,Road
-kmph-v1,-1,army,tropical,water,none,*,Footpath
-kmph-v1,-1,army,tropical,coastal water,none,*,Road
-kmph-v1,-1,army,tropical,coastal water,none,*,Footpath
-kmph-v1,-1,army,tropical,ocean,none,*,Road
-kmph-v1,-1,army,tropical,ocean,none,*,Footpath
-kmph-v1,1.3,army,tropical,wetlands,none,none,none
-kmph-v1,1.6,army,tropical,wetlands,none,*,Footpath
-kmph-v1,1.2,army,tropical,wetlands,none,river,none
-kmph-v1,1.0,army,tropical,wetlands,vegetation,none,none
-kmph-v1,1.2,army,tropical,wetlands,vegetation,*,Footpath
-kmph-v1,0.9,army,tropical,wetlands,vegetation,river,none
-kmph-v1,2.9,army,subtropical,flat,none,none,none
-kmph-v1,3.6,army,subtropical,flat,none,*,Footpath
-kmph-v1,2.8,army,subtropical,flat,none,river,none
-kmph-v1,2.2,army,subtropical,flat,vegetation,none,none
-kmph-v1,2.8,army,subtropical,flat,vegetation,*,Footpath
-kmph-v1,2.1,army,subtropical,flat,vegetation,river,none
-kmph-v1,2.4,army,subtropical,hills,none,none,none
-kmph-v1,3.0,army,subtropical,hills,none,*,Footpath
-kmph-v1,2.3,army,subtropical,hills,none,river,none
-kmph-v1,1.9,army,subtropical,hills,vegetation,none,none
-kmph-v1,2.3,army,subtropical,hills,vegetation,*,Footpath
-kmph-v1,1.8,army,subtropical,hills,vegetation,river,none
-kmph-v1,1.4,army,subtropical,mountains,none,none,none
-kmph-v1,1.8,army,subtropical,mountains,none,*,Footpath
-kmph-v1,1.4,army,subtropical,mountains,none,river,none
-kmph-v1,1.1,army,subtropical,mountains,vegetation,none,none
-kmph-v1,1.4,army,subtropical,mountains,vegetation,*,Footpath
-kmph-v1,1.1,army,subtropical,mountains,vegetation,river,none
-kmph-v1,-1,army,subtropical,water,none,none,none
-kmph-v1,-1,army,subtropical,water,none,*,Road
-kmph-v1,-1,army,subtropical,water,none,*,Footpath
-kmph-v1,-1,army,subtropical,coastal water,none,*,Road
-kmph-v1,-1,army,subtropical,coastal water,none,*,Footpath
-kmph-v1,-1,army,subtropical,ocean,none,*,Road
-kmph-v1,-1,army,subtropical,ocean,none,*,Footpath
-kmph-v1,1.3,army,subtropical,wetlands,none,none,none
-kmph-v1,1.6,army,subtropical,wetlands,none,*,Footpath
-kmph-v1,1.3,army,subtropical,wetlands,none,river,none
-kmph-v1,1.0,army,subtropical,wetlands,vegetation,none,none
-kmph-v1,1.3,army,subtropical,wetlands,vegetation,*,Footpath
-kmph-v1,1.0,army,subtropical,wetlands,vegetation,river,none
-kmph-v1,2.5,army,desert,flat,none,none,none
-kmph-v1,3.1,army,desert,flat,none,*,Footpath
-kmph-v1,2.4,army,desert,flat,none,river,none
-kmph-v1,1.9,army,desert,flat,vegetation,none,none
-kmph-v1,2.4,army,desert,flat,vegetation,*,Footpath
-kmph-v1,1.8,army,desert,flat,vegetation,river,none
-kmph-v1,2.1,army,desert,hills,none,none,none
-kmph-v1,2.6,army,desert,hills,none,*,Footpath
-kmph-v1,2.0,army,desert,hills,none,river,none
-kmph-v1,1.6,army,desert,hills,vegetation,none,none
-kmph-v1,2.0,army,desert,hills,vegetation,*,Footpath
-kmph-v1,1.5,army,desert,hills,vegetation,river,none
-kmph-v1,1.2,army,desert,mountains,none,none,none
-kmph-v1,1.5,army,desert,mountains,none,*,Footpath
-kmph-v1,1.2,army,desert,mountains,none,river,none
-kmph-v1,1.0,army,desert,mountains,vegetation,none,none
-kmph-v1,1.2,army,desert,mountains,vegetation,*,Footpath
-kmph-v1,0.9,army,desert,mountains,vegetation,river,none
-kmph-v1,-1,army,desert,water,none,none,none
-kmph-v1,-1,army,desert,water,none,*,Road
-kmph-v1,-1,army,desert,water,none,*,Footpath
-kmph-v1,-1,army,desert,coastal water,none,*,Road
-kmph-v1,-1,army,desert,coastal water,none,*,Footpath
-kmph-v1,-1,army,desert,ocean,none,*,Road
-kmph-v1,-1,army,desert,ocean,none,*,Footpath
-kmph-v1,1.1,army,desert,wetlands,none,none,none
-kmph-v1,1.4,army,desert,wetlands,none,*,Footpath
-kmph-v1,1.1,army,desert,wetlands,none,river,none
-kmph-v1,0.9,army,desert,wetlands,vegetation,none,none
-kmph-v1,1.1,army,desert,wetlands,vegetation,*,Footpath
-kmph-v1,0.8,army,desert,wetlands,vegetation,river,none
-kmph-v1,2.7,army,cold,flat,none,none,none
-kmph-v1,3.4,army,cold,flat,none,*,Footpath
-kmph-v1,2.6,army,cold,flat,none,river,none
-kmph-v1,2.1,army,cold,flat,vegetation,none,none
-kmph-v1,2.6,army,cold,flat,vegetation,*,Footpath
-kmph-v1,2.0,army,cold,flat,vegetation,river,none
-kmph-v1,2.3,army,cold,hills,none,none,none
-kmph-v1,2.8,army,cold,hills,none,*,Footpath
-kmph-v1,2.1,army,cold,hills,none,river,none
-kmph-v1,1.7,army,cold,hills,vegetation,none,none
-kmph-v1,2.2,army,cold,hills,vegetation,*,Footpath
-kmph-v1,1.7,army,cold,hills,vegetation,river,none
-kmph-v1,1.4,army,cold,mountains,none,none,none
-kmph-v1,1.7,army,cold,mountains,none,*,Footpath
-kmph-v1,1.3,army,cold,mountains,none,river,none
-kmph-v1,1.0,army,cold,mountains,vegetation,none,none
-kmph-v1,1.3,army,cold,mountains,vegetation,*,Footpath
-kmph-v1,1.0,army,cold,mountains,vegetation,river,none
-kmph-v1,-1,army,cold,water,none,none,none
-kmph-v1,-1,army,cold,water,none,*,Road
-kmph-v1,-1,army,cold,water,none,*,Footpath
-kmph-v1,-1,army,cold,coastal water,none,*,Road
-kmph-v1,-1,army,cold,coastal water,none,*,Footpath
-kmph-v1,-1,army,cold,ocean,none,*,Road
-kmph-v1,-1,army,cold,ocean,none,*,Footpath
-kmph-v1,1.2,army,cold,wetlands,none,none,none
-kmph-v1,1.5,army,cold,wetlands,none,*,Footpath
-kmph-v1,1.2,army,cold,wetlands,none,river,none
-kmph-v1,0.9,army,cold,wetlands,vegetation,none,none
-kmph-v1,1.2,army,cold,wetlands,vegetation,*,Footpath
-kmph-v1,0.9,army,cold,wetlands,vegetation,river,none
-kmph-v1,2.4,army,freezing,flat,none,none,none
-kmph-v1,3.0,army,freezing,flat,none,*,Footpath
-kmph-v1,2.3,army,freezing,flat,none,river,none
-kmph-v1,1.8,army,freezing,flat,vegetation,none,none
-kmph-v1,2.3,army,freezing,flat,vegetation,*,Footpath
-kmph-v1,1.7,army,freezing,flat,vegetation,river,none
-kmph-v1,2.0,army,freezing,hills,none,none,none
-kmph-v1,2.5,army,freezing,hills,none,*,Footpath
-kmph-v1,1.9,army,freezing,hills,none,river,none
-kmph-v1,1.5,army,freezing,hills,vegetation,none,none
-kmph-v1,1.9,army,freezing,hills,vegetation,*,Footpath
-kmph-v1,1.5,army,freezing,hills,vegetation,river,none
-kmph-v1,1.2,army,freezing,mountains,none,none,none
-kmph-v1,1.5,army,freezing,mountains,none,*,Footpath
-kmph-v1,1.1,army,freezing,mountains,none,river,none
-kmph-v1,0.9,army,freezing,mountains,vegetation,none,none
-kmph-v1,1.1,army,freezing,mountains,vegetation,*,Footpath
-kmph-v1,0.9,army,freezing,mountains,vegetation,river,none
-kmph-v1,-1,army,freezing,water,none,none,none
-kmph-v1,-1,army,freezing,water,none,*,Road
-kmph-v1,-1,army,freezing,water,none,*,Footpath
-kmph-v1,-1,army,freezing,coastal water,none,*,Road
-kmph-v1,-1,army,freezing,coastal water,none,*,Footpath
-kmph-v1,-1,army,freezing,ocean,none,*,Road
-kmph-v1,-1,army,freezing,ocean,none,*,Footpath
-kmph-v1,1.1,army,freezing,wetlands,none,none,none
-kmph-v1,1.4,army,freezing,wetlands,none,*,Footpath
-kmph-v1,1.0,army,freezing,wetlands,none,river,none
-kmph-v1,0.8,army,freezing,wetlands,vegetation,none,none
-kmph-v1,1.0,army,freezing,wetlands,vegetation,*,Footpath
-kmph-v1,0.8,army,freezing,wetlands,vegetation,river,none
+kmph,Mode of transportation,Climate,Terrain,Vegetation,River,Infrastructure,schema
+4.6,horse,temperate,flat,none,none,none,kmph-v1
+7.0,horse,*,flat,*,*,Road,kmph-v1
+5.8,horse,*,flat,*,*,Footpath,kmph-v1
+4.4,horse,temperate,flat,none,river,none,kmph-v1
+3.6,horse,temperate,flat,vegetation,none,none,kmph-v1
+3.4,horse,temperate,flat,vegetation,river,none,kmph-v1
+3.9,horse,temperate,hills,none,none,none,kmph-v1
+5.9,horse,*,hills,*,*,Road,kmph-v1
+4.8,horse,temperate,hills,none,*,Footpath,kmph-v1
+3.7,horse,temperate,hills,none,river,none,kmph-v1
+3.0,horse,temperate,hills,vegetation,none,none,kmph-v1
+3.7,horse,temperate,hills,vegetation,*,Footpath,kmph-v1
+2.8,horse,temperate,hills,vegetation,river,none,kmph-v1
+2.3,horse,temperate,mountains,none,none,none,kmph-v1
+3.5,horse,*,mountains,*,*,Road,kmph-v1
+2.9,horse,*,mountains,*,*,Footpath,kmph-v1
+2.2,horse,temperate,mountains,none,river,none,kmph-v1
+1.8,horse,temperate,mountains,vegetation,none,none,kmph-v1
+1.7,horse,temperate,mountains,vegetation,river,none,kmph-v1
+-1,horse,temperate,water,none,none,none,kmph-v1
+-1,horse,temperate,water,none,*,Road,kmph-v1
+-1,horse,temperate,water,none,*,Footpath,kmph-v1
+-1,horse,temperate,coastal water,none,none,none,kmph-v1
+-1,horse,temperate,coastal water,none,*,Road,kmph-v1
+-1,horse,temperate,coastal water,none,*,Footpath,kmph-v1
+-1,horse,temperate,ocean,none,none,none,kmph-v1
+-1,horse,temperate,ocean,none,*,Road,kmph-v1
+-1,horse,temperate,ocean,none,*,Footpath,kmph-v1
+2.1,horse,temperate,wetlands,none,none,none,kmph-v1
+3.2,horse,*,wetlands,*,*,Road,kmph-v1
+2.6,horse,*,wetlands,*,*,Footpath,kmph-v1
+2.0,horse,temperate,wetlands,none,river,none,kmph-v1
+1.6,horse,temperate,wetlands,vegetation,none,none,kmph-v1
+1.5,horse,temperate,wetlands,vegetation,river,none,kmph-v1
+4.4,horse,tropical,flat,none,none,none,kmph-v1
+4.2,horse,tropical,flat,none,river,none,kmph-v1
+3.4,horse,tropical,flat,vegetation,none,none,kmph-v1
+3.2,horse,tropical,flat,vegetation,river,none,kmph-v1
+3.7,horse,tropical,hills,none,none,none,kmph-v1
+4.6,horse,tropical,hills,none,*,Footpath,kmph-v1
+3.5,horse,tropical,hills,none,river,none,kmph-v1
+2.8,horse,tropical,hills,vegetation,none,none,kmph-v1
+3.5,horse,tropical,hills,vegetation,*,Footpath,kmph-v1
+2.7,horse,tropical,hills,vegetation,river,none,kmph-v1
+2.2,horse,tropical,mountains,none,none,none,kmph-v1
+2.1,horse,tropical,mountains,none,river,none,kmph-v1
+1.7,horse,tropical,mountains,vegetation,none,none,kmph-v1
+1.6,horse,tropical,mountains,vegetation,river,none,kmph-v1
+-1,horse,tropical,water,none,none,none,kmph-v1
+-1,horse,tropical,water,none,*,Road,kmph-v1
+-1,horse,tropical,water,none,*,Footpath,kmph-v1
+-1,horse,tropical,coastal water,none,none,none,kmph-v1
+-1,horse,tropical,coastal water,none,*,Road,kmph-v1
+-1,horse,tropical,coastal water,none,*,Footpath,kmph-v1
+-1,horse,tropical,ocean,none,none,none,kmph-v1
+-1,horse,tropical,ocean,none,*,Road,kmph-v1
+-1,horse,tropical,ocean,none,*,Footpath,kmph-v1
+2.0,horse,tropical,wetlands,none,none,none,kmph-v1
+1.9,horse,tropical,wetlands,none,river,none,kmph-v1
+1.5,horse,tropical,wetlands,vegetation,none,none,kmph-v1
+1.5,horse,tropical,wetlands,vegetation,river,none,kmph-v1
+4.5,horse,subtropical,flat,none,none,none,kmph-v1
+4.3,horse,subtropical,flat,none,river,none,kmph-v1
+3.5,horse,subtropical,flat,vegetation,none,none,kmph-v1
+3.3,horse,subtropical,flat,vegetation,river,none,kmph-v1
+3.7,horse,subtropical,hills,none,none,none,kmph-v1
+4.7,horse,subtropical,hills,none,*,Footpath,kmph-v1
+3.6,horse,subtropical,hills,none,river,none,kmph-v1
+2.9,horse,subtropical,hills,vegetation,none,none,kmph-v1
+3.6,horse,subtropical,hills,vegetation,*,Footpath,kmph-v1
+2.8,horse,subtropical,hills,vegetation,river,none,kmph-v1
+2.2,horse,subtropical,mountains,none,none,none,kmph-v1
+2.1,horse,subtropical,mountains,none,river,none,kmph-v1
+1.7,horse,subtropical,mountains,vegetation,none,none,kmph-v1
+1.6,horse,subtropical,mountains,vegetation,river,none,kmph-v1
+-1,horse,subtropical,water,none,none,none,kmph-v1
+-1,horse,subtropical,water,none,*,Road,kmph-v1
+-1,horse,subtropical,water,none,*,Footpath,kmph-v1
+-1,horse,subtropical,coastal water,none,none,none,kmph-v1
+-1,horse,subtropical,coastal water,none,*,Road,kmph-v1
+-1,horse,subtropical,coastal water,none,*,Footpath,kmph-v1
+-1,horse,subtropical,ocean,none,none,none,kmph-v1
+-1,horse,subtropical,ocean,none,*,Road,kmph-v1
+-1,horse,subtropical,ocean,none,*,Footpath,kmph-v1
+2.0,horse,subtropical,wetlands,none,none,none,kmph-v1
+1.9,horse,subtropical,wetlands,none,river,none,kmph-v1
+1.6,horse,subtropical,wetlands,vegetation,none,none,kmph-v1
+1.5,horse,subtropical,wetlands,vegetation,river,none,kmph-v1
+3.9,horse,desert,flat,none,none,none,kmph-v1
+3.7,horse,desert,flat,none,river,none,kmph-v1
+3.0,horse,desert,flat,vegetation,none,none,kmph-v1
+2.8,horse,desert,flat,vegetation,river,none,kmph-v1
+3.2,horse,desert,hills,none,none,none,kmph-v1
+4.0,horse,desert,hills,none,*,Footpath,kmph-v1
+3.1,horse,desert,hills,none,river,none,kmph-v1
+2.5,horse,desert,hills,vegetation,none,none,kmph-v1
+3.1,horse,desert,hills,vegetation,*,Footpath,kmph-v1
+2.4,horse,desert,hills,vegetation,river,none,kmph-v1
+1.9,horse,desert,mountains,none,none,none,kmph-v1
+1.8,horse,desert,mountains,none,river,none,kmph-v1
+1.5,horse,desert,mountains,vegetation,none,none,kmph-v1
+1.4,horse,desert,mountains,vegetation,river,none,kmph-v1
+-1,horse,desert,water,none,none,none,kmph-v1
+-1,horse,desert,water,none,*,Road,kmph-v1
+-1,horse,desert,water,none,*,Footpath,kmph-v1
+-1,horse,desert,coastal water,none,none,none,kmph-v1
+-1,horse,desert,coastal water,none,*,Road,kmph-v1
+-1,horse,desert,coastal water,none,*,Footpath,kmph-v1
+-1,horse,desert,ocean,none,none,none,kmph-v1
+-1,horse,desert,ocean,none,*,Road,kmph-v1
+-1,horse,desert,ocean,none,*,Footpath,kmph-v1
+1.8,horse,desert,wetlands,none,none,none,kmph-v1
+1.7,horse,desert,wetlands,none,river,none,kmph-v1
+1.4,horse,desert,wetlands,vegetation,none,none,kmph-v1
+1.3,horse,desert,wetlands,vegetation,river,none,kmph-v1
+4.2,horse,cold,flat,none,none,none,kmph-v1
+4.0,horse,cold,flat,none,river,none,kmph-v1
+3.2,horse,cold,flat,vegetation,none,none,kmph-v1
+3.1,horse,cold,flat,vegetation,river,none,kmph-v1
+3.5,horse,cold,hills,none,none,none,kmph-v1
+4.4,horse,cold,hills,none,*,Footpath,kmph-v1
+3.3,horse,cold,hills,none,river,none,kmph-v1
+2.7,horse,cold,hills,vegetation,none,none,kmph-v1
+3.4,horse,cold,hills,vegetation,*,Footpath,kmph-v1
+2.6,horse,cold,hills,vegetation,river,none,kmph-v1
+2.1,horse,cold,mountains,none,none,none,kmph-v1
+2.0,horse,cold,mountains,none,river,none,kmph-v1
+1.6,horse,cold,mountains,vegetation,none,none,kmph-v1
+1.5,horse,cold,mountains,vegetation,river,none,kmph-v1
+-1,horse,cold,water,none,none,none,kmph-v1
+-1,horse,cold,water,none,*,Road,kmph-v1
+-1,horse,cold,water,none,*,Footpath,kmph-v1
+-1,horse,cold,coastal water,none,none,none,kmph-v1
+-1,horse,cold,coastal water,none,*,Road,kmph-v1
+-1,horse,cold,coastal water,none,*,Footpath,kmph-v1
+-1,horse,cold,ocean,none,none,none,kmph-v1
+-1,horse,cold,ocean,none,*,Road,kmph-v1
+-1,horse,cold,ocean,none,*,Footpath,kmph-v1
+1.9,horse,cold,wetlands,none,none,none,kmph-v1
+1.8,horse,cold,wetlands,none,river,none,kmph-v1
+1.5,horse,cold,wetlands,vegetation,none,none,kmph-v1
+1.4,horse,cold,wetlands,vegetation,river,none,kmph-v1
+3.7,horse,freezing,flat,none,none,none,kmph-v1
+3.5,horse,freezing,flat,none,river,none,kmph-v1
+2.9,horse,freezing,flat,vegetation,none,none,kmph-v1
+2.7,horse,freezing,flat,vegetation,river,none,kmph-v1
+3.1,horse,freezing,hills,none,none,none,kmph-v1
+3.9,horse,freezing,hills,none,*,Footpath,kmph-v1
+2.9,horse,freezing,hills,none,river,none,kmph-v1
+2.4,horse,freezing,hills,vegetation,none,none,kmph-v1
+3.0,horse,freezing,hills,vegetation,*,Footpath,kmph-v1
+2.3,horse,freezing,hills,vegetation,river,none,kmph-v1
+1.9,horse,freezing,mountains,none,none,none,kmph-v1
+1.8,horse,freezing,mountains,none,river,none,kmph-v1
+1.4,horse,freezing,mountains,vegetation,none,none,kmph-v1
+1.4,horse,freezing,mountains,vegetation,river,none,kmph-v1
+-1,horse,freezing,water,none,none,none,kmph-v1
+-1,horse,freezing,water,none,*,Road,kmph-v1
+-1,horse,freezing,water,none,*,Footpath,kmph-v1
+-1,horse,freezing,coastal water,none,none,none,kmph-v1
+-1,horse,freezing,coastal water,none,*,Road,kmph-v1
+-1,horse,freezing,coastal water,none,*,Footpath,kmph-v1
+-1,horse,freezing,ocean,none,none,none,kmph-v1
+-1,horse,freezing,ocean,none,*,Road,kmph-v1
+-1,horse,freezing,ocean,none,*,Footpath,kmph-v1
+1.7,horse,freezing,wetlands,none,none,none,kmph-v1
+1.6,horse,freezing,wetlands,none,river,none,kmph-v1
+1.3,horse,freezing,wetlands,vegetation,none,none,kmph-v1
+1.2,horse,freezing,wetlands,vegetation,river,none,kmph-v1
+3.3,foot,temperate,flat,none,none,none,kmph-v1
+5.0,foot,*,flat,*,*,Road,kmph-v1
+4.1,foot,*,flat,*,*,Footpath,kmph-v1
+3.1,foot,temperate,flat,none,river,none,kmph-v1
+2.5,foot,temperate,flat,vegetation,none,none,kmph-v1
+2.4,foot,temperate,flat,vegetation,river,none,kmph-v1
+2.8,foot,temperate,hills,none,none,none,kmph-v1
+4.2,foot,*,hills,*,*,Road,kmph-v1
+3.4,foot,temperate,hills,none,*,Footpath,kmph-v1
+2.6,foot,temperate,hills,none,river,none,kmph-v1
+2.1,foot,temperate,hills,vegetation,none,none,kmph-v1
+2.6,foot,temperate,hills,vegetation,*,Footpath,kmph-v1
+2.0,foot,temperate,hills,vegetation,river,none,kmph-v1
+1.6,foot,temperate,mountains,none,none,none,kmph-v1
+2.5,foot,*,mountains,*,*,Road,kmph-v1
+2.1,foot,*,mountains,*,*,Footpath,kmph-v1
+1.6,foot,temperate,mountains,none,river,none,kmph-v1
+1.3,foot,temperate,mountains,vegetation,none,none,kmph-v1
+1.2,foot,temperate,mountains,vegetation,river,none,kmph-v1
+-1,foot,temperate,water,none,none,none,kmph-v1
+-1,foot,temperate,water,none,*,Road,kmph-v1
+-1,foot,temperate,water,none,*,Footpath,kmph-v1
+-1,foot,temperate,coastal water,none,none,none,kmph-v1
+-1,foot,temperate,coastal water,none,*,Road,kmph-v1
+-1,foot,temperate,coastal water,none,*,Footpath,kmph-v1
+-1,foot,temperate,ocean,none,none,none,kmph-v1
+-1,foot,temperate,ocean,none,*,Road,kmph-v1
+-1,foot,temperate,ocean,none,*,Footpath,kmph-v1
+1.5,foot,temperate,wetlands,none,none,none,kmph-v1
+2.3,foot,*,wetlands,*,*,Road,kmph-v1
+1.9,foot,*,wetlands,*,*,Footpath,kmph-v1
+1.4,foot,temperate,wetlands,none,river,none,kmph-v1
+1.2,foot,temperate,wetlands,vegetation,none,none,kmph-v1
+1.1,foot,temperate,wetlands,vegetation,river,none,kmph-v1
+3.1,foot,tropical,flat,none,none,none,kmph-v1
+3.0,foot,tropical,flat,none,river,none,kmph-v1
+2.4,foot,tropical,flat,vegetation,none,none,kmph-v1
+2.3,foot,tropical,flat,vegetation,river,none,kmph-v1
+2.6,foot,tropical,hills,none,none,none,kmph-v1
+3.3,foot,tropical,hills,none,*,Footpath,kmph-v1
+2.5,foot,tropical,hills,none,river,none,kmph-v1
+2.0,foot,tropical,hills,vegetation,none,none,kmph-v1
+2.5,foot,tropical,hills,vegetation,*,Footpath,kmph-v1
+1.9,foot,tropical,hills,vegetation,river,none,kmph-v1
+1.6,foot,tropical,mountains,none,none,none,kmph-v1
+1.5,foot,tropical,mountains,none,river,none,kmph-v1
+1.2,foot,tropical,mountains,vegetation,none,none,kmph-v1
+1.2,foot,tropical,mountains,vegetation,river,none,kmph-v1
+-1,foot,tropical,water,none,none,none,kmph-v1
+-1,foot,tropical,water,none,*,Road,kmph-v1
+-1,foot,tropical,water,none,*,Footpath,kmph-v1
+-1,foot,tropical,coastal water,none,none,none,kmph-v1
+-1,foot,tropical,coastal water,none,*,Road,kmph-v1
+-1,foot,tropical,coastal water,none,*,Footpath,kmph-v1
+-1,foot,tropical,ocean,none,none,none,kmph-v1
+-1,foot,tropical,ocean,none,*,Road,kmph-v1
+-1,foot,tropical,ocean,none,*,Footpath,kmph-v1
+1.4,foot,tropical,wetlands,none,none,none,kmph-v1
+1.4,foot,tropical,wetlands,none,river,none,kmph-v1
+1.1,foot,tropical,wetlands,vegetation,none,none,kmph-v1
+1.0,foot,tropical,wetlands,vegetation,river,none,kmph-v1
+3.2,foot,subtropical,flat,none,none,none,kmph-v1
+3.1,foot,subtropical,flat,none,river,none,kmph-v1
+2.5,foot,subtropical,flat,vegetation,none,none,kmph-v1
+2.3,foot,subtropical,flat,vegetation,river,none,kmph-v1
+2.7,foot,subtropical,hills,none,none,none,kmph-v1
+3.3,foot,subtropical,hills,none,*,Footpath,kmph-v1
+2.5,foot,subtropical,hills,none,river,none,kmph-v1
+2.1,foot,subtropical,hills,vegetation,none,none,kmph-v1
+2.6,foot,subtropical,hills,vegetation,*,Footpath,kmph-v1
+2.0,foot,subtropical,hills,vegetation,river,none,kmph-v1
+1.6,foot,subtropical,mountains,none,none,none,kmph-v1
+1.5,foot,subtropical,mountains,none,river,none,kmph-v1
+1.2,foot,subtropical,mountains,vegetation,none,none,kmph-v1
+1.2,foot,subtropical,mountains,vegetation,river,none,kmph-v1
+-1,foot,subtropical,water,none,none,none,kmph-v1
+-1,foot,subtropical,water,none,*,Road,kmph-v1
+-1,foot,subtropical,water,none,*,Footpath,kmph-v1
+-1,foot,subtropical,coastal water,none,none,none,kmph-v1
+-1,foot,subtropical,coastal water,none,*,Road,kmph-v1
+-1,foot,subtropical,coastal water,none,*,Footpath,kmph-v1
+-1,foot,subtropical,ocean,none,none,none,kmph-v1
+-1,foot,subtropical,ocean,none,*,Road,kmph-v1
+-1,foot,subtropical,ocean,none,*,Footpath,kmph-v1
+1.5,foot,subtropical,wetlands,none,none,none,kmph-v1
+1.4,foot,subtropical,wetlands,none,river,none,kmph-v1
+1.1,foot,subtropical,wetlands,vegetation,none,none,kmph-v1
+1.1,foot,subtropical,wetlands,vegetation,river,none,kmph-v1
+2.8,foot,desert,flat,none,none,none,kmph-v1
+2.6,foot,desert,flat,none,river,none,kmph-v1
+2.1,foot,desert,flat,vegetation,none,none,kmph-v1
+2.0,foot,desert,flat,vegetation,river,none,kmph-v1
+2.3,foot,desert,hills,none,none,none,kmph-v1
+2.9,foot,desert,hills,none,*,Footpath,kmph-v1
+2.2,foot,desert,hills,none,river,none,kmph-v1
+1.8,foot,desert,hills,vegetation,none,none,kmph-v1
+2.2,foot,desert,hills,vegetation,*,Footpath,kmph-v1
+1.7,foot,desert,hills,vegetation,river,none,kmph-v1
+1.4,foot,desert,mountains,none,none,none,kmph-v1
+1.3,foot,desert,mountains,none,river,none,kmph-v1
+1.1,foot,desert,mountains,vegetation,none,none,kmph-v1
+1.0,foot,desert,mountains,vegetation,river,none,kmph-v1
+-1,foot,desert,water,none,none,none,kmph-v1
+-1,foot,desert,water,none,*,Road,kmph-v1
+-1,foot,desert,water,none,*,Footpath,kmph-v1
+-1,foot,desert,coastal water,none,none,none,kmph-v1
+-1,foot,desert,coastal water,none,*,Road,kmph-v1
+-1,foot,desert,coastal water,none,*,Footpath,kmph-v1
+-1,foot,desert,ocean,none,none,none,kmph-v1
+-1,foot,desert,ocean,none,*,Road,kmph-v1
+-1,foot,desert,ocean,none,*,Footpath,kmph-v1
+1.2,foot,desert,wetlands,none,none,none,kmph-v1
+1.2,foot,desert,wetlands,none,river,none,kmph-v1
+1.0,foot,desert,wetlands,vegetation,none,none,kmph-v1
+0.9,foot,desert,wetlands,vegetation,river,none,kmph-v1
+3.0,foot,cold,flat,none,none,none,kmph-v1
+2.9,foot,cold,flat,none,river,none,kmph-v1
+2.3,foot,cold,flat,vegetation,none,none,kmph-v1
+2.2,foot,cold,flat,vegetation,river,none,kmph-v1
+2.5,foot,cold,hills,none,none,none,kmph-v1
+3.1,foot,cold,hills,none,*,Footpath,kmph-v1
+2.4,foot,cold,hills,none,river,none,kmph-v1
+1.9,foot,cold,hills,vegetation,none,none,kmph-v1
+2.4,foot,cold,hills,vegetation,*,Footpath,kmph-v1
+1.8,foot,cold,hills,vegetation,river,none,kmph-v1
+1.5,foot,cold,mountains,none,none,none,kmph-v1
+1.4,foot,cold,mountains,none,river,none,kmph-v1
+1.2,foot,cold,mountains,vegetation,none,none,kmph-v1
+1.1,foot,cold,mountains,vegetation,river,none,kmph-v1
+-1,foot,cold,water,none,none,none,kmph-v1
+-1,foot,cold,water,none,*,Road,kmph-v1
+-1,foot,cold,water,none,*,Footpath,kmph-v1
+-1,foot,cold,coastal water,none,none,none,kmph-v1
+-1,foot,cold,coastal water,none,*,Road,kmph-v1
+-1,foot,cold,coastal water,none,*,Footpath,kmph-v1
+-1,foot,cold,ocean,none,none,none,kmph-v1
+-1,foot,cold,ocean,none,*,Road,kmph-v1
+-1,foot,cold,ocean,none,*,Footpath,kmph-v1
+1.4,foot,cold,wetlands,none,none,none,kmph-v1
+1.3,foot,cold,wetlands,none,river,none,kmph-v1
+1.0,foot,cold,wetlands,vegetation,none,none,kmph-v1
+1.0,foot,cold,wetlands,vegetation,river,none,kmph-v1
+2.6,foot,freezing,flat,none,none,none,kmph-v1
+2.5,foot,freezing,flat,none,river,none,kmph-v1
+2.0,foot,freezing,flat,vegetation,none,none,kmph-v1
+1.9,foot,freezing,flat,vegetation,river,none,kmph-v1
+2.2,foot,freezing,hills,none,none,none,kmph-v1
+2.8,foot,freezing,hills,none,*,Footpath,kmph-v1
+2.1,foot,freezing,hills,none,river,none,kmph-v1
+1.7,foot,freezing,hills,vegetation,none,none,kmph-v1
+2.1,foot,freezing,hills,vegetation,*,Footpath,kmph-v1
+1.6,foot,freezing,hills,vegetation,river,none,kmph-v1
+1.3,foot,freezing,mountains,none,none,none,kmph-v1
+1.3,foot,freezing,mountains,none,river,none,kmph-v1
+1.0,foot,freezing,mountains,vegetation,none,none,kmph-v1
+1.0,foot,freezing,mountains,vegetation,river,none,kmph-v1
+-1,foot,freezing,water,none,none,none,kmph-v1
+-1,foot,freezing,water,none,*,Road,kmph-v1
+-1,foot,freezing,water,none,*,Footpath,kmph-v1
+-1,foot,freezing,coastal water,none,none,none,kmph-v1
+-1,foot,freezing,coastal water,none,*,Road,kmph-v1
+-1,foot,freezing,coastal water,none,*,Footpath,kmph-v1
+-1,foot,freezing,ocean,none,none,none,kmph-v1
+-1,foot,freezing,ocean,none,*,Road,kmph-v1
+-1,foot,freezing,ocean,none,*,Footpath,kmph-v1
+1.2,foot,freezing,wetlands,none,none,none,kmph-v1
+1.1,foot,freezing,wetlands,none,river,none,kmph-v1
+0.9,foot,freezing,wetlands,vegetation,none,none,kmph-v1
+0.9,foot,freezing,wetlands,vegetation,river,none,kmph-v1
+-1,river boat,*,flat,*,none,*,kmph-v1
+4.0,river boat,*,flat,*,river,*,kmph-v1
+-1,river boat,*,hills,*,none,*,kmph-v1
+-1,river boat,*,hills,*,*,*,kmph-v1
+2.8,river boat,*,hills,*,river,*,kmph-v1
+-1,river boat,*,mountains,*,none,*,kmph-v1
+-1,river boat,*,mountains,*,*,*,kmph-v1
+-1,river boat,*,mountains,*,river,*,kmph-v1
+6.5,river boat,*,water,*,none,*,kmph-v1
+7.4,river boat,*,coastal water,*,none,*,kmph-v1
+-1,river boat,*,ocean,*,none,*,kmph-v1
+-1,river boat,*,wetlands,*,none,*,kmph-v1
+-1,river boat,*,wetlands,*,*,*,kmph-v1
+1.6,river boat,*,wetlands,*,river,*,kmph-v1
+-1,ship,*,flat,*,none,*,kmph-v1
+-1,ship,*,flat,*,*,*,kmph-v1
+-1,ship,*,flat,*,river,*,kmph-v1
+-1,ship,*,hills,*,none,*,kmph-v1
+-1,ship,*,hills,*,*,*,kmph-v1
+-1,ship,*,hills,*,river,*,kmph-v1
+-1,ship,*,mountains,*,none,*,kmph-v1
+-1,ship,*,mountains,*,*,*,kmph-v1
+-1,ship,*,mountains,*,river,*,kmph-v1
+6.6,ship,*,water,*,none,*,kmph-v1
+8.1,ship,*,coastal water,*,none,*,kmph-v1
+9.0,ship,*,ocean,*,none,*,kmph-v1
+-1,ship,*,wetlands,*,none,*,kmph-v1
+-1,ship,*,wetlands,*,*,*,kmph-v1
+-1,ship,*,wetlands,*,river,*,kmph-v1
+2.6,caravan,temperate,flat,none,none,none,kmph-v1
+4.0,caravan,*,flat,*,*,Road,kmph-v1
+3.3,caravan,temperate,flat,none,*,Footpath,kmph-v1
+2.5,caravan,temperate,flat,none,river,none,kmph-v1
+2.0,caravan,temperate,flat,vegetation,none,none,kmph-v1
+2.5,caravan,temperate,flat,vegetation,*,Footpath,kmph-v1
+1.9,caravan,temperate,flat,vegetation,river,none,kmph-v1
+2.2,caravan,temperate,hills,none,none,none,kmph-v1
+3.3,caravan,*,hills,*,*,Road,kmph-v1
+2.7,caravan,temperate,hills,none,*,Footpath,kmph-v1
+2.1,caravan,temperate,hills,none,river,none,kmph-v1
+1.7,caravan,temperate,hills,vegetation,none,none,kmph-v1
+2.1,caravan,temperate,hills,vegetation,*,Footpath,kmph-v1
+1.6,caravan,temperate,hills,vegetation,river,none,kmph-v1
+1.3,caravan,temperate,mountains,none,none,none,kmph-v1
+2.0,caravan,*,mountains,*,*,Road,kmph-v1
+1.7,caravan,temperate,mountains,none,*,Footpath,kmph-v1
+1.3,caravan,temperate,mountains,none,river,none,kmph-v1
+1.0,caravan,temperate,mountains,vegetation,none,none,kmph-v1
+1.3,caravan,temperate,mountains,vegetation,*,Footpath,kmph-v1
+1.0,caravan,temperate,mountains,vegetation,river,none,kmph-v1
+-1,caravan,temperate,water,none,none,none,kmph-v1
+-1,caravan,temperate,water,none,*,Road,kmph-v1
+-1,caravan,temperate,water,none,*,Footpath,kmph-v1
+-1,caravan,*,coastal water,*,none,none,kmph-v1
+-1,caravan,temperate,coastal water,none,*,Road,kmph-v1
+-1,caravan,temperate,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,*,ocean,*,none,none,kmph-v1
+-1,caravan,temperate,ocean,none,*,Road,kmph-v1
+-1,caravan,temperate,ocean,none,*,Footpath,kmph-v1
+1.2,caravan,temperate,wetlands,none,none,none,kmph-v1
+1.8,caravan,*,wetlands,*,*,Road,kmph-v1
+1.5,caravan,temperate,wetlands,none,*,Footpath,kmph-v1
+1.1,caravan,temperate,wetlands,none,river,none,kmph-v1
+0.9,caravan,temperate,wetlands,vegetation,none,none,kmph-v1
+1.2,caravan,temperate,wetlands,vegetation,*,Footpath,kmph-v1
+0.9,caravan,temperate,wetlands,vegetation,river,none,kmph-v1
+2.5,caravan,tropical,flat,none,none,none,kmph-v1
+3.1,caravan,tropical,flat,none,*,Footpath,kmph-v1
+2.4,caravan,tropical,flat,none,river,none,kmph-v1
+1.9,caravan,tropical,flat,vegetation,none,none,kmph-v1
+2.4,caravan,tropical,flat,vegetation,*,Footpath,kmph-v1
+1.8,caravan,tropical,flat,vegetation,river,none,kmph-v1
+2.1,caravan,tropical,hills,none,none,none,kmph-v1
+2.6,caravan,tropical,hills,none,*,Footpath,kmph-v1
+2.0,caravan,tropical,hills,none,river,none,kmph-v1
+1.6,caravan,tropical,hills,vegetation,none,none,kmph-v1
+2.0,caravan,tropical,hills,vegetation,*,Footpath,kmph-v1
+1.5,caravan,tropical,hills,vegetation,river,none,kmph-v1
+1.3,caravan,tropical,mountains,none,none,none,kmph-v1
+1.6,caravan,tropical,mountains,none,*,Footpath,kmph-v1
+1.2,caravan,tropical,mountains,none,river,none,kmph-v1
+1.0,caravan,tropical,mountains,vegetation,none,none,kmph-v1
+1.2,caravan,tropical,mountains,vegetation,*,Footpath,kmph-v1
+0.9,caravan,tropical,mountains,vegetation,river,none,kmph-v1
+-1,caravan,tropical,water,none,none,none,kmph-v1
+-1,caravan,tropical,water,none,*,Road,kmph-v1
+-1,caravan,tropical,water,none,*,Footpath,kmph-v1
+-1,caravan,tropical,coastal water,none,*,Road,kmph-v1
+-1,caravan,tropical,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,tropical,ocean,none,*,Road,kmph-v1
+-1,caravan,tropical,ocean,none,*,Footpath,kmph-v1
+1.1,caravan,tropical,wetlands,none,none,none,kmph-v1
+1.4,caravan,tropical,wetlands,none,*,Footpath,kmph-v1
+1.1,caravan,tropical,wetlands,none,river,none,kmph-v1
+0.9,caravan,tropical,wetlands,vegetation,none,none,kmph-v1
+1.1,caravan,tropical,wetlands,vegetation,*,Footpath,kmph-v1
+0.8,caravan,tropical,wetlands,vegetation,river,none,kmph-v1
+2.6,caravan,subtropical,flat,none,none,none,kmph-v1
+3.2,caravan,subtropical,flat,none,*,Footpath,kmph-v1
+2.4,caravan,subtropical,flat,none,river,none,kmph-v1
+2.0,caravan,subtropical,flat,vegetation,none,none,kmph-v1
+2.5,caravan,subtropical,flat,vegetation,*,Footpath,kmph-v1
+1.9,caravan,subtropical,flat,vegetation,river,none,kmph-v1
+2.1,caravan,subtropical,hills,none,none,none,kmph-v1
+2.7,caravan,subtropical,hills,none,*,Footpath,kmph-v1
+2.0,caravan,subtropical,hills,none,river,none,kmph-v1
+1.6,caravan,subtropical,hills,vegetation,none,none,kmph-v1
+2.1,caravan,subtropical,hills,vegetation,*,Footpath,kmph-v1
+1.6,caravan,subtropical,hills,vegetation,river,none,kmph-v1
+1.3,caravan,subtropical,mountains,none,none,none,kmph-v1
+1.6,caravan,subtropical,mountains,none,*,Footpath,kmph-v1
+1.2,caravan,subtropical,mountains,none,river,none,kmph-v1
+1.0,caravan,subtropical,mountains,vegetation,none,none,kmph-v1
+1.2,caravan,subtropical,mountains,vegetation,*,Footpath,kmph-v1
+0.9,caravan,subtropical,mountains,vegetation,river,none,kmph-v1
+-1,caravan,subtropical,water,none,none,none,kmph-v1
+-1,caravan,subtropical,water,none,*,Road,kmph-v1
+-1,caravan,subtropical,water,none,*,Footpath,kmph-v1
+-1,caravan,subtropical,coastal water,none,*,Road,kmph-v1
+-1,caravan,subtropical,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,subtropical,ocean,none,*,Road,kmph-v1
+-1,caravan,subtropical,ocean,none,*,Footpath,kmph-v1
+1.2,caravan,subtropical,wetlands,none,none,none,kmph-v1
+1.5,caravan,subtropical,wetlands,none,*,Footpath,kmph-v1
+1.1,caravan,subtropical,wetlands,none,river,none,kmph-v1
+0.9,caravan,subtropical,wetlands,vegetation,none,none,kmph-v1
+1.1,caravan,subtropical,wetlands,vegetation,*,Footpath,kmph-v1
+0.9,caravan,subtropical,wetlands,vegetation,river,none,kmph-v1
+2.2,caravan,desert,flat,none,none,none,kmph-v1
+2.7,caravan,desert,flat,none,*,Footpath,kmph-v1
+2.1,caravan,desert,flat,none,river,none,kmph-v1
+1.7,caravan,desert,flat,vegetation,none,none,kmph-v1
+2.1,caravan,desert,flat,vegetation,*,Footpath,kmph-v1
+1.6,caravan,desert,flat,vegetation,river,none,kmph-v1
+1.8,caravan,desert,hills,none,none,none,kmph-v1
+2.3,caravan,desert,hills,none,*,Footpath,kmph-v1
+1.7,caravan,desert,hills,none,river,none,kmph-v1
+1.4,caravan,desert,hills,vegetation,none,none,kmph-v1
+1.8,caravan,desert,hills,vegetation,*,Footpath,kmph-v1
+1.3,caravan,desert,hills,vegetation,river,none,kmph-v1
+1.1,caravan,desert,mountains,none,none,none,kmph-v1
+1.4,caravan,desert,mountains,none,*,Footpath,kmph-v1
+1.0,caravan,desert,mountains,none,river,none,kmph-v1
+0.8,caravan,desert,mountains,vegetation,none,none,kmph-v1
+1.1,caravan,desert,mountains,vegetation,*,Footpath,kmph-v1
+0.8,caravan,desert,mountains,vegetation,river,none,kmph-v1
+-1,caravan,desert,water,none,none,none,kmph-v1
+-1,caravan,desert,water,none,*,Road,kmph-v1
+-1,caravan,desert,water,none,*,Footpath,kmph-v1
+-1,caravan,desert,coastal water,none,*,Road,kmph-v1
+-1,caravan,desert,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,desert,ocean,none,*,Road,kmph-v1
+-1,caravan,desert,ocean,none,*,Footpath,kmph-v1
+1.0,caravan,desert,wetlands,none,none,none,kmph-v1
+1.3,caravan,desert,wetlands,none,*,Footpath,kmph-v1
+1.0,caravan,desert,wetlands,none,river,none,kmph-v1
+0.8,caravan,desert,wetlands,vegetation,none,none,kmph-v1
+1.0,caravan,desert,wetlands,vegetation,*,Footpath,kmph-v1
+0.7,caravan,desert,wetlands,vegetation,river,none,kmph-v1
+2.4,caravan,cold,flat,none,none,none,kmph-v1
+3.0,caravan,cold,flat,none,*,Footpath,kmph-v1
+2.3,caravan,cold,flat,none,river,none,kmph-v1
+1.9,caravan,cold,flat,vegetation,none,none,kmph-v1
+2.3,caravan,cold,flat,vegetation,*,Footpath,kmph-v1
+1.8,caravan,cold,flat,vegetation,river,none,kmph-v1
+2.0,caravan,cold,hills,none,none,none,kmph-v1
+2.5,caravan,cold,hills,none,*,Footpath,kmph-v1
+1.9,caravan,cold,hills,none,river,none,kmph-v1
+1.5,caravan,cold,hills,vegetation,none,none,kmph-v1
+1.9,caravan,cold,hills,vegetation,*,Footpath,kmph-v1
+1.5,caravan,cold,hills,vegetation,river,none,kmph-v1
+1.2,caravan,cold,mountains,none,none,none,kmph-v1
+1.5,caravan,cold,mountains,none,*,Footpath,kmph-v1
+1.1,caravan,cold,mountains,none,river,none,kmph-v1
+0.9,caravan,cold,mountains,vegetation,none,none,kmph-v1
+1.2,caravan,cold,mountains,vegetation,*,Footpath,kmph-v1
+0.9,caravan,cold,mountains,vegetation,river,none,kmph-v1
+-1,caravan,cold,water,none,none,none,kmph-v1
+-1,caravan,cold,water,none,*,Road,kmph-v1
+-1,caravan,cold,water,none,*,Footpath,kmph-v1
+-1,caravan,cold,coastal water,none,*,Road,kmph-v1
+-1,caravan,cold,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,cold,ocean,none,*,Road,kmph-v1
+-1,caravan,cold,ocean,none,*,Footpath,kmph-v1
+1.1,caravan,cold,wetlands,none,none,none,kmph-v1
+1.4,caravan,cold,wetlands,none,*,Footpath,kmph-v1
+1.0,caravan,cold,wetlands,none,river,none,kmph-v1
+0.8,caravan,cold,wetlands,vegetation,none,none,kmph-v1
+1.0,caravan,cold,wetlands,vegetation,*,Footpath,kmph-v1
+0.8,caravan,cold,wetlands,vegetation,river,none,kmph-v1
+2.1,caravan,freezing,flat,none,none,none,kmph-v1
+2.6,caravan,freezing,flat,none,*,Footpath,kmph-v1
+2.0,caravan,freezing,flat,none,river,none,kmph-v1
+1.6,caravan,freezing,flat,vegetation,none,none,kmph-v1
+2.0,caravan,freezing,flat,vegetation,*,Footpath,kmph-v1
+1.5,caravan,freezing,flat,vegetation,river,none,kmph-v1
+1.8,caravan,freezing,hills,none,none,none,kmph-v1
+2.2,caravan,freezing,hills,none,*,Footpath,kmph-v1
+1.7,caravan,freezing,hills,none,river,none,kmph-v1
+1.4,caravan,freezing,hills,vegetation,none,none,kmph-v1
+1.7,caravan,freezing,hills,vegetation,*,Footpath,kmph-v1
+1.3,caravan,freezing,hills,vegetation,river,none,kmph-v1
+1.1,caravan,freezing,mountains,none,none,none,kmph-v1
+1.3,caravan,freezing,mountains,none,*,Footpath,kmph-v1
+1.0,caravan,freezing,mountains,none,river,none,kmph-v1
+0.8,caravan,freezing,mountains,vegetation,none,none,kmph-v1
+1.0,caravan,freezing,mountains,vegetation,*,Footpath,kmph-v1
+0.8,caravan,freezing,mountains,vegetation,river,none,kmph-v1
+-1,caravan,freezing,water,none,none,none,kmph-v1
+-1,caravan,freezing,water,none,*,Road,kmph-v1
+-1,caravan,freezing,water,none,*,Footpath,kmph-v1
+-1,caravan,freezing,coastal water,none,*,Road,kmph-v1
+-1,caravan,freezing,coastal water,none,*,Footpath,kmph-v1
+-1,caravan,freezing,ocean,none,*,Road,kmph-v1
+-1,caravan,freezing,ocean,none,*,Footpath,kmph-v1
+1.0,caravan,freezing,wetlands,none,none,none,kmph-v1
+1.2,caravan,freezing,wetlands,none,*,Footpath,kmph-v1
+0.9,caravan,freezing,wetlands,none,river,none,kmph-v1
+0.7,caravan,freezing,wetlands,vegetation,none,none,kmph-v1
+0.9,caravan,freezing,wetlands,vegetation,*,Footpath,kmph-v1
+0.7,caravan,freezing,wetlands,vegetation,river,none,kmph-v1
+3.0,army,temperate,flat,none,none,none,kmph-v1
+4.5,army,*,flat,*,*,Road,kmph-v1
+3.7,army,temperate,flat,none,*,Footpath,kmph-v1
+2.8,army,temperate,flat,none,river,none,kmph-v1
+2.3,army,temperate,flat,vegetation,none,none,kmph-v1
+2.9,army,temperate,flat,vegetation,*,Footpath,kmph-v1
+2.2,army,temperate,flat,vegetation,river,none,kmph-v1
+2.5,army,temperate,hills,none,none,none,kmph-v1
+3.8,army,*,hills,*,*,Road,kmph-v1
+3.1,army,temperate,hills,none,*,Footpath,kmph-v1
+2.4,army,temperate,hills,none,river,none,kmph-v1
+1.9,army,temperate,hills,vegetation,none,none,kmph-v1
+2.4,army,temperate,hills,vegetation,*,Footpath,kmph-v1
+1.8,army,temperate,hills,vegetation,river,none,kmph-v1
+1.5,army,temperate,mountains,none,none,none,kmph-v1
+2.3,army,*,mountains,*,*,Road,kmph-v1
+1.9,army,temperate,mountains,none,*,Footpath,kmph-v1
+1.4,army,temperate,mountains,none,river,none,kmph-v1
+1.1,army,temperate,mountains,vegetation,none,none,kmph-v1
+1.4,army,temperate,mountains,vegetation,*,Footpath,kmph-v1
+1.1,army,temperate,mountains,vegetation,river,none,kmph-v1
+-1,army,temperate,water,none,none,none,kmph-v1
+-1,army,temperate,water,none,*,Road,kmph-v1
+-1,army,temperate,water,none,*,Footpath,kmph-v1
+-1,army,*,coastal water,*,none,none,kmph-v1
+-1,army,temperate,coastal water,none,*,Road,kmph-v1
+-1,army,temperate,coastal water,none,*,Footpath,kmph-v1
+-1,army,*,ocean,*,none,none,kmph-v1
+-1,army,temperate,ocean,none,*,Road,kmph-v1
+-1,army,temperate,ocean,none,*,Footpath,kmph-v1
+1.4,army,temperate,wetlands,none,none,none,kmph-v1
+2.1,army,*,wetlands,*,*,Road,kmph-v1
+1.7,army,temperate,wetlands,none,*,Footpath,kmph-v1
+1.3,army,temperate,wetlands,none,river,none,kmph-v1
+1.0,army,temperate,wetlands,vegetation,none,none,kmph-v1
+1.3,army,temperate,wetlands,vegetation,*,Footpath,kmph-v1
+1.0,army,temperate,wetlands,vegetation,river,none,kmph-v1
+2.8,army,tropical,flat,none,none,none,kmph-v1
+3.5,army,tropical,flat,none,*,Footpath,kmph-v1
+2.7,army,tropical,flat,none,river,none,kmph-v1
+2.2,army,tropical,flat,vegetation,none,none,kmph-v1
+2.7,army,tropical,flat,vegetation,*,Footpath,kmph-v1
+2.1,army,tropical,flat,vegetation,river,none,kmph-v1
+2.4,army,tropical,hills,none,none,none,kmph-v1
+3.0,army,tropical,hills,none,*,Footpath,kmph-v1
+2.2,army,tropical,hills,none,river,none,kmph-v1
+1.8,army,tropical,hills,vegetation,none,none,kmph-v1
+2.3,army,tropical,hills,vegetation,*,Footpath,kmph-v1
+1.7,army,tropical,hills,vegetation,river,none,kmph-v1
+1.4,army,tropical,mountains,none,none,none,kmph-v1
+1.8,army,tropical,mountains,none,*,Footpath,kmph-v1
+1.3,army,tropical,mountains,none,river,none,kmph-v1
+1.1,army,tropical,mountains,vegetation,none,none,kmph-v1
+1.4,army,tropical,mountains,vegetation,*,Footpath,kmph-v1
+1.0,army,tropical,mountains,vegetation,river,none,kmph-v1
+-1,army,tropical,water,none,none,none,kmph-v1
+-1,army,tropical,water,none,*,Road,kmph-v1
+-1,army,tropical,water,none,*,Footpath,kmph-v1
+-1,army,tropical,coastal water,none,*,Road,kmph-v1
+-1,army,tropical,coastal water,none,*,Footpath,kmph-v1
+-1,army,tropical,ocean,none,*,Road,kmph-v1
+-1,army,tropical,ocean,none,*,Footpath,kmph-v1
+1.3,army,tropical,wetlands,none,none,none,kmph-v1
+1.6,army,tropical,wetlands,none,*,Footpath,kmph-v1
+1.2,army,tropical,wetlands,none,river,none,kmph-v1
+1.0,army,tropical,wetlands,vegetation,none,none,kmph-v1
+1.2,army,tropical,wetlands,vegetation,*,Footpath,kmph-v1
+0.9,army,tropical,wetlands,vegetation,river,none,kmph-v1
+2.9,army,subtropical,flat,none,none,none,kmph-v1
+3.6,army,subtropical,flat,none,*,Footpath,kmph-v1
+2.8,army,subtropical,flat,none,river,none,kmph-v1
+2.2,army,subtropical,flat,vegetation,none,none,kmph-v1
+2.8,army,subtropical,flat,vegetation,*,Footpath,kmph-v1
+2.1,army,subtropical,flat,vegetation,river,none,kmph-v1
+2.4,army,subtropical,hills,none,none,none,kmph-v1
+3.0,army,subtropical,hills,none,*,Footpath,kmph-v1
+2.3,army,subtropical,hills,none,river,none,kmph-v1
+1.9,army,subtropical,hills,vegetation,none,none,kmph-v1
+2.3,army,subtropical,hills,vegetation,*,Footpath,kmph-v1
+1.8,army,subtropical,hills,vegetation,river,none,kmph-v1
+1.4,army,subtropical,mountains,none,none,none,kmph-v1
+1.8,army,subtropical,mountains,none,*,Footpath,kmph-v1
+1.4,army,subtropical,mountains,none,river,none,kmph-v1
+1.1,army,subtropical,mountains,vegetation,none,none,kmph-v1
+1.4,army,subtropical,mountains,vegetation,*,Footpath,kmph-v1
+1.1,army,subtropical,mountains,vegetation,river,none,kmph-v1
+-1,army,subtropical,water,none,none,none,kmph-v1
+-1,army,subtropical,water,none,*,Road,kmph-v1
+-1,army,subtropical,water,none,*,Footpath,kmph-v1
+-1,army,subtropical,coastal water,none,*,Road,kmph-v1
+-1,army,subtropical,coastal water,none,*,Footpath,kmph-v1
+-1,army,subtropical,ocean,none,*,Road,kmph-v1
+-1,army,subtropical,ocean,none,*,Footpath,kmph-v1
+1.3,army,subtropical,wetlands,none,none,none,kmph-v1
+1.6,army,subtropical,wetlands,none,*,Footpath,kmph-v1
+1.3,army,subtropical,wetlands,none,river,none,kmph-v1
+1.0,army,subtropical,wetlands,vegetation,none,none,kmph-v1
+1.3,army,subtropical,wetlands,vegetation,*,Footpath,kmph-v1
+1.0,army,subtropical,wetlands,vegetation,river,none,kmph-v1
+2.5,army,desert,flat,none,none,none,kmph-v1
+3.1,army,desert,flat,none,*,Footpath,kmph-v1
+2.4,army,desert,flat,none,river,none,kmph-v1
+1.9,army,desert,flat,vegetation,none,none,kmph-v1
+2.4,army,desert,flat,vegetation,*,Footpath,kmph-v1
+1.8,army,desert,flat,vegetation,river,none,kmph-v1
+2.1,army,desert,hills,none,none,none,kmph-v1
+2.6,army,desert,hills,none,*,Footpath,kmph-v1
+2.0,army,desert,hills,none,river,none,kmph-v1
+1.6,army,desert,hills,vegetation,none,none,kmph-v1
+2.0,army,desert,hills,vegetation,*,Footpath,kmph-v1
+1.5,army,desert,hills,vegetation,river,none,kmph-v1
+1.2,army,desert,mountains,none,none,none,kmph-v1
+1.5,army,desert,mountains,none,*,Footpath,kmph-v1
+1.2,army,desert,mountains,none,river,none,kmph-v1
+1.0,army,desert,mountains,vegetation,none,none,kmph-v1
+1.2,army,desert,mountains,vegetation,*,Footpath,kmph-v1
+0.9,army,desert,mountains,vegetation,river,none,kmph-v1
+-1,army,desert,water,none,none,none,kmph-v1
+-1,army,desert,water,none,*,Road,kmph-v1
+-1,army,desert,water,none,*,Footpath,kmph-v1
+-1,army,desert,coastal water,none,*,Road,kmph-v1
+-1,army,desert,coastal water,none,*,Footpath,kmph-v1
+-1,army,desert,ocean,none,*,Road,kmph-v1
+-1,army,desert,ocean,none,*,Footpath,kmph-v1
+1.1,army,desert,wetlands,none,none,none,kmph-v1
+1.4,army,desert,wetlands,none,*,Footpath,kmph-v1
+1.1,army,desert,wetlands,none,river,none,kmph-v1
+0.9,army,desert,wetlands,vegetation,none,none,kmph-v1
+1.1,army,desert,wetlands,vegetation,*,Footpath,kmph-v1
+0.8,army,desert,wetlands,vegetation,river,none,kmph-v1
+2.7,army,cold,flat,none,none,none,kmph-v1
+3.4,army,cold,flat,none,*,Footpath,kmph-v1
+2.6,army,cold,flat,none,river,none,kmph-v1
+2.1,army,cold,flat,vegetation,none,none,kmph-v1
+2.6,army,cold,flat,vegetation,*,Footpath,kmph-v1
+2.0,army,cold,flat,vegetation,river,none,kmph-v1
+2.3,army,cold,hills,none,none,none,kmph-v1
+2.8,army,cold,hills,none,*,Footpath,kmph-v1
+2.1,army,cold,hills,none,river,none,kmph-v1
+1.7,army,cold,hills,vegetation,none,none,kmph-v1
+2.2,army,cold,hills,vegetation,*,Footpath,kmph-v1
+1.7,army,cold,hills,vegetation,river,none,kmph-v1
+1.4,army,cold,mountains,none,none,none,kmph-v1
+1.7,army,cold,mountains,none,*,Footpath,kmph-v1
+1.3,army,cold,mountains,none,river,none,kmph-v1
+1.0,army,cold,mountains,vegetation,none,none,kmph-v1
+1.3,army,cold,mountains,vegetation,*,Footpath,kmph-v1
+1.0,army,cold,mountains,vegetation,river,none,kmph-v1
+-1,army,cold,water,none,none,none,kmph-v1
+-1,army,cold,water,none,*,Road,kmph-v1
+-1,army,cold,water,none,*,Footpath,kmph-v1
+-1,army,cold,coastal water,none,*,Road,kmph-v1
+-1,army,cold,coastal water,none,*,Footpath,kmph-v1
+-1,army,cold,ocean,none,*,Road,kmph-v1
+-1,army,cold,ocean,none,*,Footpath,kmph-v1
+1.2,army,cold,wetlands,none,none,none,kmph-v1
+1.5,army,cold,wetlands,none,*,Footpath,kmph-v1
+1.2,army,cold,wetlands,none,river,none,kmph-v1
+0.9,army,cold,wetlands,vegetation,none,none,kmph-v1
+1.2,army,cold,wetlands,vegetation,*,Footpath,kmph-v1
+0.9,army,cold,wetlands,vegetation,river,none,kmph-v1
+2.4,army,freezing,flat,none,none,none,kmph-v1
+3.0,army,freezing,flat,none,*,Footpath,kmph-v1
+2.3,army,freezing,flat,none,river,none,kmph-v1
+1.8,army,freezing,flat,vegetation,none,none,kmph-v1
+2.3,army,freezing,flat,vegetation,*,Footpath,kmph-v1
+1.7,army,freezing,flat,vegetation,river,none,kmph-v1
+2.0,army,freezing,hills,none,none,none,kmph-v1
+2.5,army,freezing,hills,none,*,Footpath,kmph-v1
+1.9,army,freezing,hills,none,river,none,kmph-v1
+1.5,army,freezing,hills,vegetation,none,none,kmph-v1
+1.9,army,freezing,hills,vegetation,*,Footpath,kmph-v1
+1.5,army,freezing,hills,vegetation,river,none,kmph-v1
+1.2,army,freezing,mountains,none,none,none,kmph-v1
+1.5,army,freezing,mountains,none,*,Footpath,kmph-v1
+1.1,army,freezing,mountains,none,river,none,kmph-v1
+0.9,army,freezing,mountains,vegetation,none,none,kmph-v1
+1.1,army,freezing,mountains,vegetation,*,Footpath,kmph-v1
+0.9,army,freezing,mountains,vegetation,river,none,kmph-v1
+-1,army,freezing,water,none,none,none,kmph-v1
+-1,army,freezing,water,none,*,Road,kmph-v1
+-1,army,freezing,water,none,*,Footpath,kmph-v1
+-1,army,freezing,coastal water,none,*,Road,kmph-v1
+-1,army,freezing,coastal water,none,*,Footpath,kmph-v1
+-1,army,freezing,ocean,none,*,Road,kmph-v1
+-1,army,freezing,ocean,none,*,Footpath,kmph-v1
+1.1,army,freezing,wetlands,none,none,none,kmph-v1
+1.4,army,freezing,wetlands,none,*,Footpath,kmph-v1
+1.0,army,freezing,wetlands,none,river,none,kmph-v1
+0.8,army,freezing,wetlands,vegetation,none,none,kmph-v1
+1.0,army,freezing,wetlands,vegetation,*,Footpath,kmph-v1
+0.8,army,freezing,wetlands,vegetation,river,none,kmph-v1
