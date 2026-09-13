@@ -369,8 +369,8 @@ class WorldMapGrid {
     const ctx = this.ctx;
 
     ctx.save();
-    ctx.strokeStyle = item.color || "#1E90FF";
-    ctx.lineWidth = item.lineWidth || (riverId === 2 ? 4 : 2);
+    ctx.strokeStyle = item.color || "#00008B";
+    ctx.lineWidth = item.lineWidth || 4;
     ctx.lineCap = "round";
 
     const neighbors = [[1,0], [0,1], [-1,0], [0,-1]];

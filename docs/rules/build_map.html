@@ -85,11 +85,8 @@
       <!-- Vegetation Layer -->
       <div class="control-panel">
         <h3>Vegetation Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'light', 'vegetation'); updateActiveButton(this);">
-          <img src="../img/map/control_veg_1.png" class="control-icon" alt="" />Light
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'dense', 'vegetation'); updateActiveButton(this);">
-          <img src="../img/map/control_veg_3.png" class="control-icon" alt="" />Dense
+        <button class="tool-button" onclick="mapGrid.selectTool('vegetation', 'Vegetation', 'vegetation'); updateActiveButton(this);">
+          <img src="../img/map/control_veg_3.png" class="control-icon" alt="" />Vegetation
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'vegetation', 'erase'); updateActiveButton(this);">
           Erase Vegetation
@@ -99,11 +96,8 @@
       <!-- River Layer -->
       <div class="control-panel">
         <h3>River Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('river', 'small river', 'river'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: #1E90FF;"></span>Small River
-        </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('river', 'large river', 'river'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: #00008B;"></span>Large River
+        <button class="tool-button" onclick="mapGrid.selectTool('river', 'River', 'river'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: #00008B;"></span>River
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'river', 'erase'); updateActiveButton(this);">
           Erase River

@@ -99,13 +99,8 @@
           "color": null
         },
         {
-          "id": 1,
-          "name": "light",
-          "color": "#90EE90"
-        },
-        {
           "id": 3,
-          "name": "dense",
+          "name": "Vegetation",
           "color": "#228B22"
         }
       ]
@@ -120,14 +115,8 @@
           "color": null
         },
         {
-          "id": 1,
-          "name": "small river",
-          "color": "#1E90FF",
-          "lineWidth": 2
-        },
-        {
           "id": 2,
-          "name": "large river",
+          "name": "River",
           "color": "#00008B",
           "lineWidth": 4
         }
