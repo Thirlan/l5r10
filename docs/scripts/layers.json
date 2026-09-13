@@ -682,6 +682,32 @@
           "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
+    },
+    "fertility": {
+      "id": "fertility",
+      "name": "Land Fertility Layer",
+      "values": [
+        {
+          "id": 0,
+          "name": "none",
+          "color": null
+        },
+        {
+          "id": 1,
+          "name": "low",
+          "color": "rgba(255, 0, 0, 0.45)"
+        },
+        {
+          "id": 2,
+          "name": "medium",
+          "color": "rgba(255, 165, 0, 0.55)"
+        },
+        {
+          "id": 3,
+          "name": "high",
+          "color": "rgba(0, 128, 0, 0.65)"
+        }
+      ]
     }
   }
 }

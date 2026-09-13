@@ -176,7 +176,7 @@ class WorldMapViewer {
           }
         }
         if (txt) this.grid[k].text = txt;
-        for (const oName of ["animal", "spirit", "shadowland", "crime"]) {
+        for (const oName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
           if (parsed[oName] && parsed[oName][k] !== undefined) {
             let oVal = parsed[oName][k];
             if (typeof oVal === "string" && this.layerMaps[oName]) {
@@ -457,7 +457,7 @@ class WorldMapViewer {
       else if (layerName === "text") this.drawTextLayer();
     }
 
-    if (["animal", "spirit", "shadowland", "crime"].includes(this.viewMode)) {
+    if (["animal", "spirit", "shadowland", "crime", "fertility"].includes(this.viewMode)) {
       this.drawOverlayLayer(this.viewMode);
     }
 
