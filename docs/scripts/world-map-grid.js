@@ -181,7 +181,7 @@ class WorldMapGrid {
         } else {
           const layerToErase = this.currentValue;
           const cell = this.grid[cellKey];
-          if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime"].includes(layerToErase)) {
+          if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(layerToErase)) {
             cell[layerToErase] = 0;
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
@@ -204,7 +204,7 @@ class WorldMapGrid {
           if (mapped !== undefined) valId = mapped;
         }
 
-        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime"].includes(this.currentLayer)) {
+        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(this.currentLayer)) {
           cell[this.currentLayer] = valId ?? 0;
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
@@ -750,7 +750,7 @@ class WorldMapGrid {
   }
 
   getActiveOverlayLayer() {
-    const overlayLayers = ["animal", "spirit", "shadowland", "crime"];
+    const overlayLayers = ["animal", "spirit", "shadowland", "crime", "fertility"];
     if (overlayLayers.includes(this.currentLayer)) {
       return this.currentLayer;
     }
@@ -835,7 +835,7 @@ class WorldMapGrid {
             }
           }
           if (txt) this.grid[k].text = txt;
-          for (const oName of ["animal", "spirit", "shadowland", "crime"]) {
+          for (const oName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
             if (parsed[oName] && parsed[oName][k] !== undefined) {
               let oVal = parsed[oName][k];
               if (typeof oVal === "string" && this.layerMaps[oName]) {
