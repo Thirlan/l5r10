@@ -2,36 +2,17 @@ kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
 9.0,ship,*,ocean,*,*,*
 8.1,ship,*,coastal water,*,*,*
 6.6,ship,*,water,*,*,*
--1,ship,*,*,*,*,*
--1,ship,*,hills,*,*,*
--1,ship,*,wetlands,*,*,*
--1,ship,*,mountains,none,*,*
--1,ship,*,mountains,river,*,*
--1,ship,*,mountains,*,*,*
--1,river boat,*,ocean,none,*,*
-7.4,river boat,*,coastal water,none,*,*
-6.5,river boat,*,water,none,*,*
+-1,ship,*,*,*,*,*
+6.5,river boat,*,water,*,*,*
+6.5,river boat,*,*,river,*,*
+-1,river boat,*,ocean,*,*,*
+-1,river boat,*,coastal water,*,*,*
 -1,river boat,*,flat,none,*,*
-4.0,river boat,*,flat,river,*,*
 -1,river boat,*,hills,none,*,*
-2.8,river boat,*,hills,river,*,*
--1,river boat,*,hills,*,*,*
--1,river boat,*,wetlands,none,*,*
-1.6,river boat,*,wetlands,river,*,*
--1,river boat,*,wetlands,*,*,*
+3.0,river boat,*,wetlands,none,*,*
 -1,river boat,*,mountains,none,*,*
--1,river boat,*,mountains,river,*,*
--1,river boat,*,mountains,*,*,*
--1,horse,Road,ocean,*,none,temperate
--1,horse,Road,ocean,*,none,desert
--1,horse,Road,ocean,*,none,polar
--1,horse,Road,ocean,*,none,tropical
--1,horse,Road,ocean,*,none,subtropical
--1,horse,Road,coastal water,*,none,temperate
--1,horse,Road,coastal water,*,none,desert
--1,horse,Road,coastal water,*,none,polar
--1,horse,Road,coastal water,*,none,tropical
--1,horse,Road,coastal water,*,none,subtropical
+-1,horse,Road,ocean,*,*,*
+-1,horse,Road,coastal water,*,*,*
 -1,horse,Road,water,*,none,temperate
 -1,horse,Road,water,*,none,desert
 -1,horse,Road,water,*,none,polar
