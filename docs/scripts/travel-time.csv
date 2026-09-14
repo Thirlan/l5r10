@@ -267,12 +267,9 @@ kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
 1.1,caravan,Footpath,mountains,*,vegetation,desert
 1.2,caravan,Footpath,mountains,*,vegetation,polar
 1.2,caravan,Footpath,mountains,*,vegetation,tropical
--1,caravan,none,ocean,none,*,*
--1,caravan,none,coastal water,none,*,*
--1,caravan,none,water,none,none,temperate
--1,caravan,none,water,none,none,desert
--1,caravan,none,water,none,none,polar
--1,caravan,none,water,none,none,tropical
+-1,caravan,none,ocean,*,*,*
+-1,caravan,none,coastal water,*,*,*
+-1,caravan,none,water,*,*,*
 2.6,caravan,none,flat,none,none,temperate
 2.2,caravan,none,flat,none,none,desert
 2.4,caravan,none,flat,none,none,polar
@@ -397,12 +394,9 @@ kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
 1.2,army,Footpath,mountains,*,vegetation,desert
 1.3,army,Footpath,mountains,*,vegetation,polar
 1.4,army,Footpath,mountains,*,vegetation,tropical
--1,army,none,ocean,none,*,*
--1,army,none,coastal water,none,*,*
--1,army,none,water,none,none,temperate
--1,army,none,water,none,none,desert
--1,army,none,water,none,none,polar
--1,army,none,water,none,none,tropical
+-1,army,none,ocean,*,*,*
+-1,army,none,coastal water,*,*,*
+-1,army,none,water,*,*,*
 3.0,army,none,flat,none,none,temperate
 2.5,army,none,flat,none,none,desert
 2.7,army,none,flat,none,none,polar
