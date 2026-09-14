@@ -1,15 +1,9 @@
 kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
-9.0,ship,*,ocean,none,*,*
-8.1,ship,*,coastal water,none,*,*
-6.6,ship,*,water,none,*,*
--1,ship,*,flat,none,*,*
--1,ship,*,flat,river,*,*
--1,ship,*,flat,*,*,*
--1,ship,*,hills,none,*,*
--1,ship,*,hills,river,*,*
--1,ship,*,hills,*,*,*
--1,ship,*,wetlands,none,*,*
--1,ship,*,wetlands,river,*,*
+9.0,ship,*,ocean,*,*,*
+8.1,ship,*,coastal water,*,*,*
+6.6,ship,*,water,*,*,*
+-1,ship,*,*,*,*,*
+-1,ship,*,hills,*,*,*
 -1,ship,*,wetlands,*,*,*
 -1,ship,*,mountains,none,*,*
 -1,ship,*,mountains,river,*,*
