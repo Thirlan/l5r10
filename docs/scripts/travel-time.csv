@@ -13,45 +13,20 @@ kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
 -1,river boat,*,mountains,none,*,*
 -1,horse,Road,ocean,*,*,*
 -1,horse,Road,coastal water,*,*,*
--1,horse,Road,water,*,none,temperate
--1,horse,Road,water,*,none,desert
--1,horse,Road,water,*,none,polar
--1,horse,Road,water,*,none,tropical
+-1,horse,Road,water,*,*,*
 7.0,horse,Road,flat,*,*,*
 5.9,horse,Road,hills,*,*,*
 3.2,horse,Road,wetlands,*,*,*
 3.5,horse,Road,mountains,*,*,*
--1,horse,Footpath,ocean,*,none,temperate
--1,horse,Footpath,ocean,*,none,desert
--1,horse,Footpath,ocean,*,none,polar
--1,horse,Footpath,ocean,*,none,tropical
--1,horse,Footpath,coastal water,*,none,temperate
--1,horse,Footpath,coastal water,*,none,desert
--1,horse,Footpath,coastal water,*,none,polar
--1,horse,Footpath,coastal water,*,none,tropical
--1,horse,Footpath,water,*,none,temperate
--1,horse,Footpath,water,*,none,desert
--1,horse,Footpath,water,*,none,polar
--1,horse,Footpath,water,*,none,tropical
+-1,horse,Footpath,ocean,*,*,*
+-1,horse,Footpath,coastal water,*,*,*
+-1,horse,Footpath,water,*,*,*
 5.8,horse,Footpath,flat,*,*,*
-4.8,horse,Footpath,hills,*,none,temperate
-4.0,horse,Footpath,hills,*,none,desert
-4.4,horse,Footpath,hills,*,none,polar
-4.6,horse,Footpath,hills,*,none,tropical
-3.7,horse,Footpath,hills,*,vegetation,temperate
-3.1,horse,Footpath,hills,*,vegetation,desert
-3.4,horse,Footpath,hills,*,vegetation,polar
-3.5,horse,Footpath,hills,*,vegetation,tropical
+4.8,horse,Footpath,hills,*,*,*
 2.6,horse,Footpath,wetlands,*,*,*
 2.9,horse,Footpath,mountains,*,*,*
--1,horse,none,ocean,none,none,temperate
--1,horse,none,ocean,none,none,desert
--1,horse,none,ocean,none,none,polar
--1,horse,none,ocean,none,none,tropical
--1,horse,none,coastal water,none,none,temperate
--1,horse,none,coastal water,none,none,desert
--1,horse,none,coastal water,none,none,polar
--1,horse,none,coastal water,none,none,tropical
+-1,horse,none,ocean,*,*,*
+-1,horse,none,coastal water,*,*,*
 -1,horse,none,water,none,none,temperate
 -1,horse,none,water,none,none,desert
 -1,horse,none,water,none,none,polar
