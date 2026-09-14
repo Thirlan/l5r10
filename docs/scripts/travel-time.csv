@@ -27,10 +27,7 @@ kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
 2.9,horse,Footpath,mountains,*,*,*
 -1,horse,none,ocean,*,*,*
 -1,horse,none,coastal water,*,*,*
--1,horse,none,water,none,none,temperate
--1,horse,none,water,none,none,desert
--1,horse,none,water,none,none,polar
--1,horse,none,water,none,none,tropical
+-1,horse,none,water,*,*,*
 4.6,horse,none,flat,none,none,temperate
 3.9,horse,none,flat,none,none,desert
 4.2,horse,none,flat,none,none,polar
