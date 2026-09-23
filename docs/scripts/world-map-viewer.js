@@ -8,10 +8,12 @@ function numOrNull(val) {
 }
 
 class WorldMapViewer {
-  constructor(imageSrc, canvasSelector, gridSize = VIEWER_GRID_SIZE) {
+  constructor(canvasSelector, gridSize = VIEWER_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext("2d");
     this.gridSize = gridSize;
+    this.mapWidth = Number(this.canvas.dataset.mapColumns) * this.gridSize;
+    this.mapHeight = Number(this.canvas.dataset.mapRows) * this.gridSize;
     this.zoom = 0.5;
     this.minZoom = 0.1;
     this.maxZoom = 4;
@@ -38,14 +40,6 @@ class WorldMapViewer {
     this.travelPapers = {};
     this.avoidClans = {};
 
-    this.mapImage = new Image();
-    this.mapImage.onload = () => {
-      this.mapWidth = this.mapImage.naturalWidth;
-      this.mapHeight = this.mapImage.naturalHeight;
-      this.applyZoom();
-    };
-    this.mapImage.src = imageSrc;
-
     this.settlementImages = {};
 
     this.shrineImage = new Image();
@@ -54,6 +48,7 @@ class WorldMapViewer {
 
     this.setupEventListeners();
     this.loadLayersConfig();
+    this.applyZoom();
   }
 
   async loadLayersConfig() {
@@ -443,8 +438,6 @@ class WorldMapViewer {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.scale(this.zoom, this.zoom);
-    ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
-
     // Draw base map tile images
     this.drawBaseTiles();
 
@@ -942,6 +935,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.querySelector("#mapCanvas");
   if (canvas) {
     const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
-    mapViewer = new WorldMapViewer(canvas.dataset.mapSrc, "#mapCanvas", gridSize);
+    mapViewer = new WorldMapViewer("#mapCanvas", gridSize);
   }
 });

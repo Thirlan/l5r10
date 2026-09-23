@@ -1,10 +1,12 @@
 const DEFAULT_GRID_SIZE = 16;
 
 class WorldMapGrid {
-  constructor(imageSrc, canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
+  constructor(canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext("2d");
     this.gridSize = Number.isFinite(gridSize) && gridSize > 0 ? gridSize : DEFAULT_GRID_SIZE;
+    this.mapWidth = Number(this.canvas.dataset.mapColumns) * this.gridSize;
+    this.mapHeight = Number(this.canvas.dataset.mapRows) * this.gridSize;
     this.zoom = 0.35;
     this.minZoom = 0.1;
     this.maxZoom = 4;
@@ -24,14 +26,6 @@ class WorldMapGrid {
     this.isDrawing = false;
     this.shrineIconCache = {};
 
-    this.mapImage = new Image();
-    this.mapImage.onload = () => {
-      this.mapWidth = this.mapImage.naturalWidth;
-      this.mapHeight = this.mapImage.naturalHeight;
-      this.applyZoom();
-    };
-    this.mapImage.src = imageSrc;
-
     this.settlementImages = {};
 
     this.shrineImage = new Image();
@@ -40,6 +34,7 @@ class WorldMapGrid {
 
     this.setupEventListeners();
     this.loadLayersConfig();
+    this.applyZoom();
   }
 
   async loadLayersConfig() {
@@ -310,8 +305,6 @@ class WorldMapGrid {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.scale(this.zoom, this.zoom);
-
-    ctx.drawImage(this.mapImage, 0, 0, this.mapWidth, this.mapHeight);
 
     // Render base tile layer (combination of terrain, climate, vegetation)
     this.drawBaseTiles();
@@ -889,6 +882,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.querySelector("#mapCanvas");
   if (canvas) {
     const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
-    mapGrid = new WorldMapGrid(canvas.dataset.mapSrc, "#mapCanvas", gridSize);
+    mapGrid = new WorldMapGrid("#mapCanvas", gridSize);
   }
 });
