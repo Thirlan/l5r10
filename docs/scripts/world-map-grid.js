@@ -8,7 +8,7 @@ class WorldMapGrid {
     this.mapWidth = Number(this.canvas.dataset.mapColumns) * this.gridSize;
     this.mapHeight = Number(this.canvas.dataset.mapRows) * this.gridSize;
     this.zoom = 0.35;
-    this.minZoom = 0.1;
+    this.minZoom = 0.55;
     this.maxZoom = 4;
 
     this.layersConfig = null;
@@ -20,7 +20,7 @@ class WorldMapGrid {
 
     this.currentLayer = "terrain";
     this.currentValue = null;
-    this.fontSize = 16;
+    this.fontSize = 14;
     this.settlementLanguage = "english";
     this.brushSize = 1;
     this.isDrawing = false;
@@ -420,7 +420,7 @@ class WorldMapGrid {
     if (item.marker) {
       ctx.save();
       ctx.fillStyle = item.color || "#5C3A1E";
-      ctx.font = "bold " + (this.gridSize * 0.75) + "px Arial";
+      ctx.font = "bold " + (this.gridSize * 0.625) + "px Arial";
       ctx.textAlign = "left";
       ctx.textBaseline = "top";
       ctx.fillText(item.marker, x * this.gridSize + 1, y * this.gridSize + 1);
@@ -666,7 +666,7 @@ class WorldMapGrid {
   }
 
   settlementFontSize(type) {
-    return { Village: 8, City: 10, Capital: 12, Fortification: 8, Castle: 10, Kyuden: 12, "Lumber Mill": 8, "Small Shrine": 8, "Large Shrine": 10 }[type] || 8;
+    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Lumber Mill": 6, "Small Shrine": 6, "Large Shrine": 8 }[type] || 6;
   }
 
   englishSettlementType(type) {
@@ -685,7 +685,7 @@ class WorldMapGrid {
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.text) continue;
       const [x, y] = key.split(",").map(Number);
-      this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 16);
+      this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 14);
     }
   }
 

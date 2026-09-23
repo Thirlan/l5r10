@@ -48,7 +48,7 @@
     "river": 0,
     "text": {
       "text": "Fukou Lake",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "83,84": {
@@ -4271,7 +4271,7 @@
     "river": 0,
     "text": {
       "text": "Shinomen Forest",
-      "fontSize": 18
+      "fontSize": 16
     }
   },
   "34,83": {
@@ -9277,7 +9277,7 @@
     "river": 0,
     "text": {
       "text": "Shadowland Marshes",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "42,109": {
@@ -12473,7 +12473,7 @@
     "clan": 6,
     "text": {
       "text": "Shoshi Castle",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "51,56": {
@@ -26332,7 +26332,7 @@
     "clan": 5,
     "text": {
       "text": "Shiro Gisu",
-      "fontSize": 14
+      "fontSize": 12
     }
   },
   "89,17": {
@@ -27612,7 +27612,7 @@
     "clan": 5,
     "text": {
       "text": "Ukafu Village",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "93,34": {
@@ -33555,7 +33555,7 @@
     "clan": 2,
     "text": {
       "text": "Akagi Forest",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "82,136": {
@@ -52093,7 +52093,7 @@
     "river": 0,
     "text": {
       "text": "The Twilight Mountains",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "20,123": {
@@ -56711,7 +56711,7 @@
     "river": 0,
     "text": {
       "text": "The Burning Sands",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "4,38": {
@@ -70624,7 +70624,7 @@
     "clan": 17,
     "text": {
       "text": "Kaminari City",
-      "fontSize": 14
+      "fontSize": 12
     }
   },
   "94,164": {
@@ -72690,7 +72690,7 @@
     "clan": 17,
     "text": {
       "text": "Bay of Dark Water",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "107,170": {
@@ -74108,7 +74108,7 @@
     "clan": 17,
     "text": {
       "text": "Thunder Dragon Bay",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "119,177": {
@@ -79249,7 +79249,7 @@
     "clan": 17,
     "text": {
       "text": "Mantis Castle",
-      "fontSize": 14
+      "fontSize": 12
     }
   },
   "108,152": {
@@ -93197,7 +93197,7 @@
     "river": 0,
     "text": {
       "text": "Whirlpool of the Great Sea Spider",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "86,156": {
@@ -99803,7 +99803,7 @@
     "clan": 8,
     "text": {
       "text": "Kyuden Otomo",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "105,84": {
@@ -102824,7 +102824,7 @@
     "clan": 5,
     "text": {
       "text": "Shiro Shiba",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "116,28": {
@@ -114841,7 +114841,7 @@
     "text": {
       "englishText": "Red Lake",
       "rokuganiText": "Aka Mizu-Umi",
-      "fontSize": 10
+      "fontSize": 8
     },
     "spirit": 1
   },
@@ -119534,7 +119534,7 @@
     "text": {
       "englishText": "The Tidal Landbridge",
       "rokuganiText": "Chōseki Rikkyo",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "35,188": {
@@ -121297,7 +121297,7 @@
     "clan": 5,
     "text": {
       "text": "Shinsei and Sumai village",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "109,26": {
@@ -121730,7 +121730,7 @@
     "clan": 5,
     "text": {
       "text": "Kyuden Asako",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "105,32": {
@@ -123145,7 +123145,7 @@
     "river": 2,
     "text": {
       "text": "Kintani Valley",
-      "fontSize": 10
+      "fontSize": 8
     },
     "clan": 2
   },
@@ -126240,7 +126240,7 @@
     "river": 0,
     "text": {
       "text": "The Plains Above Evil",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "5,109": {
@@ -134052,7 +134052,7 @@
     "clan": 4,
     "text": {
       "text": "Nezuban Forest",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "79,51": {
@@ -136719,7 +136719,7 @@
     "clan": 8,
     "text": {
       "text": "Otosan Uchi",
-      "fontSize": 18
+      "fontSize": 16
     }
   },
   "99,74": {
@@ -138901,7 +138901,7 @@
     "clan": 2,
     "text": {
       "text": "Kyuden Kakita",
-      "fontSize": 16
+      "fontSize": 14
     },
     "infrastructure": 1
   },
@@ -139876,7 +139876,7 @@
     "clan": 2,
     "text": {
       "text": "Osari Forest",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "93,84": {
@@ -140214,7 +140214,7 @@
     "clan": 2,
     "text": {
       "text": "Tsuma Village",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "98,85": {
@@ -140255,7 +140255,7 @@
     "clan": 2,
     "text": {
       "text": "Shizuka City",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "87,80": {
@@ -140832,7 +140832,7 @@
     "clan": 2,
     "text": {
       "text": "Musume Village",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "89,94": {
@@ -142178,7 +142178,7 @@
     "clan": 11,
     "text": {
       "text": "Kitsune Forest",
-      "fontSize": 10
+      "fontSize": 8
     },
     "animal": 4,
     "spirit": 4
@@ -147376,7 +147376,7 @@
     "clan": 6,
     "text": {
       "text": "Beiden Pass",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "69,83": {
@@ -149457,7 +149457,7 @@
     "clan": 2,
     "text": {
       "text": "Uebi Marshes",
-      "fontSize": 10
+      "fontSize": 8
     }
   },
   "69,140": {
@@ -150306,7 +150306,7 @@
     "text": {
       "englishText": "Uebi Marshes",
       "rokuganiText": "Uebi Marhes",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "59,158": {
@@ -153170,7 +153170,7 @@
     "text": {
       "englishText": "Fields of the Morning Sun",
       "rokuganiText": "Asahi no No",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "51,184": {
@@ -156634,7 +156634,7 @@
     "river": 0,
     "text": {
       "text": "Drowned Merchant River",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "62,41": {
@@ -163013,7 +163013,7 @@
     "clan": 5,
     "text": {
       "text": "Kakudaira Village",
-      "fontSize": 12
+      "fontSize": 10
     }
   },
   "98,13": {
@@ -163031,7 +163031,7 @@
     "clan": 5,
     "text": {
       "text": "Gisei Toshi",
-      "fontSize": 14
+      "fontSize": 12
     }
   },
   "99,14": {
@@ -164873,7 +164873,7 @@
     "clan": 5,
     "text": {
       "text": "Kyuden Isawa",
-      "fontSize": 16
+      "fontSize": 14
     }
   },
   "114,12": {
@@ -171358,7 +171358,7 @@
     "clan": 1,
     "text": {
       "text": "Kuni Wastes",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "36,148": {
@@ -173756,7 +173756,7 @@
     "clan": 15,
     "text": {
       "text": "Golden Sun Plains",
-      "fontSize": 8
+      "fontSize": 6
     },
     "fertility": 3
   },
@@ -174092,7 +174092,7 @@
     "text": {
       "englishText": "The Daidōji Training Grounds",
       "rokuganiText": "The Daidōji Training Grounds",
-      "fontSize": 8
+      "fontSize": 6
     }
   },
   "67,146": {
