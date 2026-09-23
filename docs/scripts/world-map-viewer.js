@@ -9,7 +9,7 @@ function numOrNull(val) {
 
 class WorldMapViewer extends WorldMapRenderer {
   constructor(canvasSelector, gridSize = VIEWER_GRID_SIZE) {
-    super(canvasSelector, gridSize, { zoom: 0.5 });
+    super(canvasSelector, gridSize, { zoom: 0.55 });
 
     this.terrainCosts = {};
     this.viewMode = "default";
