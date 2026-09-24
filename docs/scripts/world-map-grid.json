@@ -13503,7 +13503,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "59,70": {
     "terrain": 1,
@@ -13646,9 +13646,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 30,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "66,67": {
     "terrain": 0,
@@ -13678,9 +13678,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 30,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "66,69": {
     "terrain": 0,
@@ -13786,9 +13786,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 30,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "64,72": {
     "terrain": 0,
@@ -13918,8 +13918,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 3,
-    "settlement": 30,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "63,75": {
     "terrain": 2,
@@ -13943,7 +13943,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "66,74": {
     "terrain": 0,
@@ -13951,7 +13951,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "65,75": {
     "terrain": 0,
@@ -14062,7 +14062,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "68,74": {
     "terrain": 0,
@@ -14070,7 +14070,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "67,75": {
     "terrain": 0,
@@ -14163,7 +14163,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "65,77": {
     "terrain": 2,
@@ -14187,7 +14187,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "68,76": {
     "terrain": 0,
@@ -14195,7 +14195,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "67,77": {
     "terrain": 0,
@@ -14291,7 +14291,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "69,75": {
     "terrain": 0,
@@ -14326,7 +14326,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "69,77": {
     "terrain": 0,
@@ -14511,7 +14511,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "72,74": {
     "terrain": 0,
@@ -14526,7 +14526,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "72,75": {
     "terrain": 0,
@@ -14541,7 +14541,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9
+    "resource": 9
   },
   "72,76": {
     "terrain": 0,
@@ -24364,7 +24364,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 3,
-    "settlement": 31
+    "resource": 31
   },
   "66,18": {
     "terrain": 1,
@@ -25905,7 +25905,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 3,
-    "settlement": 31
+    "resource": 31
   },
   "82,18": {
     "terrain": 1,
@@ -28320,7 +28320,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 3,
-    "settlement": 31
+    "resource": 31
   },
   "87,26": {
     "terrain": 2,
@@ -29131,7 +29131,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 3,
-    "settlement": 31
+    "resource": 31
   },
   "80,28": {
     "terrain": 1,
@@ -29780,7 +29780,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 3,
-    "settlement": 31
+    "resource": 31
   },
   "66,30": {
     "terrain": 1,
@@ -32253,9 +32253,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 30,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "76,80": {
     "terrain": 2,
@@ -34255,8 +34255,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 47
   },
   "90,115": {
     "terrain": 0,
@@ -34363,7 +34363,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "90,116": {
     "terrain": 1,
@@ -48344,7 +48344,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 7
+    "resource": 7
   },
   "28,143": {
     "terrain": 1,
@@ -48388,7 +48388,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 7
+    "resource": 7
   },
   "28,146": {
     "terrain": 1,
@@ -50635,7 +50635,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,142": {
     "terrain": 0,
@@ -50643,7 +50643,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "45,143": {
     "terrain": 0,
@@ -50651,7 +50651,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,143": {
     "terrain": 0,
@@ -50659,7 +50659,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,142": {
     "terrain": 0,
@@ -50667,7 +50667,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,142": {
     "terrain": 0,
@@ -50675,7 +50675,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,143": {
     "terrain": 1,
@@ -50697,7 +50697,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "50,142": {
     "terrain": 1,
@@ -50852,7 +50852,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "50,141": {
     "terrain": 1,
@@ -51063,7 +51063,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "42,128": {
     "terrain": 0,
@@ -51071,7 +51071,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "41,129": {
     "terrain": 0,
@@ -51460,7 +51460,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "45,134": {
     "terrain": 0,
@@ -51482,7 +51482,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,135": {
     "terrain": 0,
@@ -51490,7 +51490,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,134": {
     "terrain": 0,
@@ -51512,7 +51512,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,135": {
     "terrain": 0,
@@ -51520,7 +51520,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "23,122": {
     "terrain": 2,
@@ -114359,7 +114359,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "88,118": {
     "terrain": 1,
@@ -114695,8 +114695,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "80,97": {
     "terrain": 0,
@@ -114727,9 +114727,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 33,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 33
   },
   "82,97": {
     "terrain": 1,
@@ -114760,8 +114760,8 @@
     "river": 0,
     "clan": 6,
     "spirit": 2,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "84,97": {
     "terrain": 3,
@@ -114999,8 +114999,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "83,108": {
     "terrain": 0,
@@ -117014,8 +117014,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "72,56": {
     "terrain": 0,
@@ -117023,8 +117023,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "71,57": {
     "terrain": 0,
@@ -117040,8 +117040,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "69,68": {
     "terrain": 0,
@@ -123072,9 +123072,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "90,49": {
     "terrain": 0,
@@ -123096,9 +123096,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "91,51": {
     "terrain": 0,
@@ -123127,9 +123127,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "93,53": {
     "terrain": 0,
@@ -123162,9 +123162,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "95,55": {
     "terrain": 0,
@@ -123186,9 +123186,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "96,56": {
     "terrain": 0,
@@ -130956,7 +130956,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "47,80": {
     "terrain": 0,
@@ -131642,7 +131642,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "39,133": {
     "terrain": 0,
@@ -131650,7 +131650,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "40,133": {
     "terrain": 0,
@@ -131694,7 +131694,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "40,128": {
     "terrain": 0,
@@ -131702,7 +131702,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "39,129": {
     "terrain": 0,
@@ -131726,7 +131726,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "40,130": {
     "terrain": 0,
@@ -131734,7 +131734,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "39,131": {
     "terrain": 0,
@@ -131750,7 +131750,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,140": {
     "terrain": 1,
@@ -131979,7 +131979,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,141": {
     "terrain": 0,
@@ -131987,7 +131987,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "41,150": {
     "terrain": 2,
@@ -133962,8 +133962,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "84,53": {
     "terrain": 0,
@@ -133994,8 +133994,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "82,53": {
     "terrain": 0,
@@ -134026,8 +134026,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "80,53": {
     "terrain": 0,
@@ -134092,8 +134092,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "78,53": {
     "terrain": 0,
@@ -134214,8 +134214,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "86,53": {
     "terrain": 0,
@@ -134274,8 +134274,8 @@
     "river": 0,
     "clan": 4,
     "fertility": 2,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "78,51": {
     "terrain": 0,
@@ -134304,8 +134304,8 @@
     "vegetation": 3,
     "river": 0,
     "clan": 4,
-    "settlement": 8,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "78,49": {
     "terrain": 0,
@@ -135420,8 +135420,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "74,58": {
     "terrain": 0,
@@ -135429,8 +135429,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "73,59": {
     "terrain": 0,
@@ -141013,8 +141013,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "86,98": {
     "terrain": 1,
@@ -141053,8 +141053,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "83,99": {
     "terrain": 0,
@@ -141081,9 +141081,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 33,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 33
   },
   "82,98": {
     "terrain": 0,
@@ -141091,8 +141091,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "81,99": {
     "terrain": 1,
@@ -141146,7 +141146,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "90,112": {
     "terrain": 0,
@@ -141154,7 +141154,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 15
+    "resource": 15
   },
   "89,113": {
     "terrain": 0,
@@ -141162,7 +141162,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "90,113": {
     "terrain": 0,
@@ -141170,7 +141170,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "85,120": {
     "terrain": 0,
@@ -141213,7 +141213,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "83,121": {
     "terrain": 0,
@@ -141235,7 +141235,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "86,118": {
     "terrain": 0,
@@ -141243,7 +141243,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "85,119": {
     "terrain": 0,
@@ -141251,7 +141251,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "86,119": {
     "terrain": 0,
@@ -141259,7 +141259,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "87,116": {
     "terrain": 0,
@@ -141267,7 +141267,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 17
+    "resource": 17
   },
   "88,116": {
     "terrain": 0,
@@ -141275,7 +141275,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 23
+    "resource": 23
   },
   "87,117": {
     "terrain": 0,
@@ -141283,7 +141283,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "88,117": {
     "terrain": 0,
@@ -141298,7 +141298,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "88,114": {
     "terrain": 0,
@@ -141306,7 +141306,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "87,115": {
     "terrain": 0,
@@ -141314,8 +141314,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 14
   },
   "88,115": {
     "terrain": 0,
@@ -141323,8 +141323,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "87,112": {
     "terrain": 0,
@@ -141332,7 +141332,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "88,112": {
     "terrain": 0,
@@ -141340,7 +141340,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "87,113": {
     "terrain": 0,
@@ -141348,7 +141348,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 15
+    "resource": 15
   },
   "88,113": {
     "terrain": 0,
@@ -141356,7 +141356,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 17
+    "resource": 17
   },
   "75,140": {
     "terrain": 0,
@@ -141803,7 +141803,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "82,120": {
     "terrain": 0,
@@ -141811,7 +141811,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 23
+    "resource": 23
   },
   "81,121": {
     "terrain": 0,
@@ -141819,7 +141819,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "82,121": {
     "terrain": 0,
@@ -143709,7 +143709,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "81,115": {
     "terrain": 0,
@@ -143724,7 +143724,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "83,114": {
     "terrain": 0,
@@ -143732,7 +143732,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 13
+    "resource": 13
   },
   "84,114": {
     "terrain": 0,
@@ -143740,7 +143740,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "83,115": {
     "terrain": 0,
@@ -143748,7 +143748,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "84,115": {
     "terrain": 0,
@@ -143756,7 +143756,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "85,114": {
     "terrain": 0,
@@ -143764,7 +143764,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 15
+    "resource": 15
   },
   "86,114": {
     "terrain": 0,
@@ -143780,7 +143780,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 17
+    "resource": 17
   },
   "86,115": {
     "terrain": 0,
@@ -143799,7 +143799,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "86,116": {
     "terrain": 0,
@@ -143807,7 +143807,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 13
+    "resource": 13
   },
   "85,117": {
     "terrain": 0,
@@ -143815,7 +143815,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "86,117": {
     "terrain": 0,
@@ -143830,7 +143830,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "84,116": {
     "terrain": 0,
@@ -143838,7 +143838,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "83,117": {
     "terrain": 0,
@@ -143846,7 +143846,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 13
+    "resource": 13
   },
   "84,117": {
     "terrain": 0,
@@ -143854,7 +143854,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "83,118": {
     "terrain": 0,
@@ -143862,7 +143862,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 15
+    "resource": 15
   },
   "84,118": {
     "terrain": 0,
@@ -143870,7 +143870,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "83,119": {
     "terrain": 0,
@@ -143878,7 +143878,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "84,119": {
     "terrain": 0,
@@ -143886,7 +143886,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "81,118": {
     "terrain": 0,
@@ -143901,7 +143901,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "81,119": {
     "terrain": 0,
@@ -143909,7 +143909,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "82,119": {
     "terrain": 0,
@@ -143917,7 +143917,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 17
+    "resource": 17
   },
   "79,118": {
     "terrain": 0,
@@ -144136,7 +144136,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "81,117": {
     "terrain": 0,
@@ -144144,7 +144144,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "82,117": {
     "terrain": 0,
@@ -144152,7 +144152,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "73,118": {
     "terrain": 0,
@@ -144471,7 +144471,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "90,108": {
     "terrain": 0,
@@ -144486,7 +144486,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "90,109": {
     "terrain": 0,
@@ -144501,7 +144501,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 23
+    "resource": 23
   },
   "90,110": {
     "terrain": 0,
@@ -144516,7 +144516,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "90,111": {
     "terrain": 0,
@@ -144531,7 +144531,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "88,110": {
     "terrain": 0,
@@ -144539,7 +144539,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "87,111": {
     "terrain": 0,
@@ -144547,7 +144547,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "88,111": {
     "terrain": 0,
@@ -144555,7 +144555,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 23
+    "resource": 23
   },
   "85,110": {
     "terrain": 0,
@@ -144563,7 +144563,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "86,110": {
     "terrain": 0,
@@ -144594,7 +144594,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "86,112": {
     "terrain": 0,
@@ -144610,7 +144610,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12
+    "resource": 12
   },
   "86,113": {
     "terrain": 0,
@@ -144626,7 +144626,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "84,112": {
     "terrain": 0,
@@ -144634,7 +144634,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "83,113": {
     "terrain": 0,
@@ -144642,7 +144642,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9
+    "resource": 9
   },
   "84,113": {
     "terrain": 0,
@@ -144650,7 +144650,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 16
+    "resource": 16
   },
   "81,112": {
     "terrain": 0,
@@ -144721,7 +144721,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 13
+    "resource": 13
   },
   "83,111": {
     "terrain": 0,
@@ -144736,7 +144736,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 13
+    "resource": 13
   },
   "87,108": {
     "terrain": 0,
@@ -144758,7 +144758,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 23
+    "resource": 23
   },
   "88,109": {
     "terrain": 0,
@@ -144766,7 +144766,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 14
+    "resource": 14
   },
   "85,108": {
     "terrain": 0,
@@ -144796,7 +144796,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47
+    "resource": 47
   },
   "85,106": {
     "terrain": 0,
@@ -145191,9 +145191,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "78,102": {
     "terrain": 3,
@@ -145208,9 +145208,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "78,103": {
     "terrain": 3,
@@ -145232,9 +145232,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "75,103": {
     "terrain": 0,
@@ -145249,9 +145249,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "77,100": {
     "terrain": 0,
@@ -145259,9 +145259,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "78,100": {
     "terrain": 0,
@@ -145277,9 +145277,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "78,101": {
     "terrain": 0,
@@ -145319,9 +145319,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 6,
-    "settlement": 8,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 8
   },
   "75,98": {
     "terrain": 0,
@@ -145475,16 +145475,16 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "78,98": {
     "terrain": 0,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "77,99": {
     "terrain": 0,
@@ -145519,8 +145519,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "75,97": {
     "terrain": 0,
@@ -145535,8 +145535,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "77,94": {
     "terrain": 0,
@@ -145566,9 +145566,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 15,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 15
   },
   "79,94": {
     "terrain": 0,
@@ -145590,9 +145590,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 15,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 15
   },
   "80,95": {
     "terrain": 0,
@@ -145601,9 +145601,9 @@
     "river": 0,
     "clan": 6,
     "spirit": 2,
-    "settlement": 15,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 15
   },
   "79,92": {
     "terrain": 1,
@@ -145802,7 +145802,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "76,95": {
     "terrain": 1,
@@ -145810,9 +145810,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 32,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 32
   },
   "73,92": {
     "terrain": 0,
@@ -147560,7 +147560,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "55,71": {
     "terrain": 0,
@@ -147582,7 +147582,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "58,72": {
     "terrain": 0,
@@ -147590,7 +147590,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "57,73": {
     "terrain": 0,
@@ -147598,7 +147598,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "58,73": {
     "terrain": 0,
@@ -147606,7 +147606,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "51,70": {
     "terrain": 0,
@@ -147649,7 +147649,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "51,73": {
     "terrain": 0,
@@ -147657,7 +147657,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "52,73": {
     "terrain": 0,
@@ -147665,7 +147665,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "51,74": {
     "terrain": 0,
@@ -147680,7 +147680,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "51,75": {
     "terrain": 0,
@@ -147688,7 +147688,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "52,75": {
     "terrain": 0,
@@ -147696,7 +147696,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 9
+    "resource": 9
   },
   "51,76": {
     "terrain": 0,
@@ -147725,7 +147725,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "51,78": {
     "terrain": 0,
@@ -147754,7 +147754,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "53,78": {
     "terrain": 0,
@@ -147923,7 +147923,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "49,74": {
     "terrain": 0,
@@ -147959,7 +147959,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "50,72": {
     "terrain": 0,
@@ -148030,7 +148030,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 6,
-    "settlement": 27
+    "resource": 27
   },
   "50,79": {
     "terrain": 0,
@@ -154183,8 +154183,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 1,
-    "settlement": 9,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "92,49": {
     "terrain": 0,
@@ -154210,9 +154210,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "94,54": {
     "terrain": 0,
@@ -154235,8 +154235,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 1,
-    "settlement": 8,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 8
   },
   "94,51": {
     "terrain": 1,
@@ -154252,9 +154252,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "96,53": {
     "terrain": 1,
@@ -154270,9 +154270,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "97,56": {
     "terrain": 0,
@@ -154280,9 +154280,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "infrastructure": 2,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "98,57": {
     "terrain": 0,
@@ -154291,8 +154291,8 @@
     "river": 0,
     "clan": 2,
     "fertility": 3,
-    "settlement": 9,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "98,56": {
     "terrain": 0,
@@ -154301,8 +154301,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 1,
-    "settlement": 9,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "97,57": {
     "terrain": 0,
@@ -154318,8 +154318,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 2,
-    "settlement": 9,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "92,52": {
     "terrain": 0,
@@ -154334,9 +154334,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "94,55": {
     "terrain": 0,
@@ -154344,9 +154344,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 47,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 47
   },
   "96,49": {
     "terrain": 0,
@@ -154505,9 +154505,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 7,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 7
   },
   "93,49": {
     "terrain": 1,
@@ -154516,8 +154516,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 1,
-    "settlement": 8,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 8
   },
   "93,48": {
     "terrain": 2,
@@ -154598,9 +154598,9 @@
     "vegetation": 3,
     "river": 0,
     "clan": 2,
-    "settlement": 8,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 8
   },
   "90,47": {
     "terrain": 0,
@@ -154608,9 +154608,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "86,44": {
     "terrain": 0,
@@ -155202,8 +155202,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "72,51": {
     "terrain": 0,
@@ -155218,8 +155218,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "71,51": {
     "terrain": 0,
@@ -155574,8 +155574,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 47,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 47
   },
   "70,54": {
     "terrain": 0,
@@ -155583,9 +155583,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "70,55": {
     "terrain": 0,
@@ -155593,8 +155593,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "69,53": {
     "terrain": 0,
@@ -155616,9 +155616,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 12,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "71,54": {
     "terrain": 0,
@@ -155627,8 +155627,8 @@
     "river": 0,
     "infrastructure": 2,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "72,53": {
     "terrain": 0,
@@ -155636,8 +155636,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 47,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 47
   },
   "73,53": {
     "terrain": 0,
@@ -155645,8 +155645,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 12,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 12
   },
   "72,54": {
     "terrain": 0,
@@ -155654,9 +155654,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 12,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "73,54": {
     "terrain": 0,
@@ -155664,9 +155664,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "74,54": {
     "terrain": 0,
@@ -155685,8 +155685,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "73,55": {
     "terrain": 0,
@@ -155694,8 +155694,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 47,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 47
   },
   "71,55": {
     "terrain": 0,
@@ -155703,9 +155703,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 12,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "69,56": {
     "terrain": 0,
@@ -155713,8 +155713,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "70,56": {
     "terrain": 0,
@@ -155722,8 +155722,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "69,57": {
     "terrain": 0,
@@ -155755,8 +155755,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 12,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 12
   },
   "73,56": {
     "terrain": 0,
@@ -155764,8 +155764,8 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 9,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 9
   },
   "72,50": {
     "terrain": 0,
@@ -156587,9 +156587,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 30,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 30
   },
   "55,49": {
     "terrain": 0,
@@ -163589,9 +163589,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 9,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 9
   },
   "90,51": {
     "terrain": 0,
@@ -163600,8 +163600,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 2,
-    "settlement": 47,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 47
   },
   "91,52": {
     "terrain": 0,
@@ -163610,8 +163610,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 2,
-    "settlement": 9,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "91,47": {
     "terrain": 0,
@@ -163620,8 +163620,8 @@
     "river": 0,
     "clan": 2,
     "infrastructure": 1,
-    "settlement": 9,
-    "fertility": 3
+    "fertility": 3,
+    "resource": 9
   },
   "91,46": {
     "terrain": 0,
@@ -163674,9 +163674,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 36,
     "fertility": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 36
   },
   "93,45": {
     "terrain": 0,
@@ -163839,9 +163839,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 12,
     "fertility": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "resource": 12
   },
   "89,50": {
     "terrain": 2,
@@ -163849,9 +163849,9 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 33,
     "infrastructure": 2,
-    "fertility": 2
+    "fertility": 2,
+    "resource": 33
   },
   "87,50": {
     "terrain": 0,
@@ -168119,7 +168119,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "50,136": {
     "terrain": 0,
@@ -168640,7 +168640,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,136": {
     "terrain": 0,
@@ -168648,7 +168648,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,137": {
     "terrain": 0,
@@ -168656,7 +168656,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,137": {
     "terrain": 0,
@@ -168664,7 +168664,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,138": {
     "terrain": 0,
@@ -168672,7 +168672,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,138": {
     "terrain": 0,
@@ -168680,7 +168680,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "47,139": {
     "terrain": 0,
@@ -168688,7 +168688,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "48,139": {
     "terrain": 0,
@@ -168696,7 +168696,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,138": {
     "terrain": 0,
@@ -168704,7 +168704,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,139": {
     "terrain": 0,
@@ -168728,7 +168728,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "45,137": {
     "terrain": 0,
@@ -168736,7 +168736,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,137": {
     "terrain": 0,
@@ -168744,7 +168744,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "45,136": {
     "terrain": 0,
@@ -168759,7 +168759,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,136": {
     "terrain": 0,
@@ -168767,7 +168767,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,137": {
     "terrain": 0,
@@ -168791,7 +168791,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "42,136": {
     "terrain": 0,
@@ -168869,7 +168869,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "41,139": {
     "terrain": 0,
@@ -168884,7 +168884,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "43,138": {
     "terrain": 0,
@@ -168892,7 +168892,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "43,139": {
     "terrain": 0,
@@ -168900,7 +168900,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,138": {
     "terrain": 0,
@@ -168908,7 +168908,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,139": {
     "terrain": 0,
@@ -168916,7 +168916,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,137": {
     "terrain": 0,
@@ -169333,7 +169333,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,133": {
     "terrain": 0,
@@ -169341,7 +169341,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,133": {
     "terrain": 0,
@@ -169349,7 +169349,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,134": {
     "terrain": 0,
@@ -169364,7 +169364,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "35,134": {
     "terrain": 0,
@@ -169379,7 +169379,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,134": {
     "terrain": 0,
@@ -169518,7 +169518,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,131": {
     "terrain": 0,
@@ -169534,7 +169534,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "35,131": {
     "terrain": 0,
@@ -169550,7 +169550,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,131": {
     "terrain": 0,
@@ -169558,7 +169558,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,132": {
     "terrain": 0,
@@ -169566,7 +169566,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,131": {
     "terrain": 0,
@@ -169574,7 +169574,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,132": {
     "terrain": 0,
@@ -169582,7 +169582,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,131": {
     "terrain": 0,
@@ -169590,7 +169590,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,132": {
     "terrain": 0,
@@ -169598,7 +169598,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,130": {
     "terrain": 0,
@@ -169607,7 +169607,7 @@
     "river": 0,
     "infrastructure": 1,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,130": {
     "terrain": 0,
@@ -169631,7 +169631,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,130": {
     "terrain": 0,
@@ -169639,7 +169639,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "33,129": {
     "terrain": 0,
@@ -169647,7 +169647,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,129": {
     "terrain": 0,
@@ -169655,7 +169655,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "33,130": {
     "terrain": 0,
@@ -169663,7 +169663,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "33,128": {
     "terrain": 0,
@@ -169671,7 +169671,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,128": {
     "terrain": 0,
@@ -169679,7 +169679,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "32,128": {
     "terrain": 0,
@@ -169715,7 +169715,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,129": {
     "terrain": 0,
@@ -169723,7 +169723,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,129": {
     "terrain": 0,
@@ -169742,7 +169742,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,128": {
     "terrain": 0,
@@ -169750,7 +169750,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "35,129": {
     "terrain": 0,
@@ -169758,7 +169758,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,128": {
     "terrain": 0,
@@ -169766,7 +169766,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,128": {
     "terrain": 0,
@@ -169782,7 +169782,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "37,127": {
     "terrain": 0,
@@ -169790,7 +169790,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "35,127": {
     "terrain": 0,
@@ -169805,7 +169805,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,126": {
     "terrain": 0,
@@ -169813,7 +169813,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,126": {
     "terrain": 0,
@@ -169821,7 +169821,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,127": {
     "terrain": 0,
@@ -169829,7 +169829,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "34,125": {
     "terrain": 0,
@@ -169973,7 +169973,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,125": {
     "terrain": 0,
@@ -169989,7 +169989,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,126": {
     "terrain": 0,
@@ -170005,7 +170005,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "38,127": {
     "terrain": 0,
@@ -170021,7 +170021,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "40,126": {
     "terrain": 0,
@@ -170029,7 +170029,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "40,127": {
     "terrain": 0,
@@ -170037,7 +170037,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "41,126": {
     "terrain": 0,
@@ -170045,7 +170045,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "41,127": {
     "terrain": 0,
@@ -170053,7 +170053,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "42,126": {
     "terrain": 0,
@@ -170215,7 +170215,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "36,125": {
     "terrain": 0,
@@ -170687,7 +170687,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "45,141": {
     "terrain": 0,
@@ -170695,7 +170695,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "46,140": {
     "terrain": 0,
@@ -170711,7 +170711,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "49,137": {
     "terrain": 0,
@@ -170719,7 +170719,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "50,137": {
     "terrain": 0,
@@ -170727,7 +170727,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "43,141": {
     "terrain": 0,
@@ -170735,7 +170735,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,143": {
     "terrain": 0,
@@ -170743,7 +170743,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "44,144": {
     "terrain": 0,
@@ -170758,7 +170758,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 9
+    "resource": 9
   },
   "43,142": {
     "terrain": 7,
@@ -171489,7 +171489,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 1,
-    "settlement": 7
+    "resource": 7
   },
   "32,147": {
     "terrain": 0,

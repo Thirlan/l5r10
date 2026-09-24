@@ -77,7 +77,8 @@ class WorldMapViewer extends WorldMapRenderer {
         const t = parsed.terrain ? parsed.terrain[k] : null;
         const c = parsed.clans ? parsed.clans[k] : null;
         const i = parsed.infrastructure ? parsed.infrastructure[k] : null;
-        const s = parsed.settlements ? parsed.settlements[k] : null;
+        const s = parsed.settlements ? parsed.settlements[k] : (parsed.settlement ? parsed.settlement[k] : null);
+        const r = parsed.resources ? parsed.resources[k] : (parsed.resource ? parsed.resource[k] : null);
         const txt = parsed.text ? parsed.text[k] : null;
 
         let tId = 0, cId = 0, vId = 0, rId = 0;
@@ -92,15 +93,12 @@ class WorldMapViewer extends WorldMapRenderer {
           this.grid[k].clan = this.layerMaps.clan.nameToId[c.toLowerCase()];
         }
         if (s) {
-          if (typeof s === "string" && this.layerMaps.settlement) {
-            this.grid[k].settlement = this.layerMaps.settlement.nameToId[s.toLowerCase()];
-          } else if (typeof s === "object") {
-            if (this.layerMaps.settlement) {
-              this.grid[k].settlement = this.layerMaps.settlement.nameToId[(s.type || "").toLowerCase()];
-            }
-            if (s.englishName) this.grid[k].englishName = s.englishName;
-            if (s.rokuganiName) this.grid[k].rokuganiName = s.rokuganiName;
-          }
+          const locationValue = typeof s === "object" ? s.type : s;
+          this.assignLocationValue(this.grid[k], locationValue, typeof s === "object" ? s : {});
+        }
+        if (r !== undefined && r !== null) {
+          const resourceId = this.layerId("resource", typeof r === "object" ? r.type : r);
+          if (resourceId !== null) this.grid[k].resource = resourceId;
         }
         if (txt) this.grid[k].text = txt;
         for (const oName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
@@ -114,7 +112,7 @@ class WorldMapViewer extends WorldMapRenderer {
         }
       }
     } else {
-      this.grid = parsed;
+      this.grid = this.normalizeGridData(parsed);
     }
     this.render();
   }
@@ -355,6 +353,7 @@ class WorldMapViewer extends WorldMapRenderer {
       if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
+      else if (layerName === "resource") this.drawResourcesLayer();
       else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
       else if (layerName === "text") this.drawTextLayer();
     }

@@ -15,7 +15,7 @@ class WorldMapRenderer {
     this.maxZoom = 4;
 
     this.layersConfig = null;
-    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "settlement", "clan", "text"];
+    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "text"];
     this.layerMaps = {};
 
     this.grid = {};
@@ -86,6 +86,66 @@ class WorldMapRenderer {
     if (!["english", "rokugani"].includes(language)) return;
     this.settlementLanguage = language;
     this.redraw();
+  }
+
+  layerId(layerName, value) {
+    if (value === undefined || value === null || value === "") return null;
+    const map = this.layerMaps[layerName];
+    if (!map) return typeof value === "number" ? value : null;
+    if (typeof value === "number") return map.idToItem[value] ? value : null;
+    return map.nameToId[String(value).toLowerCase()] ?? null;
+  }
+
+  layerItem(layerName, value) {
+    if (value === undefined || value === null || value === "") return null;
+    const map = this.layerMaps[layerName];
+    if (!map) return null;
+    return typeof value === "number"
+      ? (map.idToItem[value] || null)
+      : (map.nameToItem[String(value).toLowerCase()] || null);
+  }
+
+  assignLocationValue(cell, value, names = {}) {
+    const settlementId = this.layerId("settlement", value);
+    if (settlementId !== null) {
+      cell.settlement = settlementId;
+      if (names.englishName) cell.englishName = names.englishName;
+      if (names.rokuganiName) cell.rokuganiName = names.rokuganiName;
+      return "settlement";
+    }
+
+    const resourceId = this.layerId("resource", value);
+    if (resourceId !== null) {
+      cell.resource = resourceId;
+      return "resource";
+    }
+
+    return null;
+  }
+
+  normalizeGridData(grid) {
+    const normalized = {};
+    for (const [key, originalCell] of Object.entries(grid || {})) {
+      const cell = { ...originalCell };
+
+      if (cell.settlement !== undefined) {
+        const settlementValue = cell.settlement;
+        const names = { englishName: cell.englishName, rokuganiName: cell.rokuganiName };
+        delete cell.settlement;
+        delete cell.englishName;
+        delete cell.rokuganiName;
+        this.assignLocationValue(cell, settlementValue, names);
+      }
+
+      if (cell.resource !== undefined) {
+        const resourceId = this.layerId("resource", cell.resource);
+        if (resourceId !== null) cell.resource = resourceId;
+        else delete cell.resource;
+      }
+
+      normalized[key] = cell;
+    }
+    return normalized;
   }
 
   setZoom(zoom) {
@@ -322,12 +382,18 @@ class WorldMapRenderer {
     }
   }
 
+  drawResourcesLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      if (!cell.resource) continue;
+      const [x, y] = key.split(",").map(Number);
+      this.drawResourceMarker(x, y, cell.resource);
+    }
+  }
+
   drawSettlementMarker(x, y, cell) {
     const { settlement: setVal } = cell;
-    let typeName = setVal;
-    if (typeof setVal === "number" && this.layerMaps.settlement) {
-      typeName = this.layerMaps.settlement.idToName[setVal] || setVal;
-    }
+    const setItem = this.layerItem("settlement", setVal);
+    const typeName = setItem ? setItem.name : setVal;
 
     const size = this.gridSize;
     const cx = x * size + size / 2;
@@ -339,7 +405,6 @@ class WorldMapRenderer {
     }
     const clanItem = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[String(clanName).toLowerCase()] : null;
     const clanColors = clanItem || { border: "#444444", fill: "#DDDDDD" };
-    const setItem = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(typeName).toLowerCase()] : null;
 
     const fillColor = clanColors.fill || "#DDDDDD";
     const borderColor = clanColors.border || "#444444";
@@ -380,12 +445,21 @@ class WorldMapRenderer {
     ctx.restore();
   }
 
+  drawResourceMarker(x, y, resourceVal) {
+    const item = this.layerItem("resource", resourceVal);
+    if (!item || !item.image) return;
+
+    const size = this.gridSize;
+    const cx = x * size + size / 2;
+    const cy = y * size + size / 2;
+    const img = this.settlementImage(item.image);
+    if (img.complete && img.naturalWidth) this.ctx.drawImage(img, cx - 6, cy - 6, 12, 12);
+  }
+
   drawSettlementText(x, y, cell) {
     const { settlement: setVal, englishName = "", rokuganiName = "" } = cell;
-    let typeName = setVal;
-    if (typeof setVal === "number" && this.layerMaps.settlement) {
-      typeName = this.layerMaps.settlement.idToName[setVal] || setVal;
-    }
+    const setItem = this.layerItem("settlement", setVal);
+    const typeName = setItem ? setItem.name : setVal;
 
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
@@ -434,7 +508,7 @@ class WorldMapRenderer {
   }
 
   settlementFontSize(type) {
-    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Lumber Mill": 6, "Small Shrine": 6, "Large Shrine": 8 }[type] || 6;
+    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Small Shrine": 6, "Large Shrine": 8 }[type] || 6;
   }
 
   englishSettlementType(type) {
@@ -446,7 +520,7 @@ class WorldMapRenderer {
   rokuganiSettlementType(type) {
     const item = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(type).toLowerCase()] : null;
     if (item && item.rokuganiType !== undefined) return item.rokuganiType;
-    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", "Lumber Mill": "Seizaijo", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
+    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
   }
 
   drawTextLayer() {
