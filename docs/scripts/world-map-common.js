@@ -176,14 +176,24 @@ class WorldMapRenderer {
 
       if (!connected) {
         const halfLength = this.gridSize * 0.25;
-        riverStripeColors.forEach((color, index) => {
-          const offset = riverStripeOffsets[index] * stripeSpacing;
-          ctx.beginPath();
-          ctx.strokeStyle = color;
-          ctx.lineWidth = stripeWidth;
-          ctx.moveTo(cx - halfLength, cy + offset);
-          ctx.lineTo(cx + halfLength, cy + offset);
-          ctx.stroke();
+        [[1, 0], [0, 1]].forEach(([dx, dy]) => {
+          const nx = -dy;
+          const ny = dx;
+          riverStripeColors.forEach((color, index) => {
+            const offset = riverStripeOffsets[index] * stripeSpacing;
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = stripeWidth;
+            ctx.moveTo(
+              cx - dx * halfLength + nx * offset,
+              cy - dy * halfLength + ny * offset
+            );
+            ctx.lineTo(
+              cx + dx * halfLength + nx * offset,
+              cy + dy * halfLength + ny * offset
+            );
+            ctx.stroke();
+          });
         });
       }
 
