@@ -129,6 +129,9 @@ class WorldMapRenderer {
   }
 
   drawRiverLayer() {
+    const riverStripeColors = ["#F4A460", "#ADD8E6", "#0000FF", "#ADD8E6", "#F4A460"];
+    const riverStripeOffsets = [-2, -1, 0, 1, 2];
+
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.river) continue;
       const [x, y] = key.split(",").map(Number);
@@ -140,28 +143,58 @@ class WorldMapRenderer {
       const ctx = this.ctx;
 
       ctx.save();
-      ctx.strokeStyle = item.color || "#00008B";
-      ctx.lineWidth = item.lineWidth || 4;
       ctx.lineCap = "round";
+      const stripeWidth = Math.max(1.25, (item.lineWidth || 4) * 0.45);
+      const stripeSpacing = stripeWidth * 0.85;
 
-      const neighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-      let connected = false;
-      for (const [dx, dy] of neighbors) {
+      const allNeighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+      const connected = allNeighbors.some(([dx, dy]) => {
+        const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
+        return neighborCell && neighborCell.river;
+      });
+
+      const forwardNeighbors = [[1, 0], [0, 1]];
+      for (const [dx, dy] of forwardNeighbors) {
         const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
         if (neighborCell && neighborCell.river) {
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(cx + dx * (this.gridSize / 2), cy + dy * (this.gridSize / 2));
-          ctx.stroke();
-          connected = true;
+          const nx = -dy;
+          const ny = dx;
+          riverStripeColors.forEach((color, index) => {
+            const offset = riverStripeOffsets[index] * stripeSpacing;
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = stripeWidth;
+            ctx.moveTo(cx + nx * offset, cy + ny * offset);
+            ctx.lineTo(
+              cx + dx * this.gridSize + nx * offset,
+              cy + dy * this.gridSize + ny * offset
+            );
+            ctx.stroke();
+          });
         }
       }
 
       if (!connected) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, ctx.lineWidth, 0, Math.PI * 2);
-        ctx.fillStyle = ctx.strokeStyle;
-        ctx.fill();
+        const halfLength = this.gridSize * 0.25;
+        [[1, 0], [0, 1]].forEach(([dx, dy]) => {
+          const nx = -dy;
+          const ny = dx;
+          riverStripeColors.forEach((color, index) => {
+            const offset = riverStripeOffsets[index] * stripeSpacing;
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = stripeWidth;
+            ctx.moveTo(
+              cx - dx * halfLength + nx * offset,
+              cy - dy * halfLength + ny * offset
+            );
+            ctx.lineTo(
+              cx + dx * halfLength + nx * offset,
+              cy + dy * halfLength + ny * offset
+            );
+            ctx.stroke();
+          });
+        });
       }
 
       ctx.restore();
