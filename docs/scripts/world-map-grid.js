@@ -299,53 +299,7 @@ class WorldMapGrid extends WorldMapRenderer {
   loadFromJSON(jsonString) {
     try {
       const parsed = JSON.parse(jsonString);
-      if (parsed.terrain) {
-        this.grid = {};
-        const allKeys = new Set();
-        for (const lName of Object.keys(parsed)) {
-          for (const k of Object.keys(parsed[lName])) allKeys.add(k);
-        }
-        for (const k of allKeys) {
-          const t = parsed.terrain ? parsed.terrain[k] : null;
-          const c = parsed.clans ? parsed.clans[k] : null;
-          const i = parsed.infrastructure ? parsed.infrastructure[k] : null;
-          const s = parsed.settlements ? parsed.settlements[k] : (parsed.settlement ? parsed.settlement[k] : null);
-          const r = parsed.resources ? parsed.resources[k] : (parsed.resource ? parsed.resource[k] : null);
-          const txt = parsed.text ? parsed.text[k] : null;
-
-          let tId = 0, cId = 0, vId = 0, rId = 0;
-          if (t && this.layerMaps.terrain) {
-            tId = this.layerMaps.terrain.nameToId[t.toLowerCase()] ?? 0;
-          }
-          this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };
-          if (i && this.layerMaps.infrastructure) {
-            this.grid[k].infrastructure = this.layerMaps.infrastructure.nameToId[i.toLowerCase()];
-          }
-          if (c && this.layerMaps.clan) {
-            this.grid[k].clan = this.layerMaps.clan.nameToId[c.toLowerCase()];
-          }
-          if (s) {
-            const locationValue = typeof s === "object" ? s.type : s;
-            this.assignLocationValue(this.grid[k], locationValue, typeof s === "object" ? s : {});
-          }
-          if (r !== undefined && r !== null) {
-            const resourceId = this.layerId("resource", typeof r === "object" ? r.type : r);
-            if (resourceId !== null) this.grid[k].resource = resourceId;
-          }
-          if (txt) this.grid[k].text = txt;
-          for (const oName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
-            if (parsed[oName] && parsed[oName][k] !== undefined) {
-              let oVal = parsed[oName][k];
-              if (typeof oVal === "string" && this.layerMaps[oName]) {
-                oVal = this.layerMaps[oName].nameToId[oVal.toLowerCase()] ?? 0;
-              }
-              this.grid[k][oName] = oVal;
-            }
-          }
-        }
-      } else {
-        this.grid = this.normalizeGridData(parsed);
-      }
+      this.grid = this.normalizeGridData(parsed);
       this.draw();
       return true;
     } catch (e) {

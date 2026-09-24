@@ -105,42 +105,15 @@ class WorldMapRenderer {
       : (map.nameToItem[String(value).toLowerCase()] || null);
   }
 
-  assignLocationValue(cell, value, names = {}) {
-    const settlementId = this.layerId("settlement", value);
-    if (settlementId !== null) {
-      cell.settlement = settlementId;
-      if (names.englishName) cell.englishName = names.englishName;
-      if (names.rokuganiName) cell.rokuganiName = names.rokuganiName;
-      return "settlement";
-    }
-
-    const resourceId = this.layerId("resource", value);
-    if (resourceId !== null) {
-      cell.resource = resourceId;
-      return "resource";
-    }
-
-    return null;
-  }
-
   normalizeGridData(grid) {
     const normalized = {};
     for (const [key, originalCell] of Object.entries(grid || {})) {
       const cell = { ...originalCell };
-
-      if (cell.settlement !== undefined) {
-        const settlementValue = cell.settlement;
-        const names = { englishName: cell.englishName, rokuganiName: cell.rokuganiName };
-        delete cell.settlement;
-        delete cell.englishName;
-        delete cell.rokuganiName;
-        this.assignLocationValue(cell, settlementValue, names);
-      }
-
-      if (cell.resource !== undefined) {
-        const resourceId = this.layerId("resource", cell.resource);
-        if (resourceId !== null) cell.resource = resourceId;
-        else delete cell.resource;
+      for (const layerName of ["terrain", "climate", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "animal", "spirit", "shadowland", "crime", "fertility"]) {
+        if (cell[layerName] === undefined) continue;
+        const layerValue = this.layerId(layerName, cell[layerName]);
+        if (layerValue !== null) cell[layerName] = layerValue;
+        else delete cell[layerName];
       }
 
       normalized[key] = cell;
