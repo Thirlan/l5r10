@@ -147,9 +147,14 @@ class WorldMapRenderer {
       const stripeWidth = Math.max(1.25, (item.lineWidth || 4) * 0.45);
       const stripeSpacing = stripeWidth * 0.85;
 
-      const neighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-      let connected = false;
-      for (const [dx, dy] of neighbors) {
+      const allNeighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+      const connected = allNeighbors.some(([dx, dy]) => {
+        const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
+        return neighborCell && neighborCell.river;
+      });
+
+      const forwardNeighbors = [[1, 0], [0, 1]];
+      for (const [dx, dy] of forwardNeighbors) {
         const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
         if (neighborCell && neighborCell.river) {
           const nx = -dy;
@@ -161,12 +166,11 @@ class WorldMapRenderer {
             ctx.lineWidth = stripeWidth;
             ctx.moveTo(cx + nx * offset, cy + ny * offset);
             ctx.lineTo(
-              cx + dx * (this.gridSize / 2) + nx * offset,
-              cy + dy * (this.gridSize / 2) + ny * offset
+              cx + dx * this.gridSize + nx * offset,
+              cy + dy * this.gridSize + ny * offset
             );
             ctx.stroke();
           });
-          connected = true;
         }
       }
 
