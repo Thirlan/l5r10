@@ -111,6 +111,8 @@ class WorldMapGrid extends WorldMapRenderer {
             cell[layerToErase] = 0;
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
+          } else if (layerToErase === "resource" || layerToErase === "resources") {
+            delete cell.resource;
           } else if (layerToErase === "clan" || layerToErase === "clans") {
             delete cell.clan;
           } else if (layerToErase === "settlement" || layerToErase === "settlements") {
@@ -134,6 +136,8 @@ class WorldMapGrid extends WorldMapRenderer {
           cell[this.currentLayer] = valId ?? 0;
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
+        } else if (this.currentLayer === "resource" || this.currentLayer === "resources") {
+          cell.resource = valId;
         } else if (this.currentLayer === "clan" || this.currentLayer === "clans") {
           cell.clan = valId;
         } else if (this.currentLayer === "settlement" || this.currentLayer === "settlements") {
@@ -216,6 +220,7 @@ class WorldMapGrid extends WorldMapRenderer {
       if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
+      else if (layerName === "resource") this.drawResourcesLayer();
       else if (layerName === "clan") this.drawClanBoundariesLayer();
       else if (layerName === "text") this.drawTextLayer();
     }
@@ -294,55 +299,7 @@ class WorldMapGrid extends WorldMapRenderer {
   loadFromJSON(jsonString) {
     try {
       const parsed = JSON.parse(jsonString);
-      if (parsed.terrain) {
-        this.grid = {};
-        const allKeys = new Set();
-        for (const lName of Object.keys(parsed)) {
-          for (const k of Object.keys(parsed[lName])) allKeys.add(k);
-        }
-        for (const k of allKeys) {
-          const t = parsed.terrain ? parsed.terrain[k] : null;
-          const c = parsed.clans ? parsed.clans[k] : null;
-          const i = parsed.infrastructure ? parsed.infrastructure[k] : null;
-          const s = parsed.settlements ? parsed.settlements[k] : null;
-          const txt = parsed.text ? parsed.text[k] : null;
-
-          let tId = 0, cId = 0, vId = 0, rId = 0;
-          if (t && this.layerMaps.terrain) {
-            tId = this.layerMaps.terrain.nameToId[t.toLowerCase()] ?? 0;
-          }
-          this.grid[k] = { terrain: tId, climate: cId, vegetation: vId, river: rId };
-          if (i && this.layerMaps.infrastructure) {
-            this.grid[k].infrastructure = this.layerMaps.infrastructure.nameToId[i.toLowerCase()];
-          }
-          if (c && this.layerMaps.clan) {
-            this.grid[k].clan = this.layerMaps.clan.nameToId[c.toLowerCase()];
-          }
-          if (s) {
-            if (typeof s === "string" && this.layerMaps.settlement) {
-              this.grid[k].settlement = this.layerMaps.settlement.nameToId[s.toLowerCase()];
-            } else if (typeof s === "object") {
-              if (this.layerMaps.settlement) {
-                this.grid[k].settlement = this.layerMaps.settlement.nameToId[(s.type || "").toLowerCase()];
-              }
-              if (s.englishName) this.grid[k].englishName = s.englishName;
-              if (s.rokuganiName) this.grid[k].rokuganiName = s.rokuganiName;
-            }
-          }
-          if (txt) this.grid[k].text = txt;
-          for (const oName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
-            if (parsed[oName] && parsed[oName][k] !== undefined) {
-              let oVal = parsed[oName][k];
-              if (typeof oVal === "string" && this.layerMaps[oName]) {
-                oVal = this.layerMaps[oName].nameToId[oVal.toLowerCase()] ?? 0;
-              }
-              this.grid[k][oName] = oVal;
-            }
-          }
-        }
-      } else {
-        this.grid = parsed;
-      }
+      this.grid = this.normalizeGridData(parsed);
       this.draw();
       return true;
     } catch (e) {
