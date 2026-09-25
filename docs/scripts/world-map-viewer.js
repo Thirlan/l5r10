@@ -12,7 +12,19 @@ class WorldMapViewer extends WorldMapRenderer {
     super(canvasSelector, gridSize, { zoom: 0.55 });
 
     this.terrainCosts = {};
-    this.viewMode = "default";
+    this.layerVisibility = {
+      infrastructure: true,
+      clan: true,
+      vegetation: true,
+      river: true,
+      settlement: true,
+      resource: true,
+      animal: false,
+      spirit: false,
+      shadowland: false,
+      crime: false,
+      fertility: false
+    };
     this.routePreferences = { includeRisk: false, includeMoney: false };
     this.skillConfig = TravelEventEngine.defaultSkillConfig();
 
@@ -96,7 +108,16 @@ class WorldMapViewer extends WorldMapRenderer {
     }
   }
 
-  setViewMode(mode) { this.viewMode = mode; this.render(); }
+  isLayerVisible(layerName) {
+    if (layerName === "terrain" || layerName === "climate") return true;
+    return this.layerVisibility[layerName] ?? true;
+  }
+
+  setLayerVisibility(layerName, visible) {
+    if (!(layerName in this.layerVisibility)) return;
+    this.layerVisibility[layerName] = visible;
+    this.render();
+  }
 
   setRoutePreference(preference, enabled) {
     if (!(preference in this.routePreferences)) return;
@@ -304,16 +325,17 @@ class WorldMapViewer extends WorldMapRenderer {
 
     // Draw remaining layers
     for (const layerName of this.drawOrder) {
+      if (!this.isLayerVisible(layerName)) continue;
       if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "resource") this.drawResourcesLayer();
-      else if (layerName === "clan" && this.viewMode !== "terrain") this.drawClanLayer();
+      else if (layerName === "clan") this.drawClanLayer();
       else if (layerName === "text") this.drawTextLayer();
     }
 
-    if (["animal", "spirit", "shadowland", "crime", "fertility"].includes(this.viewMode)) {
-      this.drawOverlayLayer(this.viewMode);
+    for (const layerName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
+      if (this.isLayerVisible(layerName)) this.drawOverlayLayer(layerName);
     }
 
     this.drawGrid();
@@ -333,7 +355,7 @@ class WorldMapViewer extends WorldMapRenderer {
 
   drawClanLayer() {
     const cellsByClan = this.clanCellGroups();
-    const fillAlpha = this.viewMode === "clan" ? 0.4 : 0.15;
+    const fillAlpha = 0.15;
     for (const [clan, cells] of Object.entries(cellsByClan)) {
       const colors = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[clan.toLowerCase()] : { border: "#00008B", fill: "#808080" };
       if (!colors) continue;

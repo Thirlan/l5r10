@@ -33,6 +33,8 @@ class WorldMapRenderer {
   // Repaint the whole canvas. Subclasses implement this (draw / render).
   redraw() {}
 
+  isLayerVisible(_layerName) { return true; }
+
   async loadMapTileImages() {
     try {
       const res = await fetch("../scripts/map_tile_img.json");
@@ -150,7 +152,7 @@ class WorldMapRenderer {
       const t = cell.terrain ?? 0;
       const c = cell.climate ?? 0;
       const isWater = (t === 3 || t === 4 || t === 5);
-      const v = isWater ? 0 : (cell.vegetation ?? 0);
+      const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ?? 0);
 
       const tileKey = t + "," + c + "," + v;
       const img = this.tileImageMap[tileKey];
