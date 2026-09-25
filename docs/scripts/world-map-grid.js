@@ -222,7 +222,6 @@ class WorldMapGrid extends WorldMapRenderer {
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "resource") this.drawResourcesLayer();
       else if (layerName === "clan") this.drawClanBoundariesLayer();
-      else if (layerName === "text") this.drawTextLayer();
     }
 
     const activeOverlay = this.getActiveOverlayLayer();
@@ -231,6 +230,7 @@ class WorldMapGrid extends WorldMapRenderer {
     }
 
     this.drawGrid();
+    if (this.drawOrder.includes("text")) this.drawTextLayer();
   }
 
   drawClanBoundariesLayer() {

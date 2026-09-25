@@ -350,11 +350,6 @@ class WorldMapRenderer {
       const [x, y] = key.split(",").map(Number);
       this.drawSettlementMarker(x, y, cell);
     }
-    for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.settlement) continue;
-      const [x, y] = key.split(",").map(Number);
-      this.drawSettlementText(x, y, cell);
-    }
   }
 
   drawResourcesLayer() {
@@ -444,6 +439,18 @@ class WorldMapRenderer {
     this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(typeName));
   }
 
+  drawResourceText(x, y, resourceVal) {
+    const item = this.layerItem("resource", resourceVal);
+    if (!item) return;
+
+    const label = this.settlementLanguage === "english"
+      ? item.englishType || item.name
+      : item.rokuganiType || item.name;
+    const cx = x * this.gridSize + this.gridSize / 2;
+    const cy = y * this.gridSize + this.gridSize / 2;
+    this.drawMapText(label, cx, cy + this.gridSize / 2 + 3, 6);
+  }
+
   settlementImage(src) {
     let img = this.settlementImages[src];
     if (!img) {
@@ -500,9 +507,10 @@ class WorldMapRenderer {
 
   drawTextLayer() {
     for (const [key, cell] of Object.entries(this.grid)) {
-      if (!cell.text) continue;
       const [x, y] = key.split(",").map(Number);
-      this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 14);
+      if (cell.text) this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 14);
+      if (cell.settlement) this.drawSettlementText(x, y, cell);
+      if (cell.resource) this.drawResourceText(x, y, cell.resource);
     }
   }
 

@@ -331,7 +331,6 @@ class WorldMapViewer extends WorldMapRenderer {
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "resource") this.drawResourcesLayer();
       else if (layerName === "clan") this.drawClanLayer();
-      else if (layerName === "text") this.drawTextLayer();
     }
 
     const activeOverlays = ["animal", "spirit", "shadowland", "crime", "fertility"]
@@ -351,6 +350,8 @@ class WorldMapViewer extends WorldMapRenderer {
         this.drawText(x, y, label, 8);
       }
     }
+
+    if (this.drawOrder.includes("text")) this.drawTextLayer();
   }
 
   drawClanLayer() {
