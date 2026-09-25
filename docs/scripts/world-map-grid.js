@@ -75,7 +75,7 @@ class WorldMapGrid extends WorldMapRenderer {
 
   ensureCell(key) {
     if (!this.grid[key]) {
-      this.grid[key] = { terrain: 0, climate: 0, vegetation: 0, river: 0 };
+      this.grid[key] = {};
     }
     return this.grid[key];
   }
@@ -108,7 +108,7 @@ class WorldMapGrid extends WorldMapRenderer {
           const layerToErase = this.currentValue;
           const cell = this.grid[cellKey];
           if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(layerToErase)) {
-            cell[layerToErase] = 0;
+            delete cell[layerToErase];
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
           } else if (layerToErase === "resource" || layerToErase === "resources") {
@@ -133,7 +133,8 @@ class WorldMapGrid extends WorldMapRenderer {
         }
 
         if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(this.currentLayer)) {
-          cell[this.currentLayer] = valId ?? 0;
+          if (valId) cell[this.currentLayer] = valId;
+          else delete cell[this.currentLayer];
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
         } else if (this.currentLayer === "resource" || this.currentLayer === "resources") {
