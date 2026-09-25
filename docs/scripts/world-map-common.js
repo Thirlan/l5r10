@@ -593,7 +593,7 @@ class WorldMapRenderer {
       const [x, y] = key.split(",").map(Number);
       if (overlays.length === 1) {
         this.fillCell(x, y, overlays[0].color, 1.0);
-        this.drawOverlayCueSegment(x, y, overlays[0].layerName, 0, 1);
+        this.drawOverlayCueSegment(x, y, overlays[0].layerName, overlays[0].color, 0, 1);
         continue;
       }
 
@@ -603,7 +603,7 @@ class WorldMapRenderer {
       const stripeWidth = 1 / overlays.length;
       for (let index = 0; index < overlays.length; index++) {
         this.fillCellSegment(x, y, overlays[index].color, index * stripeWidth, stripeWidth, 1.0);
-        this.drawOverlayCueSegment(x, y, overlays[index].layerName, index * stripeWidth, stripeWidth);
+        this.drawOverlayCueSegment(x, y, overlays[index].layerName, overlays[index].color, index * stripeWidth, stripeWidth);
       }
     }
   }
@@ -631,7 +631,7 @@ class WorldMapRenderer {
     this.ctx.restore();
   }
 
-  drawOverlayCueSegment(x, y, layerName, startRatio, widthRatio) {
+  drawOverlayCueSegment(x, y, layerName, color, startRatio, widthRatio) {
     if (widthRatio <= 0) return;
     const left = x * this.gridSize + this.gridSize * startRatio;
     const top = y * this.gridSize;
@@ -646,8 +646,9 @@ class WorldMapRenderer {
     ctx.beginPath();
     ctx.rect(left, top, width, height);
     ctx.clip();
-    ctx.strokeStyle = "rgba(0, 0, 0, 0.85)";
-    ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+    const cueColor = this.overlayCueColor(color);
+    ctx.strokeStyle = cueColor;
+    ctx.fillStyle = cueColor;
     ctx.lineWidth = Math.max(1, 1 / this.zoom);
     ctx.lineCap = "round";
 
@@ -680,5 +681,26 @@ class WorldMapRenderer {
     }
 
     ctx.restore();
+  }
+
+  overlayCueColor(color) {
+    const rgbaMatch = color && color.match(/^rgba?\(([^)]+)\)$/i);
+    if (rgbaMatch) {
+      const [r, g, b] = rgbaMatch[1].split(",").slice(0, 3).map((part) => Number.parseFloat(part.trim()) || 0);
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+    }
+
+    const hexMatch = color && color.match(/^#([0-9a-f]{6})$/i);
+    if (hexMatch) {
+      const hex = hexMatch[1];
+      const r = Number.parseInt(hex.slice(0, 2), 16);
+      const g = Number.parseInt(hex.slice(2, 4), 16);
+      const b = Number.parseInt(hex.slice(4, 6), 16);
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+    }
+
+    return "rgba(0, 0, 0, 0.85)";
   }
 }
