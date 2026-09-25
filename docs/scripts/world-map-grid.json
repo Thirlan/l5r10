@@ -7686,8 +7686,8 @@
     "clan": 4,
     "infrastructure": 2,
     "settlement": 11,
-    "englishName": "The Hall of the Ancestors",
-    "rokuganiName": "The Hall of the Ancestors"
+    "englishName": "The Hall of\nthe Ancestors",
+    "rokuganiName": "The Hall of\nthe Ancestors"
   },
   "70,79": {
     "clan": 4,
@@ -7749,7 +7749,7 @@
     "clan": 4,
     "infrastructure": 1,
     "settlement": 5,
-    "englishName": "Last Breath Castle",
+    "englishName": "Last Breath",
     "rokuganiName": "Matsu"
   },
   "73,72": {
