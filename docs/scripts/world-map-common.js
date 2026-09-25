@@ -596,6 +596,9 @@ class WorldMapRenderer {
         continue;
       }
 
+      // When several optional overlays are enabled on the viewer at once, split
+      // the tile into equal vertical bands so each enabled overlay remains
+      // visible without blending its color with the others.
       const stripeWidth = 1 / overlays.length;
       for (let index = 0; index < overlays.length; index++) {
         this.fillCellSegment(x, y, overlays[index], index * stripeWidth, stripeWidth, 1.0);
