@@ -596,14 +596,9 @@ class WorldMapRenderer {
         continue;
       }
 
-      const left = x * this.gridSize;
-      const top = y * this.gridSize;
-      const stripeWidth = this.gridSize / overlays.length;
+      const stripeWidth = 1 / overlays.length;
       for (let index = 0; index < overlays.length; index++) {
-        this.ctx.save();
-        this.ctx.fillStyle = overlays[index];
-        this.ctx.fillRect(left + index * stripeWidth, top, stripeWidth, this.gridSize);
-        this.ctx.restore();
+        this.fillCellSegment(x, y, overlays[index], index * stripeWidth, stripeWidth, 1.0);
       }
     }
   }
@@ -614,6 +609,20 @@ class WorldMapRenderer {
     this.ctx.globalAlpha = alpha;
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+    this.ctx.restore();
+  }
+
+  fillCellSegment(x, y, color, startRatio, widthRatio, alpha = 0.8) {
+    if (!color || widthRatio <= 0) return;
+    this.ctx.save();
+    this.ctx.globalAlpha = alpha;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(
+      x * this.gridSize + this.gridSize * startRatio,
+      y * this.gridSize,
+      this.gridSize * widthRatio,
+      this.gridSize
+    );
     this.ctx.restore();
   }
 }
