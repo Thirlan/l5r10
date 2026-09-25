@@ -510,7 +510,6 @@ class WorldMapRenderer {
       const [x, y] = key.split(",").map(Number);
       if (cell.text) this.drawText(x, y, this.textContent(cell.text), cell.text.fontSize || 14);
       if (cell.settlement) this.drawSettlementText(x, y, cell);
-      if (cell.resource) this.drawResourceText(x, y, cell.resource);
     }
   }
 
