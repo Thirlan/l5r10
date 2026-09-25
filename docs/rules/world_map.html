@@ -113,20 +113,25 @@
 
     <div class="viewer-controls">
       <div class="viewer-panel">
-        <h3>View Mode</h3>
-        <div class="radio-row">
-          <label class="radio"><input type="radio" name="viewMode" value="default" checked onchange="mapViewer.setViewMode(this.value)"> Default</label>
-          <label class="radio"><input type="radio" name="viewMode" value="terrain" onchange="mapViewer.setViewMode(this.value)"> Terrain</label>
-          <label class="radio"><input type="radio" name="viewMode" value="climate" onchange="mapViewer.setViewMode(this.value)"> Climate</label>
-          <label class="radio"><input type="radio" name="viewMode" value="vegetation" onchange="mapViewer.setViewMode(this.value)"> Vegetation</label>
-          <label class="radio"><input type="radio" name="viewMode" value="river" onchange="mapViewer.setViewMode(this.value)"> River</label>
-          <label class="radio"><input type="radio" name="viewMode" value="clan" onchange="mapViewer.setViewMode(this.value)"> Clan</label>
-          <label class="radio"><input type="radio" name="viewMode" value="animal" onchange="mapViewer.setViewMode(this.value)"> Animal</label>
-          <label class="radio"><input type="radio" name="viewMode" value="spirit" onchange="mapViewer.setViewMode(this.value)"> Spirit</label>
-          <label class="radio"><input type="radio" name="viewMode" value="shadowland" onchange="mapViewer.setViewMode(this.value)"> Shadowland</label>
-          <label class="radio"><input type="radio" name="viewMode" value="crime" onchange="mapViewer.setViewMode(this.value)"> Crime</label>
-          <label class="radio"><input type="radio" name="viewMode" value="fertility" onchange="mapViewer.setViewMode(this.value)"> Land Fertility</label>
-        </div>
+        <fieldset aria-describedby="mapLayerHelp" style="border: 0; padding: 0; margin: 0 0 12px;">
+          <legend style="padding: 0; font-size: 1.05em; font-weight: bold; margin-bottom: 10px;">Map Layers</legend>
+          <p id="mapLayerHelp" style="font-size: 0.85em; color: #666; margin: 0 0 10px;">
+            Terrain and Climate are always shown.
+          </p>
+          <div class="radio-row">
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('infrastructure', this.checked)"> Infrastructure</label>
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('clan', this.checked)"> Clan</label>
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('vegetation', this.checked)"> Vegetation</label>
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('river', this.checked)"> River</label>
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('settlement', this.checked)"> Settlement</label>
+            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('resource', this.checked)"> Resource</label>
+            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('animal', this.checked)"> Animals</label>
+            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('spirit', this.checked)"> Spirits</label>
+            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('shadowland', this.checked)"> Shadowlands</label>
+            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('crime', this.checked)"> Crime</label>
+            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('fertility', this.checked)"> Land Fertility</label>
+          </div>
+        </fieldset>
 
         <h3>Settlement Names</h3>
         <div class="radio-row">

@@ -33,6 +33,8 @@ class WorldMapRenderer {
   // Repaint the whole canvas. Subclasses implement this (draw / render).
   redraw() {}
 
+  isLayerVisible(_layerName) { return true; }
+
   async loadMapTileImages() {
     try {
       const res = await fetch("../scripts/map_tile_img.json");
@@ -150,7 +152,7 @@ class WorldMapRenderer {
       const t = cell.terrain ?? 0;
       const c = cell.climate ?? 0;
       const isWater = (t === 3 || t === 4 || t === 5);
-      const v = isWater ? 0 : (cell.vegetation ?? 0);
+      const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ?? 0);
 
       const tileKey = t + "," + c + "," + v;
       const img = this.tileImageMap[tileKey];
@@ -558,24 +560,50 @@ class WorldMapRenderer {
   }
 
   drawOverlayLayer(layerName) {
+    this.drawOverlayLayers([layerName]);
+  }
+
+  overlayColor(layerName, val) {
+    if (!val || val === "none" || val === 0) return null;
     const map = this.layerMaps[layerName];
+    let color = null;
+    if (map) {
+      const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
+      if (item && item.color) color = item.color;
+    }
+    if (!color) {
+      if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
+      else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
+      else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
+      else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
+    }
+    return color;
+  }
+
+  drawOverlayLayers(layerNames) {
+    if (!layerNames || !layerNames.length) return;
     for (const [key, cell] of Object.entries(this.grid)) {
-      const val = cell[layerName];
-      if (!val || val === "none" || val === 0) continue;
+      const overlays = [];
+      for (const layerName of layerNames) {
+        const val = cell[layerName];
+        const color = this.overlayColor(layerName, val);
+        if (color) overlays.push({ layerName, color });
+      }
+      if (!overlays.length) continue;
       const [x, y] = key.split(",").map(Number);
-      let color = null;
-      if (map) {
-        const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
-        if (item && item.color) color = item.color;
+      if (overlays.length === 1) {
+        this.fillCell(x, y, overlays[0].color, 1.0);
+        this.drawOverlayCueSegment(x, y, overlays[0].layerName, overlays[0].color, 0, 1);
+        continue;
       }
-      if (!color) {
-        if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
-        else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
-        else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
-        else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
-      }
-      if (color) {
-        this.fillCell(x, y, color, 1.0);
+
+      // When several optional overlays are enabled on the viewer at once, split
+      // the tile into equal vertical bands so each enabled overlay remains
+      // visible without blending its color with the others.
+      const stripeWidth = 1 / overlays.length;
+      for (let index = 0; index < overlays.length; index++) {
+        this.fillCellSegment(x, y, overlays[index].color, index * stripeWidth, stripeWidth, 1.0);
+        this.drawOverlayCueSegment(x, y, overlays[index].layerName, overlays[index].color, index * stripeWidth, stripeWidth);
       }
     }
   }
@@ -587,5 +615,92 @@ class WorldMapRenderer {
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
     this.ctx.restore();
+  }
+
+  fillCellSegment(x, y, color, startRatio, widthRatio, alpha = 0.8) {
+    if (!color || widthRatio <= 0) return;
+    this.ctx.save();
+    this.ctx.globalAlpha = alpha;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(
+      x * this.gridSize + this.gridSize * startRatio,
+      y * this.gridSize,
+      this.gridSize * widthRatio,
+      this.gridSize
+    );
+    this.ctx.restore();
+  }
+
+  drawOverlayCueSegment(x, y, layerName, color, startRatio, widthRatio) {
+    if (widthRatio <= 0) return;
+    const left = x * this.gridSize + this.gridSize * startRatio;
+    const top = y * this.gridSize;
+    const width = this.gridSize * widthRatio;
+    const height = this.gridSize;
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    const inset = Math.max(0.75, Math.min(width, height) * 0.2);
+    const ctx = this.ctx;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(left, top, width, height);
+    ctx.clip();
+    const cueColor = this.overlayCueColor(color);
+    ctx.strokeStyle = cueColor;
+    ctx.fillStyle = cueColor;
+    ctx.lineWidth = Math.max(1, 1 / this.zoom);
+    ctx.lineCap = "round";
+
+    if (layerName === "animal") {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, Math.max(1, Math.min(width, height) * 0.18), 0, Math.PI * 2);
+      ctx.fill();
+    } else if (layerName === "spirit") {
+      ctx.beginPath();
+      ctx.moveTo(centerX, top + inset);
+      ctx.lineTo(centerX, top + height - inset);
+      ctx.stroke();
+    } else if (layerName === "shadowland") {
+      ctx.beginPath();
+      ctx.moveTo(left + inset, top + inset);
+      ctx.lineTo(left + width - inset, top + height - inset);
+      ctx.stroke();
+    } else if (layerName === "crime") {
+      ctx.beginPath();
+      ctx.moveTo(left + inset, centerY);
+      ctx.lineTo(left + width - inset, centerY);
+      ctx.stroke();
+    } else if (layerName === "fertility") {
+      ctx.beginPath();
+      ctx.moveTo(centerX, top + inset);
+      ctx.lineTo(centerX, top + height - inset);
+      ctx.moveTo(left + inset, centerY);
+      ctx.lineTo(left + width - inset, centerY);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  overlayCueColor(color) {
+    const rgbaMatch = color && color.match(/^rgba?\(([^)]+)\)$/i);
+    if (rgbaMatch) {
+      const [r, g, b] = rgbaMatch[1].split(",").slice(0, 3).map((part) => Number.parseFloat(part.trim()) || 0);
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+    }
+
+    const hexMatch = color && color.match(/^#([0-9a-f]{6})$/i);
+    if (hexMatch) {
+      const hex = hexMatch[1];
+      const r = Number.parseInt(hex.slice(0, 2), 16);
+      const g = Number.parseInt(hex.slice(2, 4), 16);
+      const b = Number.parseInt(hex.slice(4, 6), 16);
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+    }
+
+    return "rgba(0, 0, 0, 0.85)";
   }
 }
