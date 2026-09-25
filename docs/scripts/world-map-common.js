@@ -587,12 +587,13 @@ class WorldMapRenderer {
       for (const layerName of layerNames) {
         const val = cell[layerName];
         const color = this.overlayColor(layerName, val);
-        if (color) overlays.push(color);
+        if (color) overlays.push({ layerName, color });
       }
       if (!overlays.length) continue;
       const [x, y] = key.split(",").map(Number);
       if (overlays.length === 1) {
-        this.fillCell(x, y, overlays[0], 1.0);
+        this.fillCell(x, y, overlays[0].color, 1.0);
+        this.drawOverlayCueSegment(x, y, overlays[0].layerName, 0, 1);
         continue;
       }
 
@@ -601,7 +602,8 @@ class WorldMapRenderer {
       // visible without blending its color with the others.
       const stripeWidth = 1 / overlays.length;
       for (let index = 0; index < overlays.length; index++) {
-        this.fillCellSegment(x, y, overlays[index], index * stripeWidth, stripeWidth, 1.0);
+        this.fillCellSegment(x, y, overlays[index].color, index * stripeWidth, stripeWidth, 1.0);
+        this.drawOverlayCueSegment(x, y, overlays[index].layerName, index * stripeWidth, stripeWidth);
       }
     }
   }
@@ -627,5 +629,56 @@ class WorldMapRenderer {
       this.gridSize
     );
     this.ctx.restore();
+  }
+
+  drawOverlayCueSegment(x, y, layerName, startRatio, widthRatio) {
+    if (widthRatio <= 0) return;
+    const left = x * this.gridSize + this.gridSize * startRatio;
+    const top = y * this.gridSize;
+    const width = this.gridSize * widthRatio;
+    const height = this.gridSize;
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    const inset = Math.max(0.75, Math.min(width, height) * 0.2);
+    const ctx = this.ctx;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(left, top, width, height);
+    ctx.clip();
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.85)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+    ctx.lineWidth = Math.max(1, 1 / this.zoom);
+    ctx.lineCap = "round";
+
+    if (layerName === "animal") {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, Math.max(1, Math.min(width, height) * 0.18), 0, Math.PI * 2);
+      ctx.fill();
+    } else if (layerName === "spirit") {
+      ctx.beginPath();
+      ctx.moveTo(centerX, top + inset);
+      ctx.lineTo(centerX, top + height - inset);
+      ctx.stroke();
+    } else if (layerName === "shadowland") {
+      ctx.beginPath();
+      ctx.moveTo(left + inset, top + inset);
+      ctx.lineTo(left + width - inset, top + height - inset);
+      ctx.stroke();
+    } else if (layerName === "crime") {
+      ctx.beginPath();
+      ctx.moveTo(left + inset, centerY);
+      ctx.lineTo(left + width - inset, centerY);
+      ctx.stroke();
+    } else if (layerName === "fertility") {
+      ctx.beginPath();
+      ctx.moveTo(centerX, top + inset);
+      ctx.lineTo(centerX, top + height - inset);
+      ctx.moveTo(left + inset, centerY);
+      ctx.lineTo(left + width - inset, centerY);
+      ctx.stroke();
+    }
+
+    ctx.restore();
   }
 }
