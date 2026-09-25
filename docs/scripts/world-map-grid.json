@@ -123039,11 +123039,12 @@
     "clan": 2
   },
   "87,47": {
-    "terrain": 2,
+    "terrain": 0,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "infrastructure": 1
   },
   "88,47": {
     "terrain": 0,
@@ -123073,7 +123074,7 @@
     "river": 0,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 4
   },
   "90,49": {
@@ -123091,7 +123092,7 @@
     "clan": 2
   },
   "92,50": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -123122,7 +123123,7 @@
     "clan": 2
   },
   "94,52": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -123157,7 +123158,7 @@
     "clan": 2
   },
   "96,54": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -123181,7 +123182,7 @@
     "clan": 2
   },
   "95,56": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -123202,7 +123203,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "96,57": {
     "terrain": 0,
@@ -123265,8 +123267,8 @@
     "river": 2,
     "clan": 4,
     "settlement": 2,
-    "englishName": "Violence Behind Courtliness City",
-    "rokuganiName": "Ranbo wo Shien Shite Reigisaho",
+    "englishName": "Violence Behind\nCourtliness City",
+    "rokuganiName": "Ranbo wo Shien\nShite Reigisaho",
     "infrastructure": 1
   },
   "81,42": {
@@ -133860,30 +133862,30 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4,
-    "infrastructure": 1
+    "clan": 4
   },
   "86,48": {
-    "terrain": 0,
+    "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "85,49": {
     "terrain": 0,
     "climate": 0,
-    "vegetation": 3,
+    "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "86,49": {
     "terrain": 0,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4,
-    "infrastructure": 1
+    "clan": 4
   },
   "85,50": {
     "terrain": 0,
@@ -133897,7 +133899,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "85,51": {
     "terrain": 0,
@@ -138410,14 +138413,16 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "96,58": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "95,59": {
     "terrain": 0,
@@ -154205,7 +154210,7 @@
     "infrastructure": 1
   },
   "93,51": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -154225,8 +154230,9 @@
     "terrain": 0,
     "climate": 0,
     "vegetation": 0,
-    "river": 2,
-    "clan": 2
+    "river": 0,
+    "clan": 2,
+    "infrastructure": 1
   },
   "93,50": {
     "terrain": 1,
@@ -154247,7 +154253,7 @@
     "infrastructure": 1
   },
   "95,53": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -154317,7 +154323,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "fertility": 3,
     "resource": 3
   },
@@ -154329,7 +154335,7 @@
     "clan": 2
   },
   "93,54": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -154339,7 +154345,7 @@
     "resource": 3
   },
   "94,55": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -154532,7 +154538,7 @@
     "vegetation": 0,
     "river": 0,
     "clan": 2,
-    "settlement": 5,
+    "settlement": 6,
     "englishName": "Kyotei",
     "rokuganiName": "Kyotei",
     "infrastructure": 1
@@ -154623,35 +154629,40 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "86,46": {
     "terrain": 0,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "86,47": {
-    "terrain": 0,
+    "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "87,48": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "88,49": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "87,43": {
     "terrain": 0,
@@ -154823,14 +154834,6 @@
     "infrastructure": 1,
     "clan": 4
   },
-  "86,54": {
-    "terrain": 0,
-    "climate": 0,
-    "vegetation": 0,
-    "river": 0,
-    "clan": 4,
-    "infrastructure": 1
-  },
   "87,53": {
     "terrain": 0,
     "climate": 0,
@@ -154935,7 +154938,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "93,57": {
     "terrain": 0,
@@ -154949,14 +154953,16 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "94,56": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "92,56": {
     "terrain": 0,
@@ -155038,7 +155044,10 @@
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "Authorization",
+    "rokuganiName": "Ninka"
   },
   "87,54": {
     "terrain": 0,
@@ -155076,74 +155085,81 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "89,51": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "89,52": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "90,52": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "90,53": {
-    "terrain": 0,
+    "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
     "clan": 4,
-    "settlement": 2,
-    "englishName": "Authorization",
-    "rokuganiName": "Ninka",
-    "infrastructure": 1
+    "infrastructure": 2,
+    "animal": 2
   },
   "91,53": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "91,54": {
-    "terrain": 0,
+    "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "92,54": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "92,55": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "93,55": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 2,
+    "animal": 2
   },
   "76,51": {
     "terrain": 0,
@@ -162836,7 +162852,8 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "83,45": {
     "terrain": 0,
@@ -163587,14 +163604,13 @@
     "terrain": 0,
     "climate": 0,
     "vegetation": 0,
-    "river": 0,
+    "river": 2,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
-    "resource": 3
+    "infrastructure": 2
   },
   "90,51": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -163604,7 +163620,7 @@
     "resource": 39
   },
   "91,52": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -163834,7 +163850,7 @@
     "river": 0
   },
   "92,53": {
-    "terrain": 0,
+    "terrain": 1,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
@@ -163858,22 +163874,23 @@
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4,
-    "infrastructure": 1
+    "clan": 4
   },
   "88,50": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "87,49": {
     "terrain": 2,
     "climate": 0,
     "vegetation": 0,
     "river": 0,
-    "clan": 4
+    "clan": 4,
+    "animal": 2
   },
   "91,43": {
     "terrain": 0,
@@ -174427,5 +174444,13 @@
     "vegetation": 0,
     "river": 0,
     "clan": 5
+  },
+  "86,54": {
+    "terrain": 0,
+    "climate": 0,
+    "vegetation": 0,
+    "river": 0,
+    "infrastructure": 1,
+    "clan": 4
   }
 }

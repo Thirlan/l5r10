@@ -523,14 +523,20 @@ class WorldMapRenderer {
 
   drawMapText(text, x, y, fontSize) {
     if (!text) return;
+    const lines = String(text).split(/\r?\n/);
+    const lineHeight = fontSize;
+    const firstLineY = y - (lines.length - 1) * lineHeight / 2;
     this.ctx.font = "bold " + fontSize + "px Arial";
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
     this.ctx.strokeStyle = "#FFFFFF";
     this.ctx.lineWidth = Math.max(2, fontSize / 6);
-    this.ctx.strokeText(text, x, y);
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillText(text, x, y);
+    lines.forEach((line, index) => {
+      const lineY = firstLineY + index * lineHeight;
+      this.ctx.strokeText(line, x, lineY);
+      this.ctx.fillText(line, x, lineY);
+    });
   }
 
   drawText(x, y, text, fontSize) {
