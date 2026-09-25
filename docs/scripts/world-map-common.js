@@ -560,24 +560,50 @@ class WorldMapRenderer {
   }
 
   drawOverlayLayer(layerName) {
+    this.drawOverlayLayers([layerName]);
+  }
+
+  overlayColor(layerName, val) {
+    if (!val || val === "none" || val === 0) return null;
     const map = this.layerMaps[layerName];
+    let color = null;
+    if (map) {
+      const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
+      if (item && item.color) color = item.color;
+    }
+    if (!color) {
+      if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
+      else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
+      else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
+      else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
+    }
+    return color;
+  }
+
+  drawOverlayLayers(layerNames) {
+    if (!layerNames || !layerNames.length) return;
     for (const [key, cell] of Object.entries(this.grid)) {
-      const val = cell[layerName];
-      if (!val || val === "none" || val === 0) continue;
+      const overlays = [];
+      for (const layerName of layerNames) {
+        const val = cell[layerName];
+        const color = this.overlayColor(layerName, val);
+        if (color) overlays.push(color);
+      }
+      if (!overlays.length) continue;
       const [x, y] = key.split(",").map(Number);
-      let color = null;
-      if (map) {
-        const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
-        if (item && item.color) color = item.color;
+      if (overlays.length === 1) {
+        this.fillCell(x, y, overlays[0], 1.0);
+        continue;
       }
-      if (!color) {
-        if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
-        else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
-        else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
-        else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
-      }
-      if (color) {
-        this.fillCell(x, y, color, 1.0);
+
+      const left = x * this.gridSize;
+      const top = y * this.gridSize;
+      const stripeWidth = this.gridSize / overlays.length;
+      for (let index = 0; index < overlays.length; index++) {
+        this.ctx.save();
+        this.ctx.fillStyle = overlays[index];
+        this.ctx.fillRect(left + index * stripeWidth, top, stripeWidth, this.gridSize);
+        this.ctx.restore();
       }
     }
   }

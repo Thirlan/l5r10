@@ -334,9 +334,9 @@ class WorldMapViewer extends WorldMapRenderer {
       else if (layerName === "text") this.drawTextLayer();
     }
 
-    for (const layerName of ["animal", "spirit", "shadowland", "crime", "fertility"]) {
-      if (this.isLayerVisible(layerName)) this.drawOverlayLayer(layerName);
-    }
+    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "fertility"]
+      .filter((layerName) => this.isLayerVisible(layerName));
+    this.drawOverlayLayers(activeOverlays);
 
     this.drawGrid();
 
