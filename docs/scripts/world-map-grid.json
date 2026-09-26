@@ -52,18 +52,22 @@
     "terrain": 3
   },
   "85,84": {
-    "terrain": 3,
-    "river": 2
+    "terrain": 3
   },
   "86,84": {
-    "river": 2,
-    "clan": 2
+    "clan": 2,
+    "settlement": 5,
+    "englishName": "Son of the Crane",
+    "rokuganiName": "Daidoji",
+    "infrastructure": 1
   },
   "85,85": {
-    "clan": 2
+    "clan": 2,
+    "river": 2
   },
   "86,85": {
-    "clan": 2
+    "clan": 2,
+    "river": 2
   },
   "85,86": {
     "terrain": 1,
@@ -166,7 +170,8 @@
     "clan": 2
   },
   "88,88": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "87,89": {
     "river": 2,
@@ -193,14 +198,19 @@
     "clan": 2
   },
   "89,90": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "90,90": {
     "clan": 2,
     "infrastructure": 1
   },
   "89,91": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "Yufuku na Heigen",
+    "rokuganiName": "Yufuku na Heigen"
   },
   "90,91": {
     "river": 2,
@@ -254,7 +264,6 @@
   },
   "95,92": {
     "terrain": 4,
-    "river": 2,
     "clan": 2
   },
   "96,92": {
@@ -486,3033 +495,4192 @@
     "clan": 2
   },
   "35,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "36,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "35,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "36,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "35,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "35,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "37,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 1
   },
   "38,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 1
   },
   "37,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "38,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "37,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "38,66": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 1
   },
   "37,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 1
   },
   "38,67": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 2
   },
   "39,66": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 1
   },
   "40,66": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 1
   },
   "39,67": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 2
   },
   "40,67": {
     "vegetation": 3,
-    "clan": 8
+    "clan": 8,
+    "animal": 1
   },
   "39,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 1
   },
   "40,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "39,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "40,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "41,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "42,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "41,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "42,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "41,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "42,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "41,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "43,70": {},
+  "43,70": {
+    "crime": 1
+  },
   "44,70": {},
   "43,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "44,71": {},
   "43,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "44,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "43,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "44,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "45,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "46,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "45,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "46,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "45,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "45,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "47,78": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,78": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,79": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "43,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "41,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "39,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "36,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "35,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "36,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "39,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "40,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "45,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "45,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "47,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,82": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,83": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,83": {
     "vegetation": 3,
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "43,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "40,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "32,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "32,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "31,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "32,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "36,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "35,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "36,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "33,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "34,64": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "33,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "30,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "29,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "30,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "30,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "28,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "27,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
-  "27,66": {},
+  "27,66": {
+    "crime": 1
+  },
   "28,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "27,67": {},
+  "27,67": {
+    "crime": 1
+  },
   "28,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "25,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "26,66": {},
+  "26,66": {
+    "crime": 1
+  },
   "25,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "26,67": {},
+  "26,67": {
+    "crime": 1
+  },
   "25,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "26,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "25,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "24,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "23,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "24,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "21,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "22,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "21,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "19,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "20,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "19,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "20,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "19,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "20,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "26,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "26,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "23,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "24,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "23,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "24,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "21,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "22,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "21,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "22,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "23,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "24,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "23,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "24,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "26,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "25,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "26,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "26,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "23,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "24,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "23,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "22,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "21,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "19,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "22,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "18,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "17,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "16,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "15,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
-  "15,66": {},
-  "16,66": {},
+  "15,66": {
+    "crime": 1
+  },
+  "16,66": {
+    "crime": 1
+  },
   "15,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "16,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "17,66": {},
-  "18,66": {},
-  "17,67": {},
-  "18,67": {},
+  "17,66": {
+    "crime": 1
+  },
+  "18,66": {
+    "crime": 1
+  },
+  "17,67": {
+    "crime": 1
+  },
+  "18,67": {
+    "crime": 1
+  },
   "13,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "14,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "13,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "12,68": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "11,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "12,69": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,66": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
-  "14,66": {},
+  "14,66": {
+    "crime": 1
+  },
   "13,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "14,67": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "13,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "12,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "12,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "15,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,73": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "17,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "18,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "17,73": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "18,73": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "19,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "20,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "19,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "20,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "19,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "20,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "19,75": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "20,75": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "17,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "22,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "21,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "22,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "15,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "13,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "14,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "11,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "9,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "10,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "9,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "10,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "11,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "11,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "12,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "13,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "14,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "13,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "14,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "13,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "14,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "13,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "14,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "15,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "16,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "15,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "16,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "15,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "16,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "15,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "16,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "15,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "16,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "17,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "18,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "17,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "18,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "17,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "17,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "18,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "19,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "20,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "19,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "20,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "21,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "21,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "23,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "28,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "27,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "30,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "29,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "30,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "32,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "31,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "32,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "33,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "34,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "33,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "34,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "27,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "27,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "30,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "29,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "30,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "32,76": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "32,77": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "27,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "27,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "30,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "29,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "30,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "32,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "32,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "27,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "27,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "30,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "31,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "27,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,72": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "27,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "28,73": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "30,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "29,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "30,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "31,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "32,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "31,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "32,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "33,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "34,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "33,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "34,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "29,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,70": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,71": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "32,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "31,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "32,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "33,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "34,70": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "33,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "34,71": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "35,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "36,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "35,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "36,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "35,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "36,74": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "35,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "36,75": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "37,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "38,72": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "37,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "38,73": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "37,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,74": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,75": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,76": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "38,76": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "37,77": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "38,77": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "39,76": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "40,76": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "39,77": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "40,77": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "33,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,83": {
     "vegetation": 3,
     "text": {
       "text": "Shinomen Forest",
       "fontSize": 16
-    }
+    },
+    "animal": 4
   },
   "34,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "31,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "27,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,78": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,79": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "21,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "23,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "23,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "24,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "21,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "21,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "22,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "23,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "24,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "23,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "24,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "31,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "31,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "25,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "32,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "31,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "34,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "34,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "33,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "34,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "33,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "35,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "36,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "35,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "36,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "35,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "36,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "29,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "30,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "36,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "35,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "36,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "38,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "37,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "41,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,82": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,83": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "41,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,86": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "45,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,87": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "45,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "45,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "39,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "39,93": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "40,93": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "41,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,92": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "41,93": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "42,93": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "43,92": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "44,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,93": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "44,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,94": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "40,94": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "39,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "40,95": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "41,94": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "42,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "44,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,94": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "38,94": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "37,95": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "38,95": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "35,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "35,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "35,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "32,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "32,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "31,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "32,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "33,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "34,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "34,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "36,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,96": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "40,96": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 4
   },
   "39,97": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "40,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "41,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "41,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "43,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "44,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "44,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "38,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "39,98": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "40,98": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "39,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "40,99": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "41,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "41,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "42,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "43,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "44,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 4
   },
   "44,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "45,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,100": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "40,100": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "39,101": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "40,101": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "41,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "42,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "41,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "42,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "43,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "44,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "43,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 4
   },
   "44,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 3
   },
   "45,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "47,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "47,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "47,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "47,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "47,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "48,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "47,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,102": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "42,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 4
   },
   "41,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "42,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 4
   },
   "44,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "43,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "44,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "45,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "42,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "43,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "44,105": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "45,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,105": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "46,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "47,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "41,106": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "42,106": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "41,107": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "42,107": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "43,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "44,106": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3,
+    "shadowland": 1
   },
   "43,107": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "44,107": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 3,
+    "shadowland": 2
   },
   "45,106": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3,
+    "shadowland": 1
   },
   "46,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "45,107": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 3,
+    "shadowland": 2
   },
   "46,107": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "47,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "47,107": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,107": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "49,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "50,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "49,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "50,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "49,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "50,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "49,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "50,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "49,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "50,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "52,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "51,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "52,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "51,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "52,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "51,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "52,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "52,102": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "52,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "52,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,105": {},
   "52,105": {},
   "49,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
-  "50,106": {},
+  "50,106": {
+    "crime": 1
+  },
   "49,107": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
-  "50,107": {},
+  "50,107": {
+    "crime": 1
+  },
   "51,106": {},
   "52,106": {},
   "51,107": {},
   "52,107": {},
   "53,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "54,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "53,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "54,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "53,102": {},
   "54,102": {},
@@ -3538,8 +4706,12 @@
   "54,106": {},
   "53,107": {},
   "54,107": {},
-  "55,100": {},
-  "56,100": {},
+  "55,100": {
+    "crime": 1
+  },
+  "56,100": {
+    "crime": 1
+  },
   "55,101": {},
   "56,101": {},
   "55,102": {},
@@ -3564,27 +4736,41 @@
   "55,107": {},
   "56,107": {},
   "53,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "53,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "54,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "55,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "56,98": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "55,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
-  "56,99": {},
+  "56,99": {
+    "crime": 1
+  },
   "49,96": {
     "clan": 6
   },
@@ -3598,444 +4784,621 @@
     "clan": 6
   },
   "51,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "52,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "51,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "52,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 2
   },
   "53,96": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "54,96": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "53,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "54,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "55,96": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "56,96": {
     "clan": 6
   },
   "55,97": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "56,97": {
     "clan": 6
   },
   "45,108": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "46,108": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "45,109": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "46,109": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "47,108": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "48,108": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "47,109": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "48,109": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "49,108": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
-  "50,108": {},
+  "50,108": {
+    "crime": 1
+  },
   "49,109": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "50,109": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "51,108": {},
-  "52,108": {},
+  "51,108": {
+    "crime": 1
+  },
+  "52,108": {
+    "crime": 1
+  },
   "51,109": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "52,109": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "43,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "44,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "43,109": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "44,109": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "43,110": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "44,110": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 3,
+    "shadowland": 2
   },
   "43,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "44,111": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3,
+    "shadowland": 1
   },
   "45,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3,
+    "shadowland": 1
   },
   "46,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "45,111": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3,
+    "shadowland": 1
   },
   "46,111": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "47,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "44,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,113": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "44,113": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "45,112": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "46,112": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 3
   },
   "45,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "48,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "49,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "50,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,114": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "44,114": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "43,115": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "44,115": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "45,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "45,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "46,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "48,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "48,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "49,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "50,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "49,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "50,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "43,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,116": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "43,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,116": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "46,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "45,117": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "46,117": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "47,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "48,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,117": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "48,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "49,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "50,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "49,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "50,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "51,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "crime": 3
   },
   "52,110": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "51,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "51,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "52,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "52,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "52,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,124": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "54,124": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "53,125": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "54,125": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "55,124": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,124": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "55,125": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,125": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "57,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "58,124": {},
+  "58,124": {
+    "crime": 1
+  },
   "57,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "59,124": {},
+  "59,124": {
+    "crime": 1
+  },
   "60,124": {
     "vegetation": 3,
     "clan": 11
   },
   "59,125": {
-    "clan": 11
+    "clan": 11,
+    "crime": 1
   },
   "60,125": {
     "clan": 11
   },
   "53,126": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 2,
+    "crime": 3
   },
   "54,126": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "53,127": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 3
   },
   "54,127": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "55,126": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,126": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "55,127": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,127": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "57,126": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "58,126": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "57,127": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "58,127": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1,
+    "crime": 2
   },
   "59,126": {
-    "clan": 11
+    "clan": 11,
+    "crime": 1
   },
   "60,126": {
     "clan": 11
   },
   "59,127": {
-    "clan": 11
+    "clan": 11,
+    "crime": 1
   },
   "60,127": {
     "vegetation": 3,
@@ -4045,45 +5408,67 @@
   },
   "53,128": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "54,128": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "53,129": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "54,129": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "55,128": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "56,128": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "55,129": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
-  "56,129": {},
+  "56,129": {
+    "crime": 1
+  },
   "57,128": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,128": {
     "vegetation": 3,
-    "clan": 11
+    "clan": 11,
+    "animal": 1,
+    "crime": 2
   },
-  "57,129": {},
+  "57,129": {
+    "crime": 1
+  },
   "58,129": {
-    "clan": 11
+    "clan": 11,
+    "crime": 1
   },
   "59,128": {
-    "clan": 11
+    "clan": 11,
+    "crime": 1
   },
   "60,128": {
     "vegetation": 3,
@@ -4102,10 +5487,12 @@
     "spirit": 1
   },
   "53,130": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "54,130": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "53,131": {
     "clan": 1
@@ -4114,9 +5501,12 @@
     "clan": 1
   },
   "55,130": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
-  "56,130": {},
+  "56,130": {
+    "crime": 1
+  },
   "55,131": {
     "clan": 1
   },
@@ -4151,46 +5541,65 @@
   "53,122": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "54,122": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "53,123": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "54,123": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "55,122": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,122": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "55,123": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,123": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "57,122": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
-  "58,122": {},
+  "58,122": {
+    "crime": 1
+  },
   "57,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "58,123": {},
+  "58,123": {
+    "crime": 1
+  },
   "59,122": {},
   "60,122": {
     "clan": 11
@@ -4200,83 +5609,110 @@
     "clan": 11
   },
   "51,122": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "52,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,123": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "52,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "51,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "52,125": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2,
+    "crime": 3
   },
   "51,126": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2,
+    "crime": 3
   },
   "52,126": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "51,127": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "52,127": {
     "terrain": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 3
   },
   "51,128": {
     "clan": 1
   },
   "52,128": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "51,129": {
     "clan": 1
   },
   "52,129": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "49,120": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "50,120": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "49,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "50,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "51,120": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "52,120": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 1
   },
   "51,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "52,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 1
   },
   "53,120": {
     "vegetation": 3,
@@ -4288,600 +5724,839 @@
   },
   "54,120": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "53,121": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 1
   },
   "54,121": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "55,120": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,120": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "55,121": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,121": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "49,122": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "50,122": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "49,123": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "50,123": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "49,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "50,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "50,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "49,126": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "50,126": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "49,127": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "50,127": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 3
   },
   "49,118": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "50,118": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "49,119": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "50,119": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "51,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "52,118": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "51,119": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "52,119": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 1
   },
   "53,118": {
     "terrain": 3,
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
   "54,118": {
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
   "53,119": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "54,119": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "55,118": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,118": {
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
   "55,119": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 2
   },
   "56,119": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "crime": 2
   },
   "47,118": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 3
   },
   "48,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "48,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "47,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,120": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "47,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "48,121": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "47,122": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "48,122": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "47,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "48,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "47,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "48,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "53,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,117": {
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
   "45,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,121": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,121": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "53,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "54,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
-  "53,110": {},
-  "54,110": {},
+  "53,110": {
+    "crime": 1
+  },
+  "54,110": {
+    "crime": 1
+  },
   "53,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "54,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
-  "55,110": {},
-  "56,110": {},
+  "55,110": {
+    "crime": 1
+  },
+  "56,110": {
+    "crime": 1
+  },
   "55,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "56,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "55,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "56,112": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "55,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "56,113": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "55,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "56,114": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "55,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "56,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "55,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "56,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "55,117": {
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
   "56,117": {
-    "river": 2
+    "river": 2,
+    "animal": 2
   },
-  "57,110": {},
-  "58,110": {},
+  "57,110": {
+    "crime": 1
+  },
+  "58,110": {
+    "crime": 1
+  },
   "57,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,111": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "57,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 3
   },
   "57,113": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "58,113": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "57,114": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "58,114": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "57,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,115": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "57,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,116": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "57,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "58,117": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "53,108": {},
   "54,108": {},
-  "53,109": {},
+  "53,109": {
+    "crime": 1
+  },
   "54,109": {},
   "55,108": {},
   "56,108": {},
   "55,109": {},
   "56,109": {},
   "41,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 4
   },
   "42,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 4
   },
   "41,109": {
     "terrain": 7,
     "text": {
       "text": "Shadowland Marshes",
       "fontSize": 8
-    }
+    },
+    "shadowland": 3
   },
   "42,109": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "41,110": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "42,110": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "41,111": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "42,111": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "41,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "42,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "41,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,102": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "40,102": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "39,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "40,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "40,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "39,106": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "40,106": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 2,
+    "shadowland": 2
   },
   "39,107": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "40,107": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "39,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "40,108": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "39,109": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "40,109": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 4
   },
   "37,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,104": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "38,105": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2,
+    "shadowland": 1
   },
   "37,106": {
     "vegetation": 3,
-    "clan": 1
+    "clan": 1,
+    "animal": 1
   },
   "38,106": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "shadowland": 1
   },
   "37,107": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "38,107": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 1,
+    "shadowland": 1
   },
   "37,108": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "38,108": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 1,
+    "shadowland": 2
   },
   "37,109": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "38,109": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 1,
+    "shadowland": 2
   },
   "37,110": {
     "terrain": 7,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "shadowland": 2
   },
   "38,110": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 1,
+    "shadowland": 2
   },
   "37,111": {
     "terrain": 7,
-    "clan": 1
+    "clan": 1,
+    "animal": 1,
+    "shadowland": 2
   },
   "38,111": {
-    "terrain": 7
+    "terrain": 7,
+    "animal": 1,
+    "shadowland": 2
   },
   "39,110": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "40,110": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 3
   },
   "39,111": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "40,111": {
-    "terrain": 7
+    "terrain": 7,
+    "shadowland": 2
   },
   "37,112": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "38,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "shadowland": 1
   },
   "37,113": {
     "clan": 1
   },
   "38,113": {},
   "39,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "shadowland": 1
   },
   "40,112": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "shadowland": 1
   },
   "39,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "40,113": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "37,114": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "38,114": {},
   "37,115": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "38,115": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "39,114": {},
   "40,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "39,115": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "41,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,114": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "42,115": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "39,116": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "39,117": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,117": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "41,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,116": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,117": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,118": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,119": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "41,121": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "42,121": {
     "vegetation": 3,
@@ -4890,76 +6565,100 @@
     "rokuganiName": "Gates of Persistence"
   },
   "43,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,120": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,121": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "44,121": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "44,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "43,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "44,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "45,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "46,123": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "46,124": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "45,125": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "46,125": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "37,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 3
   },
   "37,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "37,102": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "38,102": {
-    "terrain": 3
+    "terrain": 3,
+    "animal": 2
   },
   "37,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "38,103": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,42": {
     "terrain": 3
@@ -5572,8 +7271,6 @@
     "climate": 4
   },
   "42,53": {
-    "terrain": 2,
-    "climate": 4,
     "clan": 7
   },
   "35,54": {
@@ -5629,12 +7326,11 @@
     "climate": 4
   },
   "42,54": {
-    "terrain": 2,
-    "climate": 4
+    "infrastructure": 2
   },
   "41,55": {
-    "terrain": 2,
-    "climate": 4
+    "terrain": 1,
+    "infrastructure": 2
   },
   "42,55": {
     "terrain": 2,
@@ -5673,12 +7369,17 @@
     "climate": 4
   },
   "40,56": {
-    "terrain": 2,
-    "climate": 4
+    "terrain": 1,
+    "infrastructure": 2
   },
   "39,57": {
-    "terrain": 2,
-    "climate": 4
+    "infrastructure": 2,
+    "terrain": 1,
+    "text": {
+      "englishText": "Plum Blossom Pass",
+      "rokuganiText": "Iuchi Pass",
+      "fontSize": 8
+    }
   },
   "40,57": {
     "terrain": 2,
@@ -5734,24 +7435,16 @@
   "36,58": {
     "terrain": 1
   },
-  "35,59": {
-    "terrain": 1
-  },
-  "36,59": {
-    "terrain": 1
-  },
-  "37,58": {
-    "terrain": 1
-  },
+  "35,59": {},
+  "36,59": {},
+  "37,58": {},
   "38,58": {
-    "terrain": 1
+    "infrastructure": 2
   },
   "37,59": {
-    "terrain": 1
+    "infrastructure": 2
   },
-  "38,59": {
-    "terrain": 1
-  },
+  "38,59": {},
   "39,58": {
     "terrain": 2,
     "climate": 4
@@ -5785,18 +7478,15 @@
     "climate": 4
   },
   "43,52": {
-    "terrain": 1,
     "clan": 7
   },
   "44,52": {
     "clan": 7
   },
   "43,53": {
-    "terrain": 1,
     "clan": 7
   },
   "44,53": {
-    "terrain": 1,
     "clan": 7
   },
   "43,54": {
@@ -5847,9 +7537,7 @@
     "terrain": 2,
     "climate": 4
   },
-  "37,60": {
-    "terrain": 1
-  },
+  "37,60": {},
   "38,60": {
     "terrain": 1
   },
@@ -6102,7 +7790,8 @@
     "terrain": 1
   },
   "48,63": {
-    "terrain": 1
+    "terrain": 2,
+    "climate": 4
   },
   "41,64": {
     "terrain": 2,
@@ -6152,18 +7841,19 @@
     "infrastructure": 1
   },
   "47,64": {
-    "vegetation": 3,
-    "infrastructure": 1
+    "vegetation": 3
   },
   "48,64": {
+    "terrain": 2,
+    "climate": 4
+  },
+  "47,65": {
     "vegetation": 3,
     "infrastructure": 1
   },
-  "47,65": {
-    "vegetation": 3
-  },
   "48,65": {
-    "vegetation": 3
+    "vegetation": 3,
+    "infrastructure": 1
   },
   "49,58": {
     "terrain": 1,
@@ -6224,31 +7914,34 @@
     "animal": 1
   },
   "49,63": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "50,63": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 6,
-    "infrastructure": 1
+    "climate": 4
   },
   "49,64": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 6,
-    "infrastructure": 1
+    "climate": 4
   },
   "50,64": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "49,65": {
     "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "settlement": 1,
+    "englishName": "Pokau",
+    "rokuganiName": "Pokau"
   },
   "50,65": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "51,58": {
     "terrain": 2,
@@ -6311,28 +8004,25 @@
     "animal": 1
   },
   "51,63": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 6,
-    "infrastructure": 1
+    "climate": 4
   },
   "52,63": {
     "terrain": 1,
     "clan": 6
   },
   "51,64": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "resource": 4
   },
   "52,64": {
-    "terrain": 1,
     "clan": 6,
     "infrastructure": 1
   },
   "51,65": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "infrastructure": 1
   },
   "52,65": {
     "terrain": 2,
@@ -6401,22 +8091,24 @@
     "clan": 6
   },
   "53,64": {
-    "terrain": 1,
     "clan": 6,
     "infrastructure": 1
   },
   "54,64": {
-    "terrain": 1,
     "clan": 6,
     "infrastructure": 1
   },
   "53,65": {
     "terrain": 2,
     "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "settlement": 10,
+    "englishName": "Shadows Eye",
+    "rokuganiName": "Shadows Eye",
+    "infrastructure": 2
   },
   "54,65": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 6
   },
   "55,58": {
@@ -6489,15 +8181,10 @@
     "clan": 6
   },
   "55,65": {
-    "clan": 6,
-    "infrastructure": 2
+    "clan": 6
   },
   "56,65": {
-    "clan": 6,
-    "text": {
-      "text": "Shoshi Castle",
-      "fontSize": 14
-    }
+    "clan": 6
   },
   "51,56": {
     "clan": 7
@@ -6597,7 +8284,6 @@
   },
   "57,63": {
     "terrain": 3,
-    "river": 2,
     "clan": 6
   },
   "58,63": {
@@ -6864,8 +8550,7 @@
   },
   "55,66": {
     "terrain": 1,
-    "clan": 6,
-    "infrastructure": 2
+    "clan": 6
   },
   "56,66": {
     "terrain": 1,
@@ -7030,7 +8715,6 @@
   },
   "59,68": {
     "terrain": 3,
-    "river": 2,
     "clan": 6
   },
   "60,68": {
@@ -7093,7 +8777,8 @@
     "animal": 3
   },
   "57,70": {
-    "clan": 6
+    "clan": 6,
+    "resource": 39
   },
   "58,70": {
     "clan": 6,
@@ -17711,57 +19396,84 @@
   },
   "99,44": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 2
   },
   "100,44": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 2
   },
   "99,45": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 2
   },
   "100,45": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2
   },
   "101,44": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "102,44": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "101,45": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2
   },
   "102,45": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "103,44": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,44": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "103,45": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,45": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "animal": 1
   },
   "105,44": {
     "terrain": 2,
@@ -17774,8 +19486,9 @@
     "clan": 5
   },
   "105,45": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "animal": 1,
+    "infrastructure": 1
   },
   "106,45": {
     "terrain": 2,
@@ -17784,66 +19497,102 @@
   },
   "99,46": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 2
   },
   "100,46": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2
   },
   "99,47": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 2
   },
   "100,47": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "text": {
+      "englishText": "The Mountains of Regret",
+      "rokuganiText": "The Mountains of Regert",
+      "fontSize": 8
+    },
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "101,46": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 3
   },
   "102,46": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "101,47": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 3
   },
   "102,47": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 2
   },
   "103,46": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,46": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "103,47": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 10,
+    "crime": 3,
+    "animal": 2
   },
   "104,47": {
-    "clan": 10
+    "clan": 10,
+    "terrain": 1,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "105,46": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "animal": 1
   },
   "106,46": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "105,47": {
     "terrain": 1,
@@ -17851,65 +19600,96 @@
   },
   "106,47": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "99,48": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "100,48": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2
   },
   "99,49": {
-    "terrain": 2,
+    "terrain": 1,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "100,49": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 3,
+    "animal": 2
   },
   "101,48": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 3
   },
   "102,48": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 2
   },
   "101,49": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 3
   },
   "102,49": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "103,48": {
-    "clan": 10
+    "clan": 10,
+    "terrain": 1,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,48": {
     "terrain": 1,
-    "clan": 10
+    "clan": 10,
+    "shadowland": 1
   },
   "103,49": {
-    "clan": 10
+    "clan": 10,
+    "terrain": 1,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,49": {
     "terrain": 1,
-    "clan": 10
+    "clan": 10,
+    "infrastructure": 1,
+    "crime": 1
   },
   "105,48": {
     "terrain": 1,
-    "clan": 10
+    "clan": 10,
+    "infrastructure": 1,
+    "crime": 1
   },
   "106,48": {
     "terrain": 2,
@@ -17929,69 +19709,101 @@
   "99,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 3
   },
   "100,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "animal": 2
   },
   "99,51": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "resource": 39,
+    "shadowland": 1,
+    "crime": 1,
+    "fertility": 1
   },
   "100,51": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "shadowland": 2,
+    "animal": 2
   },
   "101,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2
   },
   "102,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 2
   },
   "101,51": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 2
   },
   "102,51": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 2
   },
   "103,50": {
-    "infrastructure": 1,
-    "clan": 10
+    "clan": 10,
+    "terrain": 1,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "104,50": {
     "terrain": 1,
-    "clan": 10
+    "clan": 10,
+    "infrastructure": 2,
+    "crime": 1
   },
   "103,51": {
     "infrastructure": 1,
-    "clan": 10
+    "clan": 10,
+    "terrain": 1,
+    "shadowland": 1,
+    "crime": 1
   },
   "104,51": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 10,
+    "crime": 1
   },
   "105,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 10,
+    "infrastructure": 2
   },
   "106,50": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 10,
+    "settlement": 6,
+    "englishName": "Moshi",
+    "rokuganiName": "Moshi",
+    "infrastructure": 2
   },
   "105,51": {
     "terrain": 2,
@@ -18004,45 +19816,69 @@
     "clan": 10
   },
   "99,52": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "resource": 3,
+    "shadowland": 1,
+    "crime": 1,
+    "fertility": 1
   },
   "100,52": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "shadowland": 2,
+    "animal": 1
   },
   "99,53": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "infrastructure": 2,
+    "shadowland": 1,
+    "crime": 1
   },
   "100,53": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "infrastructure": 2,
+    "shadowland": 1,
+    "crime": 1
   },
   "101,52": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 8,
+    "shadowland": 2,
+    "crime": 2,
+    "animal": 1
   },
   "102,52": {
-    "clan": 10
+    "clan": 8,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "101,53": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "settlement": 5,
+    "englishName": "of the Breaking Dawn",
+    "rokuganiName": "Akatsuki",
+    "infrastructure": 2,
+    "shadowland": 1
   },
   "102,53": {
-    "clan": 10
+    "clan": 8,
+    "infrastructure": 1,
+    "shadowland": 1,
+    "crime": 1
   },
   "103,52": {
     "terrain": 1,
     "infrastructure": 1,
-    "clan": 10
+    "clan": 10,
+    "shadowland": 1,
+    "crime": 1
   },
   "104,52": {
     "terrain": 2,
@@ -18051,13 +19887,13 @@
   },
   "103,53": {
     "terrain": 1,
-    "infrastructure": 1,
-    "clan": 10
+    "clan": 8,
+    "crime": 1
   },
   "104,53": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8
   },
   "105,52": {
     "terrain": 2,
@@ -18072,7 +19908,7 @@
   "105,53": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8
   },
   "106,53": {
     "terrain": 4
@@ -18080,61 +19916,78 @@
   "99,54": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 1
   },
   "100,54": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 2,
+    "crime": 3,
+    "animal": 1
   },
   "99,55": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 2,
+    "animal": 1
   },
   "100,55": {
     "terrain": 2,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 1,
+    "animal": 1
   },
   "101,54": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 1,
+    "crime": 2,
+    "animal": 1
   },
   "102,54": {
-    "clan": 10
+    "clan": 8,
+    "infrastructure": 1,
+    "crime": 1
   },
   "101,55": {
     "terrain": 2,
-    "clan": 10
+    "clan": 8,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "102,55": {
-    "climate": 4,
-    "clan": 10
+    "clan": 8,
+    "infrastructure": 1,
+    "crime": 1
   },
   "103,54": {
     "terrain": 1,
-    "infrastructure": 1,
-    "clan": 10
+    "clan": 8
   },
   "104,54": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8
   },
   "103,55": {
     "terrain": 1,
-    "infrastructure": 1,
-    "clan": 10
+    "clan": 8
   },
   "104,55": {
     "terrain": 2,
     "climate": 4,
-    "clan": 10
+    "clan": 8
   },
   "105,54": {
     "terrain": 4,
-    "clan": 10
+    "clan": 8
   },
   "106,54": {
     "terrain": 4
@@ -18149,43 +20002,54 @@
     "terrain": 1,
     "climate": 4,
     "clan": 2,
-    "infrastructure": 1
+    "shadowland": 1,
+    "animal": 1
   },
   "100,56": {
     "terrain": 1,
-    "clan": 10,
-    "infrastructure": 1
+    "clan": 8,
+    "shadowland": 1,
+    "animal": 1
   },
   "99,57": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1,
+    "crime": 1
   },
   "100,57": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1,
+    "crime": 1
   },
   "101,56": {
     "terrain": 1,
-    "clan": 10,
-    "infrastructure": 1
+    "clan": 8,
+    "animal": 1
   },
   "102,56": {
     "terrain": 2,
     "climate": 4,
     "infrastructure": 1,
-    "clan": 10
+    "clan": 8,
+    "crime": 1
   },
   "101,57": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1,
+    "crime": 1
   },
   "102,57": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "crime": 1
   },
   "103,56": {
-    "clan": 10
+    "clan": 8,
+    "terrain": 1
   },
   "104,56": {
     "terrain": 2,
-    "clan": 10
+    "clan": 8
   },
   "103,57": {
     "river": 2,
@@ -18615,8 +20479,7 @@
     "river": 2
   },
   "80,81": {
-    "terrain": 3,
-    "river": 2
+    "terrain": 3
   },
   "73,82": {
     "terrain": 2,
@@ -18692,8 +20555,7 @@
     "animal": 1
   },
   "80,83": {
-    "terrain": 3,
-    "river": 2
+    "terrain": 3
   },
   "83,122": {
     "terrain": 1,
@@ -29662,7 +31524,8 @@
     "clan": 1
   },
   "48,128": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "47,129": {
     "infrastructure": 1,
@@ -31747,11 +33610,13 @@
   "27,104": {
     "vegetation": 3,
     "infrastructure": 2,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "28,104": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "27,105": {
     "terrain": 1,
@@ -31760,7 +33625,8 @@
   "28,105": {
     "vegetation": 3,
     "infrastructure": 2,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "21,106": {
     "terrain": 2,
@@ -31793,102 +33659,135 @@
   },
   "29,98": {},
   "30,98": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "29,99": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "30,99": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "31,98": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "32,98": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "31,99": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "32,99": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "33,98": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
-  "34,98": {},
+  "34,98": {
+    "animal": 2
+  },
   "33,99": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "34,99": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
-  "35,98": {},
+  "35,98": {
+    "animal": 2
+  },
   "36,98": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,99": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "36,99": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,100": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "30,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "29,101": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "30,101": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "31,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "32,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "31,101": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "32,101": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "33,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "34,100": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "33,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "34,101": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "35,100": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "36,100": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "35,101": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "36,101": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,102": {
     "clan": 14
@@ -31906,7 +33805,8 @@
     "clan": 14
   },
   "32,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "31,103": {
     "clan": 14
@@ -31915,11 +33815,13 @@
     "clan": 14
   },
   "33,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "34,102": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 1
   },
   "33,103": {
     "terrain": 1,
@@ -31932,20 +33834,25 @@
   "34,103": {
     "terrain": 2,
     "climate": 4,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "35,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "36,102": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "35,103": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "36,103": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "29,104": {
     "clan": 14
@@ -31983,7 +33890,8 @@
   },
   "34,104": {
     "terrain": 1,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "33,105": {
     "infrastructure": 2,
@@ -31991,20 +33899,25 @@
   },
   "34,105": {
     "terrain": 1,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "35,104": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "36,104": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "35,105": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "36,105": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "1,54": {
     "climate": 3
@@ -32340,7 +34253,9 @@
   "9,66": {},
   "10,66": {},
   "9,67": {},
-  "10,67": {},
+  "10,67": {
+    "crime": 1
+  },
   "1,66": {
     "terrain": 1
   },
@@ -54654,19 +56569,29 @@
     "terrain": 5
   },
   "99,88": {
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "spirit": 2,
+    "animal": 2
   },
   "100,88": {
-    "clan": 2
+    "clan": 8,
+    "settlement": 6,
+    "englishName": "Otomo",
+    "rokuganiName": "Otomo",
+    "infrastructure": 2
   },
   "99,89": {
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "spirit": 2,
+    "animal": 2
   },
   "100,89": {
     "terrain": 4
   },
   "101,88": {
-    "clan": 2
+    "clan": 8
   },
   "102,88": {
     "terrain": 4
@@ -54733,7 +56658,7 @@
     "terrain": 4
   },
   "101,87": {
-    "clan": 2
+    "clan": 8
   },
   "102,87": {
     "terrain": 4
@@ -54799,26 +56724,17 @@
     "terrain": 5
   },
   "103,84": {
-    "river": 2,
-    "infrastructure": 1,
     "clan": 8
   },
   "104,84": {
-    "terrain": 8,
-    "infrastructure": 1,
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "103,85": {
-    "river": 2,
     "clan": 8
   },
   "104,85": {
-    "terrain": 8,
-    "clan": 8,
-    "text": {
-      "text": "Kyuden Otomo",
-      "fontSize": 14
-    }
+    "clan": 8
   },
   "105,84": {
     "river": 2,
@@ -54828,8 +56744,8 @@
     "clan": 8
   },
   "105,85": {
-    "river": 2,
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "106,85": {
     "clan": 8
@@ -54887,17 +56803,18 @@
     "clan": 8
   },
   "106,82": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "105,83": {
-    "river": 2,
     "clan": 8
   },
   "106,83": {
     "clan": 8
   },
   "107,82": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "108,82": {
     "terrain": 4
@@ -55763,7 +57680,8 @@
     "clan": 5
   },
   "110,48": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "109,49": {
     "terrain": 4
@@ -55811,38 +57729,57 @@
     "terrain": 4
   },
   "109,46": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "110,46": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "109,47": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1,
+    "infrastructure": 1
   },
   "110,47": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "111,46": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "settlement": 5,
+    "englishName": "Water Cape",
+    "rokuganiName": "Mizusaki",
+    "infrastructure": 1
   },
   "112,46": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "111,47": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "112,47": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "113,46": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "114,46": {
     "terrain": 4,
     "clan": 5
   },
   "113,47": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "114,47": {
     "terrain": 4
@@ -55857,29 +57794,38 @@
     "clan": 5
   },
   "110,45": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "111,44": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "112,44": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "111,45": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "112,45": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "113,44": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1,
+    "infrastructure": 1
   },
   "114,44": {
     "terrain": 4,
     "clan": 5
   },
   "113,45": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "114,45": {
     "terrain": 4,
@@ -55940,12 +57886,16 @@
     "clan": 5
   },
   "113,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
-  "115,42": {},
+  "115,42": {
+    "infrastructure": 1
+  },
   "116,42": {
     "terrain": 4
   },
@@ -62261,7 +64211,8 @@
   },
   "94,96": {
     "terrain": 1,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 2
   },
   "93,97": {
     "terrain": 2,
@@ -63381,125 +65332,158 @@
   },
   "21,90": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "22,90": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "21,91": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "22,91": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "23,90": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "24,90": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "23,91": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "animal": 2
   },
   "24,91": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 2
   },
   "23,92": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "24,92": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "23,93": {},
   "24,93": {},
   "21,92": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "22,92": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "21,93": {},
   "22,93": {},
   "23,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "24,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "23,97": {},
   "24,97": {},
   "21,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "22,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "21,97": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "22,97": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "23,94": {},
   "24,94": {},
   "23,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "24,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "25,96": {},
   "26,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,97": {},
   "26,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "28,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "29,94": {},
   "30,94": {},
   "29,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "30,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "31,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "32,96": {},
   "31,97": {},
   "32,97": {},
   "27,100": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "28,100": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "27,101": {
     "terrain": 1,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "28,101": {
     "terrain": 1,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "11,90": {
     "terrain": 2,
@@ -63728,16 +65712,27 @@
     "clan": 4
   },
   "97,48": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "98,48": {
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "97,49": {
-    "clan": 5
+    "clan": 5,
+    "settlement": 4,
+    "englishName": "Zumiki-Mihari",
+    "rokuganiName": "Zumiki-Mihari",
+    "infrastructure": 2
   },
   "98,49": {
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "91,44": {
     "clan": 5
@@ -65506,7 +67501,6 @@
     "clan": 6
   },
   "53,68": {
-    "terrain": 1,
     "clan": 6,
     "infrastructure": 2
   },
@@ -65515,7 +67509,6 @@
     "clan": 6
   },
   "53,69": {
-    "terrain": 1,
     "clan": 6,
     "infrastructure": 2
   },
@@ -66980,10 +68973,12 @@
     "clan": 5
   },
   "90,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "89,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "90,43": {
     "clan": 5
@@ -67044,7 +69039,11 @@
   },
   "90,48": {
     "river": 2,
-    "clan": 2
+    "clan": 2,
+    "settlement": 2,
+    "englishName": "Chikuzen",
+    "rokuganiName": "Chikuzen",
+    "infrastructure": 1
   },
   "89,49": {
     "clan": 2,
@@ -67064,7 +69063,7 @@
     "terrain": 1,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 3
   },
   "91,51": {
@@ -67083,7 +69082,7 @@
     "terrain": 1,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 4
   },
   "93,53": {
@@ -67106,7 +69105,7 @@
     "terrain": 1,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 3
   },
   "95,55": {
@@ -67575,21 +69574,29 @@
     "river": 2
   },
   "17,65": {},
-  "18,65": {},
+  "18,65": {
+    "crime": 1
+  },
   "13,64": {
     "river": 2
   },
   "14,64": {
     "river": 2
   },
-  "13,65": {},
-  "14,65": {},
+  "13,65": {
+    "crime": 1
+  },
+  "14,65": {
+    "crime": 1
+  },
   "11,64": {},
   "12,64": {
     "river": 2
   },
   "11,65": {},
-  "12,65": {},
+  "12,65": {
+    "crime": 1
+  },
   "15,64": {},
   "16,64": {
     "river": 2
@@ -68241,19 +70248,23 @@
   "20,88": {},
   "19,89": {},
   "20,89": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "19,90": {},
   "20,90": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "19,91": {},
   "20,91": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "19,92": {},
   "20,92": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "19,93": {},
   "20,93": {},
@@ -68861,38 +70872,66 @@
     "river": 2
   },
   "20,64": {},
-  "19,65": {},
-  "20,65": {},
+  "19,65": {
+    "crime": 1
+  },
+  "20,65": {
+    "crime": 1
+  },
   "21,64": {},
   "22,64": {},
-  "21,65": {},
-  "22,65": {},
+  "21,65": {
+    "crime": 1
+  },
+  "22,65": {
+    "crime": 1
+  },
   "23,64": {
     "terrain": 3
   },
   "24,64": {
     "terrain": 3
   },
-  "23,65": {},
-  "24,65": {},
+  "23,65": {
+    "crime": 1
+  },
+  "24,65": {
+    "crime": 1
+  },
   "27,64": {},
   "28,64": {},
-  "27,65": {},
-  "28,65": {},
+  "27,65": {
+    "crime": 1
+  },
+  "28,65": {
+    "crime": 1
+  },
   "25,64": {
     "terrain": 3
   },
   "26,64": {},
-  "25,65": {},
-  "26,65": {},
+  "25,65": {
+    "crime": 1
+  },
+  "26,65": {
+    "crime": 1
+  },
   "29,64": {},
-  "30,64": {},
-  "29,65": {},
-  "30,65": {},
+  "30,64": {
+    "crime": 1
+  },
+  "29,65": {
+    "crime": 1
+  },
+  "30,65": {
+    "crime": 2
+  },
   "29,62": {},
   "30,62": {},
   "29,63": {},
-  "30,63": {},
+  "30,63": {
+    "crime": 1
+  },
   "29,60": {
     "vegetation": 3
   },
@@ -69018,19 +71057,34 @@
   "13,81": {},
   "14,81": {},
   "9,70": {},
-  "10,70": {},
-  "9,71": {},
-  "10,71": {},
-  "9,68": {},
-  "10,68": {},
-  "9,69": {
-    "vegetation": 3
+  "10,70": {
+    "crime": 1
   },
-  "10,69": {},
+  "9,71": {},
+  "10,71": {
+    "crime": 1
+  },
+  "9,68": {},
+  "10,68": {
+    "crime": 1
+  },
+  "9,69": {
+    "vegetation": 3,
+    "animal": 1
+  },
+  "10,69": {
+    "crime": 1
+  },
   "11,66": {},
-  "12,66": {},
-  "11,67": {},
-  "12,67": {},
+  "12,66": {
+    "crime": 1
+  },
+  "11,67": {
+    "crime": 1
+  },
+  "12,67": {
+    "crime": 1
+  },
   "7,70": {},
   "8,70": {},
   "7,71": {
@@ -69047,82 +71101,113 @@
   "24,87": {},
   "25,88": {},
   "26,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "23,88": {},
   "24,88": {},
   "23,89": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "24,89": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "27,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,88": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "28,89": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "27,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "28,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,91": {},
   "28,91": {},
   "29,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "30,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "29,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "30,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "29,92": {},
   "30,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "29,93": {},
   "30,93": {},
   "31,94": {},
   "32,94": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "31,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "32,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "31,62": {},
   "32,62": {},
-  "31,63": {},
-  "32,63": {},
+  "31,63": {
+    "crime": 1
+  },
+  "32,63": {
+    "crime": 1
+  },
   "33,62": {},
   "34,62": {},
-  "33,63": {},
-  "34,63": {},
+  "33,63": {
+    "crime": 1
+  },
+  "34,63": {
+    "crime": 1
+  },
   "35,62": {},
   "36,62": {},
-  "35,63": {},
-  "36,63": {},
+  "35,63": {
+    "crime": 1
+  },
+  "36,63": {
+    "crime": 1
+  },
   "37,62": {
     "clan": 8
   },
@@ -69165,7 +71250,9 @@
     "clan": 8
   },
   "44,68": {},
-  "43,69": {},
+  "43,69": {
+    "crime": 1
+  },
   "44,69": {},
   "45,70": {},
   "46,70": {},
@@ -69185,125 +71272,159 @@
     "clan": 6
   },
   "47,72": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,72": {
     "clan": 6
   },
   "47,73": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,73": {
     "clan": 6
   },
   "47,74": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,74": {
     "clan": 6
   },
   "47,75": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,75": {
     "clan": 6
   },
   "47,76": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,76": {
     "clan": 6
   },
   "47,77": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,77": {
     "clan": 6,
     "resource": 19
   },
   "47,80": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,80": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,81": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,81": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,84": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,84": {
     "clan": 6
   },
   "47,85": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,85": {
     "clan": 6
   },
   "45,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,84": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "45,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "46,85": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "47,86": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,86": {
     "clan": 6
   },
   "47,87": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,87": {
     "clan": 6
   },
   "47,88": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,88": {
     "clan": 6
   },
   "47,89": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,89": {
     "clan": 6
   },
   "47,90": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,90": {
     "clan": 6
   },
   "47,91": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "48,91": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,92": {
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "47,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 2
   },
   "48,93": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1,
+    "crime": 1
   },
   "49,94": {
     "clan": 6
@@ -70086,26 +72207,29 @@
     "clan": 1
   },
   "49,66": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "infrastructure": 1
   },
   "50,66": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 6
+    "clan": 6,
+    "infrastructure": 1
   },
   "49,67": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "50,67": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "51,66": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "settlement": 1,
+    "englishName": "First Breath Dojo",
+    "rokuganiName": "First Breath Dojo",
+    "infrastructure": 2
   },
   "52,66": {
     "terrain": 2,
@@ -70116,8 +72240,8 @@
     "clan": 6
   },
   "52,67": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "infrastructure": 2
   },
   "57,74": {
     "terrain": 1,
@@ -70267,20 +72391,23 @@
     "clan": 6
   },
   "51,68": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "52,68": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "51,69": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "52,69": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 2,
+    "clan": 6,
+    "climate": 4
   },
   "47,66": {
     "terrain": 1,
@@ -70312,10 +72439,14 @@
     "clan": 6
   },
   "49,68": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 2,
+    "climate": 4
   },
   "50,68": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 2,
+    "climate": 4
   },
   "49,69": {
     "terrain": 1,
@@ -70331,17 +72462,16 @@
     "clan": 6
   },
   "54,66": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "terrain": 2
   },
   "53,67": {
-    "terrain": 1,
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "54,67": {
-    "terrain": 1,
     "clan": 6,
-    "infrastructure": 2
+    "terrain": 2
   },
   "71,70": {
     "clan": 4
@@ -70559,7 +72689,11 @@
     "clan": 4
   },
   "64,54": {
-    "clan": 4
+    "clan": 4,
+    "settlement": 2,
+    "englishName": "Murame",
+    "rokuganiName": "Murame",
+    "infrastructure": 2
   },
   "63,55": {
     "clan": 4
@@ -70686,7 +72820,10 @@
   },
   "84,49": {
     "vegetation": 3,
-    "clan": 4
+    "clan": 4,
+    "settlement": 10,
+    "englishName": "Heart of Vigilance",
+    "rokuganiName": "Kokoro Nezuban"
   },
   "85,48": {
     "clan": 4
@@ -70802,7 +72939,8 @@
     "vegetation": 3,
     "clan": 4,
     "text": {
-      "text": "Nezuban Forest",
+      "englishText": "Heart of Vigilance Forest",
+      "rokuganiText": "Nezuban Mori",
       "fontSize": 8
     }
   },
@@ -70914,7 +73052,8 @@
   "77,50": {
     "vegetation": 3,
     "clan": 4,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "fertility": 2
   },
   "78,50": {
     "vegetation": 3,
@@ -70942,7 +73081,8 @@
     "vegetation": 3,
     "clan": 4,
     "infrastructure": 2,
-    "resource": 2
+    "resource": 2,
+    "fertility": 2
   },
   "78,49": {
     "vegetation": 3,
@@ -71852,13 +73992,15 @@
     "clan": 4
   },
   "94,58": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "93,59": {
     "clan": 4
   },
   "94,59": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "93,60": {
     "clan": 4,
@@ -71952,14 +74094,18 @@
     "infrastructure": 1
   },
   "94,68": {
-    "clan": 4
-  },
-  "93,69": {
-    "clan": 4
-  },
-  "94,69": {
     "clan": 4,
     "infrastructure": 1
+  },
+  "93,69": {
+    "clan": 4,
+    "infrastructure": 1,
+    "settlement": 5,
+    "englishName": "Yojin",
+    "rokuganiName": "Yojin"
+  },
+  "94,69": {
+    "clan": 4
   },
   "97,62": {
     "clan": 8
@@ -72019,7 +74165,10 @@
   },
   "97,72": {
     "infrastructure": 1,
-    "clan": 8
+    "clan": 8,
+    "settlement": 2,
+    "englishName": "North Hub",
+    "rokuganiName": "Kita Chushin"
   },
   "98,72": {
     "river": 2,
@@ -72062,7 +74211,6 @@
   },
   "101,77": {
     "river": 2,
-    "infrastructure": 1,
     "clan": 8
   },
   "102,77": {
@@ -72113,34 +74261,34 @@
     "clan": 8
   },
   "103,82": {
-    "river": 2,
     "clan": 8
   },
   "104,82": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "103,83": {
-    "river": 2,
     "clan": 8
   },
   "104,83": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "101,84": {
-    "clan": 8
+    "clan": 2
   },
   "102,84": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "101,85": {
-    "river": 2,
     "clan": 2
   },
   "102,85": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "99,84": {
-    "infrastructure": 1,
     "clan": 2
   },
   "100,84": {
@@ -72159,7 +74307,7 @@
     "clan": 2
   },
   "100,82": {
-    "clan": 8
+    "clan": 2
   },
   "99,83": {
     "river": 2,
@@ -72167,7 +74315,6 @@
   },
   "100,83": {
     "river": 2,
-    "infrastructure": 1,
     "clan": 2
   },
   "97,82": {
@@ -72175,10 +74322,12 @@
   },
   "98,82": {
     "river": 2,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "97,83": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "98,83": {
     "clan": 2
@@ -72188,7 +74337,7 @@
     "clan": 2
   },
   "98,80": {
-    "clan": 8
+    "clan": 2
   },
   "97,81": {
     "river": 2,
@@ -72213,7 +74362,11 @@
     "clan": 2
   },
   "93,78": {
-    "clan": 2
+    "clan": 2,
+    "settlement": 2,
+    "englishName": "Tsuma",
+    "rokuganiName": "Tsuma",
+    "infrastructure": 1
   },
   "94,78": {
     "clan": 2
@@ -72316,7 +74469,6 @@
   },
   "84,73": {
     "terrain": 3,
-    "river": 2,
     "clan": 4
   },
   "83,70": {
@@ -72385,71 +74537,74 @@
     "clan": 2
   },
   "101,82": {
-    "clan": 8
+    "clan": 2
   },
   "102,82": {
-    "infrastructure": 1,
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "101,83": {
-    "infrastructure": 1,
-    "clan": 8
+    "clan": 2
   },
   "102,83": {
-    "infrastructure": 1,
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "101,80": {
-    "clan": 8
+    "clan": 2
   },
   "102,80": {
-    "infrastructure": 1,
     "clan": 8
   },
   "101,81": {
-    "clan": 8
+    "clan": 2
   },
   "102,81": {
-    "infrastructure": 1,
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "101,78": {
     "clan": 8
   },
   "102,78": {
-    "infrastructure": 1,
     "clan": 8
   },
   "101,79": {
-    "clan": 8
+    "clan": 2
   },
   "102,79": {
-    "infrastructure": 1,
     "clan": 8
   },
   "99,78": {
     "clan": 8
   },
   "100,78": {
-    "clan": 8
+    "clan": 8,
+    "infrastructure": 1
   },
   "99,79": {
-    "clan": 8
+    "clan": 2
   },
   "100,79": {
-    "clan": 8
+    "clan": 2,
+    "infrastructure": 1
   },
   "99,80": {
-    "clan": 8
+    "clan": 2
   },
   "100,80": {
-    "clan": 8
+    "clan": 2,
+    "infrastructure": 1,
+    "settlement": 1,
+    "englishName": "Mizen",
+    "rokuganiName": "Mizen"
   },
   "99,81": {
-    "clan": 8
+    "clan": 2,
+    "infrastructure": 1
   },
   "100,81": {
-    "clan": 8
+    "clan": 2
   },
   "99,76": {
     "clan": 8
@@ -72462,22 +74617,26 @@
     "clan": 8
   },
   "100,77": {
-    "clan": 8
+    "clan": 8,
+    "settlement": 2,
+    "englishName": "South Hub",
+    "rokuganiName": "Minami Chushin",
+    "infrastructure": 1
   },
   "97,78": {
     "clan": 2
   },
   "98,78": {
-    "clan": 8
+    "clan": 2
   },
   "97,79": {
     "clan": 2
   },
   "98,79": {
-    "clan": 8
+    "clan": 2
   },
   "97,76": {
-    "clan": 2
+    "clan": 8
   },
   "98,76": {
     "clan": 8
@@ -72502,10 +74661,10 @@
     "clan": 2
   },
   "95,76": {
-    "clan": 2
+    "clan": 8
   },
   "96,76": {
-    "clan": 2
+    "clan": 8
   },
   "95,77": {
     "clan": 2
@@ -72514,17 +74673,19 @@
     "clan": 2
   },
   "97,74": {
+    "clan": 8
+  },
+  "98,74": {
     "clan": 8,
     "infrastructure": 1
   },
-  "98,74": {
-    "clan": 8
-  },
   "97,75": {
-    "clan": 8
+    "clan": 8,
+    "infrastructure": 1
   },
   "98,75": {
-    "clan": 8
+    "clan": 8,
+    "infrastructure": 1
   },
   "105,72": {
     "clan": 8
@@ -72806,7 +74967,6 @@
     "clan": 8
   },
   "105,81": {
-    "river": 2,
     "clan": 8
   },
   "106,81": {
@@ -72825,7 +74985,6 @@
     "clan": 8
   },
   "107,76": {
-    "river": 2,
     "clan": 8
   },
   "108,76": {
@@ -72836,7 +74995,8 @@
     "clan": 8
   },
   "108,77": {
-    "clan": 8
+    "clan": 8,
+    "river": 2
   },
   "107,74": {
     "terrain": 4,
@@ -72876,10 +75036,12 @@
     "animal": 2
   },
   "95,59": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "96,59": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "95,60": {
     "clan": 4,
@@ -72935,11 +75097,11 @@
     "clan": 4
   },
   "96,68": {
-    "infrastructure": 1,
     "clan": 4
   },
   "95,69": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "96,69": {
     "clan": 4
@@ -72957,11 +75119,11 @@
     "clan": 4
   },
   "95,70": {
-    "clan": 4,
-    "infrastructure": 1
+    "clan": 4
   },
   "96,70": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "95,71": {
     "clan": 4
@@ -72971,36 +75133,41 @@
     "clan": 8
   },
   "95,72": {
-    "clan": 4
+    "clan": 8
   },
   "96,72": {
     "clan": 8
   },
   "95,73": {
-    "clan": 4
+    "clan": 8,
+    "infrastructure": 1
   },
   "96,73": {
     "clan": 8
   },
   "95,74": {
-    "clan": 2
-  },
-  "96,74": {
     "clan": 8
   },
-  "95,75": {
-    "clan": 2,
+  "96,74": {
+    "clan": 8,
     "infrastructure": 1
+  },
+  "95,75": {
+    "clan": 8,
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "West Hub",
+    "rokuganiName": "Nishi Chushin"
   },
   "96,75": {
     "clan": 8,
     "infrastructure": 1
   },
   "93,76": {
-    "clan": 2
+    "clan": 8
   },
   "94,76": {
-    "clan": 2
+    "clan": 8
   },
   "93,77": {
     "clan": 2
@@ -73012,20 +75179,20 @@
     "clan": 2
   },
   "92,76": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "91,77": {
     "clan": 2
   },
   "92,77": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "89,76": {
-    "terrain": 8,
     "clan": 2
   },
   "90,76": {
-    "terrain": 8,
     "clan": 2
   },
   "89,77": {
@@ -73088,24 +75255,19 @@
     "clan": 2
   },
   "89,75": {
-    "terrain": 8,
     "infrastructure": 1,
     "clan": 2
   },
   "90,75": {
-    "terrain": 8,
     "clan": 2,
-    "text": {
-      "text": "Kyuden Kakita",
-      "fontSize": 14
-    },
     "infrastructure": 1
   },
   "91,74": {
     "clan": 2
   },
   "92,74": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "91,75": {
     "clan": 2,
@@ -73113,42 +75275,49 @@
   },
   "92,75": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "settlement": 6,
+    "englishName": "Kakita",
+    "rokuganiName": "Kakita"
   },
   "93,74": {
-    "clan": 2
+    "clan": 8
   },
   "94,74": {
-    "clan": 2
+    "clan": 8
   },
   "93,75": {
-    "clan": 2,
+    "clan": 8,
     "infrastructure": 1
   },
   "94,75": {
-    "clan": 2,
+    "clan": 8,
     "infrastructure": 1
   },
   "93,72": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "94,72": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "93,73": {
     "clan": 4
   },
   "94,73": {
-    "clan": 4
+    "clan": 8
   },
   "93,70": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "94,70": {
     "clan": 4
   },
   "93,71": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "94,71": {
     "clan": 4
@@ -73163,7 +75332,8 @@
     "clan": 4
   },
   "92,73": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "89,72": {
     "clan": 4
@@ -73511,7 +75681,11 @@
     "clan": 2
   },
   "86,81": {
-    "clan": 2
+    "clan": 2,
+    "settlement": 5,
+    "englishName": "Ashidaka",
+    "rokuganiName": "Ashidaka",
+    "infrastructure": 1
   },
   "85,78": {
     "clan": 2
@@ -73531,43 +75705,53 @@
   },
   "90,82": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "89,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "90,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "89,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "90,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "89,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "90,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "91,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 3
   },
   "92,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "91,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 3
   },
   "92,85": {
     "vegetation": 3,
@@ -73575,82 +75759,107 @@
     "text": {
       "text": "Osari Forest",
       "fontSize": 8
-    }
+    },
+    "animal": 3
   },
   "93,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "94,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "93,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 3
   },
   "94,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "93,82": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "94,82": {
     "clan": 2
   },
   "93,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "94,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "91,82": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "92,82": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "settlement": 10,
+    "englishName": "Giji",
+    "rokuganiName": "Giji",
+    "animal": 1
   },
   "91,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "92,83": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "93,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "94,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "93,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "94,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "95,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "96,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "settlement": 2,
+    "englishName": "Shizuka",
+    "rokuganiName": "Shizuka",
+    "infrastructure": 1
   },
   "95,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "96,87": {
     "vegetation": 3,
@@ -73658,52 +75867,63 @@
   },
   "91,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "92,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "91,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "92,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "89,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "90,86": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "89,87": {
     "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "90,87": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "95,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "96,84": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "95,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 2
   },
   "96,85": {
     "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "animal": 1
   },
   "95,90": {
     "clan": 2
@@ -73720,76 +75940,61 @@
     "clan": 2
   },
   "89,88": {
-    "terrain": 8,
     "clan": 2
   },
   "90,88": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 2
   },
   "89,89": {
-    "terrain": 8,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "90,89": {
-    "terrain": 8,
     "clan": 2
   },
   "87,82": {
-    "terrain": 8,
     "clan": 2
   },
   "88,82": {
     "clan": 2
   },
   "87,83": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 2
   },
   "88,83": {
     "clan": 2
   },
   "97,84": {
-    "terrain": 8,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "98,84": {
-    "terrain": 8,
     "clan": 2
   },
   "97,85": {
-    "terrain": 8,
     "clan": 2,
     "text": {
       "text": "Tsuma Village",
       "fontSize": 10
-    }
+    },
+    "infrastructure": 1
   },
   "98,85": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 2
   },
   "85,82": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "86,82": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 2
   },
   "85,83": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "86,83": {
-    "terrain": 8,
-    "clan": 2,
-    "text": {
-      "text": "Shizuka City",
-      "fontSize": 10
-    }
+    "clan": 2
   },
   "87,80": {
     "clan": 2
@@ -73852,61 +76057,76 @@
     "clan": 2
   },
   "97,86": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "98,86": {
-    "infrastructure": 1,
     "clan": 2
   },
   "97,87": {
-    "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "98,87": {
-    "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 2
   },
   "99,86": {
     "clan": 2
   },
   "100,86": {
-    "clan": 2
+    "clan": 2,
+    "river": 2
   },
   "99,87": {
-    "clan": 2
+    "clan": 8,
+    "infrastructure": 2
   },
   "100,87": {
-    "clan": 2
+    "clan": 8
   },
   "97,88": {
+    "clan": 8,
     "vegetation": 3,
-    "clan": 2
+    "spirit": 2,
+    "animal": 2
   },
   "98,88": {
-    "infrastructure": 1,
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "spirit": 2,
+    "animal": 2
   },
   "97,89": {
     "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 2
+    "clan": 8,
+    "spirit": 2,
+    "animal": 2
   },
   "98,89": {
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "text": {
+      "englishText": "Eye of the Needle",
+      "rokuganiText": "Eye of the Needle",
+      "fontSize": 8
+    },
+    "spirit": 3,
+    "animal": 3
   },
   "95,88": {
     "clan": 2
   },
   "96,88": {
-    "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "95,89": {
     "clan": 2
   },
   "96,89": {
-    "vegetation": 3,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "93,88": {
     "clan": 2
@@ -73941,7 +76161,6 @@
     "clan": 2
   },
   "91,89": {
-    "infrastructure": 1,
     "clan": 2
   },
   "92,89": {
@@ -73960,14 +76179,14 @@
     "clan": 2
   },
   "88,87": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "87,84": {
-    "river": 2,
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 1
   },
   "88,84": {
-    "infrastructure": 1,
     "clan": 2
   },
   "87,85": {
@@ -73979,10 +76198,16 @@
     "clan": 2
   },
   "97,90": {
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "spirit": 2,
+    "animal": 2
   },
   "98,90": {
-    "clan": 2
+    "clan": 8,
+    "vegetation": 3,
+    "spirit": 2,
+    "animal": 2
   },
   "97,91": {
     "clan": 2
@@ -74004,7 +76229,8 @@
     "clan": 2
   },
   "95,96": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 2
   },
   "96,96": {
     "clan": 2
@@ -74013,7 +76239,11 @@
     "clan": 2
   },
   "96,97": {
-    "clan": 2
+    "clan": 2,
+    "settlement": 6,
+    "englishName": "Seven Fold",
+    "rokuganiName": "Seven Fold",
+    "infrastructure": 2
   },
   "93,94": {
     "clan": 2
@@ -74022,7 +76252,8 @@
     "clan": 2
   },
   "93,95": {
-    "clan": 2
+    "clan": 2,
+    "infrastructure": 2
   },
   "94,95": {
     "clan": 2
@@ -74052,13 +76283,11 @@
     "infrastructure": 1
   },
   "92,95": {
-    "terrain": 8,
     "infrastructure": 1,
     "clan": 2,
-    "text": {
-      "text": "Musume Village",
-      "fontSize": 8
-    }
+    "settlement": 1,
+    "englishName": "Musume",
+    "rokuganiName": "Musume"
   },
   "89,94": {
     "vegetation": 3,
@@ -77590,26 +79819,34 @@
     "clan": 6
   },
   "56,68": {
-    "clan": 6
+    "clan": 6,
+    "resource": 4
   },
   "55,69": {
-    "clan": 6
+    "clan": 6,
+    "resource": 3,
+    "infrastructure": 2
   },
   "56,69": {
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "55,70": {
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "56,70": {
     "clan": 6,
-    "resource": 19
+    "resource": 19,
+    "infrastructure": 2
   },
   "55,71": {
-    "clan": 6
+    "clan": 6,
+    "resource": 3
   },
   "56,71": {
-    "clan": 6
+    "clan": 6,
+    "resource": 39
   },
   "57,72": {
     "clan": 6,
@@ -77617,7 +79854,8 @@
   },
   "58,72": {
     "clan": 6,
-    "resource": 3
+    "resource": 3,
+    "infrastructure": 2
   },
   "57,73": {
     "clan": 6,
@@ -77625,20 +79863,26 @@
   },
   "58,73": {
     "clan": 6,
-    "resource": 3
+    "resource": 3,
+    "infrastructure": 2
   },
   "51,70": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 2,
+    "climate": 4
   },
   "52,70": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 2,
+    "climate": 4
   },
   "51,71": {
-    "vegetation": 3,
-    "clan": 6
+    "clan": 6,
+    "terrain": 1
   },
   "52,71": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 1
   },
   "51,72": {
     "clan": 6
@@ -77740,7 +79984,8 @@
   },
   "52,82": {
     "vegetation": 3,
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "51,83": {
     "clan": 6
@@ -77803,7 +80048,8 @@
     "clan": 6
   },
   "50,70": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 1
   },
   "49,71": {
     "clan": 6
@@ -77836,14 +80082,16 @@
   },
   "50,81": {
     "vegetation": 3,
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "49,82": {
     "clan": 6
   },
   "50,82": {
     "vegetation": 3,
-    "clan": 6
+    "clan": 6,
+    "crime": 1
   },
   "49,83": {
     "clan": 6
@@ -78335,14 +80583,19 @@
     "clan": 9
   },
   "59,111": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
-  "59,110": {},
+  "59,110": {
+    "crime": 1
+  },
   "59,112": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "59,113": {
-    "clan": 9
+    "clan": 9,
+    "crime": 1
   },
   "59,114": {
     "clan": 9
@@ -78358,10 +80611,12 @@
     "river": 2
   },
   "57,118": {
-    "river": 2
+    "river": 2,
+    "animal": 1
   },
   "57,119": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "58,119": {
     "clan": 1
@@ -78373,10 +80628,12 @@
   "59,121": {},
   "58,121": {},
   "57,121": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "57,120": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "58,120": {
     "clan": 1
@@ -80673,21 +82930,20 @@
     "resource": 3
   },
   "92,49": {
-    "clan": 2
+    "clan": 2,
+    "resource": 3,
+    "infrastructure": 1,
+    "fertility": 3
   },
   "91,49": {
     "river": 2,
-    "clan": 2,
-    "settlement": 2,
-    "englishName": "Chikuzen",
-    "rokuganiName": "Chikuzen",
-    "infrastructure": 1
+    "clan": 2
   },
   "93,51": {
     "terrain": 1,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 3
   },
   "94,54": {
@@ -80699,52 +82955,56 @@
     "infrastructure": 1
   },
   "93,50": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
-    "infrastructure": 1,
     "fertility": 2,
-    "resource": 2
+    "resource": 2,
+    "infrastructure": 2
   },
   "94,51": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
-    "infrastructure": 1
+    "resource": 1,
+    "infrastructure": 2,
+    "fertility": 2
   },
   "95,53": {
     "terrain": 1,
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 3
   },
   "96,53": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
-    "infrastructure": 1
+    "animal": 2
   },
   "97,55": {
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
-    "resource": 4
+    "infrastructure": 1,
+    "resource": 4,
+    "crime": 1
   },
   "97,56": {
     "clan": 2,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "fertility": 3,
     "resource": 3
   },
   "98,57": {
     "clan": 2,
     "fertility": 3,
-    "infrastructure": 2,
+    "infrastructure": 1,
     "resource": 3
   },
   "98,56": {
     "clan": 2,
-    "infrastructure": 1,
     "fertility": 3,
-    "resource": 3
+    "resource": 3,
+    "infrastructure": 2,
+    "crime": 1
   },
   "97,57": {
     "river": 2,
@@ -80752,7 +83012,7 @@
   },
   "90,50": {
     "clan": 2,
-    "infrastructure": 1,
+    "infrastructure": 2,
     "fertility": 3,
     "resource": 3
   },
@@ -80778,108 +83038,124 @@
     "clan": 5
   },
   "96,48": {
-    "infrastructure": 1,
     "clan": 5
   },
   "98,50": {
-    "terrain": 2,
-    "clan": 5
+    "terrain": 1,
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "98,51": {
-    "terrain": 2,
-    "clan": 5
+    "clan": 8,
+    "resource": 4,
+    "crime": 1,
+    "fertility": 1
   },
   "98,52": {
-    "clan": 5
+    "clan": 8,
+    "infrastructure": 2,
+    "crime": 1
   },
   "98,53": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 8,
+    "animal": 1
   },
   "98,54": {
     "terrain": 2,
-    "clan": 2
+    "clan": 2,
+    "shadowland": 1,
+    "animal": 2
   },
   "98,55": {
-    "terrain": 1,
-    "infrastructure": 1,
-    "clan": 2
+    "terrain": 2,
+    "clan": 2,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "97,50": {
-    "clan": 5
+    "clan": 5,
+    "crime": 1
   },
   "97,51": {
-    "clan": 5
+    "clan": 8,
+    "resource": 3,
+    "crime": 1,
+    "fertility": 1
   },
   "97,52": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 8,
+    "settlement": 1,
+    "englishName": "Otomo",
+    "rokuganiName": "Otomo",
+    "infrastructure": 2
   },
   "97,53": {
-    "terrain": 2,
-    "clan": 2
+    "clan": 8,
+    "animal": 1
   },
   "97,54": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
-    "infrastructure": 1
+    "animal": 2
   },
   "96,50": {
     "clan": 5
   },
   "96,51": {
-    "terrain": 1,
     "clan": 5
   },
   "96,52": {
-    "terrain": 2,
-    "clan": 2
+    "clan": 8,
+    "terrain": 1,
+    "animal": 1
   },
   "95,50": {
-    "terrain": 1,
     "clan": 5
   },
   "95,51": {
-    "terrain": 2,
-    "clan": 2
+    "clan": 5,
+    "terrain": 1,
+    "animal": 1
   },
   "95,52": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
-    "infrastructure": 1
+    "animal": 2
   },
   "94,50": {
-    "terrain": 2,
-    "clan": 2
+    "clan": 5,
+    "terrain": 1,
+    "animal": 1
   },
   "95,49": {
     "clan": 5
   },
   "94,49": {
+    "terrain": 1,
+    "clan": 5,
+    "animal": 1
+  },
+  "93,49": {
     "terrain": 2,
     "clan": 2,
     "fertility": 2,
-    "infrastructure": 2,
-    "resource": 1
-  },
-  "93,49": {
-    "terrain": 1,
-    "clan": 2,
-    "infrastructure": 1,
-    "fertility": 2,
-    "resource": 2
+    "resource": 2,
+    "infrastructure": 2
   },
   "93,48": {
     "terrain": 2,
-    "clan": 2
+    "clan": 5,
+    "animal": 2
   },
   "92,48": {
     "terrain": 1,
     "clan": 2,
-    "settlement": 6,
-    "englishName": "Kyotei",
-    "rokuganiName": "Kyotei",
-    "infrastructure": 1
+    "animal": 2,
+    "resource": 3,
+    "fertility": 3
   },
   "88,43": {
     "clan": 5,
@@ -80946,8 +83222,11 @@
   },
   "88,49": {
     "terrain": 2,
-    "clan": 4,
-    "animal": 2
+    "clan": 2,
+    "animal": 2,
+    "resource": 25,
+    "infrastructure": 2,
+    "fertility": 2
   },
   "87,43": {
     "clan": 5
@@ -81063,7 +83342,8 @@
     "animal": 2
   },
   "93,57": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "93,56": {
     "terrain": 2,
@@ -81076,7 +83356,8 @@
     "animal": 2
   },
   "92,56": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "92,57": {
     "clan": 4
@@ -81093,7 +83374,8 @@
     "infrastructure": 1
   },
   "91,55": {
-    "clan": 4
+    "clan": 4,
+    "animal": 1
   },
   "89,54": {
     "clan": 4
@@ -81155,7 +83437,7 @@
     "terrain": 2,
     "clan": 4,
     "infrastructure": 2,
-    "animal": 2
+    "crime": 1
   },
   "91,53": {
     "terrain": 2,
@@ -81322,15 +83604,22 @@
     "clan": 4
   },
   "67,57": {
-    "infrastructure": 1,
-    "clan": 4
+    "infrastructure": 2,
+    "clan": 4,
+    "settlement": 11,
+    "englishName": "Bishamon",
+    "rokuganiName": "Bhishamon"
   },
   "68,57": {
     "infrastructure": 1,
     "clan": 4
   },
   "67,56": {
-    "clan": 4
+    "clan": 4,
+    "settlement": 1,
+    "englishName": "Blue Chrysanthemum",
+    "rokuganiName": "Blue Chrysanthemum",
+    "infrastructure": 2
   },
   "68,56": {
     "clan": 4
@@ -81535,7 +83824,8 @@
     "clan": 4
   },
   "66,51": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 1
   },
   "65,51": {
     "clan": 4
@@ -81742,7 +84032,11 @@
     "clan": 4
   },
   "63,49": {
-    "clan": 4
+    "clan": 4,
+    "settlement": 5,
+    "englishName": "Great Hall of Records",
+    "rokuganiName": "Great Hall of Records",
+    "infrastructure": 2
   },
   "63,50": {
     "clan": 4
@@ -81769,10 +84063,15 @@
     "clan": 4
   },
   "64,50": {
-    "clan": 4
+    "clan": 4,
+    "infrastructure": 2
   },
   "65,50": {
-    "clan": 4
+    "clan": 4,
+    "settlement": 5,
+    "englishName": "Kyuke",
+    "rokuganiName": "Kyuke",
+    "infrastructure": 1
   },
   "67,49": {
     "clan": 4
@@ -83967,15 +86266,23 @@
     "clan": 5
   },
   "98,46": {
-    "clan": 5
+    "clan": 5,
+    "animal": 1,
+    "settlement": 1,
+    "englishName": "Middle",
+    "rokuganiName": "Naka",
+    "infrastructure": 2
   },
   "100,43": {
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1,
+    "infrastructure": 1
   },
   "89,47": {
     "river": 2,
-    "clan": 2,
-    "fertility": 3
+    "clan": 2
   },
   "90,51": {
     "terrain": 1,
@@ -83985,27 +86292,29 @@
     "resource": 39
   },
   "91,52": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 2,
     "infrastructure": 2,
     "fertility": 3,
-    "resource": 3
+    "crime": 1
   },
   "91,47": {
     "terrain": 2,
     "clan": 2,
     "infrastructure": 1,
-    "fertility": 3
+    "settlement": 6,
+    "englishName": "Kyotei",
+    "rokuganiName": "Kyotei"
   },
   "91,46": {
     "terrain": 2,
-    "clan": 5
+    "clan": 5,
+    "animal": 2
   },
   "92,46": {
     "clan": 5
   },
   "93,47": {
-    "terrain": 1,
     "clan": 5
   },
   "94,47": {
@@ -84023,8 +86332,8 @@
     "terrain": 2,
     "clan": 2,
     "fertility": 2,
-    "infrastructure": 2,
-    "resource": 28
+    "resource": 28,
+    "infrastructure": 2
   },
   "93,45": {
     "clan": 5
@@ -84053,14 +86362,16 @@
     "infrastructure": 2
   },
   "97,46": {
-    "clan": 5
-  },
-  "98,45": {
-    "clan": 5
-  },
-  "97,45": {
     "clan": 5,
     "infrastructure": 2
+  },
+  "98,45": {
+    "clan": 5,
+    "animal": 1,
+    "infrastructure": 2
+  },
+  "97,45": {
+    "clan": 5
   },
   "96,44": {
     "clan": 5
@@ -84082,22 +86393,35 @@
     "clan": 5
   },
   "97,47": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "98,47": {
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "101,43": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "102,43": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "103,43": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "shadowland": 1,
+    "crime": 1,
+    "animal": 1
   },
   "92,53": {
     "terrain": 1,
@@ -84108,13 +86432,13 @@
   },
   "89,50": {
     "terrain": 2,
-    "clan": 2,
-    "infrastructure": 2,
-    "fertility": 2,
-    "resource": 25
+    "clan": 4,
+    "animal": 2
   },
   "87,50": {
-    "clan": 4
+    "clan": 4,
+    "terrain": 2,
+    "animal": 2
   },
   "88,50": {
     "terrain": 2,
@@ -84127,7 +86451,6 @@
     "animal": 2
   },
   "91,43": {
-    "infrastructure": 1,
     "clan": 5
   },
   "92,43": {
@@ -84140,22 +86463,29 @@
     "clan": 5
   },
   "94,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "95,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "96,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "97,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "98,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "99,43": {
-    "clan": 5
+    "clan": 5,
+    "animal": 1,
+    "infrastructure": 1
   },
   "98,42": {
     "clan": 5
@@ -84170,17 +86500,22 @@
     "clan": 5
   },
   "93,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "92,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "92,41": {
     "clan": 5
   },
   "91,41": {
     "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 2,
+    "englishName": "Nikesake",
+    "rokuganiName": "Nikesake"
   },
   "91,40": {
     "infrastructure": 1,
@@ -84190,7 +86525,6 @@
     "clan": 5
   },
   "91,42": {
-    "infrastructure": 1,
     "clan": 5
   },
   "94,41": {
@@ -84317,19 +86651,22 @@
     "clan": 5
   },
   "101,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "102,41": {
     "clan": 5
   },
   "102,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "103,41": {
     "clan": 5
   },
   "103,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "102,40": {
     "clan": 5
@@ -85055,19 +87392,26 @@
     "clan": 5
   },
   "108,47": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "107,47": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "Of Remembrance",
+    "rokuganiName": "Omoidasu"
   },
   "107,46": {
     "clan": 5
   },
   "107,45": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "107,44": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "108,44": {
     "clan": 5
@@ -85109,16 +87453,20 @@
     "clan": 5
   },
   "104,43": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "105,43": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "106,43": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "107,43": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "108,43": {
     "clan": 5
@@ -85730,7 +88078,8 @@
     "clan": 1
   },
   "52,130": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "52,131": {
     "clan": 1
@@ -85831,11 +88180,13 @@
     "clan": 1
   },
   "49,128": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "50,128": {
     "infrastructure": 1,
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "51,132": {
     "clan": 1
@@ -86751,44 +89102,53 @@
     "clan": 1
   },
   "45,126": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "45,127": {
     "clan": 1
   },
   "46,126": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "46,127": {
     "clan": 1
   },
   "47,126": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "47,127": {
     "clan": 1
   },
   "48,126": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "48,127": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "44,125": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "43,124": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "44,124": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "43,125": {
     "vegetation": 3,
     "clan": 1
   },
   "42,124": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "42,125": {
     "clan": 1
@@ -86831,31 +89191,39 @@
     "clan": 1
   },
   "40,119": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,120": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "39,118": {
     "clan": 1
   },
   "40,118": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,121": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,122": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "41,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "40,123": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "41,123": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "40,124": {
     "clan": 1
@@ -86864,10 +89232,12 @@
     "clan": 1
   },
   "42,123": {
-    "clan": 1
+    "clan": 1,
+    "crime": 1
   },
   "42,122": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "39,124": {
     "clan": 1
@@ -87608,43 +89978,54 @@
   "33,59": {},
   "26,102": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "25,102": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "26,103": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "27,103": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 2
   },
   "27,102": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "28,102": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "28,103": {
     "vegetation": 3,
-    "clan": 14
+    "clan": 14,
+    "animal": 1
   },
   "34,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,96": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "33,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "34,97": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "33,107": {
     "terrain": 1,
@@ -87753,13 +90134,16 @@
     "clan": 1
   },
   "36,111": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "36,110": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "36,109": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "36,108": {
     "clan": 1
@@ -87793,7 +90177,8 @@
     "clan": 1
   },
   "36,112": {
-    "clan": 1
+    "clan": 1,
+    "shadowland": 1
   },
   "20,105": {
     "terrain": 1
@@ -87855,29 +90240,37 @@
   "22,100": {},
   "21,100": {},
   "21,89": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "22,89": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "25,93": {},
   "25,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "25,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 2
   },
   "26,90": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,91": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,92": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "26,93": {},
   "27,93": {},
@@ -87888,29 +90281,36 @@
   "21,88": {},
   "22,94": {},
   "22,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "21,95": {},
   "21,94": {},
   "26,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "27,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "28,95": {
-    "vegetation": 3
+    "vegetation": 3,
+    "animal": 1
   },
   "25,94": {},
   "25,95": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "29,97": {},
   "29,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "30,96": {
-    "terrain": 1
+    "terrain": 1,
+    "animal": 1
   },
   "28,94": {},
   "27,94": {},
@@ -88640,7 +91040,6 @@
   "1,76": {},
   "1,75": {},
   "94,48": {
-    "terrain": 1,
     "clan": 5
   },
   "109,13": {
