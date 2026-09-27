@@ -24,7 +24,7 @@ Produce the following data files under `docs/scripts/`:
 | 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. Represents the settlements on the map and aggregates buildings|
 | 5 | `unit.json` | Individual military/economic units that make up a strategic unit. |
 | 6 | `strategic_unit.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
-| 7 | resource.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
+| 7 | resource_output.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
 
 **Non-goals:** simulation logic, balancing passes, UI, and price/market
 modeling. Numeric values (weights, sizes, capacities) are first-pass estimates
@@ -46,10 +46,8 @@ These conventions apply across every file below.
 - **Quality** is one of `normal` or `high`.
 - **Tool/durable quantity convention:** a single durable item (tool, weapon,
   armor, container, furniture, machinery, ship, land transport) should be produced in granular amounts, such as a stack of **1000** sub-units. One physical hammer = 1000 units. This lets the
-  simulation model wear, tear, and breakage by decrementing sub-units instead of
-  needing fractional items. **This convention does NOT apply to
-  `building.json`** — buildings are counted as whole objects.
-  - Consumables (food, drink, fuels, raw/processed/combined resources) are the same. It is all just a matter of the qty produced. It should not matter though because it will be impossible to differentiate and it should not matter anyway.
+  simulation model wear, tear, and breakage. buildings are always in units of 1.
+  - Consumables (food, drink, fuels, raw/processed/combined resources) are the same. It is all just a matter of the qty produced, but it should not be assumed 1 hammer is 1 full hammer. 1 food though is 1 food.
 - **JSON style:** 2-space indentation, top-level object with a metadata header
   and a data array, matching the existing files in this folder. Example shape:
 
@@ -67,7 +65,7 @@ These conventions apply across every file below.
 
 ### 3.1 `item.json`
 
-An exhaustive list of every raw resource and craftable item. Items larger than
+An exhaustive list of every raw resource and craftable item. Items list is larger than
 the map layer set because one source (e.g. a horse) yields many items (horse
 hair, manure, leather, meat, bone, etc.).
 
@@ -92,7 +90,7 @@ Each item entry:
 
 - Multi-type example: a **wood plank** is `["processed resource",
   "building material", "fuel"]`.
-- `entertainment` items set `physical: false` (e.g. a performance, a story).
+- `entertainment` items sometimes set `physical: false` (e.g. a performance, a story), or true (a pillow book).
 - The taxonomy is open-ended: new categories can be added when a real item does
   not fit an existing tag, but prefer reusing existing tags.
 
@@ -122,12 +120,12 @@ Each job entry:
 | `id` | number | |
 | `name` | string | Display name. |
 | `status` | number | The job's L5R social **Status** rating. |
-| `food` | {id, qty}[] | Desired food items. |
-| `drink` | {id, qty}[] | Desired drink items. |
-| `clothing` | {id, qty}[] | Desired clothing items. |
-| `accessories` | {id, qty}[] | Desired fashion accessories. |
-| `entertainment` | {id, qty}[] | Desired entertainment items. |
-| `housing` | {id, qty}[] | Desired housing (references building items). |
+| `food` | {id, qty, weight}[] | Desired food items. |
+| `drink` | {id, qty, weight}[] | Desired drink items. |
+| `clothing` | {id, qty, weight}[] | Desired clothing items. |
+| `accessories` | {id, qty, weight}[] | Desired fashion accessories. |
+| `entertainment` | {id, qty, weight}[] | Desired entertainment items. |
+| `housing` | {id, qty, weight}[] | Desired housing (references building items). |
 
 - **Ordering encodes desirability:** within each array, entries are listed from
   **most** to **least** desired. (A worker's luxury bento appears before plain
