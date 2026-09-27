@@ -37,7 +37,7 @@ intended to be tuned later.
 These conventions apply across every file below.
 
 - **IDs are numbers** Once published, an ID is never
-  reused for a different thing.
+  reused for a different thing for a specific type (item, )
 - **Cross-file references use the ID.** Every `id` inside an `input`,
   `output`, `food`, `drink`, `housing`, etc. must resolve to an entry in the
   file it points at (usually `item.json`).
