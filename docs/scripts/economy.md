@@ -127,7 +127,7 @@ Each job entry:
 | `entertainment` | {id, qty, weight}[] | Desired entertainment items. |
 | `housing` | {id, qty, weight}[] | Desired housing (references building items). |
 
-- **Ordering encodes desirability:** within each array, entries are listed from
+- **weight encodes desirability:** within each array, entries are listed from
   **most** to **least** desired. (A worker's luxury bento appears before plain
   rice.) Consumers read array order as the preference ranking.
 - Every referenced `id` must resolve in `item.json`.
