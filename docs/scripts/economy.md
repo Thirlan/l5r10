@@ -21,9 +21,10 @@ Produce the following data files under `docs/scripts/`:
 | 1 | `item.json` | Exhaustive catalog of every raw resource and craftable item. |
 | 2 | `job.json` | Every job in a feudal Edo-period economy and what each job consumes/desires. |
 | 3 | `building.json` | Buildings, the job slots they offer, and their input→output recipes. |
-| 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. |
-| 5 | `unit.json` | Individual military/economic units. |
-| 6 | `strategic_unit.json` | Higher-level (army/formation) units built from `unit.json`. |
+| 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. Represents the settlements on the map and aggregates buildings|
+| 5 | `unit.json` | Individual military/economic units that make up a strategic unit. |
+| 6 | `strategic_unit.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
+| 7 | resource.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
 
 **Non-goals:** simulation logic, balancing passes, UI, and price/market
 modeling. Numeric values (weights, sizes, capacities) are first-pass estimates
@@ -35,28 +36,20 @@ intended to be tuned later.
 
 These conventions apply across every file below.
 
-- **IDs are stable strings** in `snake_case` (e.g. `iron_ore`, `wood_plank`,
-  `peasant_hut`). String IDs survive reordering and are readable in recipes;
-  numeric IDs are reserved for the map layers. Once published, an ID is never
+- **IDs are numbers** Once published, an ID is never
   reused for a different thing.
-- **Cross-file references use the string ID.** Every `id` inside an `input`,
+- **Cross-file references use the ID.** Every `id` inside an `input`,
   `output`, `food`, `drink`, `housing`, etc. must resolve to an entry in the
   file it points at (usually `item.json`).
 - **Units:** weight in **grams**, volume/size in **cm³**. Keep raw numbers
   (no unit suffixes) so consumers can compute freely.
 - **Quality** is one of `normal` or `high`.
 - **Tool/durable quantity convention:** a single durable item (tool, weapon,
-  armor, container, furniture, machinery, ship, land transport) is represented
-  as a stack of **100** (common goods) or **1000** (finely-made / high-wear
-  goods) sub-units. One physical hammer = 100 (or 1000) units. This lets the
+  armor, container, furniture, machinery, ship, land transport) should be produced in granular amounts, such as a stack of **1000** sub-units. One physical hammer = 1000 units. This lets the
   simulation model wear, tear, and breakage by decrementing sub-units instead of
   needing fractional items. **This convention does NOT apply to
   `building.json`** — buildings are counted as whole objects.
-  - Consumables (food, drink, fuels, raw/processed/combined resources) are
-    counted in natural whole/measured units and do **not** use the ×100/×1000
-    multiplier.
-  - The multiplier used for each durable type is recorded in a `stackUnits`
-    field on the item so recipes and inventories stay unambiguous.
+  - Consumables (food, drink, fuels, raw/processed/combined resources) are the same. It is all just a matter of the qty produced. It should not matter though because it will be impossible to differentiate and it should not matter anyway.
 - **JSON style:** 2-space indentation, top-level object with a metadata header
   and a data array, matching the existing files in this folder. Example shape:
 
@@ -82,21 +75,20 @@ Each item entry:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | Stable `snake_case` identifier. |
+| `id` | number | |
 | `name` | string | Human-readable display name. |
 | `type` | string[] | One or more type tags (see taxonomy). Multi-type is allowed. |
 | `weight` | number | Weight in grams (per single natural unit). |
 | `size` | number | Volume in cm³ (per single natural unit). |
 | `quality` | string | `normal` or `high`. |
 | `physical` | boolean | `false` for non-physical items (e.g. entertainment). |
-| `stackUnits` | number | `1` for consumables; `100`/`1000` for durables (see §2). |
 
 **Type taxonomy** (an item may carry several):
 
 `raw resource`, `processed resource`, `combined resource`, `food`, `drink`,
 `discretionary consumable`, `clothing`, `armor`, `weapon`, `fashion accessory`,
 `tool`, `container`, `furniture`, `machinery`, `ship`, `land transportation`,
-`building material`, `fuel`, `building`, `entertainment`, `other`.
+`building material`, `fuel`, `building`, `entertainment`.
 
 - Multi-type example: a **wood plank** is `["processed resource",
   "building material", "fuel"]`.
@@ -127,7 +119,7 @@ Each job entry:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | Stable `snake_case` identifier. |
+| `id` | number | |
 | `name` | string | Display name. |
 | `status` | number | The job's L5R social **Status** rating. |
 | `food` | {id, qty}[] | Desired food items. |
@@ -146,14 +138,13 @@ Each job entry:
 
 ### 3.3 `building.json`
 
-A list of buildings and what they produce. Buildings are counted as whole
-objects (the ×100/×1000 convention does **not** apply here).
+A list of buildings and what they produce.
 
 Each building entry:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | Stable `snake_case` identifier. |
+| `id` | number | |
 | `name` | string | Display name. |
 | `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job.json`, `capacity` = total workers. |
 | `input` | {id, qty}[] | Items consumed each production cycle. |
