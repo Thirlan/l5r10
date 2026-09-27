@@ -6,9 +6,8 @@ creation of the JSON data files** — no runtime/simulation code is written here
 Those files are consumed later by an economy simulation that is out of scope.
 
 The base resources in [`layers.json`](./layers.json) (the `resource`,
-`settlement`, and `infrastructure` layers) are the seed for this work. The map
-resource layer lists what a tile can *produce* (e.g. `Iron Mine`, `Rice Paddy`,
-`Horse Ranch`). The economy files expand that seed into the full chain of raw
+`settlement`, and `infrastructure` layers) are the inspiration for this work. The map
+resource layer lists what a resource tile   is but not what it produces (e.g. `horse ranch` produces horses, horse hair). The economy files expand that seed into the full chain of raw
 resources, processed goods, jobs, and buildings.
 
 ---
