@@ -323,7 +323,7 @@ processed, processed before combined, etc.), so phases are strictly ordered.
 Split `item_type.json` into `item_type_<category>.json` files (see §2/§3.1) as
 soon as a phase would make it unwieldy.
 
-### Phase 1 — Base (raw) resources from the map
+### Phase 1 — Base (raw) resources from the map (done)
 - `citizen_type.json`: finalize the caste list from §3.9 (mostly already set up).
 - `item_type.json`: the raw resource(s) each `resource`-layer tile yields
   (iron ore, lumber, rice, silk, tea, ore, clay, stone, etc.) plus their raw

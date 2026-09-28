@@ -10,7 +10,7 @@
     { "id": 6, "name": "Raw Gemstone", "type": ["raw resource"], "weight": 1000, "size": 285, "quality": "normal", "physical": true },
     { "id": 7, "name": "Coal", "type": ["raw resource", "fuel"], "weight": 1000, "size": 770, "quality": "normal", "physical": true },
     { "id": 8, "name": "Clay", "type": ["raw resource"], "weight": 1000, "size": 625, "quality": "normal", "physical": true },
-    { "id": 9, "name": "Stone", "type": ["raw resource", "building material"], "weight": 1000, "size": 385, "quality": "normal", "physical": true },
+    { "id": 9, "name": "Granite", "type": ["raw resource", "building material"], "weight": 1000, "size": 385, "quality": "normal", "physical": true },
     { "id": 10, "name": "Salt", "type": ["raw resource"], "weight": 1000, "size": 455, "quality": "normal", "physical": true },
     { "id": 11, "name": "Rice", "type": ["raw resource"], "weight": 1000, "size": 1180, "quality": "normal", "physical": true },
     { "id": 12, "name": "Grain", "type": ["raw resource"], "weight": 1000, "size": 1330, "quality": "normal", "physical": true },
@@ -56,6 +56,21 @@
     { "id": 52, "name": "Raw Shellfish", "type": ["raw resource"], "weight": 1000, "size": 900, "quality": "normal", "physical": true },
     { "id": 53, "name": "Raw Squid", "type": ["raw resource"], "weight": 1000, "size": 950, "quality": "normal", "physical": true },
     { "id": 54, "name": "Raw Deep-Sea Fish", "type": ["raw resource"], "weight": 1000, "size": 950, "quality": "normal", "physical": true },
-    { "id": 55, "name": "Pearl", "type": ["raw resource"], "weight": 1, "size": 1, "quality": "high", "physical": true }
+    { "id": 55, "name": "Pearl", "type": ["raw resource"], "weight": 1, "size": 1, "quality": "high", "physical": true },
+    { "id": 56, "name": "Limestone", "type": ["raw resource", "building material"], "weight": 1000, "size": 385, "quality": "normal", "physical": true },
+    { "id": 57, "name": "Marble", "type": ["raw resource", "building material"], "weight": 1000, "size": 370, "quality": "high", "physical": true },
+    { "id": 58, "name": "Sandstone", "type": ["raw resource", "building material"], "weight": 1000, "size": 435, "quality": "normal", "physical": true },
+    { "id": 59, "name": "Sand", "type": ["raw resource", "building material"], "weight": 1000, "size": 625, "quality": "normal", "physical": true },
+    { "id": 60, "name": "Rice Straw", "type": ["raw resource", "building material", "fuel"], "weight": 1000, "size": 12500, "quality": "normal", "physical": true },
+    { "id": 61, "name": "Straw", "type": ["raw resource", "building material", "fuel"], "weight": 1000, "size": 14000, "quality": "normal", "physical": true },
+    { "id": 62, "name": "Vegetable Trimmings", "type": ["raw resource"], "weight": 1000, "size": 2500, "quality": "normal", "physical": true },
+    { "id": 63, "name": "Hemp Seeds", "type": ["raw resource"], "weight": 1000, "size": 1670, "quality": "normal", "physical": true },
+    { "id": 64, "name": "Cotton Seeds", "type": ["raw resource"], "weight": 1000, "size": 1670, "quality": "normal", "physical": true },
+    { "id": 65, "name": "Poppy Seeds", "type": ["raw resource"], "weight": 1000, "size": 1820, "quality": "normal", "physical": true },
+    { "id": 66, "name": "Nut Shells", "type": ["raw resource", "fuel"], "weight": 1000, "size": 3330, "quality": "normal", "physical": true },
+    { "id": 67, "name": "Firewood", "type": ["raw resource", "fuel"], "weight": 1000, "size": 1540, "quality": "normal", "physical": true },
+    { "id": 68, "name": "Tin Ore", "type": ["raw resource"], "weight": 1000, "size": 370, "quality": "normal", "physical": true },
+    { "id": 69, "name": "Gravel", "type": ["raw resource", "building material"], "weight": 1000, "size": 590, "quality": "normal", "physical": true },
+    { "id": 70, "name": "Silkworm Pupae", "type": ["raw resource"], "weight": 1000, "size": 1000, "quality": "normal", "physical": true }
   ]
 }
