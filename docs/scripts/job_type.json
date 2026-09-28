@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
+  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Phase 4 = toolmaker crafter jobs (ids 46-49, status 0.1). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
   "jobs": [
     { "id": 1, "name": "Miner", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 2, "name": "Quarrier", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
@@ -46,6 +46,10 @@
     { "id": 42, "name": "Plasterer", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 43, "name": "Glue Maker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 44, "name": "Inkmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
-    { "id": 45, "name": "Soapmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
+    { "id": 45, "name": "Soapmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 46, "name": "Carpenter", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 47, "name": "Blacksmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 48, "name": "Fletcher", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 49, "name": "Netmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
   ]
 }

@@ -345,7 +345,7 @@ soon as a phase would make it unwieldy.
   → bronze, alloys, dyed cloth, blended pigments…).
 - *Depends on:* Phase 2.
 
-### Phase 4 — Tools
+### Phase 4 — Tools (done)
 - Items/jobs/buildings for tools (wood hammers, smith hammers, anvils,
   chopsticks, saws, practice swords, fishing nets…). Tools use the 1000-sub-unit
   convention (§2).
