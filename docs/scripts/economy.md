@@ -24,11 +24,19 @@ Produce the following data files under `docs/scripts/`:
 | 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. Represents the settlements on the map and aggregates buildings|
 | 5 | `unit_type.json` | Individual military/economic units that make up a strategic unit. |
 | 6 | `strategic_unit_type.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
-| 7 | resource_output_type.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
+| 7 | `resource_output_type.json` | links a specific resource type with a specific building type |
+| 8 | `clan_preference.json` | modifies the weights in job_type.json to reflect clan preferences. |
+| 9 | `citizen_type.json` | list of all possible civilizans and the population counter for each (e.g. peasants are 100) |
 
-**Non-goals:** simulation logic, balancing passes, UI, and price/market
-modeling. Numeric values (weights, sizes, capacities) are first-pass estimates
-intended to be tuned later.
+Ultimately job_type and citizen_type will belong to a citizen class in the javascript code. So a given citizen instance will have a job of job type, be a citizen of citizen type, will have skills that will help determine how efficient they are in the building, will have money they can use to buy things.
+
+Settlements.json will be how we load the map with real instances. Settlement will contain all the cities on the map. Settlements will be populated with buildings and the buildings will be populated with citizens and goods.
+
+Resources.json will be how we load the map with buildings into the resource tiles. Resources will behave like settlements but with a single building, with the exception of ocean resources (fish, crabs, shrimp, squids, etc), which will instead be spawned as strategic units and must be harvested by a fishing fleet (strategic unit type).
+
+The world map will be populated with strategic_unit_types. In the case of merchants they will travel around the map carrying goods to sell from one place to another. The shadowlands will have armies spawn that march towards the crab lands. The crab will have armies that will fight the shadowland armies. The yobanjin will have small raiding armies spawn in the north and attack the dragon, unicorn and phoenix randomly. Giant creatures, like sea monsters or monstrous oni will be represented with a single army and single unit inside of it.
+
+All in all this will create a living simulation using the map that can be turned on and will increment every day so we can watch how everything behaves. this will be a new map called "world simulation".
 
 ---
 
@@ -124,14 +132,12 @@ Each job entry:
 | `clothing` | {id, qty, weight}[] | Desired clothing items. |
 | `accessories` | {id, qty, weight}[] | Desired fashion accessories. |
 | `entertainment` | {id, qty, weight}[] | Desired entertainment items. |
-| `housing` | {id, qty, weight}[] | Desired housing (references building items). |
 
 - **weight encodes desirability:** within each array, entries are listed from
   **most** to **least** desired. (A worker's luxury bento appears before plain
   rice.)
 - Every referenced `id` must resolve in `item.json`.
-- `status` uses the same L5R Status scale referenced elsewhere in the project
-  (see `stipend-calculator.js`).
+- `status` uses the same L5R Status scale referenced elsewhere in the project.
 
 ### 3.3 `building_type.json`
 
@@ -145,6 +151,7 @@ Each building entry:
 | `name` | string | Display name. |
 | `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job.json`, `capacity` = total workers. |
 | `input_items` | {id, qty}[] | Items consumed each production cycle. |
+| `input_items` | {id, qty}[] | Items consumed each production cycle. |
 | `output_items` | {id, qty}[] | Items produced each production cycle. |
 | `input_job` | {id, qty}[] | Items consumed each production cycle. |
 | `output_job` | {id, qty}[] | Items produced each production cycle. |
@@ -152,8 +159,9 @@ Each building entry:
 | storage_capacity | number | capacity in cm3 for storing input and output. |
 
 - `input` items are fully **consumed**; `output` items are produced.
-- Some buildings produce no outputs. Their existence provides other benefits but must be maintained (e.g. walls and ports).
-- Some buildings are training grounds that transform jobs into other jobs. A 
+- Some buildings produce no outputs. Their existence provides other benefits but must be maintained (e.g. walls, castles and ports).
+- Input should not only include what is needed to make the output item, but what is needed to maintain the building
+- Some buildings are training grounds that transform jobs into other jobs. Most create items and are training grounds (example, a foundry both produces steel and trains new recruits so can work the job.)
 - `jobSlots[*].jobId` must resolve in `job.json`; all `input`/`output` `id`s must
   resolve in `item.json`.
 - Buildings that are also placeable items (peasant hut, granary, castle, Kyuden)
@@ -182,7 +190,7 @@ Each settlement entry (proposed):
 ### 3.5 `unit_type.json`
 
 Individual units (economic or military) — e.g. `ashigaru_spearman`,
-`samurai_cavalry`, `porter`, `pack_horse`.
+`samurai_cavalry`, `merchant wagon`, `merchant ship`, `fishing boat`, crabs, fish, shrimp, deep sea fish, squid.
 
 Each unit entry (proposed):
 
@@ -193,20 +201,71 @@ Each unit entry (proposed):
 | `equipment` | {id, qty}[] | Items a unit is outfitted with; `id` → `item.json`. |
 | `upkeep` 
  N/A| | Not needed. Comes from job |
-| `jobId` | string | Optional link to a `job.json` role. |
+| `jobId` | number | Optional link to a `job.json` role. |
+| `unit_size` | number | the size of the unit |
 
 ### 3.6 `strategic_unit_type.json`
 
 Higher-level formations composed of `unit.json` entries — e.g. `legion`,
 `baggage_train`, `patrol`.
 
-Each strategic-unit entry (proposed):
+Each strategic-unit entry:
 
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | number | |
-| `name` | string | Display name. |
-| 'type' | string | legion, naval fleet, merchant fleet, fishing fleet, merchant caravan |
+| 'type' | string | legion, naval fleet, merchant fleet, crabs, squids, fish, shrimp, deep sea fish |
+
+### 3.7 `resource_output_type`
+
+replaces /workspaces/l5r10/docs/scripts/resource_output.js (what is currently in that file should move to a building)
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | number | maps back to the layer |
+| 'building_type' | number | maps to a building id in building_type.json |
+
+This helps establish the link from resource to a building and the building is the one that outputs the resources when worked by citizens (mostly peasants).
+
+This is a 1 to 1 relationship. A single resource should not be linked to more than 1 building. Skip the sea resources since they are units that are hunted.
+
+### 3.8 `clan_preferences.json`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | number | |
+| `name` | string | The clan for this preference |
+| `food` | {id, weight}[] | Desired food items. |
+| `drink` | {id, weight}[] | Desired drink items. |
+| `clothing` | {id, weight}[] | Desired clothing items. |
+| `accessories` | {id, weight}[] | Desired fashion accessories. |
+| `entertainment` | {id, weight}[] | Desired entertainment items. |
+
+This adds preferences on top of the job preferences. For the kuge, high buge and low buge the job preference will be fairly basic and this is where things will get creative and add flavor.
+
+### 3.9 `citizen_type.json`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | number | |
+| `type` | string | the different kinds of citizen |
+| `population_count` | number | how much one instance of this citizen type counts for population |
+| `max_job_status` | number | the highest job status this citizen can take. |
+| `min_job_status` | number | the lowest job status this citizen can take. |
+
+This file is used to help track the kinds of citizens there are. Since this is a caste system the citizens are quite restricted on jobs that can be taken.
+
+Below is the recommended list.
+- kuge, population of 1, status range of (7 to 10]
+- high buge, population of 1, max status (4 to 7]
+- low buge, population of 10, [1 to 4]
+- peasants, population of 100, [0.4 to 1)
+- crafters, population of 10, [0.1 to 0.1]
+- merchants, population of 1, [0.1 to 0.1]
+- geisha, population of 10, [-1 to -1]
+- eta, population of 10, [-2 to -2]
+
+The purpose of this file ultimately is so that when we do implement the game logic we don't have to handle each individual citizen out of a population of 12 million and instead we can handle the bulk of the population (peasants) with fewer programming objects since the ratio is 1 object to 100 peasants.
 
 ---
 
@@ -216,8 +275,7 @@ Work is sequenced so that referenced files exist before the files that reference
 them. Each PR is self-contained and reviewable.
 
 ### PR 1 — Item taxonomy & schema scaffold
-- Add `item.json` with the metadata header, the full **type taxonomy**, and the
-  ×100/×1000 stack convention documented inline.
+- Add `item.json` with the metadata header, the full **type taxonomy**
 - Seed items for every entry in the `resource` layer (raw resources only).
 - Add a schema/README note. **No** downstream files yet.
 - *Depends on:* none.
