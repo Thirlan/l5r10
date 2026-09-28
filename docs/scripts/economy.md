@@ -45,9 +45,8 @@ These conventions apply across every file below.
   (no unit suffixes) so consumers can compute freely.
 - **Quality** is one of `normal` or `high`.
 - **Tool/durable quantity convention:** a single durable item (tool, weapon,
-  armor, container, furniture, machinery, ship, land transport) should be produced in granular amounts, such as a stack of **1000** sub-units. One physical hammer = 1000 units. This lets the
-  simulation model wear, tear, and breakage. buildings are always in units of 1.
-  - Consumables (food, drink, fuels, raw/processed/combined resources) are the same. It is all just a matter of the qty produced, but it should not be assumed 1 hammer is 1 full hammer. 1 food though is 1 food.
+  armor, container, furniture, machinery, ship, land transport) should be produced in granular amounts, such as a stack of **1000** sub-units. One physical hammer = 1000 units. This lets the model handle wear, tear, and breakage quickly and efficiently, but does not always accurately represent the actual number of hammers. buildings, vehicles (e.g. boats), armor and weapons, are always in units of 1.
+  - Consumables (food, drink, fuels, raw/processed/combined resources) have varying units as well, but since most are instantly consumed they do not need the granularity of tools. It is all just a matter of the qty produced.
 - **JSON style:** 2-space indentation, top-level object with a metadata header
   and a data array, matching the existing files in this folder. Example shape:
 
@@ -63,7 +62,7 @@ These conventions apply across every file below.
 
 ## 3. File Schemas
 
-### 3.1 `item.json`
+### 3.1 `item_type.json`
 
 An exhaustive list of every raw resource and craftable item. Items list is larger than
 the map layer set because one source (e.g. a horse) yields many items (horse
@@ -106,7 +105,7 @@ Each item entry:
      fuels, buildings, entertainment) that consume them.
 - Every `id` referenced by `job.json` and `building.json` must exist here.
 
-### 3.2 `job.json`
+### 3.2 `job_type.json`
 
 Every job in a feudal Edo-period economy (farmer, fisher, miner, smith,
 carpenter, weaver, dyer, brewer, sake maker, potter, cooper, fletcher, armorer,
@@ -129,12 +128,12 @@ Each job entry:
 
 - **weight encodes desirability:** within each array, entries are listed from
   **most** to **least** desired. (A worker's luxury bento appears before plain
-  rice.) Consumers read array order as the preference ranking.
+  rice.)
 - Every referenced `id` must resolve in `item.json`.
 - `status` uses the same L5R Status scale referenced elsewhere in the project
   (see `stipend-calculator.js`).
 
-### 3.3 `building.json`
+### 3.3 `building_type.json`
 
 A list of buildings and what they produce.
 
@@ -175,7 +174,7 @@ Each settlement entry (proposed):
 - The layer’s numeric `id`/`englishType`/`rokuganiType` values carry over
   verbatim so the map and economy stay in sync.
 
-### 3.5 `unit.json`
+### 3.5 `unit_type.json`
 
 Individual units (economic or military) — e.g. `ashigaru_spearman`,
 `samurai_cavalry`, `porter`, `pack_horse`.
@@ -184,13 +183,14 @@ Each unit entry (proposed):
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | Stable `snake_case` identifier. |
+| `id` | number | |
 | `name` | string | Display name. |
 | `equipment` | {id, qty}[] | Items a unit is outfitted with; `id` → `item.json`. |
-| `upkeep` | {id, qty}[] | Per-cycle consumption (food, drink, fodder). |
+| `upkeep` 
+ N/A| | Not needed. Comes from job |
 | `jobId` | string | Optional link to a `job.json` role. |
 
-### 3.6 `strategic_unit.json`
+### 3.6 `strategic_unit_type.json`
 
 Higher-level formations composed of `unit.json` entries — e.g. `legion`,
 `baggage_train`, `patrol`.
@@ -199,14 +199,9 @@ Each strategic-unit entry (proposed):
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | Stable `snake_case` identifier. |
+| `id` | number | |
 | `name` | string | Display name. |
-| `composition` | {unitId, qty}[] | Units that make up the formation; `unitId` → `unit.json`. |
-| `upkeep` | {id, qty}[] | Aggregate per-cycle consumption not covered by member units. |
-
-> Schemas for §3.4–3.6 are proposals to be confirmed in their own PR before the
-> data is filled in, since the problem statement specified detailed fields only
-> for items, jobs, and buildings.
+| 'type' | string | legion, naval fleet, merchant fleet, fishing fleet, merchant caravan |
 
 ---
 
