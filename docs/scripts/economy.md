@@ -18,13 +18,13 @@ Produce the following data files under `docs/scripts/`:
 
 | # | File | Purpose |
 |---|------|---------|
-| 1 | `item.json` | Exhaustive catalog of every raw resource and craftable item. |
-| 2 | `job.json` | Every job in a feudal Edo-period economy and what each job consumes/desires. |
-| 3 | `building.json` | Buildings, the job slots they offer, and their input→output recipes. |
+| 1 | `item_type.json` | Exhaustive catalog of every raw resource and craftable item. |
+| 2 | `job_type.json` | Every job in a feudal Edo-period economy and what each job consumes/desires. |
+| 3 | `building_type.json` | Buildings, the job slots they offer, and their input→output recipes. |
 | 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. Represents the settlements on the map and aggregates buildings|
-| 5 | `unit.json` | Individual military/economic units that make up a strategic unit. |
-| 6 | `strategic_unit.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
-| 7 | resource_output.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
+| 5 | `unit_type.json` | Individual military/economic units that make up a strategic unit. |
+| 6 | `strategic_unit_type.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
+| 7 | resource_output_type.json | the resources a resource tile on the strategic map produces. behaves just like a building in that it takes a job, with input and output |
 
 **Non-goals:** simulation logic, balancing passes, UI, and price/market
 modeling. Numeric values (weights, sizes, capacities) are first-pass estimates
@@ -144,11 +144,16 @@ Each building entry:
 | `id` | number | |
 | `name` | string | Display name. |
 | `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job.json`, `capacity` = total workers. |
-| `input` | {id, qty}[] | Items consumed each production cycle. |
-| `output` | {id, qty}[] | Items produced each production cycle. |
-|'production time' | number time in days | time to produce the item |
+| `input_items` | {id, qty}[] | Items consumed each production cycle. |
+| `output_items` | {id, qty}[] | Items produced each production cycle. |
+| `input_job` | {id, qty}[] | Items consumed each production cycle. |
+| `output_job` | {id, qty}[] | Items produced each production cycle. |
+|'production time' | number | time in days | time to produce the item |
+| storage_capacity | number | capacity in cm3 for storing input and output. |
 
 - `input` items are fully **consumed**; `output` items are produced.
+- Some buildings produce no outputs. Their existence provides other benefits but must be maintained (e.g. walls and ports).
+- Some buildings are training grounds that transform jobs into other jobs. A 
 - `jobSlots[*].jobId` must resolve in `job.json`; all `input`/`output` `id`s must
   resolve in `item.json`.
 - Buildings that are also placeable items (peasant hut, granary, castle, Kyuden)
