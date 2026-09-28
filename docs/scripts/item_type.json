@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools (ids 120-151, type `tool`). Tools are durable: recipe/storage qty is in SUB-UNITS where 1000 sub-units = one physical tool, while weight/size are per physical tool. Nails (129) is a consumable building material counted in kg, not sub-units. weight is grams and size is cm3 per single natural unit.",
+  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
   "items": [
     { "id": 1, "name": "Iron Ore", "type": ["raw resource"], "weight": 1000, "size": 400, "quality": "normal", "physical": true },
     { "id": 2, "name": "Copper Ore", "type": ["raw resource"], "weight": 1000, "size": 360, "quality": "normal", "physical": true },
@@ -152,6 +152,25 @@
     { "id": 148, "name": "Calligraphy Brush", "type": ["tool"], "weight": 30, "size": 200, "quality": "normal", "physical": true },
     { "id": 149, "name": "Practice Sword", "type": ["tool"], "weight": 900, "size": 1500, "quality": "normal", "physical": true },
     { "id": 150, "name": "Practice Spear", "type": ["tool"], "weight": 1500, "size": 5000, "quality": "normal", "physical": true },
-    { "id": 151, "name": "Practice Bow", "type": ["tool"], "weight": 500, "size": 3000, "quality": "normal", "physical": true }
+    { "id": 151, "name": "Basket", "type": ["container"], "weight": 800, "size": 30000, "quality": "normal", "physical": true },
+    { "id": 152, "name": "Wooden Bucket", "type": ["container"], "weight": 1500, "size": 15000, "quality": "normal", "physical": true },
+    { "id": 153, "name": "Wooden Tray", "type": ["container"], "weight": 1000, "size": 8000, "quality": "normal", "physical": true },
+    { "id": 154, "name": "Barrel", "type": ["container"], "weight": 15000, "size": 120000, "quality": "normal", "physical": true },
+    { "id": 155, "name": "Sack", "type": ["container"], "weight": 300, "size": 5000, "quality": "normal", "physical": true },
+    { "id": 156, "name": "Grub Hoe", "type": ["tool"], "weight": 2000, "size": 1800, "quality": "normal", "physical": true },
+    { "id": 157, "name": "Hammer", "type": ["tool"], "weight": 1000, "size": 800, "quality": "normal", "physical": true },
+    { "id": 158, "name": "Sledgehammer", "type": ["tool"], "weight": 5000, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 159, "name": "Wedges", "type": ["tool"], "weight": 1500, "size": 600, "quality": "normal", "physical": true },
+    { "id": 160, "name": "Pry Bar", "type": ["tool"], "weight": 4000, "size": 4000, "quality": "normal", "physical": true },
+    { "id": 161, "name": "Sieve", "type": ["tool"], "weight": 700, "size": 6000, "quality": "normal", "physical": true },
+    { "id": 162, "name": "Ladder", "type": ["tool"], "weight": 6000, "size": 60000, "quality": "normal", "physical": true },
+    { "id": 163, "name": "Oil Lamp", "type": ["tool"], "weight": 500, "size": 800, "quality": "normal", "physical": true },
+    { "id": 164, "name": "Bellows", "type": ["tool"], "weight": 4000, "size": 30000, "quality": "normal", "physical": true },
+    { "id": 165, "name": "Rake", "type": ["tool"], "weight": 1200, "size": 2000, "quality": "normal", "physical": true },
+    { "id": 166, "name": "Flail", "type": ["tool"], "weight": 1500, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 167, "name": "Shuttle", "type": ["tool"], "weight": 200, "size": 400, "quality": "normal", "physical": true },
+    { "id": 168, "name": "Carrying Pole", "type": ["tool"], "weight": 1500, "size": 8000, "quality": "normal", "physical": true },
+    { "id": 169, "name": "Crucible", "type": ["tool"], "weight": 2000, "size": 1500, "quality": "normal", "physical": true },
+    { "id": 170, "name": "Whetstone", "type": ["tool"], "weight": 1500, "size": 800, "quality": "normal", "physical": true }
   ]
 }
