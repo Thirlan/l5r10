@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
+  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Phase 5 = weapons and armor (ids 171-193, types `weapon`/`armor`), counted in units of 1. Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
   "items": [
     { "id": 1, "name": "Iron Ore", "type": ["raw resource"], "weight": 1000, "size": 400, "quality": "normal", "physical": true },
     { "id": 2, "name": "Copper Ore", "type": ["raw resource"], "weight": 1000, "size": 360, "quality": "normal", "physical": true },
@@ -171,6 +171,29 @@
     { "id": 167, "name": "Shuttle", "type": ["tool"], "weight": 200, "size": 400, "quality": "normal", "physical": true },
     { "id": 168, "name": "Carrying Pole", "type": ["tool"], "weight": 1500, "size": 8000, "quality": "normal", "physical": true },
     { "id": 169, "name": "Crucible", "type": ["tool"], "weight": 2000, "size": 1500, "quality": "normal", "physical": true },
-    { "id": 170, "name": "Whetstone", "type": ["tool"], "weight": 1500, "size": 800, "quality": "normal", "physical": true }
+    { "id": 170, "name": "Whetstone", "type": ["tool"], "weight": 1500, "size": 800, "quality": "normal", "physical": true },
+    { "id": 171, "name": "Katana", "type": ["weapon"], "weight": 1200, "size": 1500, "quality": "normal", "physical": true },
+    { "id": 172, "name": "Wakizashi", "type": ["weapon"], "weight": 700, "size": 900, "quality": "normal", "physical": true },
+    { "id": 173, "name": "Tanto", "type": ["weapon"], "weight": 300, "size": 400, "quality": "normal", "physical": true },
+    { "id": 174, "name": "Nodachi", "type": ["weapon"], "weight": 2200, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 175, "name": "Yari", "type": ["weapon"], "weight": 2000, "size": 6000, "quality": "normal", "physical": true },
+    { "id": 176, "name": "Naginata", "type": ["weapon"], "weight": 2500, "size": 7000, "quality": "normal", "physical": true },
+    { "id": 177, "name": "Yumi", "type": ["weapon"], "weight": 900, "size": 5000, "quality": "normal", "physical": true },
+    { "id": 178, "name": "Arrow", "type": ["weapon"], "weight": 40, "size": 120, "quality": "normal", "physical": true },
+    { "id": 179, "name": "Ono", "type": ["weapon"], "weight": 1800, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 180, "name": "Kama", "type": ["weapon"], "weight": 500, "size": 800, "quality": "normal", "physical": true },
+    { "id": 181, "name": "Tetsubo", "type": ["weapon"], "weight": 4000, "size": 5000, "quality": "normal", "physical": true },
+    { "id": 182, "name": "Jitte", "type": ["weapon"], "weight": 600, "size": 700, "quality": "normal", "physical": true },
+    { "id": 183, "name": "Bo", "type": ["weapon"], "weight": 1200, "size": 4000, "quality": "normal", "physical": true },
+    { "id": 184, "name": "Do-Maru", "type": ["armor"], "weight": 9000, "size": 40000, "quality": "normal", "physical": true },
+    { "id": 185, "name": "O-Yoroi", "type": ["armor"], "weight": 30000, "size": 80000, "quality": "normal", "physical": true },
+    { "id": 186, "name": "Kabuto", "type": ["armor"], "weight": 2500, "size": 8000, "quality": "normal", "physical": true },
+    { "id": 187, "name": "Mempo", "type": ["armor"], "weight": 800, "size": 1500, "quality": "normal", "physical": true },
+    { "id": 188, "name": "Sode", "type": ["armor"], "weight": 1500, "size": 4000, "quality": "normal", "physical": true },
+    { "id": 189, "name": "Kote", "type": ["armor"], "weight": 2000, "size": 4000, "quality": "normal", "physical": true },
+    { "id": 190, "name": "Suneate", "type": ["armor"], "weight": 1500, "size": 3500, "quality": "normal", "physical": true },
+    { "id": 191, "name": "Haidate", "type": ["armor"], "weight": 1200, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 192, "name": "Jingasa", "type": ["armor"], "weight": 700, "size": 4000, "quality": "normal", "physical": true },
+    { "id": 193, "name": "Hara-Ate", "type": ["armor"], "weight": 4000, "size": 15000, "quality": "normal", "physical": true }
   ]
 }
