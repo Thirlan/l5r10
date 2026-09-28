@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "description": "Job catalog. Phase 1 covers the peasant harvesting jobs that produce raw resources. Desire arrays (food/drink/clothing/accessories/entertainment/housing) are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
+  "jobs": [
+    { "id": 1, "name": "Miner", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 2, "name": "Quarrier", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 3, "name": "Clay Digger", "status": 0.45, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 4, "name": "Salt Maker", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 5, "name": "Rice Farmer", "status": 0.9, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 6, "name": "Grain Farmer", "status": 0.85, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 7, "name": "Tea Grower", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 8, "name": "Hemp Farmer", "status": 0.75, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 9, "name": "Cotton Farmer", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 10, "name": "Orchardist", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 11, "name": "Vegetable Farmer", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 12, "name": "Mushroom Farmer", "status": 0.75, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 13, "name": "Spice Farmer", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 14, "name": "Poppy Farmer", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 15, "name": "Dye Farmer", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 16, "name": "Silk Farmer", "status": 0.85, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 17, "name": "Shepherd", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 18, "name": "Goatherd", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 19, "name": "Horse Breeder", "status": 0.8, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 20, "name": "Cattle Herder", "status": 0.75, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 21, "name": "Poultry Keeper", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 22, "name": "Lumberjack", "status": 0.6, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 23, "name": "Kelp Harvester", "status": 0.6, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "description": "Citizen caste types and the population each instance represents. min_job_status/max_job_status bound the L5R Status range a citizen of this caste may hold (see economy.md 3.9).",
+  "citizens": [
+    { "id": 1, "type": "kuge", "population_count": 1, "max_job_status": 10, "min_job_status": 7 },
+    { "id": 2, "type": "high buge", "population_count": 1, "max_job_status": 7, "min_job_status": 4 },
+    { "id": 3, "type": "low buge", "population_count": 10, "max_job_status": 4, "min_job_status": 1 },
+    { "id": 4, "type": "peasants", "population_count": 100, "max_job_status": 1, "min_job_status": 0.4 },
+    { "id": 5, "type": "crafters", "population_count": 10, "max_job_status": 0.1, "min_job_status": 0.1 },
+    { "id": 6, "type": "merchants", "population_count": 1, "max_job_status": 0.1, "min_job_status": 0.1 },
+    { "id": 7, "type": "geisha", "population_count": 10, "max_job_status": -1, "min_job_status": -1 },
+    { "id": 8, "type": "eta", "population_count": 10, "max_job_status": -2, "min_job_status": -2 }
+  ]
+}
