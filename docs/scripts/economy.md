@@ -335,7 +335,7 @@ soon as a phase would make it unwieldy.
   producing building. Skip ocean tiles (they are hunted units).
 - *Depends on:* none.
 
-### Phase 2 — Processed resources
+### Phase 2 — Processed resources (done)
 - Items/jobs/buildings that refine raws into processed goods (gold ore → gold
   bars, lumber → planks, ore → ingots, rice → polished rice, silk → thread…).
 - *Depends on:* Phase 1.

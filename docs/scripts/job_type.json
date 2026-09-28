@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Job catalog. Phase 1 covers the peasant harvesting jobs that produce raw resources. Desire arrays (food/drink/clothing/accessories/entertainment/housing) are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
+  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
   "jobs": [
     { "id": 1, "name": "Miner", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 2, "name": "Quarrier", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
@@ -24,6 +24,23 @@
     { "id": 20, "name": "Cattle Herder", "status": 0.75, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 21, "name": "Poultry Keeper", "status": 0.7, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 22, "name": "Lumberjack", "status": 0.6, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
-    { "id": 23, "name": "Kelp Harvester", "status": 0.6, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
+    { "id": 23, "name": "Kelp Harvester", "status": 0.6, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 24, "name": "Smelter", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 25, "name": "Miller", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 26, "name": "Sawyer", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 27, "name": "Charcoal Burner", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 28, "name": "Mason", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 29, "name": "Brickmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 30, "name": "Glassmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 31, "name": "Lime Burner", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 32, "name": "Spinner", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 33, "name": "Weaver", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 34, "name": "Ropemaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 35, "name": "Lapidary", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 36, "name": "Oil Presser", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 37, "name": "Papermaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 38, "name": "Dyer", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 39, "name": "Tanner", "status": -2, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 40, "name": "Apothecary", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
   ]
 }
