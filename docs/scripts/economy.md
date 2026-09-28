@@ -147,6 +147,7 @@ Each building entry:
 | `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job.json`, `capacity` = total workers. |
 | `input` | {id, qty}[] | Items consumed each production cycle. |
 | `output` | {id, qty}[] | Items produced each production cycle. |
+|'production time' | number time in days | time to produce the item |
 
 - `input` items are fully **consumed**; `output` items are produced.
 - `jobSlots[*].jobId` must resolve in `job.json`; all `input`/`output` `id`s must
@@ -165,13 +166,11 @@ Each settlement entry (proposed):
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | string | `snake_case` (e.g. `village`, `castle`). |
-| `layerId` | number | The matching numeric id from the `settlement` layer. |
-| `name` | string | Display name. |
-| `englishType` | string | From the layer entry. |
-| `rokuganiType` | string | From the layer entry. |
-| `population` | {min, max} | Typical population band (City ≈ 10,000 per project notes). |
-| `buildings` | {id, qty}[] | Buildings typically present; `id` → `building.json`. |
+| `id` | number | should match the settlement on the map |
+| typeId | number | settlement id type from the map |
+| `englishName` | string | From the layer entry. |
+| `rokuganiName` | string | From the layer entry. |
+| `buildings` | {id, idType}[] | Buildings typically present; `idType` → `building.json`, whereas id is a unique id for the instance of that building. |
 
 - The layer’s numeric `id`/`englishType`/`rokuganiType` values carry over
   verbatim so the map and economy stay in sync.
