@@ -21,18 +21,25 @@ Produce the following data files under `docs/scripts/`:
 | 1 | `item_type.json` | Exhaustive catalog of every raw resource and craftable item. |
 | 2 | `job_type.json` | Every job in a feudal Edo-period economy and what each job consumes/desires. |
 | 3 | `building_type.json` | Buildings, the job slots they offer, and their input→output recipes. |
-| 4 | `settlement.json` | Settlement definitions derived from the `settlement` layer. Represents the settlements on the map and aggregates buildings|
+| 4 | `settlement.json` | Settlement **instances** placed on the map (derived from the `settlement` layer) that aggregate buildings. |
 | 5 | `unit_type.json` | Individual military/economic units that make up a strategic unit. |
-| 6 | `strategic_unit_type.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit.json`. |
+| 6 | `strategic_unit_type.json` | Higher-level (army/trade caravan/army supply caravan/merchant fleet/naval fleet/monster) units built from `unit_type.json`. |
 | 7 | `resource_output_type.json` | links a specific resource type with a specific building type |
 | 8 | `clan_preference.json` | modifies the weights in job_type.json to reflect clan preferences. |
 | 9 | `citizen_type.json` | list of all possible civilizans and the population counter for each (e.g. peasants are 100) |
 
 Ultimately job_type and citizen_type will belong to a citizen class in the javascript code. So a given citizen instance will have a job of job type, be a citizen of citizen type, will have skills that will help determine how efficient they are in the building, will have money they can use to buy things.
 
-Settlements.json will be how we load the map with real instances. Settlement will contain all the cities on the map. Settlements will be populated with buildings and the buildings will be populated with citizens and goods.
+Settlement instances (`settlement.json`) are how we load the map with real
+instances. It contains all the cities on the map. Settlements are populated with
+buildings and the buildings are populated with citizens and goods.
 
-Resources.json will be how we load the map with buildings into the resource tiles. Resources will behave like settlements but with a single building, with the exception of ocean resources (fish, crabs, shrimp, squids, etc), which will instead be spawned as strategic units and must be harvested by a fishing fleet (strategic unit type).
+Resource instances are how we load the map with buildings into the resource
+tiles. Resources behave like settlements but with a single building, with the
+exception of ocean resources (fish, crabs, shrimp, squids, etc), which are
+instead spawned as strategic units and must be harvested by a fishing fleet
+(strategic unit type). *(The resource-instance file is not yet enumerated in
+§1 — see Open Questions §6.)*
 
 The world map will be populated with strategic_unit_types. In the case of merchants they will travel around the map carrying goods to sell from one place to another. The shadowlands will have armies spawn that march towards the crab lands. The crab will have armies that will fight the shadowland armies. The yobanjin will have small raiding armies spawn in the north and attack the dragon, unicorn and phoenix randomly. Giant creatures, like sea monsters or monstrous oni will be represented with a single army and single unit inside of it.
 
@@ -44,17 +51,30 @@ All in all this will create a living simulation using the map that can be turned
 
 These conventions apply across every file below.
 
-- **IDs are numbers** Once published, an ID is never
-  reused for a different thing for a specific type (item, )
+- **IDs are numbers.** Each type file owns its own ID space (item IDs are
+  unique among items, job IDs among jobs, building IDs among buildings, etc.).
+  Once published, an ID is never reused for a different thing within that type.
 - **Cross-file references use the ID.** Every `id` inside an `input`,
   `output`, `food`, `drink`, `housing`, etc. must resolve to an entry in the
-  file it points at (usually `item.json`).
+  file it points at (usually `item_type.json`).
+- **File splitting:** any type file that grows unwieldy may be split into
+  category files that share a single ID space (e.g. `item_type_weapon.json`,
+  `item_type_food.json`). Splitting does **not** create separate ID spaces —
+  an item ID is still globally unique across every `item_type_*.json` file, so
+  cross-file references stay valid. See §3.1.
 - **Units:** weight in **grams**, volume/size in **cm³**. Keep raw numbers
   (no unit suffixes) so consumers can compute freely.
 - **Quality** is one of `normal` or `high`.
-- **Tool/durable quantity convention:** a single durable item (tool, weapon,
-  armor, container, furniture, machinery, ship, land transport) should be produced in granular amounts, such as a stack of **1000** sub-units. One physical hammer = 1000 units. This lets the model handle wear, tear, and breakage quickly and efficiently, but does not always accurately represent the actual number of hammers. buildings, vehicles (e.g. boats), armor and weapons, are always in units of 1.
-  - Consumables (food, drink, fuels, raw/processed/combined resources) have varying units as well, but since most are instantly consumed they do not need the granularity of tools. It is all just a matter of the qty produced.
+- **Tool/durable quantity convention:** durable goods are counted in **sub-units**
+  so the model can handle wear, tear, and breakage quickly. A single tool
+  (hammer, saw, anvil, fishing net, etc.) is produced and stored as a stack of
+  **1000** sub-units — one physical hammer = 1000 units. This is a production/
+  storage `qty` convention only; there is **no** per-item field for it (§3.1).
+  Buildings, vehicles (ships, carts), armor, and weapons are always counted in
+  units of **1** (one recipe cycle yields one physical object).
+  - Consumables (food, drink, fuels, raw/processed/combined resources) are
+    counted in whatever natural `qty` a recipe produces; because most are
+    consumed immediately they do not need sub-unit granularity.
 - **JSON style:** 2-space indentation, top-level object with a metadata header
   and a data array, matching the existing files in this folder. Example shape:
 
@@ -75,6 +95,12 @@ These conventions apply across every file below.
 An exhaustive list of every raw resource and craftable item. Items list is larger than
 the map layer set because one source (e.g. a horse) yields many items (horse
 hair, manure, leather, meat, bone, etc.).
+
+> **Splitting:** this file is expected to become the largest in the set. When
+> it does, split it by category into `item_type_<category>.json` files
+> (e.g. `item_type_raw.json`, `item_type_weapon.json`, `item_type_food.json`)
+> that share one global item ID space (see §2). Until then a single
+> `item_type.json` is fine.
 
 Each item entry:
 
@@ -111,7 +137,7 @@ Each item entry:
   5. the finished goods (food, drink, clothing, armor, weapons, tools,
      containers, furniture, machinery, ships, transport, building materials,
      fuels, buildings, entertainment) that consume them.
-- Every `id` referenced by `job.json` and `building.json` must exist here.
+- Every `id` referenced by `job_type.json` and `building_type.json` must exist here.
 
 ### 3.2 `job_type.json`
 
@@ -132,11 +158,12 @@ Each job entry:
 | `clothing` | {id, qty, weight}[] | Desired clothing items. |
 | `accessories` | {id, qty, weight}[] | Desired fashion accessories. |
 | `entertainment` | {id, qty, weight}[] | Desired entertainment items. |
+| `housing` | {id, qty, weight}[] | Desired housing (`building`-typed items in `item_type.json`). |
 
 - **weight encodes desirability:** within each array, entries are listed from
   **most** to **least** desired. (A worker's luxury bento appears before plain
   rice.)
-- Every referenced `id` must resolve in `item.json`.
+- Every referenced `id` must resolve in `item_type.json`.
 - `status` uses the same L5R Status scale referenced elsewhere in the project.
 
 ### 3.3 `building_type.json`
@@ -149,23 +176,25 @@ Each building entry:
 |-------|------|-------|
 | `id` | number | |
 | `name` | string | Display name. |
-| `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job.json`, `capacity` = total workers. |
-| `input_items` | {id, qty}[] | Items consumed each production cycle. |
-| `input_items` | {id, qty}[] | Items consumed each production cycle. |
-| `output_items` | {id, qty}[] | Items produced each production cycle. |
-| `input_job` | {id, qty}[] | Items consumed each production cycle. |
-| `output_job` | {id, qty}[] | Items produced each production cycle. |
-|'production time' | number | time in days | time to produce the item |
-| storage_capacity | number | capacity in cm3 for storing input and output. |
+| `jobSlots` | {jobId, capacity}[] | Job slots supported; `jobId` → `job_type.json`, `capacity` = total workers. |
+| `input_items` | {id, qty}[] | Items consumed each production cycle; `id` → `item_type.json`. |
+| `output_items` | {id, qty}[] | Items produced each production cycle; `id` → `item_type.json`. |
+| `input_job` | {id, qty}[] | Workers consumed by a training cycle; `id` → `job_type.json`. |
+| `output_job` | {id, qty}[] | Workers produced by a training cycle; `id` → `job_type.json`. |
+| `production_time` | number | Time in days to complete one production cycle. |
+| `storage_capacity` | number | Storage capacity in cm³ for input and output items. |
 
 - `input` items are fully **consumed**; `output` items are produced.
 - Some buildings produce no outputs. Their existence provides other benefits but must be maintained (e.g. walls, castles and ports).
 - Input should not only include what is needed to make the output item, but what is needed to maintain the building
-- Some buildings are training grounds that transform jobs into other jobs. Most create items and are training grounds (example, a foundry both produces steel and trains new recruits so can work the job.)
-- `jobSlots[*].jobId` must resolve in `job.json`; all `input`/`output` `id`s must
-  resolve in `item.json`.
+- Some buildings are training grounds that transform jobs into other jobs via
+  `input_job`/`output_job`. Most buildings produce items; some do both (e.g. a
+  foundry produces steel *and* trains new recruits into smiths).
+- `jobSlots[*].jobId`, `input_job`, and `output_job` must resolve in
+  `job_type.json`; all `input_items`/`output_items` `id`s must resolve in
+  `item_type.json`.
 - Buildings that are also placeable items (peasant hut, granary, castle, Kyuden)
-  should have a matching `building`-typed entry in `item.json` for housing
+  should have a matching `building`-typed entry in `item_type.json` for housing
   references, while their *production* behavior lives here.
 
 ### 3.4 `settlement.json`
@@ -182,7 +211,7 @@ Each settlement entry (proposed):
 | typeId | number | settlement id type from the map |
 | `englishName` | string | From the layer entry. |
 | `rokuganiName` | string | From the layer entry. |
-| `buildings` | {id, idType}[] | Buildings typically present; `idType` → `building.json`, whereas id is a unique id for the instance of that building. |
+| `buildings` | {id, idType}[] | Buildings typically present; `idType` → `building_type.json`, whereas id is a unique id for the instance of that building. |
 
 - The layer’s numeric `id`/`englishType`/`rokuganiType` values carry over
   verbatim so the map and economy stay in sync.
@@ -198,15 +227,13 @@ Each unit entry (proposed):
 |-------|------|-------|
 | `id` | number | |
 | `name` | string | Display name. |
-| `equipment` | {id, qty}[] | Items a unit is outfitted with; `id` → `item.json`. |
-| `upkeep` 
- N/A| | Not needed. Comes from job |
-| `jobId` | number | Optional link to a `job.json` role. |
-| `unit_size` | number | the size of the unit |
+| `equipment` | {id, qty}[] | Items a unit is outfitted with; `id` → `item_type.json`. |
+| `jobId` | number | Optional link to a `job_type.json` role. Upkeep/desires come from the job — there is no separate upkeep field. |
+| `unit_size` | number | The size of the unit. |
 
 ### 3.6 `strategic_unit_type.json`
 
-Higher-level formations composed of `unit.json` entries — e.g. `legion`,
+Higher-level formations composed of `unit_type.json` entries — e.g. `legion`,
 `baggage_train`, `patrol`.
 
 Each strategic-unit entry:
@@ -214,32 +241,34 @@ Each strategic-unit entry:
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | number | |
-| 'type' | string | legion, naval fleet, merchant fleet, crabs, squids, fish, shrimp, deep sea fish |
+| `type` | string | Formation kind: legion, naval fleet, merchant fleet, crabs, squids, fish, shrimp, deep sea fish. |
+| `units` | {typeId, qty}[] | Composition; `typeId` → `unit_type.json`. |
 
-### 3.7 `resource_output_type`
+### 3.7 `resource_output_type.json`
 
-replaces /workspaces/l5r10/docs/scripts/resource_output.js (what is currently in that file should move to a building)
+Replaces [`resource_output.js`](./resource_output.js) (the yield numbers currently
+in that file should move onto the linked building's recipe).
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | number | maps back to the layer |
-| 'building_type' | number | maps to a building id in building_type.json |
+| `id` | number | Maps back to the `resource` layer id in `layers.json`. |
+| `building_type` | number | Maps to a building id in `building_type.json`. |
 
 This helps establish the link from resource to a building and the building is the one that outputs the resources when worked by citizens (mostly peasants).
 
 This is a 1 to 1 relationship. A single resource should not be linked to more than 1 building. Skip the sea resources since they are units that are hunted.
 
-### 3.8 `clan_preferences.json`
+### 3.8 `clan_preference.json`
 
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | number | |
 | `name` | string | The clan for this preference |
-| `food` | {id, weight}[] | Desired food items. |
-| `drink` | {id, weight}[] | Desired drink items. |
-| `clothing` | {id, weight}[] | Desired clothing items. |
-| `accessories` | {id, weight}[] | Desired fashion accessories. |
-| `entertainment` | {id, weight}[] | Desired entertainment items. |
+| `food` | {id, weight}[] | Desired food items; `id` → `item_type.json`. |
+| `drink` | {id, weight}[] | Desired drink items; `id` → `item_type.json`. |
+| `clothing` | {id, weight}[] | Desired clothing items; `id` → `item_type.json`. |
+| `accessories` | {id, weight}[] | Desired fashion accessories; `id` → `item_type.json`. |
+| `entertainment` | {id, weight}[] | Desired entertainment items; `id` → `item_type.json`. |
 
 This adds preferences on top of the job preferences. For the kuge, high buge and low buge the job preference will be fairly basic and this is where things will get creative and add flavor.
 
@@ -255,76 +284,126 @@ This adds preferences on top of the job preferences. For the kuge, high buge and
 
 This file is used to help track the kinds of citizens there are. Since this is a caste system the citizens are quite restricted on jobs that can be taken.
 
-Below is the recommended list.
-- kuge, population of 1, status range of (7 to 10]
-- high buge, population of 1, max status (4 to 7]
-- low buge, population of 10, [1 to 4]
-- peasants, population of 100, [0.4 to 1)
-- crafters, population of 10, [0.1 to 0.1]
-- merchants, population of 1, [0.1 to 0.1]
-- geisha, population of 10, [-1 to -1]
-- eta, population of 10, [-2 to -2]
+Below is the recommended list. Status is written as a `min..max` interval where
+`[`/`]` are inclusive bounds and `(`/`)` are exclusive bounds.
+
+- **kuge** — population 1, status (7, 10]
+- **high buge** — population 1, status (4, 7]
+- **low buge** — population 10, status [1, 4]
+- **peasants** — population 100, status [0.4, 1)
+- **crafters** — population 10, status [0.1, 0.1]
+- **merchants** — population 1, status [0.1, 0.1]
+- **geisha** — population 10, status [-1, -1]
+- **eta** — population 10, status [-2, -2]
 
 The purpose of this file ultimately is so that when we do implement the game logic we don't have to handle each individual citizen out of a population of 12 million and instead we can handle the bulk of the population (peasants) with fewer programming objects since the ratio is 1 object to 100 peasants.
 
 ---
 
-## 4. Pull Request Breakdown
+## 4. Implementation Phases
 
-Work is sequenced so that referenced files exist before the files that reference
-them. Each PR is self-contained and reviewable.
+Instead of building each file to completion one at a time, work proceeds in
+**horizontal passes**. Every phase touches the same small set of *core* files
+and adds one new tier of the production chain across all of them at once. This
+keeps every file internally consistent at every step: after each phase the data
+set is self-contained and simulatable for the tiers completed so far.
 
-### PR 1 — Item taxonomy & schema scaffold
-- Add `item.json` with the metadata header, the full **type taxonomy**
-- Seed items for every entry in the `resource` layer (raw resources only).
-- Add a schema/README note. **No** downstream files yet.
+**Core files touched each phase:**
+
+| File | When touched |
+|------|--------------|
+| `item_type.json` | Every phase (add the new items for that tier). |
+| `job_type.json` | Every phase (add the jobs that make/handle them). |
+| `building_type.json` | Every phase (add the buildings + recipes). |
+| `resource_output_type.json` | **Phase 1 only** (maps map resource tiles → raw-resource buildings). |
+| `citizen_type.json` | **Phase 1** (foundation) and **Phase 11** (population). |
+
+Each phase is one PR. Every referenced ID must already exist (raws before
+processed, processed before combined, etc.), so phases are strictly ordered.
+Split `item_type.json` into `item_type_<category>.json` files (see §2/§3.1) as
+soon as a phase would make it unwieldy.
+
+### Phase 1 — Base (raw) resources from the map
+- `citizen_type.json`: finalize the caste list from §3.9 (mostly already set up).
+- `item_type.json`: the raw resource(s) each `resource`-layer tile yields
+  (iron ore, lumber, rice, silk, tea, ore, clay, stone, etc.) plus their raw
+  by-products.
+- `job_type.json`: harvesting jobs (miner, lumberjack, rice farmer, herder…).
+- `building_type.json`: the buildings that output raw resources (iron mine,
+  lumber mill, rice paddy, gold mine → gold ore, etc.).
+- `resource_output_type.json`: 1:1 link from each land `resource` tile id to its
+  producing building. Skip ocean tiles (they are hunted units).
 - *Depends on:* none.
 
-### PR 2 — Item catalog: by-products & processed resources
-- Expand `item.json` with by-products (horse → hair, manure, leather, meat,
-  bone, sinew; lumber → bark, sawdust; etc.) and processed resources
-  (ingots, planks, cloth, flour, charcoal…).
-- *Depends on:* PR 1.
+### Phase 2 — Processed resources
+- Items/jobs/buildings that refine raws into processed goods (gold ore → gold
+  bars, lumber → planks, ore → ingots, rice → polished rice, silk → thread…).
+- *Depends on:* Phase 1.
 
-### PR 3 — Item catalog: finished goods
-- Add combined resources, food, drink, discretionary consumables, clothing,
-  armor, weapons, fashion accessories, tools, containers, furniture, machinery,
-  ships, land transportation, building materials, fuels, buildings, and
-  entertainment. Apply `stackUnits` per §2.
-- Completes the exhaustive `item.json`.
-- *Depends on:* PR 2.
+### Phase 3 — Combined (composite) resources
+- Items/jobs/buildings that blend processed goods into composites (copper + tin
+  → bronze, alloys, dyed cloth, blended pigments…).
+- *Depends on:* Phase 2.
 
-### PR 4 — Jobs
-- Add `job.json` covering every feudal/Edo-period job with `status` and the
-  desire arrays (`food`, `drink`, `clothing`, `accessories`, `entertainment`,
-  `housing`), each ordered most→least desired.
-- All referenced item IDs must already exist from PRs 1–3.
-- *Depends on:* PR 3.
+### Phase 4 — Tools
+- Items/jobs/buildings for tools (wood hammers, smith hammers, anvils,
+  chopsticks, saws, practice swords, fishing nets…). Tools use the 1000-sub-unit
+  convention (§2).
+- *Depends on:* Phase 3.
 
-### PR 5 — Buildings
-- Add `building.json` with `jobSlots`, `input`, and `output` for every building
-  (farms, mines, workshops, breweries, shrines, castles, Kyuden, etc.).
-- References jobs (PR 4) and items (PRs 1–3).
-- *Depends on:* PR 4.
+### Phase 5 — Weapons & armor
+- Items/jobs/buildings for weapons and armor (katana, yari, yumi, do-maru…).
+  Counted in units of 1 (§2).
+- *Depends on:* Phase 4 (tools/materials).
 
-### PR 6 — Settlements
-- Add `settlement.json` from the `settlement` layer, wiring in `buildings`
-  references to `building.json`.
-- *Depends on:* PR 5.
+### Phase 6 — Vehicles
+- Items/jobs/buildings for vehicles (fishing ships, merchant ships, merchant
+  carts). Counted in units of 1.
+- *Depends on:* Phase 4.
 
-### PR 7 — Units
-- Add `unit.json` (equipment/upkeep referencing items; optional job link).
-- *Depends on:* PR 5 (items/jobs).
+### Phase 7 — Entertainment
+- Items/jobs/buildings for entertainment (performances, stories, pillow books,
+  instruments…). Some items are `physical: false`.
+- *Depends on:* Phase 3.
 
-### PR 8 — Strategic units
-- Add `strategic_unit.json` composing `unit.json` entries.
-- *Depends on:* PR 7.
+### Phase 8 — Food
+- Items/jobs/buildings that turn raw/processed food into prepared dishes and
+  drinks (sake, miso, bento, tea…).
+- *Depends on:* Phase 3.
 
-### PR 9 — Validation tooling (optional but recommended)
-- Add a lightweight validation script/notes that checks: unique IDs per file,
-  every cross-file reference resolves, `quality` ∈ {normal, high}, `physical`
-  boolean present, and `stackUnits` ∈ {1, 100, 1000}.
-- *Depends on:* the files it validates.
+### Phase 9 — Clothing
+- Items/jobs/buildings for clothing and fashion accessories (kimono, obi,
+  sandals, hairpins…).
+- *Depends on:* Phase 3.
+
+### Phase 10 — Job-training buildings
+- Buildings that transform jobs into other jobs via `input_job`/`output_job`
+  (e.g. Ashigaru Military Training Grounds → spearmen, archers). Adds the new
+  trained jobs to `job_type.json`.
+- *Depends on:* Phases 4–5 (trainees need equipment).
+
+### Phase 11 — Population / housing
+- Housing buildings (merchant house, low-buge house, high-buge house, kuge
+  house…) that create new citizens. Adds housing `building`-typed items to
+  `item_type.json`, housing recipes to `building_type.json`, and wires the
+  population output back to `citizen_type.json`.
+- *Depends on:* Phases 1–9 (housing consumes finished goods).
+
+### Later phases — remaining type files
+Once the production chain (Phases 1–11) is complete, add the higher-level files
+that reference it:
+
+- **Settlements** — `settlement.json` instances placed from the `settlement`
+  layer, wiring `buildings` → `building_type.json`. *Depends on: Phase 11.*
+- **Units** — `unit_type.json` (equipment → items, optional job link).
+  *Depends on: Phase 5.*
+- **Strategic units** — `strategic_unit_type.json` composing `unit_type.json`
+  entries. *Depends on: Units.*
+- **Clan preferences** — `clan_preference.json` weighting desires per clan.
+  *Depends on: Phases 7–9 (the items being preferred).*
+- **Validation tooling** *(optional)* — a lightweight script/notes checking
+  unique IDs per file, resolvable cross-file references, `quality` ∈
+  {normal, high}, and boolean `physical`. *Depends on: the files it validates.*
 
 ---
 
@@ -333,26 +412,31 @@ them. Each PR is self-contained and reviewable.
 For each data PR, reviewers confirm:
 
 1. **Well-formed JSON**, 2-space indent, metadata header + data array.
-2. **Unique IDs** within the file.
-3. **Referential integrity:** every `id`/`jobId`/`unitId` referenced resolves in
-   its target file.
+2. **Unique IDs** within each type's ID space (including across split
+   `item_type_*.json` files).
+3. **Referential integrity:** every `id`/`jobId`/`typeId` referenced resolves in
+   its target file (`item_type.json`, `job_type.json`, `building_type.json`,
+   `unit_type.json`).
 4. **Enum correctness:** `quality` ∈ {`normal`, `high`}; item `type` values come
    from the taxonomy; `physical` is boolean.
-5. **Convention compliance:** durable items carry `stackUnits` of 100 or 1000;
-   consumables use 1; buildings are never multiplied.
-6. **Ordering:** `job.json` desire arrays are sorted most→least desired.
-7. **Coverage:** the `item.json` coverage checklist (§3.1) is satisfied for each
-   resource-layer source touched by the PR.
+5. **Convention compliance:** durable tools use the 1000-sub-unit `qty`
+   convention; buildings, vehicles, armor, and weapons are counted in units of 1;
+   consumables use natural `qty` (§2).
+6. **Ordering:** `job_type.json` desire arrays are sorted most→least desired.
+7. **Coverage:** the `item_type.json` coverage checklist (§3.1) is satisfied for
+   each resource-layer source touched by the phase.
 
 ---
 
 ## 6. Open Questions
 
-- Confirm the proposed schemas for `settlement.json`, `unit.json`, and
-  `strategic_unit.json` (§3.4–3.6) before filling in data.
-- Decide the exact `stackUnits` value (100 vs 1000) per durable type — proposal:
-  1000 for high-wear/finely-made goods (weapons, armor, precision tools), 100
-  for everyday tools/containers/furniture.
-- Confirm whether housing in `job.json` references `building`-typed items in
-  `item.json` or entries in `building.json` (proposal: `item.json` building
-  entries, so a job can "want" a dwelling without a production recipe).
+- Confirm the proposed schemas for `settlement.json`, `unit_type.json`, and
+  `strategic_unit_type.json` (§3.4–3.6) before filling in data.
+- **Resource instances:** the narrative (§1) describes loading resource *tiles*
+  with buildings, but §1 only lists `resource_output_type.json` (a type→building
+  map). Decide whether a separate resource-instance file is needed (parallel to
+  `settlement.json`) and, if so, name it and add its schema.
+- Confirm whether housing in `job_type.json` references `building`-typed items in
+  `item_type.json` or entries in `building_type.json` (current proposal:
+  `building`-typed items in `item_type.json`, so a job can "want" a dwelling
+  without a production recipe).
