@@ -340,7 +340,7 @@ soon as a phase would make it unwieldy.
   bars, lumber → planks, ore → ingots, rice → polished rice, silk → thread…).
 - *Depends on:* Phase 1.
 
-### Phase 3 — Combined (composite) resources
+### Phase 3 — Combined (composite) resources (done)
 - Items/jobs/buildings that blend processed goods into composites (copper + tin
   → bronze, alloys, dyed cloth, blended pigments…).
 - *Depends on:* Phase 2.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources refined from those raws (ids 71-106). Combined/finished goods come in later phases. weight is grams and size is cm3 per single natural unit.",
+  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources refined from those raws (ids 71-106). Phase 3 = combined resources (alloys/blends) made from processed goods (ids 107-119). Finished goods come in later phases. weight is grams and size is cm3 per single natural unit.",
   "items": [
     { "id": 1, "name": "Iron Ore", "type": ["raw resource"], "weight": 1000, "size": 400, "quality": "normal", "physical": true },
     { "id": 2, "name": "Copper Ore", "type": ["raw resource"], "weight": 1000, "size": 360, "quality": "normal", "physical": true },
@@ -107,6 +107,19 @@
     { "id": 103, "name": "Nut Oil", "type": ["processed resource", "food"], "weight": 1000, "size": 1090, "quality": "normal", "physical": true },
     { "id": 104, "name": "Opium", "type": ["processed resource", "discretionary consumable"], "weight": 1000, "size": 1000, "quality": "normal", "physical": true },
     { "id": 105, "name": "Paper", "type": ["processed resource"], "weight": 1000, "size": 1250, "quality": "normal", "physical": true },
-    { "id": 106, "name": "Indigo Dye", "type": ["processed resource"], "weight": 1000, "size": 1000, "quality": "normal", "physical": true }
+    { "id": 106, "name": "Indigo Dye", "type": ["processed resource"], "weight": 1000, "size": 1000, "quality": "normal", "physical": true },
+    { "id": 107, "name": "Steel", "type": ["combined resource"], "weight": 1000, "size": 127, "quality": "normal", "physical": true },
+    { "id": 108, "name": "Bronze", "type": ["combined resource"], "weight": 1000, "size": 114, "quality": "normal", "physical": true },
+    { "id": 109, "name": "Electrum", "type": ["combined resource"], "weight": 1000, "size": 71, "quality": "high", "physical": true },
+    { "id": 110, "name": "Mortar", "type": ["combined resource", "building material"], "weight": 1000, "size": 555, "quality": "normal", "physical": true },
+    { "id": 111, "name": "Plaster", "type": ["combined resource", "building material"], "weight": 1000, "size": 830, "quality": "normal", "physical": true },
+    { "id": 112, "name": "Dyed Silk Cloth", "type": ["combined resource"], "weight": 1000, "size": 2000, "quality": "high", "physical": true },
+    { "id": 113, "name": "Dyed Cotton Cloth", "type": ["combined resource"], "weight": 1000, "size": 2500, "quality": "normal", "physical": true },
+    { "id": 114, "name": "Dyed Hemp Cloth", "type": ["combined resource"], "weight": 1000, "size": 2500, "quality": "normal", "physical": true },
+    { "id": 115, "name": "Dyed Wool Cloth", "type": ["combined resource"], "weight": 1000, "size": 3000, "quality": "normal", "physical": true },
+    { "id": 116, "name": "Animal Glue", "type": ["combined resource"], "weight": 1000, "size": 769, "quality": "normal", "physical": true },
+    { "id": 117, "name": "Ink", "type": ["combined resource"], "weight": 1000, "size": 909, "quality": "normal", "physical": true },
+    { "id": 118, "name": "Soap", "type": ["combined resource"], "weight": 1000, "size": 1111, "quality": "normal", "physical": true },
+    { "id": 119, "name": "Pigment", "type": ["combined resource"], "weight": 1000, "size": 1000, "quality": "normal", "physical": true }
   ]
 }
