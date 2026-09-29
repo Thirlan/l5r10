@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Phase 5 = weapons and armor (ids 171-193, types `weapon`/`armor`), counted in units of 1. Phase 6 = vehicles (ids 194-196, type `vehicle`), counted in units of 1. Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
+  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Phase 5 = weapons and armor (ids 171-193, types `weapon`/`armor`), counted in units of 1. Phase 6 = vehicles (ids 194-196, type `vehicle`), counted in units of 1. Phase 7 = entertainment (ids 197-218, type `entertainment`): non-physical performances (ids 197-202, `physical: false`, weight/size 0) counted per show, and physical goods (books, prints, instruments, games) counted in units of 1. Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
   "items": [
     { "id": 1, "name": "Iron Ore", "type": ["raw resource"], "weight": 1000, "size": 400, "quality": "normal", "physical": true },
     { "id": 2, "name": "Copper Ore", "type": ["raw resource"], "weight": 1000, "size": 360, "quality": "normal", "physical": true },
@@ -197,6 +197,28 @@
     { "id": 193, "name": "Hara-Ate", "type": ["armor"], "weight": 4000, "size": 15000, "quality": "normal", "physical": true },
     { "id": 194, "name": "Fishing Ship", "type": ["vehicle"], "weight": 80000000, "size": 1200000000, "quality": "normal", "physical": true },
     { "id": 195, "name": "Merchant Ship", "type": ["vehicle"], "weight": 120000000, "size": 1800000000, "quality": "normal", "physical": true },
-    { "id": 196, "name": "Merchant Cart", "type": ["vehicle"], "weight": 120000, "size": 2000000, "quality": "normal", "physical": true }
+    { "id": 196, "name": "Merchant Cart", "type": ["vehicle"], "weight": 120000, "size": 2000000, "quality": "normal", "physical": true },
+    { "id": 197, "name": "Noh Performance", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "high", "physical": false },
+    { "id": 198, "name": "Kabuki Performance", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "high", "physical": false },
+    { "id": 199, "name": "Storytelling", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "normal", "physical": false },
+    { "id": 200, "name": "Poetry Recital", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "high", "physical": false },
+    { "id": 201, "name": "Musical Performance", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "normal", "physical": false },
+    { "id": 202, "name": "Dance Performance", "type": ["entertainment"], "weight": 0, "size": 0, "quality": "normal", "physical": false },
+    { "id": 203, "name": "Pillow Book", "type": ["entertainment"], "weight": 400, "size": 700, "quality": "normal", "physical": true },
+    { "id": 204, "name": "Poetry Book", "type": ["entertainment"], "weight": 350, "size": 650, "quality": "normal", "physical": true },
+    { "id": 205, "name": "Woodblock Print", "type": ["entertainment"], "weight": 50, "size": 300, "quality": "normal", "physical": true },
+    { "id": 206, "name": "Illustrated Scroll", "type": ["entertainment"], "weight": 800, "size": 3000, "quality": "high", "physical": true },
+    { "id": 207, "name": "Shamisen", "type": ["entertainment"], "weight": 2500, "size": 45000, "quality": "normal", "physical": true },
+    { "id": 208, "name": "Koto", "type": ["entertainment"], "weight": 5000, "size": 90000, "quality": "normal", "physical": true },
+    { "id": 209, "name": "Biwa", "type": ["entertainment"], "weight": 2200, "size": 40000, "quality": "normal", "physical": true },
+    { "id": 210, "name": "Shakuhachi", "type": ["entertainment"], "weight": 300, "size": 2000, "quality": "normal", "physical": true },
+    { "id": 211, "name": "Fue", "type": ["entertainment"], "weight": 200, "size": 1500, "quality": "normal", "physical": true },
+    { "id": 212, "name": "Taiko Drum", "type": ["entertainment"], "weight": 18000, "size": 150000, "quality": "normal", "physical": true },
+    { "id": 213, "name": "Tsuzumi", "type": ["entertainment"], "weight": 800, "size": 8000, "quality": "normal", "physical": true },
+    { "id": 214, "name": "Go Set", "type": ["entertainment"], "weight": 8000, "size": 100000, "quality": "normal", "physical": true },
+    { "id": 215, "name": "Shogi Set", "type": ["entertainment"], "weight": 3000, "size": 30000, "quality": "normal", "physical": true },
+    { "id": 216, "name": "Hanafuda", "type": ["entertainment"], "weight": 100, "size": 200, "quality": "normal", "physical": true },
+    { "id": 217, "name": "Kite", "type": ["entertainment"], "weight": 500, "size": 40000, "quality": "normal", "physical": true },
+    { "id": 218, "name": "Folding Fan", "type": ["entertainment"], "weight": 100, "size": 1500, "quality": "normal", "physical": true }
   ]
 }
