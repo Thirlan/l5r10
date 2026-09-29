@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Phase 4 = toolmaker crafter jobs (ids 46-51, status 0.1). Phase 5 = weapon/armor smith crafter jobs (ids 52-55, status 0.1). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
+  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Phase 4 = toolmaker crafter jobs (ids 46-51, status 0.1). Phase 5 = weapon/armor smith crafter jobs (ids 52-55, status 0.1). Phase 6 = vehicle crafting jobs (ids 56-58, status 0.1). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
   "jobs": [
     { "id": 1, "name": "Miner", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 2, "name": "Quarrier", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
@@ -56,6 +56,9 @@
     { "id": 52, "name": "Swordsmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 53, "name": "Weaponsmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 54, "name": "Bowyer", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
-    { "id": 55, "name": "Armorsmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
+    { "id": 55, "name": "Armorsmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 56, "name": "Fishing Shipwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 57, "name": "Merchant Shipwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 58, "name": "Cartwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Phase 5 = weapons and armor (ids 171-193, types `weapon`/`armor`), counted in units of 1. Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
+  "description": "Item catalog. Phase 1 = raw resources/by-products from the map `resource` tiles (ids 1-70). Phase 2 = processed resources (ids 71-106). Phase 3 = combined resources/alloys/blends (ids 107-119). Phase 4 = tools and containers (ids 120-170, types `tool`/`container`). Phase 5 = weapons and armor (ids 171-193, types `weapon`/`armor`), counted in units of 1. Phase 6 = vehicles (ids 194-196, type `vehicle`), counted in units of 1. Durables (tools & containers) use the SUB-UNIT convention: recipe/storage qty is in sub-units where 1000 = one physical item, while weight/size are per physical item. Nails (129) is a consumable building material counted in kg. weight is grams and size is cm3 per single natural unit.",
   "items": [
     { "id": 1, "name": "Iron Ore", "type": ["raw resource"], "weight": 1000, "size": 400, "quality": "normal", "physical": true },
     { "id": 2, "name": "Copper Ore", "type": ["raw resource"], "weight": 1000, "size": 360, "quality": "normal", "physical": true },
@@ -194,6 +194,9 @@
     { "id": 190, "name": "Suneate", "type": ["armor"], "weight": 1500, "size": 3500, "quality": "normal", "physical": true },
     { "id": 191, "name": "Haidate", "type": ["armor"], "weight": 1200, "size": 3000, "quality": "normal", "physical": true },
     { "id": 192, "name": "Jingasa", "type": ["armor"], "weight": 700, "size": 4000, "quality": "normal", "physical": true },
-    { "id": 193, "name": "Hara-Ate", "type": ["armor"], "weight": 4000, "size": 15000, "quality": "normal", "physical": true }
+    { "id": 193, "name": "Hara-Ate", "type": ["armor"], "weight": 4000, "size": 15000, "quality": "normal", "physical": true },
+    { "id": 194, "name": "Fishing Ship", "type": ["vehicle"], "weight": 80000000, "size": 1200000000, "quality": "normal", "physical": true },
+    { "id": 195, "name": "Merchant Ship", "type": ["vehicle"], "weight": 120000000, "size": 1800000000, "quality": "normal", "physical": true },
+    { "id": 196, "name": "Merchant Cart", "type": ["vehicle"], "weight": 120000, "size": 2000000, "quality": "normal", "physical": true }
   ]
 }
