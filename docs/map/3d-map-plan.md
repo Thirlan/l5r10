@@ -20,6 +20,11 @@ the plan we should have enough of a working prototype to make that call.
 - **No new backend / build tooling.** The project is a static site served from
   `docs/`. The POC stays static-site friendly (plain HTML + JS modules, CDN or
   vendored Babylon.js). No bundler, no Node build step is required to view it.
+- **One terrain mesh.** The ground is a single continuous mesh, not one mesh
+  per cell. Its elevation creates hills, mountains, cliffs, lakes, and riverbeds;
+  trees and roads are models placed on top of it. Settlements and resources
+  initially reuse the existing images on the surface; models can replace them
+  later.
 - **Incremental.** Each PR is independently reviewable, leaves the POC in a
   working (if incomplete) state, and can be abandoned without affecting the 2D
   map.
@@ -33,17 +38,17 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 | --- | --- | --- |
 | `docs/scripts/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
 | `docs/scripts/layers.json` | Layer definitions: for each layer, the list of values with `id`, `name`, `color`, and (for terrain/vegetation) `image`. | Maps numeric cell ids to names, colors, and elevation. |
-| `docs/scripts/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Optional source for tile textures on the 3D ground. |
-| `docs/img/map/*.png` | Tile and marker art. | Optional textures / billboards. |
+| `docs/scripts/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Reference for the intended surface appearance, not a per-cell mesh material. |
+| `docs/img/map/*.png` | Tile and marker art. | Reference textures and initial settlement/resource images. |
 
 Key facts that make 3D natural:
 
-- **Terrain ids already imply height.** `flat(0)`, `hills(1)`, `mountains(2)`,
-  `wetlands(7)`, `city(8)` are land; `water(3)`, `coastal water(4)`,
-  `ocean(5)` are water. A simple id→elevation table gives an immediate
-  heightmap.
+- **Terrain ids suggest initial heights.** `flat(0)`, `hills(1)`,
+  `mountains(2)`, `wetlands(7)`, `city(8)` are land; `water(3)`,
+  `coastal water(4)`, `ocean(5)` are water. River cells and water boundaries
+  need additional shape/depth rules; cliffs are not a separate terrain id.
 - **The grid is dense and regular**, so it maps cleanly onto a Babylon.js ground
-  mesh / instanced tiles indexed by `(x, y)`.
+  mesh with heights and surface positions derived from `(x, y)`.
 - **Cells are sparse** (only painted cells appear in the JSON), so unpainted
   coordinates can be treated as empty/ocean.
 
@@ -87,72 +92,85 @@ in-memory model the 3D scene can query, with no rendering yet.
   using `layers.json` (mirroring how the existing code builds its layer maps,
   but as a fresh, minimal reimplementation — no import of the 2D classes).
 - Compute and cache derived data useful for 3D: map bounds, the set of painted
-  cells, and a terrain-id → elevation table.
+  cells, terrain-id → base elevation, and river/water/vegetation positions.
 - Surface a tiny debug readout on the page (e.g. "loaded N cells, bounds …") to
   confirm parsing.
 
 **Done when:** The page logs/verifies correct cell counts and bounds from the
 live data files. Still no 3D geometry beyond PR 1.
 
-### PR 3 — Render base terrain as a 3D heightmap
+### PR 3 — Build one continuous elevation mesh
 
 **Goal:** The core of the POC — see the landmass in 3D.
 
 **Scope**
-- Build ground geometry from the grid: one tile per painted land cell (start
-  with instanced boxes/quads keyed by `(x, y)`; a single merged mesh is a later
-  optimization).
-- Apply per-cell **elevation** from the terrain-id → height table (flat low,
-  hills mid, mountains high; wetlands/city near-flat).
-- Color each tile by terrain using the `color` values from `layers.json`
-  (textures come later). Water terrains render as a flat translucent plane at
-  sea level.
+- Build **one ground mesh** across the full map bounds, with enough vertices
+  within cells to shape riverbeds and shorelines. Resolve shared edges
+  consistently so adjacent cells do not crack.
+- Derive **elevation** from the terrain-id → height table (flat low, hills
+  raised, mountains higher; wetlands/city near-flat). Shape sharp height
+  changes into cliffs; carve lake basins and connected riverbeds below nearby
+  land. Treat unpainted cells consistently as ocean.
+- Apply temporary terrain colors from `layers.json`, distinguishing raised
+  ground, water bodies, and carved channels without separate ground tiles.
+  Keep the ground surface mesh singular; water appearance can be a material
+  treatment (a separate water effect is optional if the POC needs one).
 - Position the camera to frame the whole map and confirm the silhouette matches
   the 2D map.
 
-**Done when:** The recognizable shape of Rokugan appears in 3D with mountains
-raised above plains and water at sea level.
+**Done when:** Rokugan appears as one continuous ground mesh with hills,
+mountains, cliffs, lake basins, and connected riverbeds visibly shaped by
+elevation, including at cell boundaries.
 
-### PR 4 — Apply terrain textures and climate/vegetation variation
+### PR 4 — Texture the continuous terrain
 
-**Goal:** Replace flat colors with the existing tile art so the 3D map reads
-like the 2D one.
-
-**Scope**
-- Use `map_tile_img.json` to pick a texture per `terrain,climate,vegetation`
-  combination and apply it to each tile (matching the 2D `drawBaseTiles`
-  logic: water ignores vegetation).
-- Handle missing combinations gracefully by falling back to the terrain color
-  from PR 3.
-- Add basic material tuning (e.g. water shader/animated plane optional, kept
-  simple) so land vs. water is visually distinct.
-
-**Done when:** The 3D terrain surface visually resembles the 2D map's base
-tiles across climates.
-
-### PR 5 — Rivers, roads, and infrastructure overlays
-
-**Goal:** Layer the linear/point features onto the 3D terrain.
+**Goal:** Replace flat colors with a coherent map-wide surface treatment that
+communicates terrain and climate without creating one material per cell.
 
 **Scope**
-- Render **rivers** as ribbons/lines following cells whose `river` layer is set,
-  connecting to river neighbors (same adjacency idea as the 2D river drawing).
-- Render **infrastructure** (roads, ports, bridges from the `infrastructure`
-  layer) as simple ground decals, lines, or markers.
-- Keep each overlay as its own toggleable module so they can be enabled/disabled
-  independently.
+- Prototype Babylon.js **TerrainMaterial** with a mix/splat map generated from
+  terrain and climate data, blending reusable ground textures across the
+  mesh. Its three diffuse texture slots are a constraint, not a direct way to
+  assign every `map_tile_img.json` image to a cell.
+- Compare that with a single generated map texture/atlas using existing tile
+  art, and record which approach better preserves the 2D map's variety without
+  visible seams or excessive texture memory. Use terrain colors as a fallback
+  for missing art; vegetation models are added in PR 5.
+- Distinguish water, riverbeds, and steep rock from surrounding land with
+  material masks or textures; keep water animation optional.
 
-**Done when:** Rivers and roads appear correctly positioned on the 3D surface
-and can be toggled.
+**Done when:** The one terrain mesh has readable, continuous land/water
+texturing across climates, with a documented choice of texturing approach.
+
+### PR 5 — Trees, roads, and surface features
+
+**Goal:** Place models above the terrain while keeping rivers and lakes shaped
+into the ground.
+
+**Scope**
+- Trace **rivers** from connected river cells and validate that carved channels
+  stay continuous over terrain boundaries; use surface color/material for water,
+  not floating river ribbons.
+- Place reusable **tree models** on appropriate vegetation cells, and reusable
+  **road/footpath models** along infrastructure routes, positioned against
+  sampled terrain height. Handle crossings over riverbeds without burying or
+  floating the road.
+- Handle other infrastructure (such as ports) with simple placeholders if
+  needed, and toggle tree/road models independently.
+
+**Done when:** Trees and roads sit on the mesh, roads follow their routes, and
+rivers remain visibly carved and connected rather than separate terrain pieces.
 
 ### PR 6 — Settlements, resources, and clan regions
 
 **Goal:** Add the point-of-interest and territorial layers.
 
 **Scope**
-- Render **settlements** and **resources** as billboarded sprites or simple 3D
-  markers at their cell centers, reusing the existing `docs/img/map/` art where
-  practical.
+- Draw the existing **settlement** and **resource** images over the mesh at
+  their cell locations (surface-aligned decals or anchored image sprites),
+  following local elevation and remaining legible from the camera. Do not
+  require new 3D models for these in the POC; replacing images with models is
+  a later follow-up.
 - Render **clan** ownership as tinted ground regions or colored borders using
   the clan colors from `layers.json`.
 - Add optional **settlement name labels** (English/Rokugani) as billboarded text
@@ -181,8 +199,8 @@ page UI.
 **Goal:** Make the prototype smooth enough to judge, and capture the findings.
 
 **Scope**
-- Performance: merge static tiles into fewer meshes / use thin instances,
-  frustum-cull or LOD if needed, and measure frame time on the full map.
+- Performance: measure the full terrain mesh and its texture memory/draw calls;
+  instance repeated tree and road assets or add LOD if needed.
 - Optional visual polish: simple sky/ambient, soft shadows, subtle water
   animation — only as far as it informs the "is 3D worth it?" question.
 - Update `docs/map/README.md` with: how to run it, what was reused vs. rebuilt,
@@ -204,18 +222,46 @@ plan (note them as follow-ups if 3D is greenlit):
   `build_map.html`).
 - Mobile/touch tuning beyond what Babylon.js provides by default.
 - Replacing or deprecating the existing 2D map.
+- Creating 3D settlement/resource models (retain the existing images for now).
 - A build pipeline, framework, or backend service.
+
+## Babylon.js terrain/texturing investigation
+
+- [Ground from a height map](https://doc.babylonjs.com/features/featuresDeepDive/mesh/creation/set/ground_hmap)
+  can make one ground mesh from a height image. For this POC, a generated
+  heightmap or explicitly shaped mesh should be compared: riverbeds, cliffs,
+  and shorelines require more detail than a single height per map cell.
+- The [Terrain Material](https://doc.babylonjs.com/toolsAndResources/assetLibraries/materialsLibrary/terrainMat)
+  in the Babylon.js materials library supports a **mix texture** to blend
+  **three diffuse textures** (plus optional per-texture bump maps). Generate
+  the mix map from grid terrain/climate data for broad land cover. This is a
+  candidate for world-map texturing, not an automatic conversion of our many
+  `map_tile_img.json` combinations; test its resolution, blending, and behavior
+  on steep slopes. See the [TerrainMaterial implementation](https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/materials/src/terrain/terrainMaterial.ts)
+  for its texture slots.
+- An atlas or generated canvas texture mapped across the mesh is the alternative
+  when preserving more of the existing tile art matters. Evaluate seams,
+  filtering, texture size, and zoom quality against the splat-map approach.
+- Babylon's [Dynamic Terrain extension](https://github.com/BabylonJS/Extensions/blob/master/DynamicTerrain/documentation/dynamicTerrainDocumentation.md)
+  is a camera-following mesh that morphs over a larger data map. It is aimed
+  at scrolling/large terrain rather than a fixed full-world view, so defer it
+  unless PR 8 measurements show the single mesh needs LOD.
 
 ## Risks & open questions
 
-- **Tile count / performance:** up to `135 × 196 ≈ 26k` cells; naive per-tile
-  meshes will be slow. Instancing/merging (PR 3 & PR 8) is the main technical
-  risk to validate early.
-- **Texture atlasing:** many small PNGs may need atlasing to avoid draw-call
-  and memory overhead; flagged for PR 4/PR 8.
-- **Elevation model:** terrain ids give only coarse height tiers. Whether that
-  looks good enough, or whether a smoothed/noise-based heightmap is needed, is a
-  key thing the POC should answer.
+- **Mesh detail / performance:** `135 × 196 ≈ 26k` cells, and extra subdivisions
+  for rivers/cliffs increase vertex count. Measure mesh resolution and frame
+  time early; a single mesh does not remove vertex/texture limits.
+- **Texture resolution:** a mix map with three surface types may be too limited
+  for all climates; a map-wide atlas may consume too much memory or blur at
+  zoom. Compare both in PR 4.
+- **Elevation model:** terrain ids give only coarse height tiers. Cliffs and
+  lake/river depth must be inferred from neighboring cells and river data;
+  smoothing can erase sharp banks or introduce gaps. Validate continuity and
+  legibility at both close and distant camera positions.
+- **Asset availability:** tree and road models may need simple reusable
+  placeholders for the POC; placement should still be tested on slopes and
+  at river crossings.
 - **Data drift:** because the 3D map re-implements data loading, changes to
   `layers.json` schema must be mirrored. Keeping the reimplementation minimal
   limits this cost.
