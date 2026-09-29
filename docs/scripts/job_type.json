@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Phase 4 = toolmaker crafter jobs (ids 46-51, status 0.1). Phase 5 = weapon/armor smith crafter jobs (ids 52-55, status 0.1). Phase 6 = vehicle crafting jobs (ids 56-58, status 0.1). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
+  "description": "Job catalog. Phase 1 = peasant harvesting jobs (ids 1-23, status in [0.4,1)). Phase 2 = crafter/artisan refining jobs (ids 24-40, status 0.1 for the crafter caste; Tanner is eta at -2, matching L5R's rigid caste order where farmers outrank artisans). Phase 3 = combined-resource crafter jobs (ids 41-45, status 0.1). Phase 4 = toolmaker crafter jobs (ids 46-51, status 0.1). Phase 5 = weapon/armor smith crafter jobs (ids 52-55, status 0.1). Phase 6 = vehicle crafting jobs (ids 56-58, status 0.1). Phase 7 = entertainment jobs (ids 59-66, status 0.1): performers (Actor, Storyteller, Poet, Musician, Dancer) and makers (Instrument Maker, Printmaker, Toymaker). Desire arrays are populated in later phases once those items exist; they are ordered most->least desired via the per-entry weight.",
   "jobs": [
     { "id": 1, "name": "Miner", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 2, "name": "Quarrier", "status": 0.5, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
@@ -59,6 +59,14 @@
     { "id": 55, "name": "Armorsmith", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 56, "name": "Fishing Shipwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
     { "id": 57, "name": "Merchant Shipwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
-    { "id": 58, "name": "Cartwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
+    { "id": 58, "name": "Cartwright", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 59, "name": "Actor", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 60, "name": "Storyteller", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 61, "name": "Poet", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 62, "name": "Musician", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 63, "name": "Dancer", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 64, "name": "Instrument Maker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 65, "name": "Printmaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] },
+    { "id": 66, "name": "Toymaker", "status": 0.1, "food": [], "drink": [], "clothing": [], "accessories": [], "entertainment": [], "housing": [] }
   ]
 }
