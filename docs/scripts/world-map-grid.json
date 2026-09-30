@@ -13009,8 +13009,7 @@
     "climate": 4
   },
   "94,5": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "95,0": {
     "terrain": 2,
@@ -13053,12 +13052,10 @@
     "climate": 4
   },
   "95,5": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "96,5": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "97,0": {
     "terrain": 2,
@@ -14221,32 +14218,32 @@
     "climate": 4
   },
   "94,6": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "93,7": {
     "terrain": 2,
     "climate": 4
   },
   "94,7": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "95,6": {
     "vegetation": 3,
-    "clan": 5
+    "terrain": 1
   },
   "96,6": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "95,7": {
     "vegetation": 3,
-    "clan": 5
+    "terrain": 1
   },
   "96,7": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "89,8": {
     "terrain": 2,
@@ -14282,24 +14279,24 @@
   },
   "93,8": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "vegetation": 3
   },
   "94,8": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "93,9": {
     "terrain": 2,
-    "climate": 4
+    "climate": 4,
+    "vegetation": 3
   },
   "94,9": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "vegetation": 3
   },
   "95,8": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 1
   },
   "96,8": {
     "terrain": 1,
@@ -14307,11 +14304,13 @@
   },
   "95,9": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "96,9": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "89,10": {
     "terrain": 2,
@@ -14343,44 +14342,50 @@
   },
   "92,11": {
     "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "climate": 4
   },
   "93,10": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "settlement": 5,
+    "englishName": "Lost Traveler",
+    "rokuganiName": "Lost Traveler",
+    "infrastructure": 2
   },
   "94,10": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "vegetation": 3
   },
   "93,11": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "infrastructure": 2
   },
   "94,11": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "vegetation": 3
   },
   "95,10": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "96,10": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "95,11": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "96,11": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "89,12": {
     "terrain": 2,
@@ -14400,13 +14405,11 @@
   },
   "91,12": {
     "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "climate": 4
   },
   "92,12": {
     "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "climate": 4
   },
   "91,13": {
     "terrain": 2,
@@ -14416,17 +14419,18 @@
   "92,13": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "93,12": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "infrastructure": 2
   },
   "94,12": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "vegetation": 3
   },
   "93,13": {
     "terrain": 2,
@@ -14441,11 +14445,13 @@
   "95,12": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "96,12": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "95,13": {
     "terrain": 2,
@@ -16733,8 +16739,9 @@
     "clan": 5
   },
   "90,15": {
-    "terrain": 8,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4
   },
   "89,16": {
     "terrain": 2,
@@ -16742,12 +16749,9 @@
     "clan": 5
   },
   "90,16": {
-    "terrain": 8,
+    "terrain": 2,
     "clan": 5,
-    "text": {
-      "text": "Shiro Gisu",
-      "fontSize": 12
-    }
+    "climate": 4
   },
   "89,17": {
     "terrain": 2,
@@ -16777,11 +16781,13 @@
   "90,19": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "89,20": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "90,20": {
     "terrain": 3,
@@ -16789,7 +16795,8 @@
   },
   "89,21": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "90,21": {
     "terrain": 3,
@@ -16798,7 +16805,8 @@
   "91,14": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "92,14": {
     "terrain": 2,
@@ -16806,8 +16814,10 @@
     "clan": 5
   },
   "91,15": {
-    "terrain": 8,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "infrastructure": 2,
+    "climate": 4
   },
   "92,15": {
     "terrain": 2,
@@ -16815,8 +16825,10 @@
     "clan": 5
   },
   "91,16": {
-    "terrain": 8,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "infrastructure": 2,
+    "climate": 4
   },
   "92,16": {
     "terrain": 2,
@@ -16826,7 +16838,11 @@
   "91,17": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2,
+    "settlement": 11,
+    "englishName": "Jurojin",
+    "rokuganiName": "Jurojin"
   },
   "92,17": {
     "terrain": 2,
@@ -16836,7 +16852,8 @@
   "91,18": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "92,18": {
     "terrain": 2,
@@ -16846,12 +16863,17 @@
   "91,19": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2,
+    "settlement": 5,
+    "englishName": "Gisu",
+    "rokuganiName": "Gisu"
   },
   "92,19": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "93,14": {
     "terrain": 2,
@@ -16906,7 +16928,8 @@
   "93,19": {
     "terrain": 2,
     "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "94,19": {
     "terrain": 1,
@@ -16987,7 +17010,8 @@
   },
   "94,20": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "93,21": {
     "terrain": 1,
@@ -17002,7 +17026,6 @@
     "clan": 3
   },
   "88,22": {
-    "terrain": 8,
     "clan": 5
   },
   "87,23": {
@@ -17011,20 +17034,22 @@
     "clan": 3
   },
   "88,23": {
-    "terrain": 8,
     "clan": 5
   },
   "89,22": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "90,22": {
     "terrain": 3,
     "clan": 5
   },
   "89,23": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "settlement": 10,
+    "englishName": "Ki-rin",
+    "rokuganiName": "Ki-rin",
+    "infrastructure": 2
   },
   "90,23": {
     "terrain": 3,
@@ -17153,11 +17178,13 @@
     "clan": 5
   },
   "95,21": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "96,21": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "95,22": {
     "terrain": 1,
@@ -17168,11 +17195,11 @@
     "clan": 5
   },
   "95,23": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "96,23": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "95,24": {
@@ -17181,7 +17208,7 @@
     "clan": 5
   },
   "96,24": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "95,25": {
@@ -17334,31 +17361,39 @@
   },
   "97,22": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "98,22": {
     "terrain": 1,
     "clan": 5
   },
   "97,23": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "98,23": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "settlement": 5,
+    "englishName": "Pale Oak",
+    "rokuganiName": "Aojiroi Kashiwa",
+    "infrastructure": 1
   },
   "97,24": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "98,24": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "97,25": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "98,25": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "97,26": {
@@ -17367,7 +17402,7 @@
     "clan": 5
   },
   "98,26": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "97,27": {
@@ -17376,7 +17411,7 @@
     "clan": 5
   },
   "98,27": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "97,28": {
@@ -17385,7 +17420,7 @@
     "clan": 5
   },
   "98,28": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "97,29": {
@@ -17457,11 +17492,13 @@
   },
   "98,30": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "97,31": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "98,31": {
     "terrain": 1,
@@ -17480,11 +17517,14 @@
     "clan": 5
   },
   "92,33": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 1,
+    "englishName": "Ukabu",
+    "rokuganiName": "Ukabu",
+    "infrastructure": 1
   },
   "93,32": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 5
   },
   "94,32": {
@@ -17493,13 +17533,12 @@
     "clan": 5
   },
   "93,33": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "94,33": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "95,32": {
     "terrain": 2,
@@ -17508,14 +17547,14 @@
   },
   "96,32": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "95,33": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "96,33": {
-    "terrain": 1,
     "clan": 5
   },
   "97,32": {
@@ -17523,14 +17562,16 @@
     "clan": 5
   },
   "98,32": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 11,
+    "englishName": "Uikku",
+    "rokuganiName": "Uikku",
+    "infrastructure": 2
   },
   "97,33": {
     "clan": 5
   },
   "98,33": {
-    "infrastructure": 1,
     "clan": 5
   },
   "91,34": {
@@ -17538,31 +17579,25 @@
     "clan": 5
   },
   "92,34": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "91,35": {
     "river": 2,
     "clan": 5
   },
   "92,35": {
-    "terrain": 8,
     "clan": 5,
-    "text": {
-      "text": "Ukafu Village",
-      "fontSize": 10
-    }
+    "infrastructure": 1
   },
   "93,34": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "94,34": {
     "clan": 5
   },
   "93,35": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 5
   },
   "94,35": {
@@ -17576,27 +17611,26 @@
     "clan": 5
   },
   "95,35": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "96,35": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "97,34": {
-    "infrastructure": 1,
     "clan": 5
   },
   "98,34": {
     "clan": 5
   },
   "97,35": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "98,35": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "89,30": {
     "terrain": 3,
@@ -57868,10 +57902,12 @@
     "terrain": 4
   },
   "111,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "112,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "111,43": {
     "clan": 5
@@ -57894,7 +57930,11 @@
     "infrastructure": 1
   },
   "115,42": {
-    "infrastructure": 1
+    "infrastructure": 1,
+    "settlement": 1,
+    "englishName": "The Shiba Artisan Academy",
+    "rokuganiName": "The Shiba Artisan Academy",
+    "clan": 5
   },
   "116,42": {
     "terrain": 4
@@ -57945,7 +57985,8 @@
     "clan": 5
   },
   "114,40": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,41": {
     "clan": 5
@@ -57960,7 +58001,8 @@
     "terrain": 4
   },
   "115,41": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "116,41": {
     "terrain": 4
@@ -57985,7 +58027,8 @@
     "clan": 5
   },
   "113,39": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,39": {
     "clan": 5
@@ -58085,10 +58128,12 @@
     "clan": 5
   },
   "114,34": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,35": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,35": {
     "terrain": 4,
@@ -58116,14 +58161,16 @@
   },
   "112,36": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,37": {
     "vegetation": 3,
     "clan": 5
   },
   "112,37": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,38": {
     "vegetation": 3,
@@ -58131,7 +58178,11 @@
   },
   "112,38": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "(Ruins) Mori Kage",
+    "rokuganiName": "(Ruins) Mori Kage"
   },
   "111,39": {
     "vegetation": 3,
@@ -58287,18 +58338,12 @@
     "terrain": 4
   },
   "115,28": {
-    "terrain": 8,
-    "clan": 5,
-    "text": {
-      "text": "Shiro Shiba",
-      "fontSize": 14
-    }
+    "clan": 5
   },
   "116,28": {
     "clan": 5
   },
   "115,29": {
-    "terrain": 8,
     "clan": 5
   },
   "116,29": {
@@ -58412,7 +58457,8 @@
     "clan": 5
   },
   "118,24": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "117,25": {
     "clan": 5
@@ -58453,13 +58499,15 @@
     "clan": 5
   },
   "118,22": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "117,23": {
     "clan": 5
   },
   "118,23": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "119,22": {
     "clan": 5
@@ -58694,13 +58742,16 @@
     "clan": 5
   },
   "123,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "124,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "125,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "126,16": {
     "terrain": 4,
@@ -67732,7 +67783,12 @@
   },
   "106,17": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "text": {
+      "englishText": "Isawa Forest",
+      "rokuganiText": "Mori Isawa",
+      "fontSize": 10
+    }
   },
   "107,16": {
     "vegetation": 3,
@@ -68059,13 +68115,7 @@
     "clan": 5
   },
   "108,27": {
-    "terrain": 8,
-    "infrastructure": 1,
-    "clan": 5,
-    "text": {
-      "text": "Shinsei and Sumai village",
-      "fontSize": 10
-    }
+    "clan": 5
   },
   "109,26": {
     "vegetation": 3,
@@ -68077,13 +68127,15 @@
   },
   "109,27": {
     "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "110,27": {
     "vegetation": 3,
     "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 2,
+    "englishName": "Shinsei and Sumai",
+    "rokuganiName": "Shinsei and Sumai"
   },
   "101,20": {
     "vegetation": 3,
@@ -68102,7 +68154,6 @@
     "clan": 5
   },
   "101,22": {
-    "vegetation": 3,
     "clan": 5
   },
   "102,22": {
@@ -68110,20 +68161,16 @@
     "clan": 5
   },
   "101,23": {
-    "vegetation": 3,
     "clan": 5
   },
   "102,23": {
-    "vegetation": 3,
     "clan": 5
   },
   "101,24": {
-    "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "102,24": {
-    "vegetation": 3,
     "infrastructure": 1,
     "clan": 5
   },
@@ -68132,19 +68179,19 @@
     "clan": 5
   },
   "102,25": {
-    "vegetation": 3,
     "clan": 5
   },
   "101,26": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 2,
+    "englishName": "Hopeful Rest",
+    "rokuganiName": "Michita Yasumi"
   },
   "102,26": {
-    "vegetation": 3,
     "clan": 5
   },
   "101,27": {
-    "vegetation": 3,
     "clan": 5
   },
   "102,27": {
@@ -68205,7 +68252,6 @@
   },
   "108,28": {
     "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "107,29": {
@@ -68214,7 +68260,6 @@
   },
   "108,29": {
     "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "101,30": {
@@ -68234,38 +68279,39 @@
     "clan": 5
   },
   "103,30": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "104,30": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "103,31": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "104,31": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "terrain": 1,
+    "clan": 5,
+    "vegetation": 3
   },
   "105,30": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "106,30": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "105,31": {
-    "terrain": 2,
-    "climate": 4,
-    "clan": 5
+    "terrain": 1,
+    "clan": 5,
+    "vegetation": 3
   },
   "106,31": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "107,30": {
     "vegetation": 3,
@@ -68273,17 +68319,21 @@
   },
   "108,30": {
     "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "107,31": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1,
+    "settlement": 10,
+    "englishName": "Oyo",
+    "rokuganiName": "Oyo",
+    "infrastructure": 2
   },
   "108,31": {
     "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "101,32": {
     "vegetation": 3,
@@ -68302,87 +68352,100 @@
     "clan": 5
   },
   "103,32": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "104,32": {
-    "terrain": 8,
-    "clan": 5
+    "terrain": 1,
+    "clan": 5,
+    "vegetation": 3
   },
   "103,33": {
-    "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "104,33": {
-    "terrain": 8,
-    "infrastructure": 1,
+    "terrain": 1,
     "clan": 5,
-    "text": {
-      "text": "Kyuden Asako",
-      "fontSize": 14
-    }
+    "vegetation": 3
   },
   "105,32": {
-    "terrain": 8,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4,
+    "vegetation": 3
   },
   "106,32": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4,
+    "vegetation": 3
   },
   "105,33": {
-    "terrain": 8,
-    "infrastructure": 1,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4,
+    "vegetation": 3
   },
   "106,33": {
-    "terrain": 1,
+    "terrain": 2,
     "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 6,
+    "englishName": "Morning Glory",
+    "rokuganiName": "Asako",
+    "climate": 4
   },
   "107,32": {
     "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "climate": 4
   },
   "108,32": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1,
+    "infrastructure": 1
   },
   "107,33": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "climate": 4,
+    "infrastructure": 1
   },
   "108,33": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "101,34": {
-    "vegetation": 3,
     "clan": 5
   },
   "102,34": {
-    "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "settlement": 1,
+    "englishName": "Library of the Fiery Centipede",
+    "rokuganiName": "Library of the Fiery Centipede",
+    "infrastructure": 2
   },
   "101,35": {
-    "vegetation": 3,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "102,35": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "103,34": {
-    "terrain": 1,
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "104,34": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "103,35": {
     "vegetation": 3,
@@ -68390,43 +68453,58 @@
   },
   "104,35": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "105,34": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4,
+    "vegetation": 3
   },
   "106,34": {
-    "terrain": 1,
-    "clan": 5
+    "terrain": 2,
+    "clan": 5,
+    "climate": 4,
+    "vegetation": 3,
+    "infrastructure": 2
   },
   "105,35": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "106,35": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1,
+    "infrastructure": 2
   },
   "107,34": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "climate": 4
   },
   "108,34": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "107,35": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "108,35": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "109,28": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,28": {
     "vegetation": 3,
@@ -68434,7 +68512,8 @@
   },
   "109,29": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,29": {
     "vegetation": 3,
@@ -68442,7 +68521,8 @@
   },
   "109,30": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,30": {
     "vegetation": 3,
@@ -68450,7 +68530,8 @@
   },
   "109,31": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,31": {
     "vegetation": 3,
@@ -68506,7 +68587,8 @@
     "clan": 5
   },
   "112,14": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,15": {
     "vegetation": 3,
@@ -68545,7 +68627,8 @@
     "clan": 5
   },
   "112,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "109,18": {
     "vegetation": 3,
@@ -68568,26 +68651,30 @@
     "clan": 5
   },
   "112,18": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,19": {
     "vegetation": 3,
     "clan": 5
   },
   "112,19": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,20": {
     "clan": 5
   },
   "112,20": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,21": {
     "clan": 5
   },
   "112,21": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "101,6": {
     "terrain": 1,
@@ -68765,7 +68852,12 @@
   },
   "105,11": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "text": {
+      "englishText": "Dark Forest",
+      "rokuganiText": "Mori Kuroi",
+      "fontSize": 10
+    }
   },
   "106,11": {
     "vegetation": 3,
@@ -68789,19 +68881,23 @@
   },
   "99,6": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "100,6": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "99,7": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "100,7": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "99,8": {
     "terrain": 1,
@@ -68823,7 +68919,8 @@
   },
   "99,10": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "100,10": {
     "terrain": 1,
@@ -68831,7 +68928,8 @@
   },
   "99,11": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "100,11": {
     "vegetation": 3,
@@ -68846,8 +68944,9 @@
     "clan": 5
   },
   "99,13": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2,
+    "vegetation": 3
   },
   "100,13": {
     "vegetation": 3,
@@ -68864,8 +68963,8 @@
     "clan": 5
   },
   "100,35": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "99,36": {
     "clan": 5
@@ -85928,41 +86027,33 @@
     "clan": 5
   },
   "99,23": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "100,23": {
-    "terrain": 8,
     "clan": 5
   },
   "100,24": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2,
+    "infrastructure": 1
   },
   "99,24": {
-    "terrain": 8,
-    "infrastructure": 1,
     "clan": 5,
-    "text": {
-      "text": "Kakudaira Village",
-      "fontSize": 10
-    }
+    "terrain": 2,
+    "infrastructure": 1
   },
   "98,13": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "98,14": {
-    "terrain": 8,
     "clan": 5,
-    "text": {
-      "text": "Gisei Toshi",
-      "fontSize": 12
-    }
+    "vegetation": 3
   },
   "99,14": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "100,14": {
     "vegetation": 3,
@@ -85990,63 +86081,80 @@
   },
   "100,20": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "100,21": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "100,22": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "98,9": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "98,10": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,10": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,9": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,11": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "98,11": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "settlement": 2,
+    "englishName": "Gisei",
+    "rokuganiName": "Gisei",
+    "infrastructure": 2,
+    "terrain": 1
   },
   "98,6": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,6": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,7": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "98,7": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "98,8": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "97,8": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "124,12": {
     "vegetation": 3,
@@ -86154,7 +86262,6 @@
   },
   "111,27": {
     "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "111,29": {
@@ -86196,28 +86303,29 @@
     "clan": 5
   },
   "103,36": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "104,36": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "105,36": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "107,36": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "settlement": 11,
+    "englishName": "Chukan",
+    "rokuganiName": "Chukan",
+    "infrastructure": 1
   },
   "106,36": {
-    "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "99,31": {
-    "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "100,32": {
@@ -86225,7 +86333,6 @@
     "clan": 5
   },
   "100,33": {
-    "vegetation": 3,
     "clan": 5
   },
   "100,31": {
@@ -86237,8 +86344,6 @@
     "clan": 5
   },
   "99,30": {
-    "vegetation": 3,
-    "infrastructure": 1,
     "clan": 5
   },
   "105,39": {
@@ -86772,19 +86877,27 @@
     "clan": 5
   },
   "99,15": {
-    "clan": 5
+    "clan": 5,
+    "settlement": 4,
+    "englishName": "Kitamihari",
+    "rokuganiName": "Kitamihari",
+    "infrastructure": 2
   },
   "99,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "99,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "99,18": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "99,19": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "98,19": {
     "clan": 5
@@ -86799,16 +86912,20 @@
     "clan": 5
   },
   "100,25": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "100,26": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "100,27": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "100,28": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "100,29": {
     "clan": 5
@@ -86818,20 +86935,19 @@
     "clan": 5
   },
   "99,28": {
-    "infrastructure": 1,
     "clan": 5
   },
   "99,27": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "99,26": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "99,25": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "terrain": 2
   },
   "98,15": {
     "clan": 5
@@ -86852,19 +86968,23 @@
   },
   "97,14": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "97,13": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "97,12": {
     "terrain": 1,
-    "clan": 5
+    "clan": 5,
+    "vegetation": 3
   },
   "98,12": {
     "vegetation": 3,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,10": {
     "terrain": 1,
@@ -86908,17 +87028,11 @@
     "clan": 5
   },
   "116,12": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "115,12": {
-    "terrain": 8,
-    "infrastructure": 1,
-    "clan": 5,
-    "text": {
-      "text": "Kyuden Isawa",
-      "fontSize": 14
-    }
+    "clan": 5
   },
   "114,12": {
     "clan": 5
@@ -86927,12 +87041,15 @@
     "clan": 5
   },
   "116,11": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "settlement": 1,
+    "englishName": "Road's End",
+    "rokuganiName": "Doro Owari",
+    "infrastructure": 1
   },
   "115,11": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,8": {
     "clan": 5
@@ -86950,7 +87067,8 @@
     "clan": 5
   },
   "112,11": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "112,12": {
     "clan": 5
@@ -86959,16 +87077,22 @@
     "clan": 5
   },
   "111,13": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,13": {
     "clan": 5
   },
   "110,12": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,11": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 5,
+    "englishName": "Castle of the Faitfhul Bridge",
+    "rokuganiName": "Teishukuna hanayome"
   },
   "110,10": {
     "clan": 5
@@ -86983,28 +87107,33 @@
     "clan": 5
   },
   "111,11": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,12": {
     "clan": 5
   },
   "113,10": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,10": {
     "clan": 5
   },
   "114,11": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "117,21": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,21": {
     "clan": 5
   },
   "117,20": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,20": {
     "clan": 5
@@ -87022,13 +87151,16 @@
     "clan": 5
   },
   "120,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "121,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "122,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "121,16": {
     "clan": 5
@@ -87058,7 +87190,8 @@
     "clan": 5
   },
   "118,14": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "118,15": {
     "clan": 5
@@ -87082,25 +87215,25 @@
     "clan": 5
   },
   "115,13": {
-    "infrastructure": 1,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "115,14": {
-    "infrastructure": 1,
     "clan": 5
   },
   "115,15": {
-    "infrastructure": 1,
     "clan": 5
   },
   "116,15": {
     "clan": 5
   },
   "114,14": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,15": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "114,13": {
     "clan": 5
@@ -87109,31 +87242,29 @@
     "clan": 5
   },
   "115,16": {
-    "infrastructure": 1,
+    "infrastructure": 2,
     "clan": 5
   },
   "113,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,17": {
     "clan": 5
   },
   "114,17": {
-    "infrastructure": 1,
     "clan": 5
   },
   "113,18": {
     "clan": 5
   },
   "114,18": {
-    "infrastructure": 1,
     "clan": 5
   },
   "113,19": {
     "clan": 5
   },
   "114,19": {
-    "infrastructure": 1,
     "clan": 5
   },
   "113,20": {
@@ -87143,21 +87274,19 @@
     "clan": 5
   },
   "112,22": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,22": {
-    "infrastructure": 1,
     "clan": 5
   },
   "114,21": {
-    "infrastructure": 1,
     "clan": 5
   },
   "114,22": {
     "clan": 5
   },
   "114,20": {
-    "infrastructure": 1,
     "clan": 5
   },
   "115,20": {
@@ -87182,19 +87311,24 @@
     "clan": 5
   },
   "117,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "117,18": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "116,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "117,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,16": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,17": {
     "clan": 5
@@ -87209,13 +87343,15 @@
     "clan": 5
   },
   "119,17": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "118,19": {
     "clan": 5
   },
   "117,19": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "116,20": {
     "clan": 5
@@ -87236,7 +87372,8 @@
     "clan": 5
   },
   "115,24": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "116,24": {
     "clan": 5
@@ -87273,7 +87410,11 @@
     "clan": 5
   },
   "113,15": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 6,
+    "englishName": "Isawa",
+    "rokuganiName": "Isawa"
   },
   "113,25": {
     "infrastructure": 1,
@@ -87290,36 +87431,40 @@
     "clan": 5
   },
   "114,28": {
-    "terrain": 8,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,29": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,27": {
-    "terrain": 8,
     "infrastructure": 1,
     "clan": 5
   },
   "114,27": {
-    "terrain": 8,
     "clan": 5
   },
   "113,28": {
-    "terrain": 8,
     "clan": 5
   },
   "113,30": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "114,30": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,31": {
     "clan": 5
   },
   "114,31": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1,
+    "settlement": 5,
+    "englishName": "Shiba",
+    "rokuganiName": "Shiba"
   },
   "113,29": {
     "clan": 5
@@ -87337,17 +87482,18 @@
     "clan": 5
   },
   "112,27": {
-    "infrastructure": 1,
     "clan": 5
   },
   "112,28": {
     "clan": 5
   },
   "111,28": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "112,29": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "111,30": {
     "clan": 5
@@ -87371,13 +87517,15 @@
     "clan": 5
   },
   "114,32": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "113,33": {
     "clan": 5
   },
   "114,33": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "110,40": {
     "clan": 5
@@ -87444,10 +87592,12 @@
     "clan": 5
   },
   "106,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "105,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "104,42": {
     "clan": 5
@@ -87475,16 +87625,23 @@
     "clan": 5
   },
   "110,42": {
-    "clan": 5
+    "clan": 5,
+    "settlement": 10,
+    "englishName": "Twin Soul",
+    "rokuganiName": "Twin Soul",
+    "infrastructure": 2
   },
   "109,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "108,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "107,42": {
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 2
   },
   "23,36": {
     "terrain": 1
