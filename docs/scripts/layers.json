@@ -2,6 +2,7 @@
   "drawOrder": [
     "terrain",
     "vegetation",
+    "cliff",
     "river",
     "infrastructure",
     "settlement",
@@ -87,6 +88,22 @@
           "id": 4,
           "name": "polar",
           "color": "#8B5A2B"
+        },
+        {
+          "id": 5,
+          "name": "subpolar",
+          "color": "#7FA8C9"
+        },
+        {
+          "id": 6,
+          "name": "wasteland",
+          "color": "#808080"
+        },
+        {
+          "id": 7,
+          "name": "shadowland",
+          "color": "#0B3D0B",
+          "colors": ["#0B3D0B", "#3B0B52"]
         }
       ]
     },
@@ -103,6 +120,24 @@
           "id": 3,
           "name": "Vegetation",
           "color": "#228B22"
+        }
+      ]
+    },
+    "cliff": {
+      "id": "cliff",
+      "name": "Cliff Layer",
+      "directional": true,
+      "values": [
+        {
+          "id": 0,
+          "name": "none",
+          "color": null
+        },
+        {
+          "id": 1,
+          "name": "Cliff",
+          "color": "#4A3B2A",
+          "lineWidth": 3
         }
       ]
     },

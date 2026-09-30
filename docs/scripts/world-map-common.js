@@ -1,5 +1,43 @@
 const MAP_DEFAULT_GRID_SIZE = 16;
 
+// The eight edge directions a cliff can face, and that a river or road can be
+// constrained to. Stored on a cell as an array of keys, e.g. cliff: ["n", "s"].
+const MAP_DIRECTIONS = [
+  { key: "nw", label: "↖", dx: -1, dy: -1 },
+  { key: "n", label: "↑", dx: 0, dy: -1 },
+  { key: "ne", label: "↗", dx: 1, dy: -1 },
+  { key: "w", label: "←", dx: -1, dy: 0 },
+  { key: "e", label: "→", dx: 1, dy: 0 },
+  { key: "sw", label: "↙", dx: -1, dy: 1 },
+  { key: "s", label: "↓", dx: 0, dy: 1 },
+  { key: "se", label: "↘", dx: 1, dy: 1 }
+];
+
+const MAP_DIRECTION_BY_KEY = MAP_DIRECTIONS.reduce((acc, dir) => {
+  acc[dir.key] = dir;
+  return acc;
+}, {});
+
+function mapDirectionKey(dx, dy) {
+  const dir = MAP_DIRECTIONS.find((d) => d.dx === Math.sign(dx) && d.dy === Math.sign(dy));
+  return dir ? dir.key : null;
+}
+
+function mapOppositeDirection(key) {
+  const dir = MAP_DIRECTION_BY_KEY[key];
+  return dir ? mapDirectionKey(-dir.dx, -dir.dy) : null;
+}
+
+// Normalise a stored direction value (array, single key, or missing) to an
+// array of valid direction keys.
+function mapDirectionList(value) {
+  if (!value) return [];
+  const list = Array.isArray(value) ? value : [value];
+  return list
+    .map((entry) => String(entry).toLowerCase())
+    .filter((key) => MAP_DIRECTION_BY_KEY[key]);
+}
+
 // Shared rendering logic for the map builder (WorldMapGrid) and the read-only
 // map viewer (WorldMapViewer). Subclasses provide their own repaint entry point
 // via redraw(), plus builder- or viewer-specific behaviour (painting, routing).
@@ -15,7 +53,7 @@ class WorldMapRenderer {
     this.maxZoom = 4;
 
     this.layersConfig = null;
-    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "text"];
+    this.drawOrder = ["terrain", "vegetation", "cliff", "river", "infrastructure", "settlement", "resource", "clan", "text"];
     this.layerMaps = {};
 
     this.grid = {};
@@ -118,6 +156,21 @@ class WorldMapRenderer {
         else delete cell[layerName];
       }
 
+      for (const field of ["cliff", "riverDirection", "infrastructureDirection"]) {
+        if (cell[field] === undefined) continue;
+        let directions = [...new Set(mapDirectionList(cell[field]))];
+        // A river cannot flow both ways, so an arrow opposing one already kept
+        // is discarded.
+        if (field === "riverDirection") {
+          directions = directions.reduce((kept, dirKey) => {
+            if (!kept.includes(mapOppositeDirection(dirKey))) kept.push(dirKey);
+            return kept;
+          }, []);
+        }
+        if (directions.length) cell[field] = directions;
+        else delete cell[field];
+      }
+
       normalized[key] = cell;
     }
     return normalized;
@@ -159,8 +212,74 @@ class WorldMapRenderer {
 
       if (img && img.complete && img.naturalWidth) {
         this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+      } else {
+        this.drawBaseTileFallback(x, y, t, c);
       }
     }
+  }
+
+  // Climates added after the tile art was produced (wasteland, shadowland) have
+  // no image for any terrain, so paint their configured colors instead. When a
+  // climate defines several colors they are drawn as diagonal bands.
+  drawBaseTileFallback(x, y, terrainVal, climateVal) {
+    const climateItem = this.layerItem("climate", climateVal);
+    const terrainItem = this.layerItem("terrain", terrainVal);
+    const colors = (climateItem && climateItem.colors && climateItem.colors.length)
+      ? climateItem.colors
+      : [(climateItem && climateItem.color) || (terrainItem && terrainItem.color)].filter(Boolean);
+    if (!colors.length) return;
+
+    const size = this.gridSize;
+    const left = x * size;
+    const top = y * size;
+    const ctx = this.ctx;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(left, top, size, size);
+    ctx.clip();
+    ctx.fillStyle = colors[0];
+    ctx.fillRect(left, top, size, size);
+
+    if (colors.length > 1) {
+      const band = (size * 2) / colors.length;
+      for (let index = 1; index < colors.length; index++) {
+        ctx.fillStyle = colors[index];
+        ctx.beginPath();
+        ctx.moveTo(left - size + index * band, top + size);
+        ctx.lineTo(left - size + index * band + size, top);
+        ctx.lineTo(left - size + (index + 1) * band + size, top);
+        ctx.lineTo(left - size + (index + 1) * band, top + size);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    ctx.restore();
+  }
+
+  // Directions recorded on a cell restrict which neighbours a river or road
+  // links to: an arrow implies a path along that axis, so both the arrow
+  // direction and its opposite stay connected. No arrows means connect to
+  // everything.
+  cellDirections(cell, field) {
+    return cell ? mapDirectionList(cell[field]) : [];
+  }
+
+  directionsAllowAxis(directions, dx, dy) {
+    if (!directions.length) return true;
+    const key = mapDirectionKey(dx, dy);
+    if (!key) return false;
+    const opposite = mapOppositeDirection(key);
+    return directions.includes(key) || directions.includes(opposite);
+  }
+
+  // Both tiles must accept the axis before a link is drawn between them.
+  linkAllowed(x, y, dx, dy, field) {
+    const cell = this.grid[this.getCellKey(x, y)];
+    const neighbour = this.grid[this.getCellKey(x + dx, y + dy)];
+    return this.directionsAllowAxis(this.cellDirections(cell, field), dx, dy)
+      && this.directionsAllowAxis(this.cellDirections(neighbour, field), dx, dy);
   }
 
   drawRiverLayer() {
@@ -185,13 +304,13 @@ class WorldMapRenderer {
       const allNeighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
       const connected = allNeighbors.some(([dx, dy]) => {
         const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
-        return neighborCell && neighborCell.river;
+        return neighborCell && neighborCell.river && this.linkAllowed(x, y, dx, dy, "riverDirection");
       });
 
       const forwardNeighbors = [[1, 0], [0, 1]];
       for (const [dx, dy] of forwardNeighbors) {
         const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
-        if (neighborCell && neighborCell.river) {
+        if (neighborCell && neighborCell.river && this.linkAllowed(x, y, dx, dy, "riverDirection")) {
           const nx = -dy;
           const ny = dx;
           riverStripeColors.forEach((color, index) => {
@@ -212,6 +331,8 @@ class WorldMapRenderer {
       if (!connected) {
         const halfLength = this.gridSize * 0.25;
         [[1, 0], [0, 1]].forEach(([dx, dy]) => {
+          const directions = this.cellDirections(cell, "riverDirection");
+          if (!this.directionsAllowAxis(directions, dx, dy)) return;
           const nx = -dy;
           const ny = dx;
           riverStripeColors.forEach((color, index) => {
@@ -232,8 +353,106 @@ class WorldMapRenderer {
         });
       }
 
+      // A river arrow also records which way the water flows.
+      for (const dirKey of this.cellDirections(cell, "riverDirection")) {
+        const dir = MAP_DIRECTION_BY_KEY[dirKey];
+        this.drawDirectionArrow(cx, cy, dir.dx, dir.dy, this.gridSize * 0.4, "#00008B", stripeWidth);
+      }
+
       ctx.restore();
     }
+  }
+
+  // Draw an arrow head centred on (cx, cy) pointing along (dx, dy).
+  drawDirectionArrow(cx, cy, dx, dy, length, color, lineWidth) {
+    const magnitude = Math.hypot(dx, dy) || 1;
+    const ux = dx / magnitude;
+    const uy = dy / magnitude;
+    const tipX = cx + ux * length / 2;
+    const tipY = cy + uy * length / 2;
+    const baseX = cx - ux * length / 2;
+    const baseY = cy - uy * length / 2;
+    const barb = length * 0.4;
+    const ctx = this.ctx;
+
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = Math.max(0.75, lineWidth);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(baseX, baseY);
+    ctx.lineTo(tipX, tipY);
+    ctx.moveTo(tipX, tipY);
+    ctx.lineTo(tipX - ux * barb - uy * barb * 0.6, tipY - uy * barb + ux * barb * 0.6);
+    ctx.moveTo(tipX, tipY);
+    ctx.lineTo(tipX - ux * barb + uy * barb * 0.6, tipY - uy * barb - ux * barb * 0.6);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  drawCliffLayer() {
+    for (const [key, cell] of Object.entries(this.grid)) {
+      const directions = this.cellDirections(cell, "cliff");
+      if (!directions.length) continue;
+      const [x, y] = key.split(",").map(Number);
+      for (const dirKey of directions) this.drawCliffEdge(x, y, dirKey);
+    }
+  }
+
+  // A cliff is a line drawn on the edge (or corner) it faces, with an arrow
+  // pointing outwards so the facing side is unambiguous. A tile carrying every
+  // direction is a mesa.
+  drawCliffEdge(x, y, dirKey) {
+    const dir = MAP_DIRECTION_BY_KEY[dirKey];
+    if (!dir) return;
+
+    const item = this.layerItem("cliff", "Cliff") || { color: "#4A3B2A", lineWidth: 3 };
+    const size = this.gridSize;
+    const left = x * size;
+    const top = y * size;
+    const right = left + size;
+    const bottom = top + size;
+    const inset = size * 0.12;
+    const corner = size * 0.45;
+    const ctx = this.ctx;
+
+    let start;
+    let end;
+    if (dir.dx === 0 || dir.dy === 0) {
+      if (dir.key === "n") { start = [left + inset, top + inset]; end = [right - inset, top + inset]; }
+      else if (dir.key === "s") { start = [left + inset, bottom - inset]; end = [right - inset, bottom - inset]; }
+      else if (dir.key === "w") { start = [left + inset, top + inset]; end = [left + inset, bottom - inset]; }
+      else { start = [right - inset, top + inset]; end = [right - inset, bottom - inset]; }
+    } else {
+      const cornerX = dir.dx > 0 ? right - inset : left + inset;
+      const cornerY = dir.dy > 0 ? bottom - inset : top + inset;
+      start = [cornerX - dir.dx * corner, cornerY];
+      end = [cornerX, cornerY - dir.dy * corner];
+    }
+
+    ctx.save();
+    ctx.strokeStyle = item.color || "#4A3B2A";
+    ctx.lineWidth = item.lineWidth || 3;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(start[0], start[1]);
+    ctx.lineTo(end[0], end[1]);
+    ctx.stroke();
+    ctx.restore();
+
+    const midX = (start[0] + end[0]) / 2;
+    const midY = (start[1] + end[1]) / 2;
+    const arrowLength = size * 0.3;
+    this.drawDirectionArrow(
+      midX - dir.dx * arrowLength * 0.55,
+      midY - dir.dy * arrowLength * 0.55,
+      dir.dx,
+      dir.dy,
+      arrowLength,
+      item.color || "#4A3B2A",
+      (item.lineWidth || 3) * 0.6
+    );
   }
 
   drawInfrastructureLayer() {
@@ -284,6 +503,7 @@ class WorldMapRenderer {
     forward.forEach(([dx, dy]) => {
       const neighbourCell = this.grid[this.getCellKey(x + dx, y + dy)];
       if (!neighbourCell || !neighbourCell.infrastructure) return;
+      if (!this.linkAllowed(x, y, dx, dy, "infrastructureDirection")) return;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
@@ -291,6 +511,12 @@ class WorldMapRenderer {
     });
 
     ctx.restore();
+
+    const cell = this.grid[this.getCellKey(x, y)];
+    for (const dirKey of this.cellDirections(cell, "infrastructureDirection")) {
+      const dir = MAP_DIRECTION_BY_KEY[dirKey];
+      this.drawDirectionArrow(cx, cy, dir.dx, dir.dy, this.gridSize * 0.4, item.color || "#5C3A1E", (item.lineWidth || 2) * 0.6);
+    }
   }
 
   traceClanPolygons(cellSet) {

@@ -38,7 +38,7 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 
 | File | Role | Reused how |
 | --- | --- | --- |
-| `docs/scripts/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
+| `docs/scripts/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `cliff`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. `cliff`, `riverDirection`, and `infrastructureDirection` hold arrays of edge directions (`n`, `ne`, `e`, `se`, `s`, `sw`, `w`, `nw`). | Source of every tile the 3D scene renders. |
 | `docs/scripts/layers.json` | Layer definitions: for each layer, the list of values with `id`, `name`, `color`, and (for terrain/vegetation) `image`. | Maps numeric cell ids to names, colors, and elevation. |
 | `docs/scripts/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Reference for the intended surface appearance, not a per-cell mesh material. |
 | `docs/img/map/*.png` | Tile and marker art. | Reference textures and initial settlement/resource images. |
@@ -48,7 +48,9 @@ Key facts that make 3D natural:
 - **Terrain ids suggest initial heights.** `flat(0)`, `hills(1)`,
   `mountains(2)`, `wetlands(7)`, `city(8)` are land; `water(3)`,
   `coastal water(4)`, `ocean(5)` are water. River cells and water boundaries
-  need additional shape/depth rules; cliffs are not a separate terrain id.
+  need additional shape/depth rules. Cliffs are not a terrain id either: they
+  are a separate `cliff` layer listing the tile edges a cliff faces, so a tile
+  with all eight directions is a mesa.
 - **The grid is dense and regular**, so it maps cleanly onto a Babylon.js ground
   mesh with heights and surface positions derived from `(x, y)`.
 - **Every coordinate exists; only its *properties* are optional.** All
@@ -58,8 +60,9 @@ Key facts that make 3D natural:
   `vegetation = 0 (none)`. A cell without a `terrain` key is **flat land, not
   empty space** — roughly 45% of cells omit it, so treating omissions as ocean
   would delete most of the landmass.
-- **The enums are small.** `layers.json` defines **4 climates** (temperate,
-  tropical, desert, polar), **4 land terrains** (flat, hills, mountains,
+- **The enums are small.** `layers.json` defines **7 climates** (temperate,
+  tropical, desert, polar, subpolar, wasteland, shadowland — the last two have
+  no tile art and fall back to their configured colors), **4 land terrains** (flat, hills, mountains,
   wetlands) plus `city` — which is slated for deprecation — and **3 water
   terrains** (water, coastal water, ocean). Vegetation is effectively **binary**
   (`none(0)` and `Vegetation(3)`). Note that `map_tile_img.json` still contains

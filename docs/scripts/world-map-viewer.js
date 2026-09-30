@@ -16,6 +16,7 @@ class WorldMapViewer extends WorldMapRenderer {
       infrastructure: true,
       clan: true,
       vegetation: true,
+      cliff: true,
       river: true,
       settlement: true,
       resource: true,
@@ -326,7 +327,8 @@ class WorldMapViewer extends WorldMapRenderer {
     // Draw remaining layers
     for (const layerName of this.drawOrder) {
       if (!this.isLayerVisible(layerName)) continue;
-      if (layerName === "river") this.drawRiverLayer();
+      if (layerName === "cliff") this.drawCliffLayer();
+      else if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "resource") this.drawResourcesLayer();

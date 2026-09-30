@@ -6,6 +6,7 @@ class WorldMapGrid extends WorldMapRenderer {
 
     this.currentLayer = "terrain";
     this.currentValue = null;
+    this.currentDirection = null;
     this.fontSize = 14;
     this.brushSize = 1;
     this.isDrawing = false;
@@ -13,6 +14,7 @@ class WorldMapGrid extends WorldMapRenderer {
     this.setupEventListeners();
     this.loadLayersConfig();
     this.applyZoom();
+    this.updateDirectionStatus();
   }
 
   redraw() { this.draw(); }
@@ -109,8 +111,16 @@ class WorldMapGrid extends WorldMapRenderer {
           const cell = this.grid[cellKey];
           if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(layerToErase)) {
             delete cell[layerToErase];
+            if (layerToErase === "river") delete cell.riverDirection;
+          } else if (layerToErase === "cliff") {
+            delete cell.cliff;
+          } else if (layerToErase === "direction" || layerToErase === "directions") {
+            delete cell.cliff;
+            delete cell.riverDirection;
+            delete cell.infrastructureDirection;
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
+            delete cell.infrastructureDirection;
           } else if (layerToErase === "resource" || layerToErase === "resources") {
             delete cell.resource;
           } else if (layerToErase === "clan" || layerToErase === "clans") {
@@ -123,6 +133,13 @@ class WorldMapGrid extends WorldMapRenderer {
             delete cell.text;
           }
         }
+      } else if (this.currentLayer === "cliff") {
+        if (!this.currentDirection) {
+          this.reportDirectionIssue("Pick one of the eight arrows before painting a cliff — a cliff must face an edge.");
+          return;
+        }
+        const cell = this.ensureCell(cellKey);
+        this.appendDirection(cell, "cliff", this.currentDirection);
       } else {
         const cell = this.ensureCell(cellKey);
         let valId = this.currentValue;
@@ -135,8 +152,13 @@ class WorldMapGrid extends WorldMapRenderer {
         if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(this.currentLayer)) {
           if (valId) cell[this.currentLayer] = valId;
           else delete cell[this.currentLayer];
+          if (this.currentLayer === "river") {
+            if (!valId) delete cell.riverDirection;
+            else if (this.currentDirection) this.appendDirection(cell, "riverDirection", this.currentDirection);
+          }
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
+          if (this.currentDirection) this.appendDirection(cell, "infrastructureDirection", this.currentDirection);
         } else if (this.currentLayer === "resource" || this.currentLayer === "resources") {
           cell.resource = valId;
         } else if (this.currentLayer === "clan" || this.currentLayer === "clans") {
@@ -173,7 +195,54 @@ class WorldMapGrid extends WorldMapRenderer {
   selectTool(layer, value, toolLayer) {
     this.currentValue = value;
     this.currentLayer = toolLayer || layer;
+    this.updateDirectionStatus();
     this.draw();
+  }
+
+  // The eight arrow buttons act as a modifier on the active terrain, river or
+  // road tool. Selecting an arrow again clears it.
+  setDirection(direction) {
+    const key = direction ? String(direction).toLowerCase() : null;
+    if (key && !MAP_DIRECTION_BY_KEY[key]) return;
+    this.currentDirection = this.currentDirection === key ? null : key;
+    this.updateDirectionStatus();
+  }
+
+  clearDirection() {
+    this.currentDirection = null;
+    this.updateDirectionStatus();
+  }
+
+  // Directions accumulate on a tile: a second arrow adds another cliff face, or
+  // more path information for a road. A river may not flow both ways, so an
+  // arrow opposing an existing one is rejected.
+  appendDirection(cell, field, direction) {
+    const existing = mapDirectionList(cell[field]);
+    if (existing.includes(direction)) return true;
+    if (field === "riverDirection" && existing.includes(mapOppositeDirection(direction))) {
+      this.reportDirectionIssue("A river cannot flow both ways — remove the opposing arrow first.");
+      return false;
+    }
+    cell[field] = [...existing, direction];
+    return true;
+  }
+
+  reportDirectionIssue(message) {
+    const el = document.getElementById("directionStatus");
+    if (el) el.textContent = message;
+    else console.warn(message);
+  }
+
+  updateDirectionStatus() {
+    const el = document.getElementById("directionStatus");
+    if (!el) return;
+    const dir = this.currentDirection ? MAP_DIRECTION_BY_KEY[this.currentDirection] : null;
+    el.textContent = dir
+      ? "Direction " + dir.label + " (" + this.currentDirection.toUpperCase() + ") applies to the next cliff, river or road tile."
+      : "No direction selected — rivers and roads connect to every neighbour.";
+    document.querySelectorAll(".direction-button").forEach((button) => {
+      button.classList.toggle("active", button.dataset.direction === this.currentDirection);
+    });
   }
 
   setFontSize(size) {
@@ -218,7 +287,8 @@ class WorldMapGrid extends WorldMapRenderer {
 
     // Render remaining layers
     for (const layerName of this.drawOrder) {
-      if (layerName === "river") this.drawRiverLayer();
+      if (layerName === "cliff") this.drawCliffLayer();
+      else if (layerName === "river") this.drawRiverLayer();
       else if (layerName === "infrastructure") this.drawInfrastructureLayer();
       else if (layerName === "settlement") this.drawSettlementsLayer();
       else if (layerName === "resource") this.drawResourcesLayer();

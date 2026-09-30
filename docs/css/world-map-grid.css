@@ -284,6 +284,45 @@
   display: none;
 }
 
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.direction-button {
+  padding: 8px 0;
+  font-size: 1.1em;
+  line-height: 1;
+  background-color: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.direction-button:hover {
+  background-color: #e0e0e0;
+  border-color: #333;
+}
+
+.direction-button.active {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-color: #333;
+  font-weight: bold;
+}
+
+.direction-button.direction-clear {
+  color: #a02a26;
+}
+
+.direction-help {
+  font-size: 0.8em;
+  color: #666;
+  margin: 6px 0;
+}
+
 @media (max-width: 1200px) {
   .map-controls {
     grid-template-columns: 1fr 1fr;
