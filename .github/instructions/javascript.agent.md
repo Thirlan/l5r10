@@ -33,3 +33,8 @@ You are an expert software engineer specializing in modern Vanilla JavaScript (E
 - **Method Binding:** Avoid binding methods in the constructor; use arrow functions for class fields when necessary.
 - Keep class sizes manageable, ideally under 250 lines of code, to maintain readability and maintainability.
 - **Single Responsibility Principle:** Each class should have a single responsibility or purpose, ensuring high cohesion and low coupling.
+
+## Migration
+Much of the code uses old formats, which will require migrations. 
+- When migrating legacy JavaScript code, prioritize converting CommonJS modules to ESM syntax.
+- Replace deprecated or non-standard APIs with modern native alternatives.
