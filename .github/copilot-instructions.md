@@ -1,7 +1,9 @@
 ASD-STE100
 
 # Introduction
-This project is to create a webpage version of the Legend of the Five Rings 4th Edition RPG, but heavily customized for the 10th century of legend of the five rings and nicknamed itadori.
+This project is to create a webpage version of the Legend of the Five Rings 4th Edition RPG rules, but heavily customized for the 10th century of legend of the five rings and nicknamed itadori.
+
+We hope to have all the rules covered here along with nice features such as an interactive map.
 
 # Goals
 As an agent your goals are
@@ -20,6 +22,11 @@ As an agent your goals are
 
 # What not to do
 - Do not come up with your own terms
+
+# Coding process
+I will give instructions to you and you should ask questions if there is any ambiguity. Do not proceed with changes until you have clarified any uncertainties.
+
+However, if I write MOBILE then that means I am on my mobile and limited in my ability to provide instructions. In those cases I will provide what I can and you do what you can with it. Always create a PR when making changes in this case.
 
 # Technology stack
  - html
