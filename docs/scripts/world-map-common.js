@@ -396,6 +396,15 @@ class WorldMapRenderer {
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
+    } else if (typeName === "Village Ruins") {
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx - 4, cy + 4);
+      ctx.lineTo(cx + 4, cy - 4);
+      ctx.stroke();
     } else if (typeName === "Fortification" || typeName === "Castle" || typeName === "Kyuden") {
       const side = typeName === "Fortification" ? 6 : 10;
       ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
@@ -406,11 +415,40 @@ class WorldMapRenderer {
         ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
+    } else if (typeName === "Castle Ruins" || typeName === "Academy") {
+      const side = 10;
+      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
+      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
+      if (typeName === "Castle Ruins") {
+        ctx.beginPath();
+        ctx.moveTo(cx - 5, cy + 5);
+        ctx.lineTo(cx + 5, cy - 5);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = borderColor;
+        ctx.font = `${6 / this.zoom}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("A", cx, cy);
+      }
+    } else if (typeName === "Watchtower") {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 5);
+      ctx.lineTo(cx + 4, cy - 1);
+      ctx.lineTo(cx - 4, cy - 1);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillRect(cx - 2.5, cy - 1, 5, 6);
+      ctx.strokeRect(cx - 2.5, cy - 1, 5, 6);
     } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
       this.drawShrine(cx, cy, borderColor, typeName === "Small Shrine" ? 0.75 : 1);
     } else if (setItem && setItem.image) {
       const img = this.settlementImage(setItem.image);
-      if (img.complete && img.naturalWidth) ctx.drawImage(img, cx - 6, cy - 6, 12, 12);
+      const imageSize = typeName === "Small Temple" ? 12 : typeName === "Large Temple" ? 16 : 12;
+      if (img.complete && img.naturalWidth) {
+        ctx.drawImage(img, cx - imageSize / 2, cy - imageSize / 2, imageSize, imageSize);
+      }
     }
     ctx.restore();
   }
@@ -490,7 +528,7 @@ class WorldMapRenderer {
   }
 
   settlementFontSize(type) {
-    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Small Shrine": 6, "Large Shrine": 8 }[type] || 6;
+    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Small Shrine": 6, "Large Shrine": 8, "Village Ruins": 6, "Castle Ruins": 8, Academy: 6, Watchtower: 6, "Small Temple": 6, "Large Temple": 8 }[type] || 6;
   }
 
   englishSettlementType(type) {

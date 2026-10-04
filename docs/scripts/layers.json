@@ -333,6 +333,44 @@
           "name": "Large Shrine",
           "englishType": "Large Shrine",
           "rokuganiType": "Taisha"
+        },
+        {
+          "id": 12,
+          "name": "Village Ruins",
+          "englishType": "Village Ruins",
+          "rokuganiType": ""
+        },
+        {
+          "id": 13,
+          "name": "Castle Ruins",
+          "englishType": "Castle Ruins",
+          "rokuganiType": ""
+        },
+        {
+          "id": 14,
+          "name": "Academy",
+          "englishType": "Academy",
+          "rokuganiType": ""
+        },
+        {
+          "id": 15,
+          "name": "Watchtower",
+          "englishType": "Watchtower",
+          "rokuganiType": ""
+        },
+        {
+          "id": 16,
+          "name": "Small Temple",
+          "englishType": "Small Temple",
+          "rokuganiType": "",
+          "image": "../img/map/temple.webp"
+        },
+        {
+          "id": 17,
+          "name": "Large Temple",
+          "englishType": "Large Temple",
+          "rokuganiType": "",
+          "image": "../img/map/temple.webp"
         }
       ]
     },
