@@ -58,9 +58,8 @@
         },
         {
           "id": 8,
-          "name": "city",
-          "color": "#FF6347",
-          "image": "../img/map/city.png"
+          "name": "cliff",
+          "color": "#777777"
         }
       ]
     },

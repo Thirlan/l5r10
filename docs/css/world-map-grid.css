@@ -128,6 +128,39 @@
   border-radius: 2px;
 }
 
+.cliff-tool-icon {
+  background: linear-gradient(to bottom, transparent 44%, #111 44% 56%, transparent 56%);
+}
+
+.cliff-direction-controls {
+  margin: 10px 0;
+  padding: 0;
+  border: 0;
+}
+
+.cliff-direction-controls legend {
+  margin-bottom: 6px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.cliff-direction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.cliff-direction-grid label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.75em;
+}
+
+.cliff-direction-grid input {
+  margin: 0;
+}
+
 .control-icon {
   display: inline-block;
   width: 16px;

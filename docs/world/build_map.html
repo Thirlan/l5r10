@@ -54,9 +54,23 @@
         <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'wetlands', 'terrain'); updateActiveButton(this);">
           <img src="../img/map/control_wetlands.png" class="control-icon" alt="" />Wetlands
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'city', 'terrain'); updateActiveButton(this);">
-          <img src="../img/map/control_city.png" class="control-icon" alt="" />City
+        <button class="tool-button" onclick="mapGrid.selectTool('terrain', 'cliff', 'terrain'); updateActiveButton(this);">
+          <span class="terrain-color cliff-tool-icon"></span>Cliff
         </button>
+        <fieldset class="cliff-direction-controls">
+          <legend>Cliff Directions</legend>
+          <div class="cliff-direction-grid">
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('7', this.checked)">Top left</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('0', this.checked)">Top</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('1', this.checked)">Top right</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('6', this.checked)">Left</label>
+            <label><input id="cliffDirectionAll" type="checkbox" onchange="mapGrid.setCliffDirection('all', this.checked)">All</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('2', this.checked)">Right</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('5', this.checked)">Bottom left</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('4', this.checked)">Bottom</label>
+            <label><input type="checkbox" onchange="mapGrid.setCliffDirection('3', this.checked)">Bottom right</label>
+          </div>
+        </fieldset>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'terrain', 'erase'); updateActiveButton(this);">
           Erase Terrain
         </button>

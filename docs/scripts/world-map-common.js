@@ -150,16 +150,73 @@ class WorldMapRenderer {
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
       const t = cell.terrain ?? 0;
+      const cliffId = this.layerMaps.terrain ? this.layerMaps.terrain.nameToId.cliff : undefined;
+      const tileTerrain = t === cliffId ? 0 : t;
       const c = cell.climate ?? 0;
       const isWater = (t === 3 || t === 4 || t === 5);
       const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ?? 0);
 
-      const tileKey = t + "," + c + "," + v;
+      const tileKey = tileTerrain + "," + c + "," + v;
       const img = this.tileImageMap[tileKey];
 
       if (img && img.complete && img.naturalWidth) {
         this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
       }
+    }
+  }
+
+  drawCliffEdges() {
+    const size = this.gridSize;
+    const ctx = this.ctx;
+
+    for (const [key, cell] of Object.entries(this.grid)) {
+      const directions = cell["cliff direction"];
+      if (!directions || typeof directions !== "object") continue;
+
+      const selected = Array.from({ length: 8 }, (_, index) => Number(directions[index]) === 1);
+      if (!selected.some(Boolean)) continue;
+
+      const [x, y] = key.split(",").map(Number);
+      const left = x * size;
+      const top = y * size;
+      const right = left + size;
+      const bottom = top + size;
+      const centerX = left + size / 2;
+      const centerY = top + size / 2;
+
+      ctx.save();
+      ctx.strokeStyle = "#111111";
+      ctx.lineWidth = 2 / this.zoom;
+      ctx.lineCap = "square";
+
+      if (selected.every(Boolean)) {
+        ctx.strokeRect(left, top, size, size);
+      } else {
+        ctx.beginPath();
+        if (selected[0]) { ctx.moveTo(left, top); ctx.lineTo(right, top); }
+        if (selected[2]) { ctx.moveTo(right, top); ctx.lineTo(right, bottom); }
+        if (selected[4]) { ctx.moveTo(left, bottom); ctx.lineTo(right, bottom); }
+        if (selected[6]) { ctx.moveTo(left, top); ctx.lineTo(left, bottom); }
+
+        const drawDiagonal = (index, startX, startY, endX, endY, directionX, directionY) => {
+          if (!selected[index]) return;
+          ctx.moveTo(startX, startY);
+          ctx.lineTo(endX, endY);
+          ctx.moveTo(centerX, centerY);
+          ctx.lineTo(
+            centerX + directionX * Math.SQRT1_2 * 4,
+            centerY + directionY * Math.SQRT1_2 * 4
+          );
+        };
+
+        drawDiagonal(1, left, top, right, bottom, 1, -1);
+        drawDiagonal(3, right, top, left, bottom, 1, 1);
+        drawDiagonal(5, left, top, right, bottom, -1, 1);
+        drawDiagonal(7, left, bottom, right, top, -1, -1);
+        ctx.stroke();
+      }
+
+      ctx.restore();
     }
   }
 

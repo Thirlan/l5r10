@@ -9,6 +9,7 @@ class WorldMapGrid extends WorldMapRenderer {
     this.fontSize = 14;
     this.brushSize = 1;
     this.isDrawing = false;
+    this.cliffDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
 
     this.setupEventListeners();
     this.loadLayersConfig();
@@ -82,6 +83,11 @@ class WorldMapGrid extends WorldMapRenderer {
 
   paintAt(event) {
     if (!this.currentLayer) return;
+    const cliffId = this.layerMaps.terrain ? this.layerMaps.terrain.nameToId.cliff : undefined;
+    const paintingCliffTerrain = this.currentLayer === "terrain" && cliffId !== undefined && this.currentValue !== null && (
+      this.currentValue === cliffId || this.currentValue === "cliff"
+    );
+    if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
 
@@ -109,6 +115,7 @@ class WorldMapGrid extends WorldMapRenderer {
           const cell = this.grid[cellKey];
           if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(layerToErase)) {
             delete cell[layerToErase];
+            if (layerToErase === "terrain") delete cell["cliff direction"];
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
           } else if (layerToErase === "resource" || layerToErase === "resources") {
@@ -135,6 +142,17 @@ class WorldMapGrid extends WorldMapRenderer {
         if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(this.currentLayer)) {
           if (valId) cell[this.currentLayer] = valId;
           else delete cell[this.currentLayer];
+          if (this.currentLayer === "terrain") {
+            if (valId === cliffId) {
+              if (Object.values(this.cliffDirections).some((direction) => direction === 1)) {
+                cell["cliff direction"] = { ...this.cliffDirections };
+              } else {
+                delete cell["cliff direction"];
+              }
+            } else {
+              delete cell["cliff direction"];
+            }
+          }
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
         } else if (this.currentLayer === "resource" || this.currentLayer === "resources") {
@@ -176,6 +194,25 @@ class WorldMapGrid extends WorldMapRenderer {
     this.draw();
   }
 
+  setCliffDirection(direction, enabled) {
+    if (direction === "all") {
+      for (const index of Object.keys(this.cliffDirections)) {
+        this.cliffDirections[index] = enabled ? 1 : 0;
+      }
+      document.querySelectorAll(".cliff-direction-grid input:not(#cliffDirectionAll)").forEach((checkbox) => {
+        checkbox.checked = enabled;
+      });
+    } else if (Object.hasOwn(this.cliffDirections, direction)) {
+      this.cliffDirections[direction] = enabled ? 1 : 0;
+    } else {
+      return;
+    }
+
+    const allDirections = Object.values(this.cliffDirections).every((value) => value === 1);
+    const allCheckbox = document.getElementById("cliffDirectionAll");
+    if (allCheckbox) allCheckbox.checked = allDirections;
+  }
+
   setFontSize(size) {
     this.fontSize = Number(size);
   }
@@ -215,6 +252,7 @@ class WorldMapGrid extends WorldMapRenderer {
 
     // Render base tile layer (combination of terrain, climate, vegetation)
     this.drawBaseTiles();
+    this.drawCliffEdges();
 
     // Render remaining layers
     for (const layerName of this.drawOrder) {

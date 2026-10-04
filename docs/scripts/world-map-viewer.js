@@ -322,6 +322,7 @@ class WorldMapViewer extends WorldMapRenderer {
     ctx.scale(this.zoom, this.zoom);
     // Draw base map tile images
     this.drawBaseTiles();
+    this.drawCliffEdges();
 
     // Draw remaining layers
     for (const layerName of this.drawOrder) {
