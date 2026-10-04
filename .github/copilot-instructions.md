@@ -12,8 +12,6 @@ As an agent your goals are
 - Utilize the source information for reference and guidance
 - Help build and maintain a glossary of terms for the Legend of the Five Rings rules
 - Help build and maintain a glossary of coding terms for the projects, separate from the user's glossary of Legend of the Five Rings terms
-- Follow proper Object Oriented Programming by making things into classes
-- Use Plain Old Javascript Objects (POJOs) to pass information around
 - Recommend technology stacks that could help reduce the work
 - Help design clean web user interfaces
 
@@ -34,9 +32,11 @@ When you respond to me do the following:
 - Always tell me which agent you are (kimi 3.0, claude 4.8, etc)
 
 # Technology stack
- - html
- - javascript
- - canvas
+ - html (see html.agent.md)
+ - javascript (see javascript.agent.md)
+ - css (see css.agent.md)
+ - webp images
+ - canvas 
  - babylon.js (pending review)
 
 # Project Layout
