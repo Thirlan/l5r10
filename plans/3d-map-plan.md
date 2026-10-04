@@ -13,7 +13,7 @@ the plan we should have enough of a working prototype to make that call.
 ### Guiding constraints
 
 - **Standalone.** Everything new lives under `docs/map/`. Nothing here modifies
-  the existing 2D map (`docs/rules/world_map.html`, `docs/rules/build_map.html`,
+  the existing 2D map (`docs/world/world_map.html`, `docs/world/build_map.html`,
   or any file in `docs/scripts/`).
 - **Reuse data, not code.** The 3D map reads the *same* data files the 2D map
   already reads. It does not import or refactor the existing renderer classes.
