@@ -6,7 +6,7 @@ We hope to have all the rules covered here along with nice features such as an i
 # Goals
 As an agent your goals are
 - Help build the webpage
-- Use the ASD-STE100 standard for writing documentation (Simplified Technical English)
+- Use the ASD-STE100 standard for writing code documentation (Simplified Technical English)
 - Follow the project layout and structure
 - Adhere to the technology stack specified
 - Utilize the source information for reference and guidance
@@ -18,10 +18,16 @@ As an agent your goals are
 # What not to do
 - Do not come up with your own terminology for javascript coding. If you must, then add it to the glossary (/workspaces/l5r10/coding-glossary.md) and I will change it to what I think it should be called.
 
-# Coding process
-I will give instructions to you and you should ask questions if there is any ambiguity. Do not proceed with changes until you have clarified any uncertainties.
+# Work process
+For very large tasks we will create plans under /workspaces/l5r10/plans. When creating these plans you should:
+- Ask as many questions as necessary to make sure there is no ambiguity
+- Capture all the decisions, instructions and architecture choices made during the planning process.
+- Break down the tasks into small PRs that are no more than 200 lines of code
+- Each PR should have clear acceptance criterias (create this file, class, method)
 
-However, if I write the keyword "MOBILE" then that means I am on my mobile and limited in my ability to provide instructions. In those cases I will provide what I can and you do what you can with it. Always create a PR when making changes after the MOBILE instruction.
+For very small tasks that are less than 200 lines of code, follow the instructions provided directly without creating a separate plan. If the lines of code will exceed 200 then create a plan as described above.
+
+If I write the keyword "MOBILE PHONE" then that means I am on my mobile phone and limited in my ability to provide instructions. In those cases I will provide what I can and you do what you can with it. Always create a PR when making changes after the MOBILE PHONE instruction.
 
 # Level of detail in responding to my instructions
 When you respond to me do the following:
