@@ -168,6 +168,10 @@ class WorldMapRenderer {
   drawCliffEdges() {
     const size = this.gridSize;
     const ctx = this.ctx;
+    const lineWidth = Math.min(4 / this.zoom, size / 2);
+    const inset = lineWidth / 2 + size / 16;
+    const edgeSize = size - 2 * inset;
+    const directionLength = Math.min(4, edgeSize / 2);
 
     for (const [key, cell] of Object.entries(this.grid)) {
       const directions = cell["cliff direction"];
@@ -177,20 +181,21 @@ class WorldMapRenderer {
       if (!selected.some(Boolean)) continue;
 
       const [x, y] = key.split(",").map(Number);
-      const left = x * size;
-      const top = y * size;
-      const right = left + size;
-      const bottom = top + size;
-      const centerX = left + size / 2;
-      const centerY = top + size / 2;
+      const left = x * size + inset;
+      const top = y * size + inset;
+      const right = left + edgeSize;
+      const bottom = top + edgeSize;
+      const centerX = left + edgeSize / 2;
+      const centerY = top + edgeSize / 2;
 
       ctx.save();
-      ctx.strokeStyle = "#111111";
-      ctx.lineWidth = 2 / this.zoom;
-      ctx.lineCap = "square";
+      ctx.strokeStyle = "#808080";
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
 
       if (selected.every(Boolean)) {
-        ctx.strokeRect(left, top, size, size);
+        ctx.strokeRect(left, top, edgeSize, edgeSize);
       } else {
         ctx.beginPath();
         if (selected[0]) { ctx.moveTo(left, top); ctx.lineTo(right, top); }
@@ -204,8 +209,8 @@ class WorldMapRenderer {
           ctx.lineTo(endX, endY);
           ctx.moveTo(centerX, centerY);
           ctx.lineTo(
-            centerX + directionX * Math.SQRT1_2 * 4,
-            centerY + directionY * Math.SQRT1_2 * 4
+            centerX + directionX * Math.SQRT1_2 * directionLength,
+            centerY + directionY * Math.SQRT1_2 * directionLength
           );
         };
 
