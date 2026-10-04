@@ -18,7 +18,7 @@ As an agent your goals are
 - Help design clean web user interfaces
 
 # What not to do
-- Do not come up with your own terms
+- Do not come up with your own terminology for javascript coding. If you must, then add it to the glossary (/workspaces/l5r10/coding-glossary.md) and I will change it to what I think it should be called.
 
 # Coding process
 I will give instructions to you and you should ask questions if there is any ambiguity. Do not proceed with changes until you have clarified any uncertainties.
@@ -31,6 +31,7 @@ When you respond to me do the following:
 - **Never** include conversational filler, greetings, or conversational preambles (e.g., "Sure, I can help with that").
 - **Limit explanations** to a maximum of 3 sentences per code block.
 - Keep sentences below 20 words
+- Always tell me which agent you are (kimi 3.0, claude 4.8, etc)
 
 # Technology stack
  - html
@@ -46,6 +47,7 @@ When you respond to me do the following:
   - map: Where all the map files for the project should be (work in progress)
   - other_clans: Where all the files related to the other clans are
   - rules: Where all the game rules files for the project are. This folder will be broken up though as it is getting too big.
+    - template.html: this is the template file for creating new pages
   - scripts: Where all the JavaScript files for the project are. This needs to be further broken up as it is getting quite big.
   - spells: Where all the spells are for the shugenjas in l5r 4th edition
   - index.html: The main html file page
