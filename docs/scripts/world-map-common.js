@@ -112,6 +112,7 @@ class WorldMapRenderer {
     const normalized = {};
     for (const [key, originalCell] of Object.entries(grid || {})) {
       const cell = { ...originalCell };
+      if (cell.vegetation) cell.vegetation = 1;
       for (const layerName of ["terrain", "climate", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "animal", "spirit", "shadowland", "crime", "fertility"]) {
         if (cell[layerName] === undefined) continue;
         const layerValue = this.layerId(layerName, cell[layerName]);
@@ -157,7 +158,7 @@ class WorldMapRenderer {
       const climateName = this.layerItem("climate", c)?.name;
       const recolorClimate = climateName === "waste" || climateName === "shadowland";
       const isWater = (t === 3 || t === 4 || t === 5);
-      const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ?? 0);
+      const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ? 1 : 0);
 
       const tileKey = tileTerrain + "," + (recolorClimate ? 0 : c) + "," + v;
       const img = this.tileImageMap[tileKey];

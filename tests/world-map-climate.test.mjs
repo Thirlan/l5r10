@@ -71,7 +71,7 @@ test("Both climates render all temperate combinations, preserve existing tiles, 
         renderer.climateTileCache[`${climate === 6 ? "waste" : "shadowland"},${key}`]);
     }
   }
-  assert.equal(drawn.length, 57);
+  assert.equal(drawn.length, 33);
   const normalized = renderer.normalizeGridData({ "0,0": { climate: "waste" }, "1,0": { climate: "shadowland" } });
   assert.equal(normalized["0,0"].climate, 6);
   assert.equal(normalized["1,0"].climate, 7);
@@ -81,4 +81,7 @@ test("Both climates render all temperate combinations, preserve existing tiles, 
   renderer.drawBaseTiles();
   assert.equal(drawn.at(-2), renderer.climateTileCache["waste,0,0,0"]);
   assert.equal(drawn.at(-1), renderer.climateTileCache["shadowland,3,0,0"]);
+  const vegetationNormalized = renderer.normalizeGridData({ "0,0": { vegetation: 3 }, "1,0": { vegetation: 1 } });
+  assert.equal(vegetationNormalized["0,0"].vegetation, 1);
+  assert.equal(vegetationNormalized["1,0"].vegetation, 1);
 });
