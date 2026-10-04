@@ -86,6 +86,16 @@
           "id": 4,
           "name": "polar",
           "color": "#8B5A2B"
+        },
+        {
+          "id": 6,
+          "name": "waste",
+          "color": "#808080"
+        },
+        {
+          "id": 7,
+          "name": "shadowland",
+          "color": "#800080"
         }
       ]
     },

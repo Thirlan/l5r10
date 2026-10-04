@@ -132,6 +132,14 @@
   background: linear-gradient(to bottom, transparent 44%, #111 44% 56%, transparent 56%);
 }
 
+.climate-waste-icon {
+  background: linear-gradient(135deg, #ccc, #808080, #222);
+}
+
+.climate-shadowland-icon {
+  background: linear-gradient(135deg, #800080, #228b22, #000);
+}
+
 .cliff-direction-controls {
   margin: 10px 0;
   padding: 0;

@@ -91,6 +91,12 @@
         <button class="tool-button" onclick="mapGrid.selectTool('climate', 'polar', 'climate'); updateActiveButton(this);">
           <img src="../img/map/control_cold.png" class="control-icon" alt="" />Polar
         </button>
+        <button type="button" class="tool-button" data-climate-tool="waste">
+          <span class="terrain-color climate-waste-icon"></span>Waste
+        </button>
+        <button type="button" class="tool-button" data-climate-tool="shadowland">
+          <span class="terrain-color climate-shadowland-icon"></span>Shadowland
+        </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'climate', 'erase'); updateActiveButton(this);">
           Erase Climate
         </button>
@@ -436,6 +442,13 @@
   <script src="../scripts/world-map-common.js"></script>
   <script src="../scripts/world-map-grid.js"></script>
   <script>
+    document.querySelectorAll("[data-climate-tool]").forEach((button) => {
+      button.addEventListener("click", () => {
+        mapGrid.selectTool("climate", button.dataset.climateTool, "climate");
+        updateActiveButton(button);
+      });
+    });
+
     $(function() {
       $("nav").load("/l5r10/navbar.html");
     });

@@ -20,6 +20,7 @@ class WorldMapRenderer {
 
     this.grid = {};
     this.tileImageMap = {};
+    this.climateTileCache = {};
     this.settlementLanguage = "english";
 
     this.shrineIconCache = {};
@@ -153,16 +154,64 @@ class WorldMapRenderer {
       const cliffId = this.layerMaps.terrain ? this.layerMaps.terrain.nameToId.cliff : undefined;
       const tileTerrain = t === cliffId ? 0 : t;
       const c = cell.climate ?? 0;
+      const climateName = this.layerItem("climate", c)?.name;
+      const recolorClimate = climateName === "waste" || climateName === "shadowland";
       const isWater = (t === 3 || t === 4 || t === 5);
       const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ?? 0);
 
-      const tileKey = tileTerrain + "," + c + "," + v;
+      const tileKey = tileTerrain + "," + (recolorClimate ? 0 : c) + "," + v;
       const img = this.tileImageMap[tileKey];
 
       if (img && img.complete && img.naturalWidth) {
-        this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
+        const tile = recolorClimate ? this.getClimateTileImage(img, climateName, tileKey) : img;
+        this.ctx.drawImage(tile, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
       }
     }
+  }
+
+  /**
+   * Recolor a temperate tile. Keep its shape and transparency.
+   * @param {HTMLImageElement} image - Loaded temperate tile.
+   * @param {"waste" | "shadowland"} climateName - Target climate.
+   * @param {string} tileKey - Source terrain, climate, and vegetation key.
+   * @returns {HTMLCanvasElement} Cached recolored tile.
+   */
+  getClimateTileImage(image, climateName, tileKey) {
+    const cacheKey = climateName + "," + tileKey;
+    if (this.climateTileCache[cacheKey]) return this.climateTileCache[cacheKey];
+
+    const tile = document.createElement("canvas");
+    tile.width = image.naturalWidth;
+    tile.height = image.naturalHeight;
+    const ctx = tile.getContext("2d");
+    if (!ctx) throw new Error("Cannot create climate tile canvas context.");
+    ctx.drawImage(image, 0, 0);
+    const pixels = ctx.getImageData(0, 0, tile.width, tile.height);
+    const data = pixels.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+      const red = data[i];
+      const green = data[i + 1];
+      const blue = data[i + 2];
+      const shade = Math.round(0.299 * red + 0.587 * green + 0.114 * blue);
+      if (climateName === "waste") {
+        data[i] = data[i + 1] = data[i + 2] = shade;
+      } else if (shade <= 32) {
+        data[i] = data[i + 1] = data[i + 2] = 0;
+      } else if (green > red && green > blue) {
+        data[i] = shade * 0.35;
+        data[i + 1] = shade * 1.2;
+        data[i + 2] = shade * 0.2;
+      } else {
+        data[i] = shade;
+        data[i + 1] = shade * 0.25;
+        data[i + 2] = shade * 1.3;
+      }
+    }
+
+    ctx.putImageData(pixels, 0, 0);
+    this.climateTileCache[cacheKey] = tile;
+    return tile;
   }
 
   drawCliffEdges() {
