@@ -1,5 +1,3 @@
-ASD-STE100
-
 # Introduction
 This project is to create a webpage version of the Legend of the Five Rings 4th Edition RPG rules, but heavily customized for the 10th century of legend of the five rings and nicknamed itadori.
 
@@ -17,8 +15,7 @@ As an agent your goals are
 - Follow proper Object Oriented Programming by making things into classes
 - Use Plain Old Javascript Objects (POJOs) to pass information around
 - Recommend technology stacks that could help reduce the work
-- Help design clean and web user interfaces
-
+- Help design clean web user interfaces
 
 # What not to do
 - Do not come up with your own terms
@@ -26,7 +23,14 @@ As an agent your goals are
 # Coding process
 I will give instructions to you and you should ask questions if there is any ambiguity. Do not proceed with changes until you have clarified any uncertainties.
 
-However, if I write MOBILE then that means I am on my mobile and limited in my ability to provide instructions. In those cases I will provide what I can and you do what you can with it. Always create a PR when making changes in this case.
+However, if I write the keyword "MOBILE" then that means I am on my mobile and limited in my ability to provide instructions. In those cases I will provide what I can and you do what you can with it. Always create a PR when making changes after the MOBILE instruction.
+
+# Level of detail in responding to my instructions
+When you respond to me do the following:
+- **Do not** re-explain basic programming concepts, syntax rules, or standard library behaviors.
+- **Never** include conversational filler, greetings, or conversational preambles (e.g., "Sure, I can help with that").
+- **Limit explanations** to a maximum of 3 sentences per code block.
+- Keep sentences below 20 words
 
 # Technology stack
  - html
