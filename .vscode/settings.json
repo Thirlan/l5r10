@@ -1,3 +1,5 @@
 {
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "chat.tools.global.autoApprove": true,
+  "chat.tools.terminal.ignoreDefaultAutoApproveRules": true
 }
