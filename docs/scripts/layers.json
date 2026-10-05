@@ -78,22 +78,22 @@
           "color": "#7FFF00"
         },
         {
-          "id": 3,
+          "id": 2,
           "name": "desert",
           "color": "#F4A460"
         },
         {
-          "id": 4,
+          "id": 3,
           "name": "polar",
           "color": "#8B5A2B"
         },
         {
-          "id": 6,
+          "id": 4,
           "name": "waste",
           "color": "#808080"
         },
         {
-          "id": 7,
+          "id": 5,
           "name": "shadowland",
           "color": "#800080"
         }
