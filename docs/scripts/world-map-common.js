@@ -170,7 +170,7 @@ class WorldMapRenderer {
     const size = this.gridSize;
     const ctx = this.ctx;
     const lineWidth = Math.min(4 / this.zoom, size / 2);
-    const inset = lineWidth / 2 + size / 16;
+    const inset = Math.min(lineWidth / 2 + size / 16 + 4, size * 7 / 16);
     const edgeSize = size - 2 * inset;
     const directionLength = Math.min(4, edgeSize / 2);
 
