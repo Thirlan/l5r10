@@ -5,7 +5,7 @@ files for the L5R 10th Century project. **The scope of this plan is JUST the
 creation of the JSON data files** — no runtime/simulation code is written here.
 Those files are consumed later by an economy simulation that is out of scope.
 
-The base resources in [`layers.json`](./layers.json) (the `resource`,
+The base resources in [`layers.json`](../docs/data/layers.json) (the `resource`,
 `settlement`, and `infrastructure` layers) are the inspiration for this work. The map
 resource layer lists what a resource tile   is but not what it produces (e.g. `horse ranch` produces horses, horse hair). The economy files expand that seed into the full chain of raw
 resources, processed goods, jobs, and buildings.

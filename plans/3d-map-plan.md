@@ -38,9 +38,9 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 
 | File | Role | Reused how |
 | --- | --- | --- |
-| `docs/scripts/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
-| `docs/scripts/layers.json` | Layer definitions: for each layer, the list of values with `id`, `name`, `color`, and (for terrain/vegetation) `image`. | Maps numeric cell ids to names, colors, and elevation. |
-| `docs/scripts/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Reference for the intended surface appearance, not a per-cell mesh material. |
+| `docs/data/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
+| `docs/data/layers.json` | Layer definitions: for each layer, the list of values with `id`, `name`, `color`, and (for terrain/vegetation) `image`. | Maps numeric cell ids to names, colors, and elevation. |
+| `docs/data/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Reference for the intended surface appearance, not a per-cell mesh material. |
 | `docs/img/map/*.png` | Tile and marker art. | Reference textures and initial settlement/resource images. |
 
 Key facts that make 3D natural:

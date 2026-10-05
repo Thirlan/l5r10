@@ -37,7 +37,7 @@ class WorldMapRenderer {
 
   async loadMapTileImages() {
     try {
-      const res = await fetch("../scripts/map_tile_img.json");
+      const res = await fetch("../data/map_tile_img.json");
       if (!res.ok) return;
       const entries = await res.json();
       for (const entry of entries) {

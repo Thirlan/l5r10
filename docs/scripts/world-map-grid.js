@@ -20,7 +20,7 @@ class WorldMapGrid extends WorldMapRenderer {
 
   async loadLayersConfig() {
     try {
-      const res = await fetch("../scripts/layers.json");
+      const res = await fetch("../data/layers.json");
       if (!res.ok) throw new Error("HTTP " + res.status);
       this.layersConfig = await res.json();
       if (this.layersConfig.drawOrder) {
