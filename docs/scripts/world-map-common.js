@@ -22,12 +22,8 @@ class WorldMapRenderer {
     this.tileImageMap = {};
     this.settlementLanguage = "english";
 
-    this.shrineIconCache = {};
     this.settlementImages = {};
-
-    this.shrineImage = new Image();
-    this.shrineImage.onload = () => this.redraw();
-    this.shrineImage.src = "../img/map/shrine.png";
+    this.tintedIconCache = {};
   }
 
   // Repaint the whole canvas. Subclasses implement this (draw / render).
@@ -505,13 +501,9 @@ class WorldMapRenderer {
       ctx.fillRect(cx - 2.5, cy - 1, 5, 6);
       ctx.strokeRect(cx - 2.5, cy - 1, 5, 6);
     } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
-      this.drawShrine(cx, cy, borderColor, typeName === "Small Shrine" ? 0.75 : 1);
-    } else if (setItem && setItem.image) {
-      const img = this.settlementImage(setItem.image);
-      const imageSize = typeName === "Small Temple" ? 12 : typeName === "Large Temple" ? 16 : 12;
-      if (img.complete && img.naturalWidth) {
-        ctx.drawImage(img, cx - imageSize / 2, cy - imageSize / 2, imageSize, imageSize);
-      }
+      this.drawShrine(cx, cy, borderColor, setItem.image, typeName === "Small Shrine" ? 0.75 : 1);
+    } else if (typeName === "Small Temple" || typeName === "Large Temple") {
+      this.drawTemple(cx, cy, borderColor, setItem.image, typeName === "Small Temple" ? 12 : 16);
     }
     ctx.restore();
   }
@@ -563,24 +555,34 @@ class WorldMapRenderer {
     return img;
   }
 
-  drawShrine(cx, cy, color, scale) {
-    if (!this.shrineImage.complete || !this.shrineImage.naturalWidth) return;
-    const image = this.shrineIcon(color, scale);
+  drawShrine(cx, cy, color, imageSource, scale) {
+    const source = this.settlementImage(imageSource);
+    if (!source.complete || !source.naturalWidth) return;
+    const width = Math.round(source.naturalWidth * scale);
+    const height = Math.round(source.naturalHeight * scale);
+    const image = this.tintedMapIcon(source, color, width, height);
     this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
   }
 
-  shrineIcon(color, scale) {
-    const key = color + ":" + scale;
-    if (this.shrineIconCache[key]) return this.shrineIconCache[key];
+  drawTemple(cx, cy, color, imageSource, size) {
+    const source = this.settlementImage(imageSource);
+    if (!source.complete || !source.naturalWidth) return;
+    const image = this.tintedMapIcon(source, color, size, size);
+    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
+  }
+
+  tintedMapIcon(source, color, width, height) {
+    const key = [source.src, color, width, height].join(":");
+    if (this.tintedIconCache[key]) return this.tintedIconCache[key];
     const canvas = document.createElement("canvas");
-    canvas.width = Math.round(this.shrineImage.naturalWidth * scale);
-    canvas.height = Math.round(this.shrineImage.naturalHeight * scale);
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(this.shrineImage, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
     ctx.globalCompositeOperation = "source-in";
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    this.shrineIconCache[key] = canvas;
+    this.tintedIconCache[key] = canvas;
     return canvas;
   }
 

@@ -335,13 +335,15 @@
           "id": 10,
           "name": "Small Shrine",
           "englishType": "Small Shrine",
-          "rokuganiType": "Shōsha"
+          "rokuganiType": "Shōsha",
+          "image": "../img/map/shrine.png"
         },
         {
           "id": 11,
           "name": "Large Shrine",
           "englishType": "Large Shrine",
-          "rokuganiType": "Taisha"
+          "rokuganiType": "Taisha",
+          "image": "../img/map/shrine.png"
         },
         {
           "id": 12,
