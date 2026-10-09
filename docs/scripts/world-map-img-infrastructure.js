@@ -22,6 +22,15 @@ export function getInfrastructureStyle(value) {
   return infrastructureStyles.get(value);
 }
 
+/**
+ * @param {CanvasRenderingContext2D} ctx Drawing context.
+ * @param {number} x Cell column.
+ * @param {number} y Cell row.
+ * @param {number} gridSize Cell size in pixels.
+ * @param {import("./world-map-layers.js").LayerValue} value Infrastructure metadata.
+ * @param {{east: boolean, south: boolean, southeast: boolean, northeast: boolean}} neighbors Forward connections.
+ * @returns {void}
+ */
 export function drawInfrastructure(ctx, x, y, gridSize, value, neighbors) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("Infrastructure drawing needs a canvas context and valid cell dimensions.");

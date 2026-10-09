@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–16 are complete; PR 17 onward remains.
+Status: In progress. PRs 1–18 are complete; PR 19 onward remains.
 
 ## Goal
 
@@ -284,8 +284,8 @@ Run targeted checks for completed components. Run full page checks after integra
 | 15b | 15a | **Done** — Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
 | 15c | 15a, 15b | **Done** — Draw vegetation above land and water, including cliffs. Remove tuple mapping and tile JSON loading. Retire 66 unused composite images after checking consumers. |
 | 16 | 15b | **Done** — Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
-| 17 | 14, 07 | Delegate river drawing and remove old river code and settings. |
-| 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and settings. |
+| 17 | 14, 07 | **Done** — Delegate river drawing and remove old river code and settings. Verify isolated and cardinal connections. |
+| 18 | 14, 08 | **Done** — Delegate infrastructure drawing and remove old infrastructure code and settings. Verify mixed-type connections, water crossings, and ports. |
 | 19 | 14, 06 | Connect clan colors in builder, viewer, and settlement rendering. Remove metadata color access. |
 | 20a-20c | 14, 09, 10, 11, 19 | Delegate settlement markers in separate circular, square, and asset-backed batches. Remove each replaced branch. |
 | 21 | 14, 06 | Delegate resource markers. Remove resource type-label access. Test language-independent resource names. |
@@ -330,6 +330,14 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 17 and 18 validation
+
+All 43 targeted renderer, river, and infrastructure tests pass.
+All 290 pre-delegation drawing traces match exactly, including the complete saved map.
+The traces cover every neighbor combination at cell sizes 8, 16, and 32.
+Drawing order and connections between different infrastructure types remain unchanged.
+The renderer no longer owns river stripes, road styles, or port drawing.
 
 ### PR 16 implementation batches
 

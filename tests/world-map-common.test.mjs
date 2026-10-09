@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapRenderer } from "../docs/scripts/world-map-common.js";
-import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT } from "../docs/scripts/world-map-layers.js";
+import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE } from "../docs/scripts/world-map-layers.js";
 import { getResourceLevelColor } from "../docs/scripts/world-map-img-resource-level.js";
 import { getClanColors } from "../docs/scripts/clan-colors.js";
 import { getSettlementAsset } from "../docs/scripts/world-map-img-settlements.js";
@@ -246,4 +246,131 @@ test("renderer delegates saved cliff directions without requiring cliff terrain"
 
   // Assertion
   assert.deepEqual(lines, [[88, 104]]);
+});
+
+function createConnectionRenderer(grid) {
+  const renderer = createRenderer();
+  const strokes = [];
+  const markers = [];
+  let start;
+  renderer.grid = grid;
+  renderer.ctx = {
+    save() {}, restore() {}, beginPath() {}, stroke() {},
+    moveTo: (...args) => { start = args; },
+    lineTo: (...end) => strokes.push({ start, end }),
+    fillText: (...args) => markers.push(args),
+  };
+  return { renderer, strokes, markers };
+}
+
+test("renderer draws an isolated river when neighboring values are none", () => {
+  // Setup
+  const { renderer, strokes } = createConnectionRenderer({
+    "0,0": { river: RIVER.PRESENT.id }, "1,0": { river: RIVER.NONE.id },
+  });
+
+  // Execution
+  renderer.drawRiverLayer();
+
+  // Assertion
+  assert.equal(strokes.length, 10);
+});
+
+[
+  ["east", "1,0", [24, 8]],
+  ["south", "0,1", [8, 24]],
+  ["west", "-1,0", [8, 8]],
+  ["north", "0,-1", [8, 8]],
+].forEach(([direction, neighborKey, centerEnd]) => {
+  test(`renderer draws a river connection to its ${direction} neighbor once`, () => {
+    // Setup
+    const { renderer, strokes } = createConnectionRenderer({
+      "0,0": { river: RIVER.PRESENT.id }, [neighborKey]: { river: RIVER.PRESENT.id },
+    });
+
+    // Execution
+    renderer.drawRiverLayer();
+
+    // Assertion
+    assert.equal(strokes.length, 5);
+    assert.deepEqual(strokes[2].end, centerEnd);
+  });
+});
+
+test("renderer does not treat a diagonal river neighbor as connected", () => {
+  // Setup
+  const { renderer, strokes } = createConnectionRenderer({
+    "0,0": { river: RIVER.PRESENT.id }, "1,1": { river: RIVER.PRESENT.id },
+  });
+
+  // Execution
+  renderer.drawRiverLayer();
+
+  // Assertion
+  assert.equal(strokes.length, 20);
+});
+
+[
+  ["east", "1,0", [24, 8]],
+  ["south", "0,1", [8, 24]],
+  ["southeast", "1,1", [24, 24]],
+  ["northeast", "1,-1", [24, -8]],
+].forEach(([direction, neighborKey, end]) => {
+  test(`renderer connects roads to different infrastructure types toward ${direction}`, () => {
+    // Setup
+    const { renderer, strokes } = createConnectionRenderer({
+      "0,0": { infrastructure: INFRASTRUCTURE.ROAD.id },
+      [neighborKey]: { infrastructure: INFRASTRUCTURE.FOOTPATH.id },
+    });
+
+    // Execution
+    renderer.drawInfrastructureLayer();
+
+    // Assertion
+    assert.deepEqual(strokes, [{ start: [8, 8], end }]);
+  });
+});
+
+test("renderer skips none-valued infrastructure neighbors", () => {
+  // Setup
+  const { renderer, strokes } = createConnectionRenderer({
+    "0,0": { infrastructure: INFRASTRUCTURE.ROAD.id },
+    "1,0": { infrastructure: INFRASTRUCTURE.NONE.id },
+  });
+
+  // Execution
+  renderer.drawInfrastructureLayer();
+
+  // Assertion
+  assert.deepEqual(strokes, []);
+});
+
+test("renderer preserves infrastructure connections across water", () => {
+  // Setup
+  const { renderer, strokes } = createConnectionRenderer({
+    "0,0": { terrain: TERRAIN.FLAT.id, infrastructure: INFRASTRUCTURE.ROAD.id },
+    "1,0": { terrain: TERRAIN.WATER.id, infrastructure: INFRASTRUCTURE.ROAD.id },
+  });
+
+  // Execution
+  renderer.drawInfrastructureLayer();
+
+  // Assertion
+  assert.deepEqual(strokes, [{ start: [8, 8], end: [24, 8] }]);
+});
+
+[INFRASTRUCTURE.SMALL_PORT, INFRASTRUCTURE.LARGE_PORT].forEach((port) => {
+  test(`renderer delegates ${port.name} as a marker without outgoing road lines`, () => {
+    // Setup
+    const { renderer, strokes, markers } = createConnectionRenderer({
+      "0,0": { infrastructure: port.id }, "1,0": { infrastructure: INFRASTRUCTURE.ROAD.id },
+    });
+
+    // Execution
+    renderer.drawInfrastructureLayer();
+
+    // Assertion
+    assert.equal(markers.length, 1);
+    assert.deepEqual(strokes, []);
+  });
 });

@@ -4,6 +4,14 @@ const RIVER_DIRECTIONS = ["east", "south", "west", "north"];
 
 export const RIVER_CONTROL_IMAGES = Object.freeze({});
 
+/**
+ * @param {CanvasRenderingContext2D} ctx Drawing context.
+ * @param {number} x Cell column.
+ * @param {number} y Cell row.
+ * @param {number} gridSize Cell size in pixels.
+ * @param {{east: boolean, south: boolean, west: boolean, north: boolean}} neighbors River connections.
+ * @returns {void}
+ */
 export function drawRiver(ctx, x, y, gridSize, neighbors) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("River drawing needs a canvas context and valid cell dimensions.");

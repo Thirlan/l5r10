@@ -1,9 +1,10 @@
-import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN } from "./world-map-layers.js";
+import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-layers.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
 import { getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { getResourceImage } from "./world-map-img-resources.js";
-import { getInfrastructureStyle } from "./world-map-img-infrastructure.js";
+import { drawInfrastructure } from "./world-map-img-infrastructure.js";
+import { drawRiver } from "./world-map-img-river.js";
 import { getAnimalColor } from "./world-map-img-animal.js";
 import { getSpiritColor } from "./world-map-img-spirit.js";
 import { getShadowlandColor } from "./world-map-img-shadowland.js";
@@ -148,75 +149,17 @@ export class WorldMapRenderer {
   }
 
   drawRiverLayer() {
-    const riverStripeColors = ["#F4A460", "#ADD8E6", "#0000FF", "#ADD8E6", "#F4A460"];
-    const riverStripeOffsets = [-2, -1, 0, 1, 2];
-
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.river) continue;
       const [x, y] = key.split(",").map(Number);
       const item = LAYERS.RIVER.getValue(cell.river);
-      if (!item || item.id === 0) continue;
-
-      const cx = x * this.gridSize + this.gridSize / 2;
-      const cy = y * this.gridSize + this.gridSize / 2;
-      const ctx = this.ctx;
-
-      ctx.save();
-      ctx.lineCap = "round";
-      const stripeWidth = Math.max(1.25, 4 * 0.45);
-      const stripeSpacing = stripeWidth * 0.85;
-
-      const allNeighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-      const connected = allNeighbors.some(([dx, dy]) => {
-        const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
-        return neighborCell && neighborCell.river;
-      });
-
-      const forwardNeighbors = [[1, 0], [0, 1]];
-      for (const [dx, dy] of forwardNeighbors) {
-        const neighborCell = this.grid[this.getCellKey(x + dx, y + dy)];
-        if (neighborCell && neighborCell.river) {
-          const nx = -dy;
-          const ny = dx;
-          riverStripeColors.forEach((color, index) => {
-            const offset = riverStripeOffsets[index] * stripeSpacing;
-            ctx.beginPath();
-            ctx.strokeStyle = color;
-            ctx.lineWidth = stripeWidth;
-            ctx.moveTo(cx + nx * offset, cy + ny * offset);
-            ctx.lineTo(
-              cx + dx * this.gridSize + nx * offset,
-              cy + dy * this.gridSize + ny * offset
-            );
-            ctx.stroke();
-          });
-        }
-      }
-
-      if (!connected) {
-        const halfLength = this.gridSize * 0.25;
-        [[1, 0], [0, 1]].forEach(([dx, dy]) => {
-          const nx = -dy;
-          const ny = dx;
-          riverStripeColors.forEach((color, index) => {
-            const offset = riverStripeOffsets[index] * stripeSpacing;
-            ctx.beginPath();
-            ctx.strokeStyle = color;
-            ctx.lineWidth = stripeWidth;
-            ctx.moveTo(
-              cx - dx * halfLength + nx * offset,
-              cy - dy * halfLength + ny * offset
-            );
-            ctx.lineTo(
-              cx + dx * halfLength + nx * offset,
-              cy + dy * halfLength + ny * offset
-            );
-            ctx.stroke();
-          });
-        });
-      }
-
-      ctx.restore();
+      if (!item || item === RIVER.NONE) continue;
+      const neighbors = Object.fromEntries([
+        ["east", 1, 0], ["south", 0, 1], ["west", -1, 0], ["north", 0, -1],
+      ].map(([direction, dx, dy]) => [
+        direction, Boolean(this.grid[this.getCellKey(x + dx, y + dy)]?.river),
+      ]));
+      drawRiver(this.ctx, x, y, this.gridSize, neighbors);
     }
   }
 
@@ -224,45 +167,14 @@ export class WorldMapRenderer {
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.infrastructure) continue;
       const [x, y] = key.split(",").map(Number);
-      this.drawInfrastructure(x, y, cell.infrastructure);
+      const value = LAYERS.INFRASTRUCTURE.getValue(cell.infrastructure);
+      const neighbors = Object.fromEntries([
+        ["east", 1, 0], ["south", 0, 1], ["southeast", 1, 1], ["northeast", 1, -1],
+      ].map(([direction, dx, dy]) => [
+        direction, Boolean(this.grid[this.getCellKey(x + dx, y + dy)]?.infrastructure),
+      ]));
+      drawInfrastructure(this.ctx, x, y, this.gridSize, value, neighbors);
     }
-  }
-
-  drawInfrastructure(x, y, infraVal) {
-    const item = getInfrastructureStyle(LAYERS.INFRASTRUCTURE.getValue(infraVal));
-    if (!item) return;
-
-    const cx = x * this.gridSize + this.gridSize / 2;
-    const cy = y * this.gridSize + this.gridSize / 2;
-    const ctx = this.ctx;
-
-    if (item.marker) {
-      ctx.save();
-      ctx.fillStyle = item.color || "#5C3A1E";
-      ctx.font = "bold " + (this.gridSize * 0.625) + "px Arial";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "top";
-      ctx.fillText(item.marker, x * this.gridSize + 1, y * this.gridSize + 1);
-      ctx.restore();
-      return;
-    }
-
-    ctx.save();
-    ctx.strokeStyle = item.color || "#5C3A1E";
-    ctx.lineWidth = item.lineWidth || 2;
-    ctx.lineCap = "round";
-
-    const forward = [[1, 0], [0, 1], [1, 1], [1, -1]];
-    forward.forEach(([dx, dy]) => {
-      const neighbourCell = this.grid[this.getCellKey(x + dx, y + dy)];
-      if (!neighbourCell || !neighbourCell.infrastructure) return;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(cx + dx * this.gridSize, cy + dy * this.gridSize);
-      ctx.stroke();
-    });
-
-    ctx.restore();
   }
 
   traceClanPolygons(cellSet) {
