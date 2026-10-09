@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   LayerDefinition,
   LayerValue,
+  LevelValue,
   SettlementValue,
 } from "../docs/scripts/world-map-layers.js";
 
@@ -102,6 +103,74 @@ test("layer definitions reject duplicate value IDs", () => {
 
   // Execution
   const createDefinition = () => new LayerDefinition("terrain", "Terrain Layer", values);
+
+  // Assertion
+  assert.throws(createDefinition, TypeError);
+});
+
+test("ordered levels reject fractional values", () => {
+  // Setup
+  const value = 1.5;
+
+  // Execution
+  const createLevel = () => new LevelValue(value, "Low");
+
+  // Assertion
+  assert.throws(createLevel, TypeError);
+});
+
+test("ordered levels reject values outside zero to five", () => {
+  // Setup
+  const values = [-1, 6];
+
+  // Execution
+  const createLevels = values.map((value) => () => new LevelValue(value, "Invalid"));
+
+  // Assertion
+  createLevels.forEach((createLevel) => assert.throws(createLevel, TypeError));
+});
+
+test("ordered levels reject empty names", () => {
+  // Setup
+  const name = "";
+
+  // Execution
+  const createLevel = () => new LevelValue(1, name);
+
+  // Assertion
+  assert.throws(createLevel, TypeError);
+});
+
+test("layer definitions resolve ordered metadata by its numeric value", () => {
+  // Setup
+  const low = new LevelValue(2, "Low");
+  const high = new LevelValue(4, "High");
+  const layer = new LayerDefinition("test", "Test", [high, low]);
+
+  // Execution
+  const resolved = layer.getValue(low.value);
+
+  // Assertion
+  assert.equal(resolved, low);
+});
+
+test("layer definitions reject duplicate ordered values", () => {
+  // Setup
+  const levels = [new LevelValue(2, "Low"), new LevelValue(2, "Duplicate")];
+
+  // Execution
+  const createDefinition = () => new LayerDefinition("test", "Test", levels);
+
+  // Assertion
+  assert.throws(createDefinition, TypeError);
+});
+
+test("layer definitions reject mixed identity and ordered metadata", () => {
+  // Setup
+  const values = [new LayerValue(1, "Site"), new LevelValue(2, "Low")];
+
+  // Execution
+  const createDefinition = () => new LayerDefinition("test", "Test", values);
 
   // Assertion
   assert.throws(createDefinition, TypeError);

@@ -13,11 +13,12 @@ Infrastructure: INFRASTRUCTURE.SMALL_PORT.id
 Clan: CLAN.CRAB.id
 Settlement: SETTLEMENT.LARGE_SHRINE.id
 Resource: RESOURCE.IRON_MINE.id
-Animal: ANIMAL.HIGH.id
-Spirit: SPIRIT.MEDIUM.id
-Shadowland: SHADOWLAND.LOW.id
-Crime: CRIME.EXTREME.id
-Fertility: FERTILITY.HIGH.id
+Animal: ANIMAL.HIGH.value
+Spirit: SPIRIT.MEDIUM.value
+Shadowland: SHADOWLAND.LOW.value
+Crime: CRIME.VERY_HIGH.value
+Resource level: RESOURCE_LEVEL.HIGH.value
+Compare levels: SHADOWLAND.HIGH.value > SHADOWLAND.LOW.value
 */
 
 export class LayerValue {
@@ -48,29 +49,54 @@ export class SettlementValue extends LayerValue {
   }
 }
 
+export class LevelValue {
+  /**
+   * @param {number} value Ordered level from zero to five.
+   * @param {string} name Display name.
+   */
+  constructor(value, name) {
+    if (!Number.isInteger(value) || value < 0 || value > 5 || typeof name !== "string" || !name) {
+      throw new TypeError("Levels need an integer value from zero to five and a name.");
+    }
+    this.value = value;
+    this.name = name;
+    Object.freeze(this);
+  }
+}
+
 export class LayerDefinition {
-  #valueById;
+  #valueByNumber;
 
   constructor(id, name, values) {
     if (typeof id !== "string" || id.length === 0 || typeof name !== "string" || name.length === 0) {
       throw new TypeError("Layer definitions need an ID and a name.");
     }
-    if (!Array.isArray(values) || values.some((value) => !(value instanceof LayerValue))) {
-      throw new TypeError("Layer definitions need an array of layer values.");
+    if (!Array.isArray(values) || values.some((value) => !(value instanceof LayerValue)
+      && !(value instanceof LevelValue))) {
+      throw new TypeError("Layer definitions need an array of metadata values.");
     }
-    if (new Set(values.map((value) => value.id)).size !== values.length) {
-      throw new TypeError("Layer value IDs must be unique within a layer.");
+    if (values.some((value) => (value instanceof LevelValue) !== (values[0] instanceof LevelValue))) {
+      throw new TypeError("Layer definitions cannot mix metadata types.");
+    }
+    if (new Set(values.map((value) => value instanceof LevelValue ? value.value : value.id)).size !== values.length) {
+      throw new TypeError("Layer values must be unique within a layer.");
     }
 
     this.id = id;
     this.name = name;
     this.values = Object.freeze([...values]);
-    this.#valueById = new Map(this.values.map((value) => [value.id, value]));
+    this.#valueByNumber = new Map(this.values.map((value) => [
+      value instanceof LevelValue ? value.value : value.id, value,
+    ]));
     Object.freeze(this);
   }
 
-  getValue(id) {
-    return this.#valueById.get(id);
+  /**
+   * @param {number} number Saved identity ID or ordered level value.
+   * @returns {LayerValue|LevelValue|undefined} Matching metadata.
+   */
+  getValue(number) {
+    return this.#valueByNumber.get(number);
   }
 }
 
@@ -155,15 +181,17 @@ export const RESOURCE = createValues([
   ["VEGETABLE_FARM", 39, "Vegetable Farm"],
 ]);
 
-function createLevels(names) {
-  return createValues(names.map((name, id) => [name.toUpperCase(), id, name]));
+function createLevels() {
+  return createValues(["None", "Very Low", "Low", "Medium", "High", "Very High"].map(
+    (name, value) => [name.toUpperCase().replaceAll(" ", "_"), value, name],
+  ), LevelValue);
 }
 
-export const ANIMAL = createLevels(["none", "low", "medium", "high", "extreme"]);
-export const SPIRIT = createLevels(["none", "low", "medium", "high", "extreme"]);
-export const SHADOWLAND = createLevels(["none", "low", "medium", "high", "extreme"]);
-export const CRIME = createLevels(["none", "low", "medium", "high", "extreme"]);
-export const FERTILITY = createLevels(["none", "low", "medium", "high"]);
+export const ANIMAL = createLevels();
+export const SPIRIT = createLevels();
+export const SHADOWLAND = createLevels();
+export const CRIME = createLevels();
+export const RESOURCE_LEVEL = createLevels();
 
 export const LAYERS = Object.freeze({
   TERRAIN: new LayerDefinition("terrain", "Terrain Layer", Object.values(TERRAIN)),
@@ -178,5 +206,5 @@ export const LAYERS = Object.freeze({
   SPIRIT: new LayerDefinition("spirit", "Spirit Layer", Object.values(SPIRIT)),
   SHADOWLAND: new LayerDefinition("shadowland", "Shadowland Layer", Object.values(SHADOWLAND)),
   CRIME: new LayerDefinition("crime", "Crime Layer", Object.values(CRIME)),
-  FERTILITY: new LayerDefinition("fertility", "Land Fertility Layer", Object.values(FERTILITY)),
+  RESOURCE_LEVEL: new LayerDefinition("resourceLevel", "Resource Level", Object.values(RESOURCE_LEVEL)),
 });

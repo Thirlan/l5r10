@@ -23,7 +23,7 @@ class WorldMapViewer extends WorldMapRenderer {
       spirit: false,
       shadowland: false,
       crime: false,
-      fertility: false
+      resourceLevel: false
     };
     this.routePreferences = { includeRisk: false, includeMoney: false };
     this.skillConfig = TravelEventEngine.defaultSkillConfig();
@@ -334,7 +334,7 @@ class WorldMapViewer extends WorldMapRenderer {
       else if (layerName === "clan") this.drawClanLayer();
     }
 
-    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "fertility"]
+    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "resourceLevel"]
       .filter((layerName) => this.isLayerVisible(layerName));
     this.drawOverlayLayers(activeOverlays);
 

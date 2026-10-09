@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–11 are complete; PR 12 onward remains.
+Status: In progress. PRs 1–12e are complete; PR 13 onward remains.
 
 ## Goal
 
@@ -10,6 +10,14 @@ Separate layer identity from images, colors, and drawing code.
 Use a direct migration without backward-compatibility code.
 
 ## Confirmed decisions
+
+- Optional overlays use ordered levels: None, Very Low, Low, Medium, High, and Very High (0–5).
+- Use `SHADOWLAND.LOW.value` and `.name`; compare numeric `.value` fields.
+- Rename Fertility to Resource Level (`RESOURCE_LEVEL`, saved field `resourceLevel`).
+- Keep the Resource layer for mines and farms unchanged.
+- Keep existing saved level numbers. Accept their new meanings; rename the saved Fertility field only.
+- Severity colors run from yellow to purple. Resource Level uses the reverse sequence.
+- Use `rgba(255, 255, 0, 0.55)` for Low severity and High Resource Level.
 
 - Use [world-map-layers.js](../docs/scripts/world-map-layers.js) for layer identity and value definitions.
 - Named constants return metadata instances, not numeric IDs.
@@ -51,7 +59,7 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 
 - Layer value counts are: terrain 8, climate 6, vegetation 2, river 2, infrastructure 5, clan 19.
 - Settlement has 15 values. Resource has 40 values.
-- Animal, spirit, shadowland, and crime each have 5 values. Fertility has 4 values.
+- Animal, spirit, shadowland, crime, and Resource Level each have 6 ordered values.
 - Terrain IDs are `0, 1, 2, 3, 4, 5, 7, 8`.
 - Settlement IDs are `0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16, 17`.
 - Preserve these gaps. Do not assign new IDs by array position.
@@ -74,18 +82,19 @@ Create these classes in [world-map-layers.js](../docs/scripts/world-map-layers.j
 | Class | Responsibility |
 |---|---|
 | `LayerValue` | Store immutable `id` and `name` fields. |
+| `LevelValue` | Store immutable numeric `value` and display `name` fields for ordered levels. |
 | `SettlementValue` | Extend `LayerValue` with `englishType` and `rokuganiType`. |
 | `LayerDefinition` | Store layer `id`, `name`, and its value collection. Resolve stored values by ID. |
 
 Export named value collections:
 
-`TERRAIN`, `CLIMATE`, `VEGETATION`, `RIVER`, `INFRASTRUCTURE`, `CLAN`, `SETTLEMENT`, `RESOURCE`, `ANIMAL`, `SPIRIT`, `SHADOWLAND`, `CRIME`, and `FERTILITY`.
+`TERRAIN`, `CLIMATE`, `VEGETATION`, `RIVER`, `INFRASTRUCTURE`, `CLAN`, `SETTLEMENT`, `RESOURCE`, `ANIMAL`, `SPIRIT`, `SHADOWLAND`, `CRIME`, and `RESOURCE_LEVEL`.
 
 Each collection contains immutable class instances under uppercase keys.
 Examples include `TERRAIN.COASTAL_WATER`, `INFRASTRUCTURE.SMALL_PORT`, and `SETTLEMENT.LARGE_SHRINE`.
 Use `NONE` for existing none values. Use `PRESENT` for binary vegetation and river values.
-Use `LOW`, `MEDIUM`, `HIGH`, and `EXTREME` where those values exist.
-Do not add `EXTREME` to fertility.
+Optional overlays use `NONE`, `VERY_LOW`, `LOW`, `MEDIUM`, `HIGH`, and `VERY_HIGH`.
+These values use `LevelValue`, not identity metadata. Compare their numeric `.value` fields.
 
 Export `LAYERS` as the collection of `LayerDefinition` instances.
 For example, `LAYERS.TERRAIN.id` returns `"terrain"`.
@@ -102,7 +111,7 @@ Metadata must not contain `image`, `img`, `color`, `border`, `fill`, `lineWidth`
 Image access belongs to the base-layer presentation module.
 Do not store canvas objects or image caches in layer definitions.
 
-Provide `LayerDefinition.getValue(id)` for numeric IDs in the current map data.
+Provide `LayerDefinition.getValue(number)` for saved identity IDs or ordered level values.
 Invalid values must use explicit diagnostics at the import or tool-selection boundary.
 Do not add case-insensitive legacy name lookup or historical vegetation normalization.
 Use named metadata instances directly in application code.
@@ -123,7 +132,7 @@ All paths below are relative to the repository root.
 | `docs/scripts/world-map-img-spirit.js` | Spirit colors, vertical cue drawing, and control images. |
 | `docs/scripts/world-map-img-shadowland.js` | Shadowland colors, diagonal cue drawing, and control images. |
 | `docs/scripts/world-map-img-crime.js` | Crime colors, horizontal cue drawing, and control images. |
-| `docs/scripts/world-map-img-fertility.js` | Fertility colors, cross cue drawing, and control images. |
+| [world-map-img-resource-level.js](../docs/scripts/world-map-img-resource-level.js) | Inverted Resource Level colors, cross cue drawing, and control images. |
 
 Use metadata constants when defining mappings. Do not repeat raw layer IDs.
 Use existing valid PNG and WebP assets. Do not rename PNG paths to nonexistent WebP files.
@@ -157,7 +166,7 @@ Shared image loading and caches can remain in the common renderer.
 
 Keep generic overlay band layout, clipping, and contrast calculation in the common renderer.
 Move each layer's colors and cue drawing into its dedicated module.
-Keep fertility's red, orange, and green palette.
+Resource Level uses the reverse severity palette. None has no color.
 Preserve equal-width bands when multiple overlays are visible.
 
 ### Draw order and saved data
@@ -168,7 +177,7 @@ Keep the current separate placement of cliffs, optional overlays, grid lines, ro
 Text and erase remain tools. Do not invent numeric value catalogs for them.
 
 Use numeric IDs in saved cells, not metadata objects.
-Painting uses `selectedValue.id`.
+Painting identity layers uses `selectedValue.id`. Painting ordered overlays uses `selectedValue.value`.
 This is the selected data format, not a backward-compatibility requirement.
 Use the current [world-map-grid.json](../docs/data/world-map-grid.json) as development data.
 Update that data and directly related resource mappings if the new implementation requires changes.
@@ -228,6 +237,20 @@ Document regeneration steps in [docs/scripts/README.md](../docs/scripts/README.m
 
 ## Pull request sequence
 
+### Ordered overlay follow-up
+
+Apply these bounded changes before renderer integration. Each batch must stay below 200 changed implementation lines.
+
+| Batch | Acceptance criteria |
+|---|---|
+| Level A | **Done** — Add immutable ordered level metadata and numeric lookup. Replace optional catalogs with six levels. Test validation and lookup. Verify numeric ordering. |
+| Level B1 | **Done** — Update animal, spirit, shadowland, and crime palettes. Keep existing cue geometry. |
+| Level B2 | **Done** — Rename the fertility presentation module to Resource Level and invert its palette. |
+| Level B3 | **Done** — Rename and update the Resource Level tests. Do not duplicate static palette values in unit tests. |
+| Level C1-C5 | **Done** — Update one optional layer per batch in the currently used layer JSON. Keep numeric values and update level labels and palettes. |
+| Level D | **Done** — Update builder tools, viewer visibility, and common renderer references to Resource Level and six levels. |
+| Level E1-E2 | **Done** — Rename saved fertility fields to resourceLevel in two batches of at most 90 cells. Keep every numeric value unchanged. |
+
 Count added and deleted source, data, test, HTML, and CSS lines.
 Each implementation PR must stay at or below 200 changed lines.
 Use a 180-line working budget to leave room for review fixes.
@@ -251,7 +274,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 09 | 03, 06 | **Done** — Add settlement asset lookup and circular markers, including ruins. Preserve asset-first selection. |
 | 10 | 09 | **Done** — Add square settlement markers and watchtower drawing. Preserve all marker dimensions. |
 | 11 | 09 | **Done** — Add shrine and temple drawing, tinting integration, and label-size mappings. |
-| 12a-12e | 04 | Add one optional-overlay module per PR. Test its palette and cue, including fertility's separate palette. |
+| 12a-12e | 04 | **Done** — Add one optional-overlay module per PR: animal, spirit, shadowland, crime, and Resource Level. Each exports its palette lookup, cue drawing function, and control image mapping. Test palette behavior and cue geometry; Resource Level uses the reverse severity palette. |
 | 13a-13c | 04, 05 | Convert renderer and page entry points to modules in bounded batches. Replace map action handlers with module listeners. |
 | 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
 | 15a | 14 | Add climate base-color rendering in the base-layer module. Use named climate values and preserve the current climate appearance. |
@@ -286,7 +309,7 @@ Use dependency-free Node tests for metadata and mappings.
 Use local browser checks for canvas rendering and page integration.
 Do not introduce a framework or build system for this migration.
 
-- Compare every new ID and name against the original JSON before its retirement.
+- Compare identity IDs and names against the original JSON before its retirement. Ordered overlays follow the new six-level design.
 - Verify all 13 layers and their exact value counts.
 - Verify settlement labels. Verify resources have no English or Rokugani type fields.
 - Verify identity instances have no presentation fields.
@@ -305,7 +328,7 @@ Do not introduce a framework or build system for this migration.
 - Cover infrastructure connections, ports, water crossings, and footpaths.
 - Cover all settlement marker types, clan tinting, shrine scaling, and temple sizing.
 - Cover cliff directions, vegetation over cliffs and water, waste climate, and shadowland climate.
-- Cover individual overlays, combined bands, cue contrast, and fertility colors.
+- Cover individual overlays, combined bands, cue contrast, and Resource Level colors.
 - Verify generated control images match the shared renderer at the selected preview size.
 - Check every builder tool, active button, brush size, erase tool, import, export, and zoom action.
 - Check viewer visibility, names, travel papers, skill controls, route calculation, and waypoint actions.
@@ -318,7 +341,7 @@ Do not introduce a framework or build system for this migration.
 
 ## Out of scope
 
-- New terrain, settlement, resource, or overlay values.
+- New terrain, settlement, or resource-site values beyond the confirmed ordered overlay changes.
 - New travel rules or fixes to unrelated existing travel behavior.
 - A 3D renderer or Babylon.js migration.
 - New settlement artwork or replacement resource artwork.
