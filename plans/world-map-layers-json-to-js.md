@@ -15,7 +15,11 @@ Use a direct migration without backward-compatibility code.
 - Named constants return metadata instances, not numeric IDs.
 - `TERRAIN.FLAT.id` returns `0`. `TERRAIN.FLAT.name` returns `"flat"`.
 - Keep images and colors outside these metadata instances.
-- Replace the JSON image mappings with JavaScript mappings in [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js).
+- Replace composite terrain, climate, and vegetation tile images with separately rendered layers.
+- Render climate as a base color. Render land terrain as a transparent image; draw water, coastal water, and ocean as colors over climate. Render vegetation as an image above terrain.
+- Allow vegetation to render above cliffs. Do not normalize cliff terrain to flat terrain.
+- Draw vegetation above water as well as terrain.
+- Keep the separate climate, terrain, and vegetation presentation data in [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js).
 - Use the plural filenames [world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world-map-img-resources.js).
 - The current canvas output is the source of truth for presentation.
 - Update button controls to match the canvas output.
@@ -34,7 +38,7 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 | File | Current responsibility |
 |---|---|
 | [layers.json](../docs/data/layers.json) | Defines 13 layers. Mixes identity, labels, colors, and image paths. |
-| [map_tile_img.json](../docs/data/map_tile_img.json) | Defines 66 terrain, climate, and vegetation image combinations. |
+| [map_tile_img.json](../docs/data/map_tile_img.json) | Defines 66 composite terrain, climate, and vegetation image combinations. The layered renderer will replace this mapping. |
 | [world-map-common.js](../docs/scripts/world-map-common.js) | Loads tile images. Builds layer lookups. Draws most map features. |
 | [world-map-grid.js](../docs/scripts/world-map-grid.js) | Loads layer JSON. Handles painting, import, export, and builder clan borders. |
 | [world-map-viewer.js](../docs/scripts/world-map-viewer.js) | Loads layer JSON. Handles visibility, routes, and viewer clan shapes. |
@@ -109,7 +113,7 @@ All paths below are relative to the repository root.
 
 | Module | Owns |
 |---|---|
-| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Composite tile mappings, base control images, and cliff drawing settings and code. |
+| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Climate and water terrain colors, transparent land terrain and vegetation image mappings, base control images, and cliff drawing settings and code. |
 | `docs/scripts/world-map-img-river.js` | River stripe colors, widths, connections, isolated river drawing, and control images. |
 | `docs/scripts/world-map-img-infrastructure.js` | Road and footpath drawing, port markers, colors, widths, and control images. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Clan border and fill colors only. |
@@ -131,12 +135,15 @@ Put programmatic settlement drawing below those mappings.
 Resolve asset-backed markers first. This allows a later asset to replace a drawn marker.
 Keep shrine scaling, temple sizing, and clan tinting unchanged.
 
-Use `getTileImage(terrain, climate, vegetation)` in the base-layer module.
-Its parameters are metadata instances. Its result is the configured asset URL.
-For example, pass `TERRAIN.FLAT`, `CLIMATE.TEMPERATE`, and `VEGETATION.NONE`.
-Use each instance's ID only when creating the internal lookup key.
-Preserve all 66 mappings without inventing missing combinations.
-Keep water vegetation disabled. Keep cliff tiles based on flat terrain.
+Render climate first as a base color. Select the color from the climate metadata value.
+For land terrain, draw its transparent image over the climate color.
+For water, coastal water, and ocean, draw the terrain color over the climate color instead of a terrain image.
+Draw the vegetation image over land or water when vegetation is present.
+Do not use a three-value terrain, climate, and vegetation lookup.
+Do not map cliffs to flat terrain. A cliff image must support vegetation above it.
+Use metadata values as mapping keys. Use IDs only for saved data or internal lookup keys.
+Do not suppress vegetation on water.
+Replace the composite tile mappings and retire only image assets that have no remaining consumer.
 
 Use `getClanColors(clan)` in the clan module.
 Keep the existing neutral settlement palette explicit for cells without a clan.
@@ -247,21 +254,23 @@ Run targeted checks for completed components. Run full page checks after integra
 | 12a-12e | 04 | Add one optional-overlay module per PR. Test its palette and cue, including fertility's separate palette. |
 | 13a-13c | 04, 05 | Convert renderer and page entry points to modules in bounded batches. Replace map action handlers with module listeners. |
 | 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
-| 15 | 14, 05 | Replace tile-map JSON loading. Use named terrain, climate, and vegetation values. Preserve cliff and water tile selection. |
-| 16 | 15 | Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
+| 15a | 14 | Add climate base-color rendering in the base-layer module. Use named climate values and preserve the current climate appearance. |
+| 15b | 15a | Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
+| 15c | 15a, 15b | Add vegetation image rendering above land and water, including cliffs. Remove the three-value tile mapping and its JSON loading. Retire composite images only after checking for other consumers. |
+| 16 | 15b | Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
 | 17 | 14, 07 | Delegate river drawing and remove old river code and settings. |
 | 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and settings. |
 | 19 | 14, 06 | Connect clan colors in builder, viewer, and settlement rendering. Remove metadata color access. |
 | 20a-20c | 14, 09, 10, 11, 19 | Delegate settlement markers in separate circular, square, and asset-backed batches. Remove each replaced branch. |
 | 21 | 14, 06 | Delegate resource markers. Remove resource type-label access. Test language-independent resource names. |
 | 22a-22b | 14, 12a-12e | Delegate optional-overlay colors and cues in separate batches. Preserve band layout and visibility behavior. |
-| 23 | 15, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
+| 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
 | 24a-24c | 23 | Generate base, river/infrastructure/overlay, and settlement control assets in separate batches. Add their module mappings. |
 | 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
 | 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
 | 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
-| 28 | 15, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
-| 29a-29g | 14, 15 | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
+| 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
+| 29a-29g | 14, 15a-15c | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
 | 30a-30b | 29a-29g | Update script documentation, resource-output references, and affected plan references in separate bounded PRs. |
 
 The JSON files exceed the PR limit.
@@ -282,7 +291,9 @@ Do not introduce a framework or build system for this migration.
 - Verify settlement labels. Verify resources have no English or Rokugani type fields.
 - Verify identity instances have no presentation fields.
 - Verify unique IDs within each layer, numeric ID lookup, and immutable constants.
-- Verify all 66 tile mappings and every referenced asset path.
+- Verify climate and water-terrain colors, plus land-terrain and vegetation image mappings, against the current visual reference.
+- Verify land terrain and vegetation images render as separate layers, including vegetation over cliffs and water.
+- Verify no retired composite image has a remaining runtime consumer.
 - Verify module imports do not start image loading during metadata-only tests.
 - Test zero-valued defaults separately from none-valued layers.
 - Load the development map. Verify its cells resolve to the new definitions and render correctly.
@@ -293,7 +304,7 @@ Do not introduce a framework or build system for this migration.
 - Cover river isolation, straight connections, corners, and junctions.
 - Cover infrastructure connections, ports, water crossings, and footpaths.
 - Cover all settlement marker types, clan tinting, shrine scaling, and temple sizing.
-- Cover cliff directions, water vegetation suppression, waste climate, and shadowland climate.
+- Cover cliff directions, vegetation over cliffs and water, waste climate, and shadowland climate.
 - Cover individual overlays, combined bands, cue contrast, and fertility colors.
 - Verify generated control images match the shared renderer at the selected preview size.
 - Check every builder tool, active button, brush size, erase tool, import, export, and zoom action.
