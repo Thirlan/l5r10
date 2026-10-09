@@ -113,7 +113,7 @@ class WorldMapGrid extends WorldMapRenderer {
         } else {
           const layerToErase = this.currentValue;
           const cell = this.grid[cellKey];
-          if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(layerToErase)) {
+          if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(layerToErase)) {
             delete cell[layerToErase];
             if (layerToErase === "terrain") delete cell["cliff direction"];
           } else if (layerToErase === "infrastructure") {
@@ -139,7 +139,7 @@ class WorldMapGrid extends WorldMapRenderer {
           if (mapped !== undefined) valId = mapped;
         }
 
-        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "fertility"].includes(this.currentLayer)) {
+        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
           if (valId) cell[this.currentLayer] = valId;
           else delete cell[this.currentLayer];
           if (this.currentLayer === "terrain") {
@@ -321,7 +321,7 @@ class WorldMapGrid extends WorldMapRenderer {
   }
 
   getActiveOverlayLayer() {
-    const overlayLayers = ["animal", "spirit", "shadowland", "crime", "fertility"];
+    const overlayLayers = ["animal", "spirit", "shadowland", "crime", "resourceLevel"];
     if (overlayLayers.includes(this.currentLayer)) {
       return this.currentLayer;
     }

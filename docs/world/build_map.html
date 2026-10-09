@@ -307,17 +307,20 @@
       <!-- Animal Layer -->
       <div class="control-panel">
         <h3>Animal Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'very low', 'animal'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.45);"></span>Very Low
+        </button>
         <button class="tool-button" onclick="mapGrid.selectTool('animal', 'low', 'animal'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.6);"></span>Low
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.55);"></span>Low
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('animal', 'medium', 'animal'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Medium
+          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.55);"></span>Medium
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('animal', 'high', 'animal'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.8);"></span>High
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.65);"></span>High
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'extreme', 'animal'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.85);"></span>Extreme
+        <button class="tool-button" onclick="mapGrid.selectTool('animal', 'very high', 'animal'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.75);"></span>Very High
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'animal', 'erase'); updateActiveButton(this);">
           Erase Animal
@@ -327,17 +330,20 @@
       <!-- Spirit Layer -->
       <div class="control-panel">
         <h3>Spirit Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'very low', 'spirit'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.45);"></span>Very Low
+        </button>
         <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'low', 'spirit'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.6);"></span>Low
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.55);"></span>Low
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'medium', 'spirit'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Medium
+          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.55);"></span>Medium
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'high', 'spirit'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.8);"></span>High
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.65);"></span>High
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'extreme', 'spirit'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.85);"></span>Extreme
+        <button class="tool-button" onclick="mapGrid.selectTool('spirit', 'very high', 'spirit'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.75);"></span>Very High
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'spirit', 'erase'); updateActiveButton(this);">
           Erase Spirit
@@ -347,17 +353,20 @@
       <!-- Shadowland Layer -->
       <div class="control-panel">
         <h3>Shadowland Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'very low', 'shadowland'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.45);"></span>Very Low
+        </button>
         <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'low', 'shadowland'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.6);"></span>Low
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.55);"></span>Low
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'medium', 'shadowland'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Medium
+          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.55);"></span>Medium
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'high', 'shadowland'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.8);"></span>High
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.65);"></span>High
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'extreme', 'shadowland'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.85);"></span>Extreme
+        <button class="tool-button" onclick="mapGrid.selectTool('shadowland', 'very high', 'shadowland'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.75);"></span>Very High
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'shadowland', 'erase'); updateActiveButton(this);">
           Erase Shadowland
@@ -367,37 +376,46 @@
       <!-- Crime Layer -->
       <div class="control-panel">
         <h3>Crime Layer</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'very low', 'crime'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.45);"></span>Very Low
+        </button>
         <button class="tool-button" onclick="mapGrid.selectTool('crime', 'low', 'crime'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.6);"></span>Low
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.55);"></span>Low
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('crime', 'medium', 'crime'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Medium
+          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.55);"></span>Medium
         </button>
         <button class="tool-button" onclick="mapGrid.selectTool('crime', 'high', 'crime'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.8);"></span>High
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.65);"></span>High
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'extreme', 'crime'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.85);"></span>Extreme
+        <button class="tool-button" onclick="mapGrid.selectTool('crime', 'very high', 'crime'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.75);"></span>Very High
         </button>
         <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'crime', 'erase'); updateActiveButton(this);">
           Erase Crime
         </button>
       </div>
 
-      <!-- Land Fertility Layer -->
+      <!-- Resource Level -->
       <div class="control-panel">
-        <h3>Land Fertility Layer</h3>
-        <button class="tool-button" onclick="mapGrid.selectTool('fertility', 'low', 'fertility'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.6);"></span>Low
+        <h3>Resource Level</h3>
+        <button class="tool-button" onclick="mapGrid.selectTool('resourceLevel', 'very low', 'resourceLevel'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(128, 0, 128, 0.75);"></span>Very Low
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('fertility', 'medium', 'fertility'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Medium
+        <button class="tool-button" onclick="mapGrid.selectTool('resourceLevel', 'low', 'resourceLevel'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 0, 0, 0.65);"></span>Low
         </button>
-        <button class="tool-button" onclick="mapGrid.selectTool('fertility', 'high', 'fertility'); updateActiveButton(this);">
-          <span class="terrain-color" style="background-color: rgba(0, 128, 0, 0.8);"></span>High
+        <button class="tool-button" onclick="mapGrid.selectTool('resourceLevel', 'medium', 'resourceLevel'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 165, 0, 0.55);"></span>Medium
         </button>
-        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'fertility', 'erase'); updateActiveButton(this);">
-          Erase Land Fertility
+        <button class="tool-button" onclick="mapGrid.selectTool('resourceLevel', 'high', 'resourceLevel'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.55);"></span>High
+        </button>
+        <button class="tool-button" onclick="mapGrid.selectTool('resourceLevel', 'very high', 'resourceLevel'); updateActiveButton(this);">
+          <span class="terrain-color" style="background-color: rgba(255, 255, 0, 0.45);"></span>Very High
+        </button>
+        <button class="tool-button erase-button" onclick="mapGrid.selectTool('erase', 'resourceLevel', 'erase'); updateActiveButton(this);">
+          Erase Resource Level
         </button>
       </div>
 

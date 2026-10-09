@@ -674,27 +674,32 @@
       "values": [
         {
           "id": 0,
-          "name": "none",
+          "name": "None",
           "color": null
         },
         {
           "id": 1,
-          "name": "low",
+          "name": "Very Low",
           "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
-          "name": "medium",
-          "color": "rgba(255, 165, 0, 0.55)"
+          "name": "Low",
+          "color": "rgba(255, 255, 0, 0.55)"
         },
         {
           "id": 3,
-          "name": "high",
-          "color": "rgba(255, 0, 0, 0.65)"
+          "name": "Medium",
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 4,
-          "name": "extreme",
+          "name": "High",
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 5,
+          "name": "Very High",
           "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
@@ -705,27 +710,32 @@
       "values": [
         {
           "id": 0,
-          "name": "none",
+          "name": "None",
           "color": null
         },
         {
           "id": 1,
-          "name": "low",
+          "name": "Very Low",
           "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
-          "name": "medium",
-          "color": "rgba(255, 165, 0, 0.55)"
+          "name": "Low",
+          "color": "rgba(255, 255, 0, 0.55)"
         },
         {
           "id": 3,
-          "name": "high",
-          "color": "rgba(255, 0, 0, 0.65)"
+          "name": "Medium",
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 4,
-          "name": "extreme",
+          "name": "High",
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 5,
+          "name": "Very High",
           "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
@@ -736,27 +746,32 @@
       "values": [
         {
           "id": 0,
-          "name": "none",
+          "name": "None",
           "color": null
         },
         {
           "id": 1,
-          "name": "low",
+          "name": "Very Low",
           "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
-          "name": "medium",
-          "color": "rgba(255, 165, 0, 0.55)"
+          "name": "Low",
+          "color": "rgba(255, 255, 0, 0.55)"
         },
         {
           "id": 3,
-          "name": "high",
-          "color": "rgba(255, 0, 0, 0.65)"
+          "name": "Medium",
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 4,
-          "name": "extreme",
+          "name": "High",
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 5,
+          "name": "Very High",
           "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
@@ -767,54 +782,69 @@
       "values": [
         {
           "id": 0,
-          "name": "none",
+          "name": "None",
           "color": null
         },
         {
           "id": 1,
-          "name": "low",
+          "name": "Very Low",
           "color": "rgba(255, 255, 0, 0.45)"
         },
         {
           "id": 2,
-          "name": "medium",
-          "color": "rgba(255, 165, 0, 0.55)"
+          "name": "Low",
+          "color": "rgba(255, 255, 0, 0.55)"
         },
         {
           "id": 3,
-          "name": "high",
-          "color": "rgba(255, 0, 0, 0.65)"
+          "name": "Medium",
+          "color": "rgba(255, 165, 0, 0.55)"
         },
         {
           "id": 4,
-          "name": "extreme",
+          "name": "High",
+          "color": "rgba(255, 0, 0, 0.65)"
+        },
+        {
+          "id": 5,
+          "name": "Very High",
           "color": "rgba(128, 0, 128, 0.75)"
         }
       ]
     },
-    "fertility": {
-      "id": "fertility",
-      "name": "Land Fertility Layer",
+    "resourceLevel": {
+      "id": "resourceLevel",
+      "name": "Resource Level",
       "values": [
         {
           "id": 0,
-          "name": "none",
+          "name": "None",
           "color": null
         },
         {
           "id": 1,
-          "name": "low",
-          "color": "rgba(255, 0, 0, 0.45)"
+          "name": "Very Low",
+          "color": "rgba(128, 0, 128, 0.75)"
         },
         {
           "id": 2,
-          "name": "medium",
-          "color": "rgba(255, 165, 0, 0.55)"
+          "name": "Low",
+          "color": "rgba(255, 0, 0, 0.65)"
         },
         {
           "id": 3,
-          "name": "high",
-          "color": "rgba(0, 128, 0, 0.65)"
+          "name": "Medium",
+          "color": "rgba(255, 165, 0, 0.55)"
+        },
+        {
+          "id": 4,
+          "name": "High",
+          "color": "rgba(255, 255, 0, 0.55)"
+        },
+        {
+          "id": 5,
+          "name": "Very High",
+          "color": "rgba(255, 255, 0, 0.45)"
         }
       ]
     }

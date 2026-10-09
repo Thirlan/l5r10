@@ -108,7 +108,7 @@ class WorldMapRenderer {
     for (const [key, originalCell] of Object.entries(grid || {})) {
       const cell = { ...originalCell };
       if (cell.vegetation) cell.vegetation = 1;
-      for (const layerName of ["terrain", "climate", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "animal", "spirit", "shadowland", "crime", "fertility"]) {
+      for (const layerName of ["terrain", "climate", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "animal", "spirit", "shadowland", "crime", "resourceLevel"]) {
         if (cell[layerName] === undefined) continue;
         const layerValue = this.layerId(layerName, cell[layerName]);
         if (layerValue !== null) cell[layerName] = layerValue;
@@ -688,10 +688,11 @@ class WorldMapRenderer {
       if (item && item.color) color = item.color;
     }
     if (!color) {
-      if (val === 1 || val === "low") color = "rgba(255, 255, 0, 0.45)";
-      else if (val === 2 || val === "medium") color = "rgba(255, 165, 0, 0.55)";
-      else if (val === 3 || val === "high") color = "rgba(255, 0, 0, 0.65)";
-      else if (val === 4 || val === "extreme") color = "rgba(128, 0, 128, 0.75)";
+      const levels = ["none", "very low", "low", "medium", "high", "very high"];
+      const palette = ["rgba(255, 255, 0, 0.45)", "rgba(255, 255, 0, 0.55)",
+        "rgba(255, 165, 0, 0.55)", "rgba(255, 0, 0, 0.65)", "rgba(128, 0, 128, 0.75)"];
+      const level = typeof val === "number" ? val : levels.indexOf(String(val).toLowerCase());
+      color = (layerName === "resourceLevel" ? palette.reverse() : palette)[level - 1] || null;
     }
     return color;
   }
@@ -787,7 +788,7 @@ class WorldMapRenderer {
       ctx.moveTo(left + inset, centerY);
       ctx.lineTo(left + width - inset, centerY);
       ctx.stroke();
-    } else if (layerName === "fertility") {
+    } else if (layerName === "resourceLevel") {
       ctx.beginPath();
       ctx.moveTo(centerX, top + inset);
       ctx.lineTo(centerX, top + height - inset);
