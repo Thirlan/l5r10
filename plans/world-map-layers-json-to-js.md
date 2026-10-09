@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–20 are complete; PR 21 onward remains.
+Status: In progress. PRs 1–21 are complete; PR 22 onward remains.
 
 ## Goal
 
@@ -288,7 +288,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 18 | 14, 08 | **Done** — Delegate infrastructure drawing and remove old infrastructure code and settings. Verify mixed-type connections, water crossings, and ports. |
 | 19 | 14, 06 | **Done** — Verify clan colors in builder, viewer, and settlement rendering. PR 14 already removed metadata color access. Remove redundant palette fallbacks and retain explicit neutral settlement colors. |
 | 20a-20c | 14, 09, 10, 11, 19 | **Done** — Delegate circular, square, and asset-backed settlement markers. Remove replaced renderer branches and duplicate asset-tinting methods. |
-| 21 | 14, 06 | Delegate resource markers. Remove resource type-label access. Test language-independent resource names. |
+| 21 | 14, 06 | **Done** — Delegate resource markers. PR 14 already removed resource type-label access. Test language-independent resource names. |
 | 22a-22b | 14, 12a-12e | Delegate optional-overlay colors and cues in separate batches. Preserve band layout and visibility behavior. |
 | 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
 | 24a-24c | 23 | Generate base, river/infrastructure/overlay, and settlement control assets in separate batches. Add their module mappings. |
@@ -330,6 +330,17 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 21 validation
+
+[world-map-img-resources.js](../docs/scripts/world-map-img-resources.js) now owns resource marker size and image drawing.
+The shared renderer resolves metadata, loads source images, and passes marker centers.
+Markers remain centered 12-by-12 images. Pending or failed images are not drawn.
+Source-image loading, load callbacks, error logging, and resource visibility remain unchanged.
+Resource labels use metadata names in both settlement languages. Their placement remains unchanged.
+All 44 targeted resource and renderer tests pass.
+All 120 resource and cell-size combinations preserve the previous marker output.
+All 39 resource asset paths exist.
 
 ### PR 20 implementation batches
 

@@ -2,7 +2,7 @@ import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-l
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
-import { getResourceImage } from "./world-map-img-resources.js";
+import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
 import { drawRiver } from "./world-map-img-river.js";
 import { getAnimalColor } from "./world-map-img-animal.js";
@@ -263,7 +263,7 @@ export class WorldMapRenderer {
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
     const img = this.settlementImage(image);
-    if (img.complete && img.naturalWidth) this.ctx.drawImage(img, cx - 6, cy - 6, 12, 12);
+    drawResourceMarker(this.ctx, img, cx, cy);
   }
 
   drawSettlementText(x, y, cell) {

@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapRenderer } from "../docs/scripts/world-map-common.js";
-import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE } from "../docs/scripts/world-map-layers.js";
+import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE, RESOURCE } from "../docs/scripts/world-map-layers.js";
 import { getResourceLevelColor } from "../docs/scripts/world-map-img-resource-level.js";
 import { getClanColors } from "../docs/scripts/clan-colors.js";
 import { getSettlementAsset, NEUTRAL_SETTLEMENT_COLORS } from "../docs/scripts/world-map-img-settlements.js";
 import { BASE_LAYER_IMAGES } from "../docs/scripts/world-map-img-base-layers.js";
+import { getResourceImage } from "../docs/scripts/world-map-img-resources.js";
 
 function createRenderer() {
   return Object.assign(Object.create(WorldMapRenderer.prototype), { grid: {}, gridSize: 16, zoom: 1 });
@@ -283,6 +284,53 @@ function createConnectionRenderer(grid) {
   };
   return { renderer, strokes, markers };
 }
+
+test("renderer resolves resource metadata and delegates the loaded image", () => {
+  // Setup
+  const renderer = createRenderer();
+  const source = { complete: true, naturalWidth: 32 };
+  const paths = [];
+  renderer.settlementImage = (path) => { paths.push(path); return source; };
+  const calls = [];
+  renderer.ctx = { drawImage: (...args) => calls.push(args) };
+
+  // Execution
+  renderer.drawResourceMarker(2, 3, RESOURCE.IRON_MINE.id);
+
+  // Assertion
+  assert.deepEqual(paths, [getResourceImage(RESOURCE.IRON_MINE)]);
+  assert.deepEqual(calls, [[source, 34, 50, 12, 12]]);
+});
+
+test("none-valued resources do not request images", () => {
+  // Setup
+  const renderer = createRenderer();
+  const paths = [];
+  renderer.settlementImage = (path) => paths.push(path);
+
+  // Execution
+  renderer.drawResourceMarker(0, 0, RESOURCE.NONE.id);
+
+  // Assertion
+  assert.deepEqual(paths, []);
+});
+
+test("resource labels keep the same metadata name across settlement languages", () => {
+  // Setup
+  const renderer = createRenderer();
+  const labels = [];
+  renderer.drawMapText = (...args) => labels.push(args);
+
+  // Execution
+  renderer.settlementLanguage = "english";
+  renderer.drawResourceText(2, 3, RESOURCE.IRON_MINE.id);
+  renderer.settlementLanguage = "rokugani";
+  renderer.drawResourceText(2, 3, RESOURCE.IRON_MINE.id);
+
+  // Assertion
+  assert.deepEqual(labels[0], [RESOURCE.IRON_MINE.name, 40, 67, 6]);
+  assert.deepEqual(labels[1], labels[0]);
+});
 
 function recordVillagePalette(cell) {
   const renderer = createRenderer();

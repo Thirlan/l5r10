@@ -48,9 +48,30 @@ export const RESOURCE_IMAGES = Object.freeze(resourceImageEntries.map(
 ));
 export const RESOURCE_MARKER_SIZE = 12;
 
+/**
+ * @param {import("./world-map-layers.js").LayerValue} resource Resource metadata.
+ * @returns {string|undefined} Resource asset path.
+ */
 export function getResourceImage(resource) {
   if (!Object.values(RESOURCE).includes(resource)) {
     throw new TypeError("Resource image lookup requires a resource metadata value.");
   }
   return resourceImageMap.get(resource);
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx Drawing context.
+ * @param {HTMLImageElement|null} source Loaded resource image.
+ * @param {number} centerX Marker center in pixels.
+ * @param {number} centerY Marker center in pixels.
+ * @returns {boolean} True if the image was drawn.
+ */
+export function drawResourceMarker(ctx, source, centerX, centerY) {
+  if (!ctx || !Number.isFinite(centerX) || !Number.isFinite(centerY)) {
+    throw new TypeError("Resource drawing needs a canvas context and valid coordinates.");
+  }
+  if (!source || !source.complete || !source.naturalWidth) return false;
+  const halfSize = RESOURCE_MARKER_SIZE / 2;
+  ctx.drawImage(source, centerX - halfSize, centerY - halfSize, RESOURCE_MARKER_SIZE, RESOURCE_MARKER_SIZE);
+  return true;
 }
