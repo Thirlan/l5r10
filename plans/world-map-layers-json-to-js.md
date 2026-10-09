@@ -7,7 +7,7 @@ Status: Draft for review. Do not start implementation until this plan is approve
 Replace [layers.json](../docs/data/layers.json) with class-based JavaScript definitions.
 Replace cryptic layer IDs and comparisons with named constants.
 Separate layer identity from images, colors, and drawing code.
-Keep existing saved maps compatible.
+Use a direct migration without backward-compatibility code.
 
 ## Confirmed decisions
 
@@ -21,6 +21,10 @@ Keep existing saved maps compatible.
 - Update button controls to match the canvas output.
 - Generate programmatic control images during development. Save them as WebP assets.
 - Do not generate button images during normal page loading.
+- The project is not in production. Assume no client impact from this migration.
+- Do not support legacy input formats, compatibility adapters, or temporary browser-global bridges.
+- Intermediate PRs do not need to keep both map pages functional.
+- Verify the completed migration before considering the work complete.
 
 The request used singular and plural filenames. The decisions above resolve that conflict.
 The request also repeated the JSON image-map path. The JavaScript base-layer module replaces that JSON file.
@@ -67,7 +71,7 @@ Create these classes in [world-map-layers.js](../docs/scripts/world-map-layers.j
 |---|---|
 | `LayerValue` | Store immutable `id` and `name` fields. |
 | `SettlementValue` | Extend `LayerValue` with `englishType` and `rokuganiType`. |
-| `LayerDefinition` | Store layer `id`, `name`, and its value collection. Resolve values by ID or name. |
+| `LayerDefinition` | Store layer `id`, `name`, and its value collection. Resolve stored values by ID. |
 
 Export named value collections:
 
@@ -94,9 +98,10 @@ Metadata must not contain `image`, `img`, `color`, `border`, `fill`, `lineWidth`
 Image access belongs to the base-layer presentation module.
 Do not store canvas objects or image caches in layer definitions.
 
-Provide `LayerDefinition.getValue(value)` for existing numeric IDs and case-insensitive legacy names.
+Provide `LayerDefinition.getValue(id)` for numeric IDs in the current map data.
 Invalid values must use explicit diagnostics at the import or tool-selection boundary.
-Keep valid normalization behavior, including the existing vegetation normalization.
+Do not add case-insensitive legacy name lookup or historical vegetation normalization.
+Use named metadata instances directly in application code.
 
 ### Presentation ownership
 
@@ -155,10 +160,13 @@ Keep the existing order: terrain, vegetation, river, infrastructure, settlement,
 Keep the current separate placement of cliffs, optional overlays, grid lines, route marks, and labels.
 Text and erase remain tools. Do not invent numeric value catalogs for them.
 
-Saved cells must continue to contain numbers, not metadata objects.
-Painting uses `selectedValue.id`. Export retains the current JSON structure.
-Keep settlement names, text fields, and `"cliff direction"` unchanged.
-Do not rewrite [world-map-grid.json](../docs/data/world-map-grid.json).
+Use numeric IDs in saved cells, not metadata objects.
+Painting uses `selectedValue.id`.
+This is the selected data format, not a backward-compatibility requirement.
+Use the current [world-map-grid.json](../docs/data/world-map-grid.json) as development data.
+Update that data and directly related resource mappings if the new implementation requires changes.
+Do not add readers for historical exports or alternate name-based formats.
+Retain current IDs and fields where useful. Do not renumber data without an implementation need.
 
 Use constants for semantic comparisons in rendering, tools, and travel decisions.
 Keep coordinate keys, direction indices, dimensions, travel modes, and CSV column names unchanged.
@@ -182,8 +190,9 @@ Do not silently substitute a different terrain or marker.
 Move map-dependent page initialization into the corresponding module entry point.
 Initialize travel-paper rows after clan metadata is available.
 Preserve skill controls, visibility defaults, settlement language controls, and route actions.
-Use explicit `window.mapGrid` and `window.mapViewer` bridges only for retained inline action handlers.
-Do not expose all metadata constants as browser globals.
+Replace map-related inline handlers with module event listeners, including zoom, files, routes, and viewer controls.
+Do not add `window.mapGrid` or `window.mapViewer` bridges.
+Keep map instances and metadata constants inside modules.
 
 For tool buttons, replace inline name-based selection with declarative data attributes and module event listeners.
 Resolve attribute keys against named metadata collections. Do not treat display text as an identifier.
@@ -218,6 +227,9 @@ Use a 180-line working budget to leave room for review fixes.
 Include targeted tests within each budget. Split a row further if required.
 Binary image files are reviewed separately and must have preview evidence.
 Do not compact code unnaturally to meet the limit.
+PR boundaries are review boundaries, not production releases.
+Do not add transitional code solely to keep intermediate stages operational.
+Run targeted checks for completed components. Run full page checks after integration.
 
 | PR | Depends on | Scope and acceptance criteria |
 |---|---|---|
@@ -233,12 +245,12 @@ Do not compact code unnaturally to meet the limit.
 | 10 | 09 | Add square settlement markers and watchtower drawing. Preserve all marker dimensions. |
 | 11 | 09 | Add shrine and temple drawing, tinting integration, and label-size mappings. |
 | 12a-12e | 04 | Add one optional-overlay module per PR. Test its palette and cue, including fertility's separate palette. |
-| 13 | 04, 05 | Convert the common renderer, builder, and viewer to module entry points. Update page loading and retained action bridges. |
-| 14 | 13 | Replace layer JSON loading with `LAYERS`. Keep rendering functional through a temporary presentation adapter if needed. |
+| 13a-13c | 04, 05 | Convert renderer and page entry points to modules in bounded batches. Replace map action handlers with module listeners. |
+| 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
 | 15 | 14, 05 | Replace tile-map JSON loading. Use named terrain, climate, and vegetation values. Preserve cliff and water tile selection. |
 | 16 | 15 | Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
-| 17 | 14, 07 | Delegate river drawing and remove old river code and adapter settings. |
-| 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and adapter settings. |
+| 17 | 14, 07 | Delegate river drawing and remove old river code and settings. |
+| 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and settings. |
 | 19 | 14, 06 | Connect clan colors in builder, viewer, and settlement rendering. Remove metadata color access. |
 | 20a-20c | 14, 09, 10, 11, 19 | Delegate settlement markers in separate circular, square, and asset-backed batches. Remove each replaced branch. |
 | 21 | 14, 06 | Delegate resource markers. Remove resource type-label access. Test language-independent resource names. |
@@ -248,20 +260,15 @@ Do not compact code unnaturally to meet the limit.
 | 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
 | 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
 | 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
-| 28 | 15, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Remove any temporary presentation adapter. No runtime presentation data remains in identity definitions. |
-| 29a-29g | 28 | Retire unused JSON in valid, bounded batches. Remove layer sections first, then the empty file. Do the same for tile mappings. |
+| 28 | 15, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
+| 29a-29g | 14, 15 | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
 | 30a-30b | 29a-29g | Update script documentation, resource-output references, and affected plan references in separate bounded PRs. |
 
 The JSON files exceed the PR limit.
-Retirement therefore requires several PRs after every runtime consumer has migrated.
-Keep intermediate JSON valid. Do not prune data while any runtime still reads it.
+Retirement therefore requires several PRs after the JSON loading code is replaced.
+Intermediate retired files do not need to remain usable.
 Determine exact retirement batch boundaries from the final diff.
 Do not treat large file deletions as exempt from the limit.
-
-During migration, a temporary adapter may combine identity and presentation for unchanged renderer methods.
-It must live outside the identity module and use the new presentation modules.
-It must not restore JSON fetching or copy old invalid asset paths.
-Remove it before retirement.
 
 ## Validation and acceptance
 
@@ -274,14 +281,15 @@ Do not introduce a framework or build system for this migration.
 - Verify all 13 layers and their exact value counts.
 - Verify settlement labels. Verify resources have no English or Rokugani type fields.
 - Verify identity instances have no presentation fields.
-- Verify unique IDs within each layer, case-insensitive name lookup, and immutable constants.
+- Verify unique IDs within each layer, numeric ID lookup, and immutable constants.
 - Verify all 66 tile mappings and every referenced asset path.
 - Verify module imports do not start image loading during metadata-only tests.
 - Test zero-valued defaults separately from none-valued layers.
-- Load all 26,470 saved cells. Verify normalized data and export remain equivalent to the current implementation.
-- Test imports containing numeric IDs and supported legacy names.
+- Load the development map. Verify its cells resolve to the new definitions and render correctly.
+- Test current-format numeric imports and export/import round trips.
+- Do not test historical exports or legacy names for compatibility.
 - Verify invalid values and failed asset loads produce explicit diagnostics.
-- Compare canvas output before and after each renderer extraction.
+- Compare completed canvas output with the current visual reference.
 - Cover river isolation, straight connections, corners, and junctions.
 - Cover infrastructure connections, ports, water crossings, and footpaths.
 - Cover all settlement marker types, clan tinting, shrine scaling, and temple sizing.
@@ -305,6 +313,7 @@ Do not introduce a framework or build system for this migration.
 - New settlement artwork or replacement resource artwork.
 - Conversion of all existing PNG images to WebP.
 - Changes to unrelated user files.
+- Backward compatibility, legacy format readers, temporary adapters, and production rollout safeguards.
 
 Approval applies to this design and its staged migration.
 This planning change does not implement the migration or create pull requests.
