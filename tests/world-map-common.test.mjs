@@ -478,3 +478,92 @@ test("renderer preserves infrastructure connections across water", () => {
     assert.deepEqual(strokes, []);
   });
 });
+
+    test("multiple overlays occupy equal bands in the requested order", () => {
+      // Setup
+      const renderer = createRenderer();
+      renderer.grid = { "2,3": { animal: 1, spirit: 2, crime: 3 } };
+      const bands = [];
+      renderer.fillCellSegment = (x, y, _color, start, width) => bands.push([x, y, start, width]);
+      renderer.drawOverlayCueSegment = () => {};
+
+      // Execution
+      renderer.drawOverlayLayers(["animal", "spirit", "crime"]);
+
+      // Assertion
+      assert.deepEqual(bands, [[2, 3, 0, 1 / 3], [2, 3, 1 / 3, 1 / 3], [2, 3, 2 / 3, 1 / 3]]);
+    });
+
+    test("none-valued overlays do not take a band from an active overlay", () => {
+      // Setup
+      const renderer = createRenderer();
+      renderer.grid = { "0,0": { animal: 0, spirit: 1 } };
+      const cues = [];
+      renderer.fillCell = () => {};
+      renderer.drawOverlayCueSegment = (_x, _y, layer, _color, start, width) => cues.push([layer, start, width]);
+
+      // Execution
+      renderer.drawOverlayLayers(["animal", "spirit", "crime"]);
+
+      // Assertion
+      assert.deepEqual(cues, [["spirit", 0, 1]]);
+    });
+
+    test("unrequested overlays do not render", () => {
+      // Setup
+      const renderer = createRenderer();
+      renderer.grid = { "0,0": { animal: 1, crime: 1 } };
+      const cues = [];
+      renderer.fillCell = () => {};
+      renderer.drawOverlayCueSegment = (_x, _y, layer) => cues.push(layer);
+
+      // Execution
+      renderer.drawOverlayLayers(["animal"]);
+
+      // Assertion
+      assert.deepEqual(cues, ["animal"]);
+    });
+
+    [
+      ["animal", 1, 0],
+      ["spirit", 0, 1],
+      ["shadowland", 0, 1],
+      ["crime", 0, 1],
+      ["resourceLevel", 0, 2],
+    ].forEach(([layer, arcs, lines]) => {
+      test(`${layer} cue delegation keeps band clipping and contrast`, () => {
+        // Setup
+        const renderer = createRenderer();
+        const calls = [];
+        renderer.ctx = {
+          save() {}, restore() {}, beginPath() {},
+          rect: (...args) => calls.push(["rect", ...args]),
+          clip: () => calls.push(["clip"]),
+          arc: () => calls.push(["arc"]),
+          moveTo() {}, lineTo: () => calls.push(["line"]),
+          fill() { calls.push(["color", this.fillStyle]); },
+          stroke() { calls.push(["color", this.strokeStyle]); },
+        };
+        const color = "rgba(128, 0, 128, 0.75)";
+
+        // Execution
+        renderer.drawOverlayCueSegment(2, 3, layer, color, 0.5, 0.5);
+
+        // Assertion
+        assert.deepEqual(calls.slice(0, 2), [["rect", 40, 48, 8, 16], ["clip"]]);
+        assert.equal(calls.filter(([name]) => name === "arc").length, arcs);
+        assert.equal(calls.filter(([name]) => name === "line").length, lines);
+        assert.deepEqual(calls.at(-1), ["color", renderer.overlayCueColor(color)]);
+      });
+    });
+
+    test("cue delegation rejects unknown overlay layers", () => {
+      // Setup
+      const renderer = createRenderer();
+
+      // Execution
+      const draw = () => renderer.drawOverlayCueSegment(0, 0, "terrain", "#000000", 0, 1);
+
+      // Assertion
+      assert.throws(draw, /Unknown overlay layer/);
+    });

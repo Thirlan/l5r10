@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–21 are complete; PR 22 onward remains.
+Status: In progress. PRs 1–22 are complete; PR 23 onward remains.
 
 ## Goal
 
@@ -289,7 +289,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 19 | 14, 06 | **Done** — Verify clan colors in builder, viewer, and settlement rendering. PR 14 already removed metadata color access. Remove redundant palette fallbacks and retain explicit neutral settlement colors. |
 | 20a-20c | 14, 09, 10, 11, 19 | **Done** — Delegate circular, square, and asset-backed settlement markers. Remove replaced renderer branches and duplicate asset-tinting methods. |
 | 21 | 14, 06 | **Done** — Delegate resource markers. PR 14 already removed resource type-label access. Test language-independent resource names. |
-| 22a-22b | 14, 12a-12e | Delegate optional-overlay colors and cues in separate batches. Preserve band layout and visibility behavior. |
+| 22a-22b | 14, 12a-12e | **Done** — Route optional-overlay colors and cues through their presentation modules. Preserve band layout and visibility behavior. |
 | 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
 | 24a-24c | 23 | Generate base, river/infrastructure/overlay, and settlement control assets in separate batches. Add their module mappings. |
 | 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
@@ -330,6 +330,20 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 22 implementation batches
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 22a | **Done** — Pair each overlay color lookup and cue drawing function in the renderer routing table. Keep numeric level resolution in the renderer. PR 14 already connected the color modules. |
+| 22b | **Done** — Delegate all five cues. Remove duplicate cue geometry. Keep band selection, equal widths, clipping, contrast, and zoom-dependent line widths in the shared renderer. |
+
+All 66 targeted renderer and overlay-module tests pass.
+All 90 pre-delegation cue output traces match across five layers, two contrast colors, three zoom levels, and three band widths.
+None-valued and absent overlays do not occupy bands.
+Only requested overlays render; builder and viewer visibility selection remains unchanged.
+Presentation modules own cue geometry and palette colors.
+The renderer retains band layout, clipping, and contrast calculation.
 
 ### PR 21 validation
 

@@ -5,16 +5,18 @@ import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTR
 import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
 import { drawRiver } from "./world-map-img-river.js";
-import { getAnimalColor } from "./world-map-img-animal.js";
-import { getSpiritColor } from "./world-map-img-spirit.js";
-import { getShadowlandColor } from "./world-map-img-shadowland.js";
-import { getCrimeColor } from "./world-map-img-crime.js";
-import { getResourceLevelColor } from "./world-map-img-resource-level.js";
+import { getAnimalColor, drawAnimalCue } from "./world-map-img-animal.js";
+import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
+import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
+import { getCrimeColor, drawCrimeCue } from "./world-map-img-crime.js";
+import { getResourceLevelColor, drawResourceLevelCue } from "./world-map-img-resource-level.js";
 
-const OVERLAY_COLORS = new Map([
-  [LAYERS.ANIMAL, getAnimalColor], [LAYERS.SPIRIT, getSpiritColor],
-  [LAYERS.SHADOWLAND, getShadowlandColor], [LAYERS.CRIME, getCrimeColor],
-  [LAYERS.RESOURCE_LEVEL, getResourceLevelColor],
+const OVERLAY_PRESENTATION = new Map([
+  [LAYERS.ANIMAL, { getColor: getAnimalColor, drawCue: drawAnimalCue }],
+  [LAYERS.SPIRIT, { getColor: getSpiritColor, drawCue: drawSpiritCue }],
+  [LAYERS.SHADOWLAND, { getColor: getShadowlandColor, drawCue: drawShadowlandCue }],
+  [LAYERS.CRIME, { getColor: getCrimeColor, drawCue: drawCrimeCue }],
+  [LAYERS.RESOURCE_LEVEL, { getColor: getResourceLevelColor, drawCue: drawResourceLevelCue }],
 ]);
 const MAP_DEFAULT_GRID_SIZE = 16;
 
@@ -379,9 +381,9 @@ export class WorldMapRenderer {
 
   overlayColor(layerName, val) {
     const layer = Object.values(LAYERS).find((definition) => definition.id === layerName);
-    const getColor = OVERLAY_COLORS.get(layer);
-    if (!getColor) throw new TypeError(`Unknown overlay layer: ${layerName}`);
-    return getColor(layer.getValue(val ?? 0));
+    const presentation = OVERLAY_PRESENTATION.get(layer);
+    if (!presentation) throw new TypeError(`Unknown overlay layer: ${layerName}`);
+    return presentation.getColor(layer.getValue(val ?? 0));
   }
 
   drawOverlayLayers(layerNames) {
@@ -437,13 +439,13 @@ export class WorldMapRenderer {
 
   drawOverlayCueSegment(x, y, layerName, color, startRatio, widthRatio) {
     if (widthRatio <= 0) return;
+    const layer = Object.values(LAYERS).find((definition) => definition.id === layerName);
+    const presentation = OVERLAY_PRESENTATION.get(layer);
+    if (!presentation) throw new TypeError(`Unknown overlay layer: ${layerName}`);
     const left = x * this.gridSize + this.gridSize * startRatio;
     const top = y * this.gridSize;
     const width = this.gridSize * widthRatio;
     const height = this.gridSize;
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    const inset = Math.max(0.75, Math.min(width, height) * 0.2);
     const ctx = this.ctx;
 
     ctx.save();
@@ -451,38 +453,7 @@ export class WorldMapRenderer {
     ctx.rect(left, top, width, height);
     ctx.clip();
     const cueColor = this.overlayCueColor(color);
-    ctx.strokeStyle = cueColor;
-    ctx.fillStyle = cueColor;
-    ctx.lineWidth = Math.max(1, 1 / this.zoom);
-    ctx.lineCap = "round";
-
-    if (layerName === "animal") {
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, Math.max(1, Math.min(width, height) * 0.18), 0, Math.PI * 2);
-      ctx.fill();
-    } else if (layerName === "spirit") {
-      ctx.beginPath();
-      ctx.moveTo(centerX, top + inset);
-      ctx.lineTo(centerX, top + height - inset);
-      ctx.stroke();
-    } else if (layerName === "shadowland") {
-      ctx.beginPath();
-      ctx.moveTo(left + inset, top + inset);
-      ctx.lineTo(left + width - inset, top + height - inset);
-      ctx.stroke();
-    } else if (layerName === "crime") {
-      ctx.beginPath();
-      ctx.moveTo(left + inset, centerY);
-      ctx.lineTo(left + width - inset, centerY);
-      ctx.stroke();
-    } else if (layerName === "resourceLevel") {
-      ctx.beginPath();
-      ctx.moveTo(centerX, top + inset);
-      ctx.lineTo(centerX, top + height - inset);
-      ctx.moveTo(left + inset, centerY);
-      ctx.lineTo(left + width - inset, centerY);
-      ctx.stroke();
-    }
+    presentation.drawCue(ctx, left, top, width, height, cueColor, Math.max(1, 1 / this.zoom));
 
     ctx.restore();
   }
