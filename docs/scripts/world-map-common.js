@@ -250,8 +250,8 @@ export class WorldMapRenderer {
     const clan = LAYERS.CLAN.getValue(cell.clan ?? CLAN.NONE.id);
     const clanColors = clan === CLAN.NONE ? NEUTRAL_SETTLEMENT_COLORS : getClanColors(clan);
 
-    const fillColor = clanColors.fill || "#DDDDDD";
-    const borderColor = clanColors.border || "#444444";
+    const fillColor = clanColors.fill;
+    const borderColor = clanColors.border;
 
     const ctx = this.ctx;
     ctx.save();

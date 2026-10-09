@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapViewer } from "../docs/scripts/world-map-viewer.js";
 import { CLAN, TERRAIN, CLIMATE, VEGETATION } from "../docs/scripts/world-map-layers.js";
+import { getClanColors } from "../docs/scripts/clan-colors.js";
 
 test("viewer initialization reports and propagates loading failures", async (t) => {
   // Setup
@@ -72,4 +73,33 @@ test("invalid viewer map imports report failure without replacing the current ma
   // Assertion
   await assert.rejects(loading, /Invalid terrain value/);
   assert.equal(viewer.grid, original);
+});
+
+test("viewer clan drawing resolves presentation colors from numeric cell IDs", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.gridSize = 16;
+  viewer.grid = { "0,0": { clan: CLAN.LION.id } };
+  const palettes = [];
+  viewer.drawClanShape = (_cells, _polygons, colors) => palettes.push(colors);
+
+  // Execution
+  viewer.drawClanLayer();
+
+  // Assertion
+  assert.deepEqual(palettes, [getClanColors(CLAN.LION)]);
+});
+
+test("viewer excludes absent and none-valued clans from territory drawing", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.grid = { "0,0": {}, "1,0": { clan: CLAN.NONE.id } };
+  const palettes = [];
+  viewer.drawClanShape = (_cells, _polygons, colors) => palettes.push(colors);
+
+  // Execution
+  viewer.drawClanLayer();
+
+  // Assertion
+  assert.deepEqual(palettes, []);
 });

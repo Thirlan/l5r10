@@ -4,7 +4,7 @@ import { WorldMapRenderer } from "../docs/scripts/world-map-common.js";
 import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE } from "../docs/scripts/world-map-layers.js";
 import { getResourceLevelColor } from "../docs/scripts/world-map-img-resource-level.js";
 import { getClanColors } from "../docs/scripts/clan-colors.js";
-import { getSettlementAsset } from "../docs/scripts/world-map-img-settlements.js";
+import { getSettlementAsset, NEUTRAL_SETTLEMENT_COLORS } from "../docs/scripts/world-map-img-settlements.js";
 import { BASE_LAYER_IMAGES } from "../docs/scripts/world-map-img-base-layers.js";
 
 function createRenderer() {
@@ -262,6 +262,41 @@ function createConnectionRenderer(grid) {
   };
   return { renderer, strokes, markers };
 }
+
+function recordVillagePalette(cell) {
+  const renderer = createRenderer();
+  let palette;
+  renderer.ctx = {
+    save() {}, restore() {}, beginPath() {}, arc() {}, stroke() {},
+    fill() { palette = { fill: this.fillStyle, border: this.strokeStyle }; },
+  };
+  renderer.drawSettlementMarker(0, 0, { settlement: SETTLEMENT.VILLAGE.id, ...cell });
+  return palette;
+}
+
+test("settlement procedural drawing uses its clan presentation palette", () => {
+  // Setup
+  const cell = { clan: CLAN.SCORPION.id };
+
+  // Execution
+  const palette = recordVillagePalette(cell);
+
+  // Assertion
+  assert.deepEqual(palette, getClanColors(CLAN.SCORPION));
+});
+
+[{}, { clan: CLAN.NONE.id }].forEach((cell) => {
+  test(`settlement without a clan uses the explicit neutral palette: ${JSON.stringify(cell)}`, () => {
+    // Setup
+    const noClanCell = cell;
+
+    // Execution
+    const palette = recordVillagePalette(noClanCell);
+
+    // Assertion
+    assert.deepEqual(palette, NEUTRAL_SETTLEMENT_COLORS);
+  });
+});
 
 test("renderer draws an isolated river when neighboring values are none", () => {
   // Setup

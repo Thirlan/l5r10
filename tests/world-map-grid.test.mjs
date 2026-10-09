@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapGrid } from "../docs/scripts/world-map-grid.js";
-import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL } from "../docs/scripts/world-map-layers.js";
+import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN } from "../docs/scripts/world-map-layers.js";
+import { getClanColors } from "../docs/scripts/clan-colors.js";
 
 function createBuilder() {
   return Object.assign(Object.create(WorldMapGrid.prototype), {
@@ -120,4 +121,31 @@ test("invalid builder imports report errors and retain the current map", (t) => 
   assert.equal(loaded, false);
   assert.equal(builder.grid, original);
   assert.equal(logging.mock.calls.length, 1);
+});
+
+test("builder clan boundaries use presentation border and fill colors", (t) => {
+  // Setup
+  const original = Object.getOwnPropertyDescriptor(globalThis, "Path2D");
+  globalThis.Path2D = class { rect() {} moveTo() {} lineTo() {} closePath() {} };
+  // Tear down
+  t.after(() => {
+    if (original) Object.defineProperty(globalThis, "Path2D", original);
+    else delete globalThis.Path2D;
+  });
+  const builder = createBuilder();
+  builder.gridSize = 16;
+  builder.zoom = 1;
+  builder.grid = { "0,0": { clan: CLAN.CRANE.id } };
+  const strokes = [];
+  builder.ctx = {
+    save() {}, restore() {}, clip() {},
+    stroke() { strokes.push(this.strokeStyle); },
+  };
+  const colors = getClanColors(CLAN.CRANE);
+
+  // Execution
+  builder.drawClanBoundariesLayer();
+
+  // Assertion
+  assert.deepEqual(strokes.slice(0, 2), [colors.border, colors.fill]);
 });

@@ -311,11 +311,11 @@ export class WorldMapGrid extends WorldMapRenderer {
         strokePath.closePath();
       }
 
-      this.ctx.strokeStyle = colors.border || "#00008B";
+      this.ctx.strokeStyle = colors.border;
       this.ctx.lineWidth = 12 / this.zoom;
       this.ctx.stroke(strokePath);
 
-      this.ctx.strokeStyle = colors.fill || "#FFFFFF";
+      this.ctx.strokeStyle = colors.fill;
       this.ctx.lineWidth = 6 / this.zoom;
       this.ctx.stroke(strokePath);
 

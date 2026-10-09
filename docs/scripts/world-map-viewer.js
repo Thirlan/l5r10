@@ -369,7 +369,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       this.ctx.globalAlpha = 1.0;
     }
 
-    this.ctx.strokeStyle = colors.border || "#00008B";
+    this.ctx.strokeStyle = colors.border;
     this.ctx.lineWidth = 6 / this.zoom;
     this.ctx.stroke(path);
 
