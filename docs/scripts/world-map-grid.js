@@ -1,6 +1,8 @@
+import { WorldMapRenderer } from "./world-map-common.js";
+
 const DEFAULT_GRID_SIZE = 16;
 
-class WorldMapGrid extends WorldMapRenderer {
+export class WorldMapGrid extends WorldMapRenderer {
   constructor(canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
     super(canvasSelector, gridSize, { zoom: 0.35 });
 
@@ -374,12 +376,3 @@ class WorldMapGrid extends WorldMapRenderer {
     }
   }
 }
-
-let mapGrid;
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.querySelector("#mapCanvas");
-  if (canvas) {
-    const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
-    mapGrid = new WorldMapGrid("#mapCanvas", gridSize);
-  }
-});

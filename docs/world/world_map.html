@@ -94,11 +94,11 @@
     <h1>World Map</h1>
 
     <div class="zoom-controls">
-      <button type="button" onclick="mapViewer.zoomOut()">− Zoom Out</button>
+      <button type="button" data-map-zoom="out">− Zoom Out</button>
       <span id="zoomLevel">100%</span>
-      <button type="button" onclick="mapViewer.zoomIn()">+ Zoom In</button>
-      <button type="button" onclick="mapViewer.resetZoom()">100%</button>
-      <button type="button" onclick="mapViewer.fitToWidth()">Fit Width</button>
+      <button type="button" data-map-zoom="in">+ Zoom In</button>
+      <button type="button" data-map-zoom="reset">100%</button>
+      <button type="button" data-map-zoom="fit">Fit Width</button>
       <span class="hint">Ctrl + mouse wheel to zoom &middot; first click sets the start; each additional click adds a waypoint (last click is the destination)</span>
     </div>
 
@@ -120,36 +120,36 @@
             Waste uses greyscale tiles. Shadowland uses purple, green, and black tiles.
           </p>
           <div class="radio-row">
-            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('infrastructure', this.checked)"> Infrastructure</label>
-            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('clan', this.checked)"> Clan</label>
-            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('vegetation', this.checked)"> Vegetation</label>
-            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('settlement', this.checked)"> Settlement</label>
-            <label class="radio"><input type="checkbox" checked onchange="mapViewer.setLayerVisibility('resource', this.checked)"> Resource</label>
-            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('animal', this.checked)"> Animals</label>
-            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('spirit', this.checked)"> Spirits</label>
-            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('shadowland', this.checked)"> Shadowlands</label>
-            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('crime', this.checked)"> Crime</label>
-            <label class="radio"><input type="checkbox" onchange="mapViewer.setLayerVisibility('resourceLevel', this.checked)"> Resource Level</label>
+            <label class="radio"><input type="checkbox" checked data-map-layer="infrastructure"> Infrastructure</label>
+            <label class="radio"><input type="checkbox" checked data-map-layer="clan"> Clan</label>
+            <label class="radio"><input type="checkbox" checked data-map-layer="vegetation"> Vegetation</label>
+            <label class="radio"><input type="checkbox" checked data-map-layer="settlement"> Settlement</label>
+            <label class="radio"><input type="checkbox" checked data-map-layer="resource"> Resource</label>
+            <label class="radio"><input type="checkbox" data-map-layer="animal"> Animals</label>
+            <label class="radio"><input type="checkbox" data-map-layer="spirit"> Spirits</label>
+            <label class="radio"><input type="checkbox" data-map-layer="shadowland"> Shadowlands</label>
+            <label class="radio"><input type="checkbox" data-map-layer="crime"> Crime</label>
+            <label class="radio"><input type="checkbox" data-map-layer="resourceLevel"> Resource Level</label>
           </div>
         </fieldset>
 
         <h3>Settlement Names</h3>
         <div class="radio-row">
-          <label class="radio"><input type="radio" name="settlementLanguage" value="english" checked onchange="mapViewer.setSettlementLanguage(this.value)"> English</label>
-          <label class="radio"><input type="radio" name="settlementLanguage" value="rokugani" onchange="mapViewer.setSettlementLanguage(this.value)"> Rokugani</label>
+          <label class="radio"><input type="radio" name="settlementLanguage" value="english" checked> English</label>
+          <label class="radio"><input type="radio" name="settlementLanguage" value="rokugani"> Rokugani</label>
         </div>
 
         <h3>Route Path</h3>
         <div class="radio-row">
-          <label class="radio"><input type="checkbox" onchange="mapViewer.setRoutePreference('includeRisk', this.checked)"> Safest</label>
-          <label class="radio"><input type="checkbox" onchange="mapViewer.setRoutePreference('includeMoney', this.checked)"> Cheapest</label>
+          <label class="radio"><input type="checkbox" data-route-preference="includeRisk"> Safest</label>
+          <label class="radio"><input type="checkbox" data-route-preference="includeMoney"> Cheapest</label>
         </div>
 
         <h3>Route</h3>
         <div class="button-row">
-          <button type="button" onclick="mapViewer.computePath()">Reroll</button>
-          <button type="button" onclick="mapViewer.removeLastWaypoint()">Undo Waypoint</button>
-          <button type="button" onclick="mapViewer.clearPath()">Clear Path</button>
+          <button type="button" data-route-action="reroll">Reroll</button>
+          <button type="button" data-route-action="undo">Undo Waypoint</button>
+          <button type="button" data-route-action="clear">Clear Path</button>
         </div>
         <div id="pathSummary">Click a starting tile.</div>
         <div class="path-events">
@@ -206,69 +206,9 @@
   <script src="../scripts/dice.js"></script>
   <script src="../scripts/travel-event-engine.js"></script>
   <script src="../scripts/pathing.js"></script>
-  <script src="../scripts/world-map-common.js"></script>
-  <script src="../scripts/world-map-viewer.js"></script>
+  <script type="module" src="../scripts/world-map-viewer-page.js"></script>
   <script>
     $(function() { $("nav").load("/l5r10/navbar.html"); });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const tbody = document.getElementById('skillRows');
-      const skills = [
-        { key: 'survival',    label: 'Survival' },
-        { key: 'sailing',     label: 'Sailing' },
-        { key: 'investigate', label: 'Investigation' },
-        { key: 'swim',        label: 'Swim' },
-        { key: 'sneak',       label: 'Sneak' },
-        { key: 'forgery',     label: 'Forgery' }
-      ];
-      for (const { key, label } of skills) {
-        const cfg = mapViewer.skillConfig[key];
-        const tr = document.createElement('tr');
-        tr.innerHTML =
-          `<td>${label}</td>` +
-          `<td><input type="number" min="1" value="${cfg.roll}" data-skill="${key}" data-field="roll"></td>` +
-          `<td><input type="number" min="1" value="${cfg.keep}" data-skill="${key}" data-field="keep"></td>` +
-          `<td><input type="number" value="${cfg.mod}" data-skill="${key}" data-field="mod"></td>` +
-          `<td><input type="checkbox" data-skill="${key}" data-field="rerollOnes"${cfg.rerollOnes ? ' checked' : ''}></td>` +
-          `<td><input type="checkbox" data-skill="${key}" data-field="explodeOnNines"${cfg.explodeOnNines ? ' checked' : ''}></td>` +
-          (['swim', 'sneak', 'forgery'].includes(key)
-            ? `<td><input type="checkbox" data-skill="${key}" data-field="allowed"${cfg.allowed ? ' checked' : ''}></td>`
-            : `<td></td>`);
-        tbody.appendChild(tr);
-      }
-      tbody.addEventListener('change', (e) => {
-        const input = e.target;
-        const skill = input.dataset.skill;
-        const field = input.dataset.field;
-        if (!skill || !field) return;
-        const value = input.type === 'checkbox' ? input.checked : Number(input.value) || 0;
-        mapViewer.setSkillConfig(skill, { [field]: value });
-        mapViewer._probCache = null;
-      });
-      document.getElementById('swimTNInput').value = mapViewer.skillConfig.swim.tn;
-      document.getElementById('swimTNInput').addEventListener('change', (e) => {
-        mapViewer.setSkillConfig('swim', { tn: Number(e.target.value) || 0 });
-        mapViewer._probCache = null;
-      });
-
-      const clanRows = document.getElementById('clanRows');
-      for (const clan of Object.keys(mapViewer.travelPapers)) {
-        const tr = document.createElement('tr');
-        tr.innerHTML =
-          `<td>${clan}</td>` +
-          `<td><input type="checkbox" data-clan="${clan}" data-field="papers" checked></td>` +
-          `<td><input type="checkbox" data-clan="${clan}" data-field="avoid"></td>`;
-        clanRows.appendChild(tr);
-      }
-      clanRows.addEventListener('change', (e) => {
-        const input = e.target;
-        const clan = input.dataset.clan;
-        if (!clan) return;
-        if (input.dataset.field === 'papers') mapViewer.travelPapers[clan] = input.checked;
-        if (input.dataset.field === 'avoid') mapViewer.avoidClans[clan] = input.checked;
-        if (mapViewer.startCell && mapViewer.waypoints.length) mapViewer.computePath();
-      });
-    });
   </script>
 </body>
 </html>

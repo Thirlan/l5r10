@@ -1,3 +1,5 @@
+import { WorldMapRenderer } from "./world-map-common.js";
+
 const VIEWER_GRID_SIZE = 16;
 const WATER_TERRAINS_SET = typeof WATER_TERRAINS !== "undefined" ? WATER_TERRAINS : new Set(["water", "coastal water", "ocean"]);
 
@@ -7,7 +9,7 @@ function numOrNull(val) {
   return Number.isNaN(num) ? null : num;
 }
 
-class WorldMapViewer extends WorldMapRenderer {
+export class WorldMapViewer extends WorldMapRenderer {
   constructor(canvasSelector, gridSize = VIEWER_GRID_SIZE) {
     super(canvasSelector, gridSize, { zoom: 0.55 });
 
@@ -36,7 +38,7 @@ class WorldMapViewer extends WorldMapRenderer {
     this.avoidClans = {};
 
     this.setupEventListeners();
-    this.loadLayersConfig();
+    this.ready = this.loadLayersConfig();
     this.applyZoom();
   }
 
@@ -72,6 +74,7 @@ class WorldMapViewer extends WorldMapRenderer {
       this.render();
     } catch (err) {
       console.error("Failed to load layers.json in WorldMapViewer:", err);
+      throw err;
     }
   }
 
@@ -425,12 +428,3 @@ class WorldMapViewer extends WorldMapRenderer {
     ctx.restore();
   }
 }
-
-let mapViewer;
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.querySelector("#mapCanvas");
-  if (canvas) {
-    const gridSize = Number.parseInt(canvas.dataset.gridSize, 10);
-    mapViewer = new WorldMapViewer("#mapCanvas", gridSize);
-  }
-});

@@ -3,7 +3,7 @@ const MAP_DEFAULT_GRID_SIZE = 16;
 // Shared rendering logic for the map builder (WorldMapGrid) and the read-only
 // map viewer (WorldMapViewer). Subclasses provide their own repaint entry point
 // via redraw(), plus builder- or viewer-specific behaviour (painting, routing).
-class WorldMapRenderer {
+export class WorldMapRenderer {
   constructor(canvasSelector, gridSize = MAP_DEFAULT_GRID_SIZE, { zoom = 0.5 } = {}) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext("2d");

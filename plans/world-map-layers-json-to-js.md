@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–12e are complete; PR 13 onward remains.
+Status: In progress. PRs 1–13 are complete; PR 14 onward remains.
 
 ## Goal
 
@@ -275,7 +275,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 10 | 09 | **Done** — Add square settlement markers and watchtower drawing. Preserve all marker dimensions. |
 | 11 | 09 | **Done** — Add shrine and temple drawing, tinting integration, and label-size mappings. |
 | 12a-12e | 04 | **Done** — Add one optional-overlay module per PR: animal, spirit, shadowland, crime, and Resource Level. Each exports its palette lookup, cue drawing function, and control image mapping. Test palette behavior and cue geometry; Resource Level uses the reverse severity palette. |
-| 13a-13c | 04, 05 | Convert renderer and page entry points to modules in bounded batches. Replace map action handlers with module listeners. |
+| 13a-13c | 04, 05 | **Done** — Convert renderer and page entry points to modules using the bounded batches below. Replace map action handlers with module listeners. |
 | 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
 | 15a | 14 | Add climate base-color rendering in the base-layer module. Use named climate values and preserve the current climate appearance. |
 | 15b | 15a | Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
@@ -295,6 +295,25 @@ Run targeted checks for completed components. Run full page checks after integra
 | 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
 | 29a-29g | 14, 15a-15c | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
 | 30a-30b | 29a-29g | Update script documentation, resource-output references, and affected plan references in separate bounded PRs. |
+
+### PR 13 implementation batches
+
+The page handler changes exceed three 200-line batches. Use these smaller review boundaries.
+Do not create browser-global map instances or add compatibility bridges.
+Layer and tile JSON loading remains until PRs 14 and 15.
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 13a1 | **Done** — Export renderer, builder, and viewer classes. Import the renderer explicitly. Remove automatic class-file initialization. Test explicit viewer loading failures. |
+| 13a2 | **Done** — Add shared zoom and settlement-language listeners in `world-map-controls.js`, with focused tests. |
+| 13b1 | **Done** — Add the builder module entry point. Move builder page initialization and file, brush, font, and cliff handlers into listeners. |
+| 13b2 | **Done** — Convert terrain, climate, vegetation, river, infrastructure, and clan tool attributes to named catalog keys. |
+| 13b3 | **Done** — Convert settlement and resource tool attributes to named catalog keys. |
+| 13b4 | **Done** — Convert ordered-overlay, text, erase, zoom, and file controls. Remove builder inline map scripts. |
+| 13c1 | **Done** — Add viewer module entry point and listeners. Replace viewer static inline action attributes and script tags. |
+| 13c2 | **Done** — Add viewer skill and clan control creation. Wait for loaded clan data before creating travel-paper rows. |
+| 13c3 | **Done** — Remove the old viewer inline initialization script. Keep the unrelated navigation script. |
+| 13c4 | **Done** — Add focused viewer-control tests. Verify numeric and checkbox skills, Swim TN, travel papers, and route recomputation. |
 
 The JSON files exceed the PR limit.
 Retirement therefore requires several PRs after the JSON loading code is replaced.
