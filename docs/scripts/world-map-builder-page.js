@@ -39,4 +39,10 @@ if (canvas) {
   document.querySelector('[data-map-file="save"]').addEventListener("click", () => map.exportToFile());
   document.querySelector('[data-map-file="load"]').addEventListener("click", () => fileInput.click());
   document.querySelector('[data-map-file="clear"]').addEventListener("click", () => map.clearAllLayers());
+  try {
+    await map.ready;
+  } catch (error) {
+    console.error("Failed to start map builder:", error);
+    alert("Failed to load map data. Reload the page to try again.");
+  }
 }

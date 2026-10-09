@@ -1,4 +1,6 @@
 import { WorldMapRenderer } from "./world-map-common.js";
+import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE } from "./world-map-layers.js";
+import { getClanColors } from "./clan-colors.js";
 
 const VIEWER_GRID_SIZE = 16;
 const WATER_TERRAINS_SET = typeof WATER_TERRAINS !== "undefined" ? WATER_TERRAINS : new Set(["water", "coastal water", "ocean"]);
@@ -38,32 +40,24 @@ export class WorldMapViewer extends WorldMapRenderer {
     this.avoidClans = {};
 
     this.setupEventListeners();
-    this.ready = this.loadLayersConfig();
+    this.ready = this.initialize();
     this.applyZoom();
   }
 
   redraw() { this.render(); }
 
-  async loadLayersConfig() {
+  /**
+   * @returns {Promise<void>} Completes after map and travel data load.
+   */
+  async initialize() {
     try {
-      const res = await fetch("../data/layers.json");
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      this.layersConfig = await res.json();
-      if (this.layersConfig.drawOrder) {
-        this.drawOrder = this.layersConfig.drawOrder;
-      }
-      this.buildLayerMaps();
-
-      await this.loadMapTileImages();
-
-      if (this.layerMaps.clan) {
-        this.travelPapers = {};
-        for (const item of this.layerMaps.clan.def.values) {
-          if (item.name && item.name !== "none" && item.name !== "Shadowlands") {
-            this.travelPapers[item.name] = true;
-          }
+      this.travelPapers = {};
+      for (const clan of LAYERS.CLAN.values) {
+        if (clan !== CLAN.NONE && clan !== CLAN.SHADOWLANDS) {
+          this.travelPapers[clan.name] = true;
         }
       }
+      await this.loadMapTileImages();
 
       const dataUrl = this.canvas.dataset.mapData;
       if (dataUrl) await this.loadMap(dataUrl);
@@ -73,7 +67,7 @@ export class WorldMapViewer extends WorldMapRenderer {
 
       this.render();
     } catch (err) {
-      console.error("Failed to load layers.json in WorldMapViewer:", err);
+      console.error("Failed to initialize world map viewer:", err);
       throw err;
     }
   }
@@ -82,7 +76,8 @@ export class WorldMapViewer extends WorldMapRenderer {
     const res = await fetch(jsonUrl);
     if (!res.ok) throw new Error("Failed to load map JSON: " + res.status);
     const parsed = await res.json();
-    this.grid = this.normalizeGridData(parsed);
+    this.validateGridData(parsed);
+    this.grid = parsed;
     this.render();
   }
 
@@ -184,31 +179,19 @@ export class WorldMapViewer extends WorldMapRenderer {
   cellTerrain(cx, cy) {
     const cell = this.cellData(cx, cy);
     if (!cell) return null;
-    let tName = cell.terrain;
-    if (typeof tName === "number" && this.layerMaps.terrain) {
-      tName = this.layerMaps.terrain.idToName[tName] || "flat";
-    }
-    return tName || "flat";
+    return LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id).name;
   }
 
   cellClan(cx, cy) {
     const cell = this.cellData(cx, cy);
     if (!cell || !cell.clan) return null;
-    let cName = cell.clan;
-    if (typeof cName === "number" && this.layerMaps.clan) {
-      cName = this.layerMaps.clan.idToName[cName];
-    }
-    return cName || null;
+    return LAYERS.CLAN.getValue(cell.clan).name;
   }
 
   cellInfrastructure(cx, cy) {
     const cell = this.cellData(cx, cy);
     if (!cell || !cell.infrastructure) return null;
-    let iName = cell.infrastructure;
-    if (typeof iName === "number" && this.layerMaps.infrastructure) {
-      iName = this.layerMaps.infrastructure.idToName[iName];
-    }
-    return iName || null;
+    return LAYERS.INFRASTRUCTURE.getValue(cell.infrastructure).name;
   }
 
   cellHasRoad(cx, cy) {
@@ -221,17 +204,8 @@ export class WorldMapViewer extends WorldMapRenderer {
     if (!cell) return null;
 
     const terrainName = (this.cellTerrain(cx, cy) || "flat").toLowerCase();
-    const vegVal = cell.vegetation || 0;
-    const climateVal = cell.climate || 0;
-
-    let vegName = "";
-    if (typeof vegVal === "number" && this.layerMaps.vegetation) {
-      vegName = (this.layerMaps.vegetation.idToName[vegVal] || "").toLowerCase();
-    }
-    let climateName = "";
-    if (typeof climateVal === "number" && this.layerMaps.climate) {
-      climateName = (this.layerMaps.climate.idToName[climateVal] || "").toLowerCase();
-    }
+    const vegName = LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id).name.toLowerCase();
+    const climateName = LAYERS.CLIMATE.getValue(cell.climate ?? CLIMATE.TEMPERATE.id).name.toLowerCase();
 
     if (vegName === "vegetation") return "vegetation";
     if (climateName === "desert" || climateName === "polar") return climateName;
@@ -362,8 +336,7 @@ export class WorldMapViewer extends WorldMapRenderer {
     const cellsByClan = this.clanCellGroups();
     const fillAlpha = 0.15;
     for (const [clan, cells] of Object.entries(cellsByClan)) {
-      const colors = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[clan.toLowerCase()] : { border: "#00008B", fill: "#808080" };
-      if (!colors) continue;
+      const colors = getClanColors(LAYERS.CLAN.getValue(Number(clan)));
       const polygons = this.traceClanPolygons(cells);
       if (!polygons.length) continue;
       this.drawClanShape(cells, polygons, colors, fillAlpha);

@@ -1,3 +1,19 @@
+import { LAYERS, TERRAIN, CLAN } from "./world-map-layers.js";
+import { getClanColors } from "./clan-colors.js";
+import { getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
+import { getResourceImage } from "./world-map-img-resources.js";
+import { getInfrastructureStyle } from "./world-map-img-infrastructure.js";
+import { getAnimalColor } from "./world-map-img-animal.js";
+import { getSpiritColor } from "./world-map-img-spirit.js";
+import { getShadowlandColor } from "./world-map-img-shadowland.js";
+import { getCrimeColor } from "./world-map-img-crime.js";
+import { getResourceLevelColor } from "./world-map-img-resource-level.js";
+
+const OVERLAY_COLORS = new Map([
+  [LAYERS.ANIMAL, getAnimalColor], [LAYERS.SPIRIT, getSpiritColor],
+  [LAYERS.SHADOWLAND, getShadowlandColor], [LAYERS.CRIME, getCrimeColor],
+  [LAYERS.RESOURCE_LEVEL, getResourceLevelColor],
+]);
 const MAP_DEFAULT_GRID_SIZE = 16;
 
 // Shared rendering logic for the map builder (WorldMapGrid) and the read-only
@@ -14,9 +30,8 @@ export class WorldMapRenderer {
     this.minZoom = 0.55;
     this.maxZoom = 4;
 
-    this.layersConfig = null;
-    this.drawOrder = ["terrain", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "text"];
-    this.layerMaps = {};
+    this.drawOrder = [LAYERS.TERRAIN.id, LAYERS.VEGETATION.id, LAYERS.RIVER.id,
+      LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
 
     this.grid = {};
     this.tileImageMap = {};
@@ -34,38 +49,19 @@ export class WorldMapRenderer {
   async loadMapTileImages() {
     try {
       const res = await fetch("../data/map_tile_img.json");
-      if (!res.ok) return;
+      if (!res.ok) throw new Error("Failed to load tile image mappings: HTTP " + res.status);
       const entries = await res.json();
       for (const entry of entries) {
         const key = entry.terrain + "," + entry.climate + "," + entry.vegetation;
         const img = new Image();
         img.onload = () => this.redraw();
+        img.onerror = () => console.error(`Failed to load map tile image: ${entry.image}`);
         img.src = entry.image;
         this.tileImageMap[key] = img;
       }
     } catch (err) {
       console.error("Failed to load map_tile_img.json:", err);
-    }
-  }
-
-  buildLayerMaps() {
-    if (!this.layersConfig || !this.layersConfig.layers) return;
-    for (const [layerKey, layerDef] of Object.entries(this.layersConfig.layers)) {
-      const nameToId = {};
-      const idToName = {};
-      const idToItem = {};
-      const nameToItem = {};
-
-      for (const item of layerDef.values) {
-        nameToId[item.name] = item.id;
-        nameToId[item.name.toLowerCase()] = item.id;
-        idToName[item.id] = item.name;
-        idToItem[item.id] = item;
-        nameToItem[item.name] = item;
-        nameToItem[item.name.toLowerCase()] = item;
-      }
-
-      this.layerMaps[layerKey] = { nameToId, idToName, idToItem, nameToItem, def: layerDef };
+      throw err;
     }
   }
 
@@ -86,38 +82,24 @@ export class WorldMapRenderer {
     this.redraw();
   }
 
-  layerId(layerName, value) {
-    if (value === undefined || value === null || value === "") return null;
-    const map = this.layerMaps[layerName];
-    if (!map) return typeof value === "number" ? value : null;
-    if (typeof value === "number") return map.idToItem[value] ? value : null;
-    return map.nameToId[String(value).toLowerCase()] ?? null;
-  }
-
-  layerItem(layerName, value) {
-    if (value === undefined || value === null || value === "") return null;
-    const map = this.layerMaps[layerName];
-    if (!map) return null;
-    return typeof value === "number"
-      ? (map.idToItem[value] || null)
-      : (map.nameToItem[String(value).toLowerCase()] || null);
-  }
-
-  normalizeGridData(grid) {
-    const normalized = {};
-    for (const [key, originalCell] of Object.entries(grid || {})) {
-      const cell = { ...originalCell };
-      if (cell.vegetation) cell.vegetation = 1;
-      for (const layerName of ["terrain", "climate", "vegetation", "river", "infrastructure", "settlement", "resource", "clan", "animal", "spirit", "shadowland", "crime", "resourceLevel"]) {
-        if (cell[layerName] === undefined) continue;
-        const layerValue = this.layerId(layerName, cell[layerName]);
-        if (layerValue !== null) cell[layerName] = layerValue;
-        else delete cell[layerName];
-      }
-
-      normalized[key] = cell;
+  /**
+   * @param {unknown} grid Parsed numeric map data.
+   * @returns {void}
+   */
+  validateGridData(grid) {
+    if (!grid || typeof grid !== "object" || Array.isArray(grid)) {
+      throw new TypeError("Map data must be an object of cells.");
     }
-    return normalized;
+    Object.entries(grid).forEach(([key, cell]) => {
+      if (!cell || typeof cell !== "object" || Array.isArray(cell)) {
+        throw new TypeError(`Map cell ${key} must be an object.`);
+      }
+      Object.values(LAYERS).forEach((layer) => {
+        if (Object.hasOwn(cell, layer.id) && !layer.getValue(cell[layer.id])) {
+          throw new TypeError(`Invalid ${layer.id} value in map cell ${key}: ${cell[layer.id]}`);
+        }
+      });
+    });
   }
 
   setZoom(zoom) {
@@ -147,7 +129,7 @@ export class WorldMapRenderer {
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
       const t = cell.terrain ?? 0;
-      const cliffId = this.layerMaps.terrain ? this.layerMaps.terrain.nameToId.cliff : undefined;
+      const cliffId = TERRAIN.CLIFF.id;
       const tileTerrain = t === cliffId ? 0 : t;
       const c = cell.climate ?? 0;
       const isWater = (t === 3 || t === 4 || t === 5);
@@ -229,7 +211,7 @@ export class WorldMapRenderer {
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.river) continue;
       const [x, y] = key.split(",").map(Number);
-      const item = this.layerMaps.river ? this.layerMaps.river.idToItem[cell.river] : null;
+      const item = LAYERS.RIVER.getValue(cell.river);
       if (!item || item.id === 0) continue;
 
       const cx = x * this.gridSize + this.gridSize / 2;
@@ -238,7 +220,7 @@ export class WorldMapRenderer {
 
       ctx.save();
       ctx.lineCap = "round";
-      const stripeWidth = Math.max(1.25, (item.lineWidth || 4) * 0.45);
+      const stripeWidth = Math.max(1.25, 4 * 0.45);
       const stripeSpacing = stripeWidth * 0.85;
 
       const allNeighbors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
@@ -304,20 +286,8 @@ export class WorldMapRenderer {
   }
 
   drawInfrastructure(x, y, infraVal) {
-    const map = this.layerMaps.infrastructure;
-    let item = null;
-    if (map) {
-      item = typeof infraVal === "number" ? map.idToItem[infraVal] : map.nameToItem[String(infraVal).toLowerCase()];
-    }
-    if (!item) {
-      const styles = {
-        Road: { color: "#5C3A1E", lineWidth: 3 },
-        Footpath: { color: "#A97443", lineWidth: 1.5 },
-        "Small Port": { color: "#D2B48C", marker: "p" },
-        "Large Port": { color: "#8B4513", marker: "P" }
-      };
-      item = styles[infraVal] || styles.Road;
-    }
+    const item = getInfrastructureStyle(LAYERS.INFRASTRUCTURE.getValue(infraVal));
+    if (!item) return;
 
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
@@ -391,14 +361,8 @@ export class WorldMapRenderer {
     const cellsByClan = {};
     for (const [key, cell] of Object.entries(this.grid)) {
       if (!cell.clan) continue;
-      const clanVal = cell.clan;
-      let clanName = clanVal;
-      if (typeof clanVal === "number" && this.layerMaps.clan) {
-        clanName = this.layerMaps.clan.idToName[clanVal] || clanVal;
-      }
-      if (clanName && clanName !== "none") {
-        (cellsByClan[clanName] ||= new Set()).add(key);
-      }
+      const clan = LAYERS.CLAN.getValue(cell.clan);
+      if (clan && clan !== CLAN.NONE) (cellsByClan[clan.id] ||= new Set()).add(key);
     }
     return cellsByClan;
   }
@@ -421,19 +385,15 @@ export class WorldMapRenderer {
 
   drawSettlementMarker(x, y, cell) {
     const { settlement: setVal } = cell;
-    const setItem = this.layerItem("settlement", setVal);
-    const typeName = setItem ? setItem.name : setVal;
+    const setItem = LAYERS.SETTLEMENT.getValue(setVal);
+    const typeName = setItem.name;
 
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
 
-    let clanName = cell.clan;
-    if (typeof clanName === "number" && this.layerMaps.clan) {
-      clanName = this.layerMaps.clan.idToName[clanName];
-    }
-    const clanItem = this.layerMaps.clan ? this.layerMaps.clan.nameToItem[String(clanName).toLowerCase()] : null;
-    const clanColors = clanItem || { border: "#444444", fill: "#DDDDDD" };
+    const clan = LAYERS.CLAN.getValue(cell.clan ?? CLAN.NONE.id);
+    const clanColors = clan === CLAN.NONE ? NEUTRAL_SETTLEMENT_COLORS : getClanColors(clan);
 
     const fillColor = clanColors.fill || "#DDDDDD";
     const borderColor = clanColors.border || "#444444";
@@ -501,44 +461,42 @@ export class WorldMapRenderer {
       ctx.fillRect(cx - 2.5, cy - 1, 5, 6);
       ctx.strokeRect(cx - 2.5, cy - 1, 5, 6);
     } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
-      this.drawShrine(cx, cy, borderColor, setItem.image, typeName === "Small Shrine" ? 0.75 : 1);
+      this.drawShrine(cx, cy, borderColor, getSettlementAsset(setItem), typeName === "Small Shrine" ? 0.75 : 1);
     } else if (typeName === "Small Temple" || typeName === "Large Temple") {
-      this.drawTemple(cx, cy, borderColor, setItem.image, typeName === "Small Temple" ? 12 : 16);
+      this.drawTemple(cx, cy, borderColor, getSettlementAsset(setItem), typeName === "Small Temple" ? 12 : 16);
     }
     ctx.restore();
   }
 
   drawResourceMarker(x, y, resourceVal) {
-    const item = this.layerItem("resource", resourceVal);
-    if (!item || !item.image) return;
+    const item = LAYERS.RESOURCE.getValue(resourceVal);
+    const image = getResourceImage(item);
+    if (!image) return;
 
     const size = this.gridSize;
     const cx = x * size + size / 2;
     const cy = y * size + size / 2;
-    const img = this.settlementImage(item.image);
+    const img = this.settlementImage(image);
     if (img.complete && img.naturalWidth) this.ctx.drawImage(img, cx - 6, cy - 6, 12, 12);
   }
 
   drawSettlementText(x, y, cell) {
     const { settlement: setVal, englishName = "", rokuganiName = "" } = cell;
-    const setItem = this.layerItem("settlement", setVal);
-    const typeName = setItem ? setItem.name : setVal;
+    const setItem = LAYERS.SETTLEMENT.getValue(setVal);
 
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
 
     const name = this.settlementLanguage === "english" ? englishName : rokuganiName;
-    const label = this.settlementLanguage === "english" ? this.englishSettlementType(typeName) : this.rokuganiSettlementType(typeName);
-    this.drawSettlementLabel(cx, cy, label, name, this.settlementFontSize(typeName));
+    const label = this.settlementLanguage === "english" ? setItem.englishType : setItem.rokuganiType;
+    this.drawSettlementLabel(cx, cy, label, name, getSettlementLabelSize(setItem));
   }
 
   drawResourceText(x, y, resourceVal) {
-    const item = this.layerItem("resource", resourceVal);
+    const item = LAYERS.RESOURCE.getValue(resourceVal);
     if (!item) return;
 
-    const label = this.settlementLanguage === "english"
-      ? item.englishType || item.name
-      : item.rokuganiType || item.name;
+    const label = item.name;
     const cx = x * this.gridSize + this.gridSize / 2;
     const cy = y * this.gridSize + this.gridSize / 2;
     this.drawMapText(label, cx, cy + this.gridSize / 2 + 3, 6);
@@ -549,6 +507,7 @@ export class WorldMapRenderer {
     if (!img) {
       img = new Image();
       img.onload = () => this.redraw();
+      img.onerror = () => console.error(`Failed to load map marker image: ${src}`);
       img.src = src;
       this.settlementImages[src] = img;
     }
@@ -590,22 +549,6 @@ export class WorldMapRenderer {
     if (!name) return;
     this.drawMapText(name, cx, cy + this.gridSize / 2 + fontSize / 2, fontSize);
     if (label) this.drawMapText(label, cx, cy + this.gridSize / 2 + fontSize * 1.5, fontSize);
-  }
-
-  settlementFontSize(type) {
-    return { Village: 6, City: 8, Capital: 10, Fortification: 6, Castle: 8, Kyuden: 10, "Small Shrine": 6, "Large Shrine": 8, "Village Ruins": 6, "Castle Ruins": 8, Academy: 6, Watchtower: 6, "Small Temple": 6, "Large Temple": 8 }[type] || 6;
-  }
-
-  englishSettlementType(type) {
-    const item = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(type).toLowerCase()] : null;
-    if (item && item.englishType !== undefined) return item.englishType;
-    return type === "Kyuden" ? "Palace" : type;
-  }
-
-  rokuganiSettlementType(type) {
-    const item = this.layerMaps.settlement ? this.layerMaps.settlement.nameToItem[String(type).toLowerCase()] : null;
-    if (item && item.rokuganiType !== undefined) return item.rokuganiType;
-    return { Village: "Mura", City: "Toshi", Capital: "Shuto", Fortification: "", Castle: "Shiro", Kyuden: "Kyuden", "Small Shrine": "Shōsha", "Large Shrine": "Taisha" }[type] || type;
   }
 
   drawTextLayer() {
@@ -680,21 +623,10 @@ export class WorldMapRenderer {
   }
 
   overlayColor(layerName, val) {
-    if (!val || val === "none" || val === 0) return null;
-    const map = this.layerMaps[layerName];
-    let color = null;
-    if (map) {
-      const item = typeof val === "number" ? map.idToItem[val] : map.nameToItem[String(val).toLowerCase()];
-      if (item && item.color) color = item.color;
-    }
-    if (!color) {
-      const levels = ["none", "very low", "low", "medium", "high", "very high"];
-      const palette = ["rgba(255, 255, 0, 0.45)", "rgba(255, 255, 0, 0.55)",
-        "rgba(255, 165, 0, 0.55)", "rgba(255, 0, 0, 0.65)", "rgba(128, 0, 128, 0.75)"];
-      const level = typeof val === "number" ? val : levels.indexOf(String(val).toLowerCase());
-      color = (layerName === "resourceLevel" ? palette.reverse() : palette)[level - 1] || null;
-    }
-    return color;
+    const layer = Object.values(LAYERS).find((definition) => definition.id === layerName);
+    const getColor = OVERLAY_COLORS.get(layer);
+    if (!getColor) throw new TypeError(`Unknown overlay layer: ${layerName}`);
+    return getColor(layer.getValue(val ?? 0));
   }
 
   drawOverlayLayers(layerNames) {

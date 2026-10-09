@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–13 are complete; PR 14 onward remains.
+Status: In progress. PRs 1–14 are complete; PR 15 onward remains.
 
 ## Goal
 
@@ -276,7 +276,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 11 | 09 | **Done** — Add shrine and temple drawing, tinting integration, and label-size mappings. |
 | 12a-12e | 04 | **Done** — Add one optional-overlay module per PR: animal, spirit, shadowland, crime, and Resource Level. Each exports its palette lookup, cue drawing function, and control image mapping. Test palette behavior and cue geometry; Resource Level uses the reverse severity palette. |
 | 13a-13c | 04, 05 | **Done** — Convert renderer and page entry points to modules using the bounded batches below. Replace map action handlers with module listeners. |
-| 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
+| 14a-14f | 13a-13c | **Done** — Replace layer JSON loading with `LAYERS` directly using the bounded batches below. Remove legacy lookup and normalization logic. Do not add an adapter. |
 | 15a | 14 | Add climate base-color rendering in the base-layer module. Use named climate values and preserve the current climate appearance. |
 | 15b | 15a | Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
 | 15c | 15a, 15b | Add vegetation image rendering above land and water, including cliffs. Remove the three-value tile mapping and its JSON loading. Retire composite images only after checking for other consumers. |
@@ -314,6 +314,19 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 13c2 | **Done** — Add viewer skill and clan control creation. Wait for loaded clan data before creating travel-paper rows. |
 | 13c3 | **Done** — Remove the old viewer inline initialization script. Keep the unrelated navigation script. |
 | 13c4 | **Done** — Add focused viewer-control tests. Verify numeric and checkbox skills, Swim TN, travel papers, and route recomputation. |
+
+### PR 14 implementation batches
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 14a | **Done** — Remove common renderer lookup tables and name normalization. Resolve numeric metadata directly and validate imported cells. |
+| 14b | **Done** — Update builder and viewer initialization and numeric metadata access. Remove both layer JSON requests. |
+| 14c | **Done** — Replace removed metadata presentation access with existing clan, settlement, resource, and overlay modules. Preserve drawing geometry. |
+| 14d | **Done** — Remove builder name-based tool lookup. Validate numeric selections and preserve zero-valued defaults. |
+| 14e1 | **Done** — Add common-renderer import-validation and presentation-routing tests. |
+| 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
+| 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
+| 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
 
 The JSON files exceed the PR limit.
 Retirement therefore requires several PRs after the JSON loading code is replaced.

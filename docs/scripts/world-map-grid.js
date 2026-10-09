@@ -1,4 +1,6 @@
 import { WorldMapRenderer } from "./world-map-common.js";
+import { LAYERS, TERRAIN } from "./world-map-layers.js";
+import { getClanColors } from "./clan-colors.js";
 
 const DEFAULT_GRID_SIZE = 16;
 
@@ -6,30 +8,25 @@ export class WorldMapGrid extends WorldMapRenderer {
   constructor(canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
     super(canvasSelector, gridSize, { zoom: 0.35 });
 
-    this.currentLayer = "terrain";
-    this.currentValue = null;
+    this.currentLayer = LAYERS.TERRAIN.id;
+    this.currentValue = TERRAIN.FLAT.id;
     this.fontSize = 14;
     this.brushSize = 1;
     this.isDrawing = false;
     this.cliffDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
 
     this.setupEventListeners();
-    this.loadLayersConfig();
+    this.ready = this.initialize();
     this.applyZoom();
   }
 
   redraw() { this.draw(); }
 
-  async loadLayersConfig() {
+  /**
+   * @returns {Promise<void>} Completes after map assets and data load.
+   */
+  async initialize() {
     try {
-      const res = await fetch("../data/layers.json");
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      this.layersConfig = await res.json();
-      if (this.layersConfig.drawOrder) {
-        this.drawOrder = this.layersConfig.drawOrder;
-      }
-      this.buildLayerMaps();
-
       await this.loadMapTileImages();
 
       const dataUrl = this.canvas.dataset.mapData;
@@ -39,18 +36,20 @@ export class WorldMapGrid extends WorldMapRenderer {
 
       this.draw();
     } catch (err) {
-      console.error("Failed to load layers.json:", err);
+      console.error("Failed to initialize map builder:", err);
+      throw err;
     }
   }
 
   async loadMapFromUrl(url) {
     try {
       const res = await fetch(url);
-      if (!res.ok) return;
+      if (!res.ok) throw new Error("Failed to load map JSON: HTTP " + res.status);
       const text = await res.text();
-      this.loadFromJSON(text);
+      if (!this.loadFromJSON(text)) throw new Error("Invalid map data from URL: " + url);
     } catch (e) {
       console.error("Failed to load map data from URL:", e);
+      throw e;
     }
   }
 
@@ -85,10 +84,8 @@ export class WorldMapGrid extends WorldMapRenderer {
 
   paintAt(event) {
     if (!this.currentLayer) return;
-    const cliffId = this.layerMaps.terrain ? this.layerMaps.terrain.nameToId.cliff : undefined;
-    const paintingCliffTerrain = this.currentLayer === "terrain" && cliffId !== undefined && this.currentValue !== null && (
-      this.currentValue === cliffId || this.currentValue === "cliff"
-    );
+    const cliffId = TERRAIN.CLIFF.id;
+    const paintingCliffTerrain = this.currentLayer === LAYERS.TERRAIN.id && this.currentValue === cliffId;
     if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
@@ -120,11 +117,11 @@ export class WorldMapGrid extends WorldMapRenderer {
             if (layerToErase === "terrain") delete cell["cliff direction"];
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
-          } else if (layerToErase === "resource" || layerToErase === "resources") {
+          } else if (layerToErase === "resource") {
             delete cell.resource;
-          } else if (layerToErase === "clan" || layerToErase === "clans") {
+          } else if (layerToErase === "clan") {
             delete cell.clan;
-          } else if (layerToErase === "settlement" || layerToErase === "settlements") {
+          } else if (layerToErase === "settlement") {
             delete cell.settlement;
             delete cell.englishName;
             delete cell.rokuganiName;
@@ -134,16 +131,12 @@ export class WorldMapGrid extends WorldMapRenderer {
         }
       } else {
         const cell = this.ensureCell(cellKey);
-        let valId = this.currentValue;
-
-        if (typeof valId === "string" && this.layerMaps[this.currentLayer]) {
-          const mapped = this.layerMaps[this.currentLayer].nameToId[valId.toLowerCase()];
-          if (mapped !== undefined) valId = mapped;
-        }
+        const valId = this.currentValue;
 
         if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
-          if (valId) cell[this.currentLayer] = valId;
-          else delete cell[this.currentLayer];
+          if (valId || this.currentLayer === LAYERS.TERRAIN.id || this.currentLayer === LAYERS.CLIMATE.id) {
+            cell[this.currentLayer] = valId;
+          } else delete cell[this.currentLayer];
           if (this.currentLayer === "terrain") {
             if (valId === cliffId) {
               if (Object.values(this.cliffDirections).some((direction) => direction === 1)) {
@@ -157,11 +150,11 @@ export class WorldMapGrid extends WorldMapRenderer {
           }
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
-        } else if (this.currentLayer === "resource" || this.currentLayer === "resources") {
+        } else if (this.currentLayer === "resource") {
           cell.resource = valId;
-        } else if (this.currentLayer === "clan" || this.currentLayer === "clans") {
+        } else if (this.currentLayer === "clan") {
           cell.clan = valId;
-        } else if (this.currentLayer === "settlement" || this.currentLayer === "settlements") {
+        } else if (this.currentLayer === "settlement") {
           cell.settlement = valId;
           const setObj = this.createSettlement(valId);
           if (setObj.englishName) cell.englishName = setObj.englishName;
@@ -190,7 +183,24 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.brushSize = Math.min(8, Math.max(1, Number(size) || 1));
   }
 
+  /**
+   * @param {string} layer Canonical layer ID, text, or erase.
+   * @param {number|string|null} value Numeric value, erase target, or null for text.
+   * @param {string} [toolLayer] Matching layer ID.
+   * @returns {void}
+   */
   selectTool(layer, value, toolLayer) {
+    if (toolLayer && toolLayer !== layer) throw new TypeError("Tool layer must match the selected layer.");
+    if (layer === "erase") {
+      if (value !== null && value !== "text" && !Object.values(LAYERS).some((definition) => definition.id === value)) {
+        throw new TypeError(`Unknown erase layer: ${value}`);
+      }
+    } else if (layer === "text") {
+      if (value !== null) throw new TypeError("Text tools do not have a layer value.");
+    } else {
+      const definition = Object.values(LAYERS).find((definition) => definition.id === layer);
+      if (!definition?.getValue(value)) throw new TypeError(`Invalid tool selection: ${layer}=${value}`);
+    }
     this.currentValue = value;
     this.currentLayer = toolLayer || layer;
     this.draw();
@@ -279,11 +289,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     const size = this.gridSize;
 
     for (const [clan, cells] of Object.entries(cellsByClan)) {
-      let colors = null;
-      if (this.layerMaps.clan) {
-        colors = this.layerMaps.clan.nameToItem[clan.toLowerCase()];
-      }
-      if (!colors) colors = { border: "#00008B", fill: "#808080" };
+      const colors = getClanColors(LAYERS.CLAN.getValue(Number(clan)));
 
       const polygons = this.traceClanPolygons(cells);
       if (!polygons.length) continue;
@@ -340,7 +346,8 @@ export class WorldMapGrid extends WorldMapRenderer {
   loadFromJSON(jsonString) {
     try {
       const parsed = JSON.parse(jsonString);
-      this.grid = this.normalizeGridData(parsed);
+      this.validateGridData(parsed);
+      this.grid = parsed;
       this.draw();
       return true;
     } catch (e) {

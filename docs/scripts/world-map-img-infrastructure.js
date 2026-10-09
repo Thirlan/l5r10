@@ -7,8 +7,20 @@ const infrastructureStyles = new Map([
   [INFRASTRUCTURE.LARGE_PORT, { color: "#8B4513", marker: "P" }],
 ]);
 const ROAD_DIRECTIONS = ["east", "south", "southeast", "northeast"];
+for (const style of infrastructureStyles.values()) Object.freeze(style);
 
 export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze({});
+
+/**
+ * @param {import("./world-map-layers.js").LayerValue} value Infrastructure metadata.
+ * @returns {{color: string, lineWidth?: number, marker?: string}|undefined} Drawing style.
+ */
+export function getInfrastructureStyle(value) {
+  if (!Object.values(INFRASTRUCTURE).includes(value)) {
+    throw new TypeError("Infrastructure style lookup needs an infrastructure metadata value.");
+  }
+  return infrastructureStyles.get(value);
+}
 
 export function drawInfrastructure(ctx, x, y, gridSize, value, neighbors) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
@@ -21,7 +33,7 @@ export function drawInfrastructure(ctx, x, y, gridSize, value, neighbors) {
     throw new TypeError("Infrastructure drawing needs boolean forward-neighbor values.");
   }
 
-  const style = infrastructureStyles.get(value);
+  const style = getInfrastructureStyle(value);
   if (!style) return;
 
   const left = x * gridSize;
