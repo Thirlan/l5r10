@@ -222,3 +222,37 @@ test("settlement marker rejects a non-settlement value", () => {
   // Assertion
   assert.throws(drawInvalidSettlement, TypeError);
 });
+
+[
+  [SETTLEMENT.SMALL_SHRINE, 24, 18],
+  [SETTLEMENT.LARGE_SHRINE, 32, 24],
+  [SETTLEMENT.SMALL_TEMPLE, 12, 12],
+  [SETTLEMENT.LARGE_TEMPLE, 16, 16],
+].forEach(([settlement, width, height]) => {
+  test(`${settlement.name} keeps its centered asset dimensions`, () => {
+    // Setup
+    const source = { src: "marker", complete: true, naturalWidth: 32, naturalHeight: 24 };
+    const image = { width, height };
+    const color = "#123456";
+    const cache = { [[source.src, color, width, height].join(":")]: image };
+    const calls = [];
+    const context = { drawImage: (...args) => calls.push(args) };
+
+    // Execution
+    drawSettlementMarker(context, settlement, source, 40, 56, 1, { border: color }, cache);
+
+    // Assertion
+    assert.deepEqual(calls, [[image, 40 - width / 2, 56 - height / 2]]);
+  });
+});
+
+test("an asset-backed marker does not fall back to geometry while loading", () => {
+  // Setup
+  const { context, calls } = createContext();
+
+  // Execution
+  drawSettlementMarker(context, SETTLEMENT.LARGE_TEMPLE, { complete: false }, 8, 10, 1, null, {});
+
+  // Assertion
+  assert.equal(calls.fills + calls.arcs + calls.lines, 0);
+});

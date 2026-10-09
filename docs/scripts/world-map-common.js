@@ -1,7 +1,7 @@
 import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-layers.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
-import { getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
+import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
 import { drawRiver } from "./world-map-img-river.js";
@@ -241,7 +241,6 @@ export class WorldMapRenderer {
   drawSettlementMarker(x, y, cell) {
     const { settlement: setVal } = cell;
     const setItem = LAYERS.SETTLEMENT.getValue(setVal);
-    const typeName = setItem.name;
 
     const size = this.gridSize;
     const cx = x * size + size / 2;
@@ -250,77 +249,9 @@ export class WorldMapRenderer {
     const clan = LAYERS.CLAN.getValue(cell.clan ?? CLAN.NONE.id);
     const clanColors = clan === CLAN.NONE ? NEUTRAL_SETTLEMENT_COLORS : getClanColors(clan);
 
-    const fillColor = clanColors.fill;
-    const borderColor = clanColors.border;
-
-    const ctx = this.ctx;
-    ctx.save();
-    ctx.fillStyle = fillColor;
-    ctx.strokeStyle = borderColor;
-    ctx.lineWidth = 1 / this.zoom;
-
-    if (typeName === "Village" || typeName === "City" || typeName === "Capital") {
-      ctx.beginPath();
-      ctx.arc(cx, cy, typeName === "Village" ? 3 : 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-      if (typeName === "Capital") {
-        ctx.fillStyle = borderColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    } else if (typeName === "Village Ruins") {
-      ctx.beginPath();
-      ctx.arc(cx, cy, 3, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(cx - 4, cy + 4);
-      ctx.lineTo(cx + 4, cy - 4);
-      ctx.stroke();
-    } else if (typeName === "Fortification" || typeName === "Castle" || typeName === "Kyuden") {
-      const side = typeName === "Fortification" ? 6 : 10;
-      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
-      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
-      if (typeName === "Kyuden") {
-        ctx.fillStyle = borderColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    } else if (typeName === "Castle Ruins" || typeName === "Academy") {
-      const side = 10;
-      ctx.fillRect(cx - side / 2, cy - side / 2, side, side);
-      ctx.strokeRect(cx - side / 2, cy - side / 2, side, side);
-      if (typeName === "Castle Ruins") {
-        ctx.beginPath();
-        ctx.moveTo(cx - 5, cy + 5);
-        ctx.lineTo(cx + 5, cy - 5);
-        ctx.stroke();
-      } else {
-        ctx.fillStyle = borderColor;
-        ctx.font = `${6 / this.zoom}px sans-serif`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("A", cx, cy);
-      }
-    } else if (typeName === "Watchtower") {
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - 5);
-      ctx.lineTo(cx + 4, cy - 1);
-      ctx.lineTo(cx - 4, cy - 1);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-      ctx.fillRect(cx - 2.5, cy - 1, 5, 6);
-      ctx.strokeRect(cx - 2.5, cy - 1, 5, 6);
-    } else if (typeName === "Small Shrine" || typeName === "Large Shrine") {
-      this.drawShrine(cx, cy, borderColor, getSettlementAsset(setItem), typeName === "Small Shrine" ? 0.75 : 1);
-    } else if (typeName === "Small Temple" || typeName === "Large Temple") {
-      this.drawTemple(cx, cy, borderColor, getSettlementAsset(setItem), typeName === "Small Temple" ? 12 : 16);
-    }
-    ctx.restore();
+    const asset = getSettlementAsset(setItem);
+    const source = asset ? this.settlementImage(asset) : null;
+    drawSettlementMarker(this.ctx, setItem, source, cx, cy, this.zoom, clanColors, this.tintedIconCache);
   }
 
   drawResourceMarker(x, y, resourceVal) {
@@ -367,37 +298,6 @@ export class WorldMapRenderer {
       this.settlementImages[src] = img;
     }
     return img;
-  }
-
-  drawShrine(cx, cy, color, imageSource, scale) {
-    const source = this.settlementImage(imageSource);
-    if (!source.complete || !source.naturalWidth) return;
-    const width = Math.round(source.naturalWidth * scale);
-    const height = Math.round(source.naturalHeight * scale);
-    const image = this.tintedMapIcon(source, color, width, height);
-    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
-  }
-
-  drawTemple(cx, cy, color, imageSource, size) {
-    const source = this.settlementImage(imageSource);
-    if (!source.complete || !source.naturalWidth) return;
-    const image = this.tintedMapIcon(source, color, size, size);
-    this.ctx.drawImage(image, cx - image.width / 2, cy - image.height / 2);
-  }
-
-  tintedMapIcon(source, color, width, height) {
-    const key = [source.src, color, width, height].join(":");
-    if (this.tintedIconCache[key]) return this.tintedIconCache[key];
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
-    ctx.globalCompositeOperation = "source-in";
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    this.tintedIconCache[key] = canvas;
-    return canvas;
   }
 
   drawSettlementLabel(cx, cy, label, name, fontSize) {

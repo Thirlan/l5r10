@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–19 are complete; PR 20 onward remains.
+Status: In progress. PRs 1–20 are complete; PR 21 onward remains.
 
 ## Goal
 
@@ -287,7 +287,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 17 | 14, 07 | **Done** — Delegate river drawing and remove old river code and settings. Verify isolated and cardinal connections. |
 | 18 | 14, 08 | **Done** — Delegate infrastructure drawing and remove old infrastructure code and settings. Verify mixed-type connections, water crossings, and ports. |
 | 19 | 14, 06 | **Done** — Verify clan colors in builder, viewer, and settlement rendering. PR 14 already removed metadata color access. Remove redundant palette fallbacks and retain explicit neutral settlement colors. |
-| 20a-20c | 14, 09, 10, 11, 19 | Delegate settlement markers in separate circular, square, and asset-backed batches. Remove each replaced branch. |
+| 20a-20c | 14, 09, 10, 11, 19 | **Done** — Delegate circular, square, and asset-backed settlement markers. Remove replaced renderer branches and duplicate asset-tinting methods. |
 | 21 | 14, 06 | Delegate resource markers. Remove resource type-label access. Test language-independent resource names. |
 | 22a-22b | 14, 12a-12e | Delegate optional-overlay colors and cues in separate batches. Preserve band layout and visibility behavior. |
 | 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
@@ -330,6 +330,24 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 20 implementation batches
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 20a | **Done** — Delegate villages, cities, capitals, and village ruins to the settlement module. Remove circular renderer branches. |
+| 20b | **Done** — Delegate fortifications, castles, Kyuden, castle ruins, academies, and watchtowers. Remove square renderer branches. |
+| 20c | **Done** — Delegate shrines and temples through asset-first marker selection. Remove duplicate shrine, temple, and tint drawing methods. Verify dimensions, centering, loading, and cache reuse. |
+
+The shared renderer resolves metadata, clan colors, and source images before delegation.
+[world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) owns all marker drawing and asset tinting.
+Asset-backed markers take priority over procedural shapes.
+Pending assets wait for their image load callback; they do not draw substitute shapes.
+The renderer keeps source-image loading and the tinted-image cache.
+Settlement labels retain their current language and placement.
+All 54 targeted settlement and renderer tests pass.
+All 900 pre-delegation output cases match, covering every settlement, all clans, no clan, and three zoom levels.
+Geometry, shrine scales, temple dimensions, neutral colors, and clan tinting remain unchanged.
 
 ### PR 19 validation
 

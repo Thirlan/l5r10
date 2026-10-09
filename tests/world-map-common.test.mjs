@@ -133,17 +133,38 @@ test("overlay color selection rejects non-overlay layers", () => {
 test("settlement asset drawing uses presentation lookup and clan colors", () => {
   // Setup
   const renderer = createRenderer();
-  renderer.ctx = { save() {}, restore() {} };
+  const asset = getSettlementAsset(SETTLEMENT.SMALL_SHRINE);
+  const color = getClanColors(CLAN.CRAB).border;
+  const source = { src: asset, complete: true, naturalWidth: 32, naturalHeight: 24 };
+  const tinted = { width: 24, height: 18 };
+  renderer.tintedIconCache = { [[asset, color, 24, 18].join(":")]: tinted };
   let result;
-  renderer.drawShrine = (...args) => { result = args; };
+  renderer.ctx = { drawImage: (...args) => { result = args; } };
+  renderer.settlementImage = (path) => {
+    assert.equal(path, asset);
+    return source;
+  };
   const cell = { settlement: SETTLEMENT.SMALL_SHRINE.id, clan: CLAN.CRAB.id };
 
   // Execution
   renderer.drawSettlementMarker(0, 0, cell);
 
   // Assertion
-  assert.equal(result[2], getClanColors(CLAN.CRAB).border);
-  assert.equal(result[3], getSettlementAsset(SETTLEMENT.SMALL_SHRINE));
+  assert.deepEqual(result, [tinted, -4, -1]);
+});
+
+test("settlement renderer does not load an image for procedural markers", () => {
+  // Setup
+  const renderer = createRenderer();
+  const requests = [];
+  renderer.settlementImage = (path) => requests.push(path);
+  renderer.ctx = { save() {}, restore() {}, beginPath() {}, arc() {}, fill() {}, stroke() {} };
+
+  // Execution
+  renderer.drawSettlementMarker(0, 0, { settlement: SETTLEMENT.VILLAGE.id });
+
+  // Assertion
+  assert.deepEqual(requests, []);
 });
 
 test("base asset loading failures report the image path and propagate", async (t) => {
