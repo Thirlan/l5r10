@@ -6,7 +6,7 @@ import { CLAN, TERRAIN, CLIMATE, VEGETATION } from "../docs/scripts/world-map-la
 test("viewer initialization reports and propagates loading failures", async (t) => {
   // Setup
   const error = new Error("Map data unavailable");
-  t.mock.method(WorldMapViewer.prototype, "loadMapTileImages", async () => { throw error; });
+  t.mock.method(WorldMapViewer.prototype, "loadBaseLayerImages", async () => { throw error; });
   const logging = t.mock.method(console, "error", () => {});
   const viewer = Object.create(WorldMapViewer.prototype);
 
@@ -24,7 +24,7 @@ test("viewer initializes travel papers from metadata before loading assets", asy
   viewer.canvas = { dataset: {} };
   viewer.render = () => {};
   let paperAtAssetLoad;
-  viewer.loadMapTileImages = async () => { paperAtAssetLoad = viewer.travelPapers[CLAN.CRAB.name]; };
+  viewer.loadBaseLayerImages = async () => { paperAtAssetLoad = viewer.travelPapers[CLAN.CRAB.name]; };
 
   // Execution
   await viewer.initialize();

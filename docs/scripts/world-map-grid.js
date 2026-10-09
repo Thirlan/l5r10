@@ -27,7 +27,7 @@ export class WorldMapGrid extends WorldMapRenderer {
    */
   async initialize() {
     try {
-      await this.loadMapTileImages();
+      await this.loadBaseLayerImages();
 
       const dataUrl = this.canvas.dataset.mapData;
       if (dataUrl) {
@@ -262,7 +262,6 @@ export class WorldMapGrid extends WorldMapRenderer {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.scale(this.zoom, this.zoom);
 
-    // Render base tile layer (combination of terrain, climate, vegetation)
     this.drawBaseTiles();
     this.drawCliffEdges();
 

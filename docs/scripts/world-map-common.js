@@ -1,4 +1,5 @@
-import { LAYERS, TERRAIN, CLAN } from "./world-map-layers.js";
+import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN } from "./world-map-layers.js";
+import { BASE_LAYER_IMAGES, drawBaseLayers } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
 import { getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { getResourceImage } from "./world-map-img-resources.js";
@@ -34,7 +35,7 @@ export class WorldMapRenderer {
       LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
 
     this.grid = {};
-    this.tileImageMap = {};
+    this.baseLayerImages = new Map();
     this.settlementLanguage = "english";
 
     this.settlementImages = {};
@@ -46,22 +47,24 @@ export class WorldMapRenderer {
 
   isLayerVisible(_layerName) { return true; }
 
-  async loadMapTileImages() {
+  /**
+   * @returns {Promise<void>} Completes when all base-layer images are loaded.
+   */
+  async loadBaseLayerImages() {
+    this.baseLayersLoading = true;
     try {
-      const res = await fetch("../data/map_tile_img.json");
-      if (!res.ok) throw new Error("Failed to load tile image mappings: HTTP " + res.status);
-      const entries = await res.json();
-      for (const entry of entries) {
-        const key = entry.terrain + "," + entry.climate + "," + entry.vegetation;
+      const entries = await Promise.all(BASE_LAYER_IMAGES.map(({ image }) => new Promise((resolve, reject) => {
         const img = new Image();
-        img.onload = () => this.redraw();
-        img.onerror = () => console.error(`Failed to load map tile image: ${entry.image}`);
-        img.src = entry.image;
-        this.tileImageMap[key] = img;
-      }
+        img.onload = () => resolve([image, img]);
+        img.onerror = () => reject(new Error(`Failed to load base-layer image: ${image}`));
+        img.src = image;
+      })));
+      this.baseLayerImages = new Map(entries);
     } catch (err) {
-      console.error("Failed to load map_tile_img.json:", err);
+      console.error("Failed to load base-layer images:", err);
       throw err;
+    } finally {
+      this.baseLayersLoading = false;
     }
   }
 
@@ -126,21 +129,14 @@ export class WorldMapRenderer {
   }
 
   drawBaseTiles() {
+    if (this.baseLayersLoading) return;
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
-      const t = cell.terrain ?? 0;
-      const cliffId = TERRAIN.CLIFF.id;
-      const tileTerrain = t === cliffId ? 0 : t;
-      const c = cell.climate ?? 0;
-      const isWater = (t === 3 || t === 4 || t === 5);
-      const v = isWater || !this.isLayerVisible("vegetation") ? 0 : (cell.vegetation ? 1 : 0);
-
-      const tileKey = tileTerrain + "," + c + "," + v;
-      const img = this.tileImageMap[tileKey];
-
-      if (img && img.complete && img.naturalWidth) {
-        this.ctx.drawImage(img, x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-      }
+      const terrain = LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id);
+      const climate = LAYERS.CLIMATE.getValue(cell.climate ?? CLIMATE.TEMPERATE.id);
+      const vegetation = this.isLayerVisible(LAYERS.VEGETATION.id)
+        ? LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id) : VEGETATION.NONE;
+      drawBaseLayers(this.ctx, x, y, this.gridSize, terrain, climate, vegetation, this.baseLayerImages);
     }
   }
 

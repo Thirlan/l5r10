@@ -57,7 +57,7 @@ export class WorldMapViewer extends WorldMapRenderer {
           this.travelPapers[clan.name] = true;
         }
       }
-      await this.loadMapTileImages();
+      await this.loadBaseLayerImages();
 
       const dataUrl = this.canvas.dataset.mapData;
       if (dataUrl) await this.loadMap(dataUrl);
@@ -297,7 +297,6 @@ export class WorldMapViewer extends WorldMapRenderer {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.scale(this.zoom, this.zoom);
-    // Draw base map tile images
     this.drawBaseTiles();
     this.drawCliffEdges();
 

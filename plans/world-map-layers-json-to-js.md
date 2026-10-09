@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–14 are complete; PR 15 onward remains.
+Status: In progress. PRs 1–15 are complete; PR 16 onward remains.
 
 ## Goal
 
@@ -30,6 +30,9 @@ Use a direct migration without backward-compatibility code.
 - Keep the separate climate, terrain, and vegetation presentation data in [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js).
 - Use the plural filenames [world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world-map-img-resources.js).
 - The current canvas output is the source of truth for presentation.
+- PR 15 preserves tile colors for Waste (`#4A4A4A`) and Shadowland (`#1A590F`).
+- Polar uses a solid brown climate fill (`#8B5A2B`), replacing its brown and white stripes.
+- Cliffs use a neutral gray transparent cliff-face image. Keep the separate direction lines unchanged.
 - Update button controls to match the canvas output.
 - Generate programmatic control images during development. Save them as WebP assets.
 - Do not generate button images during normal page loading.
@@ -46,7 +49,7 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 | File | Current responsibility |
 |---|---|
 | [layers.json](../docs/data/layers.json) | Defines 13 layers. Mixes identity, labels, colors, and image paths. |
-| [map_tile_img.json](../docs/data/map_tile_img.json) | Defines 66 composite terrain, climate, and vegetation image combinations. The layered renderer will replace this mapping. |
+| [map_tile_img.json](../docs/data/map_tile_img.json) | Unused historical mapping for 66 retired composite tiles. Keep it until PR 29. |
 | [world-map-common.js](../docs/scripts/world-map-common.js) | Loads tile images. Builds layer lookups. Draws most map features. |
 | [world-map-grid.js](../docs/scripts/world-map-grid.js) | Loads layer JSON. Handles painting, import, export, and builder clan borders. |
 | [world-map-viewer.js](../docs/scripts/world-map-viewer.js) | Loads layer JSON. Handles visibility, routes, and viewer clan shapes. |
@@ -277,9 +280,9 @@ Run targeted checks for completed components. Run full page checks after integra
 | 12a-12e | 04 | **Done** — Add one optional-overlay module per PR: animal, spirit, shadowland, crime, and Resource Level. Each exports its palette lookup, cue drawing function, and control image mapping. Test palette behavior and cue geometry; Resource Level uses the reverse severity palette. |
 | 13a-13c | 04, 05 | **Done** — Convert renderer and page entry points to modules using the bounded batches below. Replace map action handlers with module listeners. |
 | 14a-14f | 13a-13c | **Done** — Replace layer JSON loading with `LAYERS` directly using the bounded batches below. Remove legacy lookup and normalization logic. Do not add an adapter. |
-| 15a | 14 | Add climate base-color rendering in the base-layer module. Use named climate values and preserve the current climate appearance. |
-| 15b | 15a | Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
-| 15c | 15a, 15b | Add vegetation image rendering above land and water, including cliffs. Remove the three-value tile mapping and its JSON loading. Retire composite images only after checking for other consumers. |
+| 15a | 14 | **Done** — Add climate base-color rendering using named climate values. Preserve tile colors; use the confirmed solid Polar fill. |
+| 15b | 15a | **Done** — Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
+| 15c | 15a, 15b | **Done** — Draw vegetation above land and water, including cliffs. Remove tuple mapping and tile JSON loading. Retire 66 unused composite images after checking consumers. |
 | 16 | 15b | Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
 | 17 | 14, 07 | Delegate river drawing and remove old river code and settings. |
 | 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and settings. |
@@ -327,6 +330,21 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 15 implementation batches
+
+Keep each implementation and test review batch below 200 changed lines.
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 15a | **Done** — Replace tuple mappings with climate colors and independent terrain and vegetation presentation. |
+| 15b1 | **Done** — Add six transparent lossless WebP images for land terrain and vegetation, including the gray cliff face. Recover existing feature transparency from two climate backgrounds. Maximum reconstruction error is one color-channel unit. |
+| 15b2 | **Done** — Load base assets directly in the shared renderer. Remove tile JSON requests from both pages. |
+| 15c1 | **Done** — Draw climate, terrain, and vegetation in order. Honor vegetation visibility on land and water. Keep cliff direction placement unchanged. |
+| 15c2 | **Done** — Replace obsolete base-layer tests with focused compositing behavior tests. |
+| 15c3 | **Done** — Update shared-renderer loading, failure, visibility, default, and loading-state tests. Update viewer initialization tests. All 117 unit tests pass. |
+| 15c4 | **Done** — Check consumers and retire 66 unused composite tiles. Keep control images and historical tile JSON until their planned retirement. |
+| 15c5 | **Done** — Verify simulated builder and viewer startup with all 26,470 saved cells, all 96 base combinations, numeric data preservation, and image transparency. Inspect a composited asset preview. Update documentation. Browser visual verification remains for page integration. |
 
 The JSON files exceed the PR limit.
 Retirement therefore requires several PRs after the JSON loading code is replaced.

@@ -5,9 +5,20 @@ import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT } from "
 import { getResourceLevelColor } from "../docs/scripts/world-map-img-resource-level.js";
 import { getClanColors } from "../docs/scripts/clan-colors.js";
 import { getSettlementAsset } from "../docs/scripts/world-map-img-settlements.js";
+import { BASE_LAYER_IMAGES } from "../docs/scripts/world-map-img-base-layers.js";
 
 function createRenderer() {
   return Object.assign(Object.create(WorldMapRenderer.prototype), { grid: {}, gridSize: 16, zoom: 1 });
+}
+
+function installImage(t, image) {
+  const original = Object.getOwnPropertyDescriptor(globalThis, "Image");
+  globalThis.Image = image;
+  // Tear down
+  t.after(() => {
+    if (original) Object.defineProperty(globalThis, "Image", original);
+    else delete globalThis.Image;
+  });
 }
 
 test("map validation rejects non-object map data", () => {
@@ -135,16 +146,86 @@ test("settlement asset drawing uses presentation lookup and clan colors", () => 
   assert.equal(result[3], getSettlementAsset(SETTLEMENT.SMALL_SHRINE));
 });
 
-test("tile mapping request failures report and propagate initialization errors", async (t) => {
+test("base asset loading failures report the image path and propagate", async (t) => {
   // Setup
   const renderer = createRenderer();
-  t.mock.method(globalThis, "fetch", async () => ({ ok: false, status: 503 }));
+  class FailedImage {
+    set src(path) { this.path = path; this.onerror(); }
+  }
+  installImage(t, FailedImage);
   const logging = t.mock.method(console, "error", () => {});
 
   // Execution
-  const loading = renderer.loadMapTileImages();
+  const loading = renderer.loadBaseLayerImages();
 
   // Assertion
-  await assert.rejects(loading, /HTTP 503/);
+  await assert.rejects(loading, (error) => error.message.includes(BASE_LAYER_IMAGES[0].image));
   assert.equal(logging.mock.calls.length, 1);
+});
+
+test("base asset loading caches images without requesting tile JSON", async (t) => {
+  // Setup
+  const renderer = createRenderer();
+  class LoadedImage {
+    complete = true;
+    naturalWidth = 32;
+    set src(path) { this.path = path; this.onload(); }
+  }
+  installImage(t, LoadedImage);
+  const requests = t.mock.method(globalThis, "fetch", async () => { throw new Error("Unexpected JSON request"); });
+
+  // Execution
+  await renderer.loadBaseLayerImages();
+
+  // Assertion
+  assert.equal(requests.mock.calls.length, 0);
+  assert.ok(BASE_LAYER_IMAGES.every(({ image }) => renderer.baseLayerImages.get(image)?.path === image));
+});
+
+test("base rendering defaults cells with missing base values", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "0,0": {} };
+  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ image }) =>
+    [image, { complete: true, naturalWidth: 32 }]));
+  const imagesDrawn = [];
+  renderer.ctx = { save() {}, restore() {}, fillRect() {}, drawImage: (image) => imagesDrawn.push(image) };
+
+  // Execution
+  renderer.drawBaseTiles();
+
+  // Assertion
+  const flatPath = BASE_LAYER_IMAGES.find(({ value }) => value === TERRAIN.FLAT).image;
+  assert.deepEqual(imagesDrawn, [renderer.baseLayerImages.get(flatPath)]);
+});
+
+test("hidden vegetation is not drawn on water", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "0,0": { terrain: TERRAIN.WATER.id, vegetation: VEGETATION.PRESENT.id } };
+  renderer.baseLayerImages = new Map();
+  renderer.isLayerVisible = (layer) => layer !== "vegetation";
+  const imagesDrawn = [];
+  renderer.ctx = { save() {}, restore() {}, fillRect() {}, drawImage: (image) => imagesDrawn.push(image) };
+
+  // Execution
+  renderer.drawBaseTiles();
+
+  // Assertion
+  assert.deepEqual(imagesDrawn, []);
+});
+
+test("base rendering waits while its images are loading", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "0,0": {} };
+  renderer.baseLayersLoading = true;
+  const calls = [];
+  renderer.ctx = { fillRect: () => calls.push("fill"), drawImage: () => calls.push("image") };
+
+  // Execution
+  renderer.drawBaseTiles();
+
+  // Assertion
+  assert.deepEqual(calls, []);
 });
