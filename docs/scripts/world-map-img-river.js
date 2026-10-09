@@ -1,8 +1,11 @@
+import { RIVER } from "./world-map-layers.js";
+
 const STRIPE_COLORS = ["#F4A460", "#ADD8E6", "#0000FF", "#ADD8E6", "#F4A460"];
 const STRIPE_OFFSETS = [-2, -1, 0, 1, 2];
 const RIVER_DIRECTIONS = ["east", "south", "west", "north"];
 
-export const RIVER_CONTROL_IMAGES = Object.freeze({});
+export const RIVER_CONTROL_IMAGES = Object.freeze(Object.entries(RIVER).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_river_${key.toLowerCase()}.webp` })));
 
 /**
  * @param {CanvasRenderingContext2D} ctx Drawing context.

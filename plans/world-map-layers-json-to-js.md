@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–22 are complete; PR 23 onward remains.
+Status: In progress. PRs 1–24 are complete; PR 25 onward remains.
 
 ## Goal
 
@@ -223,11 +223,11 @@ Resources use `name` for labels in both language modes.
 
 ### Development-time control images
 
-Add `tools/generate-world-map-controls.html` as a local development utility.
-Use browser canvas and `canvas.toBlob()` with `image/webp`.
-The utility imports the presentation modules. It does not contain duplicate drawing algorithms.
-Serve it locally over HTTP so native module imports work.
-Provide previews and downloads for each generated control asset.
+Generate images directly during development, as confirmed after reverting the original PR 23.
+Do not add a permanent generation utility, GUI, package manifest, or browser preview page.
+Use existing presentation drawing functions through temporary headless browser execution.
+Use canvas and `canvas.toBlob()` with `image/webp`; verify the output format.
+Inspect the saved images manually in VS Code.
 
 Save generated files under [docs/img/map/](../docs/img/map/) with descriptive `control_*.webp` names.
 Generate controls for rivers, infrastructure, optional overlays, and programmatic settlements.
@@ -236,7 +236,12 @@ Use a fixed preview size and zoom. Use the existing neutral palette for settleme
 Use representative connected cells for river and road previews.
 Wait for required base images before exporting climate previews.
 Confirm exported blobs are WebP, not a browser fallback format.
-Document regeneration steps in [docs/scripts/README.md](../docs/scripts/README.md).
+For regeneration, request the affected controls and run their presentation functions in a temporary headless browser.
+Write the verified WebP bytes directly to their existing control paths.
+Remove temporary generation scripts after validation.
+Keep these instructions in this plan; do not restore the removed script README.
+None controls are transparent, except vegetation None, which shows the climate background.
+Existing PNG control files remain until PR 25 replaces their HTML consumers.
 
 ## Pull request sequence
 
@@ -290,8 +295,8 @@ Run targeted checks for completed components. Run full page checks after integra
 | 20a-20c | 14, 09, 10, 11, 19 | **Done** — Delegate circular, square, and asset-backed settlement markers. Remove replaced renderer branches and duplicate asset-tinting methods. |
 | 21 | 14, 06 | **Done** — Delegate resource markers. PR 14 already removed resource type-label access. Test language-independent resource names. |
 | 22a-22b | 14, 12a-12e | **Done** — Route optional-overlay colors and cues through their presentation modules. Preserve band layout and visibility behavior. |
-| 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
-| 24a-24c | 23 | Generate base, river/infrastructure/overlay, and settlement control assets in separate batches. Add their module mappings. |
+| 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | **Done** — Generate controls directly through temporary headless browser execution. No permanent utility or GUI. Verify WebP output and save images for manual inspection. |
+| 24a-24c | 23 | **Done** — Generate 16 base, 37 river/infrastructure/overlay, and 15 settlement WebP assets. Add frozen metadata-based presentation mappings. Keep page wiring for PR 25. |
 | 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
 | 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
 | 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
@@ -330,6 +335,15 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 23 and 24 validation
+
+Generated all 68 control images directly with existing presentation functions in a temporary headless browser.
+No generation utility, GUI, or package dependency was added to the repository.
+All assets decode as 32-by-32 WebP images. All non-None controls contain visible pixels.
+All 68 frozen metadata-based mappings resolve to existing files.
+All 88 presentation-module tests pass.
+Manual image inspection remains with the user. Page wiring remains for PR 25.
 
 ### PR 22 implementation batches
 

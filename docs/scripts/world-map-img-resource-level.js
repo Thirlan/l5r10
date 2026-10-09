@@ -8,7 +8,8 @@ const colors = new Map([
   [RESOURCE_LEVEL.VERY_HIGH, "rgba(255, 255, 0, 0.45)"],
 ]);
 
-export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze({});
+export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze(Object.entries(RESOURCE_LEVEL).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_resource_level_${key.toLowerCase()}.webp` })));
 
 /**
  * @param {import("./world-map-layers.js").LevelValue} value Resource level metadata.

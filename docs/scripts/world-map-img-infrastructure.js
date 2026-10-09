@@ -9,7 +9,8 @@ const infrastructureStyles = new Map([
 const ROAD_DIRECTIONS = ["east", "south", "southeast", "northeast"];
 for (const style of infrastructureStyles.values()) Object.freeze(style);
 
-export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze({});
+export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze(Object.entries(INFRASTRUCTURE).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_infrastructure_${key.toLowerCase()}.webp` })));
 
 /**
  * @param {import("./world-map-layers.js").LayerValue} value Infrastructure metadata.

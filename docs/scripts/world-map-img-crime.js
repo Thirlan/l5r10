@@ -8,7 +8,8 @@ const colors = new Map([
   [CRIME.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const CRIME_CONTROL_IMAGES = Object.freeze({});
+export const CRIME_CONTROL_IMAGES = Object.freeze(Object.entries(CRIME).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_crime_${key.toLowerCase()}.webp` })));
 
 export function getCrimeColor(value) {
   if (!Object.values(CRIME).includes(value)) {

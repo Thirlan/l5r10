@@ -8,7 +8,8 @@ const colors = new Map([
   [SHADOWLAND.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const SHADOWLAND_CONTROL_IMAGES = Object.freeze({});
+export const SHADOWLAND_CONTROL_IMAGES = Object.freeze(Object.entries(SHADOWLAND).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_shadowland_${key.toLowerCase()}.webp` })));
 
 export function getShadowlandColor(value) {
   if (!Object.values(SHADOWLAND).includes(value)) {

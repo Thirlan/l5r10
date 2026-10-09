@@ -8,7 +8,8 @@ const colors = new Map([
   [SPIRIT.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const SPIRIT_CONTROL_IMAGES = Object.freeze({});
+export const SPIRIT_CONTROL_IMAGES = Object.freeze(Object.entries(SPIRIT).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_spirit_${key.toLowerCase()}.webp` })));
 
 export function getSpiritColor(value) {
   if (!Object.values(SPIRIT).includes(value)) {

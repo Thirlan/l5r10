@@ -8,7 +8,8 @@ const colors = new Map([
   [ANIMAL.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const ANIMAL_CONTROL_IMAGES = Object.freeze({});
+export const ANIMAL_CONTROL_IMAGES = Object.freeze(Object.entries(ANIMAL).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_animal_${key.toLowerCase()}.webp` })));
 
 export function getAnimalColor(value) {
   if (!Object.values(ANIMAL).includes(value)) {

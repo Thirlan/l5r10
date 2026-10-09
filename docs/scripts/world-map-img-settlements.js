@@ -11,7 +11,8 @@ const settlementAssetMap = new Map(settlementAssetEntries);
 export const SETTLEMENT_ASSETS = Object.freeze(settlementAssetEntries.map(
   ([settlement, image]) => Object.freeze({ settlement, image }),
 ));
-export const SETTLEMENT_CONTROL_IMAGES = Object.freeze({});
+export const SETTLEMENT_CONTROL_IMAGES = Object.freeze(Object.entries(SETTLEMENT).map(([key, value]) =>
+  Object.freeze({ value, image: `../img/map/control_settlement_${key.toLowerCase()}.webp` })));
 export const NEUTRAL_SETTLEMENT_COLORS = Object.freeze({ border: "#444444", fill: "#DDDDDD" });
 
 export function getSettlementAsset(settlement) {
