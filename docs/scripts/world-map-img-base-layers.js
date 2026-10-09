@@ -65,6 +65,68 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   ctx.restore();
 }
 
+/**
+ * @param {CanvasRenderingContext2D} ctx Drawing context.
+ * @param {number} x Cell column.
+ * @param {number} y Cell row.
+ * @param {number} gridSize Cell size in pixels.
+ * @param {number} zoom Map scale.
+ * @param {Record<number, number|string>|undefined|null} directions Saved cliff direction flags.
+ * @returns {void}
+ */
+export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions) {
+  if (!ctx || !Number.isFinite(x) || !Number.isFinite(y)
+    || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
+    throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
+  }
+  if (!directions || typeof directions !== "object") return;
+  const selected = Array.from({ length: 8 }, (_, index) => Number(directions[index]) === 1);
+  if (!selected.some(Boolean)) return;
+
+  const lineWidth = Math.min(4 / zoom, gridSize / 2);
+  const inset = Math.min(lineWidth / 2 + gridSize / 16 + 4, gridSize * 7 / 16);
+  const edgeSize = gridSize - 2 * inset;
+  const directionLength = Math.min(4, edgeSize / 2);
+  const left = x * gridSize + inset;
+  const top = y * gridSize + inset;
+  const right = left + edgeSize;
+  const bottom = top + edgeSize;
+  const centerX = left + edgeSize / 2;
+  const centerY = top + edgeSize / 2;
+
+  ctx.save();
+  ctx.strokeStyle = "#808080";
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  if (selected.every(Boolean)) {
+    ctx.strokeRect(left, top, edgeSize, edgeSize);
+  } else {
+    ctx.beginPath();
+    if (selected[0]) { ctx.moveTo(left, top); ctx.lineTo(right, top); }
+    if (selected[2]) { ctx.moveTo(right, top); ctx.lineTo(right, bottom); }
+    if (selected[4]) { ctx.moveTo(left, bottom); ctx.lineTo(right, bottom); }
+    if (selected[6]) { ctx.moveTo(left, top); ctx.lineTo(left, bottom); }
+
+    const drawDiagonal = (index, startX, startY, endX, endY, directionX, directionY) => {
+      if (!selected[index]) return;
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
+        centerX + directionX * Math.SQRT1_2 * directionLength,
+        centerY + directionY * Math.SQRT1_2 * directionLength
+      );
+    };
+    drawDiagonal(1, left, top, right, bottom, 1, -1);
+    drawDiagonal(3, right, top, left, bottom, 1, 1);
+    drawDiagonal(5, left, top, right, bottom, -1, 1);
+    drawDiagonal(7, left, bottom, right, top, -1, -1);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
 function getLoadedImage(value, images) {
   const path = imagePaths.get(value);
   const image = images.get(path);

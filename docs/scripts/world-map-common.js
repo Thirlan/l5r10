@@ -1,5 +1,5 @@
 import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN } from "./world-map-layers.js";
-import { BASE_LAYER_IMAGES, drawBaseLayers } from "./world-map-img-base-layers.js";
+import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
 import { getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { getResourceImage } from "./world-map-img-resources.js";
@@ -141,62 +141,9 @@ export class WorldMapRenderer {
   }
 
   drawCliffEdges() {
-    const size = this.gridSize;
-    const ctx = this.ctx;
-    const lineWidth = Math.min(4 / this.zoom, size / 2);
-    const inset = Math.min(lineWidth / 2 + size / 16 + 4, size * 7 / 16);
-    const edgeSize = size - 2 * inset;
-    const directionLength = Math.min(4, edgeSize / 2);
-
     for (const [key, cell] of Object.entries(this.grid)) {
-      const directions = cell["cliff direction"];
-      if (!directions || typeof directions !== "object") continue;
-
-      const selected = Array.from({ length: 8 }, (_, index) => Number(directions[index]) === 1);
-      if (!selected.some(Boolean)) continue;
-
       const [x, y] = key.split(",").map(Number);
-      const left = x * size + inset;
-      const top = y * size + inset;
-      const right = left + edgeSize;
-      const bottom = top + edgeSize;
-      const centerX = left + edgeSize / 2;
-      const centerY = top + edgeSize / 2;
-
-      ctx.save();
-      ctx.strokeStyle = "#808080";
-      ctx.lineWidth = lineWidth;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-
-      if (selected.every(Boolean)) {
-        ctx.strokeRect(left, top, edgeSize, edgeSize);
-      } else {
-        ctx.beginPath();
-        if (selected[0]) { ctx.moveTo(left, top); ctx.lineTo(right, top); }
-        if (selected[2]) { ctx.moveTo(right, top); ctx.lineTo(right, bottom); }
-        if (selected[4]) { ctx.moveTo(left, bottom); ctx.lineTo(right, bottom); }
-        if (selected[6]) { ctx.moveTo(left, top); ctx.lineTo(left, bottom); }
-
-        const drawDiagonal = (index, startX, startY, endX, endY, directionX, directionY) => {
-          if (!selected[index]) return;
-          ctx.moveTo(startX, startY);
-          ctx.lineTo(endX, endY);
-          ctx.moveTo(centerX, centerY);
-          ctx.lineTo(
-            centerX + directionX * Math.SQRT1_2 * directionLength,
-            centerY + directionY * Math.SQRT1_2 * directionLength
-          );
-        };
-
-        drawDiagonal(1, left, top, right, bottom, 1, -1);
-        drawDiagonal(3, right, top, left, bottom, 1, 1);
-        drawDiagonal(5, left, top, right, bottom, -1, 1);
-        drawDiagonal(7, left, bottom, right, top, -1, -1);
-        ctx.stroke();
-      }
-
-      ctx.restore();
+      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, cell["cliff direction"]);
     }
   }
 

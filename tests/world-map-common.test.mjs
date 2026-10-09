@@ -229,3 +229,21 @@ test("base rendering waits while its images are loading", () => {
   // Assertion
   assert.deepEqual(calls, []);
 });
+
+test("renderer delegates saved cliff directions without requiring cliff terrain", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.gridSize = 32;
+  renderer.grid = { "2,3": { terrain: TERRAIN.FLAT.id, "cliff direction": { 0: 1 } } };
+  const lines = [];
+  renderer.ctx = {
+    save() {}, restore() {}, beginPath() {}, stroke() {},
+    moveTo() {}, lineTo: (...args) => lines.push(args),
+  };
+
+  // Execution
+  renderer.drawCliffEdges();
+
+  // Assertion
+  assert.deepEqual(lines, [[88, 104]]);
+});

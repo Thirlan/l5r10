@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–15 are complete; PR 16 onward remains.
+Status: In progress. PRs 1–16 are complete; PR 17 onward remains.
 
 ## Goal
 
@@ -283,7 +283,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 15a | 14 | **Done** — Add climate base-color rendering using named climate values. Preserve tile colors; use the confirmed solid Polar fill. |
 | 15b | 15a | **Done** — Add transparent land-terrain images and colored rendering for water, coastal water, and ocean. Preserve cliff terrain; do not normalize cliffs to flat terrain. |
 | 15c | 15a, 15b | **Done** — Draw vegetation above land and water, including cliffs. Remove tuple mapping and tile JSON loading. Retire 66 unused composite images after checking consumers. |
-| 16 | 15b | Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
+| 16 | 15b | **Done** — Extract cliff drawing into the base module. Keep direction behavior and render placement unchanged. |
 | 17 | 14, 07 | Delegate river drawing and remove old river code and settings. |
 | 18 | 14, 08 | Delegate infrastructure drawing and remove old infrastructure code and settings. |
 | 19 | 14, 06 | Connect clan colors in builder, viewer, and settlement rendering. Remove metadata color access. |
@@ -330,6 +330,13 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 16 implementation batches
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 16a | **Done** — Extract cliff direction drawing into the base module. Pass context, coordinates, size, zoom, and saved flags. Keep renderer calls in place. |
+| 16b | **Done** — Add focused direction, rectangle, flag, and zoom tests. All 44 targeted tests pass. Verify all 2,304 pre-extraction drawing traces match at three sizes and three zoom levels. Update documentation. |
 
 ### PR 15 implementation batches
 
