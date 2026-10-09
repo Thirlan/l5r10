@@ -1,9 +1,10 @@
 import { WorldMapRenderer } from "./world-map-common.js";
-import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE } from "./world-map-layers.js";
+import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "./world-map-layers.js";
+import { L5RPathing, MINUTES_PER_DAY } from "./pathing.js";
 import { getClanColors } from "./clan-colors.js";
 
 const VIEWER_GRID_SIZE = 16;
-const WATER_TERRAINS_SET = typeof WATER_TERRAINS !== "undefined" ? WATER_TERRAINS : new Set(["water", "coastal water", "ocean"]);
+const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
 
 function numOrNull(val) {
   if (val === undefined || val === null || val === "") return null;
@@ -184,34 +185,30 @@ export class WorldMapViewer extends WorldMapRenderer {
 
   cellClan(cx, cy) {
     const cell = this.cellData(cx, cy);
-    if (!cell || !cell.clan) return null;
+    if (!cell || (cell.clan ?? CLAN.NONE.id) === CLAN.NONE.id) return null;
     return LAYERS.CLAN.getValue(cell.clan).name;
   }
 
   cellInfrastructure(cx, cy) {
     const cell = this.cellData(cx, cy);
-    if (!cell || !cell.infrastructure) return null;
+    if (!cell || (cell.infrastructure ?? INFRASTRUCTURE.NONE.id) === INFRASTRUCTURE.NONE.id) return null;
     return LAYERS.INFRASTRUCTURE.getValue(cell.infrastructure).name;
   }
 
   cellHasRoad(cx, cy) {
     const infra = this.cellInfrastructure(cx, cy);
-    return ["Road", "Footpath"].includes(infra);
+    return [INFRASTRUCTURE.ROAD.name, INFRASTRUCTURE.FOOTPATH.name].includes(infra);
   }
 
   tileCostKey(cx, cy) {
     const cell = this.cellData(cx, cy);
     if (!cell) return null;
 
-    const terrainName = (this.cellTerrain(cx, cy) || "flat").toLowerCase();
-    const vegName = LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id).name.toLowerCase();
-    const climateName = LAYERS.CLIMATE.getValue(cell.climate ?? CLIMATE.TEMPERATE.id).name.toLowerCase();
-
-    if (vegName === "vegetation") return "vegetation";
-    if (climateName === "desert" || climateName === "polar") return climateName;
-    if (terrainName === "wetlands" || terrainName === "flat") return terrainName;
-
-    return terrainName;
+    const vegetation = LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id);
+    const climate = LAYERS.CLIMATE.getValue(cell.climate ?? CLIMATE.TEMPERATE.id);
+    if (vegetation === VEGETATION.PRESENT) return vegetation.name.toLowerCase();
+    if (climate === CLIMATE.DESERT || climate === CLIMATE.POLAR) return climate.name.toLowerCase();
+    return this.cellTerrain(cx, cy).toLowerCase();
   }
 
   tileData(cx, cy, mode) {

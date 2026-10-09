@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapViewer } from "../docs/scripts/world-map-viewer.js";
-import { CLAN, TERRAIN, CLIMATE, VEGETATION } from "../docs/scripts/world-map-layers.js";
+import { CLAN, TERRAIN, CLIMATE, VEGETATION, INFRASTRUCTURE } from "../docs/scripts/world-map-layers.js";
 import { getClanColors } from "../docs/scripts/clan-colors.js";
 
 test("viewer initialization reports and propagates loading failures", async (t) => {
@@ -102,4 +102,27 @@ test("viewer excludes absent and none-valued clans from territory drawing", () =
 
   // Assertion
   assert.deepEqual(palettes, []);
+});
+
+test("viewer polar climate overrides terrain travel costs", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.grid = { "0,0": { terrain: TERRAIN.HILLS.id, climate: CLIMATE.POLAR.id } };
+  // Execution
+  const key = viewer.tileCostKey(0, 0);
+  // Assertion
+  assert.equal(key, CLIMATE.POLAR.name);
+});
+
+test("viewer water bridges supply road costs only for foot travel", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.grid = { "0,0": { terrain: TERRAIN.WATER.id, infrastructure: INFRASTRUCTURE.FOOTPATH.id } };
+  viewer.terrainCosts = { [TERRAIN.WATER.name]: { cost: 100, costRoad: 50 } };
+  // Execution
+  const foot = viewer.tileData(0, 0, "foot");
+  const ship = viewer.tileData(0, 0, "ship");
+  // Assertion
+  assert.equal(foot.cost, 50);
+  assert.equal(ship.cost, 100);
 });

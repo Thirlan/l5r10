@@ -1,3 +1,5 @@
+import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "./world-map-layers.js";
+
 const MODE_FOOT = 'foot';
 const MODE_RIVER_BOAT = 'river boat';
 const MODE_SHIP = 'ship';
@@ -12,13 +14,18 @@ const DIAGONAL_COST_MULTIPLIER = 1.41;
 
 const DAY_START_MIN = 8 * 60;
 const DAY_END_MIN = 18 * 60;
-const MINUTES_PER_DAY = 24 * 60;
+export const MINUTES_PER_DAY = 24 * 60;
 
-const WATER_TERRAINS = new Set(['water', 'coastal water', 'ocean', 'Water', 'Coastal Water', 'Ocean']);
+// Keep the existing title-case travel inputs until a separate travel behavior change.
+const RIVER_WATER_NAME = TERRAIN.WATER.name[0].toUpperCase() + TERRAIN.WATER.name.slice(1);
+const WATER_TERRAINS = new Set(
+  [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].flatMap(({ name }) =>
+    [name, name.replace(/\b\w/g, (letter) => letter.toUpperCase())]),
+);
 
 // Mode-aware A* + trip simulator. Consumes a small map-query interface so it stays UI-agnostic.
 // Config: { getTerrain, getTileData, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }
-class L5RPathing {
+export class L5RPathing {
   constructor({ getTerrain, getTileData, getInfrastructure = () => null, getClan = () => null, skillConfig, travelPapers = {}, avoidClans = {}, includeRisk = false, includeMoney = false }) {
     this.getTerrain = getTerrain;
     this.getTileData = getTileData;
@@ -38,7 +45,7 @@ class L5RPathing {
     if (!terrain || !WATER_TERRAINS.has(terrain)) return MODE_FOOT;
     const data = this.getTileData(cell.x, cell.y, MODE_FOOT);
     if (data && data.hasRoad) return MODE_FOOT;
-    return terrain === 'Water' ? MODE_RIVER_BOAT : MODE_SHIP;
+    return terrain === RIVER_WATER_NAME ? MODE_RIVER_BOAT : MODE_SHIP;
   }
 
   // Returns every valid { toMode, cost, zeni, checks, avoidPenalty } for entering `to` from `from` in `fromMode`.
@@ -72,7 +79,7 @@ class L5RPathing {
     }
     const clan = this.getClan(to.x, to.y);
     const crossedClanBorderOnRoad = this.getClan(from.x, from.y) !== clan && toData.hasRoad;
-    const enteredClanCity = toT === 'City';
+    const enteredClanCity = toT === SETTLEMENT.CITY.name;
     const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan]
       ? { skills: ['sneak', 'forgery'], tn: 20, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 }
       : null;
@@ -92,26 +99,26 @@ class L5RPathing {
         return null;
       }
       if (fromMode === MODE_RIVER_BOAT || fromMode === MODE_SHIP) {
-        return toT === 'City' ? transition(tileCheck ? [tileCheck] : []) : null;
+        return toT === SETTLEMENT.CITY.name ? transition(tileCheck ? [tileCheck] : []) : null;
       }
       if (fromMode === MODE_SWIM) return !toWater ? transition(tileCheck ? [tileCheck] : []) : null;
       return null;
     }
     if (toMode === MODE_RIVER_BOAT) {
       if (fromMode === MODE_FOOT) {
-        if (toT === 'Water' && ['Small Port', 'Large Port'].includes(fromInfrastructure)) {
+        if (toT === RIVER_WATER_NAME && [INFRASTRUCTURE.SMALL_PORT.name, INFRASTRUCTURE.LARGE_PORT.name].includes(fromInfrastructure)) {
           const result = transition([sailingCheck]);
           result.cost += BOAT_BOARDING_MIN;
           return result;
         }
         return null;
       }
-      if (fromMode === MODE_RIVER_BOAT) return toT === 'Water' ? transition([sailingCheck]) : null;
+      if (fromMode === MODE_RIVER_BOAT) return toT === RIVER_WATER_NAME ? transition([sailingCheck]) : null;
       return null;
     }
     if (toMode === MODE_SHIP) {
       if (fromMode === MODE_FOOT) {
-        if (toWater && fromInfrastructure === 'Large Port') {
+        if (toWater && fromInfrastructure === INFRASTRUCTURE.LARGE_PORT.name) {
           const result = transition([sailingCheck]);
           result.cost += BOAT_BOARDING_MIN;
           return result;
@@ -123,10 +130,10 @@ class L5RPathing {
     }
     if (toMode === MODE_SWIM) {
       if (fromMode === MODE_FOOT) {
-        if (toT === 'Water' && this.skillConfig.swim.allowed) return transition([swimCheck]);
+        if (toT === RIVER_WATER_NAME && this.skillConfig.swim.allowed) return transition([swimCheck]);
         return null;
       }
-      if (fromMode === MODE_SWIM) return toT === 'Water' ? transition([swimCheck]) : null;
+      if (fromMode === MODE_SWIM) return toT === RIVER_WATER_NAME ? transition([swimCheck]) : null;
       return null;
     }
     return null;

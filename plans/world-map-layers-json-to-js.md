@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–25 are complete; PR 26 onward remains.
+Status: In progress. PRs 1–26 are complete; PR 27 onward remains.
 
 ## Goal
 
@@ -298,7 +298,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | **Done** — Generate controls directly through temporary headless browser execution. No permanent utility or GUI. Verify WebP output and save images for manual inspection. |
 | 24a-24c | 23 | **Done** — Generate 16 base, 37 river/infrastructure/overlay, and 15 settlement WebP assets. Add frozen metadata-based presentation mappings. Keep page wiring for PR 25. |
 | 25a-25d | 14, 24a-24c | **Done** — Wire base, infrastructure/clan, settlement/resource, and overlay buttons. Remove duplicate HTML visual definitions. |
-| 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
+| 26 | 14 | **Done** — Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
 | 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
 | 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
 | 29a-29g | 14, 15a-15c | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
@@ -346,6 +346,19 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 25d | Wire ordered-overlay images. Preserve labels, order, active selection, erase controls, and keyboard activation. Verify all builder buttons. |
 
 Keep obsolete icon-specific CSS removal in PR 27.
+
+### PR 26 validation
+
+Viewer travel comparisons use canonical vegetation, climate, and infrastructure metadata.
+Pathing derives terrain, port, and city names from metadata. Its name-based interface remains unchanged.
+The viewer imports pathing and its day constant through native modules.
+Currency, dice, and the travel event engine remain unchanged.
+Keep existing title-case river-water checks and city-as-terrain checks in this migration.
+Their existing behavior needs a separate travel change, not a migration fix.
+
+All 22 focused pathing, viewer, and viewer-control tests pass.
+Baseline comparisons match 11,520 transitions and initial modes, 480 tile-cost combinations, and three complete routes.
+Headless browser validation loads 17 clan rows and computes a real-map route with events and summary output.
 
 ### PR 25 validation
 
