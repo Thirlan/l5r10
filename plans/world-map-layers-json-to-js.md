@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: Draft for review. Do not start implementation until this plan is approved.
+Status: In progress. PRs 1–11 are complete; PR 12 onward remains.
 
 ## Goal
 
@@ -233,17 +233,17 @@ Run targeted checks for completed components. Run full page checks after integra
 
 | PR | Depends on | Scope and acceptance criteria |
 |---|---|---|
-| 01 | None | Create `LayerValue`, `SettlementValue`, and `LayerDefinition`. Test immutable fields, lookup, and invalid values. |
-| 02 | 01 | Add terrain, climate, vegetation, river, and infrastructure catalogs. Preserve IDs and names. |
-| 03 | 01 | Add clan and settlement catalogs. Preserve all settlement type labels and ID gaps. |
-| 04 | 01 | Add resource and optional-overlay catalogs. Resources contain only ID and name. Export complete `LAYERS`. |
-| 05 | 02 | Populate the base image module with 66 mappings and existing control image paths. Check asset existence and tuple uniqueness. |
-| 06 | 03, 04 | Populate clan colors and resource images. Preserve all colors and 39 resource assets. |
-| 07 | 02 | Add river drawing exports. Capture connection and isolated-cell tests before integration. |
-| 08 | 02 | Add infrastructure drawing exports. Cover roads, footpaths, and both ports. |
-| 09 | 03, 06 | Add settlement asset lookup and circular markers, including ruins. Preserve asset-first selection. |
-| 10 | 09 | Add square settlement markers and watchtower drawing. Preserve all marker dimensions. |
-| 11 | 09 | Add shrine and temple drawing, tinting integration, and label-size mappings. |
+| 01 | None | **Done** — Create `LayerValue`, `SettlementValue`, and `LayerDefinition`. Test immutable fields, lookup, and invalid values. |
+| 02 | 01 | **Done** — Add terrain, climate, vegetation, river, and infrastructure catalogs. Preserve IDs and names. |
+| 03 | 01 | **Done** — Add clan and settlement catalogs. Preserve all settlement type labels and ID gaps. |
+| 04 | 01 | **Done** — Add resource and optional-overlay catalogs. Resources contain only ID and name. Export complete `LAYERS`. |
+| 05 | 02 | **Done** — Populate the base image module with 66 mappings and existing control image paths. Check asset existence and tuple uniqueness. |
+| 06 | 03, 04 | **Done** — Populate clan colors and resource images. Preserve all colors and 39 resource assets. |
+| 07 | 02 | **Done** — Add river drawing exports. Capture connection and isolated-cell tests before integration. |
+| 08 | 02 | **Done** — Add infrastructure drawing exports. Cover roads, footpaths, and both ports. |
+| 09 | 03, 06 | **Done** — Add settlement asset lookup and circular markers, including ruins. Preserve asset-first selection. |
+| 10 | 09 | **Done** — Add square settlement markers and watchtower drawing. Preserve all marker dimensions. |
+| 11 | 09 | **Done** — Add shrine and temple drawing, tinting integration, and label-size mappings. |
 | 12a-12e | 04 | Add one optional-overlay module per PR. Test its palette and cue, including fertility's separate palette. |
 | 13a-13c | 04, 05 | Convert renderer and page entry points to modules in bounded batches. Replace map action handlers with module listeners. |
 | 14 | 13a-13c | Replace layer JSON loading with `LAYERS` directly. Remove legacy lookup and normalization logic. Do not add an adapter. |
