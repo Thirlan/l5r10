@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "1:1 map from a `resource` layer tile id (layers.json) to the building_type.json building that produces its raw resources when worked. Ocean tiles (Coastal Fish Boat, Crab Boat, Pearl Divers, Shellfish Boat, Squid Boat, Ocean Fish Boat) are omitted because they are harvested as hunted units by fishing fleets, not fixed buildings.",
+  "description": "Maps each numeric RESOURCE.id in docs/scripts/world-map-layers.js to the building_type.json building that produces its raw resources. Ocean tiles (Coastal Fish Boat, Crab Boat, Pearl Divers, Shellfish Boat, Squid Boat, Ocean Fish Boat) are omitted. Fishing fleets harvest these resources instead of fixed buildings.",
   "outputs": [
     { "id": 1, "building_type": 1 },
     { "id": 2, "building_type": 2 },

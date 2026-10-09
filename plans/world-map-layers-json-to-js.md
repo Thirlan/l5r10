@@ -1,10 +1,10 @@
 # World map layer migration
 
-Status: In progress. PRs 1–26 are complete; PR 27 onward remains.
+Status: Complete. PRs 1–30 are complete.
 
 ## Goal
 
-Replace [layers.json](../docs/data/layers.json) with class-based JavaScript definitions.
+Replace the retired layer JSON with class-based [JavaScript definitions](../docs/scripts/world-map-layers.js).
 Replace cryptic layer IDs and comparisons with named constants.
 Separate layer identity from images, colors, and drawing code.
 Use a direct migration without backward-compatibility code.
@@ -48,15 +48,32 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 
 | File | Current responsibility |
 |---|---|
-| [layers.json](../docs/data/layers.json) | Defines 13 layers. Mixes identity, labels, colors, and image paths. |
-| [map_tile_img.json](../docs/data/map_tile_img.json) | Unused historical mapping for 66 retired composite tiles. Keep it until PR 29. |
-| [world-map-common.js](../docs/scripts/world-map-common.js) | Loads tile images. Builds layer lookups. Draws most map features. |
-| [world-map-grid.js](../docs/scripts/world-map-grid.js) | Loads layer JSON. Handles painting, import, export, and builder clan borders. |
-| [world-map-viewer.js](../docs/scripts/world-map-viewer.js) | Loads layer JSON. Handles visibility, routes, and viewer clan shapes. |
-| [build_map.html](../docs/world/build_map.html) | Defines tools with repeated names, paths, colors, and inline handlers. |
-| [world_map.html](../docs/world/world_map.html) | Loads classic scripts. Defines visibility and travel controls. |
-| [pathing.js](../docs/scripts/pathing.js) | Uses terrain and infrastructure names for travel decisions. |
-| [world-map-grid.css](../docs/css/world-map-grid.css) | Defines several button icons with separate shapes and colors. |
+| [world-map-layers.js](../docs/scripts/world-map-layers.js) | Defines 13 immutable metadata catalogs. Resolves numeric saved values. Contains no presentation settings. |
+| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Defines climate and water colors, separate terrain and vegetation images, and cliff drawing. |
+| [clan-colors.js](../docs/scripts/clan-colors.js) | Defines clan border and fill palettes. |
+| [world-map-common.js](../docs/scripts/world-map-common.js) | Loads images and validates numeric cells. Delegates feature drawing to presentation modules. |
+| [world-map-grid.js](../docs/scripts/world-map-grid.js) | Handles painting, import, export, and builder clan borders. |
+| [world-map-viewer.js](../docs/scripts/world-map-viewer.js) | Handles visibility, routes, and viewer clan shapes. Imports pathing directly. |
+| [world-map-tool-icons.js](../docs/scripts/world-map-tool-icons.js) | Resolves control images and clan swatches from presentation modules. Reports missing or failed images. |
+| [build_map.html](../docs/world/build_map.html) | Defines tool labels and catalog-key attributes. Loads the builder module entry point. |
+| [world_map.html](../docs/world/world_map.html) | Defines visibility and travel controls. Loads the viewer module entry point. Keeps unrelated classic scripts. |
+| [pathing.js](../docs/scripts/pathing.js) | Exports route calculation and the day constant. Derives semantic names from metadata without changing travel rules. |
+| [world-map-grid.css](../docs/css/world-map-grid.css) | Defines shared map layout, swatches, image sizing, buttons, and cliff-direction controls. |
+
+### Script use
+
+Import identity catalogs from [world-map-layers.js](../docs/scripts/world-map-layers.js).
+Use `.id` for identity values and `.value` for ordered overlays.
+Resolve saved numbers with `LAYERS.<LAYER>.getValue(number)`. Use `.name` for display text.
+Keep metadata separate from image URLs, colors, and geometry.
+River, infrastructure, settlements, resources, and optional overlays have separate presentation modules.
+
+[world-map-builder-page.js](../docs/scripts/world-map-builder-page.js) loads the builder and binds its tools.
+[world-map-viewer-page.js](../docs/scripts/world-map-viewer-page.js) loads the viewer and binds its controls.
+The viewer imports [pathing.js](../docs/scripts/pathing.js); do not add a classic pathing script tag.
+Both pages use shared [world-map-controls.js](../docs/scripts/world-map-controls.js).
+The viewer also uses [world-map-viewer-controls.js](../docs/scripts/world-map-viewer-controls.js).
+No browser-global map instance, JSON metadata fetch, or legacy input adapter is required.
 
 ### Verified data
 
@@ -66,15 +83,12 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 - Terrain IDs are `0, 1, 2, 3, 4, 5, 7, 8`.
 - Settlement IDs are `0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16, 17`.
 - Preserve these gaps. Do not assign new IDs by array position.
-- Four terrain image paths are invalid: `plain.png`, `hills.png`, `mountain.png`, and `wetlands.png`.
-- All 66 composite tile image paths currently exist.
-- All settlement, resource, and builder image paths checked currently exist.
+- The 66 historical composite images are retired. Base layers now render separately.
+- All current base, settlement, resource, and generated control image paths exist.
 - The saved map contains 26,470 cells and uses numeric layer IDs.
 
-The starter JavaScript modules are untracked user files.
-Most are empty. The layer starter contains unscoped numeric assignments.
-Read them again before implementation. Preserve any new user changes.
-Do not change the unrelated travel files.
+Layer JSON and composite tile JSON are retired after consumer checks.
+Unrelated travel modules and numeric resource-output mappings remain unchanged.
 
 ## Architecture
 
@@ -241,7 +255,7 @@ Write the verified WebP bytes directly to their existing control paths.
 Remove temporary generation scripts after validation.
 Keep these instructions in this plan; do not restore the removed script README.
 None controls are transparent, except vegetation None, which shows the climate background.
-Existing PNG control files remain until PR 25 replaces their HTML consumers.
+PR 25 replaces the HTML consumers of PNG controls. Unused PNG conversion or removal is outside this migration.
 
 ## Pull request sequence
 
@@ -299,10 +313,10 @@ Run targeted checks for completed components. Run full page checks after integra
 | 24a-24c | 23 | **Done** — Generate 16 base, 37 river/infrastructure/overlay, and 15 settlement WebP assets. Add frozen metadata-based presentation mappings. Keep page wiring for PR 25. |
 | 25a-25d | 14, 24a-24c | **Done** — Wire base, infrastructure/clan, settlement/resource, and overlay buttons. Remove duplicate HTML visual definitions. |
 | 26 | 14 | **Done** — Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
-| 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
-| 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
-| 29a-29g | 14, 15a-15c | Retire replaced JSON in bounded batches. No runtime consumer needs to remain functional during retirement. |
-| 30a-30b | 29a-29g | Update script documentation, resource-output references, and affected plan references in separate bounded PRs. |
+| 27a-27c | 20a-20c, 25a-25d | **Done** — Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
+| 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | **Done** — Check completed page integration. No obsolete lookups or handlers remain. Identity definitions contain no presentation data. |
+| 29a-29g | 14, 15a-15c | **Done** — Retire replaced JSON in bounded batches. No runtime or test consumer remains. |
+| 30a-30b | 29a-29g | **Done** — Update script documentation, resource-output references, and affected plan references in bounded batches. |
 
 ### PR 13 implementation batches
 
@@ -345,7 +359,56 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 25c | Wire settlement and resource images. Remove duplicate HTML paths and settlement shape classes. |
 | 25d | Wire ordered-overlay images. Preserve labels, order, active selection, erase controls, and keyboard activation. Verify all builder buttons. |
 
-Keep obsolete icon-specific CSS removal in PR 27.
+PR 27 removes obsolete icon-specific CSS.
+
+### PR 27 and 28 validation
+
+Remove settlement shape CSS in two batches: 121 lines, then 55 lines.
+Remove the three base icon styles in a separate 12-line batch.
+Keep shared swatch, image, button, erase, and cliff-direction layout styles.
+Both pages have identical screenshots before and after this CSS cleanup.
+All 191 migration tests pass.
+Runtime searches find no retired JSON references, obsolete lookups, or map inline handlers.
+All 97 identity values match the historical definitions. Confirmed empty None settlement labels remain.
+Identity metadata contains no images or colors. All 13 layers validate the 26,470 saved cells.
+Browser checks cover all 132 builder tools, image loading, and keyboard selection.
+The builder loads the saved map and preserves it through numeric export/import.
+Cliff directions, vegetation painting, and terrain erasing work.
+Viewer checks cover visibility, language, travel papers, skills, routes, waypoint undo, and route clear.
+Both pages have no module errors, missing assets, or retired JSON requests.
+
+### PR 29 retirement batches
+
+Runtime and test searches confirm neither JSON file has a consumer.
+Use the original files' line numbers for these deletion review boundaries.
+Intermediate partial JSON files do not need to remain usable.
+
+| Batch | Deletion boundary |
+|---|---|
+| 29a | Last 180 lines of layer JSON: original lines 673-852. |
+| 29b | Next 180 lines of layer JSON: original lines 493-672. |
+| 29c | Next 180 lines of layer JSON: original lines 313-492. |
+| 29d | Next 180 lines of layer JSON: original lines 133-312. |
+| 29e | Delete the remaining layer JSON file: original lines 1-132. |
+| 29f | Last 199 lines of tile JSON: original lines 200-398. |
+| 29g | Delete the remaining tile JSON file: original lines 1-199. |
+
+Keep unrelated JSON and saved numeric map data unchanged.
+
+### PR 29 and 30 validation
+
+Both replaced JSON files are deleted. No runtime, test, or documentation reference remains to their paths.
+All 191 migration tests pass after retirement.
+Both pages still pass browser integration checks with no errors or retired JSON requests.
+All 113 presentation image entries resolve to existing assets.
+All 33 numeric resource-output mappings are unchanged and resolve to canonical resources.
+
+Batch 30a updates module-use documentation here and in the metadata source header.
+It also updates the resource-output description and economy catalog references.
+Batch 30b updates the 3D plan to use canonical metadata and separate presentation modules.
+The 3D plan now identifies cliff terrain, six climates, and the current binary vegetation IDs.
+No script README, generation utility, dependency manifest, or new runtime dependency is added.
+Unrelated data and remaining PNG assets are unchanged.
 
 ### PR 26 validation
 

@@ -1,4 +1,13 @@
 /*
+Canonical map metadata
+Identity values have immutable id and name fields.
+Ordered overlays have immutable value and name fields.
+Save numeric IDs or levels in map cells, not metadata objects.
+LayerDefinition.getValue resolves only the matching numeric value.
+Settlement metadata also contains English and Rokugani type labels.
+Resource labels use name in both language modes.
+Images, palettes, and drawing functions belong in the presentation modules.
+
 Usage
 Import catalogs and layer definitions from this module.
 Read a value ID: TERRAIN.FLAT.id

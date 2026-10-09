@@ -15,8 +15,9 @@ the plan we should have enough of a working prototype to make that call.
 - **Standalone.** Everything new lives under `docs/map/`. Nothing here modifies
   the existing 2D map (`docs/world/world_map.html`, `docs/world/build_map.html`,
   or any file in `docs/scripts/`).
-- **Reuse data, not code.** The 3D map reads the *same* data files the 2D map
-  already reads. It does not import or refactor the existing renderer classes.
+- **Reuse metadata and presentation data, not renderer classes.** Import the
+  canonical catalogs and presentation data used by the 2D map. Fetch the same saved grid.
+  Do not import or refactor the existing renderer classes.
 - **No new backend / build tooling.** The project is a static site served from
   `docs/`. The POC stays static-site friendly (plain HTML + JS modules, CDN or
   vendored Babylon.js). No bundler, no Node build step is required to view it.
@@ -39,16 +40,18 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 | File | Role | Reused how |
 | --- | --- | --- |
 | `docs/data/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
-| `docs/data/layers.json` | Layer definitions: for each layer, the list of values with `id`, `name`, `color`, and (for terrain/vegetation) `image`. | Maps numeric cell ids to names, colors, and elevation. |
-| `docs/data/map_tile_img.json` | Maps `terrain,climate,vegetation` combinations to a tile PNG. | Reference for the intended surface appearance, not a per-cell mesh material. |
-| `docs/img/map/*.png` | Tile and marker art. | Reference textures and initial settlement/resource images. |
+| [world-map-layers.js](../docs/scripts/world-map-layers.js) | Immutable layer definitions and identity or ordered-value catalogs. | Resolve numeric cell values to metadata. Derive elevation from terrain constants. |
+| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Separate climate colors, water colors, transparent terrain images, and vegetation images. | Reference for surface appearance, not a per-cell mesh material. |
+| [clan-colors.js](../docs/scripts/clan-colors.js) | Clan border and fill palettes. | Resolve territory colors from clan metadata. |
+| [world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world-map-img-resources.js) | Marker presentation. | Reuse asset mappings; procedural settlements need an explicit 3D presentation choice. |
+| [docs/img/map/](../docs/img/map/) | WebP terrain, control, and marker art. | Reference textures and initial settlement/resource images. Control images are button previews, not terrain textures. |
 
 Key facts that make 3D natural:
 
 - **Terrain ids suggest initial heights.** `flat(0)`, `hills(1)`,
-  `mountains(2)`, `wetlands(7)`, `city(8)` are land; `water(3)`,
+  `mountains(2)`, `wetlands(7)`, `cliff(8)` are land; `water(3)`,
   `coastal water(4)`, `ocean(5)` are water. River cells and water boundaries
-  need additional shape/depth rules; cliffs are not a separate terrain id.
+  need additional shape/depth rules. Cliff cells also store direction flags.
 - **The grid is dense and regular**, so it maps cleanly onto a Babylon.js ground
   mesh with heights and surface positions derived from `(x, y)`.
 - **Every coordinate exists; only its *properties* are optional.** All
@@ -58,14 +61,12 @@ Key facts that make 3D natural:
   `vegetation = 0 (none)`. A cell without a `terrain` key is **flat land, not
   empty space** — roughly 45% of cells omit it, so treating omissions as ocean
   would delete most of the landmass.
-- **The enums are small.** `layers.json` defines **4 climates** (temperate,
-  tropical, desert, polar), **4 land terrains** (flat, hills, mountains,
-  wetlands) plus `city` — which is slated for deprecation — and **3 water
-  terrains** (water, coastal water, ocean). Vegetation is effectively **binary**
-  (`none(0)` and `Vegetation(3)`). Note that `map_tile_img.json` still contains
-  combinations for vegetation ids that no longer exist in `layers.json`, so the
-  tile art is *not* a reliable source for the enum sets — read the enums from
-  `layers.json`.
+- **The catalogs are small.** Canonical metadata defines six climates:
+  temperate, tropical, desert, polar, waste, and shadowland.
+  Five land terrains are flat, hills, mountains, wetlands, and cliff.
+  Three water terrains are water, coastal water, and ocean.
+  Vegetation is binary: `VEGETATION.NONE.id` is `0`; `VEGETATION.PRESENT.id` is `1`.
+  Use metadata for value sets. Do not infer them from image names.
 
 ---
 
@@ -96,16 +97,15 @@ scene. No existing file's behavior changes.
 
 ### PR 2 — Load and normalize the map data
 
-**Goal:** Fetch and parse the same data files the 2D map uses, exposing an
+**Goal:** Load the same grid and metadata the 2D map uses, exposing an
 in-memory model the 3D scene can query, with no rendering yet.
 
 **Scope**
 - A data-loading module under `docs/map/scripts/` that fetches
-  `world-map-grid.json`, `layers.json`, and `map_tile_img.json` (relative paths
-  into `docs/scripts/`).
-- Normalize cells into a lookup by `(x, y)` and resolve layer ids to names/colors
-  using `layers.json` (mirroring how the existing code builds its layer maps,
-  but as a fresh, minimal reimplementation — no import of the 2D classes).
+  `../../data/world-map-grid.json`. Import metadata and presentation modules from `../../scripts/`.
+- Index cells by `(x, y)`. Resolve saved numbers with `LAYERS.<LAYER>.getValue(number)`.
+  Read `.id` and `.name` for identity values; read `.value` and `.name` for ordered levels.
+  Resolve colors and assets through presentation modules. Do not import 2D renderer classes.
 - Compute and cache derived data useful for 3D: map bounds, the set of painted
   cells, terrain-id → base elevation, and river/water/vegetation positions.
 - Surface a tiny debug readout on the page (e.g. "loaded N cells, bounds …") to
@@ -135,11 +135,11 @@ live data files. Still no 3D geometry beyond PR 1.
 - All chunks **share one material instance**, so texturing and lighting stay
   uniform and draw calls batch well.
 - Derive **elevation** from the terrain-id → height table (flat low, hills
-  raised, mountains higher; wetlands/city near-flat). Shape sharp height
+  raised, mountains higher; wetlands near-flat). Use cliff terrain and direction flags to shape sharp height
   changes into cliffs; carve lake basins and connected riverbeds below nearby
   land. **Unset terrain is flat land; ocean must come from the explicit ids
   `3`/`4`/`5`.**
-- Apply temporary terrain colors from `layers.json`, distinguishing raised
+- Apply temporary terrain and climate colors from the base presentation module, distinguishing raised
   ground, water bodies, and carved channels without separate ground tiles.
   Keep the ground a single continuous surface; water appearance can be a
   material treatment (a separate water effect is optional if the POC needs one).
@@ -160,7 +160,7 @@ communicates terrain and climate without creating one material per cell.
 - Prototype Babylon.js **TerrainMaterial** with a mix/splat map generated from
   terrain and climate data, blending reusable ground textures across the
   mesh. Its three diffuse texture slots are a constraint, not a direct way to
-  assign every `map_tile_img.json` image to a cell.
+  assign every terrain and climate combination to a cell.
 - Compare that with a single generated map texture/atlas using existing tile
   art, and record which approach better preserves the 2D map's variety without
   visible seams or excessive texture memory. Use terrain colors as a fallback
@@ -229,7 +229,7 @@ connected rather than separate terrain pieces.
   require new 3D models for these in the POC; replacing images with models is
   a later follow-up.
 - Render **clan** ownership as tinted ground regions or colored borders using
-  the clan colors from `layers.json`.
+  palettes from [clan-colors.js](../docs/scripts/clan-colors.js).
 - Add optional **settlement name labels** (English/Rokugani) as billboarded text
   or an HTML overlay, mirroring the 2D language toggle.
 - **Bucket settlement/resource images, clan tints, and labels by chunk** so they
@@ -301,7 +301,7 @@ plan (note them as follow-ups if 3D is greenlit):
   **three diffuse textures** (plus optional per-texture bump maps). Generate
   the mix map from grid terrain/climate data for broad land cover. This is a
   candidate for world-map texturing, not an automatic conversion of our many
-  `map_tile_img.json` combinations; test its resolution, blending, and behavior
+  terrain and climate combinations; test its resolution, blending, and behavior
   on steep slopes. See the [TerrainMaterial implementation](https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/materials/src/terrain/terrainMaterial.ts)
   for its texture slots.
 - An atlas or generated canvas texture mapped across the mesh is the alternative
@@ -353,6 +353,5 @@ plan (note them as follow-ups if 3D is greenlit):
 - **Asset availability:** tree and road models may need simple reusable
   placeholders for the POC; placement should still be tested on slopes and
   at river crossings.
-- **Data drift:** because the 3D map re-implements data loading, changes to
-  `layers.json` schema must be mirrored. Keeping the reimplementation minimal
-  limits this cost.
+- **Data drift:** import canonical metadata and presentation data instead of copying their definitions.
+  Keep saved numeric cells consistent with these catalogs. Test grid loading when the schema changes.

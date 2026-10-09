@@ -5,8 +5,8 @@ files for the L5R 10th Century project. **The scope of this plan is JUST the
 creation of the JSON data files** — no runtime/simulation code is written here.
 Those files are consumed later by an economy simulation that is out of scope.
 
-The base resources in [`layers.json`](../docs/data/layers.json) (the `resource`,
-`settlement`, and `infrastructure` layers) are the inspiration for this work. The map
+The `RESOURCE`, `SETTLEMENT`, and `INFRASTRUCTURE` catalogs in
+[`world-map-layers.js`](../docs/scripts/world-map-layers.js) are the inspiration for this work. The map
 resource layer lists what a resource tile   is but not what it produces (e.g. `horse ranch` produces horses, horse hair). The economy files expand that seed into the full chain of raw
 resources, processed goods, jobs, and buildings.
 
@@ -129,7 +129,7 @@ Each item entry:
 
 **Coverage checklist** (used to keep the catalog exhaustive):
 
-- For every `resource`-layer entry in `layers.json`, enumerate:
+- For every non-None `RESOURCE` value in [`world-map-layers.js`](../docs/scripts/world-map-layers.js), enumerate:
   1. the raw resource(s) it yields,
   2. every by-product (e.g. horse → hair, manure, leather, meat, bone, sinew),
   3. the processed resources refined from those raws,
@@ -199,7 +199,7 @@ Each building entry:
 
 ### 3.4 `settlement.json`
 
-Derived from the `settlement` layer in `layers.json` (Village/Mura, City/Toshi,
+Derived from the `SETTLEMENT` catalog in [`world-map-layers.js`](../docs/scripts/world-map-layers.js) (Village/Mura, City/Toshi,
 Capital/Shuto, Fortification, Castle/Shiro, Kyuden/Palace, Small Shrine, Large
 Shrine).
 
@@ -251,7 +251,7 @@ in that file should move onto the linked building's recipe).
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `id` | number | Maps back to the `resource` layer id in `layers.json`. |
+| `id` | number | Maps to a `RESOURCE` value's numeric `.id` in [`world-map-layers.js`](../docs/scripts/world-map-layers.js). |
 | `building_type` | number | Maps to a building id in `building_type.json`. |
 
 This helps establish the link from resource to a building and the building is the one that outputs the resources when worked by citizens (mostly peasants).
