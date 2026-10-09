@@ -1,7 +1,11 @@
 kmph,mode of transportation,infrastructure,terrain,river,vegetation,climate
-9.0,ship,*,ocean,*,*,*
-8.1,ship,*,coastal water,*,*,*
-6.6,ship,*,water,*,*,*
+8.0,ship,none,"ocean, coastal water, water",none,none,polar
+7.0,ship,"road, footpath","ocean, coastal water, water",none,none,polar
+9.0,ship,none,"ocean, coastal water, water",none,none,"temperate, tropical, desert, waste, shadowland"
+8.0,ship,"road, footpath","ocean, coastal water, water",none,none,"temperate, tropical, desert, waste, shadowland"
+9.0,ship,none,*,river,*,polar
+9.0,ship,none,*,river,*,"temperate, tropical, desert, waste, shadowland"
+8.0,ship,"road, footpath",*,river,*,*
 -1,ship,*,*,*,*,*
 6.5,river boat,*,water,*,*,*
 6.5,river boat,*,*,river,*,*
