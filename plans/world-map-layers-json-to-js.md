@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–24 are complete; PR 25 onward remains.
+Status: In progress. PRs 1–25 are complete; PR 26 onward remains.
 
 ## Goal
 
@@ -297,7 +297,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 22a-22b | 14, 12a-12e | **Done** — Route optional-overlay colors and cues through their presentation modules. Preserve band layout and visibility behavior. |
 | 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | **Done** — Generate controls directly through temporary headless browser execution. No permanent utility or GUI. Verify WebP output and save images for manual inspection. |
 | 24a-24c | 23 | **Done** — Generate 16 base, 37 river/infrastructure/overlay, and 15 settlement WebP assets. Add frozen metadata-based presentation mappings. Keep page wiring for PR 25. |
-| 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
+| 25a-25d | 14, 24a-24c | **Done** — Wire base, infrastructure/clan, settlement/resource, and overlay buttons. Remove duplicate HTML visual definitions. |
 | 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
 | 27a-27c | 20a-20c, 25a-25d | Remove unused settlement and base icon CSS in bounded batches. Preserve shared layout classes. |
 | 28 | 15a-15c, 17, 18, 19, 20a-20c, 21, 22a-22b, 25a-25d, 26 | Check completed page integration. Remove remaining obsolete lookups and handlers. Identity definitions contain no presentation data. |
@@ -336,6 +336,26 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
 
+### PR 25 implementation batches
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 25a | Wire base control images through metadata mappings. Remove base icon URLs and shapes from HTML. |
+| 25b | Wire river and infrastructure images and clan palette swatches. Remove inline icon colors from HTML. |
+| 25c | Wire settlement and resource images. Remove duplicate HTML paths and settlement shape classes. |
+| 25d | Wire ordered-overlay images. Preserve labels, order, active selection, erase controls, and keyboard activation. Verify all builder buttons. |
+
+Keep obsolete icon-specific CSS removal in PR 27.
+
+### PR 25 validation
+
+All 19 focused icon, builder, and shared-control tests pass.
+Headless browser checks activate all 132 tools and decode all 98 images.
+Clan swatches match presentation palettes. Keyboard selection, paint, and erase interactions work.
+Button labels, tool attributes, and order are unchanged.
+Failed images log their paths and display an error. Unknown metadata throws.
+No permanent generation or validation tool is added.
+
 ### PR 23 and 24 validation
 
 Generated all 68 control images directly with existing presentation functions in a temporary headless browser.
@@ -343,7 +363,7 @@ No generation utility, GUI, or package dependency was added to the repository.
 All assets decode as 32-by-32 WebP images. All non-None controls contain visible pixels.
 All 68 frozen metadata-based mappings resolve to existing files.
 All 88 presentation-module tests pass.
-Manual image inspection remains with the user. Page wiring remains for PR 25.
+Manual image inspection remains with the user. PR 25 completes builder page wiring.
 
 ### PR 22 implementation batches
 

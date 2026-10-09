@@ -1,6 +1,7 @@
 import { WorldMapGrid } from "./world-map-grid.js";
 import { bindMapControls } from "./world-map-controls.js";
 import * as layers from "./world-map-layers.js";
+import { setToolIcon } from "./world-map-tool-icons.js";
 
 const canvas = document.querySelector("#mapCanvas");
 if (canvas) {
@@ -18,6 +19,7 @@ if (canvas) {
       const metadata = catalog?.[key];
       if (!metadata) throw new TypeError(`Unknown map tool: ${layer}.${key}`);
       value = metadata.value ?? metadata.id;
+      setToolIcon(button, metadata);
     }
     button.addEventListener("click", () => {
       map.selectTool(layer, value, layer);
