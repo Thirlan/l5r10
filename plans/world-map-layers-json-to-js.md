@@ -1,6 +1,6 @@
 # World map layer migration
 
-Status: In progress. PRs 1–22 are complete; PR 23 onward remains.
+Status: In progress. PRs 1–23 are complete; PR 24 onward remains.
 
 ## Goal
 
@@ -236,7 +236,28 @@ Use a fixed preview size and zoom. Use the existing neutral palette for settleme
 Use representative connected cells for river and road previews.
 Wait for required base images before exporting climate previews.
 Confirm exported blobs are WebP, not a browser fallback format.
-Document regeneration steps in [docs/scripts/README.md](../docs/scripts/README.md).
+Keep regeneration steps in this plan, as confirmed during PR 23.
+Do not restore the removed script README.
+
+#### Regenerate control images
+
+1. From the repository root, run `python -m http.server 8000 --bind 127.0.0.1`.
+2. Open `http://127.0.0.1:8000/tools/generate-world-map-controls.html` in a browser.
+3. Wait for the status to confirm that all 68 previews are ready.
+4. Inspect the previews. Select each required WebP download.
+5. Save the files under [docs/img/map/](../docs/img/map/) with their download filenames.
+6. Stop the local server with Ctrl+C.
+
+[generate-world-map-controls.html](../tools/generate-world-map-controls.html) is a development-only page.
+It does not run during normal map loading.
+Its isolated stylesheet serves the utility layout, not the published game pages.
+The utility waits for all base and settlement source images.
+It reuses presentation drawing functions and the renderer's contrast calculation.
+All preview canvases use 32-by-32 pixels and zoom 1.
+River and road previews use representative connected 16-pixel cells within the canvas.
+Settlement previews use neutral colors. None previews are transparent, except the vegetation climate background.
+Each link downloads a verified WebP blob. Unsupported export formats produce a visible error.
+PR 24 saves generated assets and adds their module mappings.
 
 ## Pull request sequence
 
@@ -290,7 +311,7 @@ Run targeted checks for completed components. Run full page checks after integra
 | 20a-20c | 14, 09, 10, 11, 19 | **Done** — Delegate circular, square, and asset-backed settlement markers. Remove replaced renderer branches and duplicate asset-tinting methods. |
 | 21 | 14, 06 | **Done** — Delegate resource markers. PR 14 already removed resource type-label access. Test language-independent resource names. |
 | 22a-22b | 14, 12a-12e | **Done** — Route optional-overlay colors and cues through their presentation modules. Preserve band layout and visibility behavior. |
-| 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | Add the control-generation utility. Verify imports, previews, and WebP downloads. |
+| 23 | 15a-15c, 16, 17, 18, 20a-20c, 22a-22b | **Done** — Add the local control-generation utility. Verify imports, all 68 previews, WebP blobs, actual downloads, and visible errors in Chromium. |
 | 24a-24c | 23 | Generate base, river/infrastructure/overlay, and settlement control assets in separate batches. Add their module mappings. |
 | 25a-25d | 14, 24a-24c | Wire base, infrastructure/clan, settlement/resource, and overlay buttons in separate PRs. Remove duplicate visual definitions. |
 | 26 | 14 | Replace semantic layer comparisons in viewer and pathing with metadata references. Preserve travel inputs and outcomes. |
@@ -330,6 +351,17 @@ Layer and tile JSON loading remains until PRs 14 and 15.
 | 14e2 | **Done** — Add builder tool-selection, zero-default, and numeric round-trip tests. |
 | 14e3 | **Done** — Update viewer initialization tests. Verify metadata-first travel papers and current-format imports. |
 | 14f | **Done** — Verify all 26,470 saved cells, simulated renderer initialization and drawing, 88 asset paths, and numeric export/import. Update related documentation. Browser visual verification remains for page integration. |
+
+### PR 23 implementation batches
+
+Keep each review batch below 200 changed lines.
+
+| Batch | Scope and acceptance criteria |
+|---|---|
+| 23a1 | **Done** — Share overlay contrast calculation with the utility. Add image loading and verified WebP export helpers. |
+| 23a2 | **Done** — Add preview definitions that reuse base, river, infrastructure, overlay, and settlement drawing functions. |
+| 23b | **Done** — Add the local HTML utility, preview layout, and download links. Report loading and export errors. |
+| 23c | **Done** — All 52 targeted helper and renderer tests pass. Verify all 68 previews in Chromium: MIME type, RIFF/WEBP bytes, decoded dimensions, unique filenames, and non-None image content. Verify an actual download and error display. Document regeneration here. |
 
 ### PR 22 implementation batches
 

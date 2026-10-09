@@ -459,23 +459,31 @@ export class WorldMapRenderer {
   }
 
   overlayCueColor(color) {
-    const rgbaMatch = color && color.match(/^rgba?\(([^)]+)\)$/i);
-    if (rgbaMatch) {
-      const [r, g, b] = rgbaMatch[1].split(",").slice(0, 3).map((part) => Number.parseFloat(part.trim()) || 0);
-      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
-    }
-
-    const hexMatch = color && color.match(/^#([0-9a-f]{6})$/i);
-    if (hexMatch) {
-      const hex = hexMatch[1];
-      const r = Number.parseInt(hex.slice(0, 2), 16);
-      const g = Number.parseInt(hex.slice(2, 4), 16);
-      const b = Number.parseInt(hex.slice(4, 6), 16);
-      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-      return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
-    }
-
-    return "rgba(0, 0, 0, 0.85)";
+    return getOverlayCueColor(color);
   }
+}
+
+/**
+ * @param {string} color Overlay fill color.
+ * @returns {string} Contrasting cue color.
+ */
+export function getOverlayCueColor(color) {
+  const rgbaMatch = color && color.match(/^rgba?\(([^)]+)\)$/i);
+  if (rgbaMatch) {
+    const [r, g, b] = rgbaMatch[1].split(",").slice(0, 3).map((part) => Number.parseFloat(part.trim()) || 0);
+    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+    return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+  }
+
+  const hexMatch = color && color.match(/^#([0-9a-f]{6})$/i);
+  if (hexMatch) {
+    const hex = hexMatch[1];
+    const r = Number.parseInt(hex.slice(0, 2), 16);
+    const g = Number.parseInt(hex.slice(2, 4), 16);
+    const b = Number.parseInt(hex.slice(4, 6), 16);
+    const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+    return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
+  }
+
+  return "rgba(0, 0, 0, 0.85)";
 }

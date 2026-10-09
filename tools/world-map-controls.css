@@ -1,0 +1,37 @@
+body {
+  margin: 2rem;
+  font-family: system-ui, sans-serif;
+}
+
+.control-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+article {
+  padding: 1rem;
+  border: 1px solid #888;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+canvas {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1rem;
+  background: #eee;
+}
+
+a {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.error {
+  color: #a00;
+}
