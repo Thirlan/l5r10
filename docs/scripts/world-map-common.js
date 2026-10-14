@@ -4,7 +4,7 @@ import { getClanColors } from "./clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
-import { drawRiver } from "./world-map-img-river.js";
+import { drawRiver, RIVER_OFFSETS } from "./world-map-img-river.js";
 import { getAnimalColor, drawAnimalCue } from "./world-map-img-animal.js";
 import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
@@ -156,12 +156,16 @@ export class WorldMapRenderer {
       const [x, y] = key.split(",").map(Number);
       const item = LAYERS.RIVER.getValue(cell.river);
       if (!item || item === RIVER.NONE) continue;
-      const neighbors = Object.fromEntries([
-        ["east", 1, 0], ["south", 0, 1], ["west", -1, 0], ["north", 0, -1],
-      ].map(([direction, dx, dy]) => [
-        direction, Boolean(this.grid[this.getCellKey(x + dx, y + dy)]?.river),
-      ]));
-      drawRiver(this.ctx, x, y, this.gridSize, neighbors);
+      const water = {};
+      const directions = cell["river direction"];
+      const neighbors = Object.fromEntries(RIVER_OFFSETS.map(([name, dx, dy], index) => {
+        const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
+        water[name] = neighbor?.terrain === TERRAIN.WATER.id || neighbor?.terrain === TERRAIN.COASTAL_WATER.id;
+        const incoming = neighbor?.["river direction"]?.[(index + 4) % 8] === 1;
+        const connected = neighbor?.river && (directions?.[index] === 1 || incoming);
+        return [name, directions ? Boolean(connected) : Boolean(neighbor?.river)];
+      }));
+      drawRiver(this.ctx, x, y, this.gridSize, neighbors, water, directions);
     }
   }
 

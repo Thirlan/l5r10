@@ -7,7 +7,8 @@ import { getClanColors } from "../docs/scripts/clan-colors.js";
 function createBuilder() {
   return Object.assign(Object.create(WorldMapGrid.prototype), {
     grid: {}, currentLayer: "terrain", currentValue: null, brushSize: 1,
-    cliffDirections: { 0: 0 }, draw() {}, getGridCell: () => ({ x: 0, y: 0 }),
+    cliffDirections: { 0: 0 }, riverDirections: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
+    draw() {}, getGridCell: () => ({ x: 0, y: 0 }),
   });
 }
 
@@ -149,3 +150,28 @@ test("builder clan boundaries use presentation border and fill colors", (t) => {
   // Assertion
   assert.deepEqual(strokes.slice(0, 2), [colors.border, colors.fill]);
 });
+
+test("river painting requires a direction and saves an independent copy", () => {
+  const builder = createBuilder();
+  builder.selectTool("river", 1);
+  builder.paintAt({});
+  assert.deepEqual(builder.grid, {});
+  builder.setRiverDirection("7", true);
+  builder.paintAt({});
+  assert.equal(builder.grid["0,0"]["river direction"][7], 1);
+  builder.setRiverDirection("7", false);
+  assert.equal(builder.grid["0,0"]["river direction"][7], 1);
+  const imported = createBuilder();
+  assert.equal(imported.loadFromJSON(builder.saveToJSON()), true);
+  assert.deepEqual(imported.grid, builder.grid);
+});
+
+for (const [layer, value] of [["river", 0], ["erase", "river"]]) {
+  test(`${layer} removes river direction data`, () => {
+    const builder = createBuilder();
+    builder.grid["0,0"] = { river: 1, "river direction": { 0: 1 }, terrain: 1 };
+    builder.selectTool(layer, value);
+    builder.paintAt({});
+    assert.deepEqual(builder.grid["0,0"], { terrain: 1 });
+  });
+}

@@ -414,6 +414,18 @@ test("renderer does not treat a diagonal river neighbor as connected", () => {
   assert.equal(strokes.length, 20);
 });
 
+test("directed rivers connect incoming diagonal flow but not unrelated adjacent rivers", () => {
+  const { renderer, strokes } = createConnectionRenderer({
+    "0,0": { river: 1, "river direction": {} },
+    "1,1": { river: 1, "river direction": { 7: 1 } },
+    "-1,0": { river: 1, "river direction": {} },
+  });
+  renderer.drawRiverLayer();
+  assert.equal(strokes.length, 10);
+  assert.deepEqual(strokes[2].end, [16, 16]);
+  assert.deepEqual(strokes[7].end, [16, 16]);
+});
+
 [
   ["east", "1,0", [24, 8]],
   ["south", "0,1", [8, 24]],

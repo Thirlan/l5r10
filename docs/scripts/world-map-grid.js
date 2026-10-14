@@ -14,6 +14,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.brushSize = 1;
     this.isDrawing = false;
     this.cliffDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+    this.riverDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
 
     this.setupEventListeners();
     this.ready = this.initialize();
@@ -87,6 +88,8 @@ export class WorldMapGrid extends WorldMapRenderer {
     const cliffId = TERRAIN.CLIFF.id;
     const paintingCliffTerrain = this.currentLayer === LAYERS.TERRAIN.id && this.currentValue === cliffId;
     if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
+    if (this.currentLayer === "river" && this.currentValue
+      && !Object.values(this.riverDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
 
@@ -115,6 +118,7 @@ export class WorldMapGrid extends WorldMapRenderer {
           if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(layerToErase)) {
             delete cell[layerToErase];
             if (layerToErase === "terrain") delete cell["cliff direction"];
+            if (layerToErase === "river") delete cell["river direction"];
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
           } else if (layerToErase === "resource") {
@@ -137,6 +141,10 @@ export class WorldMapGrid extends WorldMapRenderer {
           if (valId || this.currentLayer === LAYERS.TERRAIN.id || this.currentLayer === LAYERS.CLIMATE.id) {
             cell[this.currentLayer] = valId;
           } else delete cell[this.currentLayer];
+          if (this.currentLayer === "river") {
+            if (valId) cell["river direction"] = { ...this.riverDirections };
+            else delete cell["river direction"];
+          }
           if (this.currentLayer === "terrain") {
             if (valId === cliffId) {
               if (Object.values(this.cliffDirections).some((direction) => direction === 1)) {
@@ -211,7 +219,7 @@ export class WorldMapGrid extends WorldMapRenderer {
       for (const index of Object.keys(this.cliffDirections)) {
         this.cliffDirections[index] = enabled ? 1 : 0;
       }
-      document.querySelectorAll(".cliff-direction-grid input:not(#cliffDirectionAll)").forEach((checkbox) => {
+      document.querySelectorAll('[data-cliff-direction]:not(#cliffDirectionAll)').forEach((checkbox) => {
         checkbox.checked = enabled;
       });
     } else if (Object.hasOwn(this.cliffDirections, direction)) {
@@ -223,6 +231,12 @@ export class WorldMapGrid extends WorldMapRenderer {
     const allDirections = Object.values(this.cliffDirections).every((value) => value === 1);
     const allCheckbox = document.getElementById("cliffDirectionAll");
     if (allCheckbox) allCheckbox.checked = allDirections;
+  }
+
+  setRiverDirection(direction, enabled) {
+    if (Object.hasOwn(this.riverDirections, direction)) {
+      this.riverDirections[direction] = enabled ? 1 : 0;
+    }
   }
 
   setFontSize(size) {
