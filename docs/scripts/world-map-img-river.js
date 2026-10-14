@@ -40,15 +40,20 @@ export function drawRiver(ctx, x, y, gridSize, neighbors, water = {}, directions
 
   if (directions) {
     for (const [index, [name, dx, dy]] of RIVER_OFFSETS.entries()) {
-      if (water[name] && (dx === 0 || dy === 0)) {
+      if (water[name]) {
         ctx.beginPath();
         ctx.fillStyle = STRIPE_COLORS[2];
         ctx.moveTo(centerX, centerY);
-        ctx.lineTo(centerX + (dx - dy) * gridSize / 2, centerY + (dy + dx) * gridSize / 2);
-        ctx.lineTo(centerX + (dx + dy) * gridSize / 2, centerY + (dy - dx) * gridSize / 2);
+        if (dx && dy) {
+          ctx.lineTo(centerX + dx * gridSize / 2, centerY + dy * gridSize / 2);
+          ctx.lineTo(centerX + dx * gridSize / 2, centerY);
+        } else {
+          ctx.lineTo(centerX + (dx - dy) * gridSize / 2, centerY + (dy + dx) * gridSize / 2);
+          ctx.lineTo(centerX + (dx + dy) * gridSize / 2, centerY + (dy - dx) * gridSize / 2);
+        }
         ctx.closePath();
         ctx.fill();
-      } else if (neighbors[name] || water[name] || directions[index] === 1) {
+      } else if (neighbors[name] || directions[index] === 1) {
         const scale = Math.hypot(dx, dy);
         drawRiverStripes(ctx, centerX, centerY, gridSize * scale / 2,
           dx / scale, dy / scale, stripeSpacing, stripeWidth);

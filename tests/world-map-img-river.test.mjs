@@ -116,3 +116,15 @@ test("adjacent water fills every cardinal triangle with the river center color",
   assert.deepEqual(triangles[2].vertices, [[8, 8], [0, 16], [16, 16]]);
   assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
 });
+
+test("diagonal water fills a right triangle that reaches the shared corner", () => {
+  const vertices = [];
+  const context = {
+    save() {}, restore() {}, beginPath() {}, closePath() {}, fill() {},
+    moveTo(x, y) { vertices.push([x, y]); }, lineTo(x, y) { vertices.push([x, y]); },
+  };
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+    { northeast: true }, {});
+  assert.deepEqual(vertices, [[8, 8], [16, 0], [16, 8]]);
+  assert.equal(context.fillStyle, "#0000FF");
+});

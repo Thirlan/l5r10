@@ -45,6 +45,35 @@ test("disconnected rivers get directions and existing corrections stay unchanged
   assert.deepEqual(grid, original);
 });
 
+test("coastal BFS respects a corrected flow toward an inland lake", () => {
+  const grid = {
+    "0,0": { terrain: 4 }, "1,0": { river: 1, "river direction": { 2: 1 } },
+    "2,0": { river: 1 }, "3,0": { terrain: 3 },
+  };
+  inferRiverDirections(grid);
+  assert.deepEqual(flow(grid, "1,0"), [2]);
+  assert.deepEqual(flow(grid, "2,0"), [2]);
+});
+
+test("a disconnected river block uses a boundary exit instead of its interior", () => {
+  const grid = { "1,1": { river: 1 } };
+  for (let x = 0; x < 3; x++) {
+    for (let y = 0; y < 3; y++) grid[`${x},${y}`] = { river: 1 };
+  }
+  inferRiverDirections(grid);
+  for (const key of Object.keys(grid)) {
+    const visited = new Set();
+    let current = key;
+    while (grid[current]?.river) {
+      assert.equal(visited.has(current), false);
+      visited.add(current);
+      const [, dx, dy] = RIVER_OFFSETS[flow(grid, current)[0]];
+      const [x, y] = current.split(",").map(Number);
+      current = `${x + dx},${y + dy}`;
+    }
+  }
+});
+
 test("saved river directions reach water or a disconnected endpoint without cycles", () => {
   const grid = JSON.parse(readFileSync(new URL("../docs/data/world-map-grid.json", import.meta.url)));
   for (const [key, cell] of Object.entries(grid)) {
