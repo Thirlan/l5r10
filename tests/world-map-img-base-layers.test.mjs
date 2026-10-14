@@ -86,7 +86,7 @@ test("land drawing composites climate, terrain, and vegetation in order", () => 
   ]);
 });
 
-test("cliff drawing uses the cliff image beneath vegetation", () => {
+test("cliff drawing uses flat terrain beneath vegetation", () => {
   // Setup
   const { ctx, images, calls } = createDrawing();
 
@@ -94,7 +94,7 @@ test("cliff drawing uses the cliff image beneath vegetation", () => {
   drawBaseLayers(ctx, 0, 0, 16, TERRAIN.CLIFF, CLIMATE.TEMPERATE, VEGETATION.PRESENT, images);
 
   // Assertion
-  assert.deepEqual(calls.map(([layer]) => layer), ["fill", TERRAIN.CLIFF, VEGETATION.PRESENT]);
+  assert.deepEqual(calls.map(([layer]) => layer), ["fill", TERRAIN.FLAT, VEGETATION.PRESENT]);
 });
 
 [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].forEach((terrain) => {
@@ -191,10 +191,12 @@ test("unfinished vegetation images are rejected before painting", () => {
 });
 
 function createCliffDrawing() {
-  const calls = [];
-  const ctx = Object.fromEntries(["save", "restore", "beginPath", "moveTo", "lineTo", "stroke", "strokeRect"]
-    .map((name) => [name, (...args) => calls.push([name, ...args])]));
-  return { ctx, calls };
+  const drawing = createDrawing();
+  const transforms = [];
+  ["translate", "rotate", "scale"].forEach((name) => {
+    drawing.ctx[name] = (...args) => transforms.push([name, ...args]);
+  });
+  return { ...drawing, transforms };
 }
 
 [undefined, {}, { 0: 0 }].forEach((directions) => {
@@ -210,91 +212,119 @@ function createCliffDrawing() {
   });
 });
 
-[
-  [0, [72, 104], [88, 104]],
-  [2, [88, 104], [88, 120]],
-  [4, [72, 120], [88, 120]],
-  [6, [72, 104], [72, 120]],
-].forEach(([direction, start, end]) => {
-  test(`cliff direction ${direction} draws its cardinal edge`, () => {
+[4, 6, 0, 2].forEach((direction, rotation) => {
+  test(`cliff direction ${direction} draws three rotated sprites with tapered ends`, () => {
     // Setup
-    const { ctx, calls } = createCliffDrawing();
+    const { ctx, images, calls, transforms } = createCliffDrawing();
 
     // Execution
-    drawCliffEdges(ctx, 2, 3, 32, 1, { [direction]: 1 });
+    drawCliffEdges(ctx, 2, 3, 48, 1, { [direction]: 1 }, images);
 
     // Assertion
-    assert.deepEqual(calls, [
-      ["save"], ["beginPath"], ["moveTo", ...start], ["lineTo", ...end], ["stroke"], ["restore"],
-    ]);
+    assert.deepEqual(calls, [["bottom", -8, -8, 16, 16], ["slope", -8, -8, 16, 16], ["slope", -8, -8, 16, 16]]);
+    assert.ok(transforms.some(([name, angle]) => name === "rotate" && angle === rotation * Math.PI / 2));
+    assert.ok(transforms.some(([name, x, y]) => name === "translate" && x === 120 && y === 168));
+    assert.ok(transforms.some(([name, x]) => name === "scale" && x === -1));
   });
 });
 
-[
-  [1, [72, 104], [88, 120], 1, -1],
-  [3, [88, 104], [72, 120], 1, 1],
-  [5, [72, 104], [88, 120], -1, 1],
-  [7, [72, 120], [88, 104], -1, -1],
-].forEach(([direction, start, end, dx, dy]) => {
-  test(`cliff direction ${direction} draws its diagonal and direction mark`, () => {
+[5, 7, 1, 3].forEach((direction, rotation) => {
+  test(`cliff direction ${direction} draws three rotated diagonal sprites`, () => {
     // Setup
-    const { ctx, calls } = createCliffDrawing();
+    const { ctx, images, calls, transforms } = createCliffDrawing();
 
     // Execution
-    drawCliffEdges(ctx, 2, 3, 32, 1, { [direction]: 1 });
+    drawCliffEdges(ctx, 2, 3, 48, 1, { [direction]: 1 }, images);
 
     // Assertion
-    assert.deepEqual(calls, [
-      ["save"], ["beginPath"], ["moveTo", ...start], ["lineTo", ...end],
-      ["moveTo", 80, 112], ["lineTo", 80 + dx * Math.SQRT1_2 * 4, 112 + dy * Math.SQRT1_2 * 4],
-      ["stroke"], ["restore"],
-    ]);
+    assert.deepEqual(calls.map(([name]) => name), ["diagonal", "diagonal", "diagonal"]);
+    assert.equal(transforms.filter(([name, angle]) => name === "rotate" && angle === rotation * Math.PI / 2).length, 3);
   });
 });
 
-test("all cliff directions draw a single rectangle", () => {
+test("all cliff directions draw four edges and four corners without crossing diagonals", () => {
   // Setup
-  const { ctx, calls } = createCliffDrawing();
+  const { ctx, images, calls } = createCliffDrawing();
   const directions = Object.fromEntries(Array.from({ length: 8 }, (_, index) => [index, 1]));
 
   // Execution
-  drawCliffEdges(ctx, 2, 3, 32, 1, directions);
+  drawCliffEdges(ctx, 2, 3, 32, 1, directions, images);
 
   // Assertion
-  assert.deepEqual(calls, [["save"], ["strokeRect", 72, 104, 16, 16], ["restore"]]);
+  assert.deepEqual(calls.map(([name]) => name), ["bottom", "corner", "bottom", "corner", "bottom", "corner", "bottom", "corner"]);
 });
 
 test("cliff drawing preserves numeric-string direction flags", () => {
   // Setup
-  const { ctx, calls } = createCliffDrawing();
+  const { ctx, images, calls } = createCliffDrawing();
 
   // Execution
-  drawCliffEdges(ctx, 2, 3, 32, 1, { 0: "1" });
+  drawCliffEdges(ctx, 2, 3, 32, 1, { 0: "1" }, images);
 
   // Assertion
-  assert.ok(calls.some(([name]) => name === "stroke"));
+  assert.equal(calls.length, 3);
 });
 
-test("cliff line width is capped for small cells at low zoom", () => {
+test("connected bottom cliffs tile three straight sprites", () => {
   // Setup
-  const { ctx } = createCliffDrawing();
+  const { ctx, images, calls } = createCliffDrawing();
 
   // Execution
-  drawCliffEdges(ctx, 0, 0, 8, 0.35, { 0: 1 });
+  drawCliffEdges(ctx, 0, 0, 48, 1, { 4: 1 }, images, { 6: { 4: 1 }, 2: { 4: "1" } });
 
   // Assertion
-  assert.equal(ctx.lineWidth, 4);
+  assert.deepEqual(calls.map(([name]) => name), ["bottom", "bottom", "bottom"]);
 });
 
-test("cliff line width scales inversely with zoom", () => {
+test("neighbors with a different cliff direction do not prevent tapered ends", () => {
   // Setup
-  const { ctx } = createCliffDrawing();
+  const { ctx, images, calls } = createCliffDrawing();
+  // Execution
+  drawCliffEdges(ctx, 0, 0, 48, 1, { 4: 1 }, images, { 6: { 0: 1 }, 2: { 0: 1 } });
+  // Assertion
+  assert.deepEqual(calls.map(([name]) => name), ["bottom", "slope", "slope"]);
+});
+
+test("one diagonal wing does not select an inward corner", () => {
+  // Setup
+  const { ctx, images, calls } = createCliffDrawing();
+  // Execution
+  drawCliffEdges(ctx, 0, 0, 48, 1, { 5: 1 }, images, { 6: { 5: 1 } });
+  // Assertion
+  assert.deepEqual(calls.map(([name]) => name), ["diagonal", "diagonal", "diagonal"]);
+});
+
+test("bottom and left cliffs share one rotated outer corner", () => {
+  // Setup
+  const { ctx, images, calls } = createCliffDrawing();
 
   // Execution
-  drawCliffEdges(ctx, 0, 0, 32, 4, { 0: 1 });
+  drawCliffEdges(ctx, 0, 0, 48, 1, { 4: 1, 6: 1 }, images, { 2: { 4: 1 }, 0: { 6: 1 } });
 
   // Assertion
-  assert.equal(ctx.lineWidth, 1);
+  assert.deepEqual(calls.map(([name]) => name), ["bottom", "bottom", "bottom", "bottom", "corner"]);
+});
+
+[5, 7, 1, 3].forEach((direction, rotation) => {
+  test(`neighboring diagonal cliffs select an inward corner for direction ${direction}`, () => {
+    // Setup
+    const { ctx, images, calls } = createCliffDrawing();
+    const bottom = (4 + rotation * 2) % 8;
+    const neighbors = { [bottom]: { [direction]: 1 }, [(bottom + 2) % 8]: { [direction]: 1 } };
+    // Execution
+    drawCliffEdges(ctx, 0, 0, 48, 1, { [direction]: 1 }, images, neighbors);
+    // Assertion
+    assert.deepEqual(calls.map(([name]) => name), ["inward"]);
+  });
+});
+
+test("missing cliff sprites report the asset path", () => {
+  // Setup
+  const { ctx } = createCliffDrawing();
+  // Execution
+  const draw = () => drawCliffEdges(ctx, 0, 0, 48, 1, { 4: 1 }, new Map());
+  // Assertion
+  assert.throws(draw, /cliff_bottom.webp/);
 });
 
 test("cliff drawing rejects zero zoom", () => {

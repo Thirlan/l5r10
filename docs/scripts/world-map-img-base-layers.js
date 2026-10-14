@@ -72,8 +72,9 @@ export const BASE_LAYER_IMAGES = Object.freeze([
   [TERRAIN.HILLS, "../img/map/terrain_hills.webp"],
   [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"],
   [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"],
-  [TERRAIN.CLIFF, "../img/map/terrain_cliff.webp"],
   [VEGETATION.PRESENT, "../img/map/vegetation.webp"],
+  ...["bottom", "corner", "slope", "diagonal", "inward"].map((name) =>
+    [name, `../img/map/cliff_${name}.webp`]),
 ].map(([value, image]) => Object.freeze({ value, image })));
 
 const imagePaths = new Map(BASE_LAYER_IMAGES.map(({ value, image }) => [value, image]));
@@ -102,7 +103,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   const left = x * gridSize;
   const top = y * gridSize;
   const terrainColor = getWaterColor(terrain);
-  const terrainImage = terrainColor ? null : getLoadedImage(terrain, images);
+  const terrainImage = terrainColor ? null : getLoadedImage(terrain === TERRAIN.CLIFF ? TERRAIN.FLAT : terrain, images);
   const vegetationImage = vegetation === VEGETATION.PRESENT ? getLoadedImage(vegetation, images) : null;
 
   ctx.save();
@@ -125,9 +126,11 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
  * @param {number} gridSize Cell size in pixels.
  * @param {number} zoom Map scale.
  * @param {Record<number, number|string>|undefined|null} directions Saved cliff direction flags.
+ * @param {Map<string, HTMLImageElement>} images Loaded images by asset path.
+ * @param {Object<number, Record<number, number|string>>} [neighbors] Adjacent cliff direction flags.
  * @returns {void}
  */
-export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions) {
+export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, neighbors = {}) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y)
     || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
@@ -136,47 +139,36 @@ export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions) {
   const selected = Array.from({ length: 8 }, (_, index) => Number(directions[index]) === 1);
   if (!selected.some(Boolean)) return;
 
-  const lineWidth = Math.min(4 / zoom, gridSize / 2);
-  const inset = Math.min(lineWidth / 2 + gridSize / 16 + 4, gridSize * 7 / 16);
-  const edgeSize = gridSize - 2 * inset;
-  const directionLength = Math.min(4, edgeSize / 2);
-  const left = x * gridSize + inset;
-  const top = y * gridSize + inset;
-  const right = left + edgeSize;
-  const bottom = top + edgeSize;
-  const centerX = left + edgeSize / 2;
-  const centerY = top + edgeSize / 2;
-
+  const size = gridSize / 3;
+  const has = (flags, direction) => Number(flags?.[direction % 8]) === 1;
+  const draw = (name, column, row, rotation, mirror = false) => {
+    const image = getLoadedImage(name, images);
+    ctx.save();
+    ctx.translate((x + 0.5) * gridSize, (y + 0.5) * gridSize);
+    ctx.rotate(rotation * Math.PI / 2);
+    ctx.translate((column - 1) * size, (row - 1) * size);
+    if (mirror) ctx.scale(-1, 1);
+    ctx.drawImage(image, -size / 2, -size / 2, size, size);
+    ctx.restore();
+  };
   ctx.save();
-  ctx.strokeStyle = "#808080";
-  ctx.lineWidth = lineWidth;
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  if (selected.every(Boolean)) {
-    ctx.strokeRect(left, top, edgeSize, edgeSize);
-  } else {
-    ctx.beginPath();
-    if (selected[0]) { ctx.moveTo(left, top); ctx.lineTo(right, top); }
-    if (selected[2]) { ctx.moveTo(right, top); ctx.lineTo(right, bottom); }
-    if (selected[4]) { ctx.moveTo(left, bottom); ctx.lineTo(right, bottom); }
-    if (selected[6]) { ctx.moveTo(left, top); ctx.lineTo(left, bottom); }
-
-    const drawDiagonal = (index, startX, startY, endX, endY, directionX, directionY) => {
-      if (!selected[index]) return;
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(
-        centerX + directionX * Math.SQRT1_2 * directionLength,
-        centerY + directionY * Math.SQRT1_2 * directionLength
-      );
-    };
-    drawDiagonal(1, left, top, right, bottom, 1, -1);
-    drawDiagonal(3, right, top, left, bottom, 1, 1);
-    drawDiagonal(5, left, top, right, bottom, -1, 1);
-    drawDiagonal(7, left, bottom, right, top, -1, -1);
-    ctx.stroke();
-  }
+  ctx.imageSmoothingEnabled = false;
+  [0, 1, 2, 3].forEach((rotation) => {
+    const bottom = (4 + rotation * 2) % 8;
+    const left = (bottom + 2) % 8;
+    const right = (bottom + 6) % 8;
+    if (selected[bottom]) {
+      draw("bottom", 1, 2, rotation);
+      if (!selected[left]) draw(has(neighbors[left], bottom) ? "bottom" : "slope", 0, 2, rotation, true);
+      draw(selected[right] ? "corner" : has(neighbors[right], bottom) ? "bottom" : "slope", 2, 2, rotation);
+    }
+    const diagonal = (bottom + 1) % 8;
+    if (has(neighbors[left], diagonal) && has(neighbors[bottom], diagonal)) {
+      draw("inward", 0, 2, rotation);
+    } else if (selected[diagonal] && !(selected[bottom] && selected[left])) {
+      [0, 1, 2].forEach((index) => draw("diagonal", index, index, rotation));
+    }
+  });
   ctx.restore();
 }
 

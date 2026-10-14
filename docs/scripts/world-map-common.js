@@ -160,9 +160,14 @@ export class WorldMapRenderer {
   }
 
   drawCliffEdges() {
+    if (this.baseLayersLoading) return;
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
-      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, cell["cliff direction"]);
+      const neighbors = Object.fromEntries([
+        [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1],
+      ].map(([dx, dy], index) => [index, this.grid[this.getCellKey(x + dx, y + dy)]?.["cliff direction"]]));
+      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom,
+        cell["cliff direction"], this.baseLayerImages, neighbors);
     }
   }
 
