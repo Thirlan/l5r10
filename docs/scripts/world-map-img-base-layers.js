@@ -30,9 +30,10 @@ export function getWaterColor(terrain) {
  * @param {number} gridSize Cell size in pixels.
  * @param {import("./world-map-layers.js").LayerValue} terrain Terrain metadata.
  * @param {Object<string, import("./world-map-layers.js").LayerValue|null>} neighbors Adjacent terrain.
+ * @param {Object<string, boolean>} [riverConnections] Adjacent river connections.
  * @returns {void}
  */
-export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors) {
+export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors, riverConnections = {}) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("Water-edge drawing needs a canvas context and valid cell dimensions.");
   }
@@ -50,7 +51,8 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors) {
     ["east", right, top, right, bottom],
     ["south", left, bottom, right, bottom],
     ["west", left, top, left, bottom],
-  ].filter(([direction]) => neighbors[direction] && !getWaterColor(neighbors[direction]));
+  ].filter(([direction]) => neighbors[direction] && !getWaterColor(neighbors[direction])
+    && !riverConnections[direction]);
   if (!edges.length) return;
 
   ctx.save();
@@ -60,7 +62,7 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors) {
     ctx.lineTo(endX, endY);
   }
   ctx.strokeStyle = SAND_BANK_COLOR;
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 0.3;
   ctx.stroke();
   ctx.restore();
 }
