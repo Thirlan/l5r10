@@ -295,6 +295,7 @@ export class WorldMapGrid extends WorldMapRenderer {
 
     this.drawGrid();
     if (this.drawOrder.includes("text")) this.drawTextLayer();
+    this.updateRiverFlow();
   }
 
   drawClanBoundariesLayer() {

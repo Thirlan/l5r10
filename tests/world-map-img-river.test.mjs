@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { drawRiver, RIVER_OFFSETS } from "../docs/scripts/world-map-img-river.js";
+import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame, RIVER_OFFSETS } from "../docs/scripts/world-map-img-river.js";
 import { TERRAIN } from "../docs/scripts/world-map-layers.js";
 
 function draw(neighbors) {
@@ -178,4 +178,36 @@ test("unselected diagonal water does not create a connection", () => {
 
   // Assertion
   assert.equal(paths, 0);
+});
+
+test("river flow paths go from the incoming edge through the center to the outgoing edge", () => {
+  // Setup
+  const grid = {
+    "1,0": { river: 1, "river direction": { 0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0, 7: 0 } },
+    "1,1": { river: 1, "river direction": { 0: 0, 1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 } },
+  };
+
+  // Execution
+  const paths = buildRiverFlowPaths(grid, 16);
+
+  // Assertion
+  assert.equal(paths.length, 2);
+  assert.deepEqual(paths[0], { points: [24, 8, 24, 8, 24, 16], length: 8 });
+  assert.deepEqual(paths[1], { points: [24, 16, 24, 24, 32, 24], length: 16 });
+});
+
+test("river flow frame draws one pixel per path and loops", () => {
+  // Setup
+  const pixels = [];
+  const context = { fillRect(x, y, width, height) { pixels.push([x, y, width, height]); } };
+  const paths = [{ points: [0, 8, 8, 8, 16, 8], length: 16 }];
+
+  // Execution
+  drawRiverFlowFrame(context, paths, 3, 1);
+  drawRiverFlowFrame(context, paths, 19, 1);
+  drawRiverFlowFrame(context, paths, 10, 1);
+
+  // Assertion
+  assert.deepEqual(pixels, [[3, 8, 1, 1], [3, 8, 1, 1], [10, 8, 1, 1]]);
+  assert.equal(context.fillStyle, "#FFFFFF");
 });

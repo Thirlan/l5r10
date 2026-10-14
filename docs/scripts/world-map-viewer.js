@@ -326,6 +326,7 @@ export class WorldMapViewer extends WorldMapRenderer {
     }
 
     if (this.drawOrder.includes("text")) this.drawTextLayer();
+    this.updateRiverFlow();
   }
 
   drawClanLayer() {
