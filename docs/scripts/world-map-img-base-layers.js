@@ -13,6 +13,7 @@ const waterColors = new Map([
   [TERRAIN.COASTAL_WATER, "#4169E1"],
   [TERRAIN.OCEAN, "#00008B"],
 ]);
+export const SAND_BANK_COLOR = "#F4A460";
 
 /**
  * @param {import("./world-map-layers.js").LayerValue} terrain Terrain metadata.
@@ -20,6 +21,45 @@ const waterColors = new Map([
  */
 export function getWaterColor(terrain) {
   return waterColors.get(terrain);
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx Drawing context.
+ * @param {number} x Cell column.
+ * @param {number} y Cell row.
+ * @param {number} gridSize Cell size in pixels.
+ * @param {import("./world-map-layers.js").LayerValue} terrain Terrain metadata.
+ * @param {Object<string, import("./world-map-layers.js").LayerValue|null>} neighbors Adjacent terrain.
+ * @returns {void}
+ */
+export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors) {
+  if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
+    throw new TypeError("Water-edge drawing needs a canvas context and valid cell dimensions.");
+  }
+  if (terrain !== TERRAIN.WATER && terrain !== TERRAIN.COASTAL_WATER) return;
+
+  const left = x * gridSize;
+  const top = y * gridSize;
+  const right = left + gridSize;
+  const bottom = top + gridSize;
+  const edges = [
+    ["north", left, top, right, top],
+    ["east", right, top, right, bottom],
+    ["south", left, bottom, right, bottom],
+    ["west", left, top, left, bottom],
+  ].filter(([direction]) => neighbors[direction] && !getWaterColor(neighbors[direction]));
+  if (!edges.length) return;
+
+  ctx.save();
+  ctx.beginPath();
+  for (const [, startX, startY, endX, endY] of edges) {
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+  }
+  ctx.strokeStyle = SAND_BANK_COLOR;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
 }
 
 export const BASE_LAYER_IMAGES = Object.freeze([

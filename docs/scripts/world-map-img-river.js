@@ -1,9 +1,9 @@
 import { RIVER, TERRAIN } from "./world-map-layers.js";
-import { getWaterColor } from "./world-map-img-base-layers.js";
+import { getWaterColor, SAND_BANK_COLOR } from "./world-map-img-base-layers.js";
 
-const STRIPE_COLORS = ["#F4A460", getWaterColor(TERRAIN.WATER), "#F4A460"];
+const STRIPE_COLORS = [SAND_BANK_COLOR, getWaterColor(TERRAIN.WATER), SAND_BANK_COLOR];
 const STRIPE_OFFSETS = [-1, 0, 1];
-const STRIPE_WIDTHS = [0.6, 5.4, 0.6];
+const STRIPE_WIDTHS = [0.3, 2.7, 0.3];
 const RIVER_DIRECTIONS = ["east", "south", "west", "north"];
 export const RIVER_OFFSETS = Object.freeze([
   ["north", 0, -1], ["northeast", 1, -1], ["east", 1, 0], ["southeast", 1, 1],
@@ -49,6 +49,9 @@ export function drawRiver(ctx, x, y, gridSize, neighbors, water = {}, directions
         ctx.lineTo(centerX + (dx + dy) * gridSize / 2, centerY + (dy - dx) * gridSize / 2);
         ctx.closePath();
         ctx.fill();
+        ctx.strokeStyle = SAND_BANK_COLOR;
+        ctx.lineWidth = 1;
+        ctx.stroke();
       } else if (neighbors[name] || directions[index] === 1) {
         const scale = Math.hypot(dx, dy);
         drawRiverStripes(ctx, centerX, centerY, gridSize * scale / 2,
