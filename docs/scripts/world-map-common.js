@@ -144,14 +144,17 @@ export class WorldMapRenderer {
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
       const terrain = LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id);
-      const neighbors = Object.fromEntries([
+      const adjacent = [
         ["north", 0, -1], ["east", 1, 0], ["south", 0, 1], ["west", -1, 0],
-      ].map(([direction, dx, dy]) => {
+      ];
+      const riverConnections = {};
+      const neighbors = Object.fromEntries(adjacent.map(([direction, dx, dy]) => {
         const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
+        riverConnections[direction] = Boolean(neighbor?.river && neighbor["river direction"]);
         return [direction, neighbor
           ? LAYERS.TERRAIN.getValue(neighbor.terrain ?? TERRAIN.FLAT.id) : null];
       }));
-      drawWaterEdges(this.ctx, x, y, this.gridSize, terrain, neighbors);
+      drawWaterEdges(this.ctx, x, y, this.gridSize, terrain, neighbors, riverConnections);
     }
   }
 
@@ -172,7 +175,7 @@ export class WorldMapRenderer {
       const directions = cell["river direction"];
       const neighbors = Object.fromEntries(RIVER_OFFSETS.map(([name, dx, dy], index) => {
         const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
-        water[name] = neighbor?.terrain === TERRAIN.WATER.id || neighbor?.terrain === TERRAIN.COASTAL_WATER.id
+        water[name] = [TERRAIN.WATER.id, TERRAIN.COASTAL_WATER.id, TERRAIN.OCEAN.id].includes(neighbor?.terrain)
           ? LAYERS.TERRAIN.getValue(neighbor.terrain) : null;
         const incoming = neighbor?.["river direction"]?.[(index + 4) % 8] === 1;
         const connected = neighbor?.river && (directions?.[index] === 1 || incoming);

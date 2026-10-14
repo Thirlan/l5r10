@@ -105,11 +105,13 @@ test("adjacent water fills cardinal triangles with the adjacent terrain color", 
   const triangles = [];
   const outlines = [];
   let vertices;
+  let outlinePath;
   const context = {
-    save() {}, restore() {}, beginPath() { vertices = []; },
-    moveTo(x, y) { vertices.push([x, y]); }, lineTo(x, y) { vertices.push([x, y]); },
+    save() {}, restore() {}, beginPath() { vertices = []; outlinePath = []; },
+    moveTo(x, y) { vertices.push([x, y]); outlinePath.push([x, y]); },
+    lineTo(x, y) { vertices.push([x, y]); outlinePath.push([x, y]); },
     closePath() {}, fill() { triangles.push({ color: this.fillStyle, vertices }); },
-    stroke() { outlines.push({ color: this.strokeStyle, width: this.lineWidth, vertices: [...vertices] }); },
+    stroke() { outlines.push({ color: this.strokeStyle, width: this.lineWidth, vertices: [...outlinePath] }); },
   };
   drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
     { north: TERRAIN.WATER, east: TERRAIN.COASTAL_WATER,
@@ -121,10 +123,12 @@ test("adjacent water fills cardinal triangles with the adjacent terrain color", 
   assert.deepEqual(triangles[2].vertices, [[8, 8], [0, 16], [16, 16]]);
   assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
   assert.equal(outlines.length, 4);
-  assert.ok(outlines.every(({ color, width }) => color === "#F4A460" && width === 1));
+  assert.ok(outlines.every(({ color, width }) => color === "#F4A460" && width === 0.3));
+  assert.deepEqual(outlines[0].vertices, [[8, 8], [0, 0], [8, 8], [16, 0]]);
+  assert.ok(outlines.every(({ vertices }) => vertices.length === 4));
 });
 
-for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER]) {
+for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]) {
   for (const index of [1, 3, 5, 7]) {
     const [name, dx, dy] = RIVER_OFFSETS[index];
     test(`diagonal flow into ${terrain.name} toward ${name} draws strokes, not triangles`, () => {

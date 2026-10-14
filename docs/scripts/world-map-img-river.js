@@ -49,8 +49,13 @@ export function drawRiver(ctx, x, y, gridSize, neighbors, water = {}, directions
         ctx.lineTo(centerX + (dx + dy) * gridSize / 2, centerY + (dy - dx) * gridSize / 2);
         ctx.closePath();
         ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(centerX + (dx - dy) * gridSize / 2, centerY + (dy + dx) * gridSize / 2);
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(centerX + (dx + dy) * gridSize / 2, centerY + (dy - dx) * gridSize / 2);
         ctx.strokeStyle = SAND_BANK_COLOR;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 0.3;
         ctx.stroke();
       } else if (neighbors[name] || directions[index] === 1) {
         const scale = Math.hypot(dx, dy);

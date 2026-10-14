@@ -30,7 +30,25 @@ test("water edges draw sandbank lines beside land, but not beside water", () => 
 
   assert.deepEqual(calls, [
     ["move", 32, 48], ["line", 48, 48],
-    ["#F4A460", 1],
+    ["#F4A460", 0.3],
+  ]);
+});
+
+test("water edges skip banks beside connected rivers", () => {
+  const calls = [];
+  const ctx = {
+    save() {}, restore() {}, beginPath() {}, stroke() { calls.push([this.strokeStyle, this.lineWidth]); },
+    moveTo: (...point) => calls.push(["move", ...point]), lineTo: (...point) => calls.push(["line", ...point]),
+  };
+
+  drawWaterEdges(ctx, 0, 0, 16, TERRAIN.WATER, {
+    north: TERRAIN.FLAT, east: TERRAIN.FLAT, south: TERRAIN.FLAT, west: null,
+  }, { north: true });
+
+  assert.deepEqual(calls, [
+    ["move", 16, 16], ["line", 0, 16],
+    ["move", 0, 0], ["line", 0, 16],
+    ["#F4A460", 0.3],
   ]);
 });
 
@@ -45,7 +63,7 @@ test("coastal water edges use the sandbank line beside land", () => {
     north: null, east: TERRAIN.HILLS, south: TERRAIN.WATER, west: TERRAIN.OCEAN,
   });
 
-  assert.deepEqual(calls, [["#F4A460", 1]]);
+  assert.deepEqual(calls, [["#F4A460", 0.3]]);
 });
 
 test("ocean cells do not draw sandbank edges", () => {
