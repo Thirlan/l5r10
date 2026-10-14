@@ -36,6 +36,9 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("Water-edge drawing needs a canvas context and valid cell dimensions.");
   }
+  if (!neighbors || typeof neighbors !== "object") {
+    throw new TypeError("Water-edge drawing needs adjacent terrain metadata.");
+  }
   if (terrain !== TERRAIN.WATER && terrain !== TERRAIN.COASTAL_WATER) return;
 
   const left = x * gridSize;

@@ -437,6 +437,7 @@ test("renderer matches river mouth colors to neighboring water terrain", () => {
   const colors = [];
   renderer.ctx = {
     save() {}, restore() {}, beginPath() {}, moveTo() {}, lineTo() {}, closePath() {},
+    stroke() {},
     fill() { colors.push(this.fillStyle); },
   };
 
