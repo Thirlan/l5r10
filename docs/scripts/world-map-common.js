@@ -4,7 +4,7 @@ import { getClanColors } from "./clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
-import { drawRiver, RIVER_OFFSETS } from "./world-map-img-river.js";
+import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame, RIVER_OFFSETS } from "./world-map-img-river.js";
 import { getAnimalColor, drawAnimalCue } from "./world-map-img-animal.js";
 import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
@@ -19,6 +19,7 @@ const OVERLAY_PRESENTATION = new Map([
   [LAYERS.RESOURCE_LEVEL, { getColor: getResourceLevelColor, drawCue: drawResourceLevelCue }],
 ]);
 const MAP_DEFAULT_GRID_SIZE = 16;
+const RIVER_FLOW_FRAME_MS = 120;
 
 // Shared rendering logic for the map builder (WorldMapGrid) and the read-only
 // map viewer (WorldMapViewer). Subclasses provide their own repaint entry point
@@ -183,6 +184,45 @@ export class WorldMapRenderer {
       }));
       drawRiver(this.ctx, x, y, this.gridSize, neighbors, water, directions);
     }
+  }
+
+  /**
+   * Updates the river flow overlay after a full repaint.
+   * The overlay is a separate canvas, so the map is not repainted for each frame.
+   * @returns {void}
+   */
+  updateRiverFlow() {
+    if (typeof document === "undefined" || !this.canvas?.parentElement) return;
+    if (!this.riverFlowCanvas) {
+      this.riverFlowCanvas = document.createElement("canvas");
+      this.riverFlowCanvas.className = "map-river-flow";
+      this.riverFlowCanvas.setAttribute("aria-hidden", "true");
+      this.canvas.after(this.riverFlowCanvas);
+      this.riverFlowCtx = this.riverFlowCanvas.getContext("2d");
+      this.riverFlowFrame = 0;
+    }
+    if (this.riverFlowCanvas.width !== this.canvas.width) this.riverFlowCanvas.width = this.canvas.width;
+    if (this.riverFlowCanvas.height !== this.canvas.height) this.riverFlowCanvas.height = this.canvas.height;
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    this.riverFlowPaths = this.isLayerVisible(LAYERS.RIVER.id) && !reducedMotion
+      ? buildRiverFlowPaths(this.grid, this.gridSize) : [];
+    this.riverFlowCtx.clearRect(0, 0, this.riverFlowCanvas.width, this.riverFlowCanvas.height);
+    if (!this.riverFlowPaths.length) {
+      clearInterval(this.riverFlowTimer);
+      this.riverFlowTimer = null;
+    } else if (!this.riverFlowTimer) {
+      this.riverFlowTimer = setInterval(() => this.drawRiverFlow(), RIVER_FLOW_FRAME_MS);
+    }
+  }
+
+  /**
+   * Draws the next river flow frame on the overlay canvas.
+   * @returns {void}
+   */
+  drawRiverFlow() {
+    if (document.hidden) return;
+    this.riverFlowCtx.clearRect(0, 0, this.riverFlowCanvas.width, this.riverFlowCanvas.height);
+    drawRiverFlowFrame(this.riverFlowCtx, this.riverFlowPaths, this.riverFlowFrame++, this.zoom);
   }
 
   drawInfrastructureLayer() {

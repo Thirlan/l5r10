@@ -96,3 +96,58 @@ function drawRiverStripes(ctx, centerX, centerY, length, dx, dy, spacing, startD
     ctx.stroke();
   });
 }
+
+/**
+ * Builds one flow path for each saved outgoing river direction.
+ * A path starts at the incoming edge (or the cell center), goes through the center, and ends at the outgoing edge.
+ * @param {Object<string, Object>} grid Map cells keyed by "x,y".
+ * @param {number} gridSize Cell size in map units.
+ * @returns {Array<{points: number[], length: number}>} Flow paths in map units.
+ */
+export function buildRiverFlowPaths(grid, gridSize) {
+  const paths = [];
+  for (const [key, cell] of Object.entries(grid)) {
+    const directions = cell?.river ? cell["river direction"] : null;
+    if (!directions) continue;
+    const [x, y] = key.split(",").map(Number);
+    const centerX = x * gridSize + gridSize / 2;
+    const centerY = y * gridSize + gridSize / 2;
+    const incoming = RIVER_OFFSETS.findIndex(([, dx, dy], index) => {
+      const neighbor = grid[`${x + dx},${y + dy}`];
+      return neighbor?.river && neighbor["river direction"]?.[(index + 4) % 8] === 1;
+    });
+    const startX = incoming < 0 ? centerX : centerX + RIVER_OFFSETS[incoming][1] * gridSize / 2;
+    const startY = incoming < 0 ? centerY : centerY + RIVER_OFFSETS[incoming][2] * gridSize / 2;
+    RIVER_OFFSETS.forEach(([, dx, dy], index) => {
+      if (directions[index] !== 1) return;
+      const endX = centerX + dx * gridSize / 2;
+      const endY = centerY + dy * gridSize / 2;
+      const length = Math.hypot(centerX - startX, centerY - startY) + Math.hypot(endX - centerX, endY - centerY);
+      paths.push({ points: [startX, startY, centerX, centerY, endX, endY], length });
+    });
+  }
+  return paths;
+}
+
+/**
+ * Draws one white pixel on each flow path. The pixel moves one screen pixel for each frame and loops.
+ * @param {CanvasRenderingContext2D} ctx Overlay drawing context in screen pixels.
+ * @param {Array<{points: number[], length: number}>} paths Flow paths in map units.
+ * @param {number} frame Frame counter.
+ * @param {number} zoom Map units to screen pixels scale.
+ * @returns {void}
+ */
+export function drawRiverFlowFrame(ctx, paths, frame, zoom) {
+  ctx.fillStyle = "#FFFFFF";
+  for (const { points: [ax, ay, bx, by, cx, cy], length } of paths) {
+    const steps = Math.max(1, Math.round(length * zoom));
+    const distance = (frame % steps) / zoom;
+    const firstLength = Math.hypot(bx - ax, by - ay);
+    const [fromX, fromY, toX, toY, segment, offset] = distance < firstLength
+      ? [ax, ay, bx, by, firstLength, distance]
+      : [bx, by, cx, cy, length - firstLength, distance - firstLength];
+    const ratio = segment > 0 ? offset / segment : 0;
+    ctx.fillRect(Math.floor((fromX + (toX - fromX) * ratio) * zoom),
+      Math.floor((fromY + (toY - fromY) * ratio) * zoom), 1, 1);
+  }
+}
