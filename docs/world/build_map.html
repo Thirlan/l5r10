@@ -119,6 +119,20 @@
         <button class="tool-button" data-tool-layer="river" data-tool-value="PRESENT">
           River
         </button>
+        <fieldset class="cliff-direction-controls">
+          <legend>River Flow Directions</legend>
+          <div class="cliff-direction-grid">
+            <label><input type="checkbox" data-river-direction="7">Top left</label>
+            <label><input type="checkbox" data-river-direction="0">Top</label>
+            <label><input type="checkbox" data-river-direction="1">Top right</label>
+            <label><input type="checkbox" data-river-direction="6">Left</label>
+            <span aria-hidden="true"></span>
+            <label><input type="checkbox" data-river-direction="2">Right</label>
+            <label><input type="checkbox" data-river-direction="5">Bottom left</label>
+            <label><input type="checkbox" data-river-direction="4">Bottom</label>
+            <label><input type="checkbox" data-river-direction="3">Bottom right</label>
+          </div>
+        </fieldset>
         <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="river">
           Erase River
         </button>

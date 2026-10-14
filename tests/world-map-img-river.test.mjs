@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { drawRiver } from "../docs/scripts/world-map-img-river.js";
+import { drawRiver, RIVER_OFFSETS } from "../docs/scripts/world-map-img-river.js";
 
 function draw(neighbors) {
   const strokes = [];
@@ -84,4 +84,47 @@ test("river drawing rejects a non-positive grid size", () => {
 
   // Assertion
   assert.throws(drawWithInvalidGridSize, TypeError);
+});
+
+for (const [direction, [name, dx, dy]] of RIVER_OFFSETS.entries()) {
+  test(`selected river direction ${name} reaches the cell boundary`, () => {
+    const strokes = [];
+    const context = {
+      save() {}, restore() {}, beginPath() {}, moveTo() {}, stroke() {},
+      lineTo(x, y) { strokes.push([x, y]); },
+    };
+    drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+      {}, { [direction]: 1 });
+    assert.equal(strokes.length, 5);
+    assert.deepEqual(strokes[2], [8 + dx * 8, 8 + dy * 8]);
+  });
+}
+
+test("adjacent water fills every cardinal triangle with the river center color", () => {
+  const triangles = [];
+  let vertices;
+  const context = {
+    save() {}, restore() {}, beginPath() { vertices = []; },
+    moveTo(x, y) { vertices.push([x, y]); }, lineTo(x, y) { vertices.push([x, y]); },
+    closePath() {}, fill() { triangles.push({ color: this.fillStyle, vertices }); },
+  };
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+    { north: true, east: true, south: true, west: true }, {});
+  assert.equal(triangles.length, 4);
+  assert.deepEqual(triangles[0], { color: "#0000FF", vertices: [[8, 8], [16, 0], [0, 0]] });
+  assert.deepEqual(triangles[1].vertices, [[8, 8], [16, 16], [16, 0]]);
+  assert.deepEqual(triangles[2].vertices, [[8, 8], [0, 16], [16, 16]]);
+  assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
+});
+
+test("diagonal water fills a right triangle that reaches the shared corner", () => {
+  const vertices = [];
+  const context = {
+    save() {}, restore() {}, beginPath() {}, closePath() {}, fill() {},
+    moveTo(x, y) { vertices.push([x, y]); }, lineTo(x, y) { vertices.push([x, y]); },
+  };
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+    { northeast: true }, {});
+  assert.deepEqual(vertices, [[8, 8], [16, 0], [16, 8]]);
+  assert.equal(context.fillStyle, "#0000FF");
 });

@@ -31,6 +31,9 @@ if (canvas) {
   document.querySelectorAll("[data-cliff-direction]").forEach((input) => {
     input.addEventListener("change", () => map.setCliffDirection(input.dataset.cliffDirection, input.checked));
   });
+  document.querySelectorAll("[data-river-direction]").forEach((input) => {
+    input.addEventListener("change", () => map.setRiverDirection(input.dataset.riverDirection, input.checked));
+  });
   document.querySelector("#brushSize").addEventListener("change", (event) => map.setBrushSize(event.target.value));
   document.querySelector("#fontSize").addEventListener("change", (event) => map.setFontSize(event.target.value));
   const fileInput = document.querySelector("#fileInput");
