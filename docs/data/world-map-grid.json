@@ -263,7 +263,18 @@
   },
   "90,90": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "89,91": {
     "clan": 2,
@@ -288,11 +299,33 @@
   },
   "91,90": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "92,90": {
     "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "91,91": {
     "river": 1,
@@ -390,7 +423,18 @@
     "settlement": 6,
     "englishName": "Doji",
     "rokuganiName": "Doji",
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "95,93": {
     "terrain": 4,
@@ -401,7 +445,18 @@
     "clan": 2
   },
   "97,92": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "98,92": {
     "terrain": 4,
@@ -677,7 +732,6 @@
   },
   "38,66": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 1
   },
   "37,67": {
@@ -687,27 +741,22 @@
   },
   "38,67": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 2
   },
   "39,66": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 1
   },
   "40,66": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 1
   },
   "39,67": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 2
   },
   "40,67": {
     "vegetation": 1,
-    "clan": 8,
     "animal": 1
   },
   "39,68": {
@@ -874,7 +923,6 @@
     "crime": 3
   },
   "47,78": {
-    "clan": 6,
     "crime": 1
   },
   "48,78": {
@@ -887,7 +935,6 @@
     "crime": 2
   },
   "48,79": {
-    "clan": 6,
     "crime": 1
   },
   "43,76": {
@@ -1130,11 +1177,9 @@
     "crime": 2
   },
   "48,82": {
-    "clan": 6,
     "crime": 1
   },
   "47,83": {
-    "clan": 6,
     "crime": 1
   },
   "48,83": {
@@ -4933,18 +4978,10 @@
   "56,99": {
     "crime": 1
   },
-  "49,96": {
-    "clan": 6
-  },
-  "50,96": {
-    "clan": 6
-  },
-  "49,97": {
-    "clan": 6
-  },
-  "50,97": {
-    "clan": 6
-  },
+  "49,96": {},
+  "50,96": {},
+  "49,97": {},
+  "50,97": {},
   "51,96": {
     "vegetation": 1,
     "animal": 1,
@@ -4966,11 +5003,9 @@
     "crime": 2
   },
   "53,96": {
-    "clan": 6,
     "crime": 1
   },
   "54,96": {
-    "clan": 6,
     "crime": 1
   },
   "53,97": {
@@ -9608,8 +9643,18 @@
     "infrastructure": 2
   },
   "59,71": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 8,
+    "clan": 6,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "60,71": {
     "terrain": 1,
@@ -9806,8 +9851,18 @@
     }
   },
   "59,72": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 8,
+    "clan": 6,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "60,72": {
     "terrain": 1,
@@ -9815,8 +9870,18 @@
     "animal": 1
   },
   "59,73": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 8,
+    "clan": 6,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "60,73": {
     "terrain": 1,
@@ -10120,40 +10185,74 @@
     "animal": 2
   },
   "64,76": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
     "clan": 6,
-    "animal": 3
+    "animal": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "63,77": {
     "vegetation": 1,
     "clan": 6,
-    "animal": 1
+    "animal": 1,
+    "terrain": 2
   },
   "64,77": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 6,
-    "animal": 2
+    "animal": 2,
+    "climate": 3
   },
   "65,76": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
     "clan": 6,
-    "animal": 3
+    "animal": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "66,76": {
     "clan": 4,
     "resource": 3
   },
   "65,77": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 7,
+    "climate": 0,
     "clan": 6,
     "animal": 3
   },
   "66,77": {
     "clan": 4,
-    "animal": 1
+    "animal": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    },
+    "climate": 3
   },
   "67,76": {
     "clan": 4,
@@ -10273,45 +10372,56 @@
     "settlement": 5,
     "englishName": "Castle of Learning",
     "rokuganiName": "Yogo",
-    "infrastructure": 1
+    "infrastructure": 1,
+    "climate": 0
   },
   "63,79": {
     "terrain": 2,
     "clan": 6
   },
   "64,79": {
-    "terrain": 1,
+    "terrain": 7,
     "clan": 6,
     "infrastructure": 1
   },
   "65,78": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 7,
+    "climate": 0,
     "clan": 6,
     "animal": 3
   },
   "66,78": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 7,
+    "climate": 0,
     "clan": 6,
     "animal": 3
   },
   "65,79": {
-    "terrain": 2,
+    "terrain": 7,
     "clan": 6,
     "animal": 1
   },
   "66,79": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 3,
+    "climate": 0,
     "clan": 6,
     "animal": 2
   },
   "67,78": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
     "clan": 6,
-    "animal": 3
+    "animal": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "68,78": {
     "terrain": 2,
@@ -10993,8 +11103,7 @@
   },
   "12,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,11": {
     "terrain": 2,
@@ -11002,28 +11111,23 @@
   },
   "12,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,12": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,12": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,13": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,13": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "3,4": {
     "terrain": 1,
@@ -11218,38 +11322,31 @@
   },
   "14,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,4": {
     "infrastructure": 2,
@@ -11275,52 +11372,42 @@
   },
   "15,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,7": {
-    "clan": 7,
     "climate": 3
   },
   "15,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,8": {
     "terrain": 1,
-    "clan": 7,
     "climate": 3
   },
   "15,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,9": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,10": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "17,4": {
     "terrain": 1,
@@ -11345,17 +11432,14 @@
     "climate": 3
   },
   "17,7": {
-    "clan": 7,
     "infrastructure": 2,
     "climate": 3
   },
   "18,7": {
     "terrain": 1,
-    "clan": 7,
     "climate": 3
   },
   "17,8": {
-    "clan": 7,
     "infrastructure": 2
   },
   "18,8": {
@@ -11398,13 +11482,11 @@
   },
   "19,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "20,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "19,8": {
     "terrain": 1,
@@ -11440,27 +11522,22 @@
   },
   "13,12": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,12": {
-    "clan": 7,
     "terrain": 2
   },
   "13,13": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,13": {
     "clan": 7
   },
   "15,12": {
-    "clan": 7,
     "terrain": 2
   },
   "16,12": {
-    "clan": 7,
     "terrain": 2
   },
   "15,13": {
@@ -11510,13 +11587,11 @@
   },
   "21,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "22,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "21,8": {
     "clan": 7
@@ -12003,8 +12078,7 @@
   },
   "35,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "36,6": {
     "terrain": 1,
@@ -12012,13 +12086,11 @@
   },
   "35,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "36,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "35,8": {
     "terrain": 2,
@@ -12091,13 +12163,11 @@
   },
   "37,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "38,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "37,8": {
     "terrain": 1,
@@ -12241,13 +12311,11 @@
   },
   "39,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "40,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "39,8": {
     "clan": 7,
@@ -12309,12 +12377,9 @@
     "climate": 3
   },
   "41,7": {
-    "clan": 7,
     "infrastructure": 2
   },
-  "42,7": {
-    "clan": 7
-  },
+  "42,7": {},
   "41,8": {
     "clan": 7
   },
@@ -12368,22 +12433,18 @@
   },
   "43,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "44,7": {
     "terrain": 1,
     "climate": 3,
-    "clan": 7,
     "vegetation": 1
   },
   "43,8": {
     "clan": 7,
     "vegetation": 1
   },
-  "44,8": {
-    "clan": 7
-  },
+  "44,8": {},
   "43,9": {
     "terrain": 1,
     "clan": 7
@@ -12531,16 +12592,14 @@
   },
   "45,7": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "46,7": {
     "terrain": 1,
     "climate": 3
   },
   "45,8": {
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "46,8": {
     "terrain": 1,
@@ -12608,36 +12667,29 @@
   },
   "48,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "47,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "48,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "47,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "48,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "47,11": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "48,11": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "49,4": {
     "terrain": 2,
@@ -12673,43 +12725,35 @@
   },
   "49,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "50,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "49,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "50,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "49,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "50,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "49,11": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "50,11": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "51,4": {
     "terrain": 2,
@@ -12745,39 +12789,29 @@
   },
   "51,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "52,8": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "51,9": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "52,9": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "51,10": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
-  "52,10": {
-    "clan": 7
-  },
+  "52,10": {},
   "51,11": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
-  "52,11": {
-    "clan": 7
-  },
+  "52,11": {},
   "53,4": {
     "terrain": 2,
     "climate": 3
@@ -12812,29 +12846,18 @@
   },
   "53,8": {
     "climate": 3,
-    "clan": 7,
     "vegetation": 1
   },
   "54,8": {
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
-  "53,9": {
-    "clan": 7
-  },
-  "54,9": {
-    "clan": 7
-  },
-  "53,10": {
-    "clan": 7
-  },
+  "53,9": {},
+  "54,9": {},
+  "53,10": {},
   "54,10": {
-    "clan": 7,
     "vegetation": 1
   },
-  "53,11": {
-    "clan": 7
-  },
+  "53,11": {},
   "54,11": {
     "clan": 7
   },
@@ -12860,8 +12883,7 @@
   },
   "56,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "55,7": {
     "terrain": 1,
@@ -12869,33 +12891,23 @@
   },
   "56,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "55,8": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "56,8": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
-  "55,9": {
-    "clan": 7
-  },
+  "55,9": {},
   "56,9": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
-  "55,10": {
-    "clan": 7
-  },
-  "56,10": {
-    "clan": 3
-  },
+  "55,10": {},
+  "56,10": {},
   "55,11": {
     "vegetation": 1,
     "clan": 7
@@ -12922,48 +12934,39 @@
   },
   "57,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "58,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "57,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "58,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "57,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "58,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "57,9": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "58,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "57,10": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "58,10": {
     "terrain": 1,
@@ -12996,43 +12999,35 @@
   },
   "59,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "60,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "59,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "60,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "59,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "60,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "59,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "60,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "59,10": {
     "terrain": 2,
@@ -13072,43 +13067,35 @@
   },
   "61,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "62,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "61,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "62,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "61,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "62,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "61,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "62,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "61,10": {
     "terrain": 2,
@@ -13148,43 +13135,35 @@
   },
   "63,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "64,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "63,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "64,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "63,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "64,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "63,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "64,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "63,10": {
     "terrain": 2,
@@ -13224,43 +13203,35 @@
   },
   "65,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "66,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "65,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "66,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "65,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "66,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "65,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "66,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "65,10": {
     "terrain": 2,
@@ -13303,43 +13274,35 @@
   },
   "67,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "68,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "67,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "68,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "67,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "68,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "67,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "68,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "67,10": {
     "terrain": 2,
@@ -13379,43 +13342,35 @@
   },
   "69,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "70,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "69,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "70,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "69,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "70,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "69,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "70,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "69,10": {
     "terrain": 2,
@@ -13455,43 +13410,35 @@
   },
   "71,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "72,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "71,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "72,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "71,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "72,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "71,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "72,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "71,10": {
     "terrain": 2,
@@ -13532,8 +13479,7 @@
   },
   "73,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "74,6": {
     "terrain": 2,
@@ -13541,33 +13487,27 @@
   },
   "73,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "74,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "73,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "74,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "73,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "74,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "73,10": {
     "terrain": 2,
@@ -13617,33 +13557,27 @@
   },
   "75,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "76,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "75,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "76,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "75,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "76,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "75,10": {
     "terrain": 2,
@@ -13691,8 +13625,7 @@
   },
   "77,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "78,7": {
     "terrain": 2,
@@ -13700,23 +13633,19 @@
   },
   "77,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "78,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "77,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "78,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "77,10": {
     "terrain": 2,
@@ -14744,12 +14673,10 @@
   },
   "97,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "98,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "99,0": {
@@ -14798,12 +14725,10 @@
   },
   "99,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "100,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "101,0": {
@@ -14848,13 +14773,11 @@
   },
   "101,5": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "102,5": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "103,0": {
     "terrain": 2,
@@ -14898,12 +14821,10 @@
   },
   "103,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,0": {
@@ -14948,12 +14869,10 @@
   },
   "105,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,0": {
@@ -14998,12 +14917,10 @@
   },
   "107,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "109,0": {
@@ -15048,13 +14965,11 @@
   },
   "109,5": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "110,5": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "111,0": {
     "terrain": 2,
@@ -15098,8 +15013,7 @@
   },
   "111,5": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "112,5": {
     "terrain": 2,
@@ -15203,62 +15117,50 @@
   },
   "109,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "110,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "109,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "110,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "111,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "112,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "111,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "112,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "113,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "114,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "113,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "114,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "115,6": {
@@ -15271,7 +15173,6 @@
   },
   "115,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "116,7": {
@@ -15472,12 +15373,10 @@
   },
   "115,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "116,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "115,9": {
@@ -15492,7 +15391,6 @@
   },
   "117,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "118,8": {
@@ -15506,7 +15404,6 @@
   },
   "118,9": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "119,8": {
@@ -15519,8 +15416,7 @@
   },
   "119,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "120,9": {
     "terrain": 2,
@@ -15600,12 +15496,10 @@
   },
   "123,9": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "124,9": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "125,2": {
@@ -15658,22 +15552,18 @@
   },
   "125,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "125,9": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "119,10": {
@@ -15697,12 +15587,10 @@
   },
   "121,10": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "122,10": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "121,11": {
@@ -15712,47 +15600,38 @@
   },
   "122,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "123,10": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "124,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "123,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "124,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "125,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "125,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,4": {
@@ -15785,48 +15664,50 @@
   },
   "128,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,11": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,11": {
     "vegetation": 1,
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "129,4": {
     "terrain": 2,
@@ -15850,40 +15731,54 @@
   },
   "130,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "129,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "130,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "129,8": {
-    "clan": 5,
     "climate": 3
   },
   "130,8": {
-    "clan": 5,
     "climate": 3
   },
   "129,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "130,9": {
     "vegetation": 1,
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "129,10": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "130,10": {
     "terrain": 4
@@ -15963,7 +15858,6 @@
   },
   "96,6": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
@@ -15974,7 +15868,6 @@
   },
   "96,7": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
@@ -16041,7 +15934,6 @@
   },
   "96,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "95,9": {
@@ -16148,9 +16040,19 @@
     "infrastructure": 2
   },
   "89,13": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,13": {
     "terrain": 2,
@@ -16253,8 +16155,7 @@
   },
   "87,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "88,10": {
     "terrain": 2,
@@ -16271,19 +16172,39 @@
     "clan": 5
   },
   "87,12": {
-    "terrain": 2,
     "climate": 3,
     "clan": 5,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "88,12": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
     "clan": 5,
     "infrastructure": 2,
     "settlement": 1,
     "englishName": "Yobanjin",
-    "rokuganiName": "Yobanjin"
+    "rokuganiName": "Yobanjin",
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "87,13": {
     "terrain": 1,
@@ -16291,9 +16212,9 @@
     "climate": 3
   },
   "88,13": {
-    "terrain": 2,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "85,6": {
     "terrain": 2,
@@ -16321,23 +16242,19 @@
   },
   "85,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "86,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "85,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "86,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "85,11": {
     "terrain": 2,
@@ -16365,10 +16282,20 @@
     "climate": 3
   },
   "86,13": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 5,
     "climate": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "83,6": {
     "terrain": 2,
@@ -16396,23 +16323,19 @@
   },
   "83,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "84,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "83,10": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "84,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "83,11": {
     "terrain": 1,
@@ -16466,8 +16389,7 @@
   },
   "81,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "82,8": {
     "terrain": 2,
@@ -16475,23 +16397,19 @@
   },
   "81,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "82,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "81,10": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "82,10": {
     "terrain": 1,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "81,11": {
     "terrain": 2,
@@ -16545,23 +16463,19 @@
   },
   "79,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "80,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "79,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "80,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "climate": 3
   },
   "79,10": {
     "terrain": 2,
@@ -16655,12 +16569,14 @@
   "75,14": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "76,14": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "75,15": {
     "terrain": 2,
@@ -16686,7 +16602,18 @@
   "77,15": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "78,15": {
     "terrain": 2,
@@ -16724,7 +16651,8 @@
   "80,15": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "81,14": {
     "climate": 3,
@@ -16748,7 +16676,18 @@
   "73,12": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    }
   },
   "74,12": {
     "terrain": 2,
@@ -16756,34 +16695,39 @@
     "climate": 3
   },
   "73,13": {
-    "terrain": 3,
+    "terrain": 0,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "74,13": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "73,14": {
-    "terrain": 3,
+    "terrain": 2,
     "clan": 3,
     "climate": 3
   },
   "74,14": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "73,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "74,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "71,12": {
     "terrain": 1,
@@ -16794,7 +16738,18 @@
   "72,12": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "71,13": {
     "terrain": 2,
@@ -16802,14 +16757,26 @@
     "climate": 3
   },
   "72,13": {
-    "terrain": 3,
+    "terrain": 0,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "71,14": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "72,14": {
     "terrain": 3,
@@ -16819,12 +16786,14 @@
   "71,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "72,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "69,12": {
     "terrain": 1,
@@ -16864,7 +16833,8 @@
   "69,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,15": {
     "terrain": 1,
@@ -16880,12 +16850,14 @@
   "68,12": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "67,13": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "68,13": {
     "terrain": 1,
@@ -16902,7 +16874,8 @@
   "68,14": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "67,15": {
     "terrain": 2,
@@ -16913,7 +16886,8 @@
   "68,15": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "65,12": {
     "terrain": 2,
@@ -16943,7 +16917,8 @@
   "66,14": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "65,15": {
     "terrain": 2,
@@ -16979,12 +16954,24 @@
     "infrastructure": 1,
     "settlement": 6,
     "englishName": "Togashi",
-    "rokuganiName": "Togashi"
+    "rokuganiName": "Togashi",
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "67,16": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "68,16": {
     "terrain": 1,
@@ -16998,7 +16985,8 @@
   "67,17": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "68,17": {
     "terrain": 1,
@@ -17009,42 +16997,50 @@
   "69,16": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,16": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "69,17": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,17": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "71,16": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "72,16": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "71,17": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "72,17": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "63,12": {
     "terrain": 2,
@@ -17156,16 +17152,30 @@
     "clan": 3
   },
   "62,16": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 2,
+    "clan": 3,
+    "climate": 3
   },
   "61,17": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 2,
+    "clan": 3,
+    "climate": 3
   },
   "62,17": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 2,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    "climate": 3
   },
   "59,12": {
     "terrain": 1,
@@ -17227,8 +17237,9 @@
     "clan": 3
   },
   "60,17": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 2,
+    "clan": 3,
+    "climate": 3
   },
   "57,12": {
     "vegetation": 1,
@@ -17301,16 +17312,49 @@
   },
   "59,18": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "60,18": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    }
   },
   "59,19": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "60,19": {
     "terrain": 2,
@@ -17318,12 +17362,36 @@
     "clan": 3
   },
   "61,18": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    },
+    "climate": 3
   },
   "62,18": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    },
+    "climate": 3
   },
   "61,19": {
     "terrain": 2,
@@ -17338,7 +17406,18 @@
   "63,18": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "64,18": {
     "terrain": 2,
@@ -17353,7 +17432,18 @@
   "64,19": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "57,20": {
     "clan": 3
@@ -17434,12 +17524,23 @@
     "climate": 3
   },
   "65,19": {
-    "terrain": 2,
+    "terrain": 0,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "66,19": {
-    "terrain": 1,
+    "terrain": 3,
     "clan": 3,
     "climate": 3
   },
@@ -17579,12 +17680,34 @@
   "61,25": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "62,25": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "63,24": {
     "terrain": 2,
@@ -17619,7 +17742,18 @@
   "65,25": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    }
   },
   "66,25": {
     "terrain": 2,
@@ -17632,33 +17766,79 @@
     "clan": 3
   },
   "60,26": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "vegetation": 1
   },
   "59,27": {
     "clan": 3,
     "terrain": 1
   },
   "60,27": {
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 1,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "61,26": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "62,26": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "61,27": {
     "clan": 3
   },
   "62,27": {
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "63,26": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "64,26": {
     "terrain": 3,
@@ -17666,7 +17846,8 @@
   },
   "63,27": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,27": {
     "terrain": 3,
@@ -17675,7 +17856,8 @@
   "65,26": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "66,26": {
     "terrain": 2,
@@ -17685,7 +17867,8 @@
   "65,27": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "66,27": {
     "terrain": 2,
@@ -17720,21 +17903,25 @@
   },
   "62,29": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "63,28": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,28": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "63,29": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,29": {
     "terrain": 2,
@@ -17744,7 +17931,8 @@
   "65,28": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "66,28": {
     "terrain": 2,
@@ -17814,7 +18002,8 @@
   "67,26": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "68,26": {
     "terrain": 1,
@@ -17825,7 +18014,8 @@
   "67,27": {
     "clan": 3,
     "climate": 3,
-    "terrain": 2
+    "terrain": 2,
+    "vegetation": 1
   },
   "68,27": {
     "terrain": 1,
@@ -17836,7 +18026,8 @@
   "67,28": {
     "clan": 3,
     "climate": 3,
-    "terrain": 2
+    "terrain": 2,
+    "vegetation": 1
   },
   "68,28": {
     "terrain": 1,
@@ -17847,7 +18038,8 @@
   "67,29": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "68,29": {
     "terrain": 1,
@@ -17951,17 +18143,7 @@
     "terrain": 2,
     "climate": 3,
     "clan": 3,
-    "river": 1,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-      "5": 1,
-      "6": 0,
-      "7": 0
-    }
+    "vegetation": 1
   },
   "69,25": {
     "terrain": 2,
@@ -17997,7 +18179,8 @@
   "69,27": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,27": {
     "terrain": 2,
@@ -18012,7 +18195,8 @@
   "72,20": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "71,21": {
     "terrain": 2,
@@ -18022,7 +18206,8 @@
   "72,21": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "71,22": {
     "terrain": 2,
@@ -18032,7 +18217,8 @@
   "72,22": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "71,23": {
     "terrain": 2,
@@ -18042,7 +18228,8 @@
   "72,23": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "71,24": {
     "terrain": 2,
@@ -18093,7 +18280,8 @@
   "68,18": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "67,19": {
     "terrain": 1,
@@ -18104,22 +18292,26 @@
   "68,19": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "69,18": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,18": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "69,19": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,19": {
     "terrain": 2,
@@ -18134,7 +18326,8 @@
   "72,18": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "71,19": {
     "terrain": 2,
@@ -18144,7 +18337,8 @@
   "72,19": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "73,18": {
     "terrain": 2,
@@ -18228,14 +18422,34 @@
     "clan": 3
   },
   "75,18": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "76,18": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "75,19": {
     "terrain": 1,
@@ -18332,9 +18546,19 @@
     }
   },
   "77,18": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "78,18": {
     "terrain": 2,
@@ -18453,32 +18677,72 @@
   "79,18": {
     "climate": 3,
     "clan": 3,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "80,18": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "79,19": {
-    "terrain": 1,
+    "terrain": 0,
     "climate": 3,
     "clan": 3
   },
   "80,19": {
     "climate": 3,
     "clan": 3,
-    "terrain": 1
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "79,20": {
-    "terrain": 1,
+    "terrain": 0,
     "climate": 3,
     "clan": 3
   },
   "80,20": {
     "climate": 3,
     "clan": 3,
-    "terrain": 1
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "79,21": {
     "terrain": 2,
@@ -18538,7 +18802,8 @@
   "73,16": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "74,16": {
     "terrain": 2,
@@ -18611,14 +18876,34 @@
     "rokuganiName": "Maigo no Samurai"
   },
   "77,17": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "78,17": {
     "climate": 3,
     "clan": 3,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "79,16": {
     "terrain": 2,
@@ -18628,12 +18913,23 @@
   "80,16": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "79,17": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "80,17": {
     "terrain": 2,
@@ -18653,7 +18949,8 @@
   "81,17": {
     "terrain": 1,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "82,17": {
     "climate": 3,
@@ -18669,7 +18966,8 @@
   "82,18": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "81,19": {
     "terrain": 2,
@@ -18684,12 +18982,32 @@
   "81,20": {
     "climate": 3,
     "clan": 3,
-    "terrain": 1
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "82,20": {
     "clan": 3,
     "climate": 3,
-    "terrain": 1
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "81,21": {
     "climate": 3,
@@ -18702,7 +19020,17 @@
   "82,21": {
     "clan": 3,
     "climate": 3,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "83,14": {
     "climate": 3,
@@ -18753,9 +19081,19 @@
     "climate": 3
   },
   "83,19": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "84,19": {
     "clan": 3,
@@ -18780,48 +19118,91 @@
     "infrastructure": 1
   },
   "84,21": {
-    "climate": 3
+    "climate": 0
   },
   "85,14": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 5,
     "climate": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "86,14": {
     "clan": 5,
     "climate": 3,
-    "terrain": 2
+    "terrain": 1
   },
   "85,15": {
     "clan": 5,
     "climate": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "86,15": {
     "clan": 5,
     "climate": 3,
-    "terrain": 2
+    "terrain": 1
   },
   "85,16": {
     "clan": 5,
     "climate": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "86,16": {
     "clan": 5,
     "climate": 3,
-    "terrain": 2
+    "terrain": 1
   },
   "85,17": {
     "clan": 5,
     "climate": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "86,17": {
     "clan": 5,
     "climate": 3,
-    "terrain": 2
+    "terrain": 1
   },
   "85,18": {
     "clan": 3,
@@ -18849,14 +19230,15 @@
     "climate": 3
   },
   "85,21": {
-    "climate": 3
+    "climate": 0
   },
   "86,21": {
     "climate": 3
   },
   "87,14": {
     "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 1
   },
   "88,14": {
     "climate": 3,
@@ -18917,18 +19299,18 @@
     "rokuganiName": "Chuda"
   },
   "88,20": {
-    "terrain": 2,
     "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 1
   },
   "87,21": {
     "clan": 5,
     "climate": 3
   },
   "88,21": {
-    "terrain": 2,
     "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 1
   },
   "89,14": {
     "climate": 3,
@@ -18936,9 +19318,19 @@
     "terrain": 1
   },
   "90,14": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "89,15": {
     "climate": 3,
@@ -18946,9 +19338,19 @@
     "terrain": 1
   },
   "90,15": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "89,16": {
     "climate": 3,
@@ -18956,14 +19358,34 @@
     "terrain": 1
   },
   "90,16": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "89,17": {
     "climate": 3,
     "clan": 5,
-    "terrain": 1
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,17": {
     "terrain": 2,
@@ -18971,9 +19393,19 @@
     "clan": 5
   },
   "89,18": {
-    "terrain": 2,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,18": {
     "terrain": 2,
@@ -18981,9 +19413,19 @@
     "clan": 5
   },
   "89,19": {
-    "terrain": 2,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,19": {
     "terrain": 2,
@@ -18992,18 +19434,38 @@
     "infrastructure": 2
   },
   "89,20": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 5,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,20": {
     "terrain": 3,
     "clan": 5
   },
   "89,21": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 5,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,21": {
     "terrain": 3,
@@ -19236,23 +19698,44 @@
   "88,22": {
     "clan": 5,
     "climate": 3,
-    "terrain": 2
+    "terrain": 1
   },
   "87,23": {
-    "terrain": 2,
     "climate": 3,
-    "clan": 5
+    "clan": 5,
+    "terrain": 1
   },
   "88,23": {
     "clan": 5,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "89,22": {
     "clan": 5,
     "infrastructure": 2,
     "settlement": 10,
     "englishName": "Ki-rin",
-    "rokuganiName": "Ki-rin"
+    "rokuganiName": "Ki-rin",
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "90,22": {
     "terrain": 3,
@@ -19305,23 +19788,32 @@
     "clan": 5
   },
   "87,24": {
-    "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "terrain": 8,
+    "climate": 0,
+    "clan": 5,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "88,24": {
-    "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 5
   },
   "87,25": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 5
   },
   "88,25": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 5
   },
   "89,24": {
@@ -19881,7 +20373,7 @@
     "clan": 5
   },
   "89,31": {
-    "terrain": 1,
+    "terrain": 3,
     "clan": 5
   },
   "90,31": {
@@ -19957,7 +20449,7 @@
     "clan": 5
   },
   "88,31": {
-    "terrain": 1,
+    "terrain": 3,
     "clan": 5
   },
   "87,32": {
@@ -20242,7 +20734,8 @@
   "81,26": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "82,26": {
     "climate": 3,
@@ -20267,7 +20760,8 @@
   "83,26": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "84,26": {
     "terrain": 1,
@@ -20327,7 +20821,7 @@
     "climate": 3
   },
   "84,24": {
-    "climate": 3,
+    "climate": 0,
     "vegetation": 1
   },
   "83,25": {
@@ -20498,9 +20992,19 @@
     }
   },
   "79,32": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "80,32": {
     "terrain": 2,
@@ -20509,18 +21013,38 @@
   },
   "79,33": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 3
   },
   "80,33": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "79,34": {
-    "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "terrain": 8,
+    "climate": 0,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "80,34": {
     "terrain": 2,
@@ -20564,32 +21088,52 @@
   "77,32": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 0
   },
   "78,32": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 0
   },
   "77,33": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 3
   },
   "78,33": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 0,
     "clan": 3
   },
   "77,34": {
-    "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "terrain": 8,
+    "climate": 0,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "78,34": {
-    "terrain": 2,
-    "climate": 3,
-    "clan": 3
+    "terrain": 8,
+    "climate": 0,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "77,35": {
     "terrain": 1,
@@ -20626,9 +21170,19 @@
     "vegetation": 1
   },
   "77,30": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "78,30": {
     "terrain": 1,
@@ -20638,13 +21192,23 @@
   "77,31": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 0
   },
   "78,31": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
     "climate": 3,
-    "vegetation": 1
+    "vegetation": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "79,30": {
     "terrain": 1,
@@ -20673,18 +21237,39 @@
     "climate": 3
   },
   "76,30": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "75,31": {
-    "terrain": 1,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    },
+    "climate": 3
   },
   "76,31": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 0
   },
   "75,32": {
     "terrain": 1,
@@ -20704,18 +21289,38 @@
     "clan": 3
   },
   "75,34": {
-    "terrain": 1,
+    "terrain": 0,
     "clan": 3,
     "vegetation": 1
   },
   "76,34": {
-    "terrain": 1,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "75,35": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "76,35": {
     "terrain": 1,
@@ -20726,16 +21331,29 @@
     "rokuganiName": "Toi Koku"
   },
   "75,36": {
-    "clan": 3
+    "clan": 3,
+    "terrain": 2
   },
   "76,36": {
     "clan": 3
   },
   "75,37": {
-    "clan": 13
+    "clan": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "76,37": {
-    "clan": 3
+    "clan": 3,
+    "terrain": 2
   },
   "73,28": {
     "terrain": 2,
@@ -20748,10 +21366,20 @@
     "clan": 3
   },
   "73,29": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 3,
     "infrastructure": 1,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "74,29": {
     "terrain": 1,
@@ -20771,7 +21399,8 @@
   "76,28": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "75,29": {
     "terrain": 1,
@@ -20788,12 +21417,14 @@
   "77,28": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "78,28": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "77,29": {
     "terrain": 1,
@@ -20831,22 +21462,54 @@
     "climate": 3
   },
   "73,30": {
-    "terrain": 2,
+    "terrain": 0,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    }
   },
   "74,30": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "73,31": {
-    "terrain": 3,
+    "terrain": 1,
     "clan": 3
   },
   "74,31": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 1
+    }
   },
   "73,32": {
     "terrain": 3,
@@ -20865,22 +21528,42 @@
     "clan": 3
   },
   "73,34": {
-    "terrain": 2,
+    "terrain": 0,
     "clan": 3
   },
   "74,34": {
-    "terrain": 1,
+    "terrain": 0,
     "clan": 3
   },
   "73,35": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "74,35": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "75,26": {
     "terrain": 2,
@@ -20951,7 +21634,8 @@
   "81,24": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "82,24": {
     "climate": 3,
@@ -20979,7 +21663,17 @@
   "82,22": {
     "climate": 3,
     "clan": 3,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "81,23": {
     "terrain": 2,
@@ -20996,17 +21690,17 @@
     "infrastructure": 1
   },
   "84,22": {
-    "climate": 3
+    "climate": 0
   },
   "83,23": {
     "climate": 3
   },
   "84,23": {
-    "climate": 3,
+    "climate": 0,
     "vegetation": 1
   },
   "85,22": {
-    "climate": 3,
+    "climate": 0,
     "settlement": 10,
     "englishName": "Quiet Stone",
     "rokuganiName": "Quiet Stone"
@@ -21015,7 +21709,7 @@
     "climate": 3
   },
   "85,23": {
-    "climate": 3
+    "climate": 0
   },
   "86,23": {},
   "73,26": {
@@ -21041,7 +21735,8 @@
   "71,28": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "72,28": {
     "terrain": 2,
@@ -21061,33 +21756,75 @@
     "climate": 3
   },
   "71,30": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "72,30": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 3,
     "settlement": 5,
     "englishName": "Great Falls",
     "rokuganiName": "Great Falls",
     "climate": 3,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "71,31": {
-    "terrain": 3,
+    "terrain": 1,
     "clan": 3
   },
   "72,31": {
-    "terrain": 3,
-    "clan": 3
+    "terrain": 0,
+    "clan": 3,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "71,32": {
-    "terrain": 3,
+    "terrain": 1,
     "clan": 3
   },
   "72,32": {
-    "terrain": 3,
+    "terrain": 1,
     "clan": 3
   },
   "71,33": {
@@ -21101,12 +21838,14 @@
   "69,28": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,28": {
     "terrain": 1,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "69,29": {
     "terrain": 1,
@@ -21134,15 +21873,27 @@
   "69,31": {
     "terrain": 2,
     "clan": 3,
-    "climate": 3
+    "climate": 3,
+    "vegetation": 1
   },
   "70,31": {
     "clan": 3,
-    "terrain": 1
+    "terrain": 2,
+    "climate": 3
   },
   "69,32": {
-    "terrain": 1,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "70,32": {
     "clan": 3,
@@ -21153,8 +21904,19 @@
     "clan": 3
   },
   "70,33": {
-    "terrain": 2,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "climate": 0,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "67,30": {
     "terrain": 1,
@@ -21202,7 +21964,8 @@
   },
   "67,34": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "68,34": {
     "clan": 3
@@ -21231,19 +21994,40 @@
     "clan": 3
   },
   "71,34": {
-    "terrain": 1,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "72,34": {
-    "terrain": 2,
-    "clan": 3
+    "terrain": 8,
+    "clan": 3,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "71,35": {
     "clan": 3
   },
   "72,35": {
     "terrain": 2,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "65,30": {
     "terrain": 2,
@@ -21276,7 +22060,8 @@
   "66,32": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "65,33": {
     "terrain": 2,
@@ -21286,21 +22071,25 @@
   "66,33": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "65,34": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "66,34": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "65,35": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "66,35": {
     "terrain": 1,
@@ -21309,7 +22098,8 @@
   "63,30": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,30": {
     "terrain": 2,
@@ -21334,7 +22124,8 @@
   "63,32": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,32": {
     "terrain": 2,
@@ -21344,7 +22135,8 @@
   "63,33": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,33": {
     "terrain": 2,
@@ -21354,7 +22146,8 @@
   "63,34": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "64,34": {
     "terrain": 2,
@@ -21369,14 +22162,16 @@
   "64,35": {
     "terrain": 2,
     "climate": 3,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "61,30": {
     "clan": 3
   },
   "62,30": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "61,31": {
     "clan": 3,
@@ -21393,7 +22188,8 @@
   },
   "62,32": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "61,33": {
     "clan": 3,
@@ -21401,7 +22197,8 @@
   },
   "62,33": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "61,34": {
     "clan": 3,
@@ -21409,7 +22206,8 @@
   },
   "62,34": {
     "terrain": 1,
-    "clan": 3
+    "clan": 3,
+    "vegetation": 1
   },
   "61,35": {
     "clan": 3,
@@ -21766,7 +22564,7 @@
     "clan": 13
   },
   "70,36": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 13,
     "settlement": 6,
     "englishName": "Dragonfly",
@@ -21792,8 +22590,18 @@
     "infrastructure": 1
   },
   "71,37": {
-    "terrain": 2,
-    "clan": 13
+    "terrain": 8,
+    "clan": 13,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "72,37": {
     "terrain": 2,
@@ -21820,8 +22628,18 @@
     "clan": 13
   },
   "68,38": {
-    "terrain": 2,
-    "clan": 13
+    "terrain": 8,
+    "clan": 13,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "67,39": {
     "clan": 13
@@ -21831,15 +22649,35 @@
     "clan": 13
   },
   "69,38": {
-    "terrain": 2,
-    "clan": 13
+    "terrain": 8,
+    "clan": 13,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "70,38": {
-    "terrain": 2,
+    "terrain": 8,
     "clan": 13,
     "settlement": 10,
     "englishName": "Still Water",
-    "rokuganiName": "Still Water"
+    "rokuganiName": "Still Water",
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "69,39": {
     "terrain": 1,
@@ -21868,11 +22706,23 @@
   },
   "73,36": {
     "terrain": 2,
-    "clan": 13
+    "clan": 13,
+    "vegetation": 1
   },
   "74,36": {
-    "terrain": 2,
-    "clan": 13
+    "terrain": 8,
+    "clan": 3,
+    "vegetation": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "73,37": {
     "clan": 13
@@ -22414,14 +23264,34 @@
     "clan": 10
   },
   "106,52": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 10
+    "clan": 10,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "105,53": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 8
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "106,53": {
     "terrain": 4
@@ -22483,22 +23353,42 @@
     "terrain": 1
   },
   "103,54": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 8
   },
   "104,54": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 8
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "103,55": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 8
   },
   "104,55": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 8
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "105,54": {
     "terrain": 4
@@ -22523,7 +23413,18 @@
     "terrain": 1,
     "clan": 8,
     "shadowland": 1,
-    "animal": 1
+    "animal": 1,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "99,57": {
     "clan": 2,
@@ -22533,7 +23434,18 @@
   "100,57": {
     "clan": 2,
     "infrastructure": 1,
-    "crime": 1
+    "crime": 1,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "101,56": {
     "terrain": 1,
@@ -22678,7 +23590,18 @@
     "clan": 8
   },
   "103,58": {
-    "clan": 2
+    "clan": 2,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 1
+    }
   },
   "104,58": {
     "terrain": 1,
@@ -22809,13 +23732,33 @@
     "clan": 8
   },
   "102,63": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 8
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "103,62": {
-    "terrain": 2,
-    "clan": 8
+    "terrain": 8,
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "104,62": {
     "terrain": 2,
@@ -22827,8 +23770,18 @@
     "infrastructure": 1
   },
   "104,63": {
-    "terrain": 2,
-    "clan": 8
+    "terrain": 8,
+    "clan": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "105,62": {
     "terrain": 4
@@ -23671,7 +24624,18 @@
     "clan": 2
   },
   "92,131": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "85,132": {
     "terrain": 2,
@@ -23728,14 +24692,46 @@
     "clan": 2
   },
   "90,133": {
-    "terrain": 1,
-    "clan": 2
+    "terrain": 8,
+    "clan": 2,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "91,132": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "92,132": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "91,133": {
     "terrain": 4,
@@ -30832,9 +31828,19 @@
     "climate": 5
   },
   "38,178": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 5,
-    "clan": 18
+    "clan": 18,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "37,179": {
     "terrain": 1,
@@ -30842,9 +31848,19 @@
     "climate": 5
   },
   "38,179": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 5,
-    "clan": 18
+    "clan": 18,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "39,172": {
     "climate": 5
@@ -30900,14 +31916,34 @@
     "clan": 18
   },
   "39,177": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 5,
-    "clan": 18
+    "clan": 18,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "40,177": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 5,
-    "clan": 18
+    "clan": 18,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "39,178": {
     "terrain": 4,
@@ -39543,13 +40579,9 @@
   "7,56": {
     "terrain": 1
   },
-  "8,56": {
-    "clan": 7
-  },
+  "8,56": {},
   "7,57": {},
-  "8,57": {
-    "clan": 7
-  },
+  "8,57": {},
   "1,58": {
     "terrain": 2
   },
@@ -39577,13 +40609,9 @@
   "5,59": {},
   "6,59": {},
   "7,58": {},
-  "8,58": {
-    "clan": 7
-  },
+  "8,58": {},
   "7,59": {},
-  "8,59": {
-    "clan": 7
-  },
+  "8,59": {},
   "1,60": {
     "terrain": 2
   },
@@ -39603,13 +40631,9 @@
   "5,61": {},
   "6,61": {},
   "7,60": {},
-  "8,60": {
-    "clan": 7
-  },
+  "8,60": {},
   "7,61": {},
-  "8,61": {
-    "clan": 7
-  },
+  "8,61": {},
   "1,62": {},
   "2,62": {
     "river": 1,
@@ -39711,7 +40735,6 @@
   },
   "8,62": {
     "river": 1,
-    "clan": 7,
     "river direction": {
       "0": 0,
       "1": 0,
@@ -39727,8 +40750,7 @@
     "terrain": 1
   },
   "8,63": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "0,56": {
     "climate": 2
@@ -39776,21 +40798,16 @@
   "4,65": {
     "terrain": 1
   },
-  "9,60": {
-    "clan": 7
-  },
+  "9,60": {},
   "10,60": {
     "clan": 7
   },
-  "9,61": {
-    "clan": 7
-  },
+  "9,61": {},
   "10,61": {
     "clan": 7
   },
   "9,62": {
     "river": 1,
-    "clan": 7,
     "river direction": {
       "0": 0,
       "1": 0,
@@ -39806,8 +40823,7 @@
     "clan": 7
   },
   "9,63": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "10,63": {
     "river": 1,
@@ -39844,8 +40860,7 @@
   },
   "8,64": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "7,65": {
     "terrain": 2,
@@ -39855,8 +40870,7 @@
     "terrain": 1
   },
   "9,64": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "10,64": {
     "clan": 7
@@ -40275,16 +41289,34 @@
     "climate": 2
   },
   "11,48": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,48": {
     "terrain": 2,
     "clan": 7
   },
   "11,49": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,49": {
     "terrain": 2,
@@ -40340,16 +41372,24 @@
     "clan": 7
   },
   "11,50": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,50": {
     "terrain": 1,
     "clan": 7
   },
   "11,51": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "12,51": {
     "terrain": 2,
@@ -40397,8 +41437,7 @@
     "clan": 7
   },
   "11,52": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "12,52": {
     "terrain": 2,
@@ -40406,13 +41445,11 @@
     "clan": 7
   },
   "11,53": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "12,53": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,52": {
     "terrain": 2,
@@ -40458,12 +41495,10 @@
     "clan": 7
   },
   "11,54": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "12,54": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "11,55": {
     "clan": 7
@@ -40524,15 +41559,33 @@
     "terrain": 1
   },
   "11,46": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,46": {
     "clan": 7
   },
   "11,47": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,47": {
     "terrain": 1,
@@ -40555,7 +41608,8 @@
     "clan": 7
   },
   "16,46": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 1
   },
   "15,47": {
     "clan": 7
@@ -40595,15 +41649,13 @@
     "climate": 2
   },
   "10,52": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "9,53": {
     "climate": 2
   },
   "10,53": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "7,44": {
     "terrain": 1,
@@ -40637,16 +41689,33 @@
     "terrain": 2
   },
   "11,44": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "12,44": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "11,45": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "12,45": {
     "terrain": 1,
@@ -40730,41 +41799,54 @@
     "climate": 2
   },
   "11,42": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "12,42": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,43": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "12,43": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,42": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,42": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 7
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "13,43": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 7
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "14,43": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 0,
+    "climate": 0,
     "clan": 7
   },
   "9,40": {
@@ -40788,34 +41870,28 @@
     "climate": 2
   },
   "12,40": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "11,41": {
     "terrain": 2
   },
   "12,41": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "13,40": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "14,40": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "9,38": {
     "climate": 2
@@ -40849,76 +41925,82 @@
   },
   "13,38": {
     "terrain": 2,
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "14,38": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "13,39": {
     "terrain": 2,
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "14,39": {
-    "terrain": 2,
-    "clan": 7
+    "terrain": 2
   },
   "15,38": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "16,38": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "15,39": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "16,39": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "15,40": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,40": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,42": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 7
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "16,42": {
-    "terrain": 2,
+    "terrain": 8,
     "climate": 3,
-    "clan": 7
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "15,43": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 0,
+    "climate": 0,
     "clan": 7
   },
   "16,43": {
-    "terrain": 2,
-    "climate": 3,
+    "terrain": 0,
+    "climate": 0,
     "clan": 7
   },
   "15,44": {
@@ -40926,60 +42008,53 @@
     "clan": 7
   },
   "16,44": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 7
   },
   "15,45": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 1
   },
   "16,45": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 2
   },
   "17,38": {
     "climate": 2,
-    "clan": 7
+    "terrain": 2
   },
   "18,38": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 2
   },
   "17,39": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "18,39": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 2
   },
   "17,40": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "18,40": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "17,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "18,41": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "17,42": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "18,42": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "17,43": {
     "terrain": 1,
@@ -40990,17 +42065,19 @@
     "clan": 7
   },
   "17,44": {
-    "terrain": 1,
+    "terrain": 2,
     "clan": 7
   },
   "18,44": {
     "clan": 7
   },
   "17,45": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 2
   },
   "18,45": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 1
   },
   "19,38": {
     "terrain": 1,
@@ -41319,13 +42396,35 @@
     "climate": 2
   },
   "16,34": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "15,35": {
     "climate": 2
   },
   "16,35": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "17,34": {
     "terrain": 1,
@@ -41367,22 +42466,30 @@
     "climate": 2
   },
   "14,37": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 1
   },
   "15,36": {
     "climate": 2
   },
   "16,36": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "15,37": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "16,37": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "17,36": {
     "terrain": 1,
@@ -41394,7 +42501,17 @@
   },
   "17,37": {
     "climate": 2,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "18,37": {
     "terrain": 1,
@@ -41420,7 +42537,18 @@
     "climate": 2
   },
   "14,32": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "13,33": {
     "climate": 2
@@ -41437,7 +42565,18 @@
     "clan": 7
   },
   "15,33": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "16,33": {
     "terrain": 1,
@@ -41472,13 +42611,35 @@
     "climate": 2
   },
   "14,30": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "13,31": {
     "climate": 2
   },
   "14,31": {
-    "climate": 2
+    "climate": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "15,30": {
     "terrain": 1,
@@ -41525,7 +42686,17 @@
   },
   "14,28": {
     "climate": 2,
-    "clan": 7
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "13,29": {
     "climate": 2,
@@ -41533,11 +42704,23 @@
   },
   "14,29": {
     "climate": 2,
-    "infrastructure": 2
+    "infrastructure": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "15,28": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 2,
+    "clan": 7,
+    "climate": 2
   },
   "16,28": {
     "terrain": 1,
@@ -41670,7 +42853,7 @@
   },
   "14,26": {
     "terrain": 2,
-    "climate": 3,
+    "climate": 2,
     "clan": 7
   },
   "13,27": {
@@ -41678,8 +42861,9 @@
     "climate": 2
   },
   "14,27": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 2,
+    "clan": 7,
+    "climate": 2
   },
   "15,26": {
     "terrain": 2,
@@ -41691,8 +42875,9 @@
     "clan": 7
   },
   "15,27": {
-    "terrain": 1,
-    "clan": 7
+    "terrain": 2,
+    "clan": 7,
+    "climate": 2
   },
   "16,27": {
     "terrain": 1,
@@ -41864,13 +43049,11 @@
   },
   "13,22": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,22": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,23": {
     "terrain": 2,
@@ -42169,13 +43352,11 @@
   },
   "11,20": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,20": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,21": {
     "terrain": 2,
@@ -42183,28 +43364,23 @@
   },
   "12,21": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,20": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,20": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,21": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,21": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "9,18": {
     "terrain": 2,
@@ -42224,8 +43400,7 @@
   },
   "11,18": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,18": {
     "terrain": 1,
@@ -42233,13 +43408,11 @@
   },
   "11,19": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,19": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "13,18": {
     "terrain": 1,
@@ -42251,13 +43424,11 @@
   },
   "13,19": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,19": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "15,18": {
     "terrain": 1,
@@ -42276,8 +43447,7 @@
   },
   "15,20": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,20": {
     "terrain": 1,
@@ -42285,8 +43455,7 @@
   },
   "15,21": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "16,21": {
     "terrain": 1,
@@ -42338,8 +43507,7 @@
   },
   "11,16": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,16": {
     "terrain": 1,
@@ -42347,8 +43515,7 @@
   },
   "11,17": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,17": {
     "terrain": 1,
@@ -42419,18 +43586,15 @@
   },
   "11,14": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,14": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "11,15": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "12,15": {
     "terrain": 2,
@@ -42438,8 +43602,7 @@
   },
   "13,14": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 7
+    "climate": 3
   },
   "14,14": {
     "clan": 7
@@ -42991,7 +44154,18 @@
   },
   "48,13": {
     "terrain": 1,
-    "clan": 7
+    "clan": 7,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 0,
+      "7": 0
+    }
   },
   "49,12": {
     "terrain": 2,
@@ -43047,7 +44221,7 @@
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 0,
+      "4": 1,
       "5": 1,
       "6": 0,
       "7": 0
@@ -65599,7 +66773,18 @@
   },
   "48,189": {
     "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "47,190": {
     "terrain": 4
@@ -65641,10 +66826,32 @@
     "clan": 2
   },
   "49,190": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "50,190": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "49,191": {
     "terrain": 4
@@ -65694,10 +66901,32 @@
     "clan": 2
   },
   "51,191": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "52,191": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "51,192": {
     "terrain": 4
@@ -65760,8 +66989,18 @@
     "animal": 1
   },
   "53,190": {
-    "terrain": 1,
-    "clan": 2
+    "terrain": 8,
+    "clan": 2,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "54,190": {
     "terrain": 4
@@ -65813,7 +67052,18 @@
     "clan": 2
   },
   "54,189": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "53,186": {
     "clan": 2
@@ -66267,10 +67517,32 @@
     "clan": 2
   },
   "66,166": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "65,167": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "66,167": {
     "terrain": 4
@@ -67044,31 +68316,86 @@
     "clan": 2
   },
   "77,143": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "78,143": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "79,142": {
     "infrastructure": 2,
     "clan": 2
   },
   "80,142": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "79,143": {
     "infrastructure": 2,
     "clan": 2,
     "settlement": 5,
     "englishName": "Songbird's Cage",
-    "rokuganiName": "Hiramori"
+    "rokuganiName": "Hiramori",
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "80,143": {
     "terrain": 4
   },
   "81,142": {
     "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "82,142": {
     "clan": 2
@@ -68540,13 +69867,35 @@
     "animal": 2
   },
   "100,88": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "99,89": {
     "clan": 2,
     "vegetation": 1,
     "spirit": 2,
-    "animal": 2
+    "animal": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "100,89": {
     "terrain": 4
@@ -68719,10 +70068,32 @@
     "clan": 8
   },
   "103,85": {
-    "clan": 8
+    "clan": 8,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "104,85": {
-    "clan": 8
+    "clan": 8,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "105,84": {
     "river": 1,
@@ -68753,10 +70124,32 @@
     }
   },
   "105,85": {
-    "clan": 8
+    "clan": 8,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "106,85": {
-    "clan": 8
+    "clan": 8,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "107,84": {
     "terrain": 4
@@ -68856,7 +70249,18 @@
     }
   },
   "106,83": {
-    "clan": 8
+    "clan": 8,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "107,82": {
     "clan": 8
@@ -69858,7 +71262,17 @@
   },
   "110,48": {
     "clan": 5,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "109,49": {
     "terrain": 4
@@ -69917,8 +71331,18 @@
   },
   "109,47": {
     "clan": 5,
-    "terrain": 1,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "110,47": {
     "clan": 5,
@@ -69939,25 +71363,65 @@
   },
   "111,47": {
     "clan": 5,
-    "terrain": 2,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "112,47": {
     "clan": 5,
-    "terrain": 2,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "113,46": {
     "clan": 5,
-    "terrain": 2,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "114,46": {
     "terrain": 4
   },
   "113,47": {
     "clan": 5,
-    "terrain": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "114,47": {
     "terrain": 4
@@ -69993,16 +71457,36 @@
   },
   "113,44": {
     "clan": 5,
-    "terrain": 1,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "114,44": {
     "terrain": 4
   },
   "113,45": {
     "clan": 5,
-    "terrain": 2,
-    "infrastructure": 1
+    "terrain": 8,
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "114,45": {
     "terrain": 4
@@ -70073,14 +71557,36 @@
   },
   "114,43": {
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "115,42": {
     "infrastructure": 1,
     "settlement": 1,
     "englishName": "The Shiba Artisan Academy",
     "rokuganiName": "The Shiba Artisan Academy",
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "116,42": {
     "terrain": 4
@@ -70263,11 +71769,33 @@
   },
   "114,34": {
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "113,35": {
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "114,35": {
     "terrain": 4,
@@ -70292,7 +71820,18 @@
   "112,36": {
     "vegetation": 1,
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "111,37": {
     "vegetation": 1,
@@ -70300,7 +71839,18 @@
   },
   "112,37": {
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "111,38": {
     "vegetation": 1,
@@ -70470,13 +72020,35 @@
     "clan": 5
   },
   "116,29": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "117,28": {
     "clan": 5
   },
   "118,28": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "117,29": {
     "terrain": 4
@@ -70518,10 +72090,32 @@
     "clan": 5
   },
   "118,27": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "119,26": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "120,26": {
     "terrain": 4
@@ -70594,7 +72188,18 @@
     "clan": 5
   },
   "119,25": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "120,25": {
     "terrain": 4
@@ -70707,7 +72312,18 @@
     "clan": 5
   },
   "122,20": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "121,21": {
     "clan": 5
@@ -70787,10 +72403,32 @@
     "clan": 5
   },
   "124,18": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "123,19": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "124,19": {
     "terrain": 4
@@ -70867,31 +72505,91 @@
   },
   "125,16": {
     "clan": 5,
-    "infrastructure": 2
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "126,16": {
     "terrain": 4,
     "clan": 5
   },
   "125,17": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    "settlement": 1,
+    "englishName": "Cliff Side",
+    "rokuganiName": "Cliff Side",
+    "infrastructure": 1
   },
   "126,17": {
     "terrain": 4,
-    "clan": 5
+    "clan": 5,
+    "infrastructure": 1
   },
   "127,16": {
     "terrain": 4,
     "clan": 5
   },
   "128,16": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "127,17": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    },
+    "infrastructure": 1
   },
   "128,17": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "125,14": {
     "vegetation": 1,
@@ -70906,10 +72604,32 @@
     "clan": 5
   },
   "126,15": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "127,14": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "128,14": {
     "terrain": 4,
@@ -70936,7 +72656,18 @@
     "terrain": 4
   },
   "129,16": {
-    "clan": 5
+    "clan": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "130,16": {
     "terrain": 4
@@ -70966,41 +72697,55 @@
   },
   "125,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "125,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "126,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "127,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,12": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "127,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "128,13": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "129,12": {
     "terrain": 4
@@ -71102,8 +72847,18 @@
     "terrain": 4
   },
   "131,8": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "132,8": {
     "terrain": 4
@@ -71128,20 +72883,38 @@
   },
   "131,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "132,6": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "131,7": {
-    "clan": 5,
     "climate": 3
   },
   "132,7": {
-    "clan": 5,
-    "climate": 3
+    "climate": 3,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "133,6": {
     "terrain": 4
@@ -71156,7 +72929,6 @@
     "terrain": 4
   },
   "133,4": {
-    "clan": 5,
     "climate": 3
   },
   "134,4": {
@@ -76241,7 +78013,6 @@
   },
   "132,3": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "131,4": {
@@ -76250,18 +78021,25 @@
   },
   "132,4": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "131,5": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "132,5": {
-    "terrain": 1,
-    "clan": 5,
-    "climate": 3
+    "terrain": 8,
+    "climate": 3,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "133,0": {
     "terrain": 2,
@@ -76290,12 +78068,10 @@
   },
   "133,3": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "134,3": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "41,0": {
@@ -78994,41 +80770,21 @@
     "infrastructure": 1
   },
   "41,34": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "42,34": {
-    "river": 1,
-    "clan": 7,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 1,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "clan": 7
   },
   "41,35": {
-    "clan": 7,
-    "settlement": 5,
-    "englishName": "Naoko",
-    "rokuganiName": "Naoko"
+    "clan": 7
   },
   "42,35": {
     "clan": 7,
-    "river": 1,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 1,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "settlement": 5,
+    "englishName": "Naoko",
+    "rokuganiName": "Naoko",
+    "infrastructure": 2
   },
   "41,32": {
     "river": 1,
@@ -79139,7 +80895,8 @@
     "clan": 7
   },
   "35,31": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "36,31": {
     "river": 1,
@@ -79173,7 +80930,8 @@
     }
   },
   "33,29": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "34,29": {
     "clan": 7
@@ -79538,18 +81296,7 @@
     "clan": 7
   },
   "38,36": {
-    "clan": 7,
-    "river": 1,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 1,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "clan": 7
   },
   "37,37": {
     "clan": 7,
@@ -80270,21 +82017,15 @@
     "infrastructure": 1,
     "clan": 6
   },
-  "51,92": {
-    "clan": 6
-  },
-  "52,92": {
-    "clan": 6
-  },
+  "51,92": {},
+  "52,92": {},
   "51,93": {
-    "clan": 6,
     "infrastructure": 2,
     "settlement": 11,
     "englishName": "Osano-Wo",
     "rokuganiName": "Osano-Wo"
   },
   "52,93": {
-    "clan": 6,
     "infrastructure": 2
   },
   "63,98": {
@@ -81148,8 +82889,8 @@
     "river direction": {
       "0": 0,
       "1": 0,
-      "2": 0,
-      "3": 1,
+      "2": 1,
+      "3": 0,
       "4": 0,
       "5": 0,
       "6": 0,
@@ -81186,18 +82927,7 @@
     "infrastructure": 1
   },
   "73,141": {
-    "river": 1,
-    "clan": 2,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 1,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "clan": 2
   },
   "74,141": {
     "river": 1,
@@ -81245,9 +82975,9 @@
     }
   },
   "76,143": {
-    "river": 1,
     "clan": 2,
-    "river direction": {
+    "terrain": 8,
+    "cliff direction": {
       "0": 0,
       "1": 0,
       "2": 0,
@@ -82043,7 +83773,18 @@
     "settlement": 5,
     "englishName": "Kakeguchi",
     "rokuganiName": "Kakeguchi",
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "46,173": {
     "terrain": 4,
@@ -83220,76 +84961,60 @@
     "clan": 6
   },
   "101,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "102,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "101,13": {
     "vegetation": 1,
     "clan": 5
   },
   "102,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "103,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "104,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "103,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "104,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "105,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "106,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "105,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "106,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "107,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "108,12": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "107,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "108,13": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "101,14": {
     "vegetation": 1,
     "clan": 5
   },
   "102,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "101,15": {
     "vegetation": 1,
@@ -83300,12 +85025,10 @@
     "clan": 5
   },
   "103,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "104,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "103,15": {
     "vegetation": 1,
@@ -83316,12 +85039,10 @@
     "clan": 5
   },
   "105,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "106,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "105,15": {
     "vegetation": 1,
@@ -83332,12 +85053,10 @@
     "clan": 5
   },
   "107,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "108,14": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "107,15": {
     "vegetation": 1,
@@ -84288,213 +86007,170 @@
   },
   "101,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "102,6": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "101,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "102,7": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "103,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,6": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "103,7": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,7": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,6": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,6": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,7": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,7": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,6": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,6": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,7": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,7": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "101,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "102,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "101,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "102,9": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "103,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "103,9": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "101,10": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "102,10": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "101,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "102,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "103,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "104,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "103,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "104,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "105,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "106,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "105,11": {
     "vegetation": 1,
-    "clan": 5,
     "text": {
       "englishText": "Dark Forest",
       "rokuganiText": "Mori Kuroi",
@@ -84502,60 +86178,49 @@
     }
   },
   "106,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "107,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "108,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "107,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "108,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "99,6": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "100,6": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "99,7": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "100,7": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "99,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "100,8": {
     "terrain": 2,
-    "climate": 3,
-    "clan": 5
+    "climate": 3
   },
   "99,9": {
     "terrain": 1,
@@ -87208,15 +88873,13 @@
     "climate": 2
   },
   "10,54": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "9,55": {
     "climate": 2
   },
   "10,55": {
-    "climate": 2,
-    "clan": 7
+    "climate": 2
   },
   "0,18": {
     "climate": 2
@@ -87783,10 +89446,12 @@
     "clan": 7
   },
   "17,46": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 1
   },
   "18,46": {
-    "clan": 7
+    "clan": 7,
+    "terrain": 1
   },
   "17,47": {
     "clan": 7
@@ -88085,9 +89750,7 @@
   "42,67": {
     "clan": 8
   },
-  "43,68": {
-    "clan": 8
-  },
+  "43,68": {},
   "44,68": {},
   "43,69": {
     "crime": 1
@@ -88097,56 +89760,47 @@
   "46,70": {},
   "45,71": {},
   "46,71": {},
-  "47,70": {
-    "clan": 6
-  },
+  "47,70": {},
   "48,70": {
     "clan": 6
   },
   "47,71": {
-    "vegetation": 1,
-    "clan": 6
+    "vegetation": 1
   },
   "48,71": {
     "clan": 6
   },
   "47,72": {
-    "clan": 6,
     "crime": 1
   },
   "48,72": {
     "clan": 6
   },
   "47,73": {
-    "clan": 6,
     "crime": 1
   },
   "48,73": {
     "clan": 6
   },
   "47,74": {
-    "clan": 6,
     "crime": 1
   },
   "48,74": {
     "clan": 6
   },
   "47,75": {
-    "clan": 6,
     "crime": 1
   },
   "48,75": {
     "clan": 6
   },
   "47,76": {
-    "clan": 6,
     "crime": 1
   },
   "48,76": {
     "clan": 6
   },
   "47,77": {
-    "clan": 6,
     "crime": 1
   },
   "48,77": {
@@ -88159,7 +89813,6 @@
     "crime": 2
   },
   "48,80": {
-    "clan": 6,
     "crime": 1
   },
   "47,81": {
@@ -88168,18 +89821,15 @@
     "crime": 2
   },
   "48,81": {
-    "clan": 6,
     "crime": 1
   },
   "47,84": {
-    "clan": 6,
     "crime": 1
   },
   "48,84": {
     "clan": 6
   },
   "47,85": {
-    "clan": 6,
     "crime": 1
   },
   "48,85": {
@@ -88204,46 +89854,37 @@
     "crime": 2
   },
   "47,86": {
-    "clan": 6,
     "crime": 1
   },
   "48,86": {
     "clan": 6
   },
   "47,87": {
-    "clan": 6,
     "crime": 1
   },
   "48,87": {
     "clan": 6
   },
   "47,88": {
-    "clan": 6,
     "crime": 1
   },
   "48,88": {
     "clan": 6
   },
   "47,89": {
-    "clan": 6,
     "crime": 1
   },
   "48,89": {
     "clan": 6
   },
   "47,90": {
-    "clan": 6,
     "crime": 1
   },
-  "48,90": {
-    "clan": 6
-  },
+  "48,90": {},
   "47,91": {
-    "clan": 6,
     "crime": 1
   },
   "48,91": {
-    "clan": 6,
     "crime": 1
   },
   "47,92": {
@@ -88252,7 +89893,6 @@
     "crime": 2
   },
   "48,92": {
-    "clan": 6,
     "crime": 1
   },
   "47,93": {
@@ -88265,42 +89905,20 @@
     "animal": 1,
     "crime": 1
   },
-  "49,94": {
-    "clan": 6
-  },
-  "50,94": {
-    "clan": 6
-  },
-  "49,95": {
-    "clan": 6
-  },
-  "50,95": {
-    "clan": 6
-  },
-  "51,94": {
-    "clan": 6
-  },
-  "52,94": {
-    "clan": 6
-  },
-  "51,95": {
-    "clan": 6
-  },
-  "52,95": {
-    "clan": 6
-  },
-  "53,94": {
-    "clan": 6
-  },
+  "49,94": {},
+  "50,94": {},
+  "49,95": {},
+  "50,95": {},
+  "51,94": {},
+  "52,94": {},
+  "51,95": {},
+  "52,95": {},
+  "53,94": {},
   "54,94": {
     "clan": 6
   },
-  "53,95": {
-    "clan": 6
-  },
-  "54,95": {
-    "clan": 6
-  },
+  "53,95": {},
+  "54,95": {},
   "55,94": {
     "clan": 6
   },
@@ -89370,19 +90988,22 @@
     "clan": 6
   },
   "63,80": {
-    "terrain": 2,
+    "terrain": 7,
     "clan": 6
   },
   "64,80": {
     "infrastructure": 1,
-    "clan": 6
+    "clan": 6,
+    "terrain": 7
   },
   "63,81": {
     "infrastructure": 1,
-    "clan": 6
+    "clan": 6,
+    "terrain": 7
   },
   "64,81": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 7
   },
   "51,68": {
     "terrain": 2,
@@ -89420,15 +91041,11 @@
     "climate": 3,
     "clan": 6
   },
-  "47,68": {
-    "clan": 6
-  },
+  "47,68": {},
   "48,68": {
     "clan": 6
   },
-  "47,69": {
-    "clan": 6
-  },
+  "47,69": {},
   "48,69": {
     "clan": 6
   },
@@ -93561,7 +95178,18 @@
   },
   "95,91": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "96,91": {
     "clan": 2
@@ -93794,11 +95422,33 @@
   },
   "93,91": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "94,91": {
     "clan": 2,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "91,88": {
     "clan": 2
@@ -93871,13 +95521,35 @@
     "clan": 2,
     "vegetation": 1,
     "spirit": 2,
-    "animal": 2
+    "animal": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "97,91": {
     "clan": 2
   },
   "98,91": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "95,94": {
     "clan": 2
@@ -96881,7 +98553,18 @@
   },
   "65,91": {
     "clan": 6,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "66,91": {
     "clan": 6,
@@ -97034,7 +98717,18 @@
   "62,91": {
     "vegetation": 1,
     "clan": 6,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "59,90": {
     "vegetation": 1,
@@ -97255,15 +98949,26 @@
     "clan": 6
   },
   "63,92": {
-    "terrain": 1,
-    "clan": 6
+    "terrain": 0,
+    "clan": 6,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "64,92": {
-    "terrain": 1,
+    "terrain": 3,
     "clan": 6
   },
   "63,93": {
-    "terrain": 1,
+    "terrain": 0,
     "clan": 6
   },
   "64,93": {
@@ -97302,11 +99007,11 @@
     "clan": 6
   },
   "63,94": {
-    "terrain": 3,
+    "terrain": 0,
     "clan": 6
   },
   "64,94": {
-    "terrain": 3,
+    "terrain": 0,
     "clan": 6
   },
   "63,95": {
@@ -97316,7 +99021,7 @@
     "clan": 6
   },
   "65,94": {
-    "terrain": 3,
+    "terrain": 0,
     "clan": 6
   },
   "66,94": {
@@ -97341,17 +99046,48 @@
     "clan": 6
   },
   "63,91": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 6,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 1,
+      "7": 0
+    }
   },
   "64,91": {
-    "terrain": 1,
+    "terrain": 8,
     "clan": 6,
     "infrastructure": 1,
     "settlement": 6,
     "englishName": "Bayushi",
-    "rokuganiName": "Bayushi"
+    "rokuganiName": "Bayushi",
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "61,88": {
     "clan": 6
@@ -97469,10 +99205,12 @@
     "clan": 6
   },
   "63,82": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 7
   },
   "64,82": {
-    "clan": 6
+    "clan": 6,
+    "terrain": 7
   },
   "63,83": {
     "clan": 6
@@ -97636,7 +99374,7 @@
     "infrastructure": 2
   },
   "65,80": {
-    "terrain": 1,
+    "terrain": 7,
     "clan": 6,
     "animal": 1
   },
@@ -97646,7 +99384,7 @@
     "animal": 2
   },
   "65,81": {
-    "terrain": 1,
+    "terrain": 3,
     "clan": 6,
     "animal": 1
   },
@@ -98137,63 +99875,38 @@
   "54,90": {
     "clan": 6
   },
-  "53,91": {
-    "clan": 6
-  },
+  "53,91": {},
   "54,91": {
     "clan": 6
   },
-  "53,92": {
-    "clan": 6
-  },
+  "53,92": {},
   "54,92": {
     "clan": 6
   },
   "53,93": {
-    "clan": 6,
     "infrastructure": 2
   },
   "54,93": {
     "clan": 6,
     "infrastructure": 2
   },
-  "51,90": {
-    "clan": 6
-  },
+  "51,90": {},
   "52,90": {
     "clan": 6
   },
-  "51,91": {
-    "clan": 6
-  },
-  "52,91": {
-    "clan": 6
-  },
-  "49,90": {
-    "clan": 6
-  },
-  "50,90": {
-    "clan": 6
-  },
-  "49,91": {
-    "clan": 6
-  },
-  "50,91": {
-    "clan": 6
-  },
-  "49,92": {
-    "clan": 6
-  },
-  "50,92": {
-    "clan": 6
-  },
+  "51,91": {},
+  "52,91": {},
+  "49,90": {},
+  "50,90": {},
+  "49,91": {},
+  "50,91": {},
+  "49,92": {},
+  "50,92": {},
   "49,93": {
-    "vegetation": 1,
-    "clan": 6
+    "vegetation": 1
   },
   "50,93": {
-    "vegetation": 1,
-    "clan": 6
+    "vegetation": 1
   },
   "57,80": {
     "terrain": 1,
@@ -98803,18 +100516,7 @@
     "vegetation": 1
   },
   "74,142": {
-    "river": 1,
-    "clan": 2,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 1,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "clan": 2
   },
   "74,143": {
     "clan": 2,
@@ -98880,13 +100582,46 @@
   },
   "64,168": {
     "infrastructure": 1,
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "64,169": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "64,170": {
-    "clan": 2
+    "clan": 2,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "63,170": {
     "infrastructure": 1,
@@ -101101,7 +102836,18 @@
     "clan": 2
   },
   "44,174": {
-    "clan": 1
+    "clan": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "43,174": {
     "clan": 1,
@@ -101152,21 +102898,65 @@
   },
   "42,176": {
     "clan": 18,
-    "climate": 5
+    "climate": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "42,177": {
     "clan": 18,
-    "climate": 5
+    "climate": 5,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "41,177": {
     "clan": 18,
     "climate": 5,
-    "vegetation": 1
+    "vegetation": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "44,175": {
     "clan": 1,
     "settlement": 4,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "48,169": {
     "clan": 1
@@ -103888,18 +105678,7 @@
     "infrastructure": 1
   },
   "43,34": {
-    "clan": 7,
-    "river": 1,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 1,
-      "4": 0,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "clan": 7
   },
   "44,34": {
     "clan": 7,
@@ -103910,7 +105689,7 @@
       "2": 0,
       "3": 0,
       "4": 1,
-      "5": 0,
+      "5": 1,
       "6": 0,
       "7": 0
     }
@@ -103936,8 +105715,8 @@
       "0": 0,
       "1": 0,
       "2": 0,
-      "3": 1,
-      "4": 0,
+      "3": 0,
+      "4": 1,
       "5": 0,
       "6": 0,
       "7": 0
@@ -104586,12 +106365,20 @@
     }
   },
   "43,35": {
-    "clan": 7
+    "clan": 7,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "38,35": {
-    "clan": 7
-  },
-  "37,35": {
     "clan": 7,
     "river": 1,
     "river direction": {
@@ -104599,6 +106386,20 @@
       "1": 0,
       "2": 0,
       "3": 1,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
+  },
+  "37,35": {
+    "clan": 7,
+    "river": 1,
+    "river direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
       "4": 0,
       "5": 0,
       "6": 0,
@@ -104867,10 +106668,12 @@
     "clan": 7
   },
   "38,34": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "39,34": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "39,35": {
     "clan": 7
@@ -104879,7 +106682,8 @@
     "clan": 7
   },
   "40,34": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "40,33": {
     "clan": 7
@@ -104904,25 +106708,13 @@
   },
   "45,36": {
     "clan": 7,
-    "river": 1,
-    "river direction": {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 1,
-      "5": 0,
-      "6": 0,
-      "7": 0
-    }
+    "infrastructure": 1
   },
   "46,36": {
-    "clan": 7,
-    "infrastructure": 1
+    "clan": 7
   },
   "46,37": {
-    "clan": 7,
-    "infrastructure": 1
+    "clan": 7
   },
   "47,39": {
     "clan": 7
@@ -105953,7 +107745,8 @@
     "clan": 7
   },
   "37,33": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "34,34": {
     "clan": 7
@@ -106021,7 +107814,8 @@
     }
   },
   "36,32": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "35,29": {
     "river": 1,
@@ -106072,7 +107866,8 @@
     "clan": 7
   },
   "34,30": {
-    "clan": 7
+    "clan": 7,
+    "infrastructure": 2
   },
   "34,31": {
     "clan": 7
@@ -106547,58 +108342,48 @@
   },
   "98,6": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "97,6": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "97,7": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "98,7": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "98,8": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "97,8": {
     "vegetation": 1,
-    "clan": 5,
     "terrain": 1,
     "climate": 3
   },
   "124,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "124,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "123,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "122,13": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "121,13": {
@@ -106613,12 +108398,10 @@
   },
   "122,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "123,12": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "118,11": {
@@ -106653,27 +108436,22 @@
   },
   "114,8": {
     "terrain": 1,
-    "clan": 5,
     "climate": 3
   },
   "109,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "109,9": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "109,10": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "109,11": {
-    "vegetation": 1,
-    "clan": 5
+    "vegetation": 1
   },
   "109,12": {
     "vegetation": 1,
@@ -106681,7 +108459,6 @@
   },
   "113,8": {
     "vegetation": 1,
-    "clan": 5,
     "climate": 3
   },
   "113,9": {
@@ -107516,15 +109293,12 @@
     "infrastructure": 1
   },
   "110,8": {
-    "clan": 5,
     "climate": 3
   },
   "111,8": {
-    "clan": 5,
     "climate": 3
   },
   "112,8": {
-    "clan": 5,
     "climate": 3
   },
   "112,9": {
@@ -108000,7 +109774,18 @@
   },
   "114,33": {
     "clan": 5,
-    "infrastructure": 1
+    "infrastructure": 1,
+    "terrain": 8,
+    "cliff direction": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    }
   },
   "110,40": {
     "clan": 5
@@ -108213,21 +109998,15 @@
   "10,56": {
     "clan": 7
   },
-  "9,56": {
-    "clan": 7
-  },
+  "9,56": {},
   "10,59": {
     "clan": 7
   },
   "10,58": {
     "clan": 7
   },
-  "9,58": {
-    "clan": 7
-  },
-  "9,57": {
-    "clan": 7
-  },
+  "9,58": {},
+  "9,57": {},
   "10,57": {
     "clan": 7
   },
@@ -108270,9 +110049,7 @@
   "11,60": {
     "clan": 7
   },
-  "9,59": {
-    "clan": 7
-  },
+  "9,59": {},
   "11,59": {
     "clan": 7
   },
