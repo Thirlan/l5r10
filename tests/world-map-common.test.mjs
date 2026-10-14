@@ -377,7 +377,7 @@ test("renderer draws an isolated river when neighboring values are none", () => 
   renderer.drawRiverLayer();
 
   // Assertion
-  assert.equal(strokes.length, 10);
+  assert.equal(strokes.length, 6);
 });
 
 [
@@ -396,8 +396,8 @@ test("renderer draws an isolated river when neighboring values are none", () => 
     renderer.drawRiverLayer();
 
     // Assertion
-    assert.equal(strokes.length, 5);
-    assert.deepEqual(strokes[2].end, centerEnd);
+    assert.equal(strokes.length, 3);
+    assert.deepEqual(strokes[1].end, centerEnd);
   });
 });
 
@@ -411,7 +411,7 @@ test("renderer does not treat a diagonal river neighbor as connected", () => {
   renderer.drawRiverLayer();
 
   // Assertion
-  assert.equal(strokes.length, 20);
+  assert.equal(strokes.length, 12);
 });
 
 test("directed rivers connect incoming diagonal flow but not unrelated adjacent rivers", () => {
@@ -421,9 +421,30 @@ test("directed rivers connect incoming diagonal flow but not unrelated adjacent 
     "-1,0": { river: 1, "river direction": {} },
   });
   renderer.drawRiverLayer();
-  assert.equal(strokes.length, 10);
-  assert.deepEqual(strokes[2].end, [16, 16]);
-  assert.deepEqual(strokes[7].end, [16, 16]);
+  assert.equal(strokes.length, 6);
+  assert.deepEqual(strokes[1].end, [16, 16]);
+  assert.deepEqual(strokes[4].end, [16, 16]);
+});
+
+test("renderer matches river mouth colors to neighboring water terrain", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = {
+    "0,0": { river: RIVER.PRESENT.id, "river direction": {} },
+    "0,-1": { terrain: TERRAIN.WATER.id },
+    "1,0": { terrain: TERRAIN.COASTAL_WATER.id },
+  };
+  const colors = [];
+  renderer.ctx = {
+    save() {}, restore() {}, beginPath() {}, moveTo() {}, lineTo() {}, closePath() {},
+    fill() { colors.push(this.fillStyle); },
+  };
+
+  // Execution
+  renderer.drawRiverLayer();
+
+  // Assertion
+  assert.deepEqual(colors, ["#1E90FF", "#4169E1"]);
 });
 
 [

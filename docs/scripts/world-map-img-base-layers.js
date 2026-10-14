@@ -14,6 +14,14 @@ const waterColors = new Map([
   [TERRAIN.OCEAN, "#00008B"],
 ]);
 
+/**
+ * @param {import("./world-map-layers.js").LayerValue} terrain Terrain metadata.
+ * @returns {string|undefined} Water color, if the terrain is water.
+ */
+export function getWaterColor(terrain) {
+  return waterColors.get(terrain);
+}
+
 export const BASE_LAYER_IMAGES = Object.freeze([
   [TERRAIN.FLAT, "../img/map/terrain_flat.webp"],
   [TERRAIN.HILLS, "../img/map/terrain_hills.webp"],
@@ -48,7 +56,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
 
   const left = x * gridSize;
   const top = y * gridSize;
-  const terrainColor = waterColors.get(terrain);
+  const terrainColor = getWaterColor(terrain);
   const terrainImage = terrainColor ? null : getLoadedImage(terrain, images);
   const vegetationImage = vegetation === VEGETATION.PRESENT ? getLoadedImage(vegetation, images) : null;
 
