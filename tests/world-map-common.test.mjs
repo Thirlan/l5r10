@@ -272,11 +272,12 @@ test("renderer delegates saved cliff directions without requiring cliff terrain"
   assert.equal(sprites.length, 3);
 });
 
-test("renderer connects neighboring bottom-left cliffs with an inward sprite", () => {
+test("renderer adds an inward sprite on a flat cell between neighboring bottom-left cliffs", () => {
   // Setup
   const renderer = createRenderer();
   renderer.grid = Object.fromEntries(["0,0", "-1,0", "0,1"].map((key) =>
     [key, { terrain: TERRAIN.CLIFF.id, "cliff direction": { 5: 1 } }]));
+  renderer.grid["0,0"] = { terrain: TERRAIN.FLAT.id };
   const sprites = [];
   renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ value, image }) =>
     [image, { value, complete: true, naturalWidth: 16 }]));

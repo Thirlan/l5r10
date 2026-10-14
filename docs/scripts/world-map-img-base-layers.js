@@ -135,12 +135,16 @@ export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, ne
     || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
   }
-  if (!directions || typeof directions !== "object") return;
-  const selected = Array.from({ length: 8 }, (_, index) => Number(directions[index]) === 1);
-  if (!selected.some(Boolean)) return;
+  const has = (flags, direction) => Number(flags?.[direction % 8]) === 1;
+  const selected = Array.from({ length: 8 }, (_, index) => has(directions, index));
+  const inward = [0, 1, 2, 3].map((rotation) => {
+    const bottom = (4 + rotation * 2) % 8;
+    const diagonal = (bottom + 1) % 8;
+    return has(neighbors[(bottom + 2) % 8], diagonal) && has(neighbors[bottom], diagonal);
+  });
+  if (!selected.some(Boolean) && !inward.some(Boolean)) return;
 
   const size = gridSize / 3;
-  const has = (flags, direction) => Number(flags?.[direction % 8]) === 1;
   const draw = (name, column, row, rotation, mirror = false) => {
     const image = getLoadedImage(name, images);
     ctx.save();
@@ -163,7 +167,7 @@ export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, ne
       draw(selected[right] ? "corner" : has(neighbors[right], bottom) ? "bottom" : "slope", 2, 2, rotation);
     }
     const diagonal = (bottom + 1) % 8;
-    if (has(neighbors[left], diagonal) && has(neighbors[bottom], diagonal)) {
+    if (inward[rotation]) {
       draw("inward", 0, 2, rotation);
     } else if (selected[diagonal] && !(selected[bottom] && selected[left])) {
       [0, 1, 2].forEach((index) => draw("diagonal", index, index, rotation));
