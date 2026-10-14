@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { drawRiver, RIVER_OFFSETS } from "../docs/scripts/world-map-img-river.js";
+import { TERRAIN } from "../docs/scripts/world-map-layers.js";
 
 function draw(neighbors) {
   const strokes = [];
@@ -25,7 +26,7 @@ test("isolated river draws cross-cues", () => {
   const isolatedStrokes = draw(isolated);
 
   // Assertion
-  assert.equal(isolatedStrokes.length, 10);
+  assert.equal(isolatedStrokes.length, 6);
 });
 
 test("river draws lines toward forward connected neighbors", () => {
@@ -38,8 +39,8 @@ test("river draws lines toward forward connected neighbors", () => {
   const southStrokes = draw(southConnected);
 
   // Assertion
-  assert.equal(eastStrokes.length, 5);
-  assert.equal(southStrokes.length, 5);
+  assert.equal(eastStrokes.length, 3);
+  assert.equal(southStrokes.length, 3);
 });
 
 test("river ignores connections to reverse neighbors", () => {
@@ -95,12 +96,12 @@ for (const [direction, [name, dx, dy]] of RIVER_OFFSETS.entries()) {
     };
     drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
       {}, { [direction]: 1 });
-    assert.equal(strokes.length, 5);
-    assert.deepEqual(strokes[2], [8 + dx * 8, 8 + dy * 8]);
+    assert.equal(strokes.length, 3);
+    assert.deepEqual(strokes[1], [8 + dx * 8, 8 + dy * 8]);
   });
 }
 
-test("adjacent water fills every cardinal triangle with the river center color", () => {
+test("adjacent water fills cardinal triangles with the adjacent terrain color", () => {
   const triangles = [];
   let vertices;
   const context = {
@@ -109,22 +110,53 @@ test("adjacent water fills every cardinal triangle with the river center color",
     closePath() {}, fill() { triangles.push({ color: this.fillStyle, vertices }); },
   };
   drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-    { north: true, east: true, south: true, west: true }, {});
+    { north: TERRAIN.WATER, east: TERRAIN.COASTAL_WATER,
+      south: TERRAIN.WATER, west: TERRAIN.COASTAL_WATER }, {});
   assert.equal(triangles.length, 4);
-  assert.deepEqual(triangles[0], { color: "#0000FF", vertices: [[8, 8], [16, 0], [0, 0]] });
+  assert.deepEqual(triangles[0], { color: "#1E90FF", vertices: [[8, 8], [16, 0], [0, 0]] });
+  assert.deepEqual(triangles.map(({ color }) => color), ["#1E90FF", "#4169E1", "#1E90FF", "#4169E1"]);
   assert.deepEqual(triangles[1].vertices, [[8, 8], [16, 16], [16, 0]]);
   assert.deepEqual(triangles[2].vertices, [[8, 8], [0, 16], [16, 16]]);
   assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
 });
 
-test("diagonal water fills a right triangle that reaches the shared corner", () => {
-  const vertices = [];
-  const context = {
-    save() {}, restore() {}, beginPath() {}, closePath() {}, fill() {},
-    moveTo(x, y) { vertices.push([x, y]); }, lineTo(x, y) { vertices.push([x, y]); },
-  };
+for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER]) {
+  for (const index of [1, 3, 5, 7]) {
+    const [name, dx, dy] = RIVER_OFFSETS[index];
+    test(`diagonal flow into ${terrain.name} toward ${name} draws strokes, not triangles`, () => {
+      // Setup
+      const strokes = [];
+      let fills = 0;
+      const context = {
+        save() {}, restore() {}, beginPath() {}, moveTo() {}, closePath() {},
+        lineTo(x, y) { this.end = [x, y]; },
+        stroke() { strokes.push({ end: this.end, color: this.strokeStyle, width: this.lineWidth }); },
+        fill() { fills++; },
+      };
+
+      // Execution
+      drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+        { [name]: terrain }, { [index]: 1 });
+
+      // Assertion
+      assert.equal(fills, 0);
+      assert.equal(strokes.length, 3);
+      assert.deepEqual(strokes[1], { end: [8 + dx * 8, 8 + dy * 8], color: "#1E90FF", width: 5.4 });
+      assert.deepEqual(strokes.filter((_, i) => i !== 1).map(({ color, width }) => [color, width]),
+        [["#F4A460", 0.6], ["#F4A460", 0.6]]);
+    });
+  }
+}
+
+test("unselected diagonal water does not create a connection", () => {
+  // Setup
+  let paths = 0;
+  const context = { save() {}, restore() {}, beginPath() { paths++; } };
+
+  // Execution
   drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-    { northeast: true }, {});
-  assert.deepEqual(vertices, [[8, 8], [16, 0], [16, 8]]);
-  assert.equal(context.fillStyle, "#0000FF");
+    { northeast: TERRAIN.WATER }, {});
+
+  // Assertion
+  assert.equal(paths, 0);
 });

@@ -160,7 +160,8 @@ export class WorldMapRenderer {
       const directions = cell["river direction"];
       const neighbors = Object.fromEntries(RIVER_OFFSETS.map(([name, dx, dy], index) => {
         const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
-        water[name] = neighbor?.terrain === TERRAIN.WATER.id || neighbor?.terrain === TERRAIN.COASTAL_WATER.id;
+        water[name] = neighbor?.terrain === TERRAIN.WATER.id || neighbor?.terrain === TERRAIN.COASTAL_WATER.id
+          ? LAYERS.TERRAIN.getValue(neighbor.terrain) : null;
         const incoming = neighbor?.["river direction"]?.[(index + 4) % 8] === 1;
         const connected = neighbor?.river && (directions?.[index] === 1 || incoming);
         return [name, directions ? Boolean(connected) : Boolean(neighbor?.river)];
