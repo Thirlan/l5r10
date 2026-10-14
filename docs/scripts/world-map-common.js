@@ -1,5 +1,5 @@
 import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-layers.js";
-import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "./world-map-img-base-layers.js";
+import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "./clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
 import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
@@ -140,6 +140,18 @@ export class WorldMapRenderer {
       const vegetation = this.isLayerVisible(LAYERS.VEGETATION.id)
         ? LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id) : VEGETATION.NONE;
       drawBaseLayers(this.ctx, x, y, this.gridSize, terrain, climate, vegetation, this.baseLayerImages);
+    }
+    for (const [key, cell] of Object.entries(this.grid)) {
+      const [x, y] = key.split(",").map(Number);
+      const terrain = LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id);
+      const neighbors = Object.fromEntries([
+        ["north", 0, -1], ["east", 1, 0], ["south", 0, 1], ["west", -1, 0],
+      ].map(([direction, dx, dy]) => {
+        const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
+        return [direction, neighbor
+          ? LAYERS.TERRAIN.getValue(neighbor.terrain ?? TERRAIN.FLAT.id) : null];
+      }));
+      drawWaterEdges(this.ctx, x, y, this.gridSize, terrain, neighbors);
     }
   }
 

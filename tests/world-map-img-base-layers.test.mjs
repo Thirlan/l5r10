@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { CLIMATE, TERRAIN, VEGETATION } from "../docs/scripts/world-map-layers.js";
-import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges } from "../docs/scripts/world-map-img-base-layers.js";
+import {
+  BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges,
+} from "../docs/scripts/world-map-img-base-layers.js";
 
 function createDrawing() {
   const calls = [];
@@ -14,6 +16,42 @@ function createDrawing() {
   };
   return { ctx, images, calls };
 }
+
+test("water edges draw sandbank lines beside land, but not beside water", () => {
+  const calls = [];
+  const ctx = {
+    save() {}, restore() {}, beginPath() {}, stroke() { calls.push([this.strokeStyle, this.lineWidth]); },
+    moveTo: (...point) => calls.push(["move", ...point]), lineTo: (...point) => calls.push(["line", ...point]),
+  };
+
+  drawWaterEdges(ctx, 2, 3, 16, TERRAIN.WATER, {
+    north: TERRAIN.FLAT, east: TERRAIN.COASTAL_WATER, south: TERRAIN.OCEAN, west: null,
+  });
+
+  assert.deepEqual(calls, [
+    ["move", 32, 48], ["line", 48, 48],
+    ["#F4A460", 1],
+  ]);
+});
+
+test("coastal water edges use the sandbank line beside land", () => {
+  const calls = [];
+  const ctx = {
+    save() {}, restore() {}, beginPath() {}, stroke() { calls.push([this.strokeStyle, this.lineWidth]); },
+    moveTo() {}, lineTo() {},
+  };
+
+  drawWaterEdges(ctx, 0, 0, 16, TERRAIN.COASTAL_WATER, {
+    north: null, east: TERRAIN.HILLS, south: TERRAIN.WATER, west: TERRAIN.OCEAN,
+  });
+
+  assert.deepEqual(calls, [["#F4A460", 1]]);
+});
+
+test("ocean cells do not draw sandbank edges", () => {
+  const ctx = { save() { throw new Error("Ocean edges must not be drawn"); } };
+  drawWaterEdges(ctx, 0, 0, 16, TERRAIN.OCEAN, { north: TERRAIN.FLAT });
+});
 
 test("land drawing composites climate, terrain, and vegetation in order", () => {
   // Setup
