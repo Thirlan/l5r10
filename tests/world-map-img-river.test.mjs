@@ -124,8 +124,19 @@ test("adjacent water fills cardinal triangles with the adjacent terrain color", 
   assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
   assert.equal(outlines.length, 4);
   assert.ok(outlines.every(({ color, width }) => color === "#F4A460" && width === 0.3));
-  assert.deepEqual(outlines[0].vertices, [[8, 8], [0, 0], [8, 8], [16, 0]]);
+  assert.deepEqual(outlines[0].vertices, [[8, 8], [16, 0], [8, 8], [0, 0]]);
   assert.ok(outlines.every(({ vertices }) => vertices.length === 4));
+});
+
+test("river-to-ocean triangles use the ocean color", () => {
+  const colors = [];
+  const context = {
+    save() {}, restore() {}, beginPath() {}, moveTo() {}, lineTo() {}, closePath() {},
+    fill() { colors.push(this.fillStyle); }, stroke() {},
+  };
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
+    { north: TERRAIN.OCEAN }, {});
+  assert.deepEqual(colors, ["#00008B"]);
 });
 
 for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]) {

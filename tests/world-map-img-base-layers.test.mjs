@@ -46,8 +46,8 @@ test("water edges skip banks beside connected rivers", () => {
   }, { north: true });
 
   assert.deepEqual(calls, [
-    ["move", 16, 16], ["line", 0, 16],
-    ["move", 0, 0], ["line", 0, 16],
+    ["move", 16, 0], ["line", 16, 16],
+    ["move", 0, 16], ["line", 16, 16],
     ["#F4A460", 0.3],
   ]);
 });
