@@ -107,14 +107,14 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 ## `rollEncounter` signature
 
 ```js
-rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation, river)
+rollEncounter(criminal, animal, spirit, shadowland, terrain, climate, vegetation, river)
 ```
 
 - Validate the four levels as integers from 0 to 5.
 - Validate terrain, climate, vegetation, and river as known catalog IDs.
-- Roll each encounter type independently, as now.
-- For each triggered type, select a beast from the matching table.
-- Return the selected `BeastSelection` instances in input order.
+- Roll each encounter type sequentially, stopping at the first encounter.
+- select a beast from the matching table.
+- Return the selected `BeastSelection`.
 
 ## Data guidance
 
