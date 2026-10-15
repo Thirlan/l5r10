@@ -27,6 +27,17 @@ test("desert Jinn use only the desert climate", () => {
   for (const beast of BEASTIARY.filter(({ name }) => name.endsWith("Jinn"))) {
     assert.deepEqual(beast.climate, [CLIMATE.DESERT.id]);
   }
+  for (const name of ["Manticore", "Guawa"]) {
+    assert.equal(BEASTIARY.filter((beast) => beast.name === name).length, 1);
+  }
+});
+
+test("mountain creatures avoid duplicates and keep trolls distinct", () => {
+  for (const name of ["Tengu", "Kenku", "Satori", "Gaki", "Nue"]) {
+    assert.equal(BEASTIARY.filter((beast) => beast.name === name).length, 1);
+  }
+  assert.equal(BEASTIARY.filter((beast) => beast.name === "Mountain Troll").length, 1);
+  assert.equal(BEASTIARY.filter((beast) => beast.name === "Shadowlands Troll").length, 1);
 });
 
 test("existing swamp creatures include wetlands", () => {

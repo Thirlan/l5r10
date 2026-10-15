@@ -33,12 +33,12 @@ const ALL_RIVERS = Object.values(RIVER).map(({ id }) => id);
 const FAST_BEASTS = new Set([
   "Death-Worm", "Griffon", "Manticore", "Guawa", "Serow Stampede", "Wolf Pack",
   "Wild Horse Stampede", "Shark", "Lion", "Tiger", "Shadow Wing", "Onikage Rider",
-  "Yobuko", "Koumori", "Kenku", "Tengu", "Yuki-onna", "Wanyudo", "Isonade",
+  "Yobuko", "Koumori", "Kenku", "Tengu", "Yuki-onna", "Wanyudo", "Isonade", "Wind Jinn",
 ]);
 const HARD_TO_SPOT = new Set([
   "Mamushi Viper", "Scorpion", "Rattlesnake", "Giant Spider", "Kyorinrin",
   "Penanggalan", "Harionago", "Kansen Possession", "Silt-Stalker", "Sun-Viper",
-  "Flame-Core Scorpion", "Giant Burrowing Worm", "Mizugumo", "Sanjuro",
+  "Flame-Core Scorpion", "Giant Burrowing Worm", "Mizugumo", "Sanjuro", "Yama-bito", "Yama-uba",
 ]);
 const NO_AVOID_CHECK = new Set(["Mamushi Viper", "Scorpion", "Rattlesnake"]);
 const DESCRIPTIONS = Object.freeze({

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Beast } from "../docs/scripts/beast.js";
+import { BeastSelection } from "../docs/scripts/beast-selection.js";
 import { SkillCheck } from "../docs/scripts/skill-check.js";
 import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../docs/scripts/world-map-layers.js";
 
@@ -38,4 +39,14 @@ test("Beast rejects invalid identity, rank, weight, IDs, and checks", () => {
   for (const invalid of invalidData) {
     assert.throws(() => new Beast({ ...beastData, ...invalid }), TypeError);
   }
+});
+
+test("BeastSelection copies checks and freezes its fields", () => {
+  const beast = new Beast(beastData);
+  const selection = new BeastSelection(beast, 0, beast.weight);
+  assert.equal(Object.isFrozen(selection), true);
+  assert.equal(Object.isFrozen(selection.spotSkillCheck), true);
+  assert.equal(selection.name, beast.name);
+  assert.equal(selection.selectionTo, beast.weight);
+  assert.throws(() => new BeastSelection(beast, 2, 2), TypeError);
 });

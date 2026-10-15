@@ -1,6 +1,13 @@
 import { Beast } from "./beast.js";
 
 export class BeastSelection {
+  /**
+   * Create a weighted lookup-table entry for a beast.
+   * @param {Beast} beast Source creature.
+   * @param {number} selectionFrom Inclusive lower range boundary.
+   * @param {number} selectionTo Exclusive upper range boundary.
+   * @throws {TypeError} If the source or range is invalid.
+   */
   constructor(beast, selectionFrom, selectionTo) {
     if (!(beast instanceof Beast)
       || !Number.isInteger(selectionFrom) || selectionFrom < 0

@@ -11,6 +11,11 @@ const VALID_IDS = Object.freeze({
 const CHECK_FIELDS = ["spotSkillCheck", "avoidSkillCheck", "escapeSkillCheck", "impactSkillCheck"];
 
 export class Beast {
+  /**
+   * Create one validated creature entry.
+   * @param {object} data Creature identity, habitat, checks, and description.
+   * @throws {TypeError} If any field is invalid.
+   */
   constructor(data) {
     if (data === null || typeof data !== "object" || Array.isArray(data)) {
       throw new TypeError("Beast data must be an object.");

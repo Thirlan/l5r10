@@ -1,4 +1,11 @@
 export class SkillCheck {
+  /**
+   * Create one skill or raw-trait check.
+   * @param {string} skill Skill name, or an empty string for a raw-trait roll.
+   * @param {string} trait Trait name.
+   * @param {number} tn Positive integer target number.
+   * @throws {TypeError} If a field has an invalid value.
+   */
   constructor(skill, trait, tn) {
     if (typeof skill !== "string" || skill.trim() !== skill
       || typeof trait !== "string" || trait.trim().length === 0

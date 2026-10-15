@@ -89,6 +89,27 @@ test("weighted selection uses an exclusive upper boundary", (context) => {
   assert.equal(table.select().name, table.beastList[1].name);
 });
 
+test("map encounter levels do not filter eligible beast ranks", (context) => {
+  const mountainCell = [
+    TERRAIN.CLIFF.id,
+    CLIMATE.POLAR.id,
+    VEGETATION.NONE.id,
+    RIVER.NONE.id,
+  ];
+  const table = getLookUpTable("animal", ...mountainCell);
+  const rolls = [
+    ENCOUNTER_CHANCES[0],
+    0,
+    (table.diceRollSize - 1) / table.diceRollSize,
+    ENCOUNTER_CHANCES[0],
+    ENCOUNTER_CHANCES[0],
+  ];
+  context.mock.method(Math, "random", () => rolls.shift());
+  const [encounter] = rollEncounter(0, 1, 0, 0, ...mountainCell);
+  assert.equal(encounter.name, "Mountain Troll");
+  assert.equal(encounter.rank, 4);
+});
+
 test("empty lookup tables skip triggered encounters", (context) => {
   const rolls = [0, ENCOUNTER_CHANCES[0], ENCOUNTER_CHANCES[0], ENCOUNTER_CHANCES[0]];
   context.mock.method(Math, "random", () => rolls.shift());

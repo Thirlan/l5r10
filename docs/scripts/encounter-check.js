@@ -29,6 +29,14 @@ function isKnownMapId(field, id) {
 }
 
 export class BeastiaryLookUpTable {
+  /**
+   * Create an empty lookup table for one map cell.
+   * @param {number} terrain Terrain catalog ID.
+   * @param {number} climate Climate catalog ID.
+   * @param {number} vegetation Vegetation catalog ID.
+   * @param {number} river River catalog ID.
+   * @throws {TypeError} If any map ID is unknown.
+   */
   constructor(terrain, climate, vegetation, river) {
     if (!isKnownMapId("terrain", terrain) || !isKnownMapId("climate", climate)
       || !isKnownMapId("vegetation", vegetation) || !isKnownMapId("river", river)) {
@@ -65,6 +73,10 @@ export class BeastiaryLookUpTable {
       selectionFrom <= roll && roll < selectionTo);
   }
 
+  /**
+   * Freeze the completed table and its weighted entries.
+   * @returns {BeastiaryLookUpTable} This immutable table.
+   */
   freeze() {
     Object.freeze(this.beastList);
     return Object.freeze(this);
