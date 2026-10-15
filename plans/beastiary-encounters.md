@@ -44,6 +44,7 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 | `avoidSkillCheck` | SkillCheck[] | Checks that avoid the creature if spotted. If empty then a spot check was sufficient, such as spotting a small snake before it bites. Spotting a flying Chimera however still requires a hide or horsemanship. |
 | `escapeSkillCheck` | SkillCheck[] | Checks to escape the creature if not spotted (some will overlap with avoid). |
 | `impactSkillCheck` | SkillCheck[] | Empty for a fight. Otherwise a skill trial. |
+| `encounterDescription` | One sentence description of the encounter |
 
 - The constructor validates all fields and throws `TypeError` for bad values.
 - Instances and their lists are frozen.
