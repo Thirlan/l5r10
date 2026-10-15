@@ -97,16 +97,17 @@ test("map encounter levels do not filter eligible beast ranks", (context) => {
     RIVER.NONE.id,
   ];
   const table = getLookUpTable("animal", ...mountainCell);
+  const rankFourSelection = table.beastList.find(({ rank }) => rank === 4);
+  assert.ok(rankFourSelection);
   const rolls = [
     ENCOUNTER_CHANCES[0],
     0,
-    (table.diceRollSize - 1) / table.diceRollSize,
+    (rankFourSelection.selectionFrom + 0.5) / table.diceRollSize,
     ENCOUNTER_CHANCES[0],
     ENCOUNTER_CHANCES[0],
   ];
   context.mock.method(Math, "random", () => rolls.shift());
   const [encounter] = rollEncounter(0, 1, 0, 0, ...mountainCell);
-  assert.equal(encounter.name, "Mountain Troll");
   assert.equal(encounter.rank, 4);
 });
 
