@@ -1,6 +1,6 @@
 # Beastiary encounters
 
-Status: Planned. No PRs are complete.
+Status: Complete.
 
 ## Goal
 
