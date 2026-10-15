@@ -41,6 +41,11 @@ const HARD_TO_SPOT = new Set([
   "Flame-Core Scorpion", "Giant Burrowing Worm", "Mizugumo", "Sanjuro",
 ]);
 const NO_AVOID_CHECK = new Set(["Mamushi Viper", "Scorpion", "Rattlesnake"]);
+const DESCRIPTIONS = Object.freeze({
+  Mokumokuren: "A shrine haunting watches from an abandoned mountain or marsh shrine.",
+  "Naga Guardian": "A Naga guardian protects a hidden marsh city.",
+  Zokujin: "A territorial Zokujin defends its mountain tunnels.",
+});
 const IMPACT_CHECKS = Object.freeze({
   "Mamushi Viper": [["Medicine", "Intelligence", 15], ["", "Stamina", 15]],
   "Giant Hornet Swarm": [["", "Stamina", 15]],
@@ -86,11 +91,10 @@ const IMPACT_CHECKS = Object.freeze({
 
 function resolveTerrain(values) {
   if (values === "ANY") return ALL_TERRAINS;
-  if (values === "LAND") values = LAND;
-  if (values === "MOUNTAIN_LAND") values = MOUNTAIN_LAND;
-  if (values === "DESERT_LAND") values = DESERT_LAND;
-  if (values === "WATER") values = WATER;
-  return [...new Set(values.flatMap((value) => TERRAIN_IDS[value]))];
+  const groups = { LAND, MOUNTAIN_LAND, DESERT_LAND, WATER };
+  const expandedValues = Array.isArray(values) ? values : [values];
+  return [...new Set(expandedValues.flatMap((value) => groups[value] ?? [value])
+    .flatMap((value) => TERRAIN_IDS[value]))];
 }
 
 function resolveClimate(values) {
@@ -128,7 +132,7 @@ function buildBeast([name, encounterType, rank, weight, terrain, climate, vegeta
     avoidSkillCheck: makeChecks(avoid),
     escapeSkillCheck: makeChecks(escape),
     impactSkillCheck: makeChecks(impactDefinitions),
-    encounterDescription: `${name} threatens travelers in its habitat.`,
+    encounterDescription: DESCRIPTIONS[name] ?? `${name} threatens travelers in its habitat.`,
   });
 }
 
@@ -199,3 +203,94 @@ const SHADOWLANDS = [
   ["Ashura", "shadowland", 5, 3, "LAND", "ALL", "ANY", "ANY"],
   ["Gashadokuro", "shadowland", 5, 3, ["FLAT", "HILLS"], "ALL", "ANY", "ANY", true],
 ];
+
+const SPIRITS = [
+  ["Hinotoma", "spirit", 1, 50, ["FLAT", "WETLANDS"], "LIVING", "ANY", "ANY", true],
+  ["Kodama", "spirit", 1, 40, "LAND", ["TEMPERATE", "TROPICAL"], "PRESENT", "ANY", true],
+  ["Mujina", "spirit", 1, 40, ["FLAT", "HILLS"], "LIVING", "ANY", "ANY", true],
+  ["Tanuki", "spirit", 1, 50, ["FLAT", "HILLS"], ["TEMPERATE"], "PRESENT", "ANY", true],
+  ["Yobuko", "spirit", 1, 30, ["MOUNTAINS", "CLIFF"], "LIVING", "ANY", "ANY", true],
+  ["Amikiri", "spirit", 1, 30, ["WATER", "COASTAL_WATER", "WETLANDS"], "LIVING", "ANY", "ANY", true],
+  ["Basan", "spirit", 1, 20, ["HILLS", "MOUNTAINS"], ["TEMPERATE", "TROPICAL"], "PRESENT", "ANY", true],
+  ["Gaki", "spirit", 2, 40, "LAND", ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY"],
+  ["Kappa", "spirit", 2, 50, ["WATER", "WETLANDS", "FLAT"], ["TEMPERATE", "TROPICAL"], "ANY", "PRESENT"],
+  ["Kitsune", "spirit", 2, 30, ["FLAT", "HILLS"], ["TEMPERATE"], "PRESENT", "ANY", true],
+  ["Bakeneko", "spirit", 2, 30, ["FLAT", "HILLS"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY"],
+  ["Koumori", "spirit", 2, 20, ["HILLS", "MOUNTAINS", "CLIFF"], "LIVING", "ANY", "ANY"],
+  ["Shojo", "spirit", 2, 20, ["COASTAL_WATER", "OCEAN"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY", true],
+  ["Ubume", "spirit", 2, 20, ["FLAT", "HILLS", "WETLANDS"], "LIVING", "ANY", "ANY", true],
+  ["Fudoshi Tanglevine", "spirit", 2, 20, ["FLAT", "HILLS"], ["TROPICAL", "TEMPERATE"], "PRESENT", "ANY"],
+  ["Kenku", "spirit", 3, 15, ["MOUNTAINS", "CLIFF"], ["TEMPERATE"], "PRESENT", "ANY"],
+  ["Tengu", "spirit", 3, 20, ["MOUNTAINS", "CLIFF"], ["TEMPERATE", "POLAR"], "ANY", "ANY"],
+  ["Konaki-jiji", "spirit", 3, 15, ["FLAT", "HILLS"], "LIVING", "ANY", "ANY", true],
+  ["Nure-onna", "spirit", 3, 15, ["WATER", "COASTAL_WATER", "WETLANDS"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY"],
+  ["Nekomata", "spirit", 3, 15, ["HILLS", "MOUNTAINS"], ["TEMPERATE"], "PRESENT", "ANY"],
+  ["Satori", "spirit", 3, 15, ["MOUNTAINS"], ["TEMPERATE", "POLAR"], "PRESENT", "ANY", true],
+  ["Spirit Hound", "spirit", 3, 15, "LAND", "LIVING", "ANY", "ANY"],
+  ["Yuki-onna", "spirit", 3, 30, ["MOUNTAINS", "HILLS", "FLAT"], ["POLAR"], "ANY", "ANY", true],
+  ["Ningyo", "spirit", 3, 10, ["WATER", "COASTAL_WATER", "OCEAN", "WETLANDS"], "LIVING", "ANY", "ANY", true],
+  ["Onryo", "spirit", 4, 10, "LAND", ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY"],
+  ["Toshigoku Spirit", "spirit", 4, 10, ["FLAT", "HILLS"], ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY"],
+  ["Returned Spirit", "spirit", 4, 10, "LAND", ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY", true],
+  ["Wanyudo", "spirit", 4, 8, ["FLAT", "HILLS"], "LIVING", "NONE", "ANY"],
+  ["Nue", "spirit", 4, 8, ["HILLS", "MOUNTAINS"], ["TEMPERATE", "TROPICAL"], "PRESENT", "ANY"],
+  ["Wani", "spirit", 4, 10, ["WATER", "WETLANDS"], ["TROPICAL"], "ANY", "PRESENT"],
+  ["Isonade", "spirit", 4, 8, ["OCEAN", "COASTAL_WATER"], "LIVING", "ANY", "ANY"],
+  ["Goryo", "spirit", 5, 3, "LAND", ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY", true],
+  ["Orochi", "spirit", 5, 3, ["OCEAN", "WATER"], "LIVING", "ANY", "ANY"],
+  ["Ki-rin", "spirit", 5, 2, ["FLAT", "HILLS", "MOUNTAINS"], ["TEMPERATE"], "PRESENT", "ANY", true],
+];
+
+const DESERT_CREATURES = [
+  ["Silt-Stalker", "animal", 2, 30, ["FLAT", "WETLANDS"], ["DESERT"], "NONE", "ANY"],
+  ["Sun-Viper", "animal", 2, 30, ["FLAT", "HILLS"], ["DESERT"], "ANY", "ANY", true],
+  ["Giant Tortoise", "animal", 2, 10, ["FLAT"], ["DESERT"], "ANY", "ANY"],
+  ["Flame-Core Scorpion", "animal", 3, 20, ["FLAT", "HILLS"], ["DESERT"], "NONE", "NONE", true],
+  ["Sand-Drake", "animal", 4, 10, ["FLAT", "HILLS"], ["DESERT"], "NONE", "NONE"],
+  ["Giant Burrowing Worm", "animal", 5, 3, ["FLAT"], ["DESERT"], "NONE", "NONE", true],
+  ["Hanajin", "spirit", 3, 15, "DESERT_LAND", ["DESERT"], "ANY", "ANY", true],
+  ["Qabalistic Phantom", "spirit", 3, 10, "DESERT_LAND", ["DESERT", "WASTE"], "ANY", "ANY", true],
+  ["Obsidian Golem", "spirit", 4, 8, ["HILLS", "MOUNTAINS", "CLIFF"], ["DESERT"], "ANY", "ANY"],
+  ["Flame Jinn", "spirit", 4, 5, "DESERT_LAND", ["DESERT"], "NONE", "ANY"],
+  ["Sea Jinn", "spirit", 4, 5, ["WATER", "COASTAL_WATER"], ["DESERT"], "ANY", "ANY", true],
+  ["Wind Jinn", "spirit", 4, 5, "DESERT_LAND", ["DESERT"], "ANY", "ANY", true],
+  ["Sand Jinn", "spirit", 4, 5, ["FLAT", "HILLS"], ["DESERT"], "NONE", "ANY"],
+  ["Ka Jinn", "spirit", 5, 2, "DESERT_LAND", ["DESERT"], "ANY", "ANY", true],
+  ["Grave-Ghoul", "shadowland", 2, 30, ["FLAT", "HILLS"], ["DESERT", "WASTE"], "ANY", "ANY"],
+  ["Jackal Fiend", "shadowland", 3, 20, "DESERT_LAND", ["DESERT", "WASTE"], "ANY", "ANY"],
+  ["Khadi Horror", "shadowland", 4, 10, "DESERT_LAND", ["DESERT", "WASTE"], "ANY", "ANY"],
+  ["Ashalan Abomination", "shadowland", 5, 3, "DESERT_LAND", ["DESERT"], "ANY", "ANY"],
+];
+
+const MOUNTAIN_CREATURES = [
+  ["Oni-bi", "spirit", 1, 30, ["MOUNTAINS", "CLIFF", "WETLANDS"], ["TEMPERATE", "POLAR", "TROPICAL"], "ANY", "ANY", true],
+  ["Zokujin", "spirit", 2, 20, ["MOUNTAINS", "CLIFF"], "LIVING", "ANY", "ANY"],
+  ["Mokumokuren", "spirit", 2, 10, ["MOUNTAIN_LAND", "WETLANDS"], ["TEMPERATE", "POLAR", "TROPICAL"], "ANY", "ANY", true],
+  ["Yama-bito", "spirit", 2, 25, "MOUNTAIN_LAND", ["TEMPERATE", "POLAR"], "ANY", "ANY"],
+  ["Yama-uba", "spirit", 3, 15, ["MOUNTAIN_LAND", "WETLANDS"], ["TEMPERATE", "POLAR", "TROPICAL"], "PRESENT", "ANY"],
+  ["Mountain Troll", "animal", 4, 10, ["MOUNTAINS", "CLIFF"], ["TEMPERATE", "POLAR"], "ANY", "ANY"],
+];
+
+const SWAMP_CREATURES = [
+  ["Great Marsh Leech", "animal", 1, 40, ["WETLANDS", "WATER"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY", true],
+  ["Mizugumo", "animal", 2, 25, ["WETLANDS", "WATER"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY"],
+  ["Giant Alligator", "animal", 3, 20, ["WETLANDS", "WATER"], ["TROPICAL"], "ANY", "ANY"],
+  ["Swamp Troll", "animal", 4, 10, ["WETLANDS"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY"],
+  ["Hydra", "animal", 5, 2, ["WETLANDS", "COASTAL_WATER"], ["TEMPERATE", "TROPICAL"], "ANY", "ANY"],
+  ["Yurei", "spirit", 2, 25, ["WETLANDS"], "LIVING", "ANY", "ANY", true],
+  ["Gokuri", "spirit", 2, 20, ["WETLANDS"], ["TEMPERATE", "TROPICAL", "DESERT", "POLAR", "WASTE"], "ANY", "ANY"],
+  ["Corrupted Water Kami", "spirit", 3, 10, ["WETLANDS", "WATER"], "LIVING", "ANY", "ANY", true],
+  ["Naga Guardian", "spirit", 3, 5, ["WETLANDS"], ["TROPICAL"], "PRESENT", "ANY"],
+  ["Marsh Undead", "shadowland", 2, 30, ["WETLANDS"], "ALL", "ANY", "ANY"],
+  ["Sanjuro", "shadowland", 3, 15, ["WETLANDS"], "ALL", "ANY", "ANY"],
+];
+
+export const BEASTIARY = Object.freeze([
+  ...ANIMALS,
+  ...CRIMINALS,
+  ...SHADOWLANDS,
+  ...SPIRITS,
+  ...DESERT_CREATURES,
+  ...MOUNTAIN_CREATURES,
+  ...SWAMP_CREATURES,
+].map(buildBeast));
