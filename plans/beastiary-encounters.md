@@ -112,9 +112,12 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 - Do not use named, unique oni.
 - Keep criminals to five entries, one for each rank.
 - Skip harmless animals.
-- Omit legendary or unique beings: Phoenix, Kitsu, Jinn, Akkorokamui, and the Great Sea Spider.
-- Omit indoor phenomena, such as Mokumokuren.
-- Omit sentient races that are not threats: Naga, Nezumi, and Busimin.
+- Omit legendary or unique beings: Phoenix, Kitsu, Akkorokamui, and the Great Sea Spider.
+- Include Jinn as generic desert elementals. Do not use named Jinn.
+- Include Mokumokuren only as a haunting of abandoned mountain or marsh shrines.
+- Omit sentient races that are not threats: Nezumi and Busimin.
+- Include Naga only as guardians of hidden marsh cities.
+- Include Zokujin as territorial tunnel dwellers.
 
 ### TN guidance
 
@@ -158,7 +161,7 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 | Wolf Pack | 2 | 50 | FLAT, HILLS, MOUNTAINS | TEMPERATE, POLAR | Any | Any | |
 | Mountain Ape Troop | 2 | 30 | MOUNTAINS, CLIFF | TEMPERATE, POLAR | Any | Any | |
 | Wild Horse Stampede | 2 | 20 | FLAT | TEMPERATE, DESERT | NONE | Any | I |
-| Shinomen Spider | 2 | 30 | FLAT, HILLS | TROPICAL | PRESENT | Any | I |
+| Giant Spider | 2 | 30 | FLAT, HILLS | TROPICAL | PRESENT | Any | I |
 | Black Bear | 3 | 30 | HILLS, MOUNTAINS | TEMPERATE | PRESENT | Any | |
 | Shark | 4 | 30 | COASTAL_WATER, OCEAN | TEMPERATE, TROPICAL | Any | Any | |
 | Brown Bear | 3 | 20 | HILLS, MOUNTAINS | POLAR | Any | Any | |
@@ -169,11 +172,12 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 
 | Name | Rank | W | Terrain | Climate | Veg | River | I |
 |-|-|-|-|-|-|-|-|
-| Cutpurse | 1 | 100 | Land | Living climates | Any | Any | I |
+| Cutpurse | 1 | 20 | Land | Living climates | Any | Any | I |
 | Peasant Bandits | 2 | 100 | Land | Living climates | Any | Any | |
-| Ronin Bandit Gang | 3 | 50 | Land | Living climates | Any | Any | |
-| Smugglers | 4 | 30 | Water, WETLANDS | Living climates | Any | Any | |
-| Gaijin Bandit Gang | 5 | 1 | Any | Living climates | Any | Any | I |
+| Ronin Bandits | 3 | 50 | Land | Living climates | Any | Any | |
+| Smugglers | 3 | 10 | Water, WETLANDS | Living climates | NONE | NONE | |
+| Pirates | 4 | 10 | COASTAL_WATERS, OCEAN | Living climates | NONE | NONE | |
+| Gaijin Bandits | 5 | 1 | Any | Living climates | Any | Any | |
 
 ### Shadowland creatures
 
@@ -182,8 +186,6 @@ All entries use the living and tainted climates unless noted.
 | Name | Rank | W | Terrain | Climate | Veg | River | I |
 |-|-|-|-|-|-|-|-|
 | Bakemono Raiders | 1 | 80 | Land | All | Any | Any | |
-| Swamp Goblins | 1 | 40 | WETLANDS | All | Any | Any | |
-| Mountain Goblins | 1 | 40 | HILLS, MOUNTAINS, CLIFF | All | Any | Any | |
 | Pekkle no Oni | 1 | 30 | Land | All | Any | Any | I |
 | Zombie Peasants | 1 | 50 | Land | All | Any | Any | |
 | Shadow Wing | 1 | 30 | Land | All | Any | Any | |
@@ -195,7 +197,7 @@ All entries use the living and tainted climates unless noted.
 | Penanggalan | 3 | 20 | Land | All | Any | Any | |
 | Harionago | 3 | 15 | Land | All | PRESENT | Any | |
 | Bog Hag | 3 | 20 | WETLANDS | All | Any | Any | |
-| Kumo | 3 | 20 | HILLS, MOUNTAINS | All | PRESENT | Any | |
+| Kumo | 3 | 20 | HILLS, MOUNTAINS, WETLANDS | All | PRESENT | Any | |
 | Ashi no Oni | 3 | 20 | Land | All | Any | Any | |
 | Suiteiru no Oni | 3 | 20 | Water, WETLANDS | All | Any | Any | |
 | Kansen Possession | 3 | 15 | Any | All | Any | Any | I |
@@ -243,7 +245,7 @@ All entries use the living climates unless noted.
 | Satori | 3 | 15 | MOUNTAINS | TEMPERATE, POLAR | PRESENT | Any | I |
 | Spirit Hound | 3 | 15 | Land | Living | Any | Any | |
 | Yuki-onna | 3 | 30 | MOUNTAINS, HILLS, FLAT | POLAR | Any | Any | I |
-| Ningyo | 3 | 10 | COASTAL_WATER, OCEAN | Living | Any | Any | I |
+| Ningyo | 3 | 10 | WATER, COASTAL_WATER, OCEAN, WETLANDS | Living | Any | Any | I |
 | Onryo | 4 | 10 | Land | Living, WASTE | Any | Any | |
 | Toshigoku Spirit | 4 | 10 | FLAT, HILLS | Living, WASTE | Any | Any | |
 | Returned Spirit | 4 | 10 | Land | Living, WASTE | Any | Any | I |
@@ -255,15 +257,105 @@ All entries use the living climates unless noted.
 | Orochi | 5 | 3 | OCEAN, WATER | Living | Any | Any | |
 | Ki-rin | 5 | 2 | FLAT, HILLS, MOUNTAINS | TEMPERATE | PRESENT | Any | I |
 
+### Desert creatures
+
+Source: Burning Sands additions in [monsters.txt](../monsters.txt).
+All entries use the DESERT climate unless noted.
+Desert land: FLAT, HILLS, MOUNTAINS, CLIFF.
+Manticore and Guawa are already in the animal roster. Do not add them again.
+Giant Burrowing Worm is a sinkhole skill trial. Death-Worm stays a fight.
+
+| Name | Type | Rank | W | Terrain | Climate | Veg | River | I |
+|-|-|-|-|-|-|-|-|-|
+| Silt-Stalker | animal | 2 | 30 | FLAT, WETLANDS | DESERT | NONE | Any | |
+| Sun-Viper | animal | 2 | 30 | FLAT, HILLS | DESERT | Any | Any | I |
+| Giant Tortoise | animal | 2 | 10 | FLAT | DESERT | Any | Any | |
+| Flame-Core Scorpion | animal | 3 | 20 | FLAT, HILLS | DESERT | NONE | NONE | I |
+| Sand-Drake | animal | 4 | 10 | FLAT, HILLS | DESERT | NONE | NONE | |
+| Giant Burrowing Worm | animal | 5 | 3 | FLAT | DESERT | NONE | NONE | I |
+| Hanajin | spirit | 3 | 15 | Desert land | DESERT | Any | Any | I |
+| Qabalistic Phantom | spirit | 3 | 10 | Desert land | DESERT, WASTE | Any | Any | I |
+| Obsidian Golem | spirit | 4 | 8 | HILLS, MOUNTAINS, CLIFF | DESERT | Any | Any | |
+| Flame Jinn | spirit | 4 | 5 | Desert land | DESERT | NONE | Any | |
+| Sea Jinn | spirit | 4 | 5 | WATER, COASTAL_WATER | DESERT | Any | Any | I |
+| Wind Jinn | spirit | 4 | 5 | Desert land | DESERT | Any | Any | I |
+| Sand Jinn | spirit | 4 | 5 | FLAT, HILLS | DESERT | NONE | Any | |
+| Ka Jinn | spirit | 5 | 2 | Desert land | DESERT | Any | Any | I |
+| Grave-Ghoul | shadowland | 2 | 30 | FLAT, HILLS | DESERT, WASTE | Any | Any | |
+| Jackal Fiend | shadowland | 3 | 20 | Desert land | DESERT, WASTE | Any | Any | |
+| Khadi Horror | shadowland | 4 | 10 | Desert land | DESERT, WASTE | Any | Any | |
+| Ashalan Abomination | shadowland | 5 | 3 | Desert land | DESERT | Any | Any | |
+
+Impact checks for desert entries:
+- Sun-Viper: Medicine (Intelligence) or raw Stamina against heat-stroke venom.
+- Flame-Core Scorpion: Medicine (Intelligence) or raw Stamina against burning venom.
+- Giant Burrowing Worm: Athletics (Agility) to escape the sinkhole.
+- Hanajin: Investigation (Perception) to find the impostor.
+- Qabalistic Phantom: raw Willpower to resist the magical backlash.
+- Sea Jinn: Athletics (Strength) to survive the flood.
+- Wind Jinn: Athletics (Strength) or raw Stamina to endure the tornado.
+- Ka Jinn: raw Willpower, or Etiquette (Awareness) to bargain.
+
+### Mountain creatures
+
+Source: mountain additions in [monsters.txt](../monsters.txt).
+Tengu, Kenku, Satori, Gaki, and Nue are already in the spirit roster. Do not add them again.
+Mountain land: HILLS, MOUNTAINS, CLIFF.
+
+| Name | Type | Rank | W | Terrain | Climate | Veg | River | I |
+|-|-|-|-|-|-|-|-|-|
+| Oni-bi | spirit | 1 | 30 | MOUNTAINS, CLIFF, WETLANDS | TEMPERATE, POLAR, TROPICAL | Any | Any | I |
+| Zokujin | spirit | 2 | 20 | MOUNTAINS, CLIFF | Living | Any | Any | |
+| Mokumokuren | spirit | 2 | 10 | Mountain land, WETLANDS | TEMPERATE, POLAR, TROPICAL | Any | Any | I |
+| Yama-bito | spirit | 2 | 25 | Mountain land | TEMPERATE, POLAR | Any | Any | |
+| Yama-uba | spirit | 3 | 15 | Mountain land, WETLANDS | TEMPERATE, POLAR, TROPICAL | PRESENT | Any | |
+| Mountain Troll | animal | 4 | 10 | MOUNTAINS, CLIFF | TEMPERATE, POLAR | Any | Any | |
+
+Notes for mountain entries:
+- Oni-bi: Athletics (Agility) to avoid a fall from the cliff edge or into deep mud.
+- Mokumokuren: raw Willpower to resist fear in the haunted shrine.
+- Yama-bito and Yama-uba disguise themselves. Add 5 to their spot TN.
+- Mountain Troll is not Tainted. It is separate from the Shadowlands Troll.
+
+### Swamp creatures
+
+Source: swamp additions in [monsters.txt](../monsters.txt).
+These entries already exist: Bog Hag, Kumo, Kappa, Ningyo, Yama-uba, Oni-bi, Gaki, and Mokumokuren.
+Kumo, Ningyo, Yama-uba, Oni-bi, and Mokumokuren now include WETLANDS. Do not add them again.
+Bakemono Raiders cover all goblins, including Mud, Swamp, and Mountain Goblins. Do not add goblin variants.
+Giant Alligator is a mundane animal. Wani stays a separate spirit.
+Swamp Troll is not Tainted. It is separate from the Shadowlands Troll.
+
+| Name | Type | Rank | W | Terrain | Climate | Veg | River | I |
+|-|-|-|-|-|-|-|-|-|
+| Great Marsh Leech | animal | 1 | 40 | WETLANDS, WATER | TEMPERATE, TROPICAL | Any | Any | I |
+| Mizugumo | animal | 2 | 25 | WETLANDS, WATER | TEMPERATE, TROPICAL | Any | Any | |
+| Giant Alligator | animal | 3 | 20 | WETLANDS, WATER | TROPICAL | Any | Any | |
+| Swamp Troll | animal | 4 | 10 | WETLANDS | TEMPERATE, TROPICAL | Any | Any | |
+| Hydra | animal | 5 | 2 | WETLANDS, COASTAL_WATER | TEMPERATE, TROPICAL | Any | Any | |
+| Yurei | spirit | 2 | 25 | WETLANDS | Living | Any | Any | I |
+| Gokuri | spirit | 2 | 20 | WETLANDS | Living, WASTE | Any | Any | |
+| Corrupted Water Kami | spirit | 3 | 10 | WETLANDS, WATER | Living | Any | Any | I |
+| Naga Guardian | spirit | 3 | 5 | WETLANDS | TROPICAL | PRESENT | Any | |
+| Marsh Undead | shadowland | 2 | 30 | WETLANDS | All | Any | Any | |
+| Sanjuro | shadowland | 3 | 15 | WETLANDS | All | Any | Any | |
+
+Notes for swamp entries:
+- Great Marsh Leech: Medicine (Intelligence) or raw Stamina against blood loss.
+- Yurei: raw Willpower to resist fear.
+- Corrupted Water Kami: Athletics (Strength) to escape the drowning vortex.
+- Mizugumo and Sanjuro ambush from hiding. Add 5 to their spot TN.
+
 ## PR breakdown
 
 Each PR is 200 lines or fewer, including tests.
 
 ### PR 1: Beastiary classes
 
-- Create [beastiary.js](../docs/scripts/beastiary.js) with `SkillCheck` and `Beastiary`.
+- Create [skill-check.js](../docs/scripts/skill-check.js) with `SkillCheck`.
+- Create [beastiary.js](../docs/scripts/beastiary.js) with `Beastiary`.
 - Export an empty frozen `BEASTIARY` array.
-- Create `tests/beastiary.test.mjs` for field validation and immutability.
+- Create `tests/skill-check.test.mjs` and `tests/beastiary.test.mjs` for field validation and immutability.
 - Add `SkillCheck` to [coding-glossary.md](../coding-glossary.md).
 
 Acceptance criteria:
@@ -293,7 +385,35 @@ Acceptance criteria:
 - Add ranks 3 to 5 from the spirit roster.
 - Add tests for entry counts and unique names.
 
-### PR 7: Lookup tables and encounter selection
+### PR 7: Desert creatures
+
+- Add all entries from the Desert creatures roster.
+- Add tests for entry counts and unique names across the full `BEASTIARY`.
+
+Acceptance criteria:
+- Manticore and Guawa appear once only.
+- Each Jinn uses only the DESERT climate.
+
+### PR 8: Mountain creatures
+
+- Add all entries from the Mountain creatures roster.
+- Add tests for entry counts and unique names across the full `BEASTIARY`.
+
+Acceptance criteria:
+- Tengu, Kenku, Satori, Gaki, and Nue appear once only.
+- Mountain Troll and Shadowlands Troll are separate entries.
+
+### PR 9: Swamp creatures
+
+- Add all entries from the Swamp creatures roster.
+- Add tests for entry counts and unique names across the full `BEASTIARY`.
+
+Acceptance criteria:
+- Existing swamp entries appear once only and include WETLANDS.
+- No goblin variant is a separate entry.
+- Giant Alligator and Wani are separate entries.
+
+### PR 10: Lookup tables and encounter selection
 
 - Add `Beast` and `BeastiaryLookUpTable` to [encounter-check.js](../docs/scripts/encounter-check.js).
 - Build all lookup tables when the module loads.
