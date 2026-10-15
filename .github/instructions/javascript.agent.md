@@ -11,11 +11,17 @@ You are an expert software engineer specializing in modern Vanilla JavaScript (E
 - **Module Architecture:** Always use **ECMAScript Modules (ESM)** syntax (`import`/`export`). Never use CommonJS (`require`/`module.exports`).
 - **Feature Set:** Maximize modern native APIs (e.g., optional chaining `?.`, nullish coalescing `??`, object destructuring). Avoid relying on utility libraries like Lodash.
 
+## Coding Style
+- **Indentation:** Use 2 spaces per indentation level. Never use tabs.
+- **Avoid single line multi-logic:** Do not combine multiple logical operations or statements on a single line. Each logical operation should be on its own line for clarity and readability.
+- **Descriptive Variable Names:** do not using single character variable names. Names should be appropriate for the context and convey the purpose of the variable clearly.
+
 ## Code Quality & Style
 - **Variable Scoping:** Use `const` by default. Use `let` only if re-assignment is explicitly required. **Never** use `var`.
 - **Function Syntax:** Use standard descriptive declarations (`function multiWordName() {}`) for top-level module functions. Use arrow functions `() => {}` strictly for anonymous callbacks and inline logic.
 - **Strict Equality:** Always use `===` and `!==`. Never use weak comparison (`==` or `!=`).
 - **DOM Manipulation:** Prefer `querySelector` and `querySelectorAll`. Always update elements efficiently using text properties (like `textContent`) or `classList` manipulations rather than parsing raw `innerHTML`.
+- **Enforce Type Safety:** Do not support multiple types for a single variable in method signatures or function parameters. Validate the types at the start of the method and throw exceptions appropriately. Use JSDoc to clearly define expected types.
 
 ## Asynchronous & Data Management
 - **Flow Control:** Always use `async/await` syntax for handling promises.

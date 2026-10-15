@@ -1,37 +1,34 @@
-import { SPIRIT, SHADOWLAND, ANIMAL, CRIME } from "./world-map-layers.js";
-
 // Initial house rules: probabilities per call for map levels zero through five.
-export const ENCOUNTER_CHANCES = Object.freeze([0, 0.05, 0.1, 0.2, 0.3, 0.5]);
+export const ENCOUNTER_CHANCES = Object.freeze([
+  0.00001,
+  0.00010,
+  0.00100,
+  0.01000,
+  0.10000,
+  0.33000]);
+
 const ENCOUNTERS = [
-  ["spirit", SPIRIT, 20], ["shadowland", SHADOWLAND, 25],
-  ["animal", ANIMAL, 15], ["criminal", CRIME, 20],
+  ["spirit", 20], ["shadowland", 25], ["animal", 15], ["criminal", 20],
 ];
 
 /**
  * Roll once per type, including level zero. Types use independent rolls.
- * @param {number|string|object} spirit Spirit level, name, or metadata.
- * @param {number|string|object} shadowland Shadowland level, name, or metadata.
- * @param {number|string|object} animal Animal level, name, or metadata.
- * @param {number|string|object} criminal Crime level, name, or metadata.
- * @param {function(): number} [random=Math.random] Random source in the range [0, 1).
+ * @param {number} spirit Spirit map level from zero to five.
+ * @param {number} shadowland Shadowland map level from zero to five.
+ * @param {number} animal Animal map level from zero to five.
+ * @param {number} criminal Crime map level from zero to five.
  * @returns {string[]} Encounter types that occur, in input order. Empty means none.
- * @throws {TypeError} If a level or random source is invalid.
+ * @throws {TypeError} If a level is invalid.
  */
-export function rollEncounter(spirit, shadowland, animal, criminal, random = Math.random) {
+export function rollEncounter(spirit, shadowland, animal, criminal) {
   const inputs = [spirit, shadowland, animal, criminal];
-  const chances = ENCOUNTERS.map(([, catalog], index) => {
-    const input = inputs[index];
-    const level = Object.values(catalog).find(({ value, name }) => value === input || value === input?.value
-      || (typeof input === "string" && name.toLowerCase() === input.trim().toLowerCase()));
-    if (!level) throw new TypeError("Encounter levels must be map levels from zero to five.");
-    return ENCOUNTER_CHANCES[level.value];
-  });
-  if (typeof random !== "function") throw new TypeError("Random source must be a function.");
+  if (inputs.some((level) => !Number.isInteger(level) || level < 0 || level > 5)) {
+    throw new TypeError("Encounter levels must be map level numbers from zero to five.");
+  }
+  const chances = inputs.map((level) => ENCOUNTER_CHANCES[level]);
+
   return ENCOUNTERS.filter((_, index) => {
-    const roll = random();
-    if (!Number.isFinite(roll) || roll < 0 || roll >= 1) {
-      throw new TypeError("Random values must be in the range [0, 1).");
-    }
+    const roll = Math.random();
     return roll < chances[index];
   }).map(([type]) => type);
 }
@@ -49,5 +46,5 @@ export function getSkillAndTN(encounterType) {
   const encounter = ENCOUNTERS.find(([type]) =>
     typeof encounterType === "string" && type === encounterType.trim().toLowerCase());
   if (!encounter) throw new TypeError("Unknown encounter type.");
-  return ["Horsemanship", "Athletics", "Stealth"].map((skill) => ({ skill, tn: encounter[2] }));
+  return ["Horsemanship", "Athletics", "Stealth"].map((skill) => ({ skill, tn: encounter[1] }));
 }
