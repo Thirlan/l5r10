@@ -126,7 +126,7 @@ rollEncounter(criminal, animal, spirit, shadowland, terrain, climate, vegetation
 - Include Jinn as generic desert elementals. Do not use named Jinn.
 - Include Mokumokuren only as a haunting of abandoned mountain or marsh shrines.
 - Omit sentient races that are not threats: Nezumi and Busimin.
-- Include Naga only as guardians of hidden marsh cities.
+- Include Naga only as guardians of hidden marsh/forest cities
 - Include Zokujin as territorial tunnel dwellers.
 
 ### TN guidance
