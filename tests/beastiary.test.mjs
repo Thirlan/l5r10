@@ -8,6 +8,11 @@ test("BEASTIARY is frozen and contains unique names", () => {
   assert.equal(new Set(BEASTIARY.map(({ name }) => name)).size, BEASTIARY.length);
 });
 
+test("BEASTIARY is ordered alphabetically by name", () => {
+  const names = BEASTIARY.map(({ name }) => name);
+  assert.deepEqual(names, [...names].sort((left, right) => left.localeCompare(right)));
+});
+
 test("BEASTIARY contains the full planned roster", () => {
   assert.equal(BEASTIARY.length, 128);
   for (const [encounterType, expectedCount] of [
