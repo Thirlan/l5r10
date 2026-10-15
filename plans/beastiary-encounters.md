@@ -72,6 +72,7 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 | `avoidSkillCheck` | SkillCheck[] | Checks that avoid the creature if spotted. If empty then a spot check was sufficient, such as spotting a small snake before it bites. Spotting a flying Chimera however still requires a hide or horsemanship. |
 | `escapeSkillCheck` | SkillCheck[] | Checks to escape the creature if not spotted (some will overlap with avoid). |
 | `impactSkillCheck` | SkillCheck[] | Empty for a fight. Otherwise a skill trial. |
+| `encounterDescription` | One sentence description of the encounter |
 
 - Instances and their lists are frozen.
 
@@ -113,7 +114,7 @@ rollEncounter(criminal, animal, spirit, shadowland, terrain, climate, vegetation
 
 - Validate the four levels as integers from 0 to 5.
 - Validate terrain, climate, vegetation, and river as known catalog IDs.
-- Roll each encounter type sequentially, stopping at the first encounter.
+- Roll each encounter type sequentially, stopping at the first successfully rolled encounter.
 - select a beast from the matching table.
 - Return the selected `BeastSelection`.
 
