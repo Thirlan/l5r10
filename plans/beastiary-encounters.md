@@ -11,10 +11,12 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 
 ## Confirmed decisions
 
-- Name the file `beastiary.js`. Keep the class names `Beastiary`, `BeastiaryLookUpTable`, and `Beast`.
-- Add an `encounterType` field to `Beastiary`: `"spirit"`, `"shadowland"`, `"animal"`, or `"criminal"`.
+- Name the files `beast.js`, `beastiary.js`, `beast-selection.js`, and `skill-check.js`.
+- Use the class names `Beast`, `BeastSelection`, `BeastiaryLookUpTable`, and `SkillCheck`.
+- `Beast` holds creature data. `BeastSelection` holds one weighted lookup table entry.
+- Add an `encounterType` field to `Beast`: `"spirit"`, `"shadowland"`, `"animal"`, or `"criminal"`.
 - Build one lookup table for each encounter type and each terrain, climate, vegetation, and river combination.
-- `rollEncounter` returns an array of `Beast` instances. It returns one beast at most per encounter type.
+- `rollEncounter` returns an array of `BeastSelection` instances. It returns one at most per encounter type.
 - Map levels control only the encounter chance. They do not filter beasts by rank.
 - If an encounter triggers and its table is empty, skip that encounter type.
 - Remove `getSkillAndTN`. Use the beast `avoidSkillCheck` list instead.
@@ -26,7 +28,7 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 
 ## Class design
 
-### `Beastiary` (beastiary.js)
+### `Beast` (beast.js)
 
 | Field | Type | Rule |
 |-|-|-|
@@ -39,12 +41,16 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 | `vegetation` | number[] | Valid `VEGETATION` IDs. Not empty. |
 | `river` | number[] | Valid `RIVER` IDs. Not empty. |
 | `spotSkillCheck` | SkillCheck[] | Checks that detect the creature. |
-| `avoidSkillCheck` | SkillCheck[] | Alternative checks that avoid the creature. |
+| `avoidSkillCheck` | SkillCheck[] | Checks that avoid the creature if spotted. If empty then a spot check was sufficient, such as spotting a small snake before it bites. Spotting a flying Chimera however still requires a hide or horsemanship. |
+| `escapeSkillCheck` | SkillCheck[] | Checks to escape the creature if not spotted (some will overlap with avoid). |
 | `impactSkillCheck` | SkillCheck[] | Empty for a fight. Otherwise a skill trial. |
 
 - The constructor validates all fields and throws `TypeError` for bad values.
 - Instances and their lists are frozen.
-- Export `BEASTIARY`, a frozen array of all entries.
+
+### `BEASTIARY` (beastiary.js)
+
+- Export `BEASTIARY`, a frozen array of all `Beast` entries.
 
 ### `SkillCheck` (skill-check.js)
 
@@ -52,17 +58,21 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 - Instances are frozen.
 - Add `SkillCheck` to [coding-glossary.md](../coding-glossary.md).
 
-### `Beast` (encounter-check.js)
+### `BeastSelection` (beast-selection.js)
 
-| Field | Type |
-|-|-|
-| `name` | string |
-| `rank` | number, 1 to 5 |
-| `selectionFrom` | number, inclusive |
-| `selectionTo` | number, exclusive |
-| `spotSkillCheck` | SkillCheck[] |
-| `avoidSkillCheck` | SkillCheck[] |
-| `impactSkillCheck` | SkillCheck[] |
+| Field | Type | Rule |
+|-|-|-|
+| `name` | string | Copied from `Beast`. |
+| `encounterType` | string | One of the four encounter types. |
+| `rank` | number | Integer from 1 to 5. |
+| `selectionFrom` | number | Inclusive. |
+| `selectionTo` | number | Exclusive. |
+| `spotSkillCheck` | SkillCheck[] | Checks that detect the creature. |
+| `avoidSkillCheck` | SkillCheck[] | Checks that avoid the creature if spotted. If empty then a spot check was sufficient, such as spotting a small snake before it bites. Spotting a flying Chimera however still requires a hide or horsemanship. |
+| `escapeSkillCheck` | SkillCheck[] | Checks to escape the creature if not spotted (some will overlap with avoid). |
+| `impactSkillCheck` | SkillCheck[] | Empty for a fight. Otherwise a skill trial. |
+
+- Instances and their lists are frozen.
 
 ### `BeastiaryLookUpTable` (encounter-check.js)
 
@@ -73,23 +83,23 @@ Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-c
 | `vegetation` | number |
 | `river` | number |
 | `diceRollSize` | number, starts at 0 |
-| `beastList` | Beast[] |
+| `beastList` | BeastSelection[] |
 
-- `add(beastiary)`:
+- `add(beast)`:
   1. Set `selectionFrom` to the current `diceRollSize`.
-  2. Increase `diceRollSize` by `beastiary.weight`.
+  2. Increase `diceRollSize` by `beast.weight`.
   3. Set `selectionTo` to the new `diceRollSize`.
-  4. Append the new `Beast` to `beastList`.
+  4. Append the new `BeastSelection` to `beastList`.
 - `select()`:
   1. Return `undefined` if `diceRollSize` is 0.
   2. Roll `Math.floor(Math.random() * diceRollSize)`.
-  3. Return the beast where `selectionFrom <= roll < selectionTo`.
+  3. Return the `BeastSelection` where `selectionFrom <= roll < selectionTo`.
 - Freeze the table after the build is complete.
 
 ## Lookup table build
 
 - Loop over each encounter type and each `TERRAIN`, `CLIMATE`, `VEGETATION`, and `RIVER` value.
-- Add each `Beastiary` entry whose type and four ID lists match.
+- Add each `Beast` whose type and four ID lists match.
 - Store tables in a private `Map`. Use a key built from the type and four IDs.
 - Build all tables once when the module loads.
 - Export `getLookUpTable(encounterType, terrain, climate, vegetation, river)`.
@@ -104,13 +114,13 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 - Validate terrain, climate, vegetation, and river as known catalog IDs.
 - Roll each encounter type independently, as now.
 - For each triggered type, select a beast from the matching table.
-- Return the selected `Beast` instances in input order.
+- Return the selected `BeastSelection` instances in input order.
 
 ## Data guidance
 
 - Use creature names and concepts only. Do not copy rulebook text or stat blocks.
 - Do not use named, unique oni.
-- Keep criminals to five entries, one for each rank.
+- Keep criminals to six entries. Each rank from 1 to 5 has at least one entry.
 - Skip harmless animals.
 - Omit legendary or unique beings: Phoenix, Kitsu, Akkorokamui, and the Great Sea Spider.
 - Include Jinn as generic desert elementals. Do not use named Jinn.
@@ -124,6 +134,9 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 - Base TN: 10 + 5 × rank.
 - Spot checks use Perception. Examples: Hunting, Investigation, or Lore: Spirits.
 - Avoid checks use Horsemanship (Agility), Athletics (Strength), or Stealth (Agility).
+- Leave the avoid list empty when spotting the creature is enough. Example: a small snake.
+- Escape checks use the same skills as avoid checks. Add 5 to the TN because the creature was not spotted.
+- Do not leave the escape list empty.
 - Stealthy creatures add 5 to the spot TN.
 - Fast or flying creatures add 5 to the Athletics and Horsemanship avoid TN.
 - Impact checks use Medicine (Intelligence), raw Stamina, raw Willpower, or Etiquette (Awareness).
@@ -176,7 +189,7 @@ rollEncounter(spirit, shadowland, animal, criminal, terrain, climate, vegetation
 | Peasant Bandits | 2 | 100 | Land | Living climates | Any | Any | |
 | Ronin Bandits | 3 | 50 | Land | Living climates | Any | Any | |
 | Smugglers | 3 | 10 | Water, WETLANDS | Living climates | NONE | NONE | |
-| Pirates | 4 | 10 | COASTAL_WATERS, OCEAN | Living climates | NONE | NONE | |
+| Pirates | 4 | 10 | COASTAL_WATER, OCEAN | Living climates | NONE | NONE | |
 | Gaijin Bandits | 5 | 1 | Any | Living climates | Any | Any | |
 
 ### Shadowland creatures
@@ -350,22 +363,23 @@ Notes for swamp entries:
 
 Each PR is 200 lines or fewer, including tests.
 
-### PR 1: Beastiary classes
+### PR 1: Beast classes
 
 - Create [skill-check.js](../docs/scripts/skill-check.js) with `SkillCheck`.
-- Create [beastiary.js](../docs/scripts/beastiary.js) with `Beastiary`.
-- Export an empty frozen `BEASTIARY` array.
-- Create `tests/skill-check.test.mjs` and `tests/beastiary.test.mjs` for field validation and immutability.
+- Create [beast.js](../docs/scripts/beast.js) with `Beast`.
+- Create [beastiary.js](../docs/scripts/beastiary.js). Export an empty frozen `BEASTIARY` array.
+- Create `tests/skill-check.test.mjs` and `tests/beast.test.mjs` for field validation and immutability.
 - Add `SkillCheck` to [coding-glossary.md](../coding-glossary.md).
 
 Acceptance criteria:
 - Invalid names, types, ranks, weights, IDs, and skill checks throw `TypeError`.
+- An empty `escapeSkillCheck` list throws `TypeError`.
 - Instances and their lists are frozen.
 
 ### PR 2: Animals and criminals
 
 - Add the animal and criminal roster entries to `BEASTIARY`.
-- Add tests for entry counts, unique names, and one criminal for each rank.
+- Add tests for entry counts, unique names, and at least one criminal for each rank.
 
 ### PR 3: Shadowland creatures, part 1
 
@@ -415,7 +429,8 @@ Acceptance criteria:
 
 ### PR 10: Lookup tables and encounter selection
 
-- Add `Beast` and `BeastiaryLookUpTable` to [encounter-check.js](../docs/scripts/encounter-check.js).
+- Create [beast-selection.js](../docs/scripts/beast-selection.js) with `BeastSelection`.
+- Add `BeastiaryLookUpTable` to [encounter-check.js](../docs/scripts/encounter-check.js).
 - Build all lookup tables when the module loads.
 - Export `getLookUpTable`.
 - Extend `rollEncounter` with terrain, climate, vegetation, and river.
@@ -427,4 +442,4 @@ Acceptance criteria:
 - `diceRollSize` equals the sum of the matching weights.
 - The roll boundaries select the correct beast.
 - Empty tables skip the encounter type.
-- `rollEncounter` returns `Beast` instances in input order.
+- `rollEncounter` returns `BeastSelection` instances in input order.
