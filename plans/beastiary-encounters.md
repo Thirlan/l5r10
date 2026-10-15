@@ -131,7 +131,7 @@ rollEncounter(criminal, animal, spirit, shadowland, terrain, climate, vegetation
 
 ### TN guidance
 
-- Base TN: 10 + 5 × rank.
+- Base TN: 5 + 5 × rank, but TNs should stay realistic. Large monsters should be easy to spot.
 - Spot checks use Perception. Examples: Hunting, Investigation, or Lore: Spirits.
 - Avoid checks use Horsemanship (Agility), Athletics (Strength), or Stealth (Agility).
 - Leave the avoid list empty when spotting the creature is enough. Example: a small snake.
