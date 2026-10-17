@@ -186,14 +186,24 @@
     <tr><td>Raises</td><td>Duration (+2 rounds)</td></tr>
     <tr><td>Description</td><td>This spell infuses the caster's body with the strength of Earth, weakening the force of any physical or magical attack which strikes him. For the duration of the spell, you gain Reduction in an amount equal to your Earth Ring + School Rank. However, this infusion of Earth gives you a -1 to Movement Rating while you are under the effects of this spell.</td></tr>
     </table>
-    <h3>Courage of the Seven Thunders </h3>
+    <h3>Courage of the Seven Thunders</h3>
     <table>
     <tr><td>Ring/Mastery</td><td>Earth 1 (Battle)</td></tr>
     <tr><td>Range</td><td>30'</td></tr>
     <tr><td>Area of Effect</td><td>Targets up to caster's Shugenja School Rank</td></tr>
     <tr><td>Duration</td><td>10 minutes</td></tr>
     <tr><td>Raises</td><td>Duration (+1 minute), Targets (+1)</td></tr>
-    <tr><td>Description</td><td>This spell infuses the targets (who may include the caster) with firm and unyielding courage, bolstered by the eternal power of the Earth. For the duration of the spell, all targets gain +5k0 to resist any kind of Fear effect, whether magical or natural. However, this spell is associated with the memory of the legendary Seven Thunders, and those whose connection to the Thunders is tenuous do not receive the same degree of blessing from the Earth kami. Samurai who are not of the original Seven Great Clans receive only +3k0 to their rolls to resist Fear. Anyone who has at least a full Rank of Shadowlands Taint cannot benefit from this spell, although this will not actually reveal that they are Tainted.</td></tr>
+    <tr><td>Flavor</td><td>This spell infuses the targets with firm and unyielding courage, bolstered by the eternal power of the Earth.</td></tr>
+    <tr>
+      <td>Effect</td>
+      <td>
+        <ul>
+          <li>+1 to the target's willpower, but does not cause their Earth Ring to increase from this and cannot be used with Social Skills.</li>
+          <li>Gain +5 TR to resist Fear effects</li>
+          <li>Anyone who has at least a full Rank of Shadowlands Taint cannot benefit from this spell, although this will not actually reveal that they are Tainted.</li>
+        </ul>
+      </td>
+    </tr>
     </table>
     <h3>Earth's Stagnation </h3>
     <table>
@@ -203,15 +213,6 @@
     <tr><td>Duration</td><td>6 rounds</td></tr>
     <tr><td>Raises</td><td>Duration (+2 rounds), Range (+10'), Targets (+1, to a maximum of 4 total targets)</td></tr>
     <tr><td>Description</td><td>This spell calls on the Earth in the target's body to weigh him down, impeding his movements. The target suffers a -2k0 penalty to all rolls using the Agility trait, and his Water Ring is considered 1 Rank lower for the purposes of how far he can move.</td></tr>
-    </table>
-    <h3>Earth's Touch </h3>
-    <table>
-    <tr><td>Ring/Mastery</td><td>Earth 1 (Defense)</td></tr>
-    <tr><td>Range</td><td>Touch</td></tr>
-    <tr><td>Area of Effect</td><td>One target</td></tr>
-    <tr><td>Duration</td><td>1 hour</td></tr>
-    <tr><td>Raises</td><td>Duration (+1/2 hour), Targets (+1 per 2 raises, maximum of 3 total targets)</td></tr>
-    <tr><td>Description</td><td>With this spell, the shugenja calls forth the Earth of the target (which may be himself), invoking the kami to strengthen his health and mental fortitude. For the duration of the spell, one of the target's Earth Traits (chosen by the caster) is increased by 1. This does not increase the Ring itself, but it can enhance the target's ability to withstand temptation, resist poisons, or dominate others.</td></tr>
     </table>
     <h3>Elemental Ward </h3>
     <table>
@@ -231,15 +232,26 @@
     <tr><td>Raises</td><td>Damage (+1k0), Range (+10'), Targets (+1 target, maximum of 5 total targets)</td></tr>
     <tr><td>Description</td><td>This summons forth the purest of Earth kami, those of jade, in the form of a blast of iridescent green energy. The jade power flies out and unerringly strikes the chosen target - it cannot be intercepted or deflected, although Magic Resistance or other forms of magical defense can thwart it. If the target has at least one Rank of Taint, the Jade Strike will inflict damage with a DR of 3,3, burning and blackening the Tainted flesh. However, a target who does not have at least a full Rank of Taint will not suffer any damage from the spell. Casting Jade Strike on a non-Tainted target is generally regarded as a grave insult - except perhaps among the more paranoid ranks of the Kuni family, where it is seen as merely a sensible precaution.</td></tr>
     </table>
-    <h3>Jurojin's Balm </h3>
+
+    <h3>Jurojin's Balm</h3>
     <table>
-    <tr><td>Ring/Mastery</td><td>Earth 1</td></tr>
-    <tr><td>Range</td><td>Touch</td></tr>
-    <tr><td>Area of Effect</td><td>1 target</td></tr>
-    <tr><td>Duration</td><td>1 hour</td></tr>
-    <tr><td>Raises</td><td>Duration (+1/2 hour), Targets (+1 per 2 Raises, maximum of 5 total targets)</td></tr>
-    <tr><td>Description</td><td>This spell fills the target's body with the purity and vigor of Earth, driving out poisons and impurities. If the target suffers the effects of any poison or toxin within the duration of the spell, or is already under the effects of a poison when the spell targets him, he may re-roll any failed Stamina roll to resist the poison, with a bonus of +2k0 to the second roll. (However, if the second roll is also failed, the poison has full effect.) An interesting side-effect of this spell is that it also cures drunkenness and other such effects, and it is impossible to become intoxicated during the spell's duration.</td></tr>
+      <tr><td>Ring/Mastery</td><td>Earth 1</td></tr>
+      <tr><td>Range</td><td>Touch</td></tr>
+      <tr><td>Area of Effect</td><td>1 target</td></tr>
+      <tr><td>Duration</td><td>1 hour</td></tr>
+      <tr><td>Raises</td><td>Duration (+1/2 hour), Targets (+1 per 2 Raises, maximum of 5 total targets)</td></tr>
+      <tr><td>Flavor</td><td>This spell fills the target's body with the purity and vigor of Earth, driving out poisons and impurities.</td></tr>
+      <tr>
+        <td>Effect</td>
+        <td>
+          <ul>
+            <li>+1 to the target's stamina, but does not cause their Earth Ring to increase from this.</li>
+            <li>If the target was under the effect of any poison or toxin when the spell was cast, they may make a Stamina roll to attempt to cancel the poison.</li>
+            <li>Cures drunkenness, as this is considered a poison.</li>
+          </ul>
+      </tr>
     </table>
+
     <h3>Minor Binding </h3>
     <table>
     <tr><td>Ring/Mastery</td><td>Earth 1 (Craft)</td></tr>
@@ -270,23 +282,14 @@
     <tr><td>Raises</td><td>Damage (+1k0), Duration (+5 minutes), Range (+5 feet)</td></tr>
     <tr><td>Description</td><td>You summon a tetsubo of pure earth, studded with all manner of stones. The weapon's default form is a tetsubo, but one Raise can change its form to any other heavy weapon of your choosing. The tetsubo has a DR of 2k2. When wielding this weapon, you may use your School Rank in place of your Heavy Weapon Skill if you wish. If you do have the Heavy Weapon Skill, the tetsubo grants you a +5 TR for the Knockdown maneuver (this bonus does not apply if you grant the Tetsubo to another person instead of wielding it yourself). The tetsubo disappears if it is lost from your hand. Instead of summoning for yourself, you may cause it to appear in the hands of an ally within 20 feet. He is treated as the caster for all purposes of the spell, but does not gain the +5 TR bonus.</td></tr>
     </table>
-    <h3>Biting Steel </h3>
+    <h3>Biting Steel</h3>
     <table>
     <tr><td>Ring/Mastery</td><td>Fire 1 (Craft)</td></tr>
     <tr><td>Range</td><td>Touch</td></tr>
-    <tr><td>Area of Effect</td><td>1 bladed weapon</td></tr>
+    <tr><td>Area of Effect</td><td>1 weapon</td></tr>
     <tr><td>Duration</td><td>1 minute</td></tr>
     <tr><td>Raises</td><td>Duration (+1 minute)</td></tr>
     <tr><td>Description</td><td>Fire spirits can infuse metal with their own fury, turning a sharp edge into a supremely perfect one. This spell enhances the damage of steel bladed weapons, such as swords, knives, naginata, etc. Biting Steel cannot affect weapons which are not metal blades, which are nemuranai, or which have already been enhanced by magical effects. The weapon's DR is increased by 1k1 for the duration of the spell.</td></tr>
-    </table>
-    <h3>Burning Kiss of Steel</h3>
-    <table>
-    <tr><td>Ring/Mastery</td><td>Fire 1 (Battle)</td></tr>
-    <tr><td>Range</td><td>Touch</td></tr>
-    <tr><td>Area of Effect</td><td>One melee weapon in caster's hand</td></tr>
-    <tr><td>Duration</td><td>5 minutes</td></tr>
-    <tr><td>Raises</td><td>Duration (+2 minutes)</td></tr>
-    <tr><td>Description</td><td>This spell embraces a weapon with fire, causing it to be larger and more effective. When the spell is cast, a tendril of fire extends from your hands to engulf your weapon. (If you drop or lose the weapon, the spell effect ends.) This weapon gains a +1k1 bonus to melee attack rolls. The bonus is +2k2 when making attacks against mounted opponents or opponents of larger than human size.</td></tr>
     </table>
     <h3>Envious Flames </h3>
     <table>
@@ -371,14 +374,18 @@
     <tr><td>Raises</td><td>Damage (+1k0), Duration (+5 minutes), Range (+5')</td></tr>
     <tr><td>Description</td><td>You summon a staff of pure water, as rigid as the real thing despite its fluid nature. The weapon's default form is a bo, but one Raise can change its form to any other staff of your choosing. The weapon has DR 1k2. If you do not possess the Staves Skill, you may instead use your School Rank in its place. If you do possess the Staves Skill, using this weapon grants you one +5 TR that can only be used on the Knockdown Maneuver. This weapon disappears if it is lost from your hand. Instead of summoning the bo for yourself, you may cause it to appear in the hands of an ally within 20 feet. He is treated as the caster for all purposes of the spell, but he does not gain the +5 TR bonus.</td></tr>
     </table>
-    <h3>Clarity of Purpose </h3>
+    <h3>Clarity of Purpose</h3>
     <table>
     <tr><td>Ring/Mastery</td><td>Water 1 (Battle)</td></tr>
-    <tr><td>Range</td><td>Personal</td></tr>
-    <tr><td>Area of Effect</td><td>10' radius around caster</td></tr>
-    <tr><td>Duration</td><td>2 rounds</td></tr>
-    <tr><td>Raises</td><td>Area (+5'), Duration (+1 round per 2 Raises)</td></tr>
-    <tr><td>Description</td><td>One of the many strengths of water is in its speed. All allies within the area of effect of this spell gain a bonus of +5 to their Initiative Scores for the duration of the spell.</td></tr>
+    <tr><td>Range</td><td>5 sq / 25'</td></tr>
+    <tr><td>Area of Effect</td><td>1 target</td></tr>
+    <tr><td>Duration</td><td>5 minutes</td></tr>
+    <tr><td>Raises</td><td>+1 target per raise</td></tr>
+    <tr><td>Description</td><td>One of the many strengths of water is in its speed.</td></tr>
+    <tr>
+      <td>Effect</td>
+      <td>+5 TR for Initiative rolls at start of combat</td>
+    </tr>
     </table>
     <h3>Ebbing Strength </h3>
     <table>
@@ -1052,14 +1059,26 @@
 
     This spell's effects can be overcome by those of strong will. The target can attempt to resist with an opposed Willpower roll, but you add your Fire to the total of your roll. If the spell is cast in battle, this roll occurs during the Reactions Stage (and may be attempted each Round). If the spell is cast out of battle, the roll occurs every 10 minutes.</td></tr>
     </table>
-    <h3>Hungry Blade </h3>
+    <h3>Burning Kiss of Steel</h3>
     <table>
     <tr><td>Ring/Mastery</td><td>Fire 3 (Craft)</td></tr>
     <tr><td>Range</td><td>50'</td></tr>
     <tr><td>Area of Effect</td><td>1 weapon</td></tr>
     <tr><td>Duration</td><td>5 rounds</td></tr>
     <tr><td>Raises</td><td>Duration (+1 Round)</td></tr>
-    <tr><td>Description</td><td>This spell is a more potent version of Biting Steel, designed to enhance any weapon rather than merely a sword. The spell strengthens the Fire spirits in a single target weapon, causing them to come forth and form a faint sheath of fire around it. The weapon's wielder adds +1k0 to all attack rolls, and all of his damage dice explode on a result of 8 or better. Each die can explode on an 8 or 9 only once per roll, however, even if the wielder has other effects that allow the die to explode on 9s.</td></tr>
+    <tr><td>Description</td><td>This spell is a more potent version of Biting Steel. The spell strengthens the Fire spirits in a single target weapon, causing them to come forth and form a faint sheath of fire around it.</td>
+    </tr>
+    <tr>
+      <td>Effect</td>
+      <td>
+        When attacking with the weapon:
+        <ul>
+          <li>+1k1 to attack rolls</li>
+          <li>+1k1 to damage rating</li>
+          <li>damage explodes on 9's</li>
+        </ul>
+      </td>
+    </tr>
     </table>
 
     <h3>Ravenous Swarms </h3>
