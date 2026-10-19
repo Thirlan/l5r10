@@ -903,7 +903,7 @@
               <ul>
                 <li>+1 to the target's stamina, but does not cause their Earth Ring to increase from this.</li>
                 <li>If the target was under the effect of any poison or toxin when the spell was cast, they may make a Stamina roll to attempt to cancel the poison.</li>
-                <li>Cures drunkenness, as this is considered a poison.</li>
+                <li>Note: cures all poisons, including  drunkenness, as this is considered a poison.</li>
               </ul>
             </td>
           </tr>
@@ -956,9 +956,11 @@
                   <ul>
                     <li>has 3 or less Earth Ring Rank</li>
                     <li>is Shadowland Tainted</li>
+                    <li>is not a <a href="../shadowlands/shadowlands_taint.hml#shadowland-taint-lost">Lost</a></li>
+                    <li>is not an Oni</li>
                   </ul>
                 </li>
-                <li>Then they become unable to move or act in any way other than to speak.</li>
+                <li>Then they are unable to take any simple, complex, or free action other than to speak.</li>
               </ul>
             </td>
           </tr>
@@ -977,7 +979,7 @@
           </tr>
           <tr>
             <td>Range</td>
-            <td>Personal or 4 sq / 20'</td>
+            <td>Personal or a target within 4 sq / 20'</td>
           </tr>
           <tr>
             <td>Area of Effect</td>
@@ -994,7 +996,7 @@
                 <li>1 Raise: +1k0 DR</li>
                 <li>1 Raise: +5 minutes</li>
                 <li>1 Raise: +1 sq / 5' range</li>
-                <li>1 Raise: any heavy weapon of your choice</li>
+                <li>1 Raise: change to any heavy weapon of your choice</li>
               </ul>
             </td>
           </tr>
@@ -1006,9 +1008,16 @@
             <td>Effect</td>
             <td>
               <ul>
+                <li>2k2 DR</li>
+                <li>May use your School Rank in place of your "Heavy Weapon" Skill</li>
+                <li>Gain +5 TR to Knockdown maneuver if...
+                  <ul>
+                    <li>Have the "Heavy Weapon" Skill</li>
+                    <li>You the caster, are the one wielding the Tetsubo</li>
+                  </ul>
+                </li>
                 <li>The tetsubo disappears if it is lost from your hand.</li>
               </ul>
-              The weapon's default form is a tetsubo, but one Raise can change its form to any other heavy weapon of your choosing. The tetsubo has a DR of 2k2. When wielding this weapon, you may use your School Rank in place of your Heavy Weapon Skill if you wish. If you do have the Heavy Weapon Skill, the tetsubo grants you a +5 TR for the Knockdown maneuver (this bonus does not apply if you grant the Tetsubo to another person instead of wielding it yourself). Instead of summoning for yourself, you may cause it to appear in the hands of an ally within 4 sq / 20'. He is treated as the caster for all purposes of the spell, but does not gain the +5 TR bonus.
             </td>
           </tr>
         </tbody>
@@ -1030,7 +1039,7 @@
           </tr>
           <tr>
             <td>Area of Effect</td>
-            <td>1 weapon</td>
+            <td>1 bladed weapon</td>
           </tr>
           <tr>
             <td>Duration</td>
@@ -1046,11 +1055,37 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td></td>
+            <td>Fire spirits can infuse metal with their own fury, turning a sharp edge into a supremely perfect one. </td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>Fire spirits can infuse metal with their own fury, turning a sharp edge into a supremely perfect one. This spell enhances the damage of steel bladed weapons, such as swords, knives, naginata, etc. Biting Steel cannot affect weapons which are not metal blades, which are nemuranai, or which have already been enhanced by magical effects. The weapon's DR is increased by 1k1 for the duration of the spell.</td>
+            <td>
+              <ul>
+                <li>+1k1 DR to the weapon</li>
+                <li>Can only target bladed weapons such as, but not limited to:
+                  <ul>
+                    <li>Swords</li>
+                    <li>Knives</li>
+                    <li>Naginata</li>
+                  </ul>
+                </li>
+                <li>Cannot affect non-metal weapons, such as, but not limited to:
+                  <ul>
+                    <li>Jade</li>
+                    <li>Crystal</li>
+                    <li>Obsidian</li>
+                  </ul>
+                </li>
+                <li>Cannot affect <a href="./nemuranai.html">Nemuranai</a> as they are already considered magically imbued</li>
+                  <ul>
+                    <li>Jade</li>
+                    <li>Crystal</li>
+                    <li>Obsidian</li>
+                  </ul>
+                </li>
+
+              </ul>
+              This spell enhances the damage of steel bladed weapons, such as swords, knives, naginata, etc. Biting Steel cannot affect weapons which are not metal blades, which are nemuranai, or which have already been enhanced by magical effects. The weapon's DR is increased by 1k1 for the duration of the spell.</td>
           </tr>
         </tbody>
       </table>
