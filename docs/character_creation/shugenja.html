@@ -1442,7 +1442,7 @@
           </tr>
           <tr>
             <td>Range</td>
-            <td>Personal or 4 sq / 20' (see below)</td>
+            <td>Personal or a target within 4 sq / 20'</td>
           </tr>
           <tr>
             <td>Area of Effect</td>
@@ -1458,20 +1458,33 @@
               <ul>
                 <li>1 Raise: +1k0 DR</li>
                 <li>1 Raise: Duration (+5 minutes)</li>
-                <li>1 Raise: Range (+1 sq / 5')</li>
+                <li>1 Raise: Range (+1 sq / 5')</li><li>1 Raise: change to any stave weapon of your choice</li>
               </ul>
             </td>
           </tr>
           <tr>
             <td>Flavor</td>
-            <td>This weapon disappears if it is lost from your hand.</td>
+            <td>You summon a staff of pure water, as rigid as the real thing despite its fluid nature.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>You summon a staff of pure water, as rigid as the real thing despite its fluid nature. The weapon's default form is a bo, but one Raise can change its form to any other staff of your choosing. The weapon has DR 1k2. If you do not possess the Staves Skill, you may instead use your School Rank in its place. If you do possess the Staves Skill, using this weapon grants you one +5 TR that can only be used on the Knockdown Maneuver. Instead of summoning the bo for yourself, you may cause it to appear in the hands of an ally within 4 sq / 20'. He is treated as the caster for all purposes of the spell, but he does not gain the +5 TR bonus.</td>
+            <td>
+              <ul>
+                <li>1k2 DR</li>
+                <li>May use your School Rank in place of your "Stave Weapon" Skill</li>
+                <li>Gain +5 TR to Knockdown maneuver if...
+                  <ul>
+                    <li>Have the "Stave Weapon" Skill</li>
+                    <li>You the caster, are the one wielding the weapon</li>
+                  </ul>
+                </li>
+                <li>The weapon disappears if it is lost from your hand.</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
+
       <h3>Clarity of Purpose</h3>
       <table>
         <tbody>
@@ -1505,10 +1518,6 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Effect</td>
             <td>One of the many strengths of water is in its speed.</td>
           </tr>
           <tr>
@@ -1517,6 +1526,7 @@
           </tr>
         </tbody>
       </table>
+
       <h3>Ebbing Strength</h3>
       <table>
         <tbody>
@@ -1551,14 +1561,24 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td>Energy flows through the universe just as water flows through the mortal shell.</td>
+            <td>Energy flows through the universe just as water flows through the mortal shell. You may send your energy to another, weakening yourself and strengthening them in the process.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>You may send your energy to another, weakening yourself and strengthening them in the process. You may reduce any one of your Physical Traits by an amount up to your School Rank. The target of this spell increases the same Physical Trait by the same amount. If your Trait is reduced to 0 as a result of this spell, you immediately fall unconscious and the spell's duration is reduced to 1 round. No Trait may be enhanced above double its normal rank by this spell.</td>
+            <td>
+              <ul>
+                <li>You gain -X to a physical trait of your choosing and the target gains +X to the same trait, where X is a value you choose with the condition below:
+                  <ul>
+                    <li>If your trait ever drops to 0 or lower the spell immediately ends and you lose consciousness for 1 round.</li>
+                    <li>The target may never gain more than double their trait in bonuses from this spell.</li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
+
       <h3>Path to Inner Peace</h3>
       <table>
         <tbody>
@@ -1592,14 +1612,21 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td></td>
+            <td>The water kami can influence the flow of water through the body, dramatically hastening the natural healing process. You can use this spell to heal Wounds that another individual has suffered.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>The water kami can influence the flow of water through the body, dramatically hastening the natural healing process. You can use this spell to heal Wounds that another individual has suffered. This spell restores a number of Wounds to the target equal to the amount by which the Spell Casting Roll exceeded the spell's TN to cast.</td>
+            <td>
+              <li>Restore X wounds to the target, where X is every point the roll exceeded the Spell's TN.
+                <ul>
+                  <li>example: The spell TN is 10, so if you rolled a 17, then they would heal 7 wounds.</li>
+                </ul>
+              </li>
+            </td>
           </tr>
         </tbody>
       </table>
+
       <h3>Reflections of Pan Ku</h3>
       <table>
         <tbody>
@@ -1633,15 +1660,34 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td>Divining the abilities of an object is among the simplest lessons a student of water learns in the temple. This spell will also grant the caster knowledge of the item's origin in very broad strokes, such as where it was forged, the Clan of the individual who has carried it the longest, or something similar at the GM's discretion.</td>
+            <td>Divining the abilities of an object is among the simplest lessons a student of water learns in the temple.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>If this spell is successfully cast on an object, you automatically learn all powers and abilities that object possesses. This is most frequently used to identify any supernatural qualities an item possesses, such as a nemuranai or a cursed weapon, but it can also identify the spell contained within a shugenja's prayer scroll. This spell will not allow a shugenja to read a scroll if it is written in a cipher he does not understand, but he can at least identify the spell in question.</td>
+            <td>
+              <ul>
+                <li>
+                  For items, you learn the following:
+                  <ul>
+                    <li>Abilities and powers</li>
+                    <li>origin, such as where it was created</li>
+                    <li>The clan of the individual who carried it last or longest</li>
+                  </ul>
+                </li>
+                <li>For spell scrolls
+                  <ul>
+                    <li>The spell effect contained within the scroll (Note a clever caster can inspect the scroll of a spell with long casting time this way to identify what is being cast.)</li>
+                    <li>If the scroll is using a cipher you must roll the skill to break the cipher first.</li>
+                  </ul>
+                </li>
+                <li>Other details are at the GM's discretion</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
-      <h3>Reversal of Fortunes</h3>
+
+      <h3>Reversal of Fortunes (TBD: Pending removal or transfer)</h3>
       <table>
         <tbody>
           <tr>
@@ -1683,6 +1729,7 @@
           </tr>
         </tbody>
       </table>
+
       <h3>The Rushing Wave</h3>
       <table>
         <tbody>
@@ -1721,10 +1768,16 @@
           </tr>
           <tr>
             <td>Effect</td>
-            <td>You can temporarily increase the speed of your target. This spell allows the target to make a Free Move Action of up his Water Ring x 2 sq / 10' (instead of the normal x 1 sq / 5'). Without Raises for Duration, this benefit must be used on the target's next Turn or it is lost.</td>
+            <td>
+              <ul>
+                <li>The target gains a free action starting on their next turn that can only be used to move 4 squares / 20'</li>
+                <li>The effect is lost once used or the duration ends.</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
+
       <h3>Speed of the Waterfall</h3>
       <table>
         <tbody>
