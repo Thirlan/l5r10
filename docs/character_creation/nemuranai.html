@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>template</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+    <main>
+      <h1>Nemuranai</h1>
+
+      <p>In Rokugan, all items are believed to possess a dormant spirit in them. Magical items are thus called Nemuranai (眠らない, "That which does not sleep"), implying that the spirit in these items have been awoken.</p>
+      <p>Below is a list of Nemuranai items and their stats.</p>
+
+      <h2 id="swords">Swords</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Clan</th>
+            <th scope="col">Type</th>
+            <th scope="col">Size</th>
+            <th scope="col">Damage</th>
+            <th scope="col">Keywords</th>
+            <th scope="col">Special</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Kaiu Blade (placeholder image)" /></td>
+            <td>Kaiu Blade</td>
+            <td>Crab</td>
+            <td>Katana</td>
+            <td>Medium</td>
+            <td>3k3</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>Unbreakable</li>
+                <li>-2 to target's Reduction</li>
+                <li>Receives +1k0 from Way of the Crab Technique</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Kakita Blade (placeholder image)" /></td>
+            <td>Kakita Blade</td>
+            <td>Crane</td>
+            <td>Katana</td>
+            <td>Medium</td>
+            <td>4k2</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>May reroll damage once per Iaijutsu duel</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Twin Sister Blades (placeholder image)" /></td>
+            <td>Twin Sister Blades</td>
+            <td>Dragon</td>
+            <td>Daisho (Katana and Wakizashi)</td>
+            <td>Medium</td>
+            <td>3k2 / 2k2</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>-5 TR to of all Disarm Maneuvers against you while Weapon Drawn</li>
+                <li>
+                  When beneficial spells are cast on these items
+                  <ul>
+                    <li>+5 TR to the spell casting roll</li>
+                    <li>Count as one for purposes of targeting</li>
+                    <li>Can be affected by the spell Biting Steel</li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Akodo Blade (placeholder image)" /></td>
+            <td>Akodo Blade</td>
+            <td>Lion</td>
+            <td>Katana</td>
+            <td>Medium</td>
+            <td>4k2</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>+1 Honor rank while Equipped</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Inquisitor's Strike (placeholder image)" /></td>
+            <td>Inquisitor's Strike</td>
+            <td>Phoenix</td>
+            <td>Wakizashi</td>
+            <td>Medium</td>
+            <td>3k2</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>Considered jade against targets with Taint</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Shosuro Blade (placeholder image)" /></td>
+            <td>Shosuro Blade</td>
+            <td>Scorpion</td>
+            <td>Katana</td>
+            <td>Medium</td>
+            <td>4k2</td>
+            <td>Samurai</td>
+            <td>
+              <ul>
+                <li>+5 to TN to resist poisons applied to blade</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><img class="medium_icon" src="../img/equipment/katana.jpg" alt="Moto Scimitar (placeholder image)" /></td>
+            <td>Moto Scimitar</td>
+            <td>Unicorn</td>
+            <td>Scimitar</td>
+            <td>Medium</td>
+            <td>3k3</td>
+            <td>-</td>
+            <td>
+              <ul>
+                <li>+3 to Damage Rolls made while on horseback</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
+</html>
