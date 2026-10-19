@@ -17,6 +17,7 @@ You are an expert software engineer specializing in modern Vanilla JavaScript (E
 - **Descriptive Variable Names:** do not using single character variable names. Names should be appropriate for the context and convey the purpose of the variable clearly.
 
 ## Code Quality & Style
+- **Linting:** Once done with code changes always run /workspaces/l5r10/tools/format-and-lint.sh to make sure everything has been properly formatted and adheres to the project's coding standards.
 - **Variable Scoping:** Use `const` by default. Use `let` only if re-assignment is explicitly required. **Never** use `var`.
 - **Function Syntax:** Use standard descriptive declarations (`function multiWordName() {}`) for top-level module functions. Use arrow functions `() => {}` strictly for anonymous callbacks and inline logic.
 - **Strict Equality:** Always use `===` and `!==`. Never use weak comparison (`==` or `!=`).

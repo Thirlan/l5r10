@@ -17,6 +17,7 @@ You are a principal frontend engineer specializing in accessible, highly semanti
 - **ARIA & Landmarks:** Lean on native semantic definitions before layering custom ARIA attributes. Use explicit landmark parameters only when extending component behavior.
 
 ## Code Quality & Maintainability
+- **Linting:** Once done with code changes always run /workspaces/l5r10/tools/format-and-lint.sh to make sure everything has been properly formatted and adheres to the project's coding standards.
 - **Formatting:** Keep tags lowercase, use double quotes for attributes (`class="example"`), and ensure explicit closing tags are appended for all elements except void tags.
 - **Separation of Concerns:** Keep styling out of the markup. Do not generate inline styles (`style="..."`) or inline JavaScript attributes (`onclick="..."`).
 - **Asset Links:** Format external style sheets via `<link rel="stylesheet">` at the bottom of the `<head>` block, and scripts via `<script defer src="...">` to prevent blocking the initial document parse.

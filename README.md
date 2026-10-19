@@ -19,3 +19,5 @@ npm install
 | `npm test`             | Run the unit tests.                             |
 
 To format one file, use `npx prettier --write <file>`.
+
+To format and lint only the site pages and `docs/scripts`, run `tools/format-and-lint.sh`.

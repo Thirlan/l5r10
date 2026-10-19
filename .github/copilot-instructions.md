@@ -62,7 +62,7 @@ When you respond to me do the following:
   - todo.txt: Another todo list that needs to be cleaned up with the other todo list.
 
 # Source information
+- https://github.com/Vmarr/l5r-website - github version of last haiku. Look at this one first since it will be easier to find all L5R 4th edition rules.
 - https://l5r.fandom.com/wiki - Greate source page for lore on legend of the five rings
 - https://lasthaiku.wikidot.com/ - has a link to all the legend of the five rings 4th edition rules
-- https://github.com/Vmarr/l5r-website - github version of last haiku. Look at this one first since it will be easier.
 
