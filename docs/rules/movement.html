@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Movement & Distances</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+    <main>
+      <h1>Movement & Distances</h1>
+
+      <h2>Distances</h2>
+      <p>In this game, distances are measured in feet as well as squares for purposes of a grid-based tactical map. Each grid is assumed to be 5 feet across. This allows for a level of abstraction away from feet vs meters.</p>
+
+      <p>Throughout the text both feet and square will be written out for this purpose in the format of X sq / Y', where X is the number of squares and Y is the equivalent distance in feet. X obviously is Y divided by 5.</p>
+
+      <h2 id="move-action">Move Action</h2>
+      
+      <p>It is important to note that in this edition, Free action move is no longer different than a Simple move action.</p>
+
+      <h3>Move Rating</h3>
+      <p>A character's Move Rating is the movement allowance per Move Action. This is calculated as <strong>4 sq / 20' + 1 sq / 5' per Water Ring Rank</strong>. See the table below to see what this comes out to for each Water Ring Rank.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Water Ring</th>
+            <th>Squares per Move Action</th>
+            <th>Feet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>5</td>
+            <td>25</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>6</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>7</td>
+            <td>35</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>8</td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>9</td>
+            <td>45</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Throughout the texts you will see reference to sentences such as "-1 to your Move Rating", which will imply your Water Ring is -1 for the purposes of determining your Move Rating.</p>
+
+      <h3>Terrain Difficulty</h3>
+      <p>Certain terrains will impede movement as shown below.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Terrain</th>
+            <th>Cost</th>
+            <th>Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic</td>
+            <td>No Penalty</td>
+            <td>Flat ground, open road, dojo floor, light grass.</td>
+          </tr>
+          <tr>
+            <td>Moderate</td>
+            <td>-1 sq / 5' for every move through this terrain</td>
+            <td>Mud, shallow water, light undergrowth, gravel slopes, broken paving, snow.</td>
+          </tr>
+          <tr>
+            <td>Difficult</td>
+            <td>-2 sq / 10' for every move through this terrain</td>
+            <td>Dense forest, deep snow, knee-deep water, sheer rubble, climbing.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>In effect this means to move through a single tile of shallow water requires 2 sq / 10' of movement. A dense forest would be 3 sq / 15' of movement per tile.</p>
+
+      <h3 id="maximum-movement">Maximum Movement</h3>
+      <p>The total movement of tiles / feet that a character can traverse is limited by (4 + Water Ring) x 3 sq / 15' per Move Action. This is simply previous table's values x 3, or in other words, you will not hit the cap as long as you only have your normal 2 x Simple actions and free action to move.</p>
+
+      <p>A few spells (i.e. <a href="../character_creation/shugenja.html#speed-of-the-waterfall">Speed of the waterfall</a>) and items, can increase someone's maximum movement.</p>
+
+      <p>In practice this means most characters with additional movement actions or magically increased movement rates should use at least one or more of their actions for non-movement purposes non-movement actions combined with any additional movement they can perform within their maximum movement for the turn.</p>
+
+      <p>It is important to note that this is NOT the distance in tiles / feet. So someone who moved 5 sq / 25' with Water 1 in difficult terrain (-2 sq / 10' per tile) would still count as having hit their max of 15 sq / 70' for the turn. Even if they were given additional movement actions, they would still be limited by their maximum movement for the turn.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Water Ring</th>
+            <th>Squares per Move Action</th>
+            <th>Feet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>15</td>
+            <td>70</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>18</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>21</td>
+            <td>105</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>24</td>
+            <td>120</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>27</td>
+            <td>135</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
+</html>
