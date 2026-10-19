@@ -28,7 +28,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       spirit: false,
       shadowland: false,
       crime: false,
-      resourceLevel: false
+      resourceLevel: false,
     };
     this.routePreferences = { includeRisk: false, includeMoney: false };
     this.skillConfig = TravelEventEngine.defaultSkillConfig();
@@ -45,7 +45,9 @@ export class WorldMapViewer extends WorldMapRenderer {
     this.applyZoom();
   }
 
-  redraw() { this.render(); }
+  redraw() {
+    this.render();
+  }
 
   /**
    * @returns {Promise<void>} Completes after map and travel data load.
@@ -87,12 +89,17 @@ export class WorldMapViewer extends WorldMapRenderer {
     if (!res.ok) throw new Error("Failed to load travel lookup CSV: " + res.status);
     const text = await res.text();
     const lines = text.trim().split(/\r?\n/);
-    const cols = lines.shift().split(",").map((s) => s.trim());
+    const cols = lines
+      .shift()
+      .split(",")
+      .map((s) => s.trim());
     this.terrainCosts = {};
     for (const line of lines) {
       const values = line.split(",").map((s) => s.trim());
       const entry = {};
-      cols.forEach((c, i) => { entry[c] = values[i]; });
+      cols.forEach((c, i) => {
+        entry[c] = values[i];
+      });
       this.terrainCosts[(entry.Terrain || "").toLowerCase()] = {
         cost: numOrNull(entry["Cost Minutes"]),
         costRoad: numOrNull(entry["Cost With Road Minutes"]),
@@ -102,7 +109,7 @@ export class WorldMapViewer extends WorldMapRenderer {
         tn: numOrNull(entry.TN),
         tnRoad: numOrNull(entry["TN with road"]),
         zeni: numOrNull(entry["Cost Zeni"]),
-        zeniRoad: numOrNull(entry["Cost Zeni with road"])
+        zeniRoad: numOrNull(entry["Cost Zeni with road"]),
       };
     }
   }
@@ -166,11 +173,15 @@ export class WorldMapViewer extends WorldMapRenderer {
 
   setupEventListeners() {
     this.canvas.addEventListener("click", (e) => this.onCanvasClick(e));
-    this.canvas.addEventListener("wheel", (e) => {
-      if (!e.ctrlKey) return;
-      e.preventDefault();
-      this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
-    }, { passive: false });
+    this.canvas.addEventListener(
+      "wheel",
+      (e) => {
+        if (!e.ctrlKey) return;
+        e.preventDefault();
+        this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
+      },
+      { passive: false },
+    );
   }
 
   cellData(cx, cy) {
@@ -228,7 +239,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       zeni: hasRoad && data.zeniRoad !== null ? data.zeniRoad : data.zeni,
       skill: data.skill,
       tn: hasRoad && data.tnRoad !== null ? data.tnRoad : data.tn,
-      prob: hasRoad && data.probRoad !== null ? data.probRoad : data.prob
+      prob: hasRoad && data.probRoad !== null ? data.probRoad : data.prob,
     };
   }
 
@@ -242,7 +253,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       skillConfig: this.skillConfig,
       travelPapers: this.travelPapers,
       avoidClans: this.avoidClans,
-      ...this.routePreferences
+      ...this.routePreferences,
     });
     this.pathResult = pather.computeRoute(this.startCell, this.waypoints);
     this.render();
@@ -254,9 +265,7 @@ export class WorldMapViewer extends WorldMapRenderer {
     const eventTable = document.getElementById("pathEvents");
     if (!el) return;
     if (!this.pathResult) {
-      el.textContent = this.startCell
-        ? "Start selected — click waypoints; the last click is the destination."
-        : "Click a starting tile.";
+      el.textContent = this.startCell ? "Start selected — click waypoints; the last click is the destination." : "Click a starting tile.";
       if (eventTable) eventTable.hidden = true;
       return;
     }
@@ -271,18 +280,9 @@ export class WorldMapViewer extends WorldMapRenderer {
     const hours = Math.floor((m % MINUTES_PER_DAY) / 60);
     const mins = m % 60;
     const cur = L5RCurrency.fromZeni(this.pathResult.totalZeni);
-    el.innerHTML =
-      "<strong>Time:</strong> " + days + " d " + hours + " h " + mins + " m &nbsp;&middot;&nbsp; " +
-      "<strong>Cost:</strong> " + cur.koku + " koku, " + cur.bu + " bu, " + cur.zeni + " zeni &nbsp;&middot;&nbsp; " +
-      "<strong>Mishaps:</strong> " + this.pathResult.mishaps.size + " &nbsp;&middot;&nbsp; " +
-      "<strong>Tiles:</strong> " + (this.pathResult.path.length - 1) + " &nbsp;&middot;&nbsp; " +
-      "<strong>Waypoints:</strong> " + this.waypoints.length;
+    el.innerHTML = "<strong>Time:</strong> " + days + " d " + hours + " h " + mins + " m &nbsp;&middot;&nbsp; " + "<strong>Cost:</strong> " + cur.koku + " koku, " + cur.bu + " bu, " + cur.zeni + " zeni &nbsp;&middot;&nbsp; " + "<strong>Mishaps:</strong> " + this.pathResult.mishaps.size + " &nbsp;&middot;&nbsp; " + "<strong>Tiles:</strong> " + (this.pathResult.path.length - 1) + " &nbsp;&middot;&nbsp; " + "<strong>Waypoints:</strong> " + this.waypoints.length;
     if (eventTable) {
-      const rows = this.pathResult.events.map((event) =>
-        "<tr><td>" + event.day + "</td><td>" + event.coord + "</td><td>" + event.event + "</td><td>" + event.mode + "</td>" +
-        "<td>" + event.terrain + "</td><td>" + event.clan + "</td><td>" + event.skill + "</td><td>" + event.tn + "</td>" +
-        "<td>" + event.result + "</td><td>" + event.cost + "</td></tr>"
-      ).join("");
+      const rows = this.pathResult.events.map((event) => "<tr><td>" + event.day + "</td><td>" + event.coord + "</td><td>" + event.event + "</td><td>" + event.mode + "</td>" + "<td>" + event.terrain + "</td><td>" + event.clan + "</td><td>" + event.skill + "</td><td>" + event.tn + "</td>" + "<td>" + event.result + "</td><td>" + event.cost + "</td></tr>").join("");
       eventTable.querySelector("tbody").innerHTML = rows;
       eventTable.hidden = false;
     }
@@ -307,8 +307,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       else if (layerName === "clan") this.drawClanLayer();
     }
 
-    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "resourceLevel"]
-      .filter((layerName) => this.isLayerVisible(layerName));
+    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "resourceLevel"].filter((layerName) => this.isLayerVisible(layerName));
     this.drawOverlayLayers(activeOverlays);
 
     this.drawGrid();

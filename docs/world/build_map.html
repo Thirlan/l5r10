@@ -1,479 +1,327 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Map Builder</title>
-  <link rel="stylesheet" href="../css/navbar.css" />
-  <link rel="stylesheet" href="../css/general.css" />
-  <link rel="stylesheet" href="../css/world-map-grid.css" />
-</head>
-<body>
-  <header>
-    <nav class="navbar"></nav>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Map Builder</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/world-map-grid.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
 
-  <main>
-    <h1>Map Builder</h1>
+    <main>
+      <h1>Map Builder</h1>
 
-    <div class="zoom-controls">
-      <button type="button" data-map-zoom="out">− Zoom Out</button>
-      <span id="zoomLevel">100%</span>
-      <button type="button" data-map-zoom="in">+ Zoom In</button>
-      <button type="button" data-map-zoom="reset">100%</button>
-      <button type="button" data-map-zoom="fit">Fit Width</button>
-      <span class="hint">Ctrl + mouse wheel to zoom · right-click a cell to erase it on the active layer</span>
-    </div>
+      <div class="zoom-controls">
+        <button type="button" data-map-zoom="out">− Zoom Out</button>
+        <span id="zoomLevel">100%</span>
+        <button type="button" data-map-zoom="in">+ Zoom In</button>
+        <button type="button" data-map-zoom="reset">100%</button>
+        <button type="button" data-map-zoom="fit">Fit Width</button>
+        <span class="hint">Ctrl + mouse wheel to zoom · right-click a cell to erase it on the active layer</span>
+      </div>
 
-    <div class="map-grid-container">
-      <canvas id="mapCanvas" data-map-columns="135" data-map-rows="196" data-grid-size="16"></canvas>
-    </div>
+      <div class="map-grid-container">
+        <canvas id="mapCanvas" data-map-columns="135" data-map-rows="196" data-grid-size="16"></canvas>
+      </div>
 
-    <div class="map-controls">
-      <!-- Terrain Layer -->
-      <div class="control-panel">
-        <h3>Terrain Layer</h3>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="FLAT">
-          Flat
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="HILLS">
-          Hills
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="MOUNTAINS">
-          Mountains
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="WATER">
-          Water
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="COASTAL_WATER">
-          Coastal Water
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="OCEAN">
-          Ocean
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="WETLANDS">
-          Wetlands
-        </button>
-        <button class="tool-button" data-tool-layer="terrain" data-tool-value="CLIFF">
-          Cliff
-        </button>
-        <fieldset class="cliff-direction-controls">
-          <legend>Cliff Directions</legend>
-          <div class="cliff-direction-grid">
-            <label><input type="checkbox" data-cliff-direction="7">Top left</label>
-            <label><input type="checkbox" data-cliff-direction="0">Top</label>
-            <label><input type="checkbox" data-cliff-direction="1">Top right</label>
-            <label><input type="checkbox" data-cliff-direction="6">Left</label>
-            <label><input id="cliffDirectionAll" type="checkbox" data-cliff-direction="all">All</label>
-            <label><input type="checkbox" data-cliff-direction="2">Right</label>
-            <label><input type="checkbox" data-cliff-direction="5">Bottom left</label>
-            <label><input type="checkbox" data-cliff-direction="4">Bottom</label>
-            <label><input type="checkbox" data-cliff-direction="3">Bottom right</label>
+      <div class="map-controls">
+        <!-- Terrain Layer -->
+        <div class="control-panel">
+          <h3>Terrain Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="FLAT">Flat</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="HILLS">Hills</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="MOUNTAINS">Mountains</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="WATER">Water</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="COASTAL_WATER">Coastal Water</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="OCEAN">Ocean</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="WETLANDS">Wetlands</button>
+          <button type="button" class="tool-button" data-tool-layer="terrain" data-tool-value="CLIFF">Cliff</button>
+          <fieldset class="cliff-direction-controls">
+            <legend>Cliff Directions</legend>
+            <div class="cliff-direction-grid">
+              <label><input type="checkbox" data-cliff-direction="7" />Top left</label>
+              <label><input type="checkbox" data-cliff-direction="0" />Top</label>
+              <label><input type="checkbox" data-cliff-direction="1" />Top right</label>
+              <label><input type="checkbox" data-cliff-direction="6" />Left</label>
+              <label><input id="cliffDirectionAll" type="checkbox" data-cliff-direction="all" />All</label>
+              <label><input type="checkbox" data-cliff-direction="2" />Right</label>
+              <label><input type="checkbox" data-cliff-direction="5" />Bottom left</label>
+              <label><input type="checkbox" data-cliff-direction="4" />Bottom</label>
+              <label><input type="checkbox" data-cliff-direction="3" />Bottom right</label>
+            </div>
+          </fieldset>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="terrain">Erase Terrain</button>
+        </div>
+
+        <!-- Climate Layer -->
+        <div class="control-panel">
+          <h3>Climate Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="TEMPERATE">Temperate</button>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="TROPICAL">Tropical</button>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="DESERT">Desert</button>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="POLAR">Polar</button>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="WASTE">Waste</button>
+          <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="SHADOWLAND">Shadowland</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="climate">Erase Climate</button>
+        </div>
+
+        <!-- Vegetation Layer -->
+        <div class="control-panel">
+          <h3>Vegetation Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="vegetation" data-tool-value="PRESENT">Vegetation</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="vegetation">Erase Vegetation</button>
+        </div>
+
+        <!-- River Layer -->
+        <div class="control-panel">
+          <h3>River Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="river" data-tool-value="PRESENT">River</button>
+          <fieldset class="cliff-direction-controls">
+            <legend>River Flow Directions</legend>
+            <div class="cliff-direction-grid">
+              <label><input type="checkbox" data-river-direction="7" />Top left</label>
+              <label><input type="checkbox" data-river-direction="0" />Top</label>
+              <label><input type="checkbox" data-river-direction="1" />Top right</label>
+              <label><input type="checkbox" data-river-direction="6" />Left</label>
+              <span aria-hidden="true"></span>
+              <label><input type="checkbox" data-river-direction="2" />Right</label>
+              <label><input type="checkbox" data-river-direction="5" />Bottom left</label>
+              <label><input type="checkbox" data-river-direction="4" />Bottom</label>
+              <label><input type="checkbox" data-river-direction="3" />Bottom right</label>
+            </div>
+          </fieldset>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="river">Erase River</button>
+        </div>
+
+        <!-- Infrastructure Layer -->
+        <div class="control-panel">
+          <h3>Infrastructure Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="infrastructure" data-tool-value="ROAD">Road</button>
+          <button type="button" class="tool-button" data-tool-layer="infrastructure" data-tool-value="FOOTPATH">Footpath</button>
+          <button type="button" class="tool-button" data-tool-layer="infrastructure" data-tool-value="SMALL_PORT">Small Port</button>
+          <button type="button" class="tool-button" data-tool-layer="infrastructure" data-tool-value="LARGE_PORT">Large Port</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="infrastructure">Erase Infrastructure</button>
+
+          <h3>Erase</h3>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="">Erase Tile (all layers)</button>
+
+          <h3>Brush Size</h3>
+          <div class="control-section">
+            <label for="brushSize">Tiles painted per click:</label>
+            <select id="brushSize">
+              <option value="1">1 x 1</option>
+              <option value="2">2 x 2</option>
+              <option value="3">3 x 3</option>
+              <option value="4">4 x 4</option>
+              <option value="5">5 x 5</option>
+              <option value="6">6 x 6</option>
+              <option value="7">7 x 7</option>
+              <option value="8">8 x 8</option>
+            </select>
           </div>
-        </fieldset>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="terrain">
-          Erase Terrain
-        </button>
-      </div>
+        </div>
 
-      <!-- Climate Layer -->
-      <div class="control-panel">
-        <h3>Climate Layer</h3>
-        <button class="tool-button" data-tool-layer="climate" data-tool-value="TEMPERATE">
-          Temperate
-        </button>
-        <button class="tool-button" data-tool-layer="climate" data-tool-value="TROPICAL">
-          Tropical
-        </button>
-        <button class="tool-button" data-tool-layer="climate" data-tool-value="DESERT">
-          Desert
-        </button>
-        <button class="tool-button" data-tool-layer="climate" data-tool-value="POLAR">
-          Polar
-        </button>
-        <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="WASTE">
-          Waste
-        </button>
-        <button type="button" class="tool-button" data-tool-layer="climate" data-tool-value="SHADOWLAND">
-          Shadowland
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="climate">
-          Erase Climate
-        </button>
-      </div>
+        <!-- Clan Layer -->
+        <div class="control-panel">
+          <h3>Clan Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="CRANE">Crane</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="LION">Lion</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="CRAB">Crab</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="DRAGON">Dragon</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="UNICORN">Unicorn</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="SCORPION">Scorpion</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="IMPERIAL">Imperial</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="SHADOWLANDS">Shadowlands</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="PHOENIX">Phoenix</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="MANTIS">Mantis</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="HARE">Hare</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="CENTIPEDE">Centipede</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="FOX">Fox</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="BADGER">Badger</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="DRAGONFLY">Dragonfly</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="FALCON">Falcon</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="SPARROW">Sparrow</button>
+          <button type="button" class="tool-button" data-tool-layer="clan" data-tool-value="TORTOISE">Tortoise</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="clan">Erase Clan</button>
+        </div>
 
-      <!-- Vegetation Layer -->
-      <div class="control-panel">
-        <h3>Vegetation Layer</h3>
-        <button class="tool-button" data-tool-layer="vegetation" data-tool-value="PRESENT">
-          Vegetation
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="vegetation">
-          Erase Vegetation
-        </button>
-      </div>
-
-      <!-- River Layer -->
-      <div class="control-panel">
-        <h3>River Layer</h3>
-        <button class="tool-button" data-tool-layer="river" data-tool-value="PRESENT">
-          River
-        </button>
-        <fieldset class="cliff-direction-controls">
-          <legend>River Flow Directions</legend>
-          <div class="cliff-direction-grid">
-            <label><input type="checkbox" data-river-direction="7">Top left</label>
-            <label><input type="checkbox" data-river-direction="0">Top</label>
-            <label><input type="checkbox" data-river-direction="1">Top right</label>
-            <label><input type="checkbox" data-river-direction="6">Left</label>
-            <span aria-hidden="true"></span>
-            <label><input type="checkbox" data-river-direction="2">Right</label>
-            <label><input type="checkbox" data-river-direction="5">Bottom left</label>
-            <label><input type="checkbox" data-river-direction="4">Bottom</label>
-            <label><input type="checkbox" data-river-direction="3">Bottom right</label>
+        <!-- Settlement Layer -->
+        <div class="control-panel">
+          <h3>Settlement Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="VILLAGE">Village</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="VILLAGE_RUINS">Village Ruins</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="CITY">City</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="CAPITAL">Capital</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="FORTIFICATION">Fortification</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="CASTLE">Castle</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="CASTLE_RUINS">Castle Ruins</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="ACADEMY">Academy</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="WATCHTOWER">Watchtower</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="KYUDEN">Kyuden</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="SMALL_SHRINE">Small Shrine</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="LARGE_SHRINE">Large Shrine</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="SMALL_TEMPLE">Small Temple</button>
+          <button type="button" class="tool-button" data-tool-layer="settlement" data-tool-value="LARGE_TEMPLE">Large Temple</button>
+          <div class="control-section control-section--spaced">
+            <label for="settlementEnglishName">English Name</label>
+            <input type="text" id="settlementEnglishName" />
           </div>
-        </fieldset>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="river">
-          Erase River
-        </button>
-      </div>
+          <div class="control-section">
+            <label for="settlementRokuganiName">Rokugani Name</label>
+            <input type="text" id="settlementRokuganiName" />
+          </div>
+          <div class="control-section">
+            <label>Display Names</label>
+            <label><input type="radio" name="settlementLanguage" value="english" checked /> English</label>
+            <label><input type="radio" name="settlementLanguage" value="rokugani" /> Rokugani</label>
+          </div>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="settlement">Erase Settlement</button>
+        </div>
 
-      <!-- Infrastructure Layer -->
-      <div class="control-panel">
-        <h3>Infrastructure Layer</h3>
-        <button class="tool-button" data-tool-layer="infrastructure" data-tool-value="ROAD">
-          Road
-        </button>
-        <button class="tool-button" data-tool-layer="infrastructure" data-tool-value="FOOTPATH">
-          Footpath
-        </button>
-        <button class="tool-button" data-tool-layer="infrastructure" data-tool-value="SMALL_PORT">
-          Small Port
-        </button>
-        <button class="tool-button" data-tool-layer="infrastructure" data-tool-value="LARGE_PORT">
-          Large Port
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="infrastructure">
-          Erase Infrastructure
-        </button>
+        <!-- Resource Layer -->
+        <div class="control-panel">
+          <h3>Resource Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="RICE_PADDY">Rice Paddy</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="GRAIN_FARM">Grain Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SILK_FARM">Silk Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="TEA_PLANTATION">Tea Plantation</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="HEMP_FARM">Hemp Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="COTTON_FARM">Cotton Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="FRUIT_ORCHARD">Fruit Orchard</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SHEEP_PASTURE">Sheep Pasture</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="GOAT_PASTURE">Goat Pasture</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="HORSE_RANCH">Horse Ranch</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="CATTLE_FARM">Cattle Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SALT_WORKS">Salt Works</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="NUT_GROVE">Nut Grove</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="MUSHROOM_FARM">Mushroom Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SPICE_FARM">Spice Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="POULTRY_FARM">Poultry Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="POPPY_FARM">Poppy Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="DYE_CROP_FARM">Dye Crop Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="JADE_MINE">Jade Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="IRON_MINE">Iron Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="COPPER_MINE">Copper Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="GOLD_MINE">Gold Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SILVER_MINE">Silver Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="COAL_MINE">Coal Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="CLAY_PIT">Clay Pit</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="GEMSTONE_MINE">Gemstone Mine</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="STONE_QUARRY">Stone Quarry</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="COASTAL_FISH_BOAT">Coastal Fish Boat</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="CRAB_BOAT">Crab Boat</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="PEARL_DIVERS">Pearl Divers</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SHELLFISH_BOAT">Shellfish Boat</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="LUMBER_MILL">Lumber Mill</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="SQUID_BOAT">Squid Boat</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="OCEAN_FISH_BOAT">Ocean Fish Boat</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="KELP_FARM">Kelp Farm</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="TROPICAL_FRUIT_ORCHARD">Tropical Fruit Orchard</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="TROPICAL_LUMBER_MILL">Tropical Lumber Mill</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="UTAKU_RANCH">Utaku Ranch</button>
+          <button type="button" class="tool-button" data-tool-layer="resource" data-tool-value="VEGETABLE_FARM">Vegetable Farm</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="resource">Erase Resource</button>
+        </div>
 
-        <h3 style="margin-top: 20px;">Erase</h3>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="">
-          Erase Tile (all layers)
-        </button>
+        <!-- Animal Layer -->
+        <div class="control-panel">
+          <h3>Animal Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="animal" data-tool-value="VERY_LOW">Very Low</button>
+          <button type="button" class="tool-button" data-tool-layer="animal" data-tool-value="LOW">Low</button>
+          <button type="button" class="tool-button" data-tool-layer="animal" data-tool-value="MEDIUM">Medium</button>
+          <button type="button" class="tool-button" data-tool-layer="animal" data-tool-value="HIGH">High</button>
+          <button type="button" class="tool-button" data-tool-layer="animal" data-tool-value="VERY_HIGH">Very High</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="animal">Erase Animal</button>
+        </div>
 
-        <h3 style="margin-top: 20px;">Brush Size</h3>
-        <div class="control-section">
-          <label for="brushSize">Tiles painted per click:</label>
-          <select id="brushSize">
-            <option value="1">1 x 1</option>
-            <option value="2">2 x 2</option>
-            <option value="3">3 x 3</option>
-            <option value="4">4 x 4</option>
-            <option value="5">5 x 5</option>
-            <option value="6">6 x 6</option>
-            <option value="7">7 x 7</option>
-            <option value="8">8 x 8</option>
-          </select>
+        <!-- Spirit Layer -->
+        <div class="control-panel">
+          <h3>Spirit Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="spirit" data-tool-value="VERY_LOW">Very Low</button>
+          <button type="button" class="tool-button" data-tool-layer="spirit" data-tool-value="LOW">Low</button>
+          <button type="button" class="tool-button" data-tool-layer="spirit" data-tool-value="MEDIUM">Medium</button>
+          <button type="button" class="tool-button" data-tool-layer="spirit" data-tool-value="HIGH">High</button>
+          <button type="button" class="tool-button" data-tool-layer="spirit" data-tool-value="VERY_HIGH">Very High</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="spirit">Erase Spirit</button>
+        </div>
+
+        <!-- Shadowland Layer -->
+        <div class="control-panel">
+          <h3>Shadowland Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="shadowland" data-tool-value="VERY_LOW">Very Low</button>
+          <button type="button" class="tool-button" data-tool-layer="shadowland" data-tool-value="LOW">Low</button>
+          <button type="button" class="tool-button" data-tool-layer="shadowland" data-tool-value="MEDIUM">Medium</button>
+          <button type="button" class="tool-button" data-tool-layer="shadowland" data-tool-value="HIGH">High</button>
+          <button type="button" class="tool-button" data-tool-layer="shadowland" data-tool-value="VERY_HIGH">Very High</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="shadowland">Erase Shadowland</button>
+        </div>
+
+        <!-- Crime Layer -->
+        <div class="control-panel">
+          <h3>Crime Layer</h3>
+          <button type="button" class="tool-button" data-tool-layer="crime" data-tool-value="VERY_LOW">Very Low</button>
+          <button type="button" class="tool-button" data-tool-layer="crime" data-tool-value="LOW">Low</button>
+          <button type="button" class="tool-button" data-tool-layer="crime" data-tool-value="MEDIUM">Medium</button>
+          <button type="button" class="tool-button" data-tool-layer="crime" data-tool-value="HIGH">High</button>
+          <button type="button" class="tool-button" data-tool-layer="crime" data-tool-value="VERY_HIGH">Very High</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="crime">Erase Crime</button>
+        </div>
+
+        <!-- Resource Level -->
+        <div class="control-panel">
+          <h3>Resource Level</h3>
+          <button type="button" class="tool-button" data-tool-layer="resourceLevel" data-tool-value="VERY_LOW">Very Low</button>
+          <button type="button" class="tool-button" data-tool-layer="resourceLevel" data-tool-value="LOW">Low</button>
+          <button type="button" class="tool-button" data-tool-layer="resourceLevel" data-tool-value="MEDIUM">Medium</button>
+          <button type="button" class="tool-button" data-tool-layer="resourceLevel" data-tool-value="HIGH">High</button>
+          <button type="button" class="tool-button" data-tool-layer="resourceLevel" data-tool-value="VERY_HIGH">Very High</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="resourceLevel">Erase Resource Level</button>
+        </div>
+
+        <!-- Text Layer & File Operations -->
+        <div class="control-panel">
+          <h3>Text Layer</h3>
+          <div class="control-section">
+            <label for="textEnglish">English Text</label>
+            <input type="text" id="textEnglish" />
+          </div>
+          <div class="control-section">
+            <label for="textRokugani">Rokugani Text</label>
+            <input type="text" id="textRokugani" />
+          </div>
+          <div class="control-section">
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" min="6" max="46" value="14" />
+          </div>
+          <button type="button" class="tool-button" data-tool-layer="text">Add Text</button>
+          <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="text">Erase Text</button>
+
+          <h3>File Operations</h3>
+          <div class="action-buttons">
+            <button type="button" class="save-btn" data-map-file="save">Save Map</button>
+            <button type="button" class="load-btn" data-map-file="load">Load Map</button>
+            <button type="button" class="clear-btn" data-map-file="clear">Clear All</button>
+          </div>
+          <input type="file" id="fileInput" accept=".json" />
         </div>
       </div>
+    </main>
 
-      <!-- Clan Layer -->
-      <div class="control-panel">
-        <h3>Clan Layer</h3>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="CRANE">
-          Crane
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="LION">
-          Lion
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="CRAB">
-          Crab
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="DRAGON">
-          Dragon
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="UNICORN">
-          Unicorn
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="SCORPION">
-          Scorpion
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="IMPERIAL">
-          Imperial
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="SHADOWLANDS">
-          Shadowlands
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="PHOENIX">
-          Phoenix
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="MANTIS">
-          Mantis
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="HARE">
-          Hare
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="CENTIPEDE">
-          Centipede
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="FOX">
-          Fox
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="BADGER">
-          Badger
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="DRAGONFLY">
-          Dragonfly
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="FALCON">
-          Falcon
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="SPARROW">
-          Sparrow
-        </button>
-        <button class="tool-button" data-tool-layer="clan" data-tool-value="TORTOISE">
-          Tortoise
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="clan">
-          Erase Clan
-        </button>
-      </div>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
 
-      <!-- Settlement Layer -->
-      <div class="control-panel">
-        <h3>Settlement Layer</h3>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="VILLAGE">Village</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="VILLAGE_RUINS">Village Ruins</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="CITY">City</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="CAPITAL">Capital</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="FORTIFICATION">Fortification</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="CASTLE">Castle</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="CASTLE_RUINS">Castle Ruins</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="ACADEMY">Academy</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="WATCHTOWER">Watchtower</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="KYUDEN">Kyuden</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="SMALL_SHRINE">Small Shrine</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="LARGE_SHRINE">Large Shrine</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="SMALL_TEMPLE">Small Temple</button>
-        <button class="tool-button" data-tool-layer="settlement" data-tool-value="LARGE_TEMPLE">Large Temple</button>
-        <div class="control-section" style="margin-top: 15px;">
-          <label for="settlementEnglishName">English Name</label>
-          <input type="text" id="settlementEnglishName">
-        </div>
-        <div class="control-section">
-          <label for="settlementRokuganiName">Rokugani Name</label>
-          <input type="text" id="settlementRokuganiName">
-        </div>
-        <div class="control-section">
-          <label>Display Names</label>
-          <label><input type="radio" name="settlementLanguage" value="english" checked> English</label>
-          <label><input type="radio" name="settlementLanguage" value="rokugani"> Rokugani</label>
-        </div>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="settlement">Erase Settlement</button>
-      </div>
-
-      <!-- Resource Layer -->
-      <div class="control-panel">
-        <h3>Resource Layer</h3>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="RICE_PADDY">Rice Paddy</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="GRAIN_FARM">Grain Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SILK_FARM">Silk Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="TEA_PLANTATION">Tea Plantation</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="HEMP_FARM">Hemp Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="COTTON_FARM">Cotton Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="FRUIT_ORCHARD">Fruit Orchard</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SHEEP_PASTURE">Sheep Pasture</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="GOAT_PASTURE">Goat Pasture</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="HORSE_RANCH">Horse Ranch</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="CATTLE_FARM">Cattle Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SALT_WORKS">Salt Works</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="NUT_GROVE">Nut Grove</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="MUSHROOM_FARM">Mushroom Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SPICE_FARM">Spice Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="POULTRY_FARM">Poultry Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="POPPY_FARM">Poppy Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="DYE_CROP_FARM">Dye Crop Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="JADE_MINE">Jade Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="IRON_MINE">Iron Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="COPPER_MINE">Copper Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="GOLD_MINE">Gold Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SILVER_MINE">Silver Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="COAL_MINE">Coal Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="CLAY_PIT">Clay Pit</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="GEMSTONE_MINE">Gemstone Mine</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="STONE_QUARRY">Stone Quarry</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="COASTAL_FISH_BOAT">Coastal Fish Boat</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="CRAB_BOAT">Crab Boat</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="PEARL_DIVERS">Pearl Divers</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SHELLFISH_BOAT">Shellfish Boat</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="LUMBER_MILL">Lumber Mill</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="SQUID_BOAT">Squid Boat</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="OCEAN_FISH_BOAT">Ocean Fish Boat</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="KELP_FARM">Kelp Farm</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="TROPICAL_FRUIT_ORCHARD">Tropical Fruit Orchard</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="TROPICAL_LUMBER_MILL">Tropical Lumber Mill</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="UTAKU_RANCH">Utaku Ranch</button>
-        <button class="tool-button" data-tool-layer="resource" data-tool-value="VEGETABLE_FARM">Vegetable Farm</button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="resource">Erase Resource</button>
-      </div>
-
-      <!-- Animal Layer -->
-      <div class="control-panel">
-        <h3>Animal Layer</h3>
-        <button class="tool-button" data-tool-layer="animal" data-tool-value="VERY_LOW">
-          Very Low
-        </button>
-        <button class="tool-button" data-tool-layer="animal" data-tool-value="LOW">
-          Low
-        </button>
-        <button class="tool-button" data-tool-layer="animal" data-tool-value="MEDIUM">
-          Medium
-        </button>
-        <button class="tool-button" data-tool-layer="animal" data-tool-value="HIGH">
-          High
-        </button>
-        <button class="tool-button" data-tool-layer="animal" data-tool-value="VERY_HIGH">
-          Very High
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="animal">
-          Erase Animal
-        </button>
-      </div>
-
-      <!-- Spirit Layer -->
-      <div class="control-panel">
-        <h3>Spirit Layer</h3>
-        <button class="tool-button" data-tool-layer="spirit" data-tool-value="VERY_LOW">
-          Very Low
-        </button>
-        <button class="tool-button" data-tool-layer="spirit" data-tool-value="LOW">
-          Low
-        </button>
-        <button class="tool-button" data-tool-layer="spirit" data-tool-value="MEDIUM">
-          Medium
-        </button>
-        <button class="tool-button" data-tool-layer="spirit" data-tool-value="HIGH">
-          High
-        </button>
-        <button class="tool-button" data-tool-layer="spirit" data-tool-value="VERY_HIGH">
-          Very High
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="spirit">
-          Erase Spirit
-        </button>
-      </div>
-
-      <!-- Shadowland Layer -->
-      <div class="control-panel">
-        <h3>Shadowland Layer</h3>
-        <button class="tool-button" data-tool-layer="shadowland" data-tool-value="VERY_LOW">
-          Very Low
-        </button>
-        <button class="tool-button" data-tool-layer="shadowland" data-tool-value="LOW">
-          Low
-        </button>
-        <button class="tool-button" data-tool-layer="shadowland" data-tool-value="MEDIUM">
-          Medium
-        </button>
-        <button class="tool-button" data-tool-layer="shadowland" data-tool-value="HIGH">
-          High
-        </button>
-        <button class="tool-button" data-tool-layer="shadowland" data-tool-value="VERY_HIGH">
-          Very High
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="shadowland">
-          Erase Shadowland
-        </button>
-      </div>
-
-      <!-- Crime Layer -->
-      <div class="control-panel">
-        <h3>Crime Layer</h3>
-        <button class="tool-button" data-tool-layer="crime" data-tool-value="VERY_LOW">
-          Very Low
-        </button>
-        <button class="tool-button" data-tool-layer="crime" data-tool-value="LOW">
-          Low
-        </button>
-        <button class="tool-button" data-tool-layer="crime" data-tool-value="MEDIUM">
-          Medium
-        </button>
-        <button class="tool-button" data-tool-layer="crime" data-tool-value="HIGH">
-          High
-        </button>
-        <button class="tool-button" data-tool-layer="crime" data-tool-value="VERY_HIGH">
-          Very High
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="crime">
-          Erase Crime
-        </button>
-      </div>
-
-      <!-- Resource Level -->
-      <div class="control-panel">
-        <h3>Resource Level</h3>
-        <button class="tool-button" data-tool-layer="resourceLevel" data-tool-value="VERY_LOW">
-          Very Low
-        </button>
-        <button class="tool-button" data-tool-layer="resourceLevel" data-tool-value="LOW">
-          Low
-        </button>
-        <button class="tool-button" data-tool-layer="resourceLevel" data-tool-value="MEDIUM">
-          Medium
-        </button>
-        <button class="tool-button" data-tool-layer="resourceLevel" data-tool-value="HIGH">
-          High
-        </button>
-        <button class="tool-button" data-tool-layer="resourceLevel" data-tool-value="VERY_HIGH">
-          Very High
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="resourceLevel">
-          Erase Resource Level
-        </button>
-      </div>
-
-      <!-- Text Layer & File Operations -->
-      <div class="control-panel">
-        <h3>Text Layer</h3>
-        <div class="control-section">
-          <label for="textEnglish">English Text</label>
-          <input type="text" id="textEnglish">
-        </div>
-        <div class="control-section">
-          <label for="textRokugani">Rokugani Text</label>
-          <input type="text" id="textRokugani">
-        </div>
-        <div class="control-section">
-          <label for="fontSize">Font Size:</label>
-          <input type="number" id="fontSize" min="6" max="46" value="14">
-        </div>
-        <button class="tool-button" data-tool-layer="text">
-          Add Text
-        </button>
-        <button class="tool-button erase-button" data-tool-layer="erase" data-tool-value="text">
-          Erase Text
-        </button>
-
-        <h3 style="margin-top: 20px;">File Operations</h3>
-        <div class="action-buttons">
-          <button class="save-btn" data-map-file="save">Save Map</button>
-          <button class="load-btn" data-map-file="load">Load Map</button>
-          <button class="clear-btn" data-map-file="clear">Clear All</button>
-        </div>
-        <input type="file" id="fileInput" accept=".json">
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>Legend of the Five Rings - 10th Century</p>
-  </footer>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="module" src="../scripts/world-map-builder-page.js"></script>
-  <script>
-    $(function() { $("nav").load("/l5r10/navbar.html"); });
-  </script>
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module" src="../scripts/world-map-builder-page.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
 </html>

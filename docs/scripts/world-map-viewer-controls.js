@@ -1,6 +1,10 @@
 const SKILLS = [
-  ["survival", "Survival"], ["sailing", "Sailing"], ["investigate", "Investigation"],
-  ["swim", "Swim"], ["sneak", "Sneak"], ["forgery", "Forgery"],
+  ["survival", "Survival"],
+  ["sailing", "Sailing"],
+  ["investigate", "Investigation"],
+  ["swim", "Swim"],
+  ["sneak", "Sneak"],
+  ["forgery", "Forgery"],
 ];
 
 function appendInput(row, type, value, label) {
@@ -58,7 +62,10 @@ export function bindViewerClans(map) {
     const heading = document.createElement("td");
     heading.textContent = clan;
     row.append(heading);
-    [["travelPapers", "Papers"], ["avoidClans", "Avoid"]].forEach(([field, label]) => {
+    [
+      ["travelPapers", "Papers"],
+      ["avoidClans", "Avoid"],
+    ].forEach(([field, label]) => {
       const input = appendInput(row, "checkbox", Boolean(map[field][clan]), `${clan}: ${label}`);
       input.addEventListener("change", () => {
         map[field][clan] = input.checked;

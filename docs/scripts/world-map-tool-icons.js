@@ -11,11 +11,7 @@ import { SHADOWLAND_CONTROL_IMAGES } from "./world-map-img-shadowland.js";
 import { CRIME_CONTROL_IMAGES } from "./world-map-img-crime.js";
 import { RESOURCE_LEVEL_CONTROL_IMAGES } from "./world-map-img-resource-level.js";
 
-const controlImages = new Map([
-  ...BASE_LAYER_CONTROL_IMAGES, ...RIVER_CONTROL_IMAGES, ...INFRASTRUCTURE_CONTROL_IMAGES,
-  ...SETTLEMENT_CONTROL_IMAGES, ...ANIMAL_CONTROL_IMAGES, ...SPIRIT_CONTROL_IMAGES,
-  ...SHADOWLAND_CONTROL_IMAGES, ...CRIME_CONTROL_IMAGES, ...RESOURCE_LEVEL_CONTROL_IMAGES,
-].map(({ value, image }) => [value, image]));
+const controlImages = new Map([...BASE_LAYER_CONTROL_IMAGES, ...RIVER_CONTROL_IMAGES, ...INFRASTRUCTURE_CONTROL_IMAGES, ...SETTLEMENT_CONTROL_IMAGES, ...ANIMAL_CONTROL_IMAGES, ...SPIRIT_CONTROL_IMAGES, ...SHADOWLAND_CONTROL_IMAGES, ...CRIME_CONTROL_IMAGES, ...RESOURCE_LEVEL_CONTROL_IMAGES].map(({ value, image }) => [value, image]));
 
 /**
  * @param {HTMLButtonElement} button Tool button.
@@ -38,10 +34,14 @@ export function setToolIcon(button, value) {
     icon.className = "control-icon";
     icon.alt = "";
     icon.src = path;
-    icon.addEventListener("error", () => {
-      console.error(`Failed to load map tool image: ${path}`);
-      icon.replaceWith(document.createTextNode("[Image unavailable] "));
-    }, { once: true });
+    icon.addEventListener(
+      "error",
+      () => {
+        console.error(`Failed to load map tool image: ${path}`);
+        icon.replaceWith(document.createTextNode("[Image unavailable] "));
+      },
+      { once: true },
+    );
   }
   icon.setAttribute("aria-hidden", "true");
   button.insertBefore(icon, button.firstChild);

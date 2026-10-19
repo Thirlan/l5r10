@@ -17,12 +17,9 @@ export function inferRiverDirections(grid) {
     });
   };
   const assign = (key, direction) => {
-    grid[key]["river direction"] ??= Object.fromEntries(
-      RIVER_OFFSETS.map((_, index) => [index, Number(index === direction)]),
-    );
+    grid[key]["river direction"] ??= Object.fromEntries(RIVER_OFFSETS.map((_, index) => [index, Number(index === direction)]));
   };
-  const accepts = (key, direction) => !grid[key]["river direction"]
-    || grid[key]["river direction"][direction] === 1;
+  const accepts = (key, direction) => !grid[key]["river direction"] || grid[key]["river direction"][direction] === 1;
   const drain = (seeds) => {
     const queue = [];
     for (const { key, direction } of seeds) {
@@ -40,16 +37,14 @@ export function inferRiverDirections(grid) {
       }
     }
   };
-  const waterSeeds = (keys, terrain) => [...keys].flatMap((key) => {
-    const outlet = neighbors(key).find((neighbor) =>
-      grid[neighbor.key]?.terrain === terrain && accepts(key, neighbor.direction));
-    return outlet ? [{ key, direction: outlet.direction }] : [];
-  });
+  const waterSeeds = (keys, terrain) =>
+    [...keys].flatMap((key) => {
+      const outlet = neighbors(key).find((neighbor) => grid[neighbor.key]?.terrain === terrain && accepts(key, neighbor.direction));
+      return outlet ? [{ key, direction: outlet.direction }] : [];
+    });
   drain(waterSeeds(remaining, TERRAIN.COASTAL_WATER.id));
 
-  const highlandScore = (key) => [key, ...neighbors(key).map((neighbor) => neighbor.key)]
-    .reduce((score, nearby) => score + (grid[nearby]?.terrain === TERRAIN.MOUNTAINS.id ? 2
-      : Number(grid[nearby]?.terrain === TERRAIN.HILLS.id)), 0);
+  const highlandScore = (key) => [key, ...neighbors(key).map((neighbor) => neighbor.key)].reduce((score, nearby) => score + (grid[nearby]?.terrain === TERRAIN.MOUNTAINS.id ? 2 : Number(grid[nearby]?.terrain === TERRAIN.HILLS.id)), 0);
   while (remaining.size) {
     const component = [remaining.values().next().value];
     const distances = new Map([[component[0], 0]]);
@@ -60,7 +55,7 @@ export function inferRiverDirections(grid) {
         component.push(neighbor.key);
       }
     }
-    const source = component.reduce((best, key) => highlandScore(key) > highlandScore(best) ? key : best);
+    const source = component.reduce((best, key) => (highlandScore(key) > highlandScore(best) ? key : best));
     const outlets = waterSeeds(component, TERRAIN.WATER.id);
     if (highlandScore(source) > 0 && outlets.length) {
       distances.clear();
@@ -73,15 +68,16 @@ export function inferRiverDirections(grid) {
           queue.push(neighbor.key);
         }
       }
-      drain([outlets.reduce((best, outlet) =>
-        distances.get(outlet.key) > distances.get(best.key) ? outlet : best)]);
+      drain([outlets.reduce((best, outlet) => (distances.get(outlet.key) > distances.get(best.key) ? outlet : best))]);
     } else if (outlets.length) {
       drain(outlets);
     } else {
       // A disconnected river has no water outlet. Use the least elevated end.
-      const exits = component.flatMap((key) => neighbors(key)
-        .filter((neighbor) => !grid[neighbor.key]?.river && accepts(key, neighbor.direction))
-        .map((neighbor) => ({ key, direction: neighbor.direction, target: neighbor.key })));
+      const exits = component.flatMap((key) =>
+        neighbors(key)
+          .filter((neighbor) => !grid[neighbor.key]?.river && accepts(key, neighbor.direction))
+          .map((neighbor) => ({ key, direction: neighbor.direction, target: neighbor.key })),
+      );
       if (!exits.length) {
         // Retain corrections when they leave no valid drainage route.
         for (const key of component) {

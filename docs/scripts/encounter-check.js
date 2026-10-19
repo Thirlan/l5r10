@@ -2,14 +2,7 @@ import { BeastSelection } from "./beast-selection.js";
 import { BEASTIARY } from "./beastiary.js";
 import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "./world-map-layers.js";
 
-export const ENCOUNTER_CHANCES = Object.freeze([
-  0.00001,
-  0.00010,
-  0.00100,
-  0.01000,
-  0.10000,
-  0.33000,
-]);
+export const ENCOUNTER_CHANCES = Object.freeze([0.00001, 0.0001, 0.001, 0.01, 0.1, 0.33]);
 
 const ENCOUNTER_TYPES = Object.freeze(["criminal", "animal", "spirit", "shadowland"]);
 const MAP_CATALOGS = Object.freeze({
@@ -38,8 +31,7 @@ export class BeastiaryLookUpTable {
    * @throws {TypeError} If any map ID is unknown.
    */
   constructor(terrain, climate, vegetation, river) {
-    if (!isKnownMapId("terrain", terrain) || !isKnownMapId("climate", climate)
-      || !isKnownMapId("vegetation", vegetation) || !isKnownMapId("river", river)) {
+    if (!isKnownMapId("terrain", terrain) || !isKnownMapId("climate", climate) || !isKnownMapId("vegetation", vegetation) || !isKnownMapId("river", river)) {
       throw new TypeError("Lookup table map values must be known catalog IDs.");
     }
     Object.assign(this, { terrain, climate, vegetation, river, diceRollSize: 0, beastList: [] });
@@ -52,8 +44,7 @@ export class BeastiaryLookUpTable {
    * @throws {TypeError} If the table is frozen or the value is not a Beast.
    */
   add(beast) {
-    if (Object.isFrozen(this) || !beast || typeof beast !== "object"
-      || !Number.isInteger(beast.weight) || beast.weight < 1) {
+    if (Object.isFrozen(this) || !beast || typeof beast !== "object" || !Number.isInteger(beast.weight) || beast.weight < 1) {
       throw new TypeError("A mutable lookup table needs a beast with a positive integer weight.");
     }
     const selection = new BeastSelection(beast, this.diceRollSize, this.diceRollSize + beast.weight);
@@ -69,8 +60,7 @@ export class BeastiaryLookUpTable {
   select() {
     if (this.diceRollSize === 0) return undefined;
     const roll = Math.floor(Math.random() * this.diceRollSize);
-    return this.beastList.find(({ selectionFrom, selectionTo }) =>
-      selectionFrom <= roll && roll < selectionTo);
+    return this.beastList.find(({ selectionFrom, selectionTo }) => selectionFrom <= roll && roll < selectionTo);
   }
 
   /**
@@ -95,12 +85,7 @@ function buildLookUpTables() {
         vegetationValues.forEach(({ id: vegetation }) => {
           rivers.forEach(({ id: river }) => {
             const table = new BeastiaryLookUpTable(terrain, climate, vegetation, river);
-            BEASTIARY.filter((beast) => beast.encounterType === encounterType
-              && beast.terrain.includes(terrain)
-              && beast.climate.includes(climate)
-              && beast.vegetation.includes(vegetation)
-              && beast.river.includes(river))
-              .forEach((beast) => table.add(beast));
+            BEASTIARY.filter((beast) => beast.encounterType === encounterType && beast.terrain.includes(terrain) && beast.climate.includes(climate) && beast.vegetation.includes(vegetation) && beast.river.includes(river)).forEach((beast) => table.add(beast));
             LOOKUP_TABLES.set(keyFor(encounterType, terrain, climate, vegetation, river), table.freeze());
           });
         });
@@ -122,11 +107,7 @@ buildLookUpTables();
  * @throws {TypeError} If the type or any map ID is unknown.
  */
 export function getLookUpTable(encounterType, terrain, climate, vegetation, river) {
-  if (!ENCOUNTER_TYPES.includes(encounterType)
-    || !isKnownMapId("terrain", terrain)
-    || !isKnownMapId("climate", climate)
-    || !isKnownMapId("vegetation", vegetation)
-    || !isKnownMapId("river", river)) {
+  if (!ENCOUNTER_TYPES.includes(encounterType) || !isKnownMapId("terrain", terrain) || !isKnownMapId("climate", climate) || !isKnownMapId("vegetation", vegetation) || !isKnownMapId("river", river)) {
     throw new TypeError("Encounter type and map values must be valid catalog values.");
   }
   return LOOKUP_TABLES.get(keyFor(encounterType, terrain, climate, vegetation, river));
@@ -145,24 +126,12 @@ export function getLookUpTable(encounterType, terrain, climate, vegetation, rive
  * @returns {BeastSelection[]} Selected encounters in argument order; empty means none.
  * @throws {TypeError} If a level or map ID is invalid.
  */
-export function rollEncounter(
-  criminal,
-  animal,
-  spirit,
-  shadowland,
-  terrain,
-  climate,
-  vegetation,
-  river,
-) {
+export function rollEncounter(criminal, animal, spirit, shadowland, terrain, climate, vegetation, river) {
   const levels = [criminal, animal, spirit, shadowland];
   if (levels.some((level) => !Number.isInteger(level) || level < 0 || level > 5)) {
     throw new TypeError("Encounter levels must be map level numbers from zero to five.");
   }
-  if (!isKnownMapId("terrain", terrain)
-    || !isKnownMapId("climate", climate)
-    || !isKnownMapId("vegetation", vegetation)
-    || !isKnownMapId("river", river)) {
+  if (!isKnownMapId("terrain", terrain) || !isKnownMapId("climate", climate) || !isKnownMapId("vegetation", vegetation) || !isKnownMapId("river", river)) {
     throw new TypeError("Encounter map values must be known catalog IDs.");
   }
 

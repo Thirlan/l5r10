@@ -9,9 +9,7 @@ export class BeastSelection {
    * @throws {TypeError} If the source or range is invalid.
    */
   constructor(beast, selectionFrom, selectionTo) {
-    if (!(beast instanceof Beast)
-      || !Number.isInteger(selectionFrom) || selectionFrom < 0
-      || !Number.isInteger(selectionTo) || selectionTo <= selectionFrom) {
+    if (!(beast instanceof Beast) || !Number.isInteger(selectionFrom) || selectionFrom < 0 || !Number.isInteger(selectionTo) || selectionTo <= selectionFrom) {
       throw new TypeError("A beast selection needs a beast and a valid selection range.");
     }
 

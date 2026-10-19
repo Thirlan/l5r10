@@ -3,7 +3,12 @@ import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "./world-map
 // Moving speeds, not daily averages. These estimates exclude rest and survival checks.
 // Horse uses a walk; caravan includes loaded carts; ship assumes favorable wind.
 export const BASE_SPEED_KMPH = Object.freeze({
-  foot: 5, horse: 7, caravan: 4, army: 4, "river boat": 6.5, ship: 9,
+  foot: 5,
+  horse: 7,
+  caravan: 4,
+  army: 4,
+  "river boat": 6.5,
+  ship: 9,
 });
 const MODE_NAMES = Object.keys(BASE_SPEED_KMPH);
 const WATER_TERRAINS = new Set([TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]);
@@ -27,9 +32,7 @@ const INFRASTRUCTURE_BONUS = {
 };
 
 function getLayerValue(value, catalog) {
-  return Object.values(catalog).find(({ id, name }) =>
-    id === value || id === value?.id
-    || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
+  return Object.values(catalog).find(({ id, name }) => id === value || id === value?.id || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
 }
 
 /**
@@ -55,17 +58,14 @@ export function getTravelSpeed(mode, terrain, climate, vegetation, river, infras
   vegetation = getLayerValue(vegetation, VEGETATION);
   river = getLayerValue(river, RIVER);
   infrastructure = getLayerValue(infrastructure, INFRASTRUCTURE);
-  if (!MODE_NAMES.includes(mode) || !terrain || !climate || !vegetation || !river || !infrastructure
-    || typeof isAgainstCurrent !== "boolean") return -1.0;
+  if (!MODE_NAMES.includes(mode) || !terrain || !climate || !vegetation || !river || !infrastructure || typeof isAgainstCurrent !== "boolean") return -1.0;
 
   const onWater = WATER_TERRAINS.has(terrain);
   const onRiver = river === RIVER.PRESENT;
   const hasBridge = infrastructure === INFRASTRUCTURE.ROAD || infrastructure === INFRASTRUCTURE.FOOTPATH;
   const waterTransport = mode === "river boat" || mode === "ship";
   if (onWater && (onRiver || vegetation !== VEGETATION.NONE)) return -1.0;
-  if (terrain === TERRAIN.CLIFF && (waterTransport
-    || (infrastructure !== INFRASTRUCTURE.ROAD
-      && !(mode === "foot" && infrastructure === INFRASTRUCTURE.FOOTPATH)))) return -1.0;
+  if (terrain === TERRAIN.CLIFF && (waterTransport || (infrastructure !== INFRASTRUCTURE.ROAD && !(mode === "foot" && infrastructure === INFRASTRUCTURE.FOOTPATH)))) return -1.0;
 
   let adjustment = 0;
   if (waterTransport) {

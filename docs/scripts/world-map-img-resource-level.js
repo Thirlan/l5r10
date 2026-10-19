@@ -8,8 +8,7 @@ const colors = new Map([
   [RESOURCE_LEVEL.VERY_HIGH, "rgba(255, 255, 0, 0.45)"],
 ]);
 
-export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze(Object.entries(RESOURCE_LEVEL).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_resource_level_${key.toLowerCase()}.webp` })));
+export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze(Object.entries(RESOURCE_LEVEL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_resource_level_${key.toLowerCase()}.webp` })));
 
 /**
  * @param {import("./world-map-layers.js").LevelValue} value Resource level metadata.
@@ -33,8 +32,7 @@ export function getResourceLevelColor(value) {
  * @returns {void}
  */
 export function drawResourceLevelCue(ctx, left, top, width, height, color, lineWidth = 1) {
-  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite)
-    || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
+  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite) || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
     throw new TypeError("Resource level cue drawing needs a canvas context, dimensions, and color.");
   }
   const inset = Math.max(0.75, Math.min(width, height) * 0.2);

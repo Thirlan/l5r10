@@ -9,8 +9,7 @@ const infrastructureStyles = new Map([
 const ROAD_DIRECTIONS = ["east", "south", "southeast", "northeast"];
 for (const style of infrastructureStyles.values()) Object.freeze(style);
 
-export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze(Object.entries(INFRASTRUCTURE).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_infrastructure_${key.toLowerCase()}.webp` })));
+export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze(Object.entries(INFRASTRUCTURE).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_infrastructure_${key.toLowerCase()}.webp` })));
 
 /**
  * @param {import("./world-map-layers.js").LayerValue} value Infrastructure metadata.
@@ -66,7 +65,10 @@ export function drawInfrastructure(ctx, x, y, gridSize, value, neighbors) {
   ctx.lineWidth = style.lineWidth;
   ctx.lineCap = "round";
   for (const [direction, dx, dy] of [
-    ["east", 1, 0], ["south", 0, 1], ["southeast", 1, 1], ["northeast", 1, -1],
+    ["east", 1, 0],
+    ["south", 0, 1],
+    ["southeast", 1, 1],
+    ["northeast", 1, -1],
   ]) {
     if (!neighbors[direction]) continue;
     ctx.beginPath();

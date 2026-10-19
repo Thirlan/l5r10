@@ -8,8 +8,7 @@ const colors = new Map([
   [ANIMAL.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const ANIMAL_CONTROL_IMAGES = Object.freeze(Object.entries(ANIMAL).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_animal_${key.toLowerCase()}.webp` })));
+export const ANIMAL_CONTROL_IMAGES = Object.freeze(Object.entries(ANIMAL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_animal_${key.toLowerCase()}.webp` })));
 
 export function getAnimalColor(value) {
   if (!Object.values(ANIMAL).includes(value)) {
@@ -19,8 +18,7 @@ export function getAnimalColor(value) {
 }
 
 export function drawAnimalCue(ctx, left, top, width, height, color) {
-  if (!ctx || ![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0
-    || typeof color !== "string") {
+  if (!ctx || ![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0 || typeof color !== "string") {
     throw new TypeError("Animal cue drawing needs a canvas context, dimensions, and color.");
   }
   ctx.save();

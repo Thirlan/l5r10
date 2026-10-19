@@ -1,3 +1,4 @@
+/* exported L5RDice */
 // Shared L5R roll/keep dice helper. Config: { roll, keep, mod?, rerollOnes?, explodeOnNines? }.
 const L5RDice = {
   rollOne(cfg) {
@@ -16,5 +17,5 @@ const L5RDice = {
     for (let i = 0; i < cfg.roll; i++) results.push(L5RDice.rollOne(cfg));
     results.sort((a, b) => b - a);
     return results.slice(0, cfg.keep).reduce((s, v) => s + v, 0) + (cfg.mod || 0);
-  }
+  },
 };

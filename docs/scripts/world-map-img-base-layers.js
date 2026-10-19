@@ -51,8 +51,7 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors, riverCon
     ["east", right, top, right, bottom],
     ["south", left, bottom, right, bottom],
     ["west", left, top, left, bottom],
-  ].filter(([direction]) => neighbors[direction] && !getWaterColor(neighbors[direction])
-    && !riverConnections[direction]);
+  ].filter(([direction]) => neighbors[direction] && !getWaterColor(neighbors[direction]) && !riverConnections[direction]);
   if (!edges.length) return;
 
   ctx.save();
@@ -67,15 +66,7 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors, riverCon
   ctx.restore();
 }
 
-export const BASE_LAYER_IMAGES = Object.freeze([
-  [TERRAIN.FLAT, "../img/map/terrain_flat.webp"],
-  [TERRAIN.HILLS, "../img/map/terrain_hills.webp"],
-  [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"],
-  [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"],
-  [VEGETATION.PRESENT, "../img/map/vegetation.webp"],
-  ...["bottom", "corner", "slope", "diagonal", "inward"].map((name) =>
-    [name, `../img/map/cliff_${name}.webp`]),
-].map(([value, image]) => Object.freeze({ value, image })));
+export const BASE_LAYER_IMAGES = Object.freeze([[TERRAIN.FLAT, "../img/map/terrain_flat.webp"], [TERRAIN.HILLS, "../img/map/terrain_hills.webp"], [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"], [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"], [VEGETATION.PRESENT, "../img/map/vegetation.webp"], ...["bottom", "corner", "slope", "diagonal", "inward"].map((name) => [name, `../img/map/cliff_${name}.webp`])].map(([value, image]) => Object.freeze({ value, image })));
 
 const imagePaths = new Map(BASE_LAYER_IMAGES.map(({ value, image }) => [value, image]));
 
@@ -94,9 +85,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("Base-layer drawing needs a canvas context and valid cell dimensions.");
   }
-  if (!Object.values(TERRAIN).includes(terrain)
-    || !climateColors.has(climate)
-    || !Object.values(VEGETATION).includes(vegetation)) {
+  if (!Object.values(TERRAIN).includes(terrain) || !climateColors.has(climate) || !Object.values(VEGETATION).includes(vegetation)) {
     throw new TypeError("Base-layer drawing needs terrain, climate, and vegetation metadata.");
   }
 
@@ -131,8 +120,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
  * @returns {void}
  */
 export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, neighbors = {}) {
-  if (!ctx || !Number.isFinite(x) || !Number.isFinite(y)
-    || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
+  if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
   }
   const has = (flags, direction) => Number(flags?.[direction % 8]) === 1;
@@ -149,7 +137,7 @@ export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, ne
     const image = getLoadedImage(name, images);
     ctx.save();
     ctx.translate((x + 0.5) * gridSize, (y + 0.5) * gridSize);
-    ctx.rotate(rotation * Math.PI / 2);
+    ctx.rotate((rotation * Math.PI) / 2);
     ctx.translate((column - 1) * size, (row - 1) * size);
     if (mirror) ctx.scale(-1, 1);
     ctx.drawImage(image, -size / 2, -size / 2, size, size);
@@ -185,21 +173,23 @@ function getLoadedImage(value, images) {
   return image;
 }
 
-export const BASE_LAYER_CONTROL_IMAGES = Object.freeze([
-  [TERRAIN.FLAT, "../img/map/control_flat.webp"],
-  [TERRAIN.HILLS, "../img/map/control_hills.webp"],
-  [TERRAIN.MOUNTAINS, "../img/map/control_mountains.webp"],
-  [TERRAIN.WATER, "../img/map/control_water.webp"],
-  [TERRAIN.COASTAL_WATER, "../img/map/control_coastal_water.webp"],
-  [TERRAIN.OCEAN, "../img/map/control_ocean.webp"],
-  [TERRAIN.WETLANDS, "../img/map/control_wetlands.webp"],
-  [TERRAIN.CLIFF, "../img/map/control_cliff.webp"],
-  [CLIMATE.TEMPERATE, "../img/map/control_temperate.webp"],
-  [CLIMATE.TROPICAL, "../img/map/control_tropical.webp"],
-  [CLIMATE.DESERT, "../img/map/control_desert.webp"],
-  [CLIMATE.POLAR, "../img/map/control_polar.webp"],
-  [CLIMATE.WASTE, "../img/map/control_waste.webp"],
-  [CLIMATE.SHADOWLAND, "../img/map/control_shadowland.webp"],
-  [VEGETATION.NONE, "../img/map/control_veg_0.webp"],
-  [VEGETATION.PRESENT, "../img/map/control_veg_1.webp"],
-].map(([value, image]) => Object.freeze({ value, image })));
+export const BASE_LAYER_CONTROL_IMAGES = Object.freeze(
+  [
+    [TERRAIN.FLAT, "../img/map/control_flat.webp"],
+    [TERRAIN.HILLS, "../img/map/control_hills.webp"],
+    [TERRAIN.MOUNTAINS, "../img/map/control_mountains.webp"],
+    [TERRAIN.WATER, "../img/map/control_water.webp"],
+    [TERRAIN.COASTAL_WATER, "../img/map/control_coastal_water.webp"],
+    [TERRAIN.OCEAN, "../img/map/control_ocean.webp"],
+    [TERRAIN.WETLANDS, "../img/map/control_wetlands.webp"],
+    [TERRAIN.CLIFF, "../img/map/control_cliff.webp"],
+    [CLIMATE.TEMPERATE, "../img/map/control_temperate.webp"],
+    [CLIMATE.TROPICAL, "../img/map/control_tropical.webp"],
+    [CLIMATE.DESERT, "../img/map/control_desert.webp"],
+    [CLIMATE.POLAR, "../img/map/control_polar.webp"],
+    [CLIMATE.WASTE, "../img/map/control_waste.webp"],
+    [CLIMATE.SHADOWLAND, "../img/map/control_shadowland.webp"],
+    [VEGETATION.NONE, "../img/map/control_veg_0.webp"],
+    [VEGETATION.PRESENT, "../img/map/control_veg_1.webp"],
+  ].map(([value, image]) => Object.freeze({ value, image })),
+);

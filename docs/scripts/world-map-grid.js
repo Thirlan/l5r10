@@ -21,7 +21,9 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.applyZoom();
   }
 
-  redraw() { this.draw(); }
+  redraw() {
+    this.draw();
+  }
 
   /**
    * @returns {Promise<void>} Completes after map assets and data load.
@@ -62,18 +64,22 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.canvas.addEventListener("mousemove", (e) => {
       if (this.isDrawing) this.paintAt(e);
     });
-    this.canvas.addEventListener("mouseup", () => this.isDrawing = false);
-    this.canvas.addEventListener("mouseleave", () => this.isDrawing = false);
+    this.canvas.addEventListener("mouseup", () => (this.isDrawing = false));
+    this.canvas.addEventListener("mouseleave", () => (this.isDrawing = false));
     this.canvas.addEventListener("contextmenu", (e) => {
       e.preventDefault();
       const cell = this.getGridCell(e);
       this.clearCell(cell.x, cell.y);
     });
-    this.canvas.addEventListener("wheel", (e) => {
-      if (!e.ctrlKey) return;
-      e.preventDefault();
-      this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
-    }, { passive: false });
+    this.canvas.addEventListener(
+      "wheel",
+      (e) => {
+        if (!e.ctrlKey) return;
+        e.preventDefault();
+        this.setZoom(this.zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1));
+      },
+      { passive: false },
+    );
   }
 
   ensureCell(key) {
@@ -88,8 +94,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     const cliffId = TERRAIN.CLIFF.id;
     const paintingCliffTerrain = this.currentLayer === LAYERS.TERRAIN.id && this.currentValue === cliffId;
     if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
-    if (this.currentLayer === "river" && this.currentValue
-      && !Object.values(this.riverDirections).some((direction) => direction === 1)) return;
+    if (this.currentLayer === "river" && this.currentValue && !Object.values(this.riverDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
     if (x < 0 || y < 0) return;
 
@@ -219,7 +224,7 @@ export class WorldMapGrid extends WorldMapRenderer {
       for (const index of Object.keys(this.cliffDirections)) {
         this.cliffDirections[index] = enabled ? 1 : 0;
       }
-      document.querySelectorAll('[data-cliff-direction]:not(#cliffDirectionAll)').forEach((checkbox) => {
+      document.querySelectorAll("[data-cliff-direction]:not(#cliffDirectionAll)").forEach((checkbox) => {
         checkbox.checked = enabled;
       });
     } else if (Object.hasOwn(this.cliffDirections, direction)) {
@@ -249,7 +254,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     return {
       type,
       englishName: engInput ? engInput.value.trim() : "",
-      rokuganiName: rokInput ? rokInput.value.trim() : ""
+      rokuganiName: rokInput ? rokInput.value.trim() : "",
     };
   }
 
@@ -259,7 +264,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     return {
       englishText: engInput ? engInput.value.trim() : "",
       rokuganiText: rokInput ? rokInput.value.trim() : "",
-      fontSize: Number(this.fontSize)
+      fontSize: Number(this.fontSize),
     };
   }
 

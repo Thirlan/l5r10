@@ -1,9 +1,9 @@
 import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "./world-map-layers.js";
 
-const MODE_FOOT = 'foot';
-const MODE_RIVER_BOAT = 'river boat';
-const MODE_SHIP = 'ship';
-const MODE_SWIM = 'swim';
+const MODE_FOOT = "foot";
+const MODE_RIVER_BOAT = "river boat";
+const MODE_SHIP = "ship";
+const MODE_SWIM = "swim";
 
 const MISHAP_PENALTY_MIN = 1440;
 const DEATH_PENALTY = 10000;
@@ -18,10 +18,7 @@ export const MINUTES_PER_DAY = 24 * 60;
 
 // Keep the existing title-case travel inputs until a separate travel behavior change.
 const RIVER_WATER_NAME = TERRAIN.WATER.name[0].toUpperCase() + TERRAIN.WATER.name.slice(1);
-const WATER_TERRAINS = new Set(
-  [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].flatMap(({ name }) =>
-    [name, name.replace(/\b\w/g, (letter) => letter.toUpperCase())]),
-);
+const WATER_TERRAINS = new Set([TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].flatMap(({ name }) => [name, name.replace(/\b\w/g, (letter) => letter.toUpperCase())]));
 
 // Mode-aware A* + trip simulator. Consumes a small map-query interface so it stays UI-agnostic.
 // Config: { getTerrain, getTileData, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }
@@ -69,9 +66,9 @@ export class L5RPathing {
     const toWater = WATER_TERRAINS.has(toT);
     const fromInfrastructure = this.getInfrastructure(from.x, from.y);
     const tileProb = toData.prob ?? 1;
-    const sailingCheck = { skill: 'sailing', tn: toData.tn, timePenalty: MISHAP_PENALTY_MIN, riskPenalty: MISHAP_PENALTY_MIN, probability: tileProb };
-    const swimCheck = { skill: 'swim', tn: this.skillConfig.swim.tn, timePenalty: 0, riskPenalty: DEATH_PENALTY, probability: 1 };
-    const tileCheck = (toData.skill && toData.tn !== null) ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN, probability: tileProb } : null;
+    const sailingCheck = { skill: "sailing", tn: toData.tn, timePenalty: MISHAP_PENALTY_MIN, riskPenalty: MISHAP_PENALTY_MIN, probability: tileProb };
+    const swimCheck = { skill: "swim", tn: this.skillConfig.swim.tn, timePenalty: 0, riskPenalty: DEATH_PENALTY, probability: 1 };
+    const tileCheck = toData.skill && toData.tn !== null ? { skill: toData.skill, tn: toData.tn, penalty: MISHAP_PENALTY_MIN, probability: tileProb } : null;
     if (tileCheck) {
       tileCheck.timePenalty = MISHAP_PENALTY_MIN;
       tileCheck.riskPenalty = MISHAP_PENALTY_MIN;
@@ -80,15 +77,13 @@ export class L5RPathing {
     const clan = this.getClan(to.x, to.y);
     const crossedClanBorderOnRoad = this.getClan(from.x, from.y) !== clan && toData.hasRoad;
     const enteredClanCity = toT === SETTLEMENT.CITY.name;
-    const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan]
-      ? { skills: ['sneak', 'forgery'], tn: 20, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 }
-      : null;
+    const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan] ? { skills: ["sneak", "forgery"], tn: 20, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 } : null;
     const transition = (checks = []) => ({
       toMode,
       cost: toData.cost,
       zeni: toData.zeni ?? 0,
       checks: [...checks, ...(territorialCheck ? [territorialCheck] : [])],
-      avoidPenalty: clan && this.avoidClans[clan] ? AVOID_CLAN_PENALTY : 0
+      avoidPenalty: clan && this.avoidClans[clan] ? AVOID_CLAN_PENALTY : 0,
     });
 
     if (toMode === MODE_FOOT) {
@@ -159,7 +154,10 @@ export class L5RPathing {
       let curKey = null;
       let cur = null;
       for (const [k, node] of open) {
-        if (cur === null || node.f < cur.f) { cur = node; curKey = k; }
+        if (cur === null || node.f < cur.f) {
+          cur = node;
+          curKey = k;
+        }
       }
       open.delete(curKey);
 
@@ -168,14 +166,23 @@ export class L5RPathing {
         let k = curKey;
         while (cameFrom.has(k)) {
           k = cameFrom.get(k);
-          const [xy, mode] = k.split('|');
-          const [x, y] = xy.split(',').map(Number);
+          const [xy, mode] = k.split("|");
+          const [x, y] = xy.split(",").map(Number);
           path.unshift({ x, y, mode });
         }
         return path;
       }
 
-      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+      for (const [dx, dy] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+        [1, 1],
+        [1, -1],
+        [-1, 1],
+        [-1, -1],
+      ]) {
         const next = { x: cur.cell.x + dx, y: cur.cell.y + dy };
         for (const trans of this.transitions(cur.cell, cur.mode, next)) {
           const diag = dx !== 0 && dy !== 0;
@@ -217,7 +224,7 @@ export class L5RPathing {
       let tileMinutes = Math.round(trans.cost * (diag ? DIAGONAL_COST_MULTIPLIER : 1));
       const eventDay = Math.floor((clock - DAY_START_MIN) / MINUTES_PER_DAY) + 1;
       const toData = this.getTileData(to.x, to.y, from.mode);
-      const clan = this.getClan(to.x, to.y) || '';
+      const clan = this.getClan(to.x, to.y) || "";
       const eventRows = [];
 
       for (const check of trans.checks) {
@@ -232,19 +239,21 @@ export class L5RPathing {
 
       totalMinutes += tileMinutes;
       totalZeni += toData?.zeni ?? 0;
-      if (!eventRows.length) eventRows.push({ event: 'Travel', skill: '', tn: '', result: '' });
-      eventRows.forEach((event, index) => events.push({
-        day: eventDay,
-        coord: `${to.x},${to.y}`,
-        event: event.event,
-        mode: to.mode[0].toUpperCase() + to.mode.slice(1),
-        terrain: toData.terrain,
-        clan,
-        skill: event.skill,
-        tn: event.tn,
-        result: event.result,
-        cost: index === 0 && toData?.zeni ? `${toData.zeni} zeni` : ''
-      }));
+      if (!eventRows.length) eventRows.push({ event: "Travel", skill: "", tn: "", result: "" });
+      eventRows.forEach((event, index) =>
+        events.push({
+          day: eventDay,
+          coord: `${to.x},${to.y}`,
+          event: event.event,
+          mode: to.mode[0].toUpperCase() + to.mode.slice(1),
+          terrain: toData.terrain,
+          clan,
+          skill: event.skill,
+          tn: event.tn,
+          result: event.result,
+          cost: index === 0 && toData?.zeni ? `${toData.zeni} zeni` : "",
+        }),
+      );
       clock += tileMinutes;
 
       const timeOfDay = ((clock % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;

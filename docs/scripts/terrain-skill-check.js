@@ -4,8 +4,7 @@ const MOVEMENT_TN = { hills: 10, mountains: 20, wetlands: 15, cliff: 25 };
 const SWIMMING_TN = { water: 15, "coastal water": 20, ocean: 25 };
 
 function resolveLayer(value, catalog) {
-  const match = Object.values(catalog).find(({ id, name }) => id === value || id === value?.id
-    || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
+  const match = Object.values(catalog).find(({ id, name }) => id === value || id === value?.id || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
   if (!match) throw new TypeError("Unknown map layer value.");
   return match.name.toLowerCase();
 }

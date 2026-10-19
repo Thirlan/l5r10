@@ -43,9 +43,7 @@ const resourceImageEntries = [
 ];
 
 const resourceImageMap = new Map(resourceImageEntries);
-export const RESOURCE_IMAGES = Object.freeze(resourceImageEntries.map(
-  ([resource, image]) => Object.freeze({ resource, image }),
-));
+export const RESOURCE_IMAGES = Object.freeze(resourceImageEntries.map(([resource, image]) => Object.freeze({ resource, image })));
 export const RESOURCE_MARKER_SIZE = 12;
 
 /**

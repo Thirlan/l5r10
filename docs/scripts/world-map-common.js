@@ -35,8 +35,7 @@ export class WorldMapRenderer {
     this.minZoom = 0.55;
     this.maxZoom = 4;
 
-    this.drawOrder = [LAYERS.TERRAIN.id, LAYERS.VEGETATION.id, LAYERS.RIVER.id,
-      LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
+    this.drawOrder = [LAYERS.TERRAIN.id, LAYERS.VEGETATION.id, LAYERS.RIVER.id, LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
 
     this.grid = {};
     this.baseLayerImages = new Map();
@@ -49,7 +48,9 @@ export class WorldMapRenderer {
   // Repaint the whole canvas. Subclasses implement this (draw / render).
   redraw() {}
 
-  isLayerVisible(_layerName) { return true; }
+  isLayerVisible(_layerName) {
+    return true;
+  }
 
   /**
    * @returns {Promise<void>} Completes when all base-layer images are loaded.
@@ -57,12 +58,17 @@ export class WorldMapRenderer {
   async loadBaseLayerImages() {
     this.baseLayersLoading = true;
     try {
-      const entries = await Promise.all(BASE_LAYER_IMAGES.map(({ image }) => new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve([image, img]);
-        img.onerror = () => reject(new Error(`Failed to load base-layer image: ${image}`));
-        img.src = image;
-      })));
+      const entries = await Promise.all(
+        BASE_LAYER_IMAGES.map(
+          ({ image }) =>
+            new Promise((resolve, reject) => {
+              const img = new Image();
+              img.onload = () => resolve([image, img]);
+              img.onerror = () => reject(new Error(`Failed to load base-layer image: ${image}`));
+              img.src = image;
+            }),
+        ),
+      );
       this.baseLayerImages = new Map(entries);
     } catch (err) {
       console.error("Failed to load base-layer images:", err);
@@ -114,9 +120,15 @@ export class WorldMapRenderer {
     this.applyZoom();
   }
 
-  zoomIn() { this.setZoom(this.zoom * 1.25); }
-  zoomOut() { this.setZoom(this.zoom / 1.25); }
-  resetZoom() { this.setZoom(1); }
+  zoomIn() {
+    this.setZoom(this.zoom * 1.25);
+  }
+  zoomOut() {
+    this.setZoom(this.zoom / 1.25);
+  }
+  resetZoom() {
+    this.setZoom(1);
+  }
 
   fitToWidth() {
     const available = this.canvas.parentElement.clientWidth;
@@ -138,23 +150,26 @@ export class WorldMapRenderer {
       const [x, y] = key.split(",").map(Number);
       const terrain = LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id);
       const climate = LAYERS.CLIMATE.getValue(cell.climate ?? CLIMATE.TEMPERATE.id);
-      const vegetation = this.isLayerVisible(LAYERS.VEGETATION.id)
-        ? LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id) : VEGETATION.NONE;
+      const vegetation = this.isLayerVisible(LAYERS.VEGETATION.id) ? LAYERS.VEGETATION.getValue(cell.vegetation ?? VEGETATION.NONE.id) : VEGETATION.NONE;
       drawBaseLayers(this.ctx, x, y, this.gridSize, terrain, climate, vegetation, this.baseLayerImages);
     }
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
       const terrain = LAYERS.TERRAIN.getValue(cell.terrain ?? TERRAIN.FLAT.id);
       const adjacent = [
-        ["north", 0, -1], ["east", 1, 0], ["south", 0, 1], ["west", -1, 0],
+        ["north", 0, -1],
+        ["east", 1, 0],
+        ["south", 0, 1],
+        ["west", -1, 0],
       ];
       const riverConnections = {};
-      const neighbors = Object.fromEntries(adjacent.map(([direction, dx, dy]) => {
-        const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
-        riverConnections[direction] = Boolean(neighbor?.river && neighbor["river direction"]);
-        return [direction, neighbor
-          ? LAYERS.TERRAIN.getValue(neighbor.terrain ?? TERRAIN.FLAT.id) : null];
-      }));
+      const neighbors = Object.fromEntries(
+        adjacent.map(([direction, dx, dy]) => {
+          const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
+          riverConnections[direction] = Boolean(neighbor?.river && neighbor["river direction"]);
+          return [direction, neighbor ? LAYERS.TERRAIN.getValue(neighbor.terrain ?? TERRAIN.FLAT.id) : null];
+        }),
+      );
       drawWaterEdges(this.ctx, x, y, this.gridSize, terrain, neighbors, riverConnections);
     }
   }
@@ -163,11 +178,19 @@ export class WorldMapRenderer {
     if (this.baseLayersLoading) return;
     for (const [key, cell] of Object.entries(this.grid)) {
       const [x, y] = key.split(",").map(Number);
-      const neighbors = Object.fromEntries([
-        [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1],
-      ].map(([dx, dy], index) => [index, this.grid[this.getCellKey(x + dx, y + dy)]?.["cliff direction"]]));
-      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom,
-        cell["cliff direction"], this.baseLayerImages, neighbors);
+      const neighbors = Object.fromEntries(
+        [
+          [0, -1],
+          [1, -1],
+          [1, 0],
+          [1, 1],
+          [0, 1],
+          [-1, 1],
+          [-1, 0],
+          [-1, -1],
+        ].map(([dx, dy], index) => [index, this.grid[this.getCellKey(x + dx, y + dy)]?.["cliff direction"]]),
+      );
+      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, cell["cliff direction"], this.baseLayerImages, neighbors);
     }
   }
 
@@ -179,14 +202,15 @@ export class WorldMapRenderer {
       if (!item || item === RIVER.NONE) continue;
       const water = {};
       const directions = cell["river direction"];
-      const neighbors = Object.fromEntries(RIVER_OFFSETS.map(([name, dx, dy], index) => {
-        const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
-        water[name] = [TERRAIN.WATER.id, TERRAIN.COASTAL_WATER.id, TERRAIN.OCEAN.id].includes(neighbor?.terrain)
-          ? LAYERS.TERRAIN.getValue(neighbor.terrain) : null;
-        const incoming = neighbor?.["river direction"]?.[(index + 4) % 8] === 1;
-        const connected = neighbor?.river && (directions?.[index] === 1 || incoming);
-        return [name, directions ? Boolean(connected) : Boolean(neighbor?.river)];
-      }));
+      const neighbors = Object.fromEntries(
+        RIVER_OFFSETS.map(([name, dx, dy], index) => {
+          const neighbor = this.grid[this.getCellKey(x + dx, y + dy)];
+          water[name] = [TERRAIN.WATER.id, TERRAIN.COASTAL_WATER.id, TERRAIN.OCEAN.id].includes(neighbor?.terrain) ? LAYERS.TERRAIN.getValue(neighbor.terrain) : null;
+          const incoming = neighbor?.["river direction"]?.[(index + 4) % 8] === 1;
+          const connected = neighbor?.river && (directions?.[index] === 1 || incoming);
+          return [name, directions ? Boolean(connected) : Boolean(neighbor?.river)];
+        }),
+      );
       drawRiver(this.ctx, x, y, this.gridSize, neighbors, water, directions);
     }
   }
@@ -209,8 +233,7 @@ export class WorldMapRenderer {
     if (this.riverFlowCanvas.width !== this.canvas.width) this.riverFlowCanvas.width = this.canvas.width;
     if (this.riverFlowCanvas.height !== this.canvas.height) this.riverFlowCanvas.height = this.canvas.height;
     const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    this.riverFlowPaths = this.isLayerVisible(LAYERS.RIVER.id) && !reducedMotion
-      ? buildRiverFlowPaths(this.grid, this.gridSize) : [];
+    this.riverFlowPaths = this.isLayerVisible(LAYERS.RIVER.id) && !reducedMotion ? buildRiverFlowPaths(this.grid, this.gridSize) : [];
     this.riverFlowCtx.clearRect(0, 0, this.riverFlowCanvas.width, this.riverFlowCanvas.height);
     if (!this.riverFlowPaths.length) {
       clearInterval(this.riverFlowTimer);
@@ -235,11 +258,14 @@ export class WorldMapRenderer {
       if (!cell.infrastructure) continue;
       const [x, y] = key.split(",").map(Number);
       const value = LAYERS.INFRASTRUCTURE.getValue(cell.infrastructure);
-      const neighbors = Object.fromEntries([
-        ["east", 1, 0], ["south", 0, 1], ["southeast", 1, 1], ["northeast", 1, -1],
-      ].map(([direction, dx, dy]) => [
-        direction, Boolean(this.grid[this.getCellKey(x + dx, y + dy)]?.infrastructure),
-      ]));
+      const neighbors = Object.fromEntries(
+        [
+          ["east", 1, 0],
+          ["south", 0, 1],
+          ["southeast", 1, 1],
+          ["northeast", 1, -1],
+        ].map(([direction, dx, dy]) => [direction, Boolean(this.grid[this.getCellKey(x + dx, y + dy)]?.infrastructure)]),
+      );
       drawInfrastructure(this.ctx, x, y, this.gridSize, value, neighbors);
     }
   }
@@ -255,9 +281,9 @@ export class WorldMapRenderer {
 
     for (const key of cellSet) {
       const [cx, cy] = key.split(",").map(Number);
-      if (!has(cx, cy - 1)) addEdge(cx + "," + cy, (cx + 1) + "," + cy);
-      if (!has(cx + 1, cy)) addEdge((cx + 1) + "," + cy, (cx + 1) + "," + (cy + 1));
-      if (!has(cx, cy + 1)) addEdge((cx + 1) + "," + (cy + 1), cx + "," + (cy + 1));
+      if (!has(cx, cy - 1)) addEdge(cx + "," + cy, cx + 1 + "," + cy);
+      if (!has(cx + 1, cy)) addEdge(cx + 1 + "," + cy, cx + 1 + "," + (cy + 1));
+      if (!has(cx, cy + 1)) addEdge(cx + 1 + "," + (cy + 1), cx + "," + (cy + 1));
       if (!has(cx - 1, cy)) addEdge(cx + "," + (cy + 1), cx + "," + cy);
     }
 
@@ -383,16 +409,14 @@ export class WorldMapRenderer {
 
   textContent(data) {
     if (typeof data === "string") return data;
-    return this.settlementLanguage === "english"
-      ? data.englishText || data.text || data.rokuganiText || ""
-      : data.rokuganiText || data.text || data.englishText || "";
+    return this.settlementLanguage === "english" ? data.englishText || data.text || data.rokuganiText || "" : data.rokuganiText || data.text || data.englishText || "";
   }
 
   drawMapText(text, x, y, fontSize) {
     if (!text) return;
     const lines = String(text).split(/\r?\n/);
     const lineHeight = fontSize;
-    const firstLineY = y - (lines.length - 1) * lineHeight / 2;
+    const firstLineY = y - ((lines.length - 1) * lineHeight) / 2;
     this.ctx.font = "bold " + fontSize + "px Arial";
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
@@ -493,12 +517,7 @@ export class WorldMapRenderer {
     this.ctx.save();
     this.ctx.globalAlpha = alpha;
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(
-      x * this.gridSize + this.gridSize * startRatio,
-      y * this.gridSize,
-      this.gridSize * widthRatio,
-      this.gridSize
-    );
+    this.ctx.fillRect(x * this.gridSize + this.gridSize * startRatio, y * this.gridSize, this.gridSize * widthRatio, this.gridSize);
     this.ctx.restore();
   }
 
@@ -526,7 +545,10 @@ export class WorldMapRenderer {
   overlayCueColor(color) {
     const rgbaMatch = color && color.match(/^rgba?\(([^)]+)\)$/i);
     if (rgbaMatch) {
-      const [r, g, b] = rgbaMatch[1].split(",").slice(0, 3).map((part) => Number.parseFloat(part.trim()) || 0);
+      const [r, g, b] = rgbaMatch[1]
+        .split(",")
+        .slice(0, 3)
+        .map((part) => Number.parseFloat(part.trim()) || 0);
       const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
       return luminance < 140 ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.85)";
     }

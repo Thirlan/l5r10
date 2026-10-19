@@ -8,11 +8,8 @@ const settlementAssetEntries = [
 ];
 const settlementAssetMap = new Map(settlementAssetEntries);
 
-export const SETTLEMENT_ASSETS = Object.freeze(settlementAssetEntries.map(
-  ([settlement, image]) => Object.freeze({ settlement, image }),
-));
-export const SETTLEMENT_CONTROL_IMAGES = Object.freeze(Object.entries(SETTLEMENT).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_settlement_${key.toLowerCase()}.webp` })));
+export const SETTLEMENT_ASSETS = Object.freeze(settlementAssetEntries.map(([settlement, image]) => Object.freeze({ settlement, image })));
+export const SETTLEMENT_CONTROL_IMAGES = Object.freeze(Object.entries(SETTLEMENT).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_settlement_${key.toLowerCase()}.webp` })));
 export const NEUTRAL_SETTLEMENT_COLORS = Object.freeze({ border: "#444444", fill: "#DDDDDD" });
 
 export function getSettlementAsset(settlement) {
@@ -67,10 +64,7 @@ export function drawSquareSettlement(ctx, settlement, centerX, centerY, zoom, cl
   if (!Object.values(SETTLEMENT).includes(settlement)) {
     throw new TypeError("Settlement drawing needs a settlement metadata value.");
   }
-  const supported = [
-    SETTLEMENT.FORTIFICATION, SETTLEMENT.CASTLE, SETTLEMENT.KYUDEN,
-    SETTLEMENT.CASTLE_RUINS, SETTLEMENT.ACADEMY, SETTLEMENT.WATCHTOWER,
-  ];
+  const supported = [SETTLEMENT.FORTIFICATION, SETTLEMENT.CASTLE, SETTLEMENT.KYUDEN, SETTLEMENT.CASTLE_RUINS, SETTLEMENT.ACADEMY, SETTLEMENT.WATCHTOWER];
   if (!supported.includes(settlement)) return false;
 
   const colors = clanColors || NEUTRAL_SETTLEMENT_COLORS;
@@ -118,18 +112,24 @@ export function drawSquareSettlement(ctx, settlement, centerX, centerY, zoom, cl
 }
 
 const settlementLabelEntries = [
-  [SETTLEMENT.VILLAGE, 6], [SETTLEMENT.CITY, 8], [SETTLEMENT.CAPITAL, 10],
-  [SETTLEMENT.FORTIFICATION, 6], [SETTLEMENT.CASTLE, 8], [SETTLEMENT.KYUDEN, 10],
-  [SETTLEMENT.SMALL_SHRINE, 6], [SETTLEMENT.LARGE_SHRINE, 8],
-  [SETTLEMENT.VILLAGE_RUINS, 6], [SETTLEMENT.CASTLE_RUINS, 8],
-  [SETTLEMENT.ACADEMY, 6], [SETTLEMENT.WATCHTOWER, 6],
-  [SETTLEMENT.SMALL_TEMPLE, 6], [SETTLEMENT.LARGE_TEMPLE, 8],
+  [SETTLEMENT.VILLAGE, 6],
+  [SETTLEMENT.CITY, 8],
+  [SETTLEMENT.CAPITAL, 10],
+  [SETTLEMENT.FORTIFICATION, 6],
+  [SETTLEMENT.CASTLE, 8],
+  [SETTLEMENT.KYUDEN, 10],
+  [SETTLEMENT.SMALL_SHRINE, 6],
+  [SETTLEMENT.LARGE_SHRINE, 8],
+  [SETTLEMENT.VILLAGE_RUINS, 6],
+  [SETTLEMENT.CASTLE_RUINS, 8],
+  [SETTLEMENT.ACADEMY, 6],
+  [SETTLEMENT.WATCHTOWER, 6],
+  [SETTLEMENT.SMALL_TEMPLE, 6],
+  [SETTLEMENT.LARGE_TEMPLE, 8],
 ];
 const settlementLabelSizeMap = new Map(settlementLabelEntries);
 
-export const SETTLEMENT_LABEL_SIZES = Object.freeze(settlementLabelEntries.map(
-  ([settlement, size]) => Object.freeze({ settlement, size }),
-));
+export const SETTLEMENT_LABEL_SIZES = Object.freeze(settlementLabelEntries.map(([settlement, size]) => Object.freeze({ settlement, size })));
 
 export function getSettlementLabelSize(settlement) {
   if (!Object.values(SETTLEMENT).includes(settlement)) {

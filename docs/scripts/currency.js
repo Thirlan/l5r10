@@ -1,3 +1,4 @@
+/* exported L5RCurrency */
 // House rates: 1 koku = 5 bu = 50 zeni; 1 bu = 10 zeni.
 const L5RCurrency = {
   KOKU_TO_ZENI: 50,
@@ -13,5 +14,5 @@ const L5RCurrency = {
     const bu = Math.floor(remainder / L5RCurrency.BU_TO_ZENI);
     const zeni = remainder - bu * L5RCurrency.BU_TO_ZENI;
     return { koku, bu, zeni };
-  }
+  },
 };

@@ -8,8 +8,7 @@ const colors = new Map([
   [CRIME.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const CRIME_CONTROL_IMAGES = Object.freeze(Object.entries(CRIME).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_crime_${key.toLowerCase()}.webp` })));
+export const CRIME_CONTROL_IMAGES = Object.freeze(Object.entries(CRIME).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_crime_${key.toLowerCase()}.webp` })));
 
 export function getCrimeColor(value) {
   if (!Object.values(CRIME).includes(value)) {
@@ -19,8 +18,7 @@ export function getCrimeColor(value) {
 }
 
 export function drawCrimeCue(ctx, left, top, width, height, color, lineWidth = 1) {
-  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite)
-    || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
+  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite) || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
     throw new TypeError("Crime cue drawing needs a canvas context, dimensions, and color.");
   }
   const inset = Math.max(0.75, Math.min(width, height) * 0.2);

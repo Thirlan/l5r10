@@ -8,8 +8,7 @@ const colors = new Map([
   [SPIRIT.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
 ]);
 
-export const SPIRIT_CONTROL_IMAGES = Object.freeze(Object.entries(SPIRIT).map(([key, value]) =>
-  Object.freeze({ value, image: `../img/map/control_spirit_${key.toLowerCase()}.webp` })));
+export const SPIRIT_CONTROL_IMAGES = Object.freeze(Object.entries(SPIRIT).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_spirit_${key.toLowerCase()}.webp` })));
 
 export function getSpiritColor(value) {
   if (!Object.values(SPIRIT).includes(value)) {
@@ -19,8 +18,7 @@ export function getSpiritColor(value) {
 }
 
 export function drawSpiritCue(ctx, left, top, width, height, color, lineWidth = 1) {
-  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite)
-    || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
+  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite) || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
     throw new TypeError("Spirit cue drawing needs a canvas context, dimensions, and color.");
   }
   ctx.save();
