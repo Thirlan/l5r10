@@ -1013,10 +1013,10 @@
                 <li>Gain +5 TR to Knockdown maneuver if...
                   <ul>
                     <li>Have the "Heavy Weapon" Skill</li>
-                    <li>You the caster, are the one wielding the Tetsubo</li>
+                    <li>You the caster, are the one wielding the weapon</li>
                   </ul>
                 </li>
-                <li>The tetsubo disappears if it is lost from your hand.</li>
+                <li>The weapon disappears if it is lost from your hand.</li>
               </ul>
             </td>
           </tr>
@@ -1312,11 +1312,13 @@
           </tr>
           <tr>
             <td>Flavor</td>
-            <td>This spell is a prayer to Amaterasu, the Sun Goddess, asking her to bestow her favor on the caster in the form of radiant Fire kami. (In the twelfth century, when Amaterasu is superceded first by Yakamo and then by the Jade Sun, the name and forms of this spell changes, but the effects remain the same.) Once the prayer is completed, warm sunlight blazes down on the chosen area, bathing it in full daylight even if it is at night, indoors, or underground.</td>
+            <td>This spell is a prayer to Amaterasu, the Sun Goddess, asking her to bestow her favor on the caster in the form of radiant Fire kami. This spell is particularly popular among shugenja who are assigned to assist in the protection of castles and other vital locations, since a sudden blaze of daylight can be a very effective deterrent to thieves, assassins, and spies.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>This spell is particularly popular among shugenja who are assigned to assist in the protection of castles and other vital locations, since a sudden blaze of daylight can bea very effective deterrent to thieves, assassins, and spies.</td>
+            <td>
+              <li>The area is bathed in full daylight, regardless of whether it is night, indoors, underground or blanked in magical darkness.</li>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1333,7 +1335,7 @@
           </tr>
           <tr>
             <td>Range</td>
-            <td>Personal or 4 sq / 20' (see below)</td>
+            <td>Personal or a target within 4 sq / 20'</td>
           </tr>
           <tr>
             <td>Area of Effect</td>
@@ -1350,16 +1352,29 @@
                 <li>1 Raise: +1k0 DR</li>
                 <li>1 Raise: Duration (+5 minutes)</li>
                 <li>1 Raise: Range (+1 sq / 5')</li>
+                <li>1 Raise: change to any sword of your choice</li>
               </ul>
             </td>
           </tr>
           <tr>
             <td>Flavor</td>
-            <td></td>
+            <td>You summon a blade of pure fire, blazing like the soul of an honorable warrior.</td>
           </tr>
           <tr>
             <td>Effect</td>
-            <td>You summon a blade of pure fire, blazing like the soul of an honorable warrior. The weapon's default form is a katana, but one Raise can change its form to any other sword of your choosing. The katana has a DR of 2k2. When wielding this weapon, you may use your School Rank in place of your Kenjutsu Skill if you wish. If you do possess the Kenjutsu Skill, you add your Honor Rank to all damage rolls made with this weapon. the katana of fire disappears if it is lost from your hand. Instead of summoning the katana for yourself, you may cause it to appear in the hands of an ally within 4 sq / 20'. He is treated as the caster for all purposes of the spell, but does not gain the Honor boost to damage.</td>
+            <td>
+              <ul>
+                <li>2k2 DR</li>
+                <li>May use your School Rank in place of your "Kenjutsu" Skill</li>
+                <li>Gain +X TR to your Kenjutsu Rolls, where X is your Honor Rank, if...
+                  <ul>
+                    <li>Have the "Kenjutsu" Skill</li>
+                    <li>You the caster, are the one wielding the weapon</li>
+                  </ul>
+                </li>
+                <li>The weapon disappears if it is lost from your hand.</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1384,7 +1399,7 @@
           </tr>
           <tr>
             <td>Duration</td>
-            <td></td>
+            <td>5 rounds</td>
           </tr>
           <tr>
             <td>Raises</td>
@@ -1400,49 +1415,16 @@
           </tr>
           <tr>
             <td>Effect</td>
-            <td>The target of the spell receives a bonus to all attack rolls, Skill rolls, and Trait Rolls equal to your Fire Ring. This effect lasts until either the spell expires, or until the target fails an attack roll or Skill Roll, or until the target suffers Wounds from any source, whichever comes first.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>The Raging Forge</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td>Ring/Mastery</td>
-            <td>Fire 1 (Craft)</td>
-          </tr>
-          <tr>
-            <td>Casting Time</td>
-            <td>1 Complex Action</td>
-          </tr>
-          <tr>
-            <td>Range</td>
-            <td>Touch</td>
-          </tr>
-          <tr>
-            <td>Area of Effect</td>
-            <td>1 weapon or armor</td>
-          </tr>
-          <tr>
-            <td>Duration</td>
-            <td>Instantaneous</td>
-          </tr>
-          <tr>
-            <td>Raises</td>
             <td>
               <ul>
-                <li>None</li>
+                <li>+X TR, where X is the caster's Fire Ring, for all...
+                  <ul>
+                    <li>Bugei Skill Rolls</li>
+                    <li>Trait Rolls</li>
+                  </ul>
+                </li>
               </ul>
             </td>
-          </tr>
-          <tr>
-            <td>Flavor</td>
-            <td>This spell invokes the powers of the forge, mighty and merciless, to remake a material item, such as a weapon or suit of armor, into its perfect form.</td>
-          </tr>
-          <tr>
-            <td>Effect</td>
-            <td>Fire is the element of creation as well as destruction, and a skilled shugenja can use this to great effect. The target item loses all blemishes, including cracks and nicks. This spell cannot repair an item which has actually been broken or destroyed, however, it can only affect items that are of ordinary quality.</td>
           </tr>
         </tbody>
       </table>
@@ -3168,6 +3150,58 @@
           <tr>
             <td>Effect</td>
             <td>The spell targets one suit of armor, which glows with the strength of the merciless desert sun. Any opponent who attempts to strike the person wearing the armor, whether or not the attack hits, is immediately considered to be Fatigued until the beginning of their next Turn. The penalty apples to the attack roll that triggered the spell, and any attackers in the Full Attack Posture immediately assume the Attack Posture instead. This spell has no effect on ranged attacks or spells that target the wearer of the armor.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The Raging Forge</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Ring/Mastery</td>
+            <td>Fire 2 (Craft)</td>
+          </tr>
+          <tr>
+            <td>Casting Time</td>
+            <td>1 minute</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>Touch</td>
+          </tr>
+          <tr>
+            <td>Area of Effect</td>
+            <td>1 item</td>
+          </tr>
+          <tr>
+            <td>Duration</td>
+            <td>Instantaneous</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>
+              <ul>
+                <li>None</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Flavor</td>
+            <td>Fire is the element of creation as well as destruction, and a skilled shugenja can use this to great effect. This spell invokes the powers of the forge, mighty and merciless, to remake a material item, such as a weapon or suit of armor, into its perfect form.</td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>
+              <ul>
+                <li>Perfectly restores and fixes an item
+                  <ul>
+                    <li>Will automatically fail if not all pieces of the item are present</li>
+                    <li>Fine quality and Nemuranai require a gift of equivalent value as a sacrifice for the Kami to fix. Note: the Kami do not comprehend the concept of currency.</li>
+                  </ul>
+                </li>
+                <li>Used as part of the crafting process to create the high quality steel / metals for clan Nemuranais</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -5644,47 +5678,6 @@
         </tbody>
       </table>
 
-      <h3>The Mending Forge</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td>Ring/Mastery</td>
-            <td>Fire 4</td>
-          </tr>
-          <tr>
-            <td>Casting Time</td>
-            <td>4 Complex Actions</td>
-          </tr>
-          <tr>
-            <td>Range</td>
-            <td>Touch</td>
-          </tr>
-          <tr>
-            <td>Area of Effect</td>
-            <td>One target item</td>
-          </tr>
-          <tr>
-            <td>Duration</td>
-            <td>Instantaneous</td>
-          </tr>
-          <tr>
-            <td>Raises</td>
-            <td>
-              <ul>
-                <li>None</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td>Flavor</td>
-            <td>This simple and powerful spell has only one function: to call on the creative power of Fire to bring back what has been destroyed. If successful, the spell restores the item to a whole and undamaged state.</td>
-          </tr>
-          <tr>
-            <td>Effect</td>
-            <td>Any damaged or destroyed material item can be restored with this spell, provided all the pieces are gathered in front of the caster. (If someone pieces are missing, the spell will automatically fail.) The spell takes 1 minute to cast, and you must concentrate during that minute. It should be noted that the Fire kami must worker harder to repair items of unusual quality - if you use this spell to repair a nemuranai or an item of Fine quality or better, you must offer the Fire kami a gift (another item for them to burn and destroy) appropriate to the worth of the item.</td>
-          </tr>
-        </tbody>
-      </table>
       <h3>Symbol of Fire</h3>
       <table>
         <tbody>
