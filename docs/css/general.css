@@ -104,6 +104,26 @@ tr:nth-child(even) {
     background-color: rgba(245, 245, 245, 0.5);
 }
 
+.earth-spell tbody tr:nth-child(even) {
+    background-color: rgba(139, 69, 19, 0.12);
+}
+
+.fire-spell tbody tr:nth-child(even) {
+    background-color: rgba(220, 20, 60, 0.12);
+}
+
+.air-spell tbody tr:nth-child(even) {
+    background-color: rgba(135, 206, 235, 0.2);
+}
+
+.water-spell tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 139, 0.12);
+}
+
+.void-spell tbody tr:nth-child(even) {
+    background-color: rgba(128, 128, 128, 0.16);
+}
+
 tr:last-child td {
     border-bottom: none;
 }
