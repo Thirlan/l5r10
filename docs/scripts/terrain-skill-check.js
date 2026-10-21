@@ -1,48 +1,51 @@
-import { TERRAIN, CLIMATE, VEGETATION, RIVER } from "./world-map-layers.js";
-
-const MOVEMENT_TN = { hills: 10, mountains: 20, wetlands: 15, cliff: 25 };
-const SWIMMING_TN = { water: 15, "coastal water": 20, ocean: 25 };
-
-function resolveLayer(value, catalog) {
-  const match = Object.values(catalog).find(({ id, name }) => id === value || id === value?.id || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
-  if (!match) throw new TypeError("Unknown map layer value.");
-  return match.name.toLowerCase();
-}
+import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "./world-map-layers.js";
+import { SkillCheck } from "./skill-check.js";
+import { environmentModifier, infrastructureModifier, isBoat, isWater, validateTravelInput } from "./travel-skill-rules.js";
+import { RIVER_AGAINST_CURRENT_MODIFIER, TERRAIN_MODIFIER } from "./terrain-skill-check-tn-modifiers.js";
 
 /**
- * Initial house rules, not official rules. Each returned check is required.
- * Land movement uses Athletics: hills 10, wetlands 15, mountains 20, cliffs 25.
- * Water assumes swimming: inland 15, coast 20, ocean 25.
- * Hunting starts at 10. Add 5 each for harsh climate, vegetation, and forest.
- * Temperate climate is not harsh. Forest is a separate boolean, not a map layer.
- * Rivers require Athletics 15, or 20 upstream. Ignore current without a river.
- * Return no checks for clear, flat, temperate land.
- * @param {string|number|object} terrain Terrain name, ID, or metadata.
- * @param {string|number|object} climate Climate name, ID, or metadata.
- * @param {string|number|object} vegetation Vegetation name, ID, or metadata.
- * @param {boolean} forest True for forest cover.
- * @param {string|number|object} river River name, ID, or metadata.
+ * Describe ordinary land travel, swimming, or Sailing in the current tile.
+ * River swimming and cliff climbing use separate crossing modules.
+ * Roads bridge inland water. Infrastructure reduces land exposure.
+ * @param {string} mode Transport name from the travel speed module.
+ * @param {object} cell Saved map cell with numeric layer IDs.
+ * @param {number} direction Movement direction, clockwise from north at zero.
  * @param {boolean} [isAgainstCurrent=false] True for upstream travel.
- * @returns {Array<{skill: string, tn: number}>} Required checks, in movement, Hunting, river order.
- * @throws {TypeError} If inputs are invalid, or water has vegetation, forest, or a river.
+ * @returns {SkillCheck|null} One check, or null when no check applies.
+ * @throws {TypeError} If inputs are invalid or a boat has no water route.
  */
-export function getSkillAndTN(terrain, climate, vegetation, forest, river, isAgainstCurrent = false) {
-  terrain = resolveLayer(terrain, TERRAIN);
-  climate = resolveLayer(climate, CLIMATE);
-  vegetation = resolveLayer(vegetation, VEGETATION);
-  river = resolveLayer(river, RIVER);
-  if (typeof forest !== "boolean" || typeof isAgainstCurrent !== "boolean") {
-    throw new TypeError("Forest and current flags must be boolean.");
+export function getSkillAndTN(mode, cell, direction, isAgainstCurrent = false) {
+  // Validate inputs and identify the travel surface.
+  cell = validateTravelInput(mode, cell, direction);
+  if (typeof isAgainstCurrent !== "boolean") {
+    throw new TypeError("Current must be boolean.");
   }
-  const onWater = Object.hasOwn(SWIMMING_TN, terrain);
-  if (onWater && (vegetation !== "none" || forest || river !== "none")) {
-    throw new TypeError("Water cannot have vegetation, forest, or a river.");
+  const boating = isBoat(mode);
+  const water = isWater(cell);
+  if (boating && !water && cell.river === 0) {
+    throw new TypeError("Boat travel needs water or a river.");
   }
-  const checks = [];
-  const movementTN = onWater ? SWIMMING_TN[terrain] : MOVEMENT_TN[terrain];
-  if (movementTN) checks.push({ skill: "Athletics", tn: movementTN });
-  const survivalPenalty = Number(climate !== "temperate") + Number(vegetation !== "none") + Number(forest);
-  if (survivalPenalty) checks.push({ skill: "Hunting", tn: 10 + 5 * survivalPenalty });
-  if (river !== "none") checks.push({ skill: "Athletics", tn: isAgainstCurrent ? 20 : 15 });
-  return checks;
+
+  // Keep all Sailing here until it has a separate module.
+  if (boating) {
+    const waterModifier = water ? TERRAIN_MODIFIER[cell.terrain] : RIVER_AGAINST_CURRENT_MODIFIER[isAgainstCurrent];
+    return new SkillCheck("Sailing", "Intelligence", 5 + waterModifier + environmentModifier(cell, true));
+  }
+
+  // Unbridged water requires swimming.
+  const environment = environmentModifier(cell);
+  const infrastructure = infrastructureModifier(cell);
+  const hasWaterBridge = cell.terrain === TERRAIN.WATER.id && cell.infrastructure === INFRASTRUCTURE.ROAD.id;
+  if (water && !hasWaterBridge) {
+    const swimmingTN = Math.max(5, 5 + TERRAIN_MODIFIER[cell.terrain] + environmentModifier(cell, true) + infrastructure);
+    return new SkillCheck("Athletics", "Strength", swimmingTN);
+  }
+
+  // Compare terrain effort with environmental exposure for land travel.
+  const terrain = water ? 0 : TERRAIN_MODIFIER[cell.terrain];
+  const tn = Math.max(5, 5 + terrain + environment + infrastructure);
+  if (cell.climate === CLIMATE.SHADOWLAND.id) {
+    return new SkillCheck("Lore: Shadowlands", "Perception", tn);
+  }
+  return terrain > environment ? new SkillCheck("Athletics", "Stamina", tn) : new SkillCheck("Survival", "Perception", tn);
 }
