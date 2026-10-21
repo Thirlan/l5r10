@@ -4,7 +4,7 @@ Status: Complete. PRs 1–30 are complete.
 
 ## Goal
 
-Replace the retired layer JSON with class-based [JavaScript definitions](../docs/scripts/world-map-layers.js).
+Replace the retired layer JSON with class-based [JavaScript definitions](../docs/scripts/world/world-map-layers.js).
 Replace cryptic layer IDs and comparisons with named constants.
 Separate layer identity from images, colors, and drawing code.
 Use a direct migration without backward-compatibility code.
@@ -19,7 +19,7 @@ Use a direct migration without backward-compatibility code.
 - Severity colors run from yellow to purple. Resource Level uses the reverse sequence.
 - Use `rgba(255, 255, 0, 0.55)` for Low severity and High Resource Level.
 
-- Use [world-map-layers.js](../docs/scripts/world-map-layers.js) for layer identity and value definitions.
+- Use [world-map-layers.js](../docs/scripts/world/world-map-layers.js) for layer identity and value definitions.
 - Named constants return metadata instances, not numeric IDs.
 - `TERRAIN.FLAT.id` returns `0`. `TERRAIN.FLAT.name` returns `"flat"`.
 - Keep images and colors outside these metadata instances.
@@ -27,8 +27,8 @@ Use a direct migration without backward-compatibility code.
 - Render climate as a base color. Render land terrain as a transparent image; draw water, coastal water, and ocean as colors over climate. Render vegetation as an image above terrain.
 - Allow vegetation to render above cliffs. Do not normalize cliff terrain to flat terrain.
 - Draw vegetation above water as well as terrain.
-- Keep the separate climate, terrain, and vegetation presentation data in [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js).
-- Use the plural filenames [world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world-map-img-resources.js).
+- Keep the separate climate, terrain, and vegetation presentation data in [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js).
+- Use the plural filenames [world-map-img-settlements.js](../docs/scripts/world/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world/world-map-img-resources.js).
 - The current canvas output is the source of truth for presentation.
 - PR 15 preserves tile colors for Waste (`#4A4A4A`) and Shadowland (`#1A590F`).
 - Polar uses a solid brown climate fill (`#8B5A2B`), replacing its brown and white stripes.
@@ -48,31 +48,31 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 
 | File | Current responsibility |
 |---|---|
-| [world-map-layers.js](../docs/scripts/world-map-layers.js) | Defines 13 immutable metadata catalogs. Resolves numeric saved values. Contains no presentation settings. |
-| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Defines climate and water colors, separate terrain and vegetation images, and cliff drawing. |
+| [world-map-layers.js](../docs/scripts/world/world-map-layers.js) | Defines 13 immutable metadata catalogs. Resolves numeric saved values. Contains no presentation settings. |
+| [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js) | Defines climate and water colors, separate terrain and vegetation images, and cliff drawing. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Defines clan border and fill palettes. |
-| [world-map-common.js](../docs/scripts/world-map-common.js) | Loads images and validates numeric cells. Delegates feature drawing to presentation modules. |
-| [world-map-grid.js](../docs/scripts/world-map-grid.js) | Handles painting, import, export, and builder clan borders. |
-| [world-map-viewer.js](../docs/scripts/world-map-viewer.js) | Handles visibility, routes, and viewer clan shapes. Imports pathing directly. |
-| [world-map-tool-icons.js](../docs/scripts/world-map-tool-icons.js) | Resolves control images and clan swatches from presentation modules. Reports missing or failed images. |
+| [world-map-common.js](../docs/scripts/world/world-map-common.js) | Loads images and validates numeric cells. Delegates feature drawing to presentation modules. |
+| [world-map-grid.js](../docs/scripts/world/world-map-grid.js) | Handles painting, import, export, and builder clan borders. |
+| [world-map-viewer.js](../docs/scripts/world/world-map-viewer.js) | Handles visibility, routes, and viewer clan shapes. Imports pathing directly. |
+| [world-map-tool-icons.js](../docs/scripts/world/world-map-tool-icons.js) | Resolves control images and clan swatches from presentation modules. Reports missing or failed images. |
 | [build_map.html](../docs/world/build_map.html) | Defines tool labels and catalog-key attributes. Loads the builder module entry point. |
 | [world_map.html](../docs/world/world_map.html) | Defines visibility and travel controls. Loads the viewer module entry point. Keeps unrelated classic scripts. |
-| [pathing.js](../docs/scripts/pathing.js) | Exports route calculation and the day constant. Derives semantic names from metadata without changing travel rules. |
+| [pathing.js](../docs/scripts/travel/pathing.js) | Exports route calculation and the day constant. Derives semantic names from metadata without changing travel rules. |
 | [world-map-grid.css](../docs/css/world-map-grid.css) | Defines shared map layout, swatches, image sizing, buttons, and cliff-direction controls. |
 
 ### Script use
 
-Import identity catalogs from [world-map-layers.js](../docs/scripts/world-map-layers.js).
+Import identity catalogs from [world-map-layers.js](../docs/scripts/world/world-map-layers.js).
 Use `.id` for identity values and `.value` for ordered overlays.
 Resolve saved numbers with `LAYERS.<LAYER>.getValue(number)`. Use `.name` for display text.
 Keep metadata separate from image URLs, colors, and geometry.
 River, infrastructure, settlements, resources, and optional overlays have separate presentation modules.
 
-[world-map-builder-page.js](../docs/scripts/world-map-builder-page.js) loads the builder and binds its tools.
-[world-map-viewer-page.js](../docs/scripts/world-map-viewer-page.js) loads the viewer and binds its controls.
-The viewer imports [pathing.js](../docs/scripts/pathing.js); do not add a classic pathing script tag.
-Both pages use shared [world-map-controls.js](../docs/scripts/world-map-controls.js).
-The viewer also uses [world-map-viewer-controls.js](../docs/scripts/world-map-viewer-controls.js).
+[world-map-builder-page.js](../docs/scripts/world/world-map-builder-page.js) loads the builder and binds its tools.
+[world-map-viewer-page.js](../docs/scripts/world/world-map-viewer-page.js) loads the viewer and binds its controls.
+The viewer imports [pathing.js](../docs/scripts/travel/pathing.js); do not add a classic pathing script tag.
+Both pages use shared [world-map-controls.js](../docs/scripts/world/world-map-controls.js).
+The viewer also uses [world-map-viewer-controls.js](../docs/scripts/world/world-map-viewer-controls.js).
 No browser-global map instance, JSON metadata fetch, or legacy input adapter is required.
 
 ### Verified data
@@ -94,7 +94,7 @@ Unrelated travel modules and numeric resource-output mappings remain unchanged.
 
 ### Identity classes and constants
 
-Create these classes in [world-map-layers.js](../docs/scripts/world-map-layers.js):
+Create these classes in [world-map-layers.js](../docs/scripts/world/world-map-layers.js):
 
 | Class | Responsibility |
 |---|---|
@@ -139,17 +139,17 @@ All paths below are relative to the repository root.
 
 | Module | Owns |
 |---|---|
-| [world-map-img-base-layers.js](../docs/scripts/world-map-img-base-layers.js) | Climate and water terrain colors, transparent land terrain and vegetation image mappings, base control images, and cliff drawing settings and code. |
-| `docs/scripts/world-map-img-river.js` | River stripe colors, widths, connections, isolated river drawing, and control images. |
-| `docs/scripts/world-map-img-infrastructure.js` | Road and footpath drawing, port markers, colors, widths, and control images. |
+| [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js) | Climate and water terrain colors, transparent land terrain and vegetation image mappings, base control images, and cliff drawing settings and code. |
+| `docs/scripts/world/world-map-img-river.js` | River stripe colors, widths, connections, isolated river drawing, and control images. |
+| `docs/scripts/world/world-map-img-infrastructure.js` | Road and footpath drawing, port markers, colors, widths, and control images. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Clan border and fill colors only. |
-| [world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) | Settlement asset mappings, programmatic markers, tinting rules, label sizes, and control images. |
-| [world-map-img-resources.js](../docs/scripts/world-map-img-resources.js) | Resource image mappings, marker sizes, and resource control images. |
-| `docs/scripts/world-map-img-animal.js` | Animal colors, circle cue drawing, and control images. |
-| `docs/scripts/world-map-img-spirit.js` | Spirit colors, vertical cue drawing, and control images. |
-| `docs/scripts/world-map-img-shadowland.js` | Shadowland colors, diagonal cue drawing, and control images. |
-| `docs/scripts/world-map-img-crime.js` | Crime colors, horizontal cue drawing, and control images. |
-| [world-map-img-resource-level.js](../docs/scripts/world-map-img-resource-level.js) | Inverted Resource Level colors, cross cue drawing, and control images. |
+| [world-map-img-settlements.js](../docs/scripts/world/world-map-img-settlements.js) | Settlement asset mappings, programmatic markers, tinting rules, label sizes, and control images. |
+| [world-map-img-resources.js](../docs/scripts/world/world-map-img-resources.js) | Resource image mappings, marker sizes, and resource control images. |
+| `docs/scripts/world/world-map-img-animal.js` | Animal colors, circle cue drawing, and control images. |
+| `docs/scripts/world/world-map-img-spirit.js` | Spirit colors, vertical cue drawing, and control images. |
+| `docs/scripts/world/world-map-img-shadowland.js` | Shadowland colors, diagonal cue drawing, and control images. |
+| `docs/scripts/world/world-map-img-crime.js` | Crime colors, horizontal cue drawing, and control images. |
+| [world-map-img-resource-level.js](../docs/scripts/world/world-map-img-resource-level.js) | Inverted Resource Level colors, cross cue drawing, and control images. |
 
 Use metadata constants when defining mappings. Do not repeat raw layer IDs.
 Use existing valid PNG and WebP assets. Do not rename PNG paths to nonexistent WebP files.
@@ -188,7 +188,7 @@ Preserve equal-width bands when multiple overlays are visible.
 
 ### Draw order and saved data
 
-Keep draw order in [world-map-common.js](../docs/scripts/world-map-common.js), using layer definitions instead of repeated layer strings.
+Keep draw order in [world-map-common.js](../docs/scripts/world/world-map-common.js), using layer definitions instead of repeated layer strings.
 Keep the existing order: terrain, vegetation, river, infrastructure, settlement, resource, clan, then text.
 Keep the current separate placement of cliffs, optional overlays, grid lines, route marks, and labels.
 Text and erase remain tools. Do not invent numeric value catalogs for them.
@@ -457,7 +457,7 @@ The renderer retains band layout, clipping, and contrast calculation.
 
 ### PR 21 validation
 
-[world-map-img-resources.js](../docs/scripts/world-map-img-resources.js) now owns resource marker size and image drawing.
+[world-map-img-resources.js](../docs/scripts/world/world-map-img-resources.js) now owns resource marker size and image drawing.
 The shared renderer resolves metadata, loads source images, and passes marker centers.
 Markers remain centered 12-by-12 images. Pending or failed images are not drawn.
 Source-image loading, load callbacks, error logging, and resource visibility remain unchanged.
@@ -475,7 +475,7 @@ All 39 resource asset paths exist.
 | 20c | **Done** — Delegate shrines and temples through asset-first marker selection. Remove duplicate shrine, temple, and tint drawing methods. Verify dimensions, centering, loading, and cache reuse. |
 
 The shared renderer resolves metadata, clan colors, and source images before delegation.
-[world-map-img-settlements.js](../docs/scripts/world-map-img-settlements.js) owns all marker drawing and asset tinting.
+[world-map-img-settlements.js](../docs/scripts/world/world-map-img-settlements.js) owns all marker drawing and asset tinting.
 Asset-backed markers take priority over procedural shapes.
 Pending assets wait for their image load callback; they do not draw substitute shapes.
 The renderer keeps source-image loading and the tinted-image cache.

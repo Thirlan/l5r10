@@ -1,4 +1,4 @@
-import { CLAN } from "./world-map-layers.js";
+import { CLAN } from "./world/world-map-layers.js";
 
 const colorsByClan = new Map([
   [CLAN.NONE, { border: null, fill: null }],
@@ -25,7 +25,7 @@ const colorsByClan = new Map([
 for (const colors of colorsByClan.values()) Object.freeze(colors);
 
 /**
- * @param {import("./world-map-layers.js").LayerValue} clan Clan metadata.
+ * @param {import("./world/world-map-layers.js").LayerValue} clan Clan metadata.
  * @returns {{border: string|null, fill: string|null}} Clan presentation colors.
  */
 export function getClanColors(clan) {

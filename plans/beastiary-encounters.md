@@ -6,8 +6,8 @@ Status: Complete.
 
 Select a specific creature when an encounter roll succeeds.
 Base the selection on the map cell terrain, climate, vegetation, and river values.
-Store creature data in [beastiary.js](../docs/scripts/beastiary.js).
-Build weighted lookup tables in [encounter-check.js](../docs/scripts/encounter-check.js).
+Store creature data in [beastiary.js](../docs/scripts/travel/beastiary.js).
+Build weighted lookup tables in [encounter-check.js](../docs/scripts/travel/encounter-check.js).
 
 ## Confirmed decisions
 
@@ -368,8 +368,8 @@ Each PR is 200 lines or fewer, including tests.
 ### PR 1: Beast classes
 
 - Create [skill-check.js](../docs/scripts/skill-check.js) with `SkillCheck`.
-- Create [beast.js](../docs/scripts/beast.js) with `Beast`.
-- Create [beastiary.js](../docs/scripts/beastiary.js). Export an empty frozen `BEASTIARY` array.
+- Create [beast.js](../docs/scripts/travel/beast.js) with `Beast`.
+- Create [beastiary.js](../docs/scripts/travel/beastiary.js). Export an empty frozen `BEASTIARY` array.
 - Create `tests/skill-check.test.mjs` and `tests/beast.test.mjs` for field validation and immutability.
 - Add `SkillCheck` to [coding-glossary.md](../coding-glossary.md).
 
@@ -431,8 +431,8 @@ Acceptance criteria:
 
 ### PR 10: Lookup tables and encounter selection
 
-- Create [beast-selection.js](../docs/scripts/beast-selection.js) with `BeastSelection`.
-- Add `BeastiaryLookUpTable` to [encounter-check.js](../docs/scripts/encounter-check.js).
+- Create [beast-selection.js](../docs/scripts/travel/beast-selection.js) with `BeastSelection`.
+- Add `BeastiaryLookUpTable` to [encounter-check.js](../docs/scripts/travel/encounter-check.js).
 - Build all lookup tables when the module loads.
 - Export `getLookUpTable`.
 - Extend `rollEncounter` with terrain, climate, vegetation, and river.

@@ -25,7 +25,7 @@ export default [
       "docs/scripts/currency.js",
       "docs/scripts/dice.js",
       "docs/scripts/stipend-calculator.js",
-      "docs/scripts/travel-event-engine.js",
+      "docs/scripts/travel/travel-event-engine.js",
     ],
     languageOptions: { sourceType: "script" },
     rules: { "no-redeclare": ["error", { builtinGlobals: false }] },
