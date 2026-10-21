@@ -33,6 +33,9 @@ You are an expert software engineer specializing in modern Vanilla JavaScript (E
 - **Self-Documenting Code:** Write highly expressive, semantic variable names. Avoid injecting redundant inline comments that restate what the code executes.
 - **JSDoc Types:** Every exported or public-facing function must include a structured JSDoc block defining input `@param` types and the expected `@returns` payload.
 
+# Comments
+- Use comments within a function or method of the code to help separate the code into sections, such as: validation, initialization, computation, and output. Spend extra time analyzing the code to determine what would be the most appropriate place to insert as well as how to classify the section. The ones given previously were examples, not an exhaustive list.
+
 ## Object Oriented Programming
 - **Class Syntax:** Use ES6 `class` syntax for defining objects with methods and properties.
 - **Encapsulation:** Keep internal state private using closures or the `#` private field syntax.
