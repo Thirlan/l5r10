@@ -28,214 +28,444 @@
       <h2>Spells</h2>
       <p>See the <a href="./itadori-spell-rework.html">spell section</a></p>
 
-      <h2>Void and unskilled rolls</h2>
-      <p>Problem: Min-maxing wise, skills are weaker than traits. A skill affects only a specific area, whereas a trait has broader applications. This combined with traits providing +1k1 vs a skills +1k0, results in skills often providing poor return for experience purchases.</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Short Description</th>
+            <th scope="col">Problem</th>
+            <th scope="col">Resolution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Void and unskilled rolls</td>
+            <td>Skills are less useful than traits because they apply to narrower situations and provide a smaller die bonus.</td>
+            <td>Void points cannot enhance unskilled rolls, improving the value of skills and simplifying the rules.</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Traits and skills capped at 5</td>
+            <td>Ranks up to 10 and situational bonuses led to large dice pools and slower play.</td>
+            <td>Cap traits and skills at 5. Supernatural beings, monsters, and Kami may have higher caps.</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Skill mastery</td>
+            <td>Many mastery bonuses duplicated rank-up bonuses and added complexity without meaningful impact.</td>
+            <td>Remove redundant masteries. Keep and streamline some masteries for all skills; rank 5 skills give +5 Insight.</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>+# TR / -# TR</td>
+            <td>There was no quick term for a bonus or penalty applied to the roll instead of the TN.</td>
+            <td>Use TR (To Your Roll): +5 TR adds 5 to the roll, and -5 TR subtracts 5.</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>Raises and Free Raises</td>
+            <td>Raises and Free Raises were unclear on contested and non-contested rolls.</td>
+            <td>A Raise means -5 TR to your roll. Remove Free Raises and replace them with +5 TR.</td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Emphasis</td>
+            <td>Skill emphases added complexity, and re-rolling 1s was too weak for narrow applications.</td>
+            <td>Remove emphasis as a game term. Keep re-rolls for entire skills and give them to some underpowered schools.</td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Squares and feet</td>
+            <td>Feet-only measurements required extra conversion for grid play and players unfamiliar with Imperial units.</td>
+            <td>Show measurements as # sq / #'. One square is always 5' x 5'; for example, 1 sq / 5'.</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Bunpitsu (Calligraphy and Forgery)</td>
+            <td>Many small skills were hard to manage. Calligraphy was underused, and Forgery overlapped with it.</td>
+            <td>Combine them into Bunpitsu (文筆, scribecraft), using Intelligence. Include Cipher and Forgery emphases.</td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>Political skills and resources</td>
+            <td>Political skill pairings and the resources used by political actions needed clarification.</td>
+            <td>Define core and supporting political skills, clarify trait and resource pairings, split Investigation by approach, and add examples and opposed rolls. Bunpitsu supports correspondence, forgery, and written ciphers.</td>
+          </tr>
+          <tr>
+            <th scope="row">10</th>
+            <td>Han-Kyu, Yumi, and Dai-Kyu</td>
+            <td>The bow names were unclear: Yumi is the general term, while Han-Kyu and Dai-Kyu are bow types.</td>
+            <td>Remove Yumi as a weapon entry. Simplify Dai-Kyu so it can be used on foot or horseback.</td>
+          </tr>
+          <tr>
+            <th scope="row">11</th>
+            <td>Honor gains and losses</td>
+            <td>The tables were inefficient, inconsistent, incomplete, and unclear about how they mapped to Bushido.</td>
+            <td>Use minor, major, and exceptional/blasphemous categories. Map examples to Bushido principles to support consistent rulings.</td>
+          </tr>
+          <tr>
+            <th scope="row">12</th>
+            <td>Redundant conditional effects</td>
+            <td>Some conditions gave the same penalties for very similar situations.</td>
+            <td>Combine redundant effects, such as Fatigued and Fasting.</td>
+          </tr>
+          <tr>
+            <th scope="row">13</th>
+            <td>Armor Target Number (ATN)</td>
+            <td>Armor and armor bonus were confusing and inconsistently used for total armor and armor-granted bonuses.</td>
+            <td>Use ATN to refer to the Armor Target Number and distinguish it from an armor bonus.</td>
+          </tr>
+          <tr>
+            <th scope="row">14</th>
+            <td>Small blades and grapples</td>
+            <td>Small blades were weak, while grapples were too strong.</td>
+            <td>Allow small blades to be used in grapples.</td>
+          </tr>
+          <tr>
+            <th scope="row">15</th>
+            <td>Ranges for ranged and thrown weapons</td>
+            <td>Weapon ranges and range penalties were scattered and inconsistent.</td>
+            <td>Add a standardized table for ranges and penalties.</td>
+          </tr>
+          <tr>
+            <th scope="row">16</th>
+            <td>Weapon sizes</td>
+            <td>Weapon size rules and their bonuses or penalties were unclear.</td>
+            <td>Add a standardized table for how weapon sizes affect situations.</td>
+          </tr>
+          <tr>
+            <th scope="row">17</th>
+            <td>Deaf</td>
+            <td>Rules and disadvantages for deaf characters were missing, despite references in spells.</td>
+            <td>Create rules for deaf characters.</td>
+          </tr>
+          <tr>
+            <th scope="row">18</th>
+            <td>Lore: Medicine</td>
+            <td>Lore is among the least-used categories, so general bonuses to it have little value.</td>
+            <td>Add Medicine to the Lore category. Further details are not specified.</td>
+          </tr>
+          <tr>
+            <th scope="row">19</th>
+            <td>Foreign culture Lore</td>
+            <td>Lore is underused, and foreign culture Lore skills are even less attractive.</td>
+            <td>Give foreign culture Lore its own section, powers, and rules. Use that skill for social interaction with other cultures instead of Rokugani political skills.</td>
+          </tr>
+          <tr>
+            <th scope="row">20</th>
+            <td>Maximum movement</td>
+            <td>The rule was easy to forget, applied infrequently, and added little challenge or strategy.</td>
+            <td>Remove the maximum movement rule to simplify movement and reduce bookkeeping.</td>
+          </tr>
+          <tr>
+            <th scope="row">21</th>
+            <td>Lost Love becomes Melancholy</td>
+            <td>Not specified.</td>
+            <td>Rename Lost Love to Melancholy.</td>
+          </tr>
+          <tr>
+            <th scope="row">22</th>
+            <td>Phobia</td>
+            <td>Not specified.</td>
+            <td>Causes fear.</td>
+          </tr>
+          <tr>
+            <th scope="row">23</th>
+            <td>Luck replaced with Fortunes</td>
+            <td>Not specified.</td>
+            <td>Remove Luck and replace it with Fortunes.</td>
+          </tr>
+          <tr>
+            <th scope="row">24</th>
+            <td>Wrath of the Kami</td>
+            <td>Not specified.</td>
+            <td>Make the spell anti-resistance magic.</td>
+          </tr>
+          <tr>
+            <th scope="row">25</th>
+            <td>Blind disadvantages</td>
+            <td>Not specified.</td>
+            <td>Standardize them with combat status.</td>
+          </tr>
+          <tr>
+            <th scope="row">26</th>
+            <td>Weakness</td>
+            <td>Not specified.</td>
+            <td>Generalize it to cover other disadvantages, split into Physical, and Mental.</td>
+          </tr>
+          <tr>
+            <th scope="row">27</th>
+            <td>Water Ring movement penalty</td>
+            <td>The text to explain that a character's movement was reduced, (e.g. "Your Water Ring is reduced by 2 for purposes of determing your movement") was convoluted, because you had to understand it doesn't affect spell casting, and resulted in a two step process to determine how it affected your movement.</td>
+            <td>Introduce the concept of Movement Rating and just say your suffer a -1 MR, which is simplier and doesn't involve discussion of rings.</td>
+          </tr>
+          <tr>
+            <th scope="row">28</th>
+            <td>Variable spell casting time</td>
+            <td>Spell changes</td>
+            <td>Add variable casting time to each spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">29</th>
+            <td>Shrine protection</td>
+            <td>Spell changes</td>
+            <td>Shrines and portable shrines provide protection against magic.</td>
+          </tr>
+          <tr>
+            <th scope="row">30</th>
+            <td>Spell casting does not clearly indicate the basic effects if spell casting</td>
+            <td>Although mentioned everywhere in the flavor text, it is never clearly mentioned that shugenja cast spells with verbal (spoken words/chanting),  somatic (hand gestures) and magical visual effects, such as glowing eyes.</td>
+            <td>Clarify these effects in the rule</td>
+          </tr>
+          <tr>
+            <th scope="row">30</th>
+            <td>Rank 6 spells</td>
+            <td>Rank 6 spells are extremely powerful and need to be contained somewhat</td>
+            <td>Each spell in Rank 6 can only be cast once per day. Casting creates sounds and lights audible and visible from a mile away.</td>
+          </tr>
+          <tr>
+            <th scope="row">31</th>
+            <td>Cloud the Mind</td>
+            <td>Tippyverse</td>
+            <td>Move it to maho; it is extremely dangerous.</td>
+          </tr>
+          <tr>
+            <th scope="row">32</th>
+            <td>To Seek the Truth</td>
+            <td>Possible removal</td>
+            <td>Consider removing it.</td>
+          </tr>
+          <tr>
+            <th scope="row">33</th>
+            <td>Reversal of Fortunes</td>
+            <td>Possible removal</td>
+            <td>Consider removing it or reusing it elsewhere.</td>
+          </tr>
+          <tr>
+            <th scope="row">34</th>
+            <td>Hurried Steps</td>
+            <td>Possible removal</td>
+            <td>Consider removing it.</td>
+          </tr>
+          <tr>
+            <th scope="row">35</th>
+            <td>Dominion of Suitengu</td>
+            <td>Possible removal</td>
+            <td>Consider removing it because it removes the element of military surprise.</td>
+          </tr>
+          <tr>
+            <th scope="row">36</th>
+            <td>Be the Mountain</td>
+            <td>Combine</td>
+            <td>Merge it with Armor of Earth.</td>
+          </tr>
+          <tr>
+            <th scope="row">37</th>
+            <td>The Mountain's Feet</td>
+            <td>Combine</td>
+            <td>Combine it with another spell or delete it.</td>
+          </tr>
+          <tr>
+            <th scope="row">38</th>
+            <td>Wholeness of the World</td>
+            <td>Combine</td>
+            <td>Combine it with another spell or delete it.</td>
+          </tr>
+          <tr>
+            <th scope="row">39</th>
+            <td>Disrupt the Aura</td>
+            <td>Combine</td>
+            <td>Combine it with another spell or delete it.</td>
+          </tr>
+          <tr>
+            <th scope="row">40</th>
+            <td>Wave-Borne Speed</td>
+            <td>Combine</td>
+            <td>Combine it with other speed-related spells.</td>
+          </tr>
+          <tr>
+            <th scope="row">41</th>
+            <td>Earth Kami's Blessing</td>
+            <td>Combine</td>
+            <td>Consider combining it with another Earth buffer spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">42</th>
+            <td>Strength of the Crow</td>
+            <td>Combine</td>
+            <td>Move resistance to maho elsewhere or change the spell to improve carried jade. It overlaps with other spells and jade.</td>
+          </tr>
+          <tr>
+            <th scope="row">43</th>
+            <td>Shining Light</td>
+            <td>Combine</td>
+            <td>Rename it to Fires of Purity.</td>
+          </tr>
+          <tr>
+            <th scope="row">44</th>
+            <td>Armor of the Emperor</td>
+            <td>Combine</td>
+            <td>Combine it with a lower-rank Earth spell and use Raises.</td>
+          </tr>
+          <tr>
+            <th scope="row">45</th>
+            <td>Essence of Earth</td>
+            <td>Combine</td>
+            <td>Combine it with a lower-rank Earth spell and use Raises.</td>
+          </tr>
+          <tr>
+            <th scope="row">46</th>
+            <td>Defense of the Firestorm</td>
+            <td>Combine</td>
+            <td>Consider combining it with a similar Fire defense spell or simplifying it.</td>
+          </tr>
+          <tr>
+            <th scope="row">47</th>
+            <td>Ward of Thunder</td>
+            <td>Combine</td>
+            <td>Combine it with another Fire armor spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">48</th>
+            <td>Fires of Purity</td>
+            <td>Bring back</td>
+            <td>Reduce its damage; set Honor to half.</td>
+          </tr>
+          <tr>
+            <th scope="row">49</th>
+            <td>Draw Back the Shadow</td>
+            <td>Buff</td>
+            <td>Move it to rank 3; it provides true sight.</td>
+          </tr>
+          <tr>
+            <th scope="row">50</th>
+            <td>Speed of the Waterfall</td>
+            <td>Buff</td>
+            <td>Buff the spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">51</th>
+            <td>Rushing Wave</td>
+            <td>Buff</td>
+            <td>Buff the spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">52</th>
+            <td>Spirit of the Water</td>
+            <td>Buff</td>
+            <td>Buff the spell.</td>
+          </tr>
+          <tr>
+            <th scope="row">53</th>
+            <td>Walking Upon the Waves</td>
+            <td>Buff</td>
+            <td>Reduce it to rank 1.</td>
+          </tr>
+          <tr>
+            <th scope="row">54</th>
+            <td>Netsuke of Wind</td>
+            <td>Buff</td>
+            <td>Reduce it to rank 3.</td>
+          </tr>
+          <tr>
+            <th scope="row">55</th>
+            <td>Tomb of Jade</td>
+            <td>Buff</td>
+            <td>Change it to rock.</td>
+          </tr>
+          <tr>
+            <th scope="row">56</th>
+            <td>Death of Flame</td>
+            <td>Buff</td>
+            <td>Reduce its rank or increase the number of targets.</td>
+          </tr>
+          <tr>
+            <th scope="row">57</th>
+            <td>Ebb &amp; Flow of Battle</td>
+            <td>Buff</td>
+            <td>Increase its duration to 5 minutes so it can be cast before combat.</td>
+          </tr>
+          <tr>
+            <th scope="row">58</th>
+            <td>Path Not Taken</td>
+            <td>Buff</td>
+            <td>Reduce the Raises required for a bonus spell slot to 2.</td>
+          </tr>
+          <tr>
+            <th scope="row">59</th>
+            <td>Strike of the Flowing Waters</td>
+            <td>Buff</td>
+            <td>Make it rank 1; it is like True Strike but weaker.</td>
+          </tr>
+          <tr>
+            <th scope="row">60</th>
+            <td>Earth Becomes Sky vs. Fires from Within</td>
+            <td>Balance</td>
+            <td>Review the balance between the spells.</td>
+          </tr>
+          <tr>
+            <th scope="row">61</th>
+            <td>Embrace of Kenro-Ji-Jin</td>
+            <td>Balance</td>
+            <td>Add details about its limits and reduce its duration in hours.</td>
+          </tr>
+          <tr>
+            <th scope="row">62</th>
+            <td>Relentless Heat</td>
+            <td>Balance</td>
+            <td>Review its balance.</td>
+          </tr>
+          <tr>
+            <th scope="row">63</th>
+            <td>The Fist of Osano-Wo</td>
+            <td>Balance</td>
+            <td>Require outdoor use and increase its radius by 5'.</td>
+          </tr>
+          <tr>
+            <th scope="row">64</th>
+            <td>Ravenous Swarms</td>
+            <td>Balance</td>
+            <td>Consider allowing the caster to choose which element to restrict.</td>
+          </tr>
+          <tr>
+            <th scope="row">65</th>
+            <td>Silent Waters</td>
+            <td>Balance</td>
+            <td>Reduce it to rank 1. Allow activation with a spoken word as a Free Action.</td>
+          </tr>
+          <tr>
+            <th scope="row">66</th>
+            <td>Know the Mind</td>
+            <td>Balance</td>
+            <td>Allow a Willpower save against it.</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <p>In a multi-pronged attempt to improve skills and in the spirit of simplification, Void points can no longer be used to enhance unskilled rolls.</p>
-
-      <h2>Traits and Skills capped at 5</h2>
-      <p>Problem: traits and skills could reach a max rank of 10. Combined with numerous situational die bonuses, it would quickly result in people rolling large amounts of dice (especially in duels), which then required applying the rule that anything about 10 dice could be translated into keeps. This bogged down gameplay, making it slower and more cumbersome than necessary.</p>
-
-      <p>Capping skills and traits at 5 reduces the number of dice rolled and simplifies gameplay. There will be exceptions to the rules for supernatural beings, monsters and Kami, who may have higher caps.</p>
-
-      <h2>Removal and streamline of most Skill Mastery</h2>
-      <p>Problem: Many mastery bonuses added redundant bonuses while increasing complexity without meaningful impact on gameplay. For example, some skills would grant +1k0 mastery bonuses on top of the +1k0 you just gained from ranking up your skill in the first place.</p>
-
-      <p>Many of the masteries that gave redundant bonuses have been removed. Some of them have been kept and streamlined to apply to all skills, both to simplify them and to make skills more powerful (e.g. rank 5 skills give +5 insight)</p>
-
-      <h2>+# TR / -# TR</h2>
-      <p>Problem: there was no quick keyword to explain that a bonus was applied to your roll instead of the TN. This compounds with the clean up of "Free Raises" mentioend below.</p>
-
-      <p>+# TR / -# TR indicates a bonus To Your Roll (TR), so -5 TR means a -5 penalty to your roll and a +5 TR means a +5 bonus to your roll.</p>
-
-      <h2>Raises and Free Raises</h2>
-      <p>Problem: Raises and Free Raises were confusing and unintuitive when applying to contested and non-contested rolls.</p>
-      <p><i>"Do I get a bonus to my rolls with a Free Raise? But I thought Raises increased the TN? Does my opponent get a bonus then to their roll because I made a Free Raise?"</i></p>
-
-      <p>Raises are now clarified to always mean a -5 TR to YOU roll score and Free Raises are purged from all documents, being replaced with a simple +5 TR</p>
-
-      <h2>Emphasis</h2>
-      <p>Problem: Emphasis on skills Athletics(Running) or Courtier(Manipulation) added unnecessary layers of complexity. The bonus of buying an emphasis to re-roll 1s was also too weak as the power was in some cases too specific.</p>
-
-      <p>Emphasis has been removed from skills and as a game term, but re-rolls have been kept and re-purposed for entire skills, improving is value and then given to certain underpowered schools.</p>
-
-      <h2>Squares / Feet</h2>
-      <p>Problem: The original game only provided feet for measurements, which resulted in extra work on the player's part to transform this onto a grid measured in squares for most table top play. This was extra painful for those who were not familiar with the Imperial measurement system.</p>
-
-      <p>All Feet measurements will have a square measurement in the form of # sq / #'. Example 1 sq / 5', where 1 square is always assumed to be 5' x 5'.</p>
-
-      <h2>Bunpitsu (Calligraphy + Forgery)</h2>
-      <p>Problem: Too many little skills in general made the game difficult to remember and manage. Calligraphy was an underused skill and Forgery overlapped enough with it to justify combining them.</p>
-
-      <p>Calligraphy and Forgery have been combined into a single skill called Bunpitsu (文筆, scribecraft). This skill encompasses both the refined art of calligraphy used for courtly beauty and encryption, as well as the precise forgery of documents. Bunpitsu uses Intelligence as its primary trait (adjusted from Forgery's Agility) to better reflect the intellectual discipline required for both calligraphy and successful document falsification. The skill includes Cipher and Forgery Emphases for specialized applications.</p>
-
-      <h2>Political Skills and Resources</h2>
-      <p>The political rules now define Courtier, Etiquette, Intimidation, Sincerity, and Temptation as the core political skills, with Investigation as a supporting skill. Their pairings have been clarified so the resources used by political actions are explicit: Courtier uses Awareness and Fame for soft power, Etiquette uses Awareness and Status when acting, Intimidation uses Awareness and Status for hard power, and Sincerity and defensive Etiquette use Willpower and Honor.</p>
-      <p>Investigation is split by approach: Perception is used for physical evidence, while Awareness is used for social information, lies, emotions, and hidden motives. Investigation does not receive Status or Fame. Political skill entries now use the same table format as Bunpitsu and include example usages and opposed rolls.</p>
-      <p>Bunpitsu also supports formal correspondence, forgery, and written ciphers. The Ango Advantage allows coded communication; written ciphers use Bunpitsu / Agility, while verbal and visual ciphers use Courtier / Awareness.</p>
-
-      <h2>Han-Kyu, Yumi and Dai-Kyu</h2>
-      <p>Problem: the original game misunderstood that there are only two bow types in Feudal Japan, the Han-Kyu and the Dai-Kyu. The Dai-Kyu could be used both on foot and on horseback. The Yumi is the general term for bow, of which Han-Kyu and Dai-Kyu are specific types.</p>
-
-      <p>In the spirit of simplifying the rules the Yumi was removed and the Dai-Kyu was simplified to be usable both on Horseback and on foot.</p>
-
-      <h2>Honor gains and losses</h2>
-      <p>Problem: the honor gains and loss tables were inefficient, inconsistent and incomplete, while also not being clear on how they mapped back to the principles of bushido, making it hard to extrapolate for different situations.</p>
-
-      <p>The honor loss and gain tables have been simplified into simple minor, major exceptional/blasphemous categories and examples mapped accordingly. Examples are also related back to the principles of bushido, allowing a better understanding of each principle and thus better applying them to similar situations.</p>
-
-      <h2>Redundant Conditional Effects</h2>
-      <p>Problem: some conditional effects were redundant, having the same penalties for very similar conditions.</p>
-
-      <p>Redundant conditional effects have been combined, such as Fatigued and Fasting.</p>
-
-      <h2>Armor Target Number (ATN)</h2>
-      <p>Problem: the term Armor and Armor bonus are confusing and some times inconsistently applied, with one meaning an individual's total armor score and the other being the bonus given by the armor they wear.</p>
-
-      <p>Armor will now be referred to by the acronym ATN, similar to how D&amp;D had the acronym AC. This will help easily differentiate between armor bonus and ATN.</p>
-
-      <h2>Small blades and Grapples</h2>
-      <p>Problem: small blades were not as powerful as other weapons, while grapples were too strong.</p>
-
-      <p>Small blades can now be used in grapples</p>
-
-      <h2>Ranges for ranged and thrown weapons</h2>
-      <p>Problem: Ranges for weapons and penalties to range were scattered throughout the rules and non-standard.</p>
-      <p>A standardized table for ranges and penalties has been added.</p>
-
-      <h2>Weapon sizes</h2>
-      <p>Problem: bonuses and penalties and rules for weapon sizes were unclear and purposefully vague, resulting in confusion during gameplay.</p>
-      <p>A standardized table for how weapon sizes can affect situations has been added.</p>
-
-      <h2>Deaf</h2>
-      <p>There are no rules or disadvantages for deafened or deaf characters, even though there is mention of it in spells.</p>
-      <p>Created the rules for this.</p>
-
-      <h2>Lore: Medicine</h2>
-      <p>Problem: Lore is among the least used categories, making general bonuses to it weak.</p>
-
-      <p>Medicine functions very much like a Lore skill and adding it to the category will enhance the category. In addition,Medicine has been</p>
-
-      <h2>Boosting Lore: Yobanjin, Senpet, Thrane, Naga, Nezumi, etc...</h2>
-      <p>Problem: Lore is among the least used categories, making investing into them less attractive. This goes double for those involing foreign cultures.</p>
-      <p>The foreign culture lore skills have been given their own section with additional powers and rules so that the Lore has additional uses. For example, engaging socially with another culture no longer uses Rokugani concepts of Courtier, Etiquette, Sincerity, and Intimidation, and must now rely entirely on this skill.</p>
-
-      <h2>Remove Maximum Movement</h2>
-      <p>Problem: the rules for maximum movement only applied if you had gain additional actions or some magical boost to your movement speed. These were infrequent circumstances, so much so that when the maximum movement rule should have been applied most people forgot about it. In addition it doesn't add any meaningful challenge or strategic depth to the game.</p>
-      <p>Solution: The maximum movement rule has been removed from the game, simplifying movement and reducing unnecessary bookkeeping during gameplay.</p>
-
-      <h2>Lost Love -> Melancholy</h2>
-      <p></p>
-
-      <h2>Phobia</h2>
-      <p>Causes fear</p>
-
-      <h2>Luck removed, replaced with Fortunes</h2>
-      <p></p>
-
-      <h2>Wrath of the Kami is now anti-resist magic</h2>
-      <p></p>
-
-      <h2>Blind disadvantages standardized with combat status</h2>
-
-      <h2>Weakness generalized to cover other disadvantages</h2>
-      <p>broken into Social, Physical and Mental</p>
-
-      <h2>Simplify "Your Water Ring is considered -2 for movement"</h2>
-
-      <h2>Spell changes</h2>
-
+      <h2>Spell ideas</h2>
+      <h3>Include</h3>
       <ul>
-        <li>Add variable casting time to each spell</li>
-        <li>Shrines and Portable shrines provide protection against magic</li>
-        <li>Rank 6: Can only be cast once a day and create sounds and lights that can be seen and heard a mile away.</li>
+        <li>Time's Deadly Hand</li>
+        <li>Wooden Prison</li>
       </ul>
-      <p>
-        Tippyverse
-      -----------------
-      Cloud the Mind: Extremely dangerous, should be a maho
-      
-      YAGNI
-      -----------------
-
-      Overlap
-      -----------------
-
-      Possible removal
-      -----------------
-      To Seek the Truth
-      Reversal of Fortunes (possibly reuse else where)
-      Hurried Steps
-      Dominion of Suitengu: Removes element of military surprise
-
-      Clean up
-      -----------------
-
-      Combine
-      -----------------
-      Be the Mountain merge with Armor of Earth
-      The Mountain's Feet (or delete)
-      Wholeness of the World (or delete)
-      Disrupt the Aura (or delete)
-      Wave-Borne Speed (with other speed-related spells)
-      Earth Kami's Blessing (possibly combine with another earth buffer spell)
-      Strength of the Crow: Move resist maho into something else, or modify to improve jade you carry (This spell is redundant because of other spells and Jade)
-      Shinning Light: Rename to Fires of Purity
-      Armor of the Emperor: combine with a lower level earth spell and just use raises
-      Essence of Earth: combine with a lower level earth spell and just use raises
-      Defense of the Firestorm: Consider combining with the other similar fire defense spell or simplifying it
-      Ward of Thunder: combine with another fire armor spell
-
-      Bring back
-      -----------------
-      Fires of Purity - nerf damage, honor/2
-
-      Buff
-      -----------------
-      Draw Back the Shadow: this is true sight, move down to rank 3
-      Speed of the Waterfall
-      Rushing Wave
-      Spirit of the Water
-      Walking Upon the Waves: drop this to rank 1
-      Netsuke of Wind: drop this to rank 3
-      Tomb of Jade: rock
-      Death of Flame: Reduce level or increase # of targets
-      Ebb & Flow of Battle: buff to 5 minutes so it can be cast before combat
-      Path Not Taken: Reduce raises to 2 for bonus spell slot
-      Strike of the Flowing Waters: Make it a rank 1 because this is like true strike, but worse
-
-      Balance
-      -----------------
-      Earth becomes sky vs Fires from Within
-      Embrace of Kenro-Ji-Jin - More details on limitations and reduce hours
-      Relentless Heat
-      The Fist of Osano-Wo: must be used outside and +5' radius
-      Ravenous Swarms: Maybe change it so you can pick the element to restrict
-      Silent Waters: nerf to only level 1 and require activation only be a spoken word with a free action
-      Know the Mind (tippy verse): Allow a willpower save
-
-      Include
-      -----------------
-      Time's Deadly Hand
-      Wooden Prison
-
-      Experimental
-      -----------------
-      Bamboo forest
-      Exhaust Ray (fire)
-      Madness (fire)
-      Summon Faeries
-      Clay Horse (earth): summon a diminuitive clay rokugani horse that can carry small loads
-      Fire spell to help resist cold weather and fire spells
-      Follow the Flame: Night vision and Track people with heat
-      Soul of Shiba: temporary ressurection
-
-      Cool names
-      -----------------
-      Immortal Steel
-      Kuroshin's Prayer (for animal control)
-      Hungry Blade
-      </p>
+      <h3>Experimental</h3>
+      <ul>
+        <li>Bamboo forest</li>
+        <li>Exhaust Ray (Fire)</li>
+        <li>Madness (Fire)</li>
+        <li>Summon Faeries</li>
+        <li>Clay Horse (Earth): summon a diminutive clay Rokugani horse that can carry small loads</li>
+        <li>Fire spell to help resist cold weather and Fire spells</li>
+        <li>Follow the Flame: night vision and track people by their heat</li>
+        <li>Soul of Shiba: temporary resurrection</li>
+      </ul>
+      <h3>Cool names</h3>
+      <ul>
+        <li>Immortal Steel</li>
+        <li>Kuroshin's Prayer (for animal control)</li>
+        <li>Hungry Blade</li>
+      </ul>
     </main>
     <footer>
       <p>Legend of the Five Rings - 10th Century</p>
