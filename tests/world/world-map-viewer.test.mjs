@@ -160,3 +160,19 @@ test("viewer measure uses two clicks and restarts on the third", () => {
   assert.deepEqual(viewer.measurePoints, [{ x: 7, y: 7 }]);
   assert.equal(viewer.measureDistance(), null);
 });
+
+test("viewer measure display shows km and miles", (t) => {
+  // Setup
+  const el = { textContent: "" };
+  const previous = globalThis.document;
+  globalThis.document = { getElementById: () => el };
+  t.after(() => (globalThis.document = previous));
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.measurePoints = [{ x: 0, y: 0 }, { x: 3, y: 4 }];
+
+  // Execution
+  viewer.updateMeasureDisplay();
+
+  // Assertion
+  assert.equal(el.textContent, "Distance: 40 km / 25 miles (5.0 tiles: 3 across, 4 down)");
+});

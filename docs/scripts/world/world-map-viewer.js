@@ -5,6 +5,8 @@ import { getClanColors } from "../clan-colors.js";
 import { MapDragToPan } from "./world-map-pan.js";
 
 const VIEWER_GRID_SIZE = 16;
+export const KM_PER_TILE = 8;
+export const MILES_PER_TILE = 5;
 export const MAP_TOOLS = Object.freeze(["route", "measure", "pan"]);
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
 
@@ -181,7 +183,9 @@ export class WorldMapViewer extends WorldMapRenderer {
       return;
     }
     const [a, b] = this.measurePoints;
-    el.textContent = `Distance: ${distance.toFixed(1)} tiles (${Math.abs(b.x - a.x)} across, ${Math.abs(b.y - a.y)} down)`;
+    const km = Math.round(distance * KM_PER_TILE);
+    const miles = Math.round(distance * MILES_PER_TILE);
+    el.textContent = `Distance: ${km} km / ${miles} miles (${distance.toFixed(1)} tiles: ${Math.abs(b.x - a.x)} across, ${Math.abs(b.y - a.y)} down)`;
   }
 
   drawMeasureLine() {
