@@ -35,6 +35,9 @@ if (canvas) {
       document.querySelector("#mapToolHint").textContent = toolHints[input.value];
     });
   });
+  document.querySelectorAll('input[name="distanceUnit"]').forEach((input) => {
+    input.addEventListener("change", () => input.checked && map.setDistanceUnit(input.value));
+  });
   document.querySelector('[data-measure-action="clear"]').addEventListener("click", () => map.clearMeasure());
   try {
     await map.ready;

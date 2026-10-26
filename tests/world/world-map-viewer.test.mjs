@@ -161,7 +161,7 @@ test("viewer measure uses two clicks and restarts on the third", () => {
   assert.equal(viewer.measureDistance(), null);
 });
 
-test("viewer measure display shows km and miles", (t) => {
+test("viewer measure display uses miles by default and km when selected", (t) => {
   // Setup
   const el = { textContent: "" };
   const previous = globalThis.document;
@@ -172,7 +172,11 @@ test("viewer measure display shows km and miles", (t) => {
 
   // Execution
   viewer.updateMeasureDisplay();
+  const miles = el.textContent;
+  viewer.setDistanceUnit("km");
 
   // Assertion
-  assert.equal(el.textContent, "Distance: 40 km / 25 miles (5.0 tiles: 3 across, 4 down)");
+  assert.equal(miles, "Distance: 25 miles (5.0 tiles: 3 across, 4 down)");
+  assert.equal(el.textContent, "Distance: 40 km (5.0 tiles: 3 across, 4 down)");
+  assert.throws(() => viewer.setDistanceUnit("leagues"), /Unknown distance unit/);
 });

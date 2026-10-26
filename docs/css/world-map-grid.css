@@ -21,6 +21,13 @@
   cursor: grabbing;
 }
 
+.map-tool-picker__units {
+  display: flex;
+  gap: 12px;
+  padding-left: 12px;
+  border-left: 1px solid #999;
+}
+
 .map-tool-picker {
   display: flex;
   align-items: center;

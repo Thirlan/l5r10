@@ -5,8 +5,9 @@ import { getClanColors } from "../clan-colors.js";
 import { MapDragToPan } from "./world-map-pan.js";
 
 const VIEWER_GRID_SIZE = 16;
-export const KM_PER_TILE = 8;
 export const MILES_PER_TILE = 5;
+export const KM_PER_MILE = 1.609344;
+export const DISTANCE_UNITS = Object.freeze({ miles: 1, km: KM_PER_MILE });
 export const MAP_TOOLS = Object.freeze(["route", "measure", "pan"]);
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
 
@@ -42,6 +43,7 @@ export class WorldMapViewer extends WorldMapRenderer {
     this.pathResult = null;
     this.mapTool = "route";
     this.measurePoints = [];
+    this.distanceUnit = "miles";
 
     this.travelPapers = {};
     this.avoidClans = {};
@@ -174,6 +176,15 @@ export class WorldMapViewer extends WorldMapRenderer {
     this.updateMeasureDisplay();
   }
 
+  /**
+   * @param {string} unit "miles" or "km". Miles is the core unit; km is converted from miles.
+   */
+  setDistanceUnit(unit) {
+    if (!(unit in DISTANCE_UNITS)) throw new TypeError(`Unknown distance unit: ${unit}`);
+    this.distanceUnit = unit;
+    this.updateMeasureDisplay();
+  }
+
   updateMeasureDisplay() {
     const el = document.getElementById("measureSummary");
     if (!el) return;
@@ -183,9 +194,9 @@ export class WorldMapViewer extends WorldMapRenderer {
       return;
     }
     const [a, b] = this.measurePoints;
-    const km = Math.round(distance * KM_PER_TILE);
-    const miles = Math.round(distance * MILES_PER_TILE);
-    el.textContent = `Distance: ${km} km / ${miles} miles (${distance.toFixed(1)} tiles: ${Math.abs(b.x - a.x)} across, ${Math.abs(b.y - a.y)} down)`;
+    const unit = this.distanceUnit ?? "miles";
+    const value = Math.round(distance * MILES_PER_TILE * DISTANCE_UNITS[unit]);
+    el.textContent = `Distance: ${value} ${unit} (${distance.toFixed(1)} tiles: ${Math.abs(b.x - a.x)} across, ${Math.abs(b.y - a.y)} down)`;
   }
 
   drawMeasureLine() {
