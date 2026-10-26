@@ -22,8 +22,16 @@
         <button type="button" data-map-zoom="in">+ Zoom In</button>
         <button type="button" data-map-zoom="reset">100%</button>
         <button type="button" data-map-zoom="fit">Fit Width</button>
-        <span class="hint">Ctrl + mouse wheel to zoom &middot; first click sets the start; each additional click adds a waypoint (last click is the destination)</span>
+        <span class="hint">Ctrl + mouse wheel to zoom</span>
       </div>
+
+      <fieldset class="map-tool-picker">
+        <legend>Map Tool</legend>
+        <label class="radio"><input type="radio" name="mapTool" value="route" checked /> Path Finding</label>
+        <label class="radio"><input type="radio" name="mapTool" value="measure" /> Measure Distance</label>
+        <label class="radio"><input type="radio" name="mapTool" value="pan" /> Pan</label>
+        <span id="mapToolHint" class="hint">First click sets the start; each additional click adds a waypoint (last click is the destination).</span>
+      </fieldset>
 
       <div class="map-grid-container">
         <canvas id="mapCanvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json" data-travel-costs="../scripts/travel/travel_lookup.csv" data-grid-size="16"></canvas>
@@ -86,6 +94,12 @@
               <tbody></tbody>
             </table>
           </div>
+
+          <h3>Measure Distance</h3>
+          <div class="button-row">
+            <button type="button" data-measure-action="clear">Clear Measure</button>
+          </div>
+          <div id="measureSummary">Click a start tile.</div>
         </div>
 
         <div class="viewer-panel">

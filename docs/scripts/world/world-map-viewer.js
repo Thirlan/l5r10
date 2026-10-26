@@ -2,9 +2,10 @@ import { WorldMapRenderer } from "./world-map-common.js";
 import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "./world-map-layers.js";
 import { L5RPathing, MINUTES_PER_DAY } from "../travel/pathing.js";
 import { getClanColors } from "../clan-colors.js";
-import { MapHoldToPan } from "./world-map-pan.js";
+import { MapDragToPan } from "./world-map-pan.js";
 
 const VIEWER_GRID_SIZE = 16;
+export const MAP_TOOLS = Object.freeze(["route", "measure", "pan"]);
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
 
 function numOrNull(val) {
@@ -37,6 +38,8 @@ export class WorldMapViewer extends WorldMapRenderer {
     this.startCell = null;
     this.waypoints = [];
     this.pathResult = null;
+    this.mapTool = "route";
+    this.measurePoints = [];
 
     this.travelPapers = {};
     this.avoidClans = {};
@@ -137,6 +140,68 @@ export class WorldMapViewer extends WorldMapRenderer {
     Object.assign(this.skillConfig[skill], patch);
   }
 
+  /**
+   * @param {string} tool One of MAP_TOOLS: "route" (path finding), "measure" (distance), or "pan".
+   */
+  setMapTool(tool) {
+    if (!MAP_TOOLS.includes(tool)) throw new TypeError(`Unknown map tool: ${tool}`);
+    this.mapTool = tool;
+    this.pan?.setEnabled(tool === "pan");
+  }
+
+  /**
+   * @returns {number|null} Straight-line distance in tiles between the two measure points, or null.
+   */
+  measureDistance() {
+    if (this.measurePoints.length < 2) return null;
+    const [a, b] = this.measurePoints;
+    return Math.hypot(b.x - a.x, b.y - a.y);
+  }
+
+  onMeasureClick(event) {
+    const cell = this.getGridCell(event);
+    if (cell.x < 0 || cell.y < 0) return;
+    this.measurePoints = this.measurePoints.length === 1 ? [this.measurePoints[0], cell] : [cell];
+    this.render();
+    this.updateMeasureDisplay();
+  }
+
+  clearMeasure() {
+    this.measurePoints = [];
+    this.render();
+    this.updateMeasureDisplay();
+  }
+
+  updateMeasureDisplay() {
+    const el = document.getElementById("measureSummary");
+    if (!el) return;
+    const distance = this.measureDistance();
+    if (distance === null) {
+      el.textContent = this.measurePoints.length ? "Click the end tile." : "Click a start tile.";
+      return;
+    }
+    const [a, b] = this.measurePoints;
+    el.textContent = `Distance: ${distance.toFixed(1)} tiles (${Math.abs(b.x - a.x)} across, ${Math.abs(b.y - a.y)} down)`;
+  }
+
+  drawMeasureLine() {
+    if (!this.measurePoints.length) return;
+    const ctx = this.ctx;
+    const half = this.gridSize / 2;
+    const [a, b = a] = this.measurePoints;
+    this.fillCell(a.x, a.y, "#0055FF", 0.5);
+    if (b !== a) this.fillCell(b.x, b.y, "#0055FF", 0.5);
+    ctx.save();
+    ctx.strokeStyle = "#0055FF";
+    ctx.lineWidth = 3 / this.zoom;
+    ctx.setLineDash([8 / this.zoom, 6 / this.zoom]);
+    ctx.beginPath();
+    ctx.moveTo(a.x * this.gridSize + half, a.y * this.gridSize + half);
+    ctx.lineTo(b.x * this.gridSize + half, b.y * this.gridSize + half);
+    ctx.stroke();
+    ctx.restore();
+  }
+
   onCanvasClick(event) {
     const cell = this.getGridCell(event);
     if (cell.x < 0 || cell.y < 0) return;
@@ -173,10 +238,10 @@ export class WorldMapViewer extends WorldMapRenderer {
   }
 
   setupEventListeners() {
-    this.pan = new MapHoldToPan(this.canvas);
+    this.pan = new MapDragToPan(this.canvas);
     this.canvas.addEventListener("click", (e) => {
-      if (this.pan.consumePan()) return;
-      this.onCanvasClick(e);
+      if (this.mapTool === "route") this.onCanvasClick(e);
+      else if (this.mapTool === "measure") this.onMeasureClick(e);
     });
     this.canvas.addEventListener(
       "wheel",
@@ -328,6 +393,8 @@ export class WorldMapViewer extends WorldMapRenderer {
         this.drawText(x, y, label, 8);
       }
     }
+
+    this.drawMeasureLine();
 
     if (this.drawOrder.includes("text")) this.drawTextLayer();
     this.updateRiverFlow();

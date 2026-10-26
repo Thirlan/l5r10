@@ -13,8 +13,20 @@
   cursor: crosshair;
 }
 
+#mapCanvas.map-pan-tool {
+  cursor: grab;
+}
+
 #mapCanvas.map-panning {
   cursor: grabbing;
+}
+
+.map-tool-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .zoom-controls {

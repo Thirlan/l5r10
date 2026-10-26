@@ -126,3 +126,37 @@ test("viewer water bridges supply road costs only for foot travel", () => {
   assert.equal(foot.cost, 50);
   assert.equal(ship.cost, 100);
 });
+
+test("viewer map tool enables panning only for the pan tool", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  const states = [];
+  viewer.pan = { setEnabled: (enabled) => states.push(enabled) };
+
+  // Execution
+  viewer.setMapTool("pan");
+  viewer.setMapTool("measure");
+
+  // Assertion
+  assert.deepEqual(states, [true, false]);
+  assert.equal(viewer.mapTool, "measure");
+  assert.throws(() => viewer.setMapTool("unknown"), /Unknown map tool/);
+});
+
+test("viewer measure uses two clicks and restarts on the third", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  const cells = [{ x: 0, y: 0 }, { x: 3, y: 4 }, { x: 7, y: 7 }];
+  Object.assign(viewer, { measurePoints: [], render() {}, updateMeasureDisplay() {}, getGridCell: () => cells.shift() });
+
+  // Execution
+  viewer.onMeasureClick({});
+  viewer.onMeasureClick({});
+  const distance = viewer.measureDistance();
+  viewer.onMeasureClick({});
+
+  // Assertion
+  assert.equal(distance, 5);
+  assert.deepEqual(viewer.measurePoints, [{ x: 7, y: 7 }]);
+  assert.equal(viewer.measureDistance(), null);
+});
