@@ -126,3 +126,57 @@ test("viewer water bridges supply road costs only for foot travel", () => {
   assert.equal(foot.cost, 50);
   assert.equal(ship.cost, 100);
 });
+
+test("viewer map tool enables panning only for the pan tool", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  const states = [];
+  viewer.pan = { setEnabled: (enabled) => states.push(enabled) };
+
+  // Execution
+  viewer.setMapTool("pan");
+  viewer.setMapTool("measure");
+
+  // Assertion
+  assert.deepEqual(states, [true, false]);
+  assert.equal(viewer.mapTool, "measure");
+  assert.throws(() => viewer.setMapTool("unknown"), /Unknown map tool/);
+});
+
+test("viewer measure uses two clicks and restarts on the third", () => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  const cells = [{ x: 0, y: 0 }, { x: 3, y: 4 }, { x: 7, y: 7 }];
+  Object.assign(viewer, { measurePoints: [], render() {}, updateMeasureDisplay() {}, getGridCell: () => cells.shift() });
+
+  // Execution
+  viewer.onMeasureClick({});
+  viewer.onMeasureClick({});
+  const distance = viewer.measureDistance();
+  viewer.onMeasureClick({});
+
+  // Assertion
+  assert.equal(distance, 5);
+  assert.deepEqual(viewer.measurePoints, [{ x: 7, y: 7 }]);
+  assert.equal(viewer.measureDistance(), null);
+});
+
+test("viewer measure display uses miles by default and km when selected", (t) => {
+  // Setup
+  const el = { textContent: "" };
+  const previous = globalThis.document;
+  globalThis.document = { getElementById: () => el };
+  t.after(() => (globalThis.document = previous));
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.measurePoints = [{ x: 0, y: 0 }, { x: 3, y: 4 }];
+
+  // Execution
+  viewer.updateMeasureDisplay();
+  const miles = el.textContent;
+  viewer.setDistanceUnit("km");
+
+  // Assertion
+  assert.equal(miles, "Distance: 25 miles (5.0 tiles: 3 across, 4 down)");
+  assert.equal(el.textContent, "Distance: 40 km (5.0 tiles: 3 across, 4 down)");
+  assert.throws(() => viewer.setDistanceUnit("leagues"), /Unknown distance unit/);
+});

@@ -23,6 +23,22 @@ if (canvas) {
     if (!action) throw new TypeError(`Unknown route action: ${button.dataset.routeAction}`);
     button.addEventListener("click", action);
   });
+  const toolHints = {
+    route: "First click sets the start; each additional click adds a waypoint (last click is the destination).",
+    measure: "First click sets the start; second click sets the end. A third click starts a new measure.",
+    pan: "Press and drag the map to move it.",
+  };
+  document.querySelectorAll('input[name="mapTool"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      if (!input.checked) return;
+      map.setMapTool(input.value);
+      document.querySelector("#mapToolHint").textContent = toolHints[input.value];
+    });
+  });
+  document.querySelectorAll('input[name="distanceUnit"]').forEach((input) => {
+    input.addEventListener("change", () => input.checked && map.setDistanceUnit(input.value));
+  });
+  document.querySelector('[data-measure-action="clear"]').addEventListener("click", () => map.clearMeasure());
   try {
     await map.ready;
     bindViewerClans(map);
