@@ -1,6 +1,7 @@
 import { WorldMapRenderer } from "./world-map-common.js";
 import { LAYERS, TERRAIN } from "./world-map-layers.js";
 import { getClanColors } from "../clan-colors.js";
+import { MapHoldToPan } from "./world-map-pan.js";
 
 const DEFAULT_GRID_SIZE = 16;
 
@@ -57,15 +58,30 @@ export class WorldMapGrid extends WorldMapRenderer {
   }
 
   setupEventListeners() {
+    this.pan = new MapHoldToPan(this.canvas, {
+      onPanStart: () => (this.pendingPaint = null),
+      onHoldCancel: () => this.startPendingPaint(),
+    });
     this.canvas.addEventListener("mousedown", (e) => {
+      if (e.button === 0) {
+        this.pendingPaint = e;
+        return;
+      }
       this.isDrawing = true;
       this.paintAt(e);
     });
     this.canvas.addEventListener("mousemove", (e) => {
       if (this.isDrawing) this.paintAt(e);
     });
-    this.canvas.addEventListener("mouseup", () => (this.isDrawing = false));
-    this.canvas.addEventListener("mouseleave", () => (this.isDrawing = false));
+    this.canvas.addEventListener("mouseup", () => {
+      if (this.pendingPaint) this.paintAt(this.pendingPaint);
+      this.pendingPaint = null;
+      this.isDrawing = false;
+    });
+    this.canvas.addEventListener("mouseleave", () => {
+      this.startPendingPaint();
+      this.isDrawing = false;
+    });
     this.canvas.addEventListener("contextmenu", (e) => {
       e.preventDefault();
       const cell = this.getGridCell(e);
@@ -80,6 +96,17 @@ export class WorldMapGrid extends WorldMapRenderer {
       },
       { passive: false },
     );
+  }
+
+  /**
+   * Paint the held cell when the mouse moves before the hold starts a pan.
+   */
+  startPendingPaint() {
+    if (!this.pendingPaint) return;
+    const event = this.pendingPaint;
+    this.pendingPaint = null;
+    this.isDrawing = true;
+    this.paintAt(event);
   }
 
   ensureCell(key) {

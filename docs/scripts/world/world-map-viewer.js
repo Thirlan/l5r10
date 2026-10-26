@@ -2,6 +2,7 @@ import { WorldMapRenderer } from "./world-map-common.js";
 import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "./world-map-layers.js";
 import { L5RPathing, MINUTES_PER_DAY } from "../travel/pathing.js";
 import { getClanColors } from "../clan-colors.js";
+import { MapHoldToPan } from "./world-map-pan.js";
 
 const VIEWER_GRID_SIZE = 16;
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
@@ -172,7 +173,11 @@ export class WorldMapViewer extends WorldMapRenderer {
   }
 
   setupEventListeners() {
-    this.canvas.addEventListener("click", (e) => this.onCanvasClick(e));
+    this.pan = new MapHoldToPan(this.canvas);
+    this.canvas.addEventListener("click", (e) => {
+      if (this.pan.consumePan()) return;
+      this.onCanvasClick(e);
+    });
     this.canvas.addEventListener(
       "wheel",
       (e) => {

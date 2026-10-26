@@ -13,6 +13,10 @@
   cursor: crosshair;
 }
 
+#mapCanvas.map-panning {
+  cursor: grabbing;
+}
+
 .zoom-controls {
   display: flex;
   align-items: center;
