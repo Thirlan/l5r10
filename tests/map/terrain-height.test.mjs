@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import { RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
-import { HeightField, RIVER_BED, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
+import { HeightField, RIVER_BED, RIVER_SEAL, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
 
 const river = (flags) => ({ river: RIVER.PRESENT.id, "river direction": flags });
 
@@ -44,6 +45,39 @@ test("a river channel stays below the water plane from center to center", () => 
 
   // Assertion
   along.forEach((height) => assert.ok(height <= RIVER_BED + 1e-6, `height ${height}`));
+});
+
+test("the seal pass keeps a river mouth on a steep mountain below the water plane", () => {
+  // Setup: the noise uses absolute lattice positions, so the cells keep their saved map positions.
+  const grid = Object.fromEntries([24, 25, 26].flatMap((y) => [64, 65, 66].map((x) => [`${x},${y}`, { terrain: TERRAIN.MOUNTAINS.id }])));
+  grid["65,25"] = { terrain: TERRAIN.MOUNTAINS.id, ...river({ 5: 1 }) };
+  grid["64,26"] = { terrain: TERRAIN.WATER.id };
+
+  // Execution
+  const field = new HeightField(new MapModel(grid, { columns: 67, rows: 27 }));
+  const [[startX, startY, endX, endY]] = field.riverSegments;
+  const along = Array.from({ length: 41 }, (_, step) => field.sample(startX + ((endX - startX) * step) / 40, startY + ((endY - startY) * step) / 40));
+
+  // Assertion
+  assert.equal(field.riverSegments.length, 1);
+  along.forEach((height) => assert.ok(height <= RIVER_SEAL, `height ${height}`));
+});
+
+test("every river path of the live map stays below the water plane", () => {
+  // Setup
+  const grid = JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)));
+  const field = new HeightField(new MapModel(grid, { columns: 135, rows: 196 }));
+
+  // Execution
+  const highest = field.riverSegments.reduce((worst, [startX, startY, endX, endY]) => {
+    const steps = Math.ceil(Math.hypot(endX - startX, endY - startY) * 32);
+    const heights = Array.from({ length: steps + 1 }, (_, step) => field.sample(startX + ((endX - startX) * step) / steps, startY + ((endY - startY) * step) / steps));
+    return Math.max(worst, ...heights);
+  }, -Infinity);
+
+  // Assertion
+  assert.ok(field.riverSegments.length > 0);
+  assert.ok(highest <= RIVER_SEAL, `highest river height ${highest}`);
 });
 
 test("normals have unit length", () => {

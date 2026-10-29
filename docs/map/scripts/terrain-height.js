@@ -11,6 +11,8 @@
  * - A saved cliff direction puts the full height change across that cell edge into one lattice step on the low side.
  * - Land gets ridged value noise, scaled by the blended roughness.
  * - River channels are carved to RIVER_BED, below the water plane at height 0.
+ * - A seal pass then walks along each river segment. Where the surface is not below RIVER_SEAL, it lowers the
+ *   four corners of that lattice quad to RIVER_BED. Steep terrain can otherwise lift a channel above the water.
  */
 import { TERRAIN } from "../../scripts/world/world-map-layers.js";
 import { MapModel, isWaterTerrain } from "./map-data.js";
@@ -20,6 +22,9 @@ export const SUBDIVISIONS = 4;
 export const RIVER_BED = -0.12;
 export const RIVER_INNER_WIDTH = 0.12;
 export const RIVER_OUTER_WIDTH = 0.36;
+/** Highest surface height that the seal pass accepts on a river segment. */
+export const RIVER_SEAL = -0.04;
+const SEAL_SAMPLES_PER_STEP = 4;
 const CLIFF_SHARPNESS = 0.12;
 const NOISE_OCTAVES = Object.freeze([
   [0.45, 0.55],
@@ -102,6 +107,7 @@ export class HeightField {
     this.heights = Float32Array.from({ length: this.width * this.depth }, (_, index) => this.#baseHeight(index % this.width, Math.floor(index / this.width)));
     this.riverSegments = carveRivers ? buildRiverSegments(model) : [];
     this.riverSegments.forEach((segment) => this.#carveSegment(segment));
+    this.riverSegments.forEach((segment) => this.#sealSegment(segment));
     this.normals = this.#normals();
   }
 
@@ -202,6 +208,21 @@ export class HeightField {
         this.heights[index] = Math.min(height, lerp(RIVER_BED, height, smoothstep(RIVER_INNER_WIDTH, RIVER_OUTER_WIDTH, distance)));
       }),
     );
+  }
+
+  #sealSegment([startX, startY, endX, endY]) {
+    const steps = Math.ceil(Math.hypot(endX - startX, endY - startY) * this.subdivisions * SEAL_SAMPLES_PER_STEP);
+    Array.from({ length: steps + 1 }, (_, step) => step / Math.max(1, steps)).forEach((ratio) => {
+      const u = lerp(startX, endX, ratio);
+      const v = lerp(startY, endY, ratio);
+      if (this.sample(u, v) <= RIVER_SEAL) return;
+      const column = Math.min(this.width - 2, Math.floor(u * this.subdivisions));
+      const row = Math.min(this.depth - 2, Math.floor(v * this.subdivisions));
+      [0, 1, this.width, this.width + 1].forEach((offset) => {
+        const index = row * this.width + column + offset;
+        this.heights[index] = Math.min(this.heights[index], RIVER_BED);
+      });
+    });
   }
 
   #normals() {

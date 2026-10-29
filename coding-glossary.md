@@ -21,3 +21,5 @@ Glossary for coding terms used in this project
 |Pixel source|An object {data, channels, scale} that gives pixel values from 0 to 1 for the PBR texture helpers.|
 |Water class|The kind of water under a cell for the 3D terrain shader: lake (also rivers), coastal, or ocean. It selects the tint of the ground under the water.|
 |Water plane|One flat mesh at the water level over the full 3D map. It uses the WaterMaterial, and shows only where the terrain is below it.|
+|Seal pass|The last river step of the HeightField. It walks along each river segment and lowers the lattice quads where the surface is not below the water plane.|
+|Chunk index|The position of a chunk in the chunkRanges list. Roads, trees, and markers use it to join the chunk that owns them.|

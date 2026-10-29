@@ -29,6 +29,25 @@ export function chunkRanges(columns, rows, chunkCells) {
 }
 
 /**
+ * Finds the chunk that owns a map position. The index is the position of the chunk in the chunkRanges list.
+ * @param {number} columns Map columns.
+ * @param {number} chunkCells Cells along each chunk edge.
+ * @param {number} x Position east, in cell units.
+ * @param {number} y Position south, in cell units.
+ * @returns {number} Chunk index.
+ */
+export function chunkIndexAt(columns, chunkCells, x, y) {
+  // Validation
+  if (![columns, chunkCells].every((value) => Number.isInteger(value) && value > 0)) throw new TypeError("chunkIndexAt needs positive integer sizes.");
+  if (!Number.isFinite(x) || !Number.isFinite(y)) throw new TypeError("chunkIndexAt needs a finite position.");
+
+  // Computation
+  const columnCount = Math.ceil(columns / chunkCells);
+  const column = Math.min(columnCount - 1, Math.max(0, Math.floor(x / chunkCells)));
+  return Math.max(0, Math.floor(y / chunkCells)) * columnCount + column;
+}
+
+/**
  * Copies the vertex data of one chunk from the global lattice.
  * @param {HeightField} field Global height lattice.
  * @param {{startX: number, endX: number, startY: number, endY: number}} range Chunk cell range.

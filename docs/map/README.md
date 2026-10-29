@@ -65,6 +65,9 @@ The terrain is one continuous surface. It is made from chunk meshes that use one
 - A saved cliff direction puts the full height change into one lattice step on the low side of that edge.
 - `scripts/river-paths.js` makes river segments with the same connection rule as the 2D map.
   The height field carves a channel below height 0 along each segment.
+- A seal pass walks along each river segment after the carve. Where the surface is above `RIVER_SEAL`,
+  it lowers that lattice quad. Without it, 60 points on steep mountain rivers were above the water.
+  Tests check every live river path and every river crossing of a chunk border.
 - `scripts/terrain-chunks.js` cuts the lattice into chunks of 32 × 32 cells (35 chunks).
   Chunks copy positions and normals from the global arrays, so the edges of adjacent chunks are equal.
 - All chunks share one material. Until the textures load, the material uses vertex colors from `scripts/terrain-colors.js`.
