@@ -16,11 +16,16 @@
 
     <main>
       <h1>3D World Map</h1>
-      <p class="hint">Proof of concept. Drag to orbit, right-drag to pan, and use the mouse wheel to zoom.</p>
+      <p class="hint">Proof of concept. Drag to orbit, right-drag to pan, and use the mouse wheel to zoom. Point at a cell to inspect it, and click to pin it.</p>
+
+      <div class="zoom-controls">
+        <button type="button" id="map3dReset">Reset view</button>
+      </div>
 
       <div class="map-grid-container map-3d-container">
         <canvas id="map3dCanvas" class="map-3d-canvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json"></canvas>
         <div id="map3dStatus" class="map-3d-status" role="status"></div>
+        <dl id="map3dInspector" class="map-3d-inspector" aria-live="polite"></dl>
       </div>
 
       <div class="viewer-controls map-3d-controls">

@@ -30,6 +30,34 @@
   display: none;
 }
 
+.map-3d-inspector {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 8px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font: 12px/1.4 monospace;
+  pointer-events: none;
+}
+
+.map-3d-inspector:empty {
+  display: none;
+}
+
+.map-3d-inspector dt {
+  font-weight: bold;
+}
+
+.map-3d-inspector dd {
+  margin: 0;
+}
+
 .viewer-controls.map-3d-controls {
   grid-template-columns: 1fr;
 }

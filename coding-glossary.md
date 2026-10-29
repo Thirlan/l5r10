@@ -43,3 +43,7 @@ Glossary for coding terms used in this project
 |Clan ID texture|A texture with one byte for each map cell: the clan ID. The terrain shader reads it with texelFetch to tint clan cells and find clan borders.|
 |Clan palette|The fill and border colors of each clan ID, as RGBA uniform arrays of the terrain shader. Alpha 0 means no color (no clan).|
 |Border band|The strip of a clan cell, next to an edge or corner where the next cell has a different clan, that gets the clan border color.|
+|Camera limits|The nearest and farthest zoom, the orbit angle range, and the target area of the 3D map orbit camera.|
+|Target clamp|Moves the orbit target back inside the map area before each frame, so a pan cannot move the map off the screen.|
+|Cell inspector|The overlay of the 3D page that shows the coordinates, height, and layer values of the cell under the pointer.|
+|Pinned cell|An inspected cell that stays in the cell inspector after a click, until the next click releases it.|

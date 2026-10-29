@@ -2,12 +2,13 @@
  * Entry module for the 3D world map page (docs/map/world_map_3d.html).
  * It starts the Babylon.js engine and the render loop.
  */
+import { bindCellInspector } from "./cell-inspector.js";
 import { createClanLayer } from "./clan-regions.js";
 import { createLabelLayer } from "./label-meshes.js";
 import { bindLanguageToggle, bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
 import { createMarkerMeshes } from "./marker-meshes.js";
-import { createMapScene } from "./map-3d-scene.js";
+import { createMapScene, frameMap } from "./map-3d-scene.js";
 import { createPortMeshes } from "./port-meshes.js";
 import { createRoadMeshes } from "./road-meshes.js";
 import { DEFAULT_CHUNK_CELLS, createTerrainChunks } from "./terrain-chunks.js";
@@ -22,6 +23,8 @@ import { createWaterSurface } from "./water-surface.js";
 const canvas = document.getElementById("map3dCanvas");
 const status = document.getElementById("map3dStatus");
 const layerPanel = document.getElementById("map3dLayers");
+const resetButton = document.getElementById("map3dReset");
+const inspector = document.getElementById("map3dInspector");
 
 /**
  * Reads the map size from the data attributes of the canvas.
@@ -103,7 +106,8 @@ async function start() {
   const size = readMapSize(canvas);
   const options = readOptions();
   const engine = new BABYLON.Engine(canvas, true, { stencil: true }, true);
-  const { scene } = createMapScene(engine, size);
+  const { scene, camera } = createMapScene(engine, size);
+  resetButton.addEventListener("click", () => frameMap(camera, size));
 
   engine.runRenderLoop(() => scene.render());
   new ResizeObserver(() => engine.resize()).observe(canvas);
@@ -118,6 +122,7 @@ async function start() {
   const { settlements, resources } = await createMarkerMeshes(scene, terrain.field, options);
   const labels = createLabelLayer(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
+  bindCellInspector(scene, terrain.chunks, terrain.field, inspector);
   const clans = createClanLayer();
   bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources, labels: [labels.root], clans: supportsTerrainShader(engine) ? [clans] : [] });
   bindLanguageToggle(layerPanel.parentElement, labels.show);

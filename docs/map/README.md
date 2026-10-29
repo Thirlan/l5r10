@@ -214,3 +214,32 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
   - gives the band a minimum width in screen pixels, so the borders show on the whole-map view.
 - Clan regions are part of the terrain shader, so they are culled with the terrain chunks.
 - The Clans checkbox sets the `clanStrength` uniform. Clans need the WebGL2 terrain shader, so the checkbox is disabled on WebGL1.
+
+## Camera and interaction (PR 7)
+
+### Camera
+
+- Drag to orbit, right-drag or Ctrl+drag to pan, and use the wheel to zoom.
+- `scripts/camera-limits.js` sets the limits:
+  - the nearest zoom is 2 cells; the farthest zoom is 1.5 × the radius that fits the full map;
+  - the orbit angle stays above the horizon (`maxBeta` 1.35 radians);
+  - `clampTarget` keeps the orbit target inside the map area. The scene applies it before each frame.
+- The Reset view button frames the full map again.
+
+### Cell inspector
+
+- `scripts/cell-inspector.js` shows the cell under the pointer: coordinates, terrain height, and each layer value.
+  A named settlement also shows its English and Rokugani names.
+- The cell comes from the picked world position (`cellAtWorld`), not from mesh faces or vertices.
+  So it is correct for each chunk size.
+- Only the terrain chunks are picked. Hover picks are throttled to one each 80 ms, because each chunk has many triangles.
+- A click pins the cell, so the pointer can move away. The next click releases it.
+
+### Layer toggles
+
+| Layer | Toggle | Notes |
+| --- | --- | --- |
+| Terrain | Always on | |
+| Roads, trees, ports | Checkbox | Infrastructure and vegetation |
+| Settlements, resources, labels, clans | Checkbox | Labels also have the language radio buttons |
+| Rivers | None | Known gap. The river channels are carved into the terrain and filled by the water plane. A toggle needs a terrain rebuild. |

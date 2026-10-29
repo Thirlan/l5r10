@@ -4,6 +4,7 @@
  * World units: one map cell is one unit. World X is the column. World Z is
  * (rows - row), so north is far from the default camera. Y is up.
  */
+import { CAMERA_LIMITS, clampTarget } from "./camera-limits.js";
 
 const CAMERA_ALPHA = -Math.PI / 2;
 const CAMERA_BETA = 0.7;
@@ -26,6 +27,7 @@ export function validateMapSize(size) {
 
 /**
  * Moves the camera so that it shows the full map from the south.
+ * The farthest zoom is a ratio of this radius, so it follows the view size.
  * @param {BABYLON.ArcRotateCamera} camera Orbit camera.
  * @param {{columns: number, rows: number}} size Map size in cells.
  * @returns {void}
@@ -40,7 +42,9 @@ export function frameMap(camera, size) {
   camera.alpha = CAMERA_ALPHA;
   camera.beta = CAMERA_BETA;
   const aspect = camera.getEngine().getAspectRatio(camera) || 1;
-  camera.radius = fitRadius(size, CAMERA_ALPHA, CAMERA_BETA, camera.fov, aspect) * FRAME_MARGIN;
+  const radius = fitRadius(size, CAMERA_ALPHA, CAMERA_BETA, camera.fov, aspect) * FRAME_MARGIN;
+  camera.upperRadiusLimit = radius * CAMERA_LIMITS.maxRadiusRatio;
+  camera.radius = radius;
 }
 
 /**
@@ -82,8 +86,16 @@ export function createMapScene(engine, size) {
   camera.maxZ = Math.max(size.columns, size.rows) * 6;
   camera.wheelDeltaPercentage = 0.02;
   camera.panningSensibility = 40;
+  camera.mapPanning = true;
+  camera.lowerRadiusLimit = CAMERA_LIMITS.minRadius;
+  camera.lowerBetaLimit = CAMERA_LIMITS.minBeta;
+  camera.upperBetaLimit = CAMERA_LIMITS.maxBeta;
   camera.attachControl(true);
   frameMap(camera, size);
+  scene.onBeforeRenderObservable.add(() => {
+    const { x, z } = clampTarget(camera.target, size);
+    if (x !== camera.target.x || z !== camera.target.z) camera.setTarget(new BABYLON.Vector3(x, camera.target.y, z));
+  });
 
   const light = new BABYLON.HemisphericLight("mapSkyLight", new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 0.55;
