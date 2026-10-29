@@ -88,3 +88,16 @@ test("world_map_3d.html scripts resolve and pin the Babylon.js version from pack
   assert.equal(cdnVersions.length, 2);
   assert.deepEqual(cdnVersions, [packageJson.devDependencies["@babylonjs/core"], packageJson.devDependencies["@babylonjs/materials"]]);
 });
+
+test("the PBR texture worker pins the three.js version from package.json", () => {
+  // Setup
+  const worker = readFileSync(new URL("../docs/map/scripts/pbr-layer-worker.js", import.meta.url), "utf8");
+  const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+
+  // Execution
+  const versions = [...worker.matchAll(/npm\/three@([^/]+)\//g)].map(([, version]) => version);
+
+  // Assertion
+  assert.equal(versions.length, 2);
+  versions.forEach((version) => assert.equal(version, packageJson.devDependencies.three));
+});
