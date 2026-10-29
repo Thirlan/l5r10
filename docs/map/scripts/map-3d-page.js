@@ -7,6 +7,9 @@ import { createMapScene } from "./map-3d-scene.js";
 import { DEFAULT_CHUNK_CELLS, createTerrainChunks } from "./terrain-chunks.js";
 import { loadSurfacePalette, terrainVertexColors } from "./terrain-colors.js";
 import { HeightField } from "./terrain-height.js";
+import { createTerrainMaterial, supportsTerrainShader } from "./terrain-material.js";
+import { TEXTURE_SETS } from "./surface-layers.js";
+import { DEFAULT_TEXTURE_SIZE, TEXTURE_SIZES, loadTextureArrays } from "./texture-arrays.js";
 
 const canvas = document.getElementById("map3dCanvas");
 const status = document.getElementById("map3dStatus");
@@ -21,13 +24,17 @@ function readMapSize(element) {
 }
 
 /**
- * Reads the page options from the URL, for example "?chunk=16".
- * @returns {{chunkCells: number}} Page options.
+ * Reads the page options from the URL, for example "?chunk=16&textureSize=1024".
+ * @returns {{chunkCells: number, textureSize: number}} Page options.
  */
 function readOptions() {
   const parameters = new URLSearchParams(window.location.search);
   const chunkCells = Number(parameters.get("chunk") ?? DEFAULT_CHUNK_CELLS);
-  return { chunkCells: Number.isInteger(chunkCells) && chunkCells > 0 ? chunkCells : DEFAULT_CHUNK_CELLS };
+  const textureSize = Number(parameters.get("textureSize") ?? DEFAULT_TEXTURE_SIZE);
+  return {
+    chunkCells: Number.isInteger(chunkCells) && chunkCells > 0 ? chunkCells : DEFAULT_CHUNK_CELLS,
+    textureSize: TEXTURE_SIZES.includes(textureSize) ? textureSize : DEFAULT_TEXTURE_SIZE,
+  };
 }
 
 /**
@@ -35,15 +42,41 @@ function readOptions() {
  * @param {BABYLON.Scene} scene Scene.
  * @param {import("./map-data.js").MapModel} model Map model.
  * @param {{chunkCells: number}} options Page options.
- * @returns {Promise<{field: HeightField, chunks: BABYLON.Mesh[]}>} Terrain objects.
+ * @returns {Promise<{field: HeightField, chunks: BABYLON.Mesh[], palette: object}>} Terrain objects.
  */
 async function buildTerrain(scene, model, options) {
   const field = new HeightField(model);
-  const colors = terrainVertexColors(field, await loadSurfacePalette());
+  const palette = await loadSurfacePalette();
+  const colors = terrainVertexColors(field, palette);
   const material = new BABYLON.StandardMaterial("terrainVertexColors", scene);
   material.specularColor = BABYLON.Color3.Black();
   const chunks = createTerrainChunks(scene, field, { chunkCells: options.chunkCells, material, colors });
-  return { field, chunks };
+  return { field, chunks, palette };
+}
+
+/**
+ * Loads the PBR texture arrays and puts the terrain material on all chunks.
+ * The vertex colors stay until the textures are ready, or when the engine has no WebGL2.
+ * @param {BABYLON.Scene} scene Scene.
+ * @param {import("./map-data.js").MapModel} model Map model.
+ * @param {{chunks: BABYLON.Mesh[], palette: object}} terrain Terrain objects from buildTerrain.
+ * @param {{textureSize: number}} options Page options.
+ * @param {(text: string) => void} report Writes one status line.
+ * @returns {Promise<void>}
+ */
+async function applyTextures(scene, model, terrain, options, report) {
+  if (!supportsTerrainShader(scene.getEngine())) {
+    report("Textures: WebGL2 is not available, so the terrain uses flat colors.");
+    return;
+  }
+  const started = performance.now();
+  const arrays = await loadTextureArrays(scene, TEXTURE_SETS, {
+    size: options.textureSize,
+    onProgress: (done, total) => report(`Textures: ${done} of ${total} sets decoded…`),
+  });
+  const material = createTerrainMaterial(scene, model, arrays, terrain.palette);
+  terrain.chunks.forEach((chunk) => (chunk.material = material));
+  report(`Textures: ${TEXTURE_SETS.length} sets at ${options.textureSize} px in ${Math.round(performance.now() - started)} ms.`);
 }
 
 /**
@@ -67,8 +100,11 @@ async function start() {
   status.textContent = "Loading the map data…";
   const model = await loadMapModel(canvas.dataset.mapData, size);
   status.textContent = "Building the terrain…";
-  const { chunks } = await buildTerrain(scene, model, options);
-  status.textContent = `${describeMapModel(model)}\nTerrain: ${chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells.`;
+  const terrain = await buildTerrain(scene, model, options);
+  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells.`;
+  const report = (line) => (status.textContent = `${summary}\n${line}`);
+  report("Textures: loading…");
+  await applyTextures(scene, model, terrain, options, report);
   console.info(status.textContent);
 }
 

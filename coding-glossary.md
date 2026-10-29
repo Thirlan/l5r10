@@ -14,3 +14,8 @@ Glossary for coding terms used in this project
 |River segment|A line from a river cell center to a cell edge, a cell corner, or a water cell center. The height field carves river channels along these lines.|
 |Chunk range|The rectangle of map cells that one terrain chunk mesh covers. The end column and the end row are not in the range.|
 |Surface palette|The climate colors and water colors that the 3D map uses for vertex colors before the textures load.|
+|Surface layer|One PBR texture set of the 3D map, and its index in the texture arrays. Layer 0 (moon_dusted_01) is the default layer.|
+|Cell ID texture|A small RGBA texture with one pixel for each map cell. It gives the primary layer, the steep-slope layer, the snow line, and the water class of the cell. It uses NEAREST filtering.|
+|Albedo layer|One layer of the albedo texture array: the diffuse color in RGB and the displacement in alpha.|
+|Shading layer|One layer of the shading texture array: the normal X and Y in red and green, and the roughness in blue.|
+|Pixel source|An object {data, channels, scale} that gives pixel values from 0 to 1 for the PBR texture helpers.|
