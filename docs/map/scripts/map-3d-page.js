@@ -2,6 +2,7 @@
  * Entry module for the 3D world map page (docs/map/world_map_3d.html).
  * It starts the Babylon.js engine and the render loop.
  */
+import { describeMapModel, loadMapModel } from "./map-data.js";
 import { createMapScene } from "./map-3d-scene.js";
 
 const canvas = document.getElementById("map3dCanvas");
@@ -17,10 +18,10 @@ function readMapSize(element) {
 }
 
 /**
- * Starts the engine, creates the scene, and starts the render loop.
- * @returns {void}
+ * Starts the engine, creates the scene, loads the map, and starts the render loop.
+ * @returns {Promise<void>}
  */
-function start() {
+async function start() {
   if (typeof BABYLON === "undefined") {
     status.textContent = "Babylon.js did not load. Check the network connection.";
     return;
@@ -34,6 +35,14 @@ function start() {
 
   engine.runRenderLoop(() => scene.render());
   new ResizeObserver(() => engine.resize()).observe(canvas);
+
+  status.textContent = "Loading the map data…";
+  const model = await loadMapModel(canvas.dataset.mapData, size);
+  status.textContent = describeMapModel(model);
+  console.info(status.textContent);
 }
 
-start();
+start().catch((error) => {
+  status.textContent = `The 3D map could not start: ${error.message}`;
+  console.error(error);
+});

@@ -42,3 +42,14 @@ The page needs a network connection to load Babylon.js from the CDN.
 - One map cell is one world unit. One cell is 5 miles.
 - World X is the column. World Z is `rows - row`, so north is far from the default camera.
 - Y is up.
+
+## Map data (PR 2)
+
+`scripts/map-data.js` loads `docs/data/world-map-grid.json` into a `MapModel`.
+
+- Each layer has one `Uint8Array` of catalog IDs, in row order (`index = y * columns + x`).
+- Missing layers use the 2D defaults: flat, temperate, no vegetation.
+- Saved numbers resolve with `LAYERS.<LAYER>.getValue(number)`. Unknown numbers keep the default and are counted.
+- River and cliff direction flags become 8-bit direction masks. Bit 0 is north, then clockwise.
+- Cells outside the 135 × 196 size are counted and skipped. The saved file has 10 cells in row 196.
+- The page shows a debug readout with the counts and the land bounds.
