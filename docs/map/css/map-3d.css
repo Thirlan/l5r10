@@ -29,3 +29,7 @@
 .map-3d-status:empty {
   display: none;
 }
+
+.viewer-controls.map-3d-controls {
+  grid-template-columns: 1fr;
+}

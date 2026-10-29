@@ -2,8 +2,10 @@
  * Entry module for the 3D world map page (docs/map/world_map_3d.html).
  * It starts the Babylon.js engine and the render loop.
  */
+import { bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
 import { createMapScene } from "./map-3d-scene.js";
+import { createPortMeshes } from "./port-meshes.js";
 import { createRoadMeshes } from "./road-meshes.js";
 import { DEFAULT_CHUNK_CELLS, createTerrainChunks } from "./terrain-chunks.js";
 import { loadSurfacePalette, terrainVertexColors } from "./terrain-colors.js";
@@ -16,6 +18,7 @@ import { createWaterSurface } from "./water-surface.js";
 
 const canvas = document.getElementById("map3dCanvas");
 const status = document.getElementById("map3dStatus");
+const layerPanel = document.getElementById("map3dLayers");
 
 /**
  * Reads the map size from the data attributes of the canvas.
@@ -107,9 +110,11 @@ async function start() {
   const terrain = await buildTerrain(scene, model, options);
   const roads = createRoadMeshes(scene, terrain.field, options);
   const trees = createTreeMeshes(scene, terrain.field, options);
+  const ports = createPortMeshes(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
-  const treeCount = trees.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
-  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${treeCount} in ${trees.length} meshes.`;
+  bindLayerToggles(layerPanel, { roads, trees, ports });
+  const count = (meshes) => meshes.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
+  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${count(trees)} in ${trees.length} meshes. Ports: ${count(ports)}.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");
   await applyTextures(scene, model, terrain, options, report);

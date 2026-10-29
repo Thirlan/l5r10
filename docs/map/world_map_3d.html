@@ -22,6 +22,20 @@
         <canvas id="map3dCanvas" class="map-3d-canvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json"></canvas>
         <div id="map3dStatus" class="map-3d-status" role="status"></div>
       </div>
+
+      <div class="viewer-controls map-3d-controls">
+        <div class="viewer-panel">
+          <fieldset id="map3dLayers" class="layer-picker" aria-describedby="map3dLayerHelp">
+            <legend class="layer-picker__title">Map Layers</legend>
+            <p id="map3dLayerHelp" class="hint layer-picker__help">Terrain, water, and rivers are always shown. Ports are placeholders.</p>
+            <div class="radio-row">
+              <label class="radio"><input type="checkbox" checked data-map-layer="roads" /> Roads</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="trees" /> Trees</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="ports" /> Ports</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
     </main>
 
     <footer>

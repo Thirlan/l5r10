@@ -167,3 +167,11 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
   Each mesh has its own copy of the small prototype geometry, because thin-instance buffers go on the geometry.
 - The instance color sets the canopy color. The trunk vertices are dark, so the trunk is a dark shade of the canopy.
 - Trees are not in the water reflection list, to keep the reflection pass cheap.
+
+### Ports and layer toggles
+
+- `scripts/port-meshes.js` puts a placeholder dock on each small or large port cell.
+  The dock points to the first water neighbor and stays above the bridge deck. Large ports use a larger dock.
+- The live map has no ports yet. The tests use a small synthetic map, and the Ports checkbox is disabled when there are none.
+- `scripts/layer-toggles.js` connects each checkbox with a `data-map-layer` attribute to its mesh group.
+  The Roads, Trees, and Ports checkboxes work independently. PR 7 adds the other layers.

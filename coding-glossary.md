@@ -31,3 +31,5 @@ Glossary for coding terms used in this project
 |Tree prototype|The geometry of one tree kind (trunk and canopy), with its base at the origin. Thin instances place copies of it.|
 |Thin instance|A Babylon.js copy of a mesh that has only a world matrix (and an optional color) in a buffer. One draw call shows all thin instances of a mesh.|
 |Settlement clearing|The circle around a settlement cell center where no trees are placed, so the settlement marker stays visible.|
+|Dock marker|The placeholder mesh for a port in the 3D map: a plank deck that points to the nearest water neighbor, with a post at the land end.|
+|Layer toggle|A checkbox with a data-map-layer attribute. On the 3D page, it shows or hides the mesh group with the same name.|
