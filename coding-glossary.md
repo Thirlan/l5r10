@@ -23,3 +23,7 @@ Glossary for coding terms used in this project
 |Water plane|One flat mesh at the water level over the full 3D map. It uses the WaterMaterial, and shows only where the terrain is below it.|
 |Seal pass|The last river step of the HeightField. It walks along each river segment and lowers the lattice quads where the surface is not below the water plane.|
 |Chunk index|The position of a chunk in the chunkRanges list. Roads, trees, and markers use it to join the chunk that owns them.|
+|Road link|One straight road or footpath piece between the centers of two neighbor cells in the 3D map. It uses the kind of its start cell.|
+|Junction cap|A small flat disc at the center of a road cell. It fills the gaps where road links meet.|
+|Cover height|The highest surface height on the lines from a road vertex to its neighbor vertices. The road vertex uses it, so that the road triangles stay above the terrain.|
+|Bridge deck|The lowest height of a road in the 3D map. Over rivers and water, roads stay at this height above the water plane.|

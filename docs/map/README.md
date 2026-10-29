@@ -135,3 +135,19 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
   The bump texture is procedural, so it needs no image file.
 - The terrain shader tints the ground under the water with the water class color (lake and river, coastal, ocean).
   The refraction shows this tint, so coastal water and ocean look different.
+
+## Roads and surface features (PR 5)
+
+### Roads and footpaths
+
+- `scripts/road-paths.js` makes road links with the same rule as the 2D infrastructure layer.
+  A road or footpath cell links east, south, south-east, and north-east to each neighbor with infrastructure.
+- A link uses the kind of its start cell. A junction cap at each cell fills the gap where links meet.
+- Each link is a ribbon of 3 vertex lines, with a vertex row every 1/8 cell.
+  Each vertex uses the cover height: the highest surface on the lines to its neighbor vertices.
+  Thus the flat triangles between vertices do not go into the terrain.
+- Over a river or water cell, the road stays on the bridge deck (`BRIDGE_DECK`), above the water plane.
+- The road is a little higher than the footpath, so the two do not flicker where they meet.
+- `scripts/road-meshes.js` makes one mesh for each chunk and kind (42 meshes). UVs are planar world positions,
+  so overlapping ribbons and caps show the same texture.
+- A test checks the clearance of every road triangle on the live map. The lowest clearance is 0.022.

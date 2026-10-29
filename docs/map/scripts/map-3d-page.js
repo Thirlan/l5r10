@@ -4,6 +4,7 @@
  */
 import { describeMapModel, loadMapModel } from "./map-data.js";
 import { createMapScene } from "./map-3d-scene.js";
+import { createRoadMeshes } from "./road-meshes.js";
 import { DEFAULT_CHUNK_CELLS, createTerrainChunks } from "./terrain-chunks.js";
 import { loadSurfacePalette, terrainVertexColors } from "./terrain-colors.js";
 import { HeightField } from "./terrain-height.js";
@@ -103,8 +104,9 @@ async function start() {
   const model = await loadMapModel(canvas.dataset.mapData, size);
   status.textContent = "Building the terrain…";
   const terrain = await buildTerrain(scene, model, options);
-  createWaterSurface(scene, size, terrain.chunks, { simple: options.simpleWater });
-  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells.`;
+  const roads = createRoadMeshes(scene, terrain.field, options);
+  createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
+  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");
   await applyTextures(scene, model, terrain, options, report);
