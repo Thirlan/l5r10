@@ -53,3 +53,22 @@ The page needs a network connection to load Babylon.js from the CDN.
 - River and cliff direction flags become 8-bit direction masks. Bit 0 is north, then clockwise.
 - Cells outside the 135 × 196 size are counted and skipped. The saved file has 10 cells in row 196.
 - The page shows a debug readout with the counts and the land bounds.
+
+## Terrain surface (PR 3)
+
+The terrain is one continuous surface. It is made from chunk meshes that use one global height sampler.
+
+- `scripts/terrain-height.js` makes the `HeightField`. Each cell has 4 lattice steps on each side (`SUBDIVISIONS`).
+- The height at a lattice point blends the 4 nearest cell centers with smoothstep weights.
+- Each terrain has a level and a roughness. Ridged noise adds relief to hills and mountains.
+- Water cells have a negative level. The shoreline is at height 0 on the edge between land and water.
+- A saved cliff direction puts the full height change into one lattice step on the low side of that edge.
+- `scripts/river-paths.js` makes river segments with the same connection rule as the 2D map.
+  The height field carves a channel below height 0 along each segment.
+- `scripts/terrain-chunks.js` cuts the lattice into chunks of 32 × 32 cells (35 chunks).
+  Chunks copy positions and normals from the global arrays, so the edges of adjacent chunks are equal.
+- All chunks share one material. Until the textures load, the material uses vertex colors from `scripts/terrain-colors.js`.
+
+| Query option | Effect |
+| --- | --- |
+| `?chunk=16` | Uses chunks of 16 × 16 cells. Use it to compare the chunk sizes. |
