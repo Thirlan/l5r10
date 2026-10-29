@@ -4,6 +4,7 @@
  */
 import { bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
+import { createMarkerMeshes } from "./marker-meshes.js";
 import { createMapScene } from "./map-3d-scene.js";
 import { createPortMeshes } from "./port-meshes.js";
 import { createRoadMeshes } from "./road-meshes.js";
@@ -111,8 +112,9 @@ async function start() {
   const roads = createRoadMeshes(scene, terrain.field, options);
   const trees = createTreeMeshes(scene, terrain.field, options);
   const ports = createPortMeshes(scene, terrain.field, options);
+  const { settlements, resources } = await createMarkerMeshes(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
-  bindLayerToggles(layerPanel, { roads, trees, ports });
+  bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources });
   const count = (meshes) => meshes.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
   const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${count(trees)} in ${trees.length} meshes. Ports: ${count(ports)}.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);

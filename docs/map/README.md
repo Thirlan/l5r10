@@ -175,3 +175,19 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 - The live map has no ports yet. The tests use a small synthetic map, and the Ports checkbox is disabled when there are none.
 - `scripts/layer-toggles.js` connects each checkbox with a `data-map-layer` attribute to its mesh group.
   The Roads, Trees, and Ports checkboxes work independently. PR 7 adds the other layers.
+
+## Settlements, resources, and clans (PR 6)
+
+### Markers
+
+- `scripts/marker-layout.js` makes one billboard quad for each settlement and resource, at its cell center.
+  The anchor is on the surface, or on the bridge deck over water.
+- `scripts/marker-meshes.js` draws each icon kind once into an atlas canvas. It uses the 2D drawing code:
+  - settlements use `drawSettlementMarker` with the clan colors (neutral colors for no clan);
+  - resources use the 2D resource image.
+- There is one mesh for each chunk and layer, so markers are culled with their chunk.
+- `scripts/marker-material.js` turns each quad to face the camera in the vertex shader.
+  - A far marker keeps a minimum angular size (`minAngle`), so it stays legible on the whole-map view.
+  - The quad moves toward the camera along the view ray, so it does not go into nearby hills. Its screen shape does not change.
+  - Transparent pixels are discarded, so the markers need no sorting.
+- The Settlements and Resources checkboxes show or hide each layer.

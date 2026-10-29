@@ -33,3 +33,7 @@ Glossary for coding terms used in this project
 |Settlement clearing|The circle around a settlement cell center where no trees are placed, so the settlement marker stays visible.|
 |Dock marker|The placeholder mesh for a port in the 3D map: a plank deck that points to the nearest water neighbor, with a post at the land end.|
 |Layer toggle|A checkbox with a data-map-layer attribute. On the 3D page, it shows or hides the mesh group with the same name.|
+|Marker atlas|One canvas texture that has each settlement and resource icon kind once, in 64 px cells. All marker quads of a layer sample it.|
+|Billboard quad|A quad that the vertex shader turns to face the camera. All 4 vertices have the anchor as position and a corner offset in view space.|
+|Minimum angular size|The smallest angle that a billboard fills on the screen. Far billboards grow, so they stay legible.|
+|Camera pull|The distance that the billboard shader moves a quad toward the camera along the view ray, so nearby terrain does not cover it.|
