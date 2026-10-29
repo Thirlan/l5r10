@@ -11,10 +11,13 @@
     "test": "node --test \"tests/**/*.test.mjs\""
   },
   "devDependencies": {
+    "@babylonjs/core": "9.33.0",
+    "@babylonjs/materials": "9.33.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.13.0",
     "globals": "^17.13.0",
     "html-validate": "^11.16.4",
-    "prettier": "^3.9.10"
+    "prettier": "^3.9.10",
+    "three": "0.186.1"
   }
 }
