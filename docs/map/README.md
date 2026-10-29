@@ -151,3 +151,19 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 - `scripts/road-meshes.js` makes one mesh for each chunk and kind (42 meshes). UVs are planar world positions,
   so overlapping ribbons and caps show the same texture.
 - A test checks the clearance of every road triangle on the live map. The lowest clearance is 0.022.
+
+### Trees
+
+- `scripts/tree-placement.js` gives each vegetation cell 6 candidate trees from a hash of the cell.
+  The placement is the same on each page load.
+- A candidate is removed when:
+  - the surface is below `TREE_MIN_HEIGHT` (river banks and shores);
+  - the slope is steep (`TREE_MIN_NORMAL`), where the shader shows rock;
+  - it is near the snow line of a mountain cell;
+  - it is near a road link (`ROAD_MARGIN`), or in a settlement clearing (`SETTLEMENT_CLEARING`).
+- The climate and terrain select the tree kind (conifer or broadleaf) and the canopy color.
+  Polar cells have only conifers. Hills and mountains have more conifers. Wetlands have none.
+- `scripts/tree-meshes.js` makes one thin-instance mesh for each chunk and kind (17,969 trees in 52 meshes).
+  Each mesh has its own copy of the small prototype geometry, because thin-instance buffers go on the geometry.
+- The instance color sets the canopy color. The trunk vertices are dark, so the trunk is a dark shade of the canopy.
+- Trees are not in the water reflection list, to keep the reflection pass cheap.

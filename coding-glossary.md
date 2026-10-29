@@ -27,3 +27,7 @@ Glossary for coding terms used in this project
 |Junction cap|A small flat disc at the center of a road cell. It fills the gaps where road links meet.|
 |Cover height|The highest surface height on the lines from a road vertex to its neighbor vertices. The road vertex uses it, so that the road triangles stay above the terrain.|
 |Bridge deck|The lowest height of a road in the 3D map. Over rivers and water, roads stay at this height above the water plane.|
+|Tree candidate|One possible tree position in a vegetation cell, from a hash of the cell and the candidate number. Filters remove candidates on water, steep slopes, snow, roads, and settlement clearings.|
+|Tree prototype|The geometry of one tree kind (trunk and canopy), with its base at the origin. Thin instances place copies of it.|
+|Thin instance|A Babylon.js copy of a mesh that has only a world matrix (and an optional color) in a buffer. One draw call shows all thin instances of a mesh.|
+|Settlement clearing|The circle around a settlement cell center where no trees are placed, so the settlement marker stays visible.|

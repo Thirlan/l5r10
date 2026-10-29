@@ -10,6 +10,7 @@ import { loadSurfacePalette, terrainVertexColors } from "./terrain-colors.js";
 import { HeightField } from "./terrain-height.js";
 import { createTerrainMaterial, supportsTerrainShader } from "./terrain-material.js";
 import { TEXTURE_SETS } from "./surface-layers.js";
+import { createTreeMeshes } from "./tree-meshes.js";
 import { DEFAULT_TEXTURE_SIZE, TEXTURE_SIZES, loadTextureArrays } from "./texture-arrays.js";
 import { createWaterSurface } from "./water-surface.js";
 
@@ -105,8 +106,10 @@ async function start() {
   status.textContent = "Building the terrain…";
   const terrain = await buildTerrain(scene, model, options);
   const roads = createRoadMeshes(scene, terrain.field, options);
+  const trees = createTreeMeshes(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
-  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes.`;
+  const treeCount = trees.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
+  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${treeCount} in ${trees.length} meshes.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");
   await applyTextures(scene, model, terrain, options, report);
