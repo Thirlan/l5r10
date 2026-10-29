@@ -203,3 +203,14 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 - Map labels show at all distances.
 - The Settlement Names radio buttons rebuild the labels in English or Rokugani, as on the 2D map.
 - The Labels checkbox shows or hides all labels.
+
+### Clan regions
+
+- `scripts/clan-regions.js` packs one clan ID for each cell into a NEAREST texture, and the fill and border colors of each clan into a palette.
+  The colors come from `scripts/clan-colors.js`, as on the 2D map.
+- The terrain shader:
+  - tints each clan cell with the clan fill color (alpha 0.15, as on the 2D map);
+  - draws the clan border color in a band where the next cell (also diagonal) has a different clan, with a thin dark line on the edge;
+  - gives the band a minimum width in screen pixels, so the borders show on the whole-map view.
+- Clan regions are part of the terrain shader, so they are culled with the terrain chunks.
+- The Clans checkbox sets the `clanStrength` uniform. Clans need the WebGL2 terrain shader, so the checkbox is disabled on WebGL1.

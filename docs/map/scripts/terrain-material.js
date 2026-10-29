@@ -7,9 +7,12 @@
  * - Snow covers mountain cells above the snow line of the cell.
  * - The displacement in the albedo alpha makes the blend follow the texture height.
  * - The surface under height 0 gets the water color of its cell.
+ * - Clan cells get a light tint of the clan fill color, and a border band where the next cell has a different clan.
+ *   The border band has a minimum width in screen pixels, so it shows on the whole-map view.
  */
 import { SUN_DIRECTION } from "./map-3d-scene.js";
 import { TERRAIN } from "../../scripts/world/world-map-layers.js";
+import { CLAN_SLOTS, clanPalette, packClanIds } from "./clan-regions.js";
 import { SNOW_LAYER, SNOW_LINE_UNITS, WATER_CLASS, packCellIds } from "./surface-layers.js";
 
 const WATER_CLASS_TERRAINS = new Map([
@@ -26,6 +29,9 @@ export const TERRAIN_LOOK = Object.freeze({
   sunColor: [1.0, 0.96, 0.88],
   skyColor: [0.3, 0.36, 0.45],
   groundColor: [0.12, 0.11, 0.09],
+  clanFillAlpha: 0.15,
+  clanBorderWidth: 0.12,
+  clanBorderPixels: 2.5,
 });
 
 const VERTEX_SHADER = `
@@ -63,6 +69,13 @@ uniform vec3 cameraPosition;
 uniform vec3 waterColors[4];
 uniform int snowLayer;
 uniform float snowLineUnits;
+uniform sampler2D clanIds;
+uniform vec4 clanFill[${CLAN_SLOTS}];
+uniform vec4 clanBorder[${CLAN_SLOTS}];
+uniform float clanStrength;
+uniform float clanFillAlpha;
+uniform float clanBorderWidth;
+uniform float clanBorderPixels;
 varying vec3 vWorldPosition;
 varying vec3 vWorldNormal;
 #include<clipPlaneFragmentDeclaration>
@@ -90,6 +103,42 @@ vec4 cellAt(ivec2 cell) {
 }
 
 vec3 toLinear(vec3 color) { return pow(color, vec3(2.2)); }
+
+int clanAt(ivec2 cell) {
+  if (any(lessThan(cell, ivec2(0))) || any(greaterThanEqual(cell, ivec2(mapSize)))) return -1;
+  return int(texelFetch(clanIds, cell, 0).r * 255.0 + 0.5);
+}
+
+// Distance from a point in its cell to the nearest cell edge or corner where the next cell has a different clan.
+float clanEdgeDistance(ivec2 cell, int clan, vec2 local) {
+  vec2 far = 1.0 - local;
+  float edge = 2.0;
+  if (clanAt(cell + ivec2(-1, 0)) != clan) edge = min(edge, local.x);
+  if (clanAt(cell + ivec2(1, 0)) != clan) edge = min(edge, far.x);
+  if (clanAt(cell + ivec2(0, -1)) != clan) edge = min(edge, local.y);
+  if (clanAt(cell + ivec2(0, 1)) != clan) edge = min(edge, far.y);
+  if (clanAt(cell + ivec2(-1, -1)) != clan) edge = min(edge, max(local.x, local.y));
+  if (clanAt(cell + ivec2(1, -1)) != clan) edge = min(edge, max(far.x, local.y));
+  if (clanAt(cell + ivec2(-1, 1)) != clan) edge = min(edge, max(local.x, far.y));
+  if (clanAt(cell + ivec2(1, 1)) != clan) edge = min(edge, max(far.x, far.y));
+  return edge;
+}
+
+vec3 addClanRegion(vec3 color, vec2 cellPosition) {
+  vec2 clanPosition = cellPosition + 0.5;
+  float pixel = length(fwidth(clanPosition));
+  if (clanStrength <= 0.0) return color;
+  ivec2 cell = ivec2(floor(clanPosition));
+  int clan = clanAt(cell);
+  if (clan <= 0) return color;
+  float edge = clanEdgeDistance(cell, clan, fract(clanPosition));
+  float width = max(clanBorderWidth, clanBorderPixels * pixel);
+  float band = 1.0 - smoothstep(width - pixel, width, edge);
+  float line = 1.0 - smoothstep(width * 0.25 - pixel, width * 0.25, edge);
+  color = mix(color, clanFill[clan].rgb, clanFill[clan].a * clanFillAlpha * clanStrength);
+  color = mix(color, clanBorder[clan].rgb, clanBorder[clan].a * band * clanStrength);
+  return mix(color, vec3(0.267), line * clanStrength);
+}
 
 void main(void) {
   #include<clipPlaneFragment>
@@ -158,7 +207,7 @@ void main(void) {
   vec3 color = toLinear(albedo) * (ambient + sunColor * diffuse) + sunColor * specular;
   float underwater = smoothstep(0.0, 1.0, clamp(-vWorldPosition.y / WATER_DEPTH, 0.0, 1.0));
   color = mix(color, toLinear(waterTint) * (ambient + sunColor * 0.6), underwater * 0.9);
-  gl_FragColor = vec4(pow(color, vec3(1.0 / 2.2)), 1.0);
+  gl_FragColor = vec4(addClanRegion(pow(color, vec3(1.0 / 2.2)), cellPosition), 1.0);
 }`;
 
 /**
@@ -184,6 +233,19 @@ function createCellIdTexture(scene, model) {
 }
 
 /**
+ * Makes the clan ID texture (one byte for each cell) with NEAREST filtering.
+ * @param {BABYLON.Scene} scene Scene.
+ * @param {import("./map-data.js").MapModel} model Map model.
+ * @returns {BABYLON.RawTexture} Clan ID texture.
+ */
+function createClanIdTexture(scene, model) {
+  const texture = new BABYLON.RawTexture(packClanIds(model), model.columns, model.rows, BABYLON.Constants.TEXTUREFORMAT_R, scene, false, false, BABYLON.Texture.NEAREST_SAMPLINGMODE, BABYLON.Constants.TEXTURETYPE_UNSIGNED_BYTE);
+  texture.wrapU = BABYLON.Texture.CLAMP_ADDRESSMODE;
+  texture.wrapV = BABYLON.Texture.CLAMP_ADDRESSMODE;
+  return texture;
+}
+
+/**
  * Makes the shared terrain material.
  * @param {BABYLON.Scene} scene Scene.
  * @param {import("./map-data.js").MapModel} model Map model.
@@ -196,8 +258,8 @@ export function createTerrainMaterial(scene, model, arrays, palette) {
   if (!arrays?.albedo || !arrays?.shading) throw new TypeError("createTerrainMaterial needs the albedo and shading texture arrays.");
 
   // Computation
-  const uniforms = ["world", "viewProjection", "cameraPosition", "mapSize", "textureScale", "cellBlend", "rockSlope", "sunDirection", "sunColor", "skyColor", "groundColor", "waterColors", "snowLayer", "snowLineUnits"];
-  const material = new BABYLON.ShaderMaterial("terrainSurface", scene, { vertexSource: VERTEX_SHADER, fragmentSource: FRAGMENT_SHADER }, { attributes: ["position", "normal"], uniforms, samplers: ["cellIds", "albedoLayers", "shadingLayers"], useClipPlane: true });
+  const uniforms = ["world", "viewProjection", "cameraPosition", "mapSize", "textureScale", "cellBlend", "rockSlope", "sunDirection", "sunColor", "skyColor", "groundColor", "waterColors", "snowLayer", "snowLineUnits", "clanFill", "clanBorder", "clanStrength", "clanFillAlpha", "clanBorderWidth", "clanBorderPixels"];
+  const material = new BABYLON.ShaderMaterial("terrainSurface", scene, { vertexSource: VERTEX_SHADER, fragmentSource: FRAGMENT_SHADER }, { attributes: ["position", "normal"], uniforms, samplers: ["cellIds", "albedoLayers", "shadingLayers", "clanIds"], useClipPlane: true });
   const classColors = [WATER_CLASS.LAKE, WATER_CLASS.LAKE, WATER_CLASS.COASTAL, WATER_CLASS.OCEAN].map((waterClass) => palette.water.get(WATER_CLASS_TERRAINS.get(waterClass)));
   if (classColors.some((color) => !color)) throw new TypeError("The palette needs a color for each water class.");
 
@@ -213,5 +275,11 @@ export function createTerrainMaterial(scene, model, arrays, palette) {
   material.setArray3("waterColors", classColors.flat());
   material.setInt("snowLayer", SNOW_LAYER);
   material.setFloat("snowLineUnits", SNOW_LINE_UNITS);
+  const clans = clanPalette();
+  material.setTexture("clanIds", createClanIdTexture(scene, model));
+  material.setArray4("clanFill", clans.fill);
+  material.setArray4("clanBorder", clans.border);
+  material.setFloat("clanStrength", 1);
+  ["clanFillAlpha", "clanBorderWidth", "clanBorderPixels"].forEach((name) => material.setFloat(name, TERRAIN_LOOK[name]));
   return material;
 }

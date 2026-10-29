@@ -40,3 +40,6 @@ Glossary for coding terms used in this project
 |Label atlas|One canvas texture with each label drawn once. Labels have different widths, so they go into shelves (rows) of the atlas.|
 |Shelf packing|Puts rectangles side by side in a row until the row is full, then starts a new row below the tallest rectangle of the row.|
 |Label layer|The root node of all label meshes on the 3D page. The language toggle rebuilds its children, and the Labels checkbox enables or disables it.|
+|Clan ID texture|A texture with one byte for each map cell: the clan ID. The terrain shader reads it with texelFetch to tint clan cells and find clan borders.|
+|Clan palette|The fill and border colors of each clan ID, as RGBA uniform arrays of the terrain shader. Alpha 0 means no color (no clan).|
+|Border band|The strip of a clan cell, next to an edge or corner where the next cell has a different clan, that gets the clan border color.|

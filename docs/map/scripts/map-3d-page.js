@@ -2,6 +2,7 @@
  * Entry module for the 3D world map page (docs/map/world_map_3d.html).
  * It starts the Babylon.js engine and the render loop.
  */
+import { createClanLayer } from "./clan-regions.js";
 import { createLabelLayer } from "./label-meshes.js";
 import { bindLanguageToggle, bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
@@ -71,12 +72,12 @@ async function buildTerrain(scene, model, options) {
  * @param {{chunks: BABYLON.Mesh[], palette: object}} terrain Terrain objects from buildTerrain.
  * @param {{textureSize: number}} options Page options.
  * @param {(text: string) => void} report Writes one status line.
- * @returns {Promise<void>}
+ * @returns {Promise<BABYLON.ShaderMaterial|null>} Terrain material, or null when the engine has no WebGL2.
  */
 async function applyTextures(scene, model, terrain, options, report) {
   if (!supportsTerrainShader(scene.getEngine())) {
     report("Textures: WebGL2 is not available, so the terrain uses flat colors.");
-    return;
+    return null;
   }
   const started = performance.now();
   const arrays = await loadTextureArrays(scene, TEXTURE_SETS, {
@@ -86,6 +87,7 @@ async function applyTextures(scene, model, terrain, options, report) {
   const material = createTerrainMaterial(scene, model, arrays, terrain.palette);
   terrain.chunks.forEach((chunk) => (chunk.material = material));
   report(`Textures: ${TEXTURE_SETS.length} sets at ${options.textureSize} px in ${Math.round(performance.now() - started)} ms.`);
+  return material;
 }
 
 /**
@@ -116,13 +118,15 @@ async function start() {
   const { settlements, resources } = await createMarkerMeshes(scene, terrain.field, options);
   const labels = createLabelLayer(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
-  bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources, labels: [labels.root] });
+  const clans = createClanLayer();
+  bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources, labels: [labels.root], clans: supportsTerrainShader(engine) ? [clans] : [] });
   bindLanguageToggle(layerPanel.parentElement, labels.show);
   const count = (meshes) => meshes.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
   const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${count(trees)} in ${trees.length} meshes. Ports: ${count(ports)}. Markers: ${count(settlements)} settlements, ${count(resources)} resources. Labels: ${labels.count()}.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");
-  await applyTextures(scene, model, terrain, options, report);
+  const material = await applyTextures(scene, model, terrain, options, report);
+  if (material) clans.attach(material);
   console.info(status.textContent);
 }
 
