@@ -64,34 +64,49 @@ export function iconAtlasLayout(keys) {
 }
 
 /**
- * Builds the billboard quads of one marker layer, in one list for each chunk.
+ * Builds billboard quads, in one list for each chunk.
  * The anchor is on the surface (or the bridge deck over water), at the cell center.
+ * @param {import("./terrain-height.js").HeightField} field Height field.
+ * @param {Array<{x: number, y: number, lift: number, rect: {u0: number, v0: number, u1: number, v1: number}, corners: number[], shape: number[]}>} quads Quads at cell columns and rows. Corners are [left, bottom, right, top] in cell units, and shape is [growth, maximum distance].
+ * @param {number} chunkCells Cells along each chunk edge.
+ * @returns {Map<number, {chunk: number, count: number, positions: number[], uvs: number[], corners: number[], shapes: number[], indices: number[]}>} Geometry by chunk index.
+ */
+export function billboardGeometry(field, quads, chunkCells) {
+  const groups = new Map();
+  quads.forEach((quad) => {
+    const [x, y] = [quad.x + 0.5, quad.y + 0.5];
+    const chunk = chunkIndexAt(field.model.columns, chunkCells, x, y);
+    if (!groups.has(chunk)) groups.set(chunk, { chunk, count: 0, positions: [], uvs: [], corners: [], shapes: [], indices: [] });
+    const group = groups.get(chunk);
+    const first = group.count * 4;
+    const anchor = [x, Math.max(field.sample(x, y), BRIDGE_DECK) + quad.lift, field.model.rows - y];
+    const [left, bottom, right, top] = quad.corners;
+    const { u0, v0, u1, v1 } = quad.rect;
+    group.positions.push(...anchor, ...anchor, ...anchor, ...anchor);
+    group.uvs.push(u0, v0, u1, v0, u1, v1, u0, v1);
+    group.corners.push(left, bottom, right, bottom, right, top, left, top);
+    group.shapes.push(...quad.shape, ...quad.shape, ...quad.shape, ...quad.shape);
+    group.indices.push(first, first + 2, first + 1, first, first + 3, first + 2);
+    group.count += 1;
+  });
+  return groups;
+}
+
+/**
+ * Builds the billboard quads of one marker layer, in one list for each chunk.
  * @param {import("./terrain-height.js").HeightField} field Height field.
  * @param {ReturnType<typeof settlementMarkers> | ReturnType<typeof resourceMarkers>} markers Markers of one layer.
  * @param {ReturnType<typeof iconAtlasLayout>} layout Atlas layout with a cell for each marker key.
  * @param {{size: number, minAngle: number, lift: number}} style Marker style.
  * @param {number} chunkCells Cells along each chunk edge.
- * @returns {Map<number, {chunk: number, count: number, positions: number[], uvs: number[], corners: number[], shapes: number[], indices: number[]}>} Geometry by chunk index.
+ * @returns {ReturnType<typeof billboardGeometry>} Geometry by chunk index.
  */
 export function markerGeometry(field, markers, layout, style, chunkCells) {
-  const groups = new Map();
   const half = style.size / 2;
-  markers.forEach((marker) => {
+  const quads = markers.map((marker) => {
     const rect = layout.rects.get(marker.key);
     if (!rect) throw new TypeError(`The atlas has no cell for the marker key ${marker.key}.`);
-    const [x, y] = [marker.x + 0.5, marker.y + 0.5];
-    const chunk = chunkIndexAt(field.model.columns, chunkCells, x, y);
-    if (!groups.has(chunk)) groups.set(chunk, { chunk, count: 0, positions: [], uvs: [], corners: [], shapes: [], indices: [] });
-    const group = groups.get(chunk);
-    const first = group.count * 4;
-    const anchor = [x, Math.max(field.sample(x, y), BRIDGE_DECK) + style.lift, field.model.rows - y];
-    group.positions.push(...anchor, ...anchor, ...anchor, ...anchor);
-    group.uvs.push(rect.u0, rect.v0, rect.u1, rect.v0, rect.u1, rect.v1, rect.u0, rect.v1);
-    group.corners.push(-half, 0, half, 0, half, style.size, -half, style.size);
-    const shape = [style.minAngle / style.size, 0];
-    group.shapes.push(...shape, ...shape, ...shape, ...shape);
-    group.indices.push(first, first + 2, first + 1, first, first + 3, first + 2);
-    group.count += 1;
+    return { x: marker.x, y: marker.y, lift: style.lift, rect, corners: [-half, 0, half, style.size], shape: [style.minAngle / style.size, 0] };
   });
-  return groups;
+  return billboardGeometry(field, quads, chunkCells);
 }

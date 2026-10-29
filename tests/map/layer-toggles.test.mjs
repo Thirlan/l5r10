@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { bindLayerToggles } from "../../docs/map/scripts/layer-toggles.js";
+import { bindLanguageToggle, bindLayerToggles } from "../../docs/map/scripts/layer-toggles.js";
 
 function fakeInput(layer, checked) {
   const listeners = [];
@@ -56,4 +56,25 @@ test("a checkbox without meshes is disabled", () => {
   // Assertion
   assert.equal(input.disabled, true);
   assert.throws(() => bindLayerToggles(null, {}), TypeError);
+});
+
+test("the settlement language radio buttons send the selected language", () => {
+  // Setup
+  const radios = ["english", "rokugani"].map((value) => {
+    const listeners = [];
+    return { value, checked: value === "english", addEventListener: (type, listener) => listeners.push(listener), listeners };
+  });
+  const panel = { querySelectorAll: (selector) => (selector === 'input[name="settlementLanguage"]' ? radios : []) };
+  const languages = [];
+
+  // Execution
+  const bound = bindLanguageToggle(panel, (language) => languages.push(language));
+  radios[0].checked = false;
+  radios[1].checked = true;
+  radios.forEach((radio) => radio.listeners.forEach((listener) => listener()));
+
+  // Assertion
+  assert.equal(bound, 2);
+  assert.deepEqual(languages, ["rokugani"]);
+  assert.throws(() => bindLanguageToggle(panel, "english"), TypeError);
 });

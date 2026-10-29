@@ -2,7 +2,8 @@
  * Entry module for the 3D world map page (docs/map/world_map_3d.html).
  * It starts the Babylon.js engine and the render loop.
  */
-import { bindLayerToggles } from "./layer-toggles.js";
+import { createLabelLayer } from "./label-meshes.js";
+import { bindLanguageToggle, bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
 import { createMarkerMeshes } from "./marker-meshes.js";
 import { createMapScene } from "./map-3d-scene.js";
@@ -113,10 +114,12 @@ async function start() {
   const trees = createTreeMeshes(scene, terrain.field, options);
   const ports = createPortMeshes(scene, terrain.field, options);
   const { settlements, resources } = await createMarkerMeshes(scene, terrain.field, options);
+  const labels = createLabelLayer(scene, terrain.field, options);
   createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
-  bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources });
+  bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources, labels: [labels.root] });
+  bindLanguageToggle(layerPanel.parentElement, labels.show);
   const count = (meshes) => meshes.reduce((sum, mesh) => sum + mesh.metadata.count, 0);
-  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${count(trees)} in ${trees.length} meshes. Ports: ${count(ports)}.`;
+  const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells. Roads: ${roads.length} meshes. Trees: ${count(trees)} in ${trees.length} meshes. Ports: ${count(ports)}. Markers: ${count(settlements)} settlements, ${count(resources)} resources. Labels: ${labels.count()}.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");
   await applyTextures(scene, model, terrain, options, report);

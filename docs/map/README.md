@@ -191,3 +191,15 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
   - The quad moves toward the camera along the view ray, so it does not go into nearby hills. Its screen shape does not change.
   - Transparent pixels are discarded, so the markers need no sorting.
 - The Settlements and Resources checkboxes show or hide each layer.
+
+### Labels
+
+- `scripts/label-layout.js` makes one label for each named settlement (name and type) and each map text cell.
+  The text and the font sizes are the same as on the 2D map.
+- `scripts/label-meshes.js` draws all labels into one atlas canvas, in the 2D style (bold Arial, black fill, white outline).
+  The labels use the marker billboard material and one mesh for each chunk.
+- A settlement label is above its marker and grows with it, so they do not overlap.
+  It shows only near the camera. Larger settlements show their labels from farther away.
+- Map labels show at all distances.
+- The Settlement Names radio buttons rebuild the labels in English or Rokugani, as on the 2D map.
+- The Labels checkbox shows or hides all labels.

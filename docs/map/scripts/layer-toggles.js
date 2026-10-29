@@ -24,3 +24,19 @@ export function bindLayerToggles(panel, groups) {
   });
   return inputs.map((input) => input.dataset.mapLayer);
 }
+
+/**
+ * Connects the settlement language radio buttons (name="settlementLanguage") to a callback, as on the 2D map.
+ * @param {ParentNode} panel Element that holds the radio buttons.
+ * @param {(language: string) => void} onChange Called with the value of the selected radio button.
+ * @returns {number} Number of connected radio buttons.
+ */
+export function bindLanguageToggle(panel, onChange) {
+  // Validation
+  if (typeof panel?.querySelectorAll !== "function" || typeof onChange !== "function") throw new TypeError("bindLanguageToggle needs a panel element and a callback.");
+
+  // Computation
+  const inputs = [...panel.querySelectorAll('input[name="settlementLanguage"]')];
+  inputs.forEach((input) => input.addEventListener("change", () => input.checked && onChange(input.value)));
+  return inputs.length;
+}

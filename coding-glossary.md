@@ -37,3 +37,6 @@ Glossary for coding terms used in this project
 |Billboard quad|A quad that the vertex shader turns to face the camera. All 4 vertices have the anchor as position and a corner offset in view space.|
 |Minimum angular size|The smallest angle that a billboard fills on the screen. Far billboards grow, so they stay legible.|
 |Camera pull|The distance that the billboard shader moves a quad toward the camera along the view ray, so nearby terrain does not cover it.|
+|Label atlas|One canvas texture with each label drawn once. Labels have different widths, so they go into shelves (rows) of the atlas.|
+|Shelf packing|Puts rectangles side by side in a row until the row is full, then starts a new row below the tallest rectangle of the row.|
+|Label layer|The root node of all label meshes on the 3D page. The language toggle rebuilds its children, and the Labels checkbox enables or disables it.|
