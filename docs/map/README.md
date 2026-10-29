@@ -72,3 +72,63 @@ The terrain is one continuous surface. It is made from chunk meshes that use one
 | Query option | Effect |
 | --- | --- |
 | `?chunk=16` | Uses chunks of 16 × 16 cells. Use it to compare the chunk sizes. |
+| `?textureSize=256` | Decodes the texture layers at 256, 512 (default), or 1024 pixels. |
+| `?water=simple` | Uses a plain see-through water material instead of the WaterMaterial. |
+
+## Terrain textures (PR 4)
+
+### Texture sets
+
+`textures/` holds raw 1k PBR sets (diffuse JPG, displacement PNG, OpenGL normal EXR, roughness EXR or JPG).
+`scripts/surface-layers.js` gives each set one layer index. Each climate gives a set for each role:
+
+| Climate | Flat | Hills | Mountains, cliffs, and steep slopes | Snow on mountain tops |
+| --- | --- | --- | --- | --- |
+| Temperate | grass_ground | rocky_terrain_02 | marble_cliff_05 | snow_02 |
+| Polar | default | default | marble_rock_03 | snow_02 |
+| Tropical | leafy_grass | default | aerial_rocks_02 | — |
+| Desert | sand_01 | marble_cliff_02 | rock_06 | — |
+| Waste | mud_cracked_dry_riverbed_002 | rocks_ground_05 | rock_boulder_dry | — |
+| Shadowland | brown_mud_03 | default | dark_rock | — |
+
+- The default set is moon_dusted_01. Wetlands and every role without a set use it.
+- road_damaged (footpaths) and pavement_04 (roads) are in the same arrays, for PR 5.
+- brown_mud_03 has no roughness map. Its roughness is a constant.
+
+### Decoding
+
+- `scripts/texture-arrays.js` decodes the sets in a pool of module workers (`scripts/pbr-layer-worker.js`).
+- The EXR files use DWAA compression, which Babylon.js cannot read.
+  The workers decode them with the three.js `EXRLoader` from jsDelivr (version pinned in `package.json`).
+- The workers pack two RGBA texture arrays with mipmaps:
+  albedo (diffuse RGB + displacement) and shading (normal X, normal Y, roughness).
+- The map shows the vertex colors until the arrays are ready.
+
+### Comparison of the texturing approaches
+
+| Approach | Result |
+| --- | --- |
+| `TerrainMaterial` with a mix map | Rejected. It has 3 diffuse slots. The map needs 18 sets, and climate borders go through the chunks. |
+| One generated map texture (atlas) | Rejected. At 16 px for each cell, the 135 × 196 map is 2160 × 3136 px and blurs when you zoom in. A sharper atlas needs too much memory. |
+| Cell ID texture + `Texture2DArray` (chosen) | One shared GLSL `ShaderMaterial`. Any climate and terrain pair can use any layer. The cost is WebGL2. |
+
+The chosen shader (`scripts/terrain-material.js`):
+
+- Reads the cell ID texture with `texelFetch` (NEAREST). It blends the colors of the 4 nearest cells, never the layer indices.
+- Selects the steep-slope layer when `dot(normal, up)` is less than about 0.62–0.8 (the cliff rule).
+- Covers mountain cells with snow above the snow line of the climate.
+- Uses the displacement to make height-based blends between layers.
+- Uses world-space UVs, so the texture does not change at chunk borders.
+- Is authored as GLSL text, not as a Node Material Editor graph, so that it can be reviewed.
+- Supports clip planes, so that the water reflection pass can render it.
+
+Without WebGL2, the page keeps the vertex colors and shows a message.
+
+### Water
+
+- `scripts/water-surface.js` puts one plane at `WATER_LEVEL` (just below 0) over the full map.
+- The terrain is under the plane only in lakes, seas, and river channels, so the plane shows only there.
+- The default material is the Babylon.js `WaterMaterial` from `babylonjs-materials`. It reflects and refracts the terrain chunks.
+  The bump texture is procedural, so it needs no image file.
+- The terrain shader tints the ground under the water with the water class color (lake and river, coastal, ocean).
+  The refraction shows this tint, so coastal water and ocean look different.

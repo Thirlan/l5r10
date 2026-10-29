@@ -10,6 +10,7 @@ import { HeightField } from "./terrain-height.js";
 import { createTerrainMaterial, supportsTerrainShader } from "./terrain-material.js";
 import { TEXTURE_SETS } from "./surface-layers.js";
 import { DEFAULT_TEXTURE_SIZE, TEXTURE_SIZES, loadTextureArrays } from "./texture-arrays.js";
+import { createWaterSurface } from "./water-surface.js";
 
 const canvas = document.getElementById("map3dCanvas");
 const status = document.getElementById("map3dStatus");
@@ -24,8 +25,8 @@ function readMapSize(element) {
 }
 
 /**
- * Reads the page options from the URL, for example "?chunk=16&textureSize=1024".
- * @returns {{chunkCells: number, textureSize: number}} Page options.
+ * Reads the page options from the URL, for example "?chunk=16&textureSize=1024&water=simple".
+ * @returns {{chunkCells: number, textureSize: number, simpleWater: boolean}} Page options.
  */
 function readOptions() {
   const parameters = new URLSearchParams(window.location.search);
@@ -34,6 +35,7 @@ function readOptions() {
   return {
     chunkCells: Number.isInteger(chunkCells) && chunkCells > 0 ? chunkCells : DEFAULT_CHUNK_CELLS,
     textureSize: TEXTURE_SIZES.includes(textureSize) ? textureSize : DEFAULT_TEXTURE_SIZE,
+    simpleWater: parameters.get("water") === "simple",
   };
 }
 
@@ -101,6 +103,7 @@ async function start() {
   const model = await loadMapModel(canvas.dataset.mapData, size);
   status.textContent = "Building the terrain…";
   const terrain = await buildTerrain(scene, model, options);
+  createWaterSurface(scene, size, terrain.chunks, { simple: options.simpleWater });
   const summary = `${describeMapModel(model)}\nTerrain: ${terrain.chunks.length} chunks of ${options.chunkCells} × ${options.chunkCells} cells.`;
   const report = (line) => (status.textContent = `${summary}\n${line}`);
   report("Textures: loading…");

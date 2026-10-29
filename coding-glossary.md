@@ -19,3 +19,5 @@ Glossary for coding terms used in this project
 |Albedo layer|One layer of the albedo texture array: the diffuse color in RGB and the displacement in alpha.|
 |Shading layer|One layer of the shading texture array: the normal X and Y in red and green, and the roughness in blue.|
 |Pixel source|An object {data, channels, scale} that gives pixel values from 0 to 1 for the PBR texture helpers.|
+|Water class|The kind of water under a cell for the 3D terrain shader: lake (also rivers), coastal, or ocean. It selects the tint of the ground under the water.|
+|Water plane|One flat mesh at the water level over the full 3D map. It uses the WaterMaterial, and shows only where the terrain is below it.|
