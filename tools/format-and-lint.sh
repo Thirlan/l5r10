@@ -12,10 +12,11 @@ html_targets=(
   "docs/rules/**/*.html"
   "docs/shadowlands/**/*.html"
   "docs/world/**/*.html"
+  "docs/map/**/*.html"
   "docs/index.html"
   "docs/navbar.html"
 )
-js_targets=("docs/scripts/**/*.js")
+js_targets=("docs/scripts/**/*.js" "docs/map/scripts/**/*.js")
 
 status=0
 

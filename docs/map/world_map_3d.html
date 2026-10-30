@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>3D World Map</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/world-map-grid.css" />
+    <link rel="stylesheet" href="css/map-3d.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+
+    <main>
+      <h1>3D World Map</h1>
+      <p class="hint">Proof of concept. Drag to orbit, right-drag to pan, and use the mouse wheel to zoom. Point at a cell to inspect it, and click to pin it.</p>
+
+      <div class="zoom-controls">
+        <button type="button" id="map3dReset">Reset view</button>
+      </div>
+
+      <div class="map-grid-container map-3d-container">
+        <canvas id="map3dCanvas" class="map-3d-canvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json"></canvas>
+        <div id="map3dStatus" class="map-3d-status" role="status"></div>
+        <dl id="map3dInspector" class="map-3d-inspector" aria-live="polite"></dl>
+        <pre id="map3dStats" class="map-3d-stats" hidden></pre>
+      </div>
+
+      <div class="viewer-controls map-3d-controls">
+        <div class="viewer-panel">
+          <fieldset id="map3dLayers" class="layer-picker" aria-describedby="map3dLayerHelp">
+            <legend class="layer-picker__title">Map Layers</legend>
+            <p id="map3dLayerHelp" class="hint layer-picker__help">Terrain, water, and rivers are always shown. Ports are placeholders. Clans need WebGL2.</p>
+            <div class="radio-row">
+              <label class="radio"><input type="checkbox" checked data-map-layer="roads" /> Roads</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="trees" /> Trees</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="ports" /> Ports</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="settlements" /> Settlements</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="resources" /> Resources</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="labels" /> Labels</label>
+              <label class="radio"><input type="checkbox" checked data-map-layer="clans" /> Clans</label>
+            </div>
+          </fieldset>
+
+          <h3>Settlement Names</h3>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="settlementLanguage" value="english" checked /> English</label>
+            <label class="radio"><input type="radio" name="settlementLanguage" value="rokugani" /> Rokugani</label>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs@9.33.0/babylon.js" integrity="sha384-PNcORUXxEoQAO+adh0wh1wG85aFNLal7ZMZ7jFJV3RwzA4f2Opf/iOCgOYS60tGv" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs-materials@9.33.0/babylonjs.materials.min.js" integrity="sha384-giFgB2IOgzwzuOI9TWTSKiUIjM1HTO/lviBykRfEaZtkkkP4EhKWW0g+jsfbpC8s" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/map-3d-page.js"></script>
+  </body>
+</html>

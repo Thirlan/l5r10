@@ -1,0 +1,76 @@
+/* Styles for the 3D world map page. The page also uses world-map-grid.css. */
+
+.map-3d-container {
+  overflow: hidden;
+}
+
+.map-3d-canvas {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  outline: none;
+  touch-action: none;
+}
+
+.map-3d-status {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  max-width: calc(100% - 16px);
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font: 12px/1.4 monospace;
+  white-space: pre-line;
+  pointer-events: none;
+}
+
+.map-3d-status:empty {
+  display: none;
+}
+
+.map-3d-inspector {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 8px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font: 12px/1.4 monospace;
+  pointer-events: none;
+}
+
+.map-3d-inspector:empty {
+  display: none;
+}
+
+.map-3d-inspector dt {
+  font-weight: bold;
+}
+
+.map-3d-inspector dd {
+  margin: 0;
+}
+
+.map-3d-stats {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font: 12px/1.4 monospace;
+  pointer-events: none;
+}
+
+.viewer-controls.map-3d-controls {
+  grid-template-columns: 1fr;
+}
