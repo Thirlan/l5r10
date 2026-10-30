@@ -261,12 +261,6 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 
 ## Performance and findings (PR 8)
 
-![The full map from the Reset view position](../img/map-3d/whole-map.webp)
-
-![An oblique view toward the north of the map](../img/map-3d/oblique.webp)
-
-![A zoomed view with settlement labels, roads, trees, and a river](../img/map-3d/zoomed.webp)
-
 ### Frame statistics
 
 - The `?stats=1` option shows an overlay at the bottom left (`scripts/frame-stats.js`):
