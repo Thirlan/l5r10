@@ -2,26 +2,9 @@
 Historic Effects on Character Options
 Because this is the 10th century in the setting, certain character options are different.
 
-- Togashi Tattooed Order (pages 115-116): The Crane tattoo, Hawk tattoo, Ki-Rin tattoo, Scorpion Tattoo and Wolf tattoo
-can be activated a number of times per day equal to the ise zumi's school rank. All the tattoos are so large that they can
-never be used with armor.
-
 - Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
 the mount itself actually spends on movement. Further clarification, a rider can still use the Full Defense stance while
 benefiting from a mount’s full movement potential.
-
-New Rule: The Weight of Glory/Infamy
-Whenever a character makes a Social Skill Roll to influence someone, he may add half his Glory or Infamy Rank to the
-total of the roll (rounded down). This only works on people who recognize him, respect how he earned his fame, and
-would realistically care about it in the situation where the roll is made. The GM is the final arbiter.
-
-New Maneuvers
-- Brandish Ofuda (0 Raises): Ofuda are small holy talismans made to war against supernatural threats and some of them
-even work! If you have a genuine ofuda and are in the Defense or Full Defense stance, you may choose to sacrifice the
-armor TN bonuses you normally gain from the stance to brandish the ofuda while saying a prayer. The TN of harmful
-shugenja or maho-tsukai spells directed at you or allies within 20 feet is increased by half your Honor Rank (rounded
-down) if you are in Defense stance or your full Honor Rank if you are in Full Defense stance. This can also work on the
-supernatural powers of Shadowlands creatures but not gaijin magic.
 
 New Combat Conditional Effects
 - Impure: A shugenja who has disappointed the spirits is considered impure until he earns their forgiveness. He cannot
