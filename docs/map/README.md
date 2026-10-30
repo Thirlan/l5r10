@@ -77,6 +77,7 @@ The terrain is one continuous surface. It is made from chunk meshes that use one
 | `?chunk=16` | Uses chunks of 16 × 16 cells. Use it to compare the chunk sizes. |
 | `?textureSize=256` | Decodes the texture layers at 256, 512 (default), or 1024 pixels. |
 | `?water=simple` | Uses a plain see-through water material instead of the WaterMaterial. |
+| `?stats=1` | Shows the frame statistics overlay (see PR 8). |
 
 ## Terrain textures (PR 4)
 
@@ -243,3 +244,95 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 | Roads, trees, ports | Checkbox | Infrastructure and vegetation |
 | Settlements, resources, labels, clans | Checkbox | Labels also have the language radio buttons |
 | Rivers | None | Known gap. The river channels are carved into the terrain and filled by the water plane. A toggle needs a terrain rebuild. |
+
+## Performance and findings (PR 8)
+
+![The full map from the Reset view position](../img/map-3d/whole-map.webp)
+
+![An oblique view toward the north of the map](../img/map-3d/oblique.webp)
+
+![A zoomed view with settlement labels, roads, trees, and a river](../img/map-3d/zoomed.webp)
+
+### Frame statistics
+
+- The `?stats=1` option shows an overlay at the bottom left (`scripts/frame-stats.js`):
+  frame rate, CPU frame time, draw calls, active meshes, triangles, and an estimate of the texture memory.
+- The draw calls and triangles include the water reflection and refraction passes.
+- The CPU frame time is the JavaScript time of one frame. It does not include the GPU time.
+
+### Measurements
+
+Setup: headless Chromium with SwiftShader (software WebGL2), 2 CPU cores, canvas 1200 × 975 pixels, `textureSize` 512.
+Each value is one frame after 3 frames at the view.
+
+| Chunk cells | Water | View | Draw calls | Active meshes | Triangles | CPU frame time |
+| --- | --- | --- | --- | --- | --- | --- |
+| 32 × 32 | WaterMaterial | Full map (Reset view) | 343 | 189 of 189 | 3.62 M | 12.2 ms |
+| 32 × 32 | WaterMaterial | Oblique (radius 90, beta 1.2) | 307 | 153 of 189 | 3.39 M | 7.8 ms |
+| 32 × 32 | WaterMaterial | Zoomed (radius 20, beta 0.9) | 246 | 92 of 189 | 2.85 M | 8.6 ms |
+| 16 × 16 | WaterMaterial | Full map | 1048 | 576 of 576 | 3.62 M | 24.3 ms |
+| 16 × 16 | WaterMaterial | Oblique | 908 | 436 of 576 | 3.23 M | 28.5 ms |
+| 16 × 16 | WaterMaterial | Zoomed | 610 | 138 of 576 | 2.27 M | 13.0 ms |
+| 32 × 32 | `?water=simple` | Full map | 189 | 189 of 189 | 1.72 M | 6.6 ms |
+| 32 × 32 | `?water=simple` | Oblique | 153 | 153 of 189 | 1.49 M | 3.6 ms |
+| 32 × 32 | `?water=simple` | Zoomed | 92 | 92 of 189 | 0.95 M | 2.1 ms |
+
+Triangles in one pass of the full map:
+
+| Meshes | Triangles |
+| --- | --- |
+| Terrain chunks | 0.85 M |
+| Trees (thin instances) | 0.76 M |
+| Roads and footpaths | 0.10 M |
+| Markers and labels | less than 0.01 M |
+
+- The WaterMaterial renders the terrain and the roads 2 more times (reflection and refraction).
+  This adds 1.9 M triangles and about 150 draw calls.
+- The texture memory is about 106 MB at 512 px. The two terrain arrays are 50 MB of it. At 1024 px, they are 201 MB.
+- The 18 texture sets decode in about 50 s on this 2-core container. Most of the time is the EXR decoding.
+- SwiftShader renders on the CPU, so its frame rate (0.1–0.2 fps) does not show the speed on a GPU.
+  The draw calls, triangles, and memory do not change with the GPU.
+
+### Chunk size
+
+- 32 × 32 cells stays the default.
+- 16 × 16 cells makes about 3 times the draw calls and 1.5 to 3.7 times the CPU frame time.
+  It removes no triangles on the full map and only 20% on the zoomed view.
+- Per-chunk LOD is not added. The full-map view shows all chunks, and the terrain is only 0.85 M triangles.
+  The water passes and the trees cost more than the terrain detail.
+
+### What was reused and what was rebuilt
+
+| Reused from `docs/scripts/` | Rebuilt for 3D in `docs/map/scripts/` |
+| --- | --- |
+| Map data (`world-map-grid.json`) and the layer catalogs (`world-map-layers.js`) | Height field, terrain chunks, and the terrain shader |
+| Clan colors (`clan-colors.js`) | Clan regions in the terrain shader |
+| Settlement marker drawing, resource images, and label sizes | Billboard material, marker atlases, and label atlas |
+| River offsets (`world-map-img-river.js`) and water colors | River channels, water surface, roads, trees, and ports |
+
+### Known gaps
+
+- Rivers have no toggle (see the layer table above).
+- The map data has no port cells yet, so only the unit tests show the port meshes.
+- Labels can overlap on the full-map view. There is no label collision test.
+- The textures and the clan regions need WebGL2. Without it, the terrain uses flat colors.
+- The page loads Babylon.js and the EXR decoder from a CDN, and the first load decodes all EXR files.
+- There are no measurements on a GPU yet.
+
+### Recommendation
+
+Continue with the 3D map, as a second view next to the 2D map, not as a replacement.
+
+Evidence:
+
+- The 3D view shows relief, rivers, forests, clans, and names together. The 2D map cannot show the relief.
+- The full map is 343 draw calls and 3.6 M triangles with the WaterMaterial, or 189 draw calls and 1.7 M triangles with simple water.
+  This is a normal load for a desktop GPU. A laptop or phone GPU needs a test.
+- The 3D page reuses the map data and catalogs, so the 2D editor stays the one source of the map.
+
+Before more 3D work:
+
+1. Open `?stats=1` on a laptop with an integrated GPU. The goal is 30 fps or more on the full map.
+2. If it is slower, make simple water the default on small GPUs, or render the reflection with the terrain only at a lower size.
+3. Convert the PBR sets to compressed KTX2 textures. This cuts the 50 s decode and the texture memory.
+4. Add trees with a distance limit, then terrain LOD, only if the GPU measurements show the need.

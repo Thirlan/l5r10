@@ -4,6 +4,7 @@
  */
 import { bindCellInspector } from "./cell-inspector.js";
 import { createClanLayer } from "./clan-regions.js";
+import { bindFrameStats } from "./frame-stats.js";
 import { createLabelLayer } from "./label-meshes.js";
 import { bindLanguageToggle, bindLayerToggles } from "./layer-toggles.js";
 import { describeMapModel, loadMapModel } from "./map-data.js";
@@ -25,6 +26,7 @@ const status = document.getElementById("map3dStatus");
 const layerPanel = document.getElementById("map3dLayers");
 const resetButton = document.getElementById("map3dReset");
 const inspector = document.getElementById("map3dInspector");
+const statsOverlay = document.getElementById("map3dStats");
 
 /**
  * Reads the map size from the data attributes of the canvas.
@@ -36,8 +38,8 @@ function readMapSize(element) {
 }
 
 /**
- * Reads the page options from the URL, for example "?chunk=16&textureSize=1024&water=simple".
- * @returns {{chunkCells: number, textureSize: number, simpleWater: boolean}} Page options.
+ * Reads the page options from the URL, for example "?chunk=16&textureSize=1024&water=simple&stats=1".
+ * @returns {{chunkCells: number, textureSize: number, simpleWater: boolean, stats: boolean}} Page options.
  */
 function readOptions() {
   const parameters = new URLSearchParams(window.location.search);
@@ -47,6 +49,7 @@ function readOptions() {
     chunkCells: Number.isInteger(chunkCells) && chunkCells > 0 ? chunkCells : DEFAULT_CHUNK_CELLS,
     textureSize: TEXTURE_SIZES.includes(textureSize) ? textureSize : DEFAULT_TEXTURE_SIZE,
     simpleWater: parameters.get("water") === "simple",
+    stats: parameters.get("stats") === "1",
   };
 }
 
@@ -111,6 +114,7 @@ async function start() {
 
   engine.runRenderLoop(() => scene.render());
   new ResizeObserver(() => engine.resize()).observe(canvas);
+  if (options.stats) bindFrameStats(scene, statsOverlay);
 
   status.textContent = "Loading the map data…";
   const model = await loadMapModel(canvas.dataset.mapData, size);

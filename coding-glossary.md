@@ -47,3 +47,4 @@ Glossary for coding terms used in this project
 |Target clamp|Moves the orbit target back inside the map area before each frame, so a pan cannot move the map off the screen.|
 |Cell inspector|The overlay of the 3D page that shows the coordinates, height, and layer values of the cell under the pointer.|
 |Pinned cell|An inspected cell that stays in the cell inspector after a click, until the next click releases it.|
+|Frame statistics overlay|The overlay of the 3D page that the `?stats=1` option shows: frame rate, CPU frame time, draw calls, active meshes, triangles, and texture memory.|
