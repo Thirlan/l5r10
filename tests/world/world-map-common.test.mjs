@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapRenderer } from "../../docs/scripts/world/world-map-common.js";
+import { createMapHeader } from "../../docs/scripts/world/world-map-file.js";
 import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE, RESOURCE } from "../../docs/scripts/world/world-map-layers.js";
 import { getResourceLevelColor } from "../../docs/scripts/world/world-map-img-resource-level.js";
 import { getClanColors } from "../../docs/scripts/clan-colors.js";
@@ -95,6 +96,39 @@ test("map validation rejects unknown ordered level values", () => {
 
   // Assertion
   assert.throws(validate, /Invalid resourceLevel value/);
+});
+
+test("loading a map file replaces the header and the tiles, and sets the map size from maxX and maxY", () => {
+  // Setup
+  const renderer = createRenderer();
+  const header = createMapHeader({ columns: 3, rows: 2 });
+  const tiles = { "0,0": { terrain: TERRAIN.HILLS.id } };
+
+  // Execution
+  renderer.loadMapFile({ header, tiles });
+
+  // Assertion
+  assert.equal(renderer.mapHeader, header);
+  assert.equal(renderer.grid, tiles);
+  assert.deepEqual([renderer.mapWidth, renderer.mapHeight], [48, 32]);
+});
+
+test("loading a map file with an invalid tile keeps the current map", () => {
+  // Setup
+  const renderer = createRenderer();
+  const currentHeader = createMapHeader({ columns: 5, rows: 5 });
+  const currentGrid = { "0,0": {} };
+  Object.assign(renderer, { mapHeader: currentHeader, grid: currentGrid, mapWidth: 80, mapHeight: 80 });
+  const header = createMapHeader({ columns: 3, rows: 2 });
+
+  // Execution
+  const load = () => renderer.loadMapFile({ header, tiles: { "0,0": { terrain: "flat" } } });
+
+  // Assertion
+  assert.throws(load, /Invalid terrain value/);
+  assert.equal(renderer.mapHeader, currentHeader);
+  assert.equal(renderer.grid, currentGrid);
+  assert.deepEqual([renderer.mapWidth, renderer.mapHeight], [80, 80]);
 });
 
 test("absent overlay values do not produce a color", () => {

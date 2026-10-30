@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { CLIMATE, RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
-import { MapModel } from "../../docs/map/scripts/map-data.js";
+import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { chunkIndexAt, chunkRanges, chunkVertexData } from "../../docs/map/scripts/terrain-chunks.js";
 import { HeightField, RIVER_SEAL } from "../../docs/map/scripts/terrain-height.js";
 
@@ -98,8 +98,7 @@ test("chunkIndexAt gives the index of the chunk range that holds the position", 
 
 test("river channels stay carved and equal in both chunks where they cross a chunk border", () => {
   // Setup
-  const grid = JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)));
-  const field = new HeightField(new MapModel(grid, { columns: 135, rows: 196 }));
+  const field = new HeightField(createMapModel(JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)))));
   const chunkCells = 32;
   const ranges = chunkRanges(135, 196, chunkCells);
   const scale = field.subdivisions;

@@ -1,14 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapGrid } from "../../docs/scripts/world/world-map-grid.js";
+import { createMapHeader } from "../../docs/scripts/world/world-map-file.js";
 import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN } from "../../docs/scripts/world/world-map-layers.js";
 import { getClanColors } from "../../docs/scripts/clan-colors.js";
 
+const SAVED_DATE = new Date(2026, 9, 27);
+
 function createBuilder() {
   return Object.assign(Object.create(WorldMapGrid.prototype), {
-    grid: {}, currentLayer: "terrain", currentValue: null, brushSize: 1,
+    grid: {}, gridSize: 16, mapHeader: createMapHeader({ columns: 5, rows: 5 }, SAVED_DATE), currentLayer: "terrain", currentValue: null, brushSize: 1,
     cliffDirections: { 0: 0 }, riverDirections: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
-    draw() {}, getGridCell: () => ({ x: 0, y: 0 }),
+    applyZoom() {}, draw() {}, getGridCell: () => ({ x: 0, y: 0 }),
   });
 }
 
@@ -94,6 +97,59 @@ test("builder painting stores the numeric ordered level", () => {
   assert.equal(builder.grid["0,0"].resourceLevel, RESOURCE_LEVEL.VERY_HIGH.value);
 });
 
+test("builder painting ignores a click past maxX", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.getGridCell = () => ({ x: builder.mapHeader.maxX + 1, y: 0 });
+  builder.selectTool("terrain", TERRAIN.FLAT.id);
+
+  // Execution
+  builder.paintAt({});
+
+  // Assertion
+  assert.deepEqual(builder.grid, {});
+});
+
+test("builder painting ignores a click past maxY", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.getGridCell = () => ({ x: 0, y: builder.mapHeader.maxY + 1 });
+  builder.selectTool("terrain", TERRAIN.FLAT.id);
+
+  // Execution
+  builder.paintAt({});
+
+  // Assertion
+  assert.deepEqual(builder.grid, {});
+});
+
+test("a large brush at the bottom-right corner paints only tiles up to maxX and maxY", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.getGridCell = () => ({ x: builder.mapHeader.maxX, y: builder.mapHeader.maxY });
+  builder.brushSize = 3;
+  builder.selectTool("terrain", TERRAIN.FLAT.id);
+
+  // Execution
+  builder.paintAt({});
+
+  // Assertion
+  assert.deepEqual(Object.keys(builder.grid).sort(), ["3,3", "3,4", "4,3", "4,4"]);
+});
+
+test("a large brush at the top-left corner paints only tiles from 0", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.brushSize = 3;
+  builder.selectTool("terrain", TERRAIN.FLAT.id);
+
+  // Execution
+  builder.paintAt({});
+
+  // Assertion
+  assert.deepEqual(Object.keys(builder.grid).sort(), ["0,0", "0,1", "1,0", "1,1"]);
+});
+
 test("builder numeric export and import preserve cell data", () => {
   // Setup
   const builder = createBuilder();
@@ -108,20 +164,62 @@ test("builder numeric export and import preserve cell data", () => {
   assert.deepEqual(imported.grid, builder.grid);
 });
 
+test("builder export writes the map header with a new date, then the tiles", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.mapHeader = { ...builder.mapHeader, name: "Rokugan 900 IC", seed: 7, lastUpdated: "2020/01/01" };
+  builder.grid = { "0,0": { terrain: TERRAIN.FLAT.id } };
+
+  // Execution
+  const saved = JSON.parse(builder.saveToJSON(new Date(2026, 9, 28)));
+
+  // Assertion
+  assert.deepEqual(saved, { ...builder.mapHeader, lastUpdated: "2026/10/28", tiles: builder.grid });
+  assert.equal(Object.keys(saved).at(-1), "tiles");
+});
+
+test("builder import replaces the map header", () => {
+  // Setup
+  const builder = createBuilder();
+  builder.mapHeader = { ...builder.mapHeader, name: "Rokugan 900 IC", seed: 7 };
+  const imported = createBuilder();
+
+  // Execution
+  imported.loadFromJSON(builder.saveToJSON(SAVED_DATE));
+
+  // Assertion
+  assert.deepEqual(imported.mapHeader, { ...builder.mapHeader, lastUpdated: "2026/10/27" });
+});
+
 test("invalid builder imports report errors and retain the current map", (t) => {
   // Setup
   const builder = createBuilder();
   const original = { "0,0": { terrain: TERRAIN.FLAT.id } };
+  const originalHeader = builder.mapHeader;
   builder.grid = original;
   const logging = t.mock.method(console, "error", () => {});
+  const invalidFile = JSON.stringify({ ...originalHeader, name: "Other map", tiles: { "0,0": { terrain: "flat" } } });
 
   // Execution
-  const loaded = builder.loadFromJSON('{"0,0":{"terrain":"flat"}}');
+  const loaded = builder.loadFromJSON(invalidFile);
 
   // Assertion
   assert.equal(loaded, false);
   assert.equal(builder.grid, original);
+  assert.equal(builder.mapHeader, originalHeader);
   assert.equal(logging.mock.calls.length, 1);
+});
+
+test("builder imports of the old format without a header are rejected", (t) => {
+  // Setup
+  const builder = createBuilder();
+  t.mock.method(console, "error", () => {});
+
+  // Execution
+  const loaded = builder.loadFromJSON('{"0,0":{"terrain":1}}');
+
+  // Assertion
+  assert.equal(loaded, false);
 });
 
 test("builder clan boundaries use presentation border and fill colors", (t) => {

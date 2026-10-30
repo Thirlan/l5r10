@@ -39,7 +39,7 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 
 | File | Role | Reused how |
 | --- | --- | --- |
-| `docs/data/world-map-grid.json` | The map itself. Object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
+| `docs/data/world-map-grid.json` | The map itself. A header (`name`, `summary`, `seed`, `maxX`, `maxY`, `version`, `lastUpdated`) and a `tiles` object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
 | [world-map-layers.js](../docs/scripts/world/world-map-layers.js) | Immutable layer definitions and identity or ordered-value catalogs. | Resolve numeric cell values to metadata. Derive elevation from terrain constants. |
 | [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js) | Separate climate colors, water colors, transparent terrain images, and vegetation images. | Reference for surface appearance, not a per-cell mesh material. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Clan border and fill palettes. | Resolve territory colors from clan metadata. |
@@ -55,7 +55,7 @@ Key facts that make 3D natural:
 - **The grid is dense and regular**, so it maps cleanly onto a Babylon.js ground
   mesh with heights and surface positions derived from `(x, y)`.
 - **Every coordinate exists; only its *properties* are optional.** All
-  `135 × 196` keys are present in `world-map-grid.json`, but an individual cell
+  `135 × 196` keys are present in the `tiles` of `world-map-grid.json`, but an individual cell
   may omit any layer. Missing values resolve to defaults, matching
   `world-map-common.js`: `terrain = 0 (flat)`, `climate = 0 (temperate)`,
   `vegetation = 0 (none)`. A cell without a `terrain` key is **flat land, not
@@ -318,7 +318,7 @@ plan (note them as follow-ups if 3D is greenlit):
   POC authors it as GLSL in source so it can be reviewed as text. Note that this
   technique is usually described for **procedurally generated** worlds, where a
   noise function emits the climate/elevation data maps. Our map is hand-authored,
-  so there is nothing to generate: `world-map-grid.json` *is* the data map, and
+  so there is nothing to generate: the `tiles` of `world-map-grid.json` *are* the data map, and
   only the texturing half of that technique transfers.
 - Babylon's [Dynamic Terrain extension](https://github.com/BabylonJS/Extensions/blob/master/DynamicTerrain/documentation/dynamicTerrainDocumentation.md)
   is a camera-following mesh that morphs over a larger data map. It is aimed

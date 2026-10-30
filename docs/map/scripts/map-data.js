@@ -1,8 +1,9 @@
 /**
  * Map data for the 3D world map.
- * It loads the saved grid of the 2D map and resolves the saved numbers with the canonical catalogs.
+ * It loads the saved map file of the 2D map and resolves the saved numbers with the canonical catalogs.
  * Missing layers use the same defaults as the 2D map: flat, temperate, and no vegetation.
  */
+import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/world-map-file.js";
 import { CLAN, CLIMATE, INFRASTRUCTURE, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/world-map-layers.js";
 
 /** Saved cell fields that hold one catalog ID, with their layer and default value. */
@@ -45,17 +46,20 @@ export class MapModel {
   #saved;
 
   /**
-   * @param {Object<string, Object>} grid Saved cells keyed by "x,y".
+   * @param {Object<string, Object>} grid Saved cells keyed by "x,y" (the tiles of the map file).
    * @param {{columns: number, rows: number}} size Map size in cells.
+   * @param {import("../../scripts/world/world-map-file.js").MapHeader} [header] Header of the map file. A new map header is the default.
    */
-  constructor(grid, size) {
+  constructor(grid, size, header) {
     // Validation
     if (!grid || typeof grid !== "object" || Array.isArray(grid)) throw new TypeError("The map grid must be an object keyed by 'x,y'.");
     if (!size || !Number.isInteger(size.columns) || !Number.isInteger(size.rows) || size.columns <= 0 || size.rows <= 0) {
       throw new TypeError("The map size needs positive integer columns and rows.");
     }
+    if (header !== undefined && (!header || typeof header !== "object" || Array.isArray(header))) throw new TypeError("The map header must be an object.");
 
     // Computation
+    this.header = Object.freeze({ ...(header ?? createMapHeader(size)) });
     this.columns = size.columns;
     this.rows = size.rows;
     const count = this.columns * this.rows;
@@ -191,16 +195,25 @@ export class MapModel {
 }
 
 /**
- * Loads the saved grid and creates a map model.
+ * Creates a map model from the parsed JSON of a map file. The size of the model comes from maxX and maxY in the file header.
+ * @param {unknown} data The parsed JSON of world-map-grid.json.
+ * @returns {MapModel} The map model.
+ */
+export function createMapModel(data) {
+  const { header, tiles } = readMapFile(data);
+  return new MapModel(tiles, getMapSize(header), header);
+}
+
+/**
+ * Loads the saved map file and creates a map model.
  * @param {string} url URL of world-map-grid.json.
- * @param {{columns: number, rows: number}} size Map size in cells.
  * @returns {Promise<MapModel>} The loaded map model.
  */
-export async function loadMapModel(url, size) {
-  if (typeof url !== "string" || url.length === 0) throw new TypeError("loadMapModel needs the URL of the map grid.");
+export async function loadMapModel(url) {
+  if (typeof url !== "string" || url.length === 0) throw new TypeError("loadMapModel needs the URL of the map file.");
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`Could not load the map grid (${response.status}).`);
-  return new MapModel(await response.json(), size);
+  if (!response.ok) throw new Error(`Could not load the map file (${response.status}).`);
+  return createMapModel(await response.json());
 }
 
 /**
@@ -211,6 +224,7 @@ export async function loadMapModel(url, size) {
 export function describeMapModel(model) {
   if (!(model instanceof MapModel)) throw new TypeError("describeMapModel needs a MapModel.");
   const counts = model.counts();
+  const { name, version, lastUpdated, seed } = model.header;
   const { minX, maxX, minY, maxY } = model.landBounds;
-  return [`Loaded ${counts.cells} cells (${model.columns} × ${model.rows}), ${counts.painted} painted, ${counts.outside} outside, ${counts.unknown} unknown values.`, `Land bounds x ${minX}–${maxX}, y ${minY}–${maxY}. Water ${counts.water}, cliffs ${counts.cliffs}, rivers ${counts.rivers}.`, `Vegetation ${counts.vegetation}, infrastructure ${counts.infrastructure}, settlements ${counts.settlements}, resources ${counts.resources}, labels ${counts.labels}.`].join("\n");
+  return [`${name}, version ${version}, updated ${lastUpdated}, seed ${seed}.`, `Loaded ${counts.cells} cells (${model.columns} × ${model.rows}), ${counts.painted} painted, ${counts.outside} outside, ${counts.unknown} unknown values.`, `Land bounds x ${minX}–${maxX}, y ${minY}–${maxY}. Water ${counts.water}, cliffs ${counts.cliffs}, rivers ${counts.rivers}.`, `Vegetation ${counts.vegetation}, infrastructure ${counts.infrastructure}, settlements ${counts.settlements}, resources ${counts.resources}, labels ${counts.labels}.`].join("\n");
 }

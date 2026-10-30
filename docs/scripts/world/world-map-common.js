@@ -1,4 +1,5 @@
 import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-layers.js";
+import { createMapHeader, getMapSize } from "./world-map-file.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "../clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
@@ -29,14 +30,18 @@ export class WorldMapRenderer {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext("2d");
     this.gridSize = Number.isFinite(gridSize) && gridSize > 0 ? gridSize : MAP_DEFAULT_GRID_SIZE;
-    this.mapWidth = Number(this.canvas.dataset.mapColumns) * this.gridSize;
-    this.mapHeight = Number(this.canvas.dataset.mapRows) * this.gridSize;
+    const columns = Number(this.canvas.dataset.mapColumns);
+    const rows = Number(this.canvas.dataset.mapRows);
+    this.mapWidth = columns * this.gridSize;
+    this.mapHeight = rows * this.gridSize;
     this.zoom = zoom;
     this.minZoom = 0.55;
     this.maxZoom = 4;
 
     this.drawOrder = [LAYERS.TERRAIN.id, LAYERS.VEGETATION.id, LAYERS.RIVER.id, LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
 
+    // The canvas attributes only give the size of a map that has no map file yet.
+    this.mapHeader = createMapHeader({ columns, rows });
     this.grid = {};
     this.baseLayerImages = new Map();
     this.settlementLanguage = "english";
@@ -113,6 +118,25 @@ export class WorldMapRenderer {
         }
       });
     });
+  }
+
+  /**
+   * Replaces the map with a map file, and sets the map size from maxX and maxY in the file header.
+   * The caller must call applyZoom afterward, to resize the canvas and repaint.
+   * The current map stays when the tiles are not valid.
+   * @param {{header: import("./world-map-file.js").MapHeader, tiles: Object<string, Object>}} mapFile Result of readMapFile.
+   * @returns {void}
+   */
+  loadMapFile(mapFile) {
+    // Validation
+    this.validateGridData(mapFile.tiles);
+
+    // Computation
+    const { columns, rows } = getMapSize(mapFile.header);
+    this.mapHeader = mapFile.header;
+    this.grid = mapFile.tiles;
+    this.mapWidth = columns * this.gridSize;
+    this.mapHeight = rows * this.gridSize;
   }
 
   setZoom(zoom) {

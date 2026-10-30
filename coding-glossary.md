@@ -6,7 +6,7 @@ Glossary for coding terms used in this project
 |SkillCheck|An immutable object that defines a skill or raw-trait check and its target number.|
 |MapDragToPan|A class that pans the map when the user drags it with the left mouse button. It works only when the Pan map tool is selected.|
 |Map tool|The selected action for a click on the world map viewer: path finding, measure distance, or pan.|
-|MapModel|The in-memory model of the saved map grid for the 3D map. It holds one catalog ID array for each layer, river and cliff direction masks, and lists of settlements, resources, and labels.|
+|MapModel|The in-memory model of the saved map tiles and the map header for the 3D map. It holds the header, one catalog ID array for each layer, river and cliff direction masks, and lists of settlements, resources, and labels.|
 |Direction mask|An 8-bit number made from saved direction flags. Bit 0 is north, then the bits go clockwise to bit 7, northwest.|
 |Land bounds|The smallest cell rectangle that holds all land cells of the map.|
 |HeightField|The one global height sampler of the 3D map. It holds a height for each lattice point, so that all terrain chunks share the same edge heights.|
@@ -48,3 +48,6 @@ Glossary for coding terms used in this project
 |Cell inspector|The overlay of the 3D page that shows the coordinates, height, and layer values of the cell under the pointer.|
 |Pinned cell|An inspected cell that stays in the cell inspector after a click, until the next click releases it.|
 |Frame statistics overlay|The overlay of the 3D page that the `?stats=1` option shows: frame rate, CPU frame time, draw calls, active meshes, triangles, and texture memory.|
+|Map file|The saved JSON file of the world map (`world-map-grid.json`). It has the map header first, then the tiles.|
+|Map header|The fields of the map file before the tiles: name, summary, seed, maxX, maxY, version, and lastUpdated. maxX and maxY are the highest tile indexes, so the map has maxX + 1 columns and maxY + 1 rows.|
+|Tiles|The saved cells of the map file, keyed by "x,y". The code calls the same object the grid.|
