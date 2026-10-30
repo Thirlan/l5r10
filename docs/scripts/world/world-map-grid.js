@@ -1,4 +1,5 @@
 import { WorldMapRenderer } from "./world-map-common.js";
+import { isInsideMap, readMapFile, stringifyMapFile } from "./world-map-file.js";
 import { LAYERS, TERRAIN } from "./world-map-layers.js";
 import { getClanColors } from "../clan-colors.js";
 
@@ -96,7 +97,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
     if (this.currentLayer === "river" && this.currentValue && !Object.values(this.riverDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
-    if (x < 0 || y < 0) return;
+    if (!isInsideMap(this.mapHeader, x, y)) return;
 
     const key = this.getCellKey(x, y);
 
@@ -186,7 +187,7 @@ export class WorldMapGrid extends WorldMapRenderer {
       for (let dx = 0; dx < this.brushSize; dx++) {
         const cx = x - offset + dx;
         const cy = y - offset + dy;
-        if (cx >= 0 && cy >= 0) cells.push([cx, cy]);
+        if (isInsideMap(this.mapHeader, cx, cy)) cells.push([cx, cy]);
       }
     }
     return cells;
@@ -358,16 +359,18 @@ export class WorldMapGrid extends WorldMapRenderer {
     return null;
   }
 
-  saveToJSON() {
-    return JSON.stringify(this.grid, null, 2);
+  /**
+   * @param {Date} [now] Date for lastUpdated in the header.
+   * @returns {string} Text of the map file: the header, then the tiles.
+   */
+  saveToJSON(now = new Date()) {
+    return stringifyMapFile(this.mapHeader, this.grid, now);
   }
 
   loadFromJSON(jsonString) {
     try {
-      const parsed = JSON.parse(jsonString);
-      this.validateGridData(parsed);
-      this.grid = parsed;
-      this.draw();
+      this.loadMapFile(readMapFile(JSON.parse(jsonString)));
+      this.applyZoom();
       return true;
     } catch (e) {
       console.error("Failed to load JSON:", e);

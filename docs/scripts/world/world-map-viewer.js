@@ -1,4 +1,5 @@
 import { WorldMapRenderer } from "./world-map-common.js";
+import { readMapFile } from "./world-map-file.js";
 import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "./world-map-layers.js";
 import { L5RPathing, MINUTES_PER_DAY } from "../travel/pathing.js";
 import { getClanColors } from "../clan-colors.js";
@@ -86,10 +87,8 @@ export class WorldMapViewer extends WorldMapRenderer {
   async loadMap(jsonUrl) {
     const res = await fetch(jsonUrl);
     if (!res.ok) throw new Error("Failed to load map JSON: " + res.status);
-    const parsed = await res.json();
-    this.validateGridData(parsed);
-    this.grid = parsed;
-    this.render();
+    this.loadMapFile(readMapFile(await res.json()));
+    this.applyZoom();
   }
 
   async loadCosts(csvUrl) {

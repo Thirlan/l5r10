@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { createMapHeader, readMapFile } from "../../docs/scripts/world/world-map-file.js";
 import { CLAN, CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/world-map-layers.js";
-import { MapModel, describeMapModel, directionMask, isWaterTerrain } from "../../docs/map/scripts/map-data.js";
+import { MapModel, createMapModel, describeMapModel, directionMask, isWaterTerrain, loadMapModel } from "../../docs/map/scripts/map-data.js";
 
 const SIZE = { columns: 3, rows: 2 };
+const MAP_FILE_URL = new URL("../../docs/data/world-map-grid.json", import.meta.url);
 
 test("missing layers resolve to flat, temperate, and no vegetation", () => {
   // Setup
@@ -76,26 +78,102 @@ test("land bounds ignore water cells", () => {
   assert.equal(isWaterTerrain(TERRAIN.WETLANDS.id), false);
 });
 
-test("the live map grid loads with counts that match the saved file", () => {
+test("the live map file loads with counts that match the saved file", () => {
   // Setup
-  const grid = JSON.parse(readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url), "utf8"));
-  const inside = Object.entries(grid).filter(([key]) => {
+  const { header, tiles } = readMapFile(JSON.parse(readFileSync(MAP_FILE_URL, "utf8")));
+  const inside = Object.entries(tiles).filter(([key]) => {
     const [x, y] = key.split(",").map(Number);
-    return x >= 0 && y >= 0 && x < 135 && y < 196;
+    return x >= 0 && y >= 0 && x <= header.maxX && y <= header.maxY;
   });
   const saved = (field) => inside.filter(([, cell]) => cell[field]).length;
 
   // Execution
-  const model = new MapModel(grid, { columns: 135, rows: 196 });
+  const model = createMapModel({ ...header, tiles });
   const counts = model.counts();
 
   // Assertion
   assert.equal(counts.unknown, 0);
-  assert.equal(counts.outside, Object.keys(grid).length - inside.length);
+  assert.equal(counts.outside, Object.keys(tiles).length - inside.length);
   assert.equal(counts.rivers, saved("river"));
   assert.equal(counts.settlements, saved("settlement"));
   assert.equal(counts.resources, saved("resource"));
   assert.equal(counts.labels, saved("text"));
   assert.equal(counts.infrastructure, saved("infrastructure"));
-  assert.match(describeMapModel(model), /^Loaded 26460 cells \(135 × 196\)/);
+  assert.equal(counts.cells, (header.maxX + 1) * (header.maxY + 1));
+});
+
+test("a map model keeps the header of the map file and takes its size from maxX and maxY", () => {
+  // Setup
+  const header = createMapHeader({ columns: 3, rows: 2 });
+  header.name = "Rokugan 900 IC";
+  header.seed = 846894882;
+
+  // Execution
+  const model = createMapModel({ ...header, tiles: { "2,1": { terrain: TERRAIN.OCEAN.id } } });
+
+  // Assertion
+  assert.deepEqual(model.header, header);
+  assert.deepEqual([model.columns, model.rows], [3, 2]);
+  assert.equal(model.isWater(2, 1), true);
+});
+
+test("a map model rejects the old map format without a header", () => {
+  // Execution
+  const create = () => createMapModel({ "0,0": { terrain: TERRAIN.OCEAN.id } });
+
+  // Assertion
+  assert.throws(create, /needs a "tiles" object/);
+});
+
+test("a map model without a header gets a new map header for its size", () => {
+  // Execution
+  const { header } = new MapModel({}, SIZE);
+
+  // Assertion
+  assert.deepEqual([header.maxX, header.maxY, header.seed], [2, 1, 0]);
+});
+
+test("a map model rejects a header that is not an object", () => {
+  // Execution
+  const create = () => new MapModel({}, SIZE, "Rokugan");
+
+  // Assertion
+  assert.throws(create, /header must be an object/);
+});
+
+test("the map model loader reads the map file from the URL", async (t) => {
+  // Setup
+  const header = createMapHeader({ columns: 3, rows: 2 });
+  const fetching = t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => ({ ...header, tiles: {} }) }));
+
+  // Execution
+  const model = await loadMapModel("../data/world-map-grid.json");
+
+  // Assertion
+  assert.deepEqual(fetching.mock.calls[0].arguments, ["../data/world-map-grid.json"]);
+  assert.deepEqual(model.header, header);
+});
+
+test("the map model loader reports a failed request", async (t) => {
+  // Setup
+  t.mock.method(globalThis, "fetch", async () => ({ ok: false, status: 404 }));
+
+  // Execution
+  const loading = loadMapModel("../data/world-map-grid.json");
+
+  // Assertion
+  await assert.rejects(loading, /Could not load the map file \(404\)/);
+});
+
+test("the map readout starts with the name, version, update date, and seed", () => {
+  // Setup
+  const header = { ...createMapHeader({ columns: 3, rows: 2 }), name: "Rokugan 900 IC", version: "0.9.0", lastUpdated: "2026/10/27", seed: 846894882 };
+  const model = createMapModel({ ...header, tiles: {} });
+
+  // Execution
+  const [firstLine, secondLine] = describeMapModel(model).split("\n");
+
+  // Assertion
+  assert.equal(firstLine, "Rokugan 900 IC, version 0.9.0, updated 2026/10/27, seed 846894882.");
+  assert.match(secondLine, /^Loaded 6 cells \(3 × 2\)/);
 });

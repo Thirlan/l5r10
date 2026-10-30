@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapViewer } from "../../docs/scripts/world/world-map-viewer.js";
+import { createMapHeader } from "../../docs/scripts/world/world-map-file.js";
 import { CLAN, TERRAIN, CLIMATE, VEGETATION, INFRASTRUCTURE } from "../../docs/scripts/world/world-map-layers.js";
 import { getClanColors } from "../../docs/scripts/clan-colors.js";
 
@@ -65,7 +66,8 @@ test("invalid viewer map imports report failure without replacing the current ma
   const viewer = Object.create(WorldMapViewer.prototype);
   const original = { "0,0": {} };
   viewer.grid = original;
-  t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => ({ "0,0": { terrain: "flat" } }) }));
+  const invalidFile = { ...createMapHeader({ columns: 3, rows: 2 }), tiles: { "0,0": { terrain: "flat" } } };
+  t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => invalidFile }));
 
   // Execution
   const loading = viewer.loadMap("map.json");
@@ -73,6 +75,37 @@ test("invalid viewer map imports report failure without replacing the current ma
   // Assertion
   await assert.rejects(loading, /Invalid terrain value/);
   assert.equal(viewer.grid, original);
+});
+
+test("viewer map imports reject the old format without a header", async (t) => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => ({ "0,0": { terrain: TERRAIN.FLAT.id } }) }));
+
+  // Execution
+  const loading = viewer.loadMap("map.json");
+
+  // Assertion
+  await assert.rejects(loading, /needs a "tiles" object/);
+});
+
+test("viewer map import replaces the map header and the tiles, then repaints", async (t) => {
+  // Setup
+  const viewer = Object.create(WorldMapViewer.prototype);
+  viewer.gridSize = 16;
+  let repaints = 0;
+  viewer.applyZoom = () => (repaints += 1);
+  const header = createMapHeader({ columns: 3, rows: 2 });
+  const tiles = { "0,0": { terrain: TERRAIN.HILLS.id } };
+  t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => ({ ...header, tiles }) }));
+
+  // Execution
+  await viewer.loadMap("map.json");
+
+  // Assertion
+  assert.deepEqual(viewer.mapHeader, header);
+  assert.deepEqual(viewer.grid, tiles);
+  assert.equal(repaints, 1);
 });
 
 test("viewer clan drawing resolves presentation colors from numeric cell IDs", () => {

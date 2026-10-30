@@ -47,12 +47,26 @@ The page needs a network connection to load Babylon.js from the CDN.
 
 `scripts/map-data.js` loads `docs/data/world-map-grid.json` into a `MapModel`.
 
+The map file is one JSON object. It has a header, then the tiles:
+
+| Field | Meaning |
+| --- | --- |
+| `name`, `summary` | Text that describes the map. |
+| `seed` | A whole number for the terrain noise. The terrain does not use it yet. |
+| `maxX`, `maxY` | The highest tile indexes. The map has `maxX + 1` columns and `maxY + 1` rows. |
+| `version` | The version of the map, for example `0.9.0`. |
+| `lastUpdated` | The date of the last save, as `YYYY/MM/DD`. The map builder sets it on each save. |
+| `tiles` | The saved cells, keyed by `"x,y"`. |
+
+- `world-map-file.js` in `docs/scripts/world/` reads and writes this format. The 2D pages and the 3D page share it.
+- `createMapModel(data)` takes the size from `maxX` and `maxY`. The `MapModel` keeps the header in `model.header`.
+- The old format has no header, so the loaders reject it.
 - Each layer has one `Uint8Array` of catalog IDs, in row order (`index = y * columns + x`).
 - Missing layers use the 2D defaults: flat, temperate, no vegetation.
 - Saved numbers resolve with `LAYERS.<LAYER>.getValue(number)`. Unknown numbers keep the default and are counted.
 - River and cliff direction flags become 8-bit direction masks. Bit 0 is north, then clockwise.
-- Cells outside the 135 × 196 size are counted and skipped. The saved file has 10 cells in row 196.
-- The page shows a debug readout with the counts and the land bounds.
+- Tiles outside `maxX` and `maxY` are counted and skipped. The loaders do not remove them. The map builder does not create them.
+- The page shows a debug readout. It starts with the name, the version, the update date, and the seed. Then it shows the counts and the land bounds.
 
 ## Terrain surface (PR 3)
 
@@ -247,12 +261,6 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 
 ## Performance and findings (PR 8)
 
-![The full map from the Reset view position](../img/map-3d/whole-map.webp)
-
-![An oblique view toward the north of the map](../img/map-3d/oblique.webp)
-
-![A zoomed view with settlement labels, roads, trees, and a river](../img/map-3d/zoomed.webp)
-
 ### Frame statistics
 
 - The `?stats=1` option shows an overlay at the bottom left (`scripts/frame-stats.js`):
@@ -305,7 +313,7 @@ Triangles in one pass of the full map:
 
 | Reused from `docs/scripts/` | Rebuilt for 3D in `docs/map/scripts/` |
 | --- | --- |
-| Map data (`world-map-grid.json`) and the layer catalogs (`world-map-layers.js`) | Height field, terrain chunks, and the terrain shader |
+| Map file format (`world-map-file.js`), map data (`world-map-grid.json`), and the layer catalogs (`world-map-layers.js`) | Height field, terrain chunks, and the terrain shader |
 | Clan colors (`clan-colors.js`) | Clan regions in the terrain shader |
 | Settlement marker drawing, resource images, and label sizes | Billboard material, marker atlases, and label atlas |
 | River offsets (`world-map-img-river.js`) and water colors | River channels, water surface, roads, trees, and ports |

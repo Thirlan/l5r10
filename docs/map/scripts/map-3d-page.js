@@ -29,15 +29,6 @@ const inspector = document.getElementById("map3dInspector");
 const statsOverlay = document.getElementById("map3dStats");
 
 /**
- * Reads the map size from the data attributes of the canvas.
- * @param {HTMLCanvasElement} element Map canvas.
- * @returns {{columns: number, rows: number}} Map size in cells.
- */
-function readMapSize(element) {
-  return { columns: Number(element.dataset.mapColumns), rows: Number(element.dataset.mapRows) };
-}
-
-/**
  * Reads the page options from the URL, for example "?chunk=16&textureSize=1024&water=simple&stats=1".
  * @returns {{chunkCells: number, textureSize: number, simpleWater: boolean, stats: boolean}} Page options.
  */
@@ -106,8 +97,10 @@ async function start() {
     return;
   }
 
-  const size = readMapSize(canvas);
   const options = readOptions();
+  status.textContent = "Loading the map data…";
+  const model = await loadMapModel(canvas.dataset.mapData);
+  const size = { columns: model.columns, rows: model.rows };
   const engine = new BABYLON.Engine(canvas, true, { stencil: true }, true);
   const { scene, camera } = createMapScene(engine, size);
   resetButton.addEventListener("click", () => frameMap(camera, size));
@@ -116,8 +109,6 @@ async function start() {
   new ResizeObserver(() => engine.resize()).observe(canvas);
   if (options.stats) bindFrameStats(scene, statsOverlay);
 
-  status.textContent = "Loading the map data…";
-  const model = await loadMapModel(canvas.dataset.mapData, size);
   status.textContent = "Building the terrain…";
   const terrain = await buildTerrain(scene, model, options);
   const roads = createRoadMeshes(scene, terrain.field, options);

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { INFRASTRUCTURE, RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
-import { MapModel } from "../../docs/map/scripts/map-data.js";
+import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { BRIDGE_DECK, ROAD_STYLES, addRibbon, buildRoadGeometry, buildRoadSegments, roadBase, roadJunctions } from "../../docs/map/scripts/road-paths.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
 
@@ -121,8 +121,7 @@ test("road geometry joins the chunk of the link midpoint and the junction cell",
 
 test("every road triangle of the live map stays above the surface", () => {
   // Setup
-  const grid = JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)));
-  const field = new HeightField(new MapModel(grid, { columns: 135, rows: 196 }));
+  const field = new HeightField(createMapModel(JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)))));
 
   // Execution
   const groups = [...buildRoadGeometry(field, 32).values()];

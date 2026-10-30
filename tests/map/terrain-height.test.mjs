@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
-import { MapModel } from "../../docs/map/scripts/map-data.js";
+import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField, RIVER_BED, RIVER_SEAL, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
 
 const river = (flags) => ({ river: RIVER.PRESENT.id, "river direction": flags });
@@ -65,8 +65,7 @@ test("the seal pass keeps a river mouth on a steep mountain below the water plan
 
 test("every river path of the live map stays below the water plane", () => {
   // Setup
-  const grid = JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)));
-  const field = new HeightField(new MapModel(grid, { columns: 135, rows: 196 }));
+  const field = new HeightField(createMapModel(JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)))));
 
   // Execution
   const highest = field.riverSegments.reduce((worst, [startX, startY, endX, endY]) => {

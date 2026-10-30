@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { CLIMATE, INFRASTRUCTURE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/world-map-layers.js";
-import { MapModel } from "../../docs/map/scripts/map-data.js";
+import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { ROAD_STYLES } from "../../docs/map/scripts/road-paths.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
 import { chunkIndexAt } from "../../docs/map/scripts/terrain-chunks.js";
@@ -31,8 +31,7 @@ const liveField = (() => {
   let field;
   return () => {
     if (!field) {
-      const grid = JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)));
-      field = new HeightField(new MapModel(grid, { columns: 135, rows: 196 }));
+      field = new HeightField(createMapModel(JSON.parse(fs.readFileSync(new URL("../../docs/data/world-map-grid.json", import.meta.url)))));
     }
     return field;
   };
