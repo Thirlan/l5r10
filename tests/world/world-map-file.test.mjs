@@ -224,6 +224,20 @@ test("the saved map file passes the map file check", () => {
   assert.doesNotThrow(read);
 });
 
+test("the saved map file has no tiles outside maxX and maxY", () => {
+  // Setup
+  const { header, tiles } = readMapFile(JSON.parse(readFileSync(MAP_FILE_URL, "utf8")));
+
+  // Execution
+  const outside = Object.keys(tiles).filter((key) => {
+    const [x, y] = key.split(",").map(Number);
+    return !isInsideMap(header, x, y);
+  });
+
+  // Assertion
+  assert.deepEqual(outside, []);
+});
+
 for (const page of ["build_map.html", "world_map.html"]) {
   test(`${page} gives the same canvas size as the saved map file`, () => {
     // Setup

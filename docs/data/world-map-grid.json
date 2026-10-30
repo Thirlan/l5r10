@@ -1,6 +1,6 @@
 {
   "name": "Rokugan 900 IC",
-  "summary": "This map of Rokugan in the year 900 of the Isawa Calendar",
+  "summary": "This is a map of Rokugan in the year 900 of the Isawa Calendar",
   "seed": 846894882,
   "maxX": 134,
   "maxY": 195,
@@ -113803,36 +113803,6 @@
     "86,54": {
       "infrastructure": 1,
       "clan": 4
-    },
-    "130,196": {
-      "animal": 1
-    },
-    "131,196": {
-      "animal": 1
-    },
-    "132,196": {
-      "animal": 1
-    },
-    "129,196": {
-      "animal": 1
-    },
-    "133,196": {
-      "animal": 1
-    },
-    "128,196": {
-      "animal": 1
-    },
-    "127,196": {
-      "animal": 1
-    },
-    "126,196": {
-      "animal": 1
-    },
-    "125,196": {
-      "animal": 1
-    },
-    "124,196": {
-      "animal": 1
     }
   }
 }
