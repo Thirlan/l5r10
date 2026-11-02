@@ -31,7 +31,7 @@ Add an `altitude` layer. Remove the `CLIFF` terrain. A cliff exists wherever two
 ## Confirmed answers
 
 1. TN = 10 plus 5 for each full 25 m of difference above 75. Confirmed.
-2. No cliffs between two water tiles (water, coastal water, ocean). Land-to-water pairs can form cliffs (assumed from "water to water"). Change if wrong.
+2. No cliffs between two water tiles (water, coastal water, ocean). Land-to-water pairs can form cliffs (confirmed, for sea cliffs).
 
 ## PRs (each 200 lines or fewer)
 
