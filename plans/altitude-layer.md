@@ -1,6 +1,6 @@
 # Altitude layer (replaces cliff terrain)
 
-Status: Planned. No code written yet.
+Status: Planned. Open questions answered. No code written yet.
 
 ## Goal
 
@@ -28,10 +28,10 @@ Add an `altitude` layer. Remove the `CLIFF` terrain. A cliff exists wherever two
 - "Cliff direction" data is deleted. Cliff edges are drawn from altitude differences.
 - Ocean depth comes from distance to the nearest land: `-(distance * 20)`, capped at `-4000`. Water within 3 tiles of an island chain is capped at `-200`.
 
-## Open questions
+## Confirmed answers
 
-1. TN formula. Proposed: base TN 10 plus 5 for each full 25 m above 75.
-2. Should water tiles form cliffs (coast to ocean)? Proposed: no, land to land only.
+1. TN = 10 plus 5 for each full 25 m of difference above 75. Confirmed.
+2. No cliffs between two water tiles (water, coastal water, ocean). Land-to-water pairs can form cliffs (assumed from "water to water"). Change if wrong.
 
 ## PRs (each 200 lines or fewer)
 
