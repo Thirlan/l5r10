@@ -73,6 +73,10 @@ export const BASE_LAYER_IMAGES = Object.freeze(
     [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"],
     [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"],
     [VEGETATION.PRESENT, "../img/map/vegetation.webp"],
+    ["bottom", "../img/map/cliff_bottom.webp"],
+    ["corner", "../img/map/cliff_corner.webp"],
+    ["inward", "../img/map/cliff_inward.webp"],
+    ["slope", "../img/map/cliff_slope.webp"],
   ].map(([value, image]) => Object.freeze({ value, image })),
 );
 
@@ -123,38 +127,51 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
  * @param {number} gridSize Cell size in pixels.
  * @param {number} zoom Map scale.
  * @param {number[]} edges Directions of elevation drops, clockwise from north.
+ * @param {Map<string, HTMLImageElement>} images Loaded images by asset path.
+ * @param {Object<number, number[]>} [neighbors] Cliff edges on adjacent plateau tiles.
  * @returns {void}
  */
-export function drawCliffEdges(ctx, x, y, gridSize, zoom, edges) {
+export function drawCliffEdges(ctx, x, y, gridSize, zoom, edges, images, neighbors = {}) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
   }
   if (!Array.isArray(edges) || edges.some((direction) => !Number.isInteger(direction) || direction < 0 || direction > 7)) {
     throw new TypeError("Cliff edges need directions from zero to seven.");
   }
-  if (!edges.length) return;
-  const segments = [
-    [0, 0, 1, 0],
-    [0.75, 0, 1, 0.25],
-    [1, 0, 1, 1],
-    [1, 0.75, 0.75, 1],
-    [1, 1, 0, 1],
-    [0.25, 1, 0, 0.75],
-    [0, 1, 0, 0],
-    [0, 0.25, 0.25, 0],
-  ];
-  ctx.save();
-  ctx.beginPath();
-  edges.forEach((direction) => {
-    if (direction % 2 && edges.includes(direction - 1) && edges.includes((direction + 1) % 8)) return;
-    const [startX, startY, endX, endY] = segments[direction];
-    ctx.moveTo((x + startX) * gridSize, (y + startY) * gridSize);
-    ctx.lineTo((x + endX) * gridSize, (y + endY) * gridSize);
+  const has = (directions, direction) => directions?.includes(direction % 8) ?? false;
+  const inward = [0, 1, 2, 3].map((rotation) => {
+    const bottom = (4 + rotation * 2) % 8;
+    const diagonal = (bottom + 1) % 8;
+    return has(neighbors[(bottom + 2) % 8], diagonal) && has(neighbors[bottom], diagonal);
   });
-  ctx.strokeStyle = "#4B3525";
-  ctx.lineWidth = Math.max(1 / zoom, gridSize / 8);
-  ctx.lineCap = "square";
-  ctx.stroke();
+  if (!edges.length && !inward.some(Boolean)) return;
+  const size = gridSize / 3;
+  const draw = (name, column, row, rotation, mirror = false) => {
+    const image = getLoadedImage(name, images);
+    ctx.save();
+    ctx.translate((x + 0.5) * gridSize, (y + 0.5) * gridSize);
+    ctx.rotate((rotation * Math.PI) / 2);
+    ctx.translate((column - 1) * size, (row - 1) * size);
+    if (mirror) ctx.scale(-1, 1);
+    ctx.drawImage(image, -size / 2, -size / 2, size, size);
+    ctx.restore();
+  };
+  ctx.save();
+  ctx.imageSmoothingEnabled = false;
+  [0, 1, 2, 3].forEach((rotation) => {
+    const bottom = (4 + rotation * 2) % 8;
+    const left = (bottom + 2) % 8;
+    const right = (bottom + 6) % 8;
+    if (has(edges, bottom)) {
+      draw("bottom", 1, 2, rotation);
+      if (!has(edges, left)) draw(has(neighbors[left], bottom) ? "bottom" : "slope", 0, 2, rotation, true);
+      draw(has(edges, right) ? "corner" : has(neighbors[right], bottom) ? "bottom" : "slope", 2, 2, rotation);
+    }
+    const diagonal = (bottom + 1) % 8;
+    if (inward[rotation] || (has(edges, diagonal) && !(has(edges, bottom) && has(edges, left)))) {
+      draw("inward", 0, 2, rotation);
+    }
+  });
   ctx.restore();
 }
 

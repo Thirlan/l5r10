@@ -307,29 +307,36 @@ test("base rendering waits while its images are loading", () => {
   assert.deepEqual(calls, []);
 });
 
+function recordCliffSprites(renderer) {
+  const calls = [];
+  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ value, image }) => [image, { value, complete: true, naturalWidth: 32 }]));
+  renderer.ctx = {
+    save() {},
+    restore() {},
+    rotate() {},
+    scale() {},
+    translate: (...point) => calls.push(["translate", ...point]),
+    drawImage: (image) => calls.push(["image", image.value]),
+  };
+  return calls;
+}
+
 test("renderer draws a cliff only on the high side of an elevation edge", () => {
   // Setup
   const renderer = createRenderer();
   renderer.gridSize = 32;
   renderer.grid = { "2,3": { elevation: 100 }, "2,2": {} };
-  const lines = [];
-  renderer.ctx = {
-    save() {},
-    restore() {},
-    beginPath() {},
-    stroke() {},
-    moveTo: (...point) => lines.push(point),
-    lineTo: (...point) => lines.push(point),
-  };
+  const calls = recordCliffSprites(renderer);
 
   // Execution
   renderer.drawCliffEdges();
 
   // Assertion
-  assert.deepEqual(lines, [
-    [64, 96],
-    [96, 96],
-  ]);
+  assert.deepEqual(
+    calls.filter(([kind]) => kind === "image").map(([, name]) => name),
+    ["bottom", "slope", "slope"],
+  );
+  assert.equal(calls.filter(([kind, x, y]) => kind === "translate" && x === 80 && y === 112).length, 3);
 });
 
 test("renderer includes unpainted land beside a deep cell without drawing outside the map", () => {
@@ -337,29 +344,18 @@ test("renderer includes unpainted land beside a deep cell without drawing outsid
   const renderer = createRenderer();
   renderer.mapHeader = createMapHeader({ columns: 2, rows: 1 });
   renderer.grid = { "0,0": { terrain: TERRAIN.OCEAN.id, elevation: -100 } };
-  const lines = [];
-  renderer.ctx = {
-    save() {},
-    restore() {},
-    beginPath() {},
-    stroke() {},
-    moveTo: (...point) => lines.push(point),
-    lineTo: (...point) => lines.push(point),
-  };
+  const calls = recordCliffSprites(renderer);
   // Execution
   renderer.drawCliffEdges();
   // Assertion
-  assert.deepEqual(lines, [
-    [16, 16],
-    [16, 0],
-  ]);
+  assert.equal(calls.filter(([kind]) => kind === "image").length, 3);
+  assert.equal(calls.filter(([kind, x, y]) => kind === "translate" && x === 24 && y === 8).length, 3);
 });
 
-test("cliff rendering needs no images and excludes water-to-water changes", () => {
+test("cliff rendering excludes water-to-water changes", () => {
   // Setup
   const renderer = createRenderer();
   renderer.grid = { "0,0": { terrain: TERRAIN.WATER.id }, "1,0": { terrain: TERRAIN.OCEAN.id, elevation: -4000 } };
-  renderer.baseLayersLoading = true;
   renderer.ctx = {};
   // Execution
   const draw = () => renderer.drawCliffEdges();
@@ -686,7 +682,7 @@ test("unrequested overlays do not render", () => {
 });
 
 [
-  ["elevation", 0, 3],
+  ["elevation", 0, 0],
   ["animal", 1, 0],
   ["spirit", 0, 1],
   ["shadowland", 0, 1],
@@ -712,6 +708,10 @@ test("unrequested overlays do not render", () => {
       stroke() {
         calls.push(["color", this.strokeStyle]);
       },
+      strokeText() {},
+      fillText() {
+        calls.push(["color", this.fillStyle]);
+      },
     };
     const color = "rgba(128, 0, 128, 0.75)";
 
@@ -724,6 +724,22 @@ test("unrequested overlays do not render", () => {
     assert.equal(calls.filter(([name]) => name === "line").length, lines);
     assert.deepEqual(calls.at(-1), ["color", renderer.overlayCueColor(color)]);
   });
+});
+
+test("elevation labels include unpainted default cells without filling their backgrounds", () => {
+  const renderer = createRenderer();
+  renderer.mapHeader = createMapHeader({ columns: 2, rows: 1 });
+  renderer.grid = { "0,0": { elevation: -100 } };
+  const fills = [];
+  const labels = [];
+  renderer.ctx = { save() {}, restore() {}, fillRect: (...args) => fills.push(args) };
+  renderer.drawOverlayCueSegment = (x, y, layer, color, start, width, value) => labels.push([x, y, value, color]);
+  renderer.drawOverlayLayers(["elevation"]);
+  assert.equal(fills.length, 1);
+  assert.deepEqual(labels, [
+    [0, 0, -100, getElevationColor(-100)],
+    [1, 0, 1, null],
+  ]);
 });
 
 test("cue delegation rejects unknown overlay layers", () => {

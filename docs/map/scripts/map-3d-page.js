@@ -116,7 +116,7 @@ async function start() {
   const ports = createPortMeshes(scene, terrain.field, options);
   const { settlements, resources } = await createMarkerMeshes(scene, terrain.field, options);
   const labels = createLabelLayer(scene, terrain.field, options);
-  createWaterSurface(scene, size, [...terrain.chunks, ...roads], { simple: options.simpleWater });
+  createWaterSurface(scene, terrain.field, [...terrain.chunks, ...roads], { simple: options.simpleWater });
   bindCellInspector(scene, terrain.chunks, terrain.field, inspector);
   const clans = createClanLayer();
   bindLayerToggles(layerPanel, { roads, trees, ports, settlements, resources, labels: [labels.root], clans: supportsTerrainShader(engine) ? [clans] : [] });

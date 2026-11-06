@@ -1,4 +1,4 @@
-import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "./world-map-layers.js";
+import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER, NEIGHBOR_OFFSETS } from "./world-map-layers.js";
 import { createMapHeader, getMapSize } from "./world-map-file.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "../clan-colors.js";
@@ -11,7 +11,7 @@ import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
 import { getCrimeColor, drawCrimeCue } from "./world-map-img-crime.js";
 import { getResourceLevelColor, drawResourceLevelCue } from "./world-map-img-resource-level.js";
-import { DEFAULT_ELEVATION, drawElevationCue, getCliffEdges, getElevationColor } from "./world-map-elevation.js";
+import { DEFAULT_ELEVATION, drawElevationCue, getCliffEdges, getElevationColor, getElevation, CLIFF_HEIGHT } from "./world-map-elevation.js";
 
 const OVERLAY_PRESENTATION = new Map([
   [LAYERS.ELEVATION, { getColor: (value) => getElevationColor(value?.id), drawCue: drawElevationCue }],
@@ -201,11 +201,20 @@ export class WorldMapRenderer {
   }
 
   drawCliffEdges() {
+    if (this.baseLayersLoading) return;
     const size = this.mapHeader ? getMapSize(this.mapHeader) : null;
     const keys = size ? Array.from({ length: size.columns * size.rows }, (_, index) => this.getCellKey(index % size.columns, Math.floor(index / size.columns))) : Object.keys(this.grid);
+    const edges = new Map(keys.map((key) => [key, getCliffEdges(this.grid, ...key.split(",").map(Number), this.mapHeader)]));
     for (const key of keys) {
       const [x, y] = key.split(",").map(Number);
-      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, getCliffEdges(this.grid, x, y, this.mapHeader));
+      const elevation = getElevation(this.grid[key] ?? {});
+      const neighbors = Object.fromEntries(
+        NEIGHBOR_OFFSETS.map(([dx, dy], direction) => {
+          const neighborKey = this.getCellKey(x + dx, y + dy);
+          return [direction, Math.abs(elevation - getElevation(this.grid[neighborKey] ?? {})) < CLIFF_HEIGHT ? edges.get(neighborKey) : []];
+        }),
+      );
+      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, edges.get(key), this.baseLayerImages, neighbors);
     }
   }
 
@@ -492,18 +501,21 @@ export class WorldMapRenderer {
 
   drawOverlayLayers(layerNames) {
     if (!layerNames || !layerNames.length) return;
-    for (const [key, cell] of Object.entries(this.grid)) {
+    const size = layerNames.includes("elevation") && this.mapHeader ? getMapSize(this.mapHeader) : null;
+    const keys = size ? Array.from({ length: size.columns * size.rows }, (_, index) => this.getCellKey(index % size.columns, Math.floor(index / size.columns))) : Object.keys(this.grid);
+    for (const key of keys) {
+      const cell = this.grid[key] ?? {};
       const overlays = [];
       for (const layerName of layerNames) {
         const val = cell[layerName];
         const color = this.overlayColor(layerName, val);
-        if (color) overlays.push({ layerName, color });
+        if (color || layerName === "elevation") overlays.push({ layerName, color, value: val ?? DEFAULT_ELEVATION });
       }
       if (!overlays.length) continue;
       const [x, y] = key.split(",").map(Number);
       if (overlays.length === 1) {
         this.fillCell(x, y, overlays[0].color, 1.0);
-        this.drawOverlayCueSegment(x, y, overlays[0].layerName, overlays[0].color, 0, 1);
+        this.drawOverlayCueSegment(x, y, overlays[0].layerName, overlays[0].color, 0, 1, overlays[0].value);
         continue;
       }
 
@@ -513,7 +525,7 @@ export class WorldMapRenderer {
       const stripeWidth = 1 / overlays.length;
       for (let index = 0; index < overlays.length; index++) {
         this.fillCellSegment(x, y, overlays[index].color, index * stripeWidth, stripeWidth, 1.0);
-        this.drawOverlayCueSegment(x, y, overlays[index].layerName, overlays[index].color, index * stripeWidth, stripeWidth);
+        this.drawOverlayCueSegment(x, y, overlays[index].layerName, overlays[index].color, index * stripeWidth, stripeWidth, overlays[index].value);
       }
     }
   }
@@ -536,7 +548,7 @@ export class WorldMapRenderer {
     this.ctx.restore();
   }
 
-  drawOverlayCueSegment(x, y, layerName, color, startRatio, widthRatio) {
+  drawOverlayCueSegment(x, y, layerName, color, startRatio, widthRatio, value = DEFAULT_ELEVATION) {
     if (widthRatio <= 0) return;
     const layer = Object.values(LAYERS).find((definition) => definition.id === layerName);
     const presentation = OVERLAY_PRESENTATION.get(layer);
@@ -552,7 +564,7 @@ export class WorldMapRenderer {
     ctx.rect(left, top, width, height);
     ctx.clip();
     const cueColor = this.overlayCueColor(color);
-    presentation.drawCue(ctx, left, top, width, height, cueColor, Math.max(1, 1 / this.zoom));
+    presentation.drawCue(ctx, left, top, width, height, cueColor, layer === LAYERS.ELEVATION ? value : Math.max(1, 1 / this.zoom));
 
     ctx.restore();
   }

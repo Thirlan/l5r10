@@ -12,7 +12,7 @@ import { DEFAULT_ELEVATION, getElevation } from "./world-map-elevation.js";
  * @typedef {Object} MapHeader
  * @property {string} name Name of the map.
  * @property {string} summary Short description of the map.
- * @property {number} seed Seed number for the terrain noise. No code uses it yet.
+ * @property {number} seed Seed number for repeatable 3D terrain shapes.
  * @property {number} maxX Highest tile column index.
  * @property {number} maxY Highest tile row index.
  * @property {string} version Version of the map, for example "0.9.0".

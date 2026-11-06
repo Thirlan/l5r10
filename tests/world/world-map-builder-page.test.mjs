@@ -9,7 +9,11 @@ function element(dataset = {}) {
     dataset,
     events,
     addEventListener(name, handler) {
-      events.set(name, handler);
+      const previous = events.get(name);
+      events.set(name, (...args) => {
+        previous?.(...args);
+        handler(...args);
+      });
     },
     classList: {
       add(name) {
@@ -29,7 +33,9 @@ function element(dataset = {}) {
 }
 
 async function setupPage(context) {
-  const button = element({ toolLayer: "elevation" });
+  const button = element({ toolLayer: "elevation", elevationOperation: "set" });
+  const delta = element({ toolLayer: "elevation", elevationOperation: "delta" });
+  const buttons = [button, delta];
   const input = Object.assign(element(), {
     valueAsNumber: 1,
     validationMessage: "",
@@ -52,8 +58,8 @@ async function setupPage(context) {
       return elements.get(selector) ?? element();
     },
     querySelectorAll(selector) {
-      if (selector === "[data-tool-layer]") return [button];
-      if (selector === ".tool-button.active") return button.classList.contains("active") ? [button] : [];
+      if (selector === "[data-tool-layer]") return buttons;
+      if (selector === ".tool-button.active") return buttons.filter((item) => item.classList.contains("active"));
       return [];
     },
   };
@@ -72,7 +78,7 @@ async function setupPage(context) {
   context.mock.method(WorldMapGrid.prototype, "draw", () => {});
   await import(`../../docs/scripts/world/world-map-builder-page.js?test=${context.name}`);
   map.getGridCell = () => ({ x: 0, y: 0 });
-  return { map, button, input };
+  return { map, button, delta, input };
 }
 
 test("elevation input updates the active paint value, including zero and negatives", async (context) => {
@@ -86,6 +92,34 @@ test("elevation input updates the active paint value, including zero and negativ
   map.paintAt({});
   assert.equal(map.grid["0,0"].elevation, 0);
   assert.equal(button.classList.contains("active"), true);
+});
+
+test("Delta applies signed input and switching to Set replaces the elevation", async (context) => {
+  const { map, button, delta, input } = await setupPage(context);
+  input.valueAsNumber = 100;
+  delta.click();
+  map.paintAt({});
+  map.paintAt({});
+  assert.equal(map.grid["0,0"].elevation, 201);
+  input.valueAsNumber = -50;
+  input.events.get("input")();
+  map.paintAt({});
+  assert.equal(map.grid["0,0"].elevation, 151);
+  button.click();
+  map.paintAt({});
+  assert.equal(map.grid["0,0"].elevation, -50);
+  assert.equal(delta.classList.contains("active"), false);
+});
+
+test("correcting an invalid input restores the newly selected Delta tool", async (context) => {
+  const { map, delta, input } = await setupPage(context);
+  input.valueAsNumber = NaN;
+  delta.click();
+  assert.equal(map.currentLayer, null);
+  input.valueAsNumber = 100;
+  input.events.get("input")();
+  map.paintAt({});
+  assert.equal(map.grid["0,0"].elevation, 101);
 });
 
 test("invalid elevation input reports an error and stops painting until corrected", async (context) => {

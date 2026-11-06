@@ -23,6 +23,8 @@ if (canvas) {
       setToolIcon(button, metadata);
     }
     const select = () => {
+      document.querySelectorAll(".tool-button.active").forEach((active) => active.classList.remove("active"));
+      button.classList.add("active");
       if (layer === "elevation") {
         value = elevationInput.valueAsNumber;
         elevationInput.setCustomValidity(Number.isSafeInteger(value) ? "" : "Enter a whole number of metres.");
@@ -31,9 +33,7 @@ if (canvas) {
           return;
         }
       }
-      map.selectTool(layer, value, layer);
-      document.querySelectorAll(".tool-button.active").forEach((active) => active.classList.remove("active"));
-      button.classList.add("active");
+      map.selectTool(layer, value, layer, button.dataset.elevationOperation ?? "set");
     };
     button.addEventListener("click", select);
     if (layer === "elevation") {

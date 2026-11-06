@@ -5,6 +5,7 @@ import { RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField, RIVER_BED, RIVER_SEAL, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
 import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
+import { createMapHeader } from "../../docs/scripts/world/world-map-file.js";
 
 const river = (flags) => ({ river: RIVER.PRESENT.id, "river direction": flags });
 
@@ -135,4 +136,50 @@ test("underwater height changes stay smooth even when deeper than a cliff", () =
   );
   const changes = Array.from({ length: field.width - 1 }, (_, column) => Math.abs(field.heightAt(column + 1, 2) - field.heightAt(column, 2)) * METERS_PER_TILE);
   assert.ok(Math.max(...changes) < 500);
+});
+
+function reliefField(terrain, elevation = 100, seed = 846894882) {
+  const size = { columns: 32, rows: 32 };
+  const grid = Object.fromEntries(Array.from({ length: size.columns * size.rows }, (_, index) => [`${index % size.columns},${Math.floor(index / size.columns)}`, { terrain, elevation }]));
+  return new HeightField(new MapModel(grid, size, { ...createMapHeader(size), seed }), { carveRivers: false });
+}
+
+[
+  [TERRAIN.HILLS.id, 600],
+  [TERRAIN.MOUNTAINS.id, 8000],
+].forEach(([terrain, maximum]) => {
+  test(`terrain ${terrain} adds seeded relief up to ${maximum} metres above saved elevation`, () => {
+    const field = reliefField(terrain);
+    const metres = Array.from(field.heights, (height) => height * METERS_PER_TILE - 100);
+    assert.ok(Math.min(...metres) >= -0.001);
+    assert.ok(Math.max(...metres) <= maximum + 0.001);
+    assert.ok(Math.max(...metres) > maximum * 0.95);
+    const higher = reliefField(terrain, 200);
+    field.heights.forEach((height, index) => assert.ok(Math.abs((higher.heights[index] - height) * METERS_PER_TILE - 100) < 0.002));
+    assert.deepEqual(field.heights, reliefField(terrain).heights);
+    assert.notDeepEqual(field.heights, reliefField(terrain, 100, 846894883).heights);
+  });
+});
+
+test("relief respects mixed-terrain boundaries without entering water or exceeding the hill cap", () => {
+  const grid = {
+    "0,0": { terrain: TERRAIN.MOUNTAINS.id, elevation: 100 },
+    "1,0": { terrain: TERRAIN.HILLS.id, elevation: 100 },
+    "2,0": { terrain: TERRAIN.COASTAL_WATER.id, elevation: -20 },
+  };
+  const field = new HeightField(new MapModel(grid, { columns: 3, rows: 1 }), { carveRivers: false });
+  for (let row = 0; row < field.depth; row++) {
+    assert.ok(Math.abs(field.heightAt(SUBDIVISIONS, row) * METERS_PER_TILE - 100) < 0.001);
+    for (let column = SUBDIVISIONS; column < SUBDIVISIONS * 2; column++) {
+      assert.ok(field.heightAt(column, row) * METERS_PER_TILE <= 700.001);
+    }
+    assert.ok(Math.abs(field.heightAt(SUBDIVISIONS * 2, row) * METERS_PER_TILE - 100) < 0.001);
+    assert.ok(field.heightAt(SUBDIVISIONS * 2.5, row) < 0);
+  }
+});
+
+test("terrain noise rejects invalid seeds and distinguishes high seed bits", () => {
+  assert.throws(() => ridgedNoise(0, 0, 1.5), /integer seed/);
+  assert.throws(() => ridgedNoise(Infinity, 0, 1), /finite coordinates/);
+  assert.notEqual(ridgedNoise(1.2, 2.3, 1), ridgedNoise(1.2, 2.3, 4294967297));
 });

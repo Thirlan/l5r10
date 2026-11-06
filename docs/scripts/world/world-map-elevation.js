@@ -80,21 +80,22 @@ export function getElevationColor(elevation) {
  * @param {number} width Band width.
  * @param {number} height Band height.
  * @param {string} color Contrast color.
- * @param {number} [lineWidth=1] Stroke width.
+ * @param {number} elevation Elevation in whole metres.
  * @returns {void}
  */
-export function drawElevationCue(ctx, left, top, width, height, color, lineWidth = 1) {
-  if (!ctx || ![left, top, width, height, lineWidth].every(Number.isFinite) || width <= 0 || height <= 0 || lineWidth <= 0 || typeof color !== "string") {
-    throw new TypeError("Elevation cue needs a canvas context, dimensions, and color.");
+export function drawElevationCue(ctx, left, top, width, height, color, elevation) {
+  if (!ctx || ![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0 || typeof color !== "string" || !Number.isSafeInteger(elevation)) {
+    throw new TypeError("Elevation label needs a canvas context, dimensions, color, and integer elevation.");
   }
   ctx.save();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = lineWidth;
-  ctx.beginPath();
-  ctx.moveTo(left + width * 0.2, top + height * 0.75);
-  ctx.lineTo(left + width * 0.5, top + height * 0.25);
-  ctx.lineTo(left + width * 0.8, top + height * 0.75);
-  ctx.lineTo(left + width * 0.2, top + height * 0.75);
-  ctx.stroke();
+  ctx.font = `${height * 0.65}px sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.lineWidth = height * 0.08;
+  ctx.strokeStyle = color.includes("255") ? "#111111" : "#ffffff";
+  ctx.fillStyle = color;
+  const label = [String(elevation), left + width / 2, top + height / 2, width * 0.9];
+  ctx.strokeText(...label);
+  ctx.fillText(...label);
   ctx.restore();
 }

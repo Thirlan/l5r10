@@ -13,7 +13,10 @@ Glossary for coding terms used in this project
 |Ocean depth|A negative elevation for ocean or coastal water. Depth is 20 m per eight-neighbor step from land, with a 4000 m limit.|
 |Direction mask|An 8-bit number made from saved direction flags. Bit 0 is north, then the bits go clockwise to bit 7, northwest.|
 |Land bounds|The smallest cell rectangle that holds all land cells of the map.|
-|HeightField|The global 3D height sampler. It converts metre elevations to five-mile world units. All terrain chunks share its edge heights and normals.|
+|HeightField|The global 3D height sampler. It adds seeded terrain relief to metre elevations, then converts to five-mile world units. All chunks share heights and normals.|
+|Terrain relief|Generated height above the saved tile elevation. Seeded hills reach 600 m; mountain ridges reach 8000 m.|
+|Delta|A signed change. The elevation Delta tool adds its input once to each tile in a brush stroke.|
+|Z-fighting|Flicker when overlapping surfaces receive the same depth-buffer value. Small height differences can disappear at large viewing distances.|
 |Lattice point|One vertex position of the terrain surface. Each map cell has a fixed number of lattice steps on each side (the subdivisions).|
 |River segment|A line from a river cell center to a cell edge, a cell corner, or a water cell center. The height field carves river channels along these lines.|
 |Chunk range|The rectangle of map cells that one terrain chunk mesh covers. The end column and the end row are not in the range.|
@@ -24,7 +27,7 @@ Glossary for coding terms used in this project
 |Shading layer|One layer of the shading texture array: the normal X and Y in red and green, and the roughness in blue.|
 |Pixel source|An object {data, channels, scale} that gives pixel values from 0 to 1 for the PBR texture helpers.|
 |Water class|The kind of water under a cell for the 3D terrain shader: lake (also rivers), coastal, or ocean. It selects the tint of the ground under the water.|
-|Water plane|One flat mesh at the water level over the full 3D map. It uses the WaterMaterial, and shows only where the terrain is below it.|
+|Water plane|A flat mesh at the water level, clipped to submerged terrain. Dry land has no water polygons beneath it.|
 |Seal pass|The last river step of the HeightField. It walks along each river segment and lowers the lattice quads where the surface is not below the water plane.|
 |Chunk index|The position of a chunk in the chunkRanges list. Roads, trees, and markers use it to join the chunk that owns them.|
 |Road link|One straight road or footpath piece between the centers of two neighbor cells in the 3D map. It uses the kind of its start cell.|

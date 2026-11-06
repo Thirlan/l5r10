@@ -49,8 +49,9 @@
             <label for="elevationInput">Elevation (metres above sea level)</label>
             <input id="elevationInput" type="number" step="1" value="1" required aria-describedby="elevationHelp" />
           </div>
-          <p id="elevationHelp" class="hint">Use a whole number. Negative values are below sea level. The default is 1 m, with no color. A difference of at least 75 m forms a cliff, except between water tiles.</p>
-          <button type="button" class="tool-button" data-tool-layer="elevation">Paint Elevation</button>
+          <p id="elevationHelp" class="hint">Set writes the entered elevation. Delta adds the signed amount once per tile during each stroke. Use a negative delta to lower land. The default is 1 m, with no color. A difference of at least 75 m forms a cliff, except between water tiles.</p>
+          <button type="button" class="tool-button" data-tool-layer="elevation" data-elevation-operation="set">Set</button>
+          <button type="button" class="tool-button" data-tool-layer="elevation" data-elevation-operation="delta">Delta</button>
           <button type="button" class="tool-button erase-button" data-tool-layer="erase" data-tool-value="elevation">Erase Elevation</button>
         </div>
 

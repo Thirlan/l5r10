@@ -15,6 +15,7 @@ function createBuilder() {
     currentLayer: "terrain",
     currentValue: null,
     brushSize: 1,
+    strokeCells: new Set(),
     riverDirections: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
     applyZoom() {},
     draw() {},
@@ -333,4 +334,57 @@ test("elevation brushes stay within map bounds", () => {
   builder.paintAt({});
   assert.deepEqual(Object.keys(builder.grid).sort(), ["0,0", "0,1", "1,0", "1,1"]);
   Object.values(builder.grid).forEach((cell) => assert.equal(cell.elevation, -50));
+});
+
+test("Delta changes overlapping brush cells once per stroke and again on the next click", () => {
+  const builder = createBuilder();
+  const events = new Map();
+  builder.canvas = { addEventListener: (name, handler) => events.set(name, handler) };
+  builder.getGridCell = (event) => event;
+  builder.setupEventListeners();
+  builder.setBrushSize(2);
+  builder.selectTool("elevation", 100, "elevation", "delta");
+  events.get("mousedown")({ x: 0, y: 0, button: 2 });
+  assert.deepEqual(builder.grid, {});
+  events.get("mousedown")({ x: 0, y: 0, button: 0 });
+  events.get("mousemove")({ x: 0, y: 0 });
+  events.get("mousemove")({ x: 1, y: 0 });
+  assert.equal(Object.keys(builder.grid).length, 6);
+  assert.ok(Object.values(builder.grid).every((cell) => cell.elevation === 101));
+  events.get("mouseup")();
+  events.get("mousedown")({ x: 0, y: 0, button: 0 });
+  assert.equal(builder.grid["1,0"].elevation, 201);
+  assert.equal(builder.grid["2,0"].elevation, 101);
+  events.get("mouseleave")();
+  assert.equal(builder.isDrawing, false);
+});
+
+test("negative Delta restores the omitted default without changing other layers", () => {
+  const builder = createBuilder();
+  builder.grid["0,0"] = { elevation: 101, terrain: TERRAIN.HILLS.id };
+  builder.selectTool("elevation", -100, "elevation", "delta");
+  builder.paintAt({});
+  assert.deepEqual(builder.grid["0,0"], { terrain: TERRAIN.HILLS.id });
+  builder.selectTool("elevation", -2, "elevation", "delta");
+  builder.paintAt({});
+  assert.equal(builder.grid["0,0"].elevation, -1);
+});
+
+test("Delta overflow reports an error without partially painting the brush", (context) => {
+  const builder = createBuilder();
+  builder.grid["1,0"] = { elevation: Number.MAX_SAFE_INTEGER };
+  const original = structuredClone(builder.grid);
+  const previous = Object.getOwnPropertyDescriptor(globalThis, "alert");
+  const messages = [];
+  globalThis.alert = (message) => messages.push(message);
+  context.after(() => {
+    if (previous) Object.defineProperty(globalThis, "alert", previous);
+    else delete globalThis.alert;
+  });
+  builder.setBrushSize(2);
+  builder.selectTool("elevation", 1, "elevation", "delta");
+  builder.paintAt({});
+  assert.deepEqual(builder.grid, original);
+  assert.match(messages[0], /No tiles.*changed/);
+  assert.throws(() => builder.selectTool("elevation", 1, "elevation", "increase"), /set or delta/);
 });

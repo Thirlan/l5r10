@@ -6,17 +6,18 @@
  *
  * Height model:
  * - Saved elevation supplies height in metres. One world unit is five miles (8046.72 m).
- * - Each cell has a sign, an absolute height, and surface roughness in metres.
+ * - Each cell has a sign and an absolute base height.
  * - The sampler blends the values of the four nearest cell centers with smoothstep weights.
  *   Height = sign × level, so the shoreline (height 0) is on the cell edge between land and water.
  * - Elevation drops of at least 75 m use one lattice step on the low side. Water-to-water changes stay smooth.
  * - Water at the default elevation uses a 1 m display bed below sea level.
- * - Land gets ridged value noise, scaled by the blended roughness.
+ * - Seeded relief adds rounded hills up to 600 m and mountain ridges up to 8000 m.
+ * - Relief fades to zero at terrain-type boundaries, keeping coasts and adjoining regions connected.
  * - River channels are carved to RIVER_BED, below the water plane at height 0.
  * - A seal pass then walks along each river segment. Where the surface is not below RIVER_SEAL, it lowers the
  *   four corners of that lattice quad to RIVER_BED. Steep terrain can otherwise lift a channel above the water.
  */
-import { TERRAIN } from "../../scripts/world/world-map-layers.js";
+import { TERRAIN, NEIGHBOR_OFFSETS } from "../../scripts/world/world-map-layers.js";
 import { MapModel, isWaterTerrain } from "./map-data.js";
 import { buildRiverSegments } from "./river-paths.js";
 import { DEFAULT_ELEVATION, getCliffDifference } from "../../scripts/world/world-map-elevation.js";
@@ -37,8 +38,8 @@ const NOISE_OCTAVES = Object.freeze([
 
 const TERRAIN_SHAPES = new Map([
   [TERRAIN.FLAT.id, { roughness: 0.1 }],
-  [TERRAIN.HILLS.id, { roughness: 0.45 }],
-  [TERRAIN.MOUNTAINS.id, { roughness: 1.3 }],
+  [TERRAIN.HILLS.id, { roughness: 600 }],
+  [TERRAIN.MOUNTAINS.id, { roughness: 8000 }],
   [TERRAIN.WATER.id, { roughness: 0 }],
   [TERRAIN.COASTAL_WATER.id, { roughness: 0 }],
   [TERRAIN.OCEAN.id, { roughness: 0 }],
@@ -47,7 +48,7 @@ const TERRAIN_SHAPES = new Map([
 
 /**
  * @param {number} terrainId Saved terrain ID.
- * @returns {{roughness: number}} Surface noise roughness in metres.
+ * @returns {{roughness: number}} Maximum added relief in metres.
  */
 export function terrainShape(terrainId) {
   const shape = TERRAIN_SHAPES.get(terrainId);
@@ -61,19 +62,19 @@ const smoothstep = (edge0, edge1, value) => {
 };
 const lerp = (start, end, ratio) => start + (end - start) * ratio;
 
-function hash(column, row) {
-  const mixed = Math.imul(column, 374761393) + Math.imul(row, 668265263);
+function hash(column, row, seed) {
+  const mixed = Math.imul(column, 374761393) + Math.imul(row, 668265263) + Math.imul(seed, 1442695041) + Math.imul(Math.floor(seed / 4294967296), 1013904223);
   const scrambled = Math.imul(mixed ^ (mixed >>> 13), 1274126177);
   return ((scrambled ^ (scrambled >>> 16)) >>> 0) / 4294967295;
 }
 
-function valueNoise(u, v) {
+function valueNoise(u, v, seed) {
   const column = Math.floor(u);
   const row = Math.floor(v);
   const blendX = smoothstep(0, 1, u - column);
   const blendY = smoothstep(0, 1, v - row);
-  const top = lerp(hash(column, row), hash(column + 1, row), blendX);
-  const bottom = lerp(hash(column, row + 1), hash(column + 1, row + 1), blendX);
+  const top = lerp(hash(column, row, seed), hash(column + 1, row, seed), blendX);
+  const bottom = lerp(hash(column, row + 1, seed), hash(column + 1, row + 1, seed), blendX);
   return lerp(top, bottom, blendY);
 }
 
@@ -81,10 +82,12 @@ function valueNoise(u, v) {
  * Deterministic ridged noise in the range 0 to 1.
  * @param {number} u Position east, in cell units.
  * @param {number} v Position south, in cell units.
+ * @param {number} [seed=0] Map seed.
  * @returns {number} Noise value.
  */
-export function ridgedNoise(u, v) {
-  const total = NOISE_OCTAVES.reduce((sum, [frequency, amplitude], octave) => sum + amplitude * (1 - Math.abs(2 * valueNoise(u * frequency + octave * 17.3, v * frequency - octave * 9.1) - 1)), 0);
+export function ridgedNoise(u, v, seed = 0) {
+  if (![u, v].every(Number.isFinite) || !Number.isSafeInteger(seed)) throw new TypeError("Terrain noise needs finite coordinates and an integer seed.");
+  const total = NOISE_OCTAVES.reduce((sum, [frequency, amplitude], octave) => sum + amplitude * (1 - Math.abs(2 * valueNoise(u * frequency + octave * 17.3, v * frequency - octave * 9.1, seed) - 1)), 0);
   return total / NOISE_OCTAVES.reduce((sum, [, amplitude]) => sum + amplitude, 0);
 }
 
@@ -97,6 +100,7 @@ export class HeightField {
   constructor(model, options = {}) {
     // Validation
     if (!(model instanceof MapModel)) throw new TypeError("HeightField needs a MapModel.");
+    if (!Number.isSafeInteger(model.header.seed)) throw new TypeError("Terrain height needs an integer map seed.");
     const { subdivisions = SUBDIVISIONS, carveRivers = true } = options;
     if (!Number.isInteger(subdivisions) || subdivisions < 1) throw new TypeError("Subdivisions must be a positive integer.");
 
@@ -145,14 +149,12 @@ export class HeightField {
 
   #cellValues() {
     const terrain = this.model.ids("terrain");
-    const shapes = [...terrain].map((id) => terrainShape(id));
     const saved = Array.from(terrain, (id, index) => ({ terrain: id, elevation: this.model.elevations[index] }));
     const heights = saved.map(({ terrain, elevation }) => (isWaterTerrain(terrain) && elevation === DEFAULT_ELEVATION ? -1 : elevation) / METERS_PER_TILE);
     return {
       saved,
       sign: Float32Array.from(heights, (height) => Math.sign(height)),
       level: Float32Array.from(heights, (height) => Math.abs(height)),
-      roughness: Float32Array.from(shapes, (shape) => shape.roughness / METERS_PER_TILE),
     };
   }
 
@@ -189,8 +191,29 @@ export class HeightField {
     const weightY = hasCliff(topLeft, bottomLeft) || !hasCliff(topRight, bottomRight) ? this.#edgeWeight(centerY - y, topLeft, bottomLeft) : this.#edgeWeight(centerY - y, topRight, bottomRight);
     const blend = (values) => lerp(lerp(values[topLeft], values[topRight], weightTop), lerp(values[bottomLeft], values[bottomRight], weightBottom), weightY);
     const sign = blend(this.cells.sign);
-    const noise = Math.max(0, sign) * blend(this.cells.roughness) * ridgedNoise(column / this.subdivisions, row / this.subdivisions) ** 1.5;
-    return sign * blend(this.cells.level) + noise;
+    return sign * blend(this.cells.level) + this.#relief(column / this.subdivisions, row / this.subdivisions, sign);
+  }
+
+  #relief(u, v, sign) {
+    const column = Math.min(this.model.columns - 1, Math.floor(u));
+    const row = Math.min(this.model.rows - 1, Math.floor(v));
+    const terrain = this.cells.saved[this.#cellIndex(column, row)].terrain;
+    if (isWaterTerrain(terrain)) return 0;
+    const { seed } = this.model.header;
+    const maximum = terrainShape(terrain).roughness;
+    let envelope = 1;
+    NEIGHBOR_OFFSETS.forEach(([dx, dy]) => {
+      const x = column + dx;
+      const y = row + dy;
+      if (x < 0 || y < 0 || x >= this.model.columns || y >= this.model.rows || this.cells.saved[this.#cellIndex(x, y)].terrain === terrain) return;
+      const distance = Math.hypot(Math.max(x - u, 0, u - x - 1), Math.max(y - v, 0, v - y - 1));
+      envelope = Math.min(envelope, smoothstep(0, 0.5, distance));
+    });
+    const warpedU = u + 1.2 * (valueNoise(u * 0.22 + 17, v * 0.22 + 8, seed) - 0.5);
+    const warpedV = v + 1.2 * (valueNoise(u * 0.22 - 9, v * 0.22 + 31, seed) - 0.5);
+    const noise = terrain === TERRAIN.HILLS.id ? smoothstep(0.1, 0.9, 0.7 * valueNoise(warpedU * 0.7, warpedV * 0.7, seed) + 0.3 * valueNoise(warpedU * 1.4 + 23, warpedV * 1.4 - 11, seed)) : ridgedNoise(warpedU, warpedV, seed) ** 1.5;
+    const aboveBase = terrain === TERRAIN.HILLS.id || terrain === TERRAIN.MOUNTAINS.id ? 1 : Math.max(0, sign);
+    return (maximum * noise * envelope * aboveBase) / METERS_PER_TILE;
   }
 
   #carveSegment([startX, startY, endX, endY]) {

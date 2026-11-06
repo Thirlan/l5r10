@@ -52,7 +52,7 @@ The map file is one JSON object. It has a header, then the tiles:
 | Field | Meaning |
 | --- | --- |
 | `name`, `summary` | Text that describes the map. |
-| `seed` | A whole number for the terrain noise. The terrain does not use it yet. |
+| `seed` | A whole number for repeatable hill and mountain shapes. |
 | `maxX`, `maxY` | The highest tile indexes. The map has `maxX + 1` columns and `maxY + 1` rows. |
 | `version` | The version of the map, for example `0.9.0`. |
 | `lastUpdated` | The date of the last save, as `YYYY/MM/DD`. The map builder sets it on each save. |
@@ -87,14 +87,26 @@ The one-time tools and their tests were removed after validation.
 - Cliff TN is `10 + 5 * floor((difference - 75) / 25)`. Roads bypass the check; footpaths bypass it only on foot.
 - Both cells must have a suitable bypass. The viewer keeps the existing restriction against unassisted cliff travel.
 
+### 2D elevation editing
+
+- Both 2D maps show elevation numbers instead of triangle cues. The colors are unchanged.
+- Default tiles show `1` without a color fill when the elevation overlay is visible.
+- **Set** writes the entered elevation. **Delta** adds the signed amount to each selected tile.
+- Each Delta stroke changes a tile once, including overlapping brush areas. A new click starts another stroke.
+- Invalid values or overflow stop the brush change and show an error.
+- Cliff contours use the original bottom, corner, inward, and slope sprites.
+- Diagonal corners use the inward sprite. Directions come from elevation differences, not saved direction flags.
+
 ## Terrain surface (PR 3)
 
 The terrain is one continuous surface. It is made from chunk meshes that use one global height sampler.
 
 - `scripts/terrain-height.js` makes the `HeightField`. Each cell has 4 lattice steps on each side (`SUBDIVISIONS`).
 - The height at a lattice point blends the 4 nearest cell centers with smoothstep weights.
-- Elevation sets the height. Divide metres by 8046.72 to get world units, with no vertical exaggeration.
-- Terrain supplies small surface roughness in metres. It does not set a base height.
+- Elevation sets the base height. Divide metres by 8046.72 to get world units, with no vertical exaggeration.
+- Seeded relief adds rounded hills up to 600 m and mountain ridges up to 8000 m above that base.
+- Relief fades to zero at terrain-type boundaries. Adjacent cells of the same terrain share a continuous noise field.
+- The seed changes 3D shapes only. It does not change saved elevations, 2D cliffs, or travel rules.
 - Negative elevations are below sea level. Water at the default elevation uses a 1 m display bed.
   This keeps inland water visible without changing its saved elevation.
 - Opposite height signs put the shoreline at height 0 on the cell edge.
@@ -168,8 +180,14 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 
 ### Water
 
-- `scripts/water-surface.js` puts one plane at `WATER_LEVEL` (just below 0) over the full map.
-- The terrain is under the plane only in lakes, seas, and river channels, so the plane shows only there.
+- `scripts/water-surface.js` clips a flat water mesh to terrain below `WATER_LEVEL` (just below 0).
+- Fully submerged cells use one quad. Shorelines and river channels follow clipped terrain triangles.
+- Shoreline vertices include a Float32 rounding margin, keeping them on the wet side of steep banks.
+- No water triangles lie beneath dry land. Both water materials use this geometry.
+- Previously, the full-map plane lay only 0.000126 world units below default land.
+  With the camera near plane at 0.05, a 24-bit depth buffer can store both surfaces at the same depth.
+  The resulting z-fighting explains flicker despite the 1 m elevation difference.
+  Removing the hidden water geometry prevents this dry-land overlap without exaggerating elevations.
 - The default material is the Babylon.js `WaterMaterial` from `babylonjs-materials`. It reflects and refracts the terrain chunks.
   The bump texture is procedural, so it needs no image file.
 - The terrain shader tints the ground under the water with the water class color (lake and river, coastal, ocean).

@@ -240,16 +240,10 @@ test("unfinished vegetation images are rejected before painting", () => {
 });
 
 function createCliffDrawing() {
-  const calls = [];
-  const ctx = {
-    save() {},
-    restore() {},
-    beginPath() {},
-    moveTo: (...point) => calls.push(["move", ...point]),
-    lineTo: (...point) => calls.push(["line", ...point]),
-    stroke: () => calls.push(["stroke"]),
-  };
-  return { ctx, calls };
+  const drawing = createDrawing();
+  const rotations = [];
+  Object.assign(drawing.ctx, { translate() {}, scale() {}, rotate: (angle) => rotations.push(angle) });
+  return { ...drawing, rotations };
 }
 
 test("cliff drawing skips cells without elevation edges", () => {
@@ -258,27 +252,48 @@ test("cliff drawing skips cells without elevation edges", () => {
   assert.deepEqual(calls, []);
 });
 
-[
-  [0, [32, 48], [48, 48]],
-  [1, [44, 48], [48, 52]],
-  [2, [48, 48], [48, 64]],
-  [3, [48, 60], [44, 64]],
-  [4, [48, 64], [32, 64]],
-  [5, [36, 64], [32, 60]],
-  [6, [32, 64], [32, 48]],
-  [7, [32, 52], [36, 48]],
-].forEach(([direction, start, end]) => {
-  test(`elevation edge ${direction} draws a line on the tile boundary`, () => {
-    const { ctx, calls } = createCliffDrawing();
-    drawCliffEdges(ctx, 2, 3, 16, 1, [direction]);
-    assert.deepEqual(calls, [["move", ...start], ["line", ...end], ["stroke"]]);
+[0, 1, 2, 3, 4, 5, 6, 7].forEach((direction) => {
+  test(`elevation edge ${direction} draws rotated contour sprites`, () => {
+    const { ctx, images, calls, rotations } = createCliffDrawing();
+    drawCliffEdges(ctx, 2, 3, 16, 1, [direction], images);
+    assert.deepEqual(
+      calls.map(([name]) => name),
+      direction % 2 ? ["inward"] : ["bottom", "slope", "slope"],
+    );
+    assert.ok(rotations.every((angle) => angle === (((Math.floor(direction / 2) + 2) % 4) * Math.PI) / 2));
+    assert.equal(ctx.imageSmoothingEnabled, false);
   });
 });
 
 test("a raised tile draws four sides without extra diagonal cuts", () => {
-  const { ctx, calls } = createCliffDrawing();
-  drawCliffEdges(ctx, 0, 0, 16, 1, [0, 1, 2, 3, 4, 5, 6, 7]);
-  assert.equal(calls.filter(([kind]) => kind === "line").length, 4);
+  const { ctx, images, calls } = createCliffDrawing();
+  drawCliffEdges(ctx, 0, 0, 16, 1, [0, 1, 2, 3, 4, 5, 6, 7], images);
+  assert.equal(calls.filter(([kind]) => kind === "bottom").length, 4);
+  assert.equal(calls.filter(([kind]) => kind === "corner").length, 4);
+  assert.equal(calls.filter(([kind]) => kind === "inward").length, 0);
+});
+
+test("neighboring cliffs continue a contour without slope ends", () => {
+  const { ctx, images, calls } = createCliffDrawing();
+  drawCliffEdges(ctx, 0, 0, 16, 1, [4], images, { 2: [4], 6: [4] });
+  assert.deepEqual(
+    calls.map(([name]) => name),
+    ["bottom", "bottom", "bottom"],
+  );
+});
+
+test("neighboring diagonal edges fill an inward corner", () => {
+  const { ctx, images, calls } = createCliffDrawing();
+  drawCliffEdges(ctx, 0, 0, 16, 1, [], images, { 4: [5], 6: [5] });
+  assert.deepEqual(
+    calls.map(([name]) => name),
+    ["inward"],
+  );
+});
+
+test("missing contour sprites report their asset path", () => {
+  const { ctx } = createCliffDrawing();
+  assert.throws(() => drawCliffEdges(ctx, 0, 0, 16, 1, [4], new Map()), /cliff_bottom.webp/);
 });
 
 test("cliff drawing rejects invalid edge directions", () => {

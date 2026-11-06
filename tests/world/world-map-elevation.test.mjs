@@ -82,3 +82,15 @@ test("elevation cue rejects invalid dimensions and colors", () => {
   assert.throws(() => drawElevationCue({}, 0, 0, 0, 16, "#000000"), TypeError);
   assert.throws(() => drawElevationCue({}, 0, 0, 16, 16, null), TypeError);
 });
+
+[-100, 0, 1, 8000].forEach((elevation) => {
+  test(`elevation label prints ${elevation} inside its band`, () => {
+    const calls = [];
+    const ctx = { save() {}, restore() {}, strokeText() {}, fillText: (...args) => calls.push(args) };
+    drawElevationCue(ctx, 10, 20, 8, 16, "#000000", elevation);
+    assert.deepEqual(calls, [[String(elevation), 14, 28, 7.2]]);
+    assert.equal(ctx.textAlign, "center");
+    assert.equal(ctx.textBaseline, "middle");
+    assert.throws(() => drawElevationCue(ctx, 0, 0, 16, 16, "#000000", 0.5), /integer elevation/);
+  });
+});

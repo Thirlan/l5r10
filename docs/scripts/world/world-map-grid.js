@@ -15,6 +15,8 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.fontSize = 14;
     this.brushSize = 1;
     this.isDrawing = false;
+    this.elevationOperation = "set";
+    this.strokeCells = new Set();
     this.riverDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
 
     this.setupEventListeners();
@@ -59,6 +61,8 @@ export class WorldMapGrid extends WorldMapRenderer {
 
   setupEventListeners() {
     this.canvas.addEventListener("mousedown", (e) => {
+      if (e.button !== 0) return;
+      this.strokeCells.clear();
       this.isDrawing = true;
       this.paintAt(e);
     });
@@ -108,6 +112,12 @@ export class WorldMapGrid extends WorldMapRenderer {
       return;
     }
 
+    if (this.currentLayer === LAYERS.ELEVATION.id) {
+      this.paintElevation(x, y);
+      this.draw();
+      return;
+    }
+
     this.brushCells(x, y).forEach(([cx, cy]) => {
       const cellKey = this.getCellKey(cx, cy);
 
@@ -139,11 +149,7 @@ export class WorldMapGrid extends WorldMapRenderer {
         const cell = this.ensureCell(cellKey);
         const valId = this.currentValue;
 
-        if (this.currentLayer === LAYERS.ELEVATION.id) {
-          const elevation = getElevation({ elevation: valId });
-          if (elevation === DEFAULT_ELEVATION) delete cell.elevation;
-          else cell.elevation = elevation;
-        } else if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
+        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
           if (valId || this.currentLayer === LAYERS.TERRAIN.id || this.currentLayer === LAYERS.CLIMATE.id) {
             cell[this.currentLayer] = valId;
           } else delete cell[this.currentLayer];
@@ -169,6 +175,32 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.draw();
   }
 
+  /**
+   * @param {number} x Brush column.
+   * @param {number} y Brush row.
+   * @returns {void}
+   */
+  paintElevation(x, y) {
+    const delta = this.elevationOperation === "delta";
+    const keys = this.brushCells(x, y).map(([column, row]) => this.getCellKey(column, row));
+    const changes = keys
+      .filter((key) => !delta || !this.isDrawing || !this.strokeCells.has(key))
+      .map((key) => {
+        const elevation = delta ? getElevation(this.grid[key] ?? {}) + this.currentValue : this.currentValue;
+        return [key, elevation];
+      });
+    if (changes.some(([, elevation]) => !Number.isSafeInteger(elevation))) {
+      alert("Elevation must stay within the safe integer range. No tiles in this brush were changed.");
+      return;
+    }
+    changes.forEach(([key, elevation]) => {
+      const cell = this.ensureCell(key);
+      if (elevation === DEFAULT_ELEVATION) delete cell.elevation;
+      else cell.elevation = elevation;
+      if (delta && this.isDrawing) this.strokeCells.add(key);
+    });
+  }
+
   brushCells(x, y) {
     const offset = Math.floor((this.brushSize - 1) / 2);
     const cells = [];
@@ -190,10 +222,12 @@ export class WorldMapGrid extends WorldMapRenderer {
    * @param {string} layer Canonical layer ID, text, or erase.
    * @param {number|string|null} value Numeric value, erase target, or null for text.
    * @param {string} [toolLayer] Matching layer ID.
+   * @param {string} [operation="set"] Elevation operation: set or delta.
    * @returns {void}
    */
-  selectTool(layer, value, toolLayer) {
+  selectTool(layer, value, toolLayer, operation = "set") {
     if (toolLayer && toolLayer !== layer) throw new TypeError("Tool layer must match the selected layer.");
+    if (!["set", "delta"].includes(operation)) throw new TypeError("Elevation operation must be set or delta.");
     if (layer === "erase") {
       if (value !== null && value !== "text" && !Object.values(LAYERS).some((definition) => definition.id === value)) {
         throw new TypeError(`Unknown erase layer: ${value}`);
@@ -206,6 +240,7 @@ export class WorldMapGrid extends WorldMapRenderer {
     }
     this.currentValue = value;
     this.currentLayer = toolLayer || layer;
+    this.elevationOperation = operation;
     this.draw();
   }
 
