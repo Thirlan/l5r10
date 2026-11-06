@@ -5,12 +5,14 @@ import { TERRAIN, INFRASTRUCTURE, SETTLEMENT, CLAN } from "../../docs/scripts/wo
 
 function createPather(terrain, infrastructure = null) {
   return Object.assign(Object.create(L5RPathing.prototype), {
-    getTerrain: (x) => x === 0 ? TERRAIN.FLAT.name : terrain,
+    getTerrain: (x) => (x === 0 ? TERRAIN.FLAT.name : terrain),
     getInfrastructure: () => infrastructure,
+    getCell: () => ({}),
     getTileData: () => ({ terrain, cost: 100, costRoad: 50, zeni: 2, tn: null, prob: 1, hasRoad: false }),
     getClan: () => null,
     skillConfig: { swim: { allowed: true, tn: 20 } },
-    travelPapers: {}, avoidClans: {},
+    travelPapers: {},
+    avoidClans: {},
   });
 }
 
@@ -71,4 +73,30 @@ test("existing title-case water inputs retain river boat boarding", () => {
   const transition = pather.transitionAs(from, "foot", to, "river boat");
   // Assertion
   assert.equal(transition.cost, 400);
+});
+
+test("routes require a continuous road or footpath across elevation cliffs", () => {
+  const pather = createPather(TERRAIN.FLAT.name);
+  const cells = [{ elevation: 1 }, { elevation: 76 }];
+  pather.getCell = (x) => cells[x];
+  assert.equal(pather.transitionAs(from, "foot", to, "foot"), null);
+  cells[0].infrastructure = INFRASTRUCTURE.ROAD.id;
+  assert.equal(pather.transitionAs(from, "foot", to, "foot"), null);
+  cells[1].infrastructure = INFRASTRUCTURE.ROAD.id;
+  assert.equal(pather.transitionAs(from, "foot", to, "foot").cost, 125);
+});
+
+test("routes ignore elevation differences below 75 metres", () => {
+  const pather = createPather(TERRAIN.FLAT.name);
+  pather.getCell = (x) => ({ elevation: x ? 75 : 1 });
+  assert.equal(pather.transitionAs(from, "foot", to, "foot").cost, 100);
+});
+
+test("sea cliffs block boarding but underwater changes do not block sailing", () => {
+  const pather = createPather(TERRAIN.OCEAN.name, INFRASTRUCTURE.LARGE_PORT.name);
+  pather.getCell = (x) => (x ? { terrain: TERRAIN.OCEAN.id, elevation: -100 } : { elevation: 1 });
+  assert.equal(pather.transitionAs(from, "foot", to, "ship"), null);
+  pather.getTerrain = () => TERRAIN.OCEAN.name;
+  pather.getCell = (x) => ({ terrain: TERRAIN.OCEAN.id, elevation: x ? -4000 : -20 });
+  assert.equal(pather.transitionAs(from, "ship", to, "ship").cost, 100);
 });

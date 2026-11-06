@@ -6,9 +6,10 @@
  * snow roles. A role without a layer uses the default layer (moon_dusted_01).
  */
 import { CLIMATE, TERRAIN } from "../../scripts/world/world-map-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
-/** Height units for the snow line in the blue channel of the cell ID texture. */
-export const SNOW_LINE_UNITS = 100;
+/** One byte step is 10 metres. The shader converts it to world units. */
+export const SNOW_LINE_UNITS = METERS_PER_TILE / 10;
 
 /** Water class in the alpha channel of the cell ID texture. Land uses the lake class, so that river channels get the lake color. */
 export const WATER_CLASS = Object.freeze({ LAKE: 1, COASTAL: 2, OCEAN: 3 });
@@ -48,8 +49,8 @@ export const SNOW_LAYER = layerIndex("snow_02");
 
 /** Texture set names for each climate role. The snow line is in height units. */
 const CLIMATE_SURFACES = new Map([
-  [CLIMATE.TEMPERATE.id, { flat: "grass_ground", hills: "rocky_terrain_02", rock: "marble_cliff_05", snowLine: 1.55 }],
-  [CLIMATE.POLAR.id, { rock: "marble_rock_03", snowLine: 1.2 }],
+  [CLIMATE.TEMPERATE.id, { flat: "grass_ground", hills: "rocky_terrain_02", rock: "marble_cliff_05", snowLine: 1550 / METERS_PER_TILE }],
+  [CLIMATE.POLAR.id, { rock: "marble_rock_03", snowLine: 1200 / METERS_PER_TILE }],
   [CLIMATE.TROPICAL.id, { flat: "leafy_grass", rock: "aerial_rocks_02" }],
   [CLIMATE.DESERT.id, { flat: "sand_01", hills: "marble_cliff_02", rock: "rock_06" }],
   [CLIMATE.WASTE.id, { flat: "mud_cracked_dry_riverbed_002", hills: "rocks_ground_05", rock: "rock_boulder_dry" }],
@@ -61,7 +62,6 @@ const TERRAIN_ROLES = new Map([
   [TERRAIN.FLAT.id, "flat"],
   [TERRAIN.HILLS.id, "hills"],
   [TERRAIN.MOUNTAINS.id, "rock"],
-  [TERRAIN.CLIFF.id, "rock"],
 ]);
 
 const WATER_CLASSES = new Map([
@@ -93,7 +93,7 @@ export function cellSurface(climateId, terrainId) {
 
 /**
  * Packs the cell ID texture: red = primary layer, green = steep-slope layer,
- * blue = snow line in 1/100 height units (0 = no snow), alpha = water class.
+ * blue = snow line in 10 m steps (0 = no snow), alpha = water class.
  * Rows are in map row order, so row 0 is north.
  * @param {import("./map-data.js").MapModel} model Map model.
  * @returns {Uint8Array} RGBA bytes, 4 for each cell.

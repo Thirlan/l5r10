@@ -21,12 +21,7 @@ export default [
     rules: { "no-unused-vars": ["error", { argsIgnorePattern: "^_" }] },
   },
   {
-    files: [
-      "docs/scripts/currency.js",
-      "docs/scripts/dice.js",
-      "docs/scripts/stipend-calculator.js",
-      "docs/scripts/travel/travel-event-engine.js",
-    ],
+    files: ["docs/scripts/currency.js", "docs/scripts/dice.js", "docs/scripts/stipend-calculator.js", "docs/scripts/travel/travel-event-engine.js"],
     languageOptions: { sourceType: "script" },
     rules: { "no-redeclare": ["error", { builtinGlobals: false }] },
   },

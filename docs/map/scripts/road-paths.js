@@ -11,6 +11,7 @@
 import { INFRASTRUCTURE } from "../../scripts/world/world-map-layers.js";
 import { MapModel } from "./map-data.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
 /** Forward links of the 2D infrastructure layer: east, south, southeast, northeast. */
 const FORWARD_LINKS = Object.freeze([
@@ -27,12 +28,12 @@ const DISC_SIDES = 8;
 const TEXTURE_REPEATS_PER_CELL = 3;
 
 /** Lowest height of a road. Roads over river channels and water stay at this height, like a bridge deck. */
-export const BRIDGE_DECK = 0.05;
+export const BRIDGE_DECK = 0.05 / METERS_PER_TILE;
 
 /** Ribbon width, lift over the terrain, and texture set for each path kind. Roads are higher than footpaths where they meet. */
 export const ROAD_STYLES = new Map([
-  [INFRASTRUCTURE.ROAD.id, Object.freeze({ name: "road", width: 0.2, lift: 0.03, texture: "pavement_04" })],
-  [INFRASTRUCTURE.FOOTPATH.id, Object.freeze({ name: "footpath", width: 0.11, lift: 0.025, texture: "road_damaged" })],
+  [INFRASTRUCTURE.ROAD.id, Object.freeze({ name: "road", width: 0.2, lift: 0.03 / METERS_PER_TILE, texture: "pavement_04" })],
+  [INFRASTRUCTURE.FOOTPATH.id, Object.freeze({ name: "footpath", width: 0.11, lift: 0.025 / METERS_PER_TILE, texture: "road_damaged" })],
 ]);
 
 /**

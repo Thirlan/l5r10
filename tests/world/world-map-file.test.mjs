@@ -251,3 +251,19 @@ for (const page of ["build_map.html", "world_map.html"]) {
     assert.deepEqual({ columns: Number(columns), rows: Number(rows) }, getMapSize(header));
   });
 }
+
+test("map files preserve zero and negative elevations and omit the default without mutation", () => {
+  const tiles = { "0,0": { elevation: -4000 }, "1,0": { elevation: 0 }, "2,0": { elevation: 1 }, "0,1": { elevation: 1200 } };
+  const original = structuredClone(tiles);
+  const saved = readMapFile(JSON.parse(stringifyMapFile(createHeader(), tiles)));
+  assert.deepEqual(saved.tiles, { "0,0": { elevation: -4000 }, "1,0": { elevation: 0 }, "2,0": {}, "0,1": { elevation: 1200 } });
+  assert.deepEqual(tiles, original);
+});
+
+test("map file readers and writers reject non-integer elevations", () => {
+  ["100", 0.5, null, NaN, Infinity].forEach((elevation) => {
+    const tiles = { "0,0": { elevation } };
+    assert.throws(() => readMapFile({ ...createHeader(), tiles }), /Elevation/);
+    assert.throws(() => stringifyMapFile(createHeader(), tiles), /Elevation/);
+  });
+});

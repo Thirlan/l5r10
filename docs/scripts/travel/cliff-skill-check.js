@@ -1,28 +1,10 @@
-import { TERRAIN } from "../world/world-map-layers.js";
-import { bypassesCrossing, crossesWithinCell, crossingCheck, validateTravelInput, validateTravelNeighbors } from "./travel-skill-rules.js";
-
-function crossesDiagonalCliff(neighbors, direction) {
-  // Match cliff normals on both sides of a diagonal move.
-  if (direction % 2 === 0) {
-    return false;
-  }
-  const first = neighbors[(direction + 7) % 8];
-  const second = neighbors[(direction + 1) % 8];
-  if (!first || !second) {
-    return false;
-  }
-
-  const hasDiagonal = (cell) => {
-    if (cell.terrain !== TERRAIN.CLIFF.id) {
-      return false;
-    }
-    return cell["cliff direction"][direction] === 1 || cell["cliff direction"][(direction + 4) % 8] === 1;
-  };
-  return hasDiagonal(first) && hasDiagonal(second);
-}
+import { CLIFF_HEIGHT, getCliffDifference } from "../world/world-map-elevation.js";
+import { SkillCheck } from "../skill-check.js";
+import { bypassesCrossing, validateTravelInput, validateTravelNeighbors } from "./travel-skill-rules.js";
 
 /**
- * Describe each cliff crossing, inside the current cell and between cells.
+ * Describe the elevation crossing between the current cell and the destination.
+ * TN is 10, plus 5 for each full 25 m above a 75 m difference.
  * @param {string} mode Transport name.
  * @param {object} cell Current saved map cell with numeric layer IDs.
  * @param {Array<object|null>} neighbors Eight cells, clockwise from north.
@@ -31,20 +13,10 @@ function crossesDiagonalCliff(neighbors, direction) {
  * @throws {TypeError} If any travel input is invalid.
  */
 export function getSkillAndTN(mode, cell, neighbors, direction) {
-  // Validate route cells before checking cliff geometry.
   cell = validateTravelInput(mode, cell, direction);
   neighbors = validateTravelNeighbors(mode, neighbors, direction);
-  const checks = [];
-  const sourceBypass = bypassesCrossing(mode, cell, "cliff");
-
-  // Keep within-cell and diagonal crossings as separate checks.
-  if (cell.terrain === TERRAIN.CLIFF.id && crossesWithinCell(cell, direction, "cliff") && !sourceBypass) {
-    checks.push(crossingCheck(mode, cell, "cliff", false));
-  }
-
-  const hasContinuousBypass = sourceBypass && bypassesCrossing(mode, neighbors[direction], "cliff");
-  if (crossesDiagonalCliff(neighbors, direction) && !hasContinuousBypass) {
-    checks.push(crossingCheck(mode, cell, "cliff", false));
-  }
-  return checks;
+  const destination = neighbors[direction];
+  const difference = getCliffDifference(cell, destination);
+  if (!difference || (bypassesCrossing(mode, cell, "cliff") && bypassesCrossing(mode, destination, "cliff"))) return [];
+  return [new SkillCheck("Athletics", "Strength", 10 + 5 * Math.floor((difference - CLIFF_HEIGHT) / 25))];
 }

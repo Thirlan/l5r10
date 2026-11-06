@@ -4,7 +4,9 @@
  * The field "tiles" comes after the header. It holds the saved cells, keyed by "x,y".
  * The fields maxX and maxY are the highest tile indexes. The map has maxX + 1 columns and maxY + 1 rows.
  * The header can have more fields. The code keeps them.
+ * Tile elevation is an integer in metres. A missing value means 1 m.
  */
+import { DEFAULT_ELEVATION, getElevation } from "./world-map-elevation.js";
 
 /**
  * @typedef {Object} MapHeader
@@ -115,6 +117,7 @@ export function readMapFile(data) {
   const { tiles, ...header } = data;
   if (!isPlainObject(tiles)) throw new TypeError('The map file needs a "tiles" object after the header.');
   validateHeader(header);
+  Object.values(tiles).forEach((cell) => getElevation(cell));
 
   // Output
   return { header, tiles };
@@ -134,5 +137,12 @@ export function stringifyMapFile(header, tiles, now = new Date()) {
   readMapFile(mapFile);
 
   // Output
-  return JSON.stringify(mapFile, null, 2);
+  const savedTiles = Object.fromEntries(
+    Object.entries(tiles).map(([key, cell]) => {
+      const saved = { ...cell };
+      if (saved.elevation === DEFAULT_ELEVATION) delete saved.elevation;
+      return [key, saved];
+    }),
+  );
+  return JSON.stringify({ ...mapFile, tiles: savedTiles }, null, 2);
 }

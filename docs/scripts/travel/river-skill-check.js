@@ -37,13 +37,13 @@ export function getSkillAndTN(mode, cell, neighbors, direction, isAgainstCurrent
   const sourceBypass = bypassesCrossing(mode, cell, "river");
 
   // The current cell and the diagonal barrier are separate crossings.
-  if (cell.river !== 0 && crossesWithinCell(cell, direction, "river") && !sourceBypass) {
-    checks.push(crossingCheck(mode, cell, "river", isAgainstCurrent));
+  if (cell.river !== 0 && crossesWithinCell(cell, direction) && !sourceBypass) {
+    checks.push(crossingCheck(mode, cell, isAgainstCurrent));
   }
 
   const hasContinuousBridge = sourceBypass && bypassesCrossing(mode, neighbors[direction], "river");
   if (crossesDiagonalRiver(neighbors, direction) && !hasContinuousBridge) {
-    checks.push(crossingCheck(mode, cell, "river", isAgainstCurrent));
+    checks.push(crossingCheck(mode, cell, isAgainstCurrent));
   }
   return checks;
 }

@@ -110,6 +110,29 @@ function createValues(entries, ValueType = LayerValue) {
   return Object.freeze(Object.fromEntries(entries.map(([key, ...valueArgs]) => [key, new ValueType(...valueArgs)])));
 }
 
+class ElevationLayerDefinition extends LayerDefinition {
+  /**
+   * @param {number} value Elevation in whole metres.
+   * @returns {LayerValue|undefined} Elevation metadata, if the value is valid.
+   */
+  getValue(value) {
+    return Number.isSafeInteger(value) ? new LayerValue(value, `${value} m`) : undefined;
+  }
+}
+
+export const NEIGHBOR_OFFSETS = Object.freeze(
+  [
+    [0, -1],
+    [1, -1],
+    [1, 0],
+    [1, 1],
+    [0, 1],
+    [-1, 1],
+    [-1, 0],
+    [-1, -1],
+  ].map((offset) => Object.freeze(offset)),
+);
+
 export const TERRAIN = createValues([
   ["FLAT", 0, "flat"],
   ["HILLS", 1, "hills"],
@@ -118,8 +141,15 @@ export const TERRAIN = createValues([
   ["COASTAL_WATER", 4, "coastal water"],
   ["OCEAN", 5, "ocean"],
   ["WETLANDS", 7, "wetlands"],
-  ["CLIFF", 8, "cliff"],
 ]);
+
+/**
+ * @param {number} terrainId Saved terrain ID.
+ * @returns {boolean} True for inland water, coastal water, or ocean.
+ */
+export function isWaterTerrain(terrainId) {
+  return terrainId === TERRAIN.WATER.id || terrainId === TERRAIN.COASTAL_WATER.id || terrainId === TERRAIN.OCEAN.id;
+}
 
 export const CLIMATE = createValues([
   ["TEMPERATE", 0, "temperate"],
@@ -249,6 +279,7 @@ export const RESOURCE_LEVEL = createLevels();
 
 export const LAYERS = Object.freeze({
   TERRAIN: new LayerDefinition("terrain", "Terrain Layer", Object.values(TERRAIN)),
+  ELEVATION: new ElevationLayerDefinition("elevation", "Elevation Layer", []),
   CLIMATE: new LayerDefinition("climate", "Climate Layer", Object.values(CLIMATE)),
   VEGETATION: new LayerDefinition("vegetation", "Vegetation Layer", Object.values(VEGETATION)),
   RIVER: new LayerDefinition("river", "River Layer", Object.values(RIVER)),

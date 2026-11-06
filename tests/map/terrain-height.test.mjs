@@ -4,6 +4,7 @@ import test from "node:test";
 import { RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField, RIVER_BED, RIVER_SEAL, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
 
 const river = (flags) => ({ river: RIVER.PRESENT.id, "river direction": flags });
 
@@ -20,7 +21,7 @@ test("the shoreline is at height 0 on the edge between land and water", () => {
   assert.ok(field.heightAt(SUBDIVISIONS * 1.5, SUBDIVISIONS / 2) < 0);
 });
 
-test("a saved cliff direction makes a steeper step than a plain edge", () => {
+test("the 75 metre threshold makes a steeper step than a lower elevation change", () => {
   // Setup
   const steepestStep = (grid) => {
     const field = new HeightField(new MapModel(grid, { columns: 2, rows: 1 }), { carveRivers: false });
@@ -28,8 +29,8 @@ test("a saved cliff direction makes a steeper step than a plain edge", () => {
   };
 
   // Execution
-  const cliff = steepestStep({ "0,0": { terrain: TERRAIN.CLIFF.id, "cliff direction": { 2: 1 } } });
-  const slope = steepestStep({ "0,0": { terrain: TERRAIN.CLIFF.id } });
+  const cliff = steepestStep({ "0,0": { elevation: 76 } });
+  const slope = steepestStep({ "0,0": { elevation: 75 } });
 
   // Assertion
   assert.ok(cliff > slope * 1.5, `${cliff} should be steeper than ${slope}`);
@@ -104,11 +105,34 @@ test("the surface sample equals the lattice height on lattice points", () => {
 
 test("terrain shapes exist for every terrain and noise stays from 0 to 1", () => {
   // Execution
-  const levels = Object.values(TERRAIN).map((terrain) => terrainShape(terrain.id).level);
+  const roughness = Object.values(TERRAIN).map((terrain) => terrainShape(terrain.id).roughness);
   const noise = Array.from({ length: 200 }, (_, index) => ridgedNoise(index * 0.37, index * 0.11));
 
   // Assertion
-  assert.ok(levels.every((level) => level > 0));
+  assert.ok(roughness.every((value) => value >= 0));
   assert.ok(noise.every((value) => value >= 0 && value <= 1));
   assert.throws(() => terrainShape(99), TypeError);
+});
+
+test("saved elevations use physical scale rather than terrain height presets", () => {
+  const fieldFor = (elevation) => new HeightField(new MapModel({ "0,0": { elevation } }, { columns: 1, rows: 1 }), { carveRivers: false });
+  const rise = fieldFor(101).sample(0.5, 0.5) - fieldFor(1).sample(0.5, 0.5);
+  assert.ok(Math.abs(rise * METERS_PER_TILE - 100) < 0.0001);
+  assert.equal(fieldFor(0).sample(0.5, 0.5), 0);
+  assert.ok(Math.abs(fieldFor(-100).sample(0.5, 0.5) * METERS_PER_TILE + 100) < 0.0001);
+});
+
+test("underwater height changes stay smooth even when deeper than a cliff", () => {
+  const field = new HeightField(
+    new MapModel(
+      {
+        "0,0": { terrain: TERRAIN.COASTAL_WATER.id, elevation: -20 },
+        "1,0": { terrain: TERRAIN.OCEAN.id, elevation: -1020 },
+      },
+      { columns: 2, rows: 1 },
+    ),
+    { carveRivers: false },
+  );
+  const changes = Array.from({ length: field.width - 1 }, (_, column) => Math.abs(field.heightAt(column + 1, 2) - field.heightAt(column, 2)) * METERS_PER_TILE);
+  assert.ok(Math.max(...changes) < 500);
 });

@@ -1,4 +1,5 @@
 import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../world/world-map-layers.js";
+import { CLIFF_HEIGHT } from "../world/world-map-elevation.js";
 
 // Moving speeds, not daily averages. These estimates exclude rest and survival checks.
 // Horse uses a walk; caravan includes loaded carts; ship assumes favorable wind.
@@ -17,7 +18,6 @@ const TERRAIN_PENALTY = {
   [TERRAIN.HILLS.id]: 0.2,
   [TERRAIN.MOUNTAINS.id]: 0.5,
   [TERRAIN.WETLANDS.id]: 0.35,
-  [TERRAIN.CLIFF.id]: 0.7,
 };
 const CLIMATE_PENALTY = {
   [CLIMATE.TROPICAL.id]: { land: -0.1 },
@@ -49,9 +49,12 @@ function getLayerValue(value, catalog) {
  * @param {string|number|object} river Map river name, ID, or metadata.
  * @param {string|number|object} infrastructure Map infrastructure name, ID, or metadata.
  * @param {boolean} [isAgainstCurrent=false] True for upstream travel; false for downstream travel.
+ * @param {number} [cliffDifference=0] Height from getCliffDifference. Water-to-water changes must use zero.
  * @returns {number} Speed in km/h, or -1.0 for invalid inputs or impossible travel.
+ * @throws {TypeError} If the cliff difference is not a non-negative safe integer.
  */
-export function getTravelSpeed(mode, terrain, climate, vegetation, river, infrastructure, isAgainstCurrent = false) {
+export function getTravelSpeed(mode, terrain, climate, vegetation, river, infrastructure, isAgainstCurrent = false, cliffDifference = 0) {
+  if (!Number.isSafeInteger(cliffDifference) || cliffDifference < 0) throw new TypeError("Cliff difference must be a non-negative integer in metres.");
   mode = typeof mode === "number" ? MODE_NAMES[mode] : mode?.trim?.().toLowerCase();
   terrain = getLayerValue(terrain, TERRAIN);
   climate = getLayerValue(climate, CLIMATE);
@@ -64,8 +67,9 @@ export function getTravelSpeed(mode, terrain, climate, vegetation, river, infras
   const onRiver = river === RIVER.PRESENT;
   const hasBridge = infrastructure === INFRASTRUCTURE.ROAD || infrastructure === INFRASTRUCTURE.FOOTPATH;
   const waterTransport = mode === "river boat" || mode === "ship";
+  const hasCliff = cliffDifference >= CLIFF_HEIGHT;
   if (onWater && (onRiver || vegetation !== VEGETATION.NONE)) return -1.0;
-  if (terrain === TERRAIN.CLIFF && (waterTransport || (infrastructure !== INFRASTRUCTURE.ROAD && !(mode === "foot" && infrastructure === INFRASTRUCTURE.FOOTPATH)))) return -1.0;
+  if (hasCliff && (waterTransport || (infrastructure !== INFRASTRUCTURE.ROAD && !(mode === "foot" && infrastructure === INFRASTRUCTURE.FOOTPATH)))) return -1.0;
 
   let adjustment = 0;
   if (waterTransport) {
@@ -80,7 +84,7 @@ export function getTravelSpeed(mode, terrain, climate, vegetation, river, infras
     if (onRiver) adjustment += isAgainstCurrent ? -0.25 : 0.1;
   } else {
     if (onWater && !(terrain === TERRAIN.WATER && infrastructure === INFRASTRUCTURE.ROAD)) return -1.0;
-    adjustment -= onWater ? 0 : TERRAIN_PENALTY[terrain.id];
+    adjustment -= Math.max(hasCliff ? 0.7 : 0, onWater ? 0 : TERRAIN_PENALTY[terrain.id]);
     adjustment += CLIMATE_PENALTY[climate.id]?.land ?? 0;
     if (vegetation !== VEGETATION.NONE) adjustment -= 0.2;
     if (onRiver && !hasBridge) adjustment -= 0.25;

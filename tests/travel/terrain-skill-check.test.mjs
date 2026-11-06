@@ -6,7 +6,7 @@ import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "../../docs/scripts/world/world
 
 // Setup
 const river = { river: 1, "river direction": { 0: 1 } };
-const cliff = { terrain: TERRAIN.CLIFF.id, "cliff direction": { 2: 1 } };
+const cliff = { elevation: 100 };
 
 [
   ["flat", {}, "Survival", "Perception", 5],
@@ -77,13 +77,13 @@ test("Sailing uses environment, not land terrain or road reductions", () => {
   ["antiparallel river", river, 4, false, "Survival", "Perception", 5],
   ["road bridge", { ...river, infrastructure: INFRASTRUCTURE.ROAD.id }, 2, false, "Survival", "Perception", 5],
   ["footpath bridge", { ...river, infrastructure: INFRASTRUCTURE.FOOTPATH.id }, 2, false, "Survival", "Perception", 5],
-  ["cliff climbing is handled separately", cliff, 2, false, "Athletics", "Stamina", 9],
-  ["along cliff", cliff, 0, false, "Athletics", "Stamina", 9],
-  ["away from cliff edge", cliff, 6, false, "Athletics", "Stamina", 9],
-  ["road bypasses cliff", { ...cliff, infrastructure: INFRASTRUCTURE.ROAD.id }, 2, false, "Athletics", "Stamina", 5],
-  ["footpath bypasses cliff on foot", { ...cliff, infrastructure: INFRASTRUCTURE.FOOTPATH.id }, 2, false, "Athletics", "Stamina", 7],
+  ["cliff climbing is handled separately", cliff, 2, false, "Survival", "Perception", 5],
+  ["along cliff", cliff, 0, false, "Survival", "Perception", 5],
+  ["away from cliff edge", cliff, 6, false, "Survival", "Perception", 5],
+  ["road bypasses cliff", { ...cliff, infrastructure: INFRASTRUCTURE.ROAD.id }, 2, false, "Survival", "Perception", 5],
+  ["footpath bypasses cliff on foot", { ...cliff, infrastructure: INFRASTRUCTURE.FOOTPATH.id }, 2, false, "Survival", "Perception", 5],
   ["river presence does not suppress Shadowland lore", { ...river, climate: CLIMATE.SHADOWLAND.id }, 2, false, "Lore: Shadowlands", "Perception", 10],
-  ["cliffs and rivers do not replace exposure checks", { ...cliff, ...river, climate: CLIMATE.POLAR.id }, 2, true, "Survival", "Perception", 13],
+  ["cliffs and rivers do not replace exposure checks", { ...cliff, ...river, climate: CLIMATE.POLAR.id }, 2, true, "Survival", "Perception", 9],
 ].forEach(([name, cell, direction, current, skill, trait, tn]) =>
   test(name, () => {
     // Execution
@@ -97,7 +97,7 @@ test("mounted travel retains its ordinary terrain check on cliffs", () => {
   // Execution
   const result = getSkillAndTN("horse", { ...cliff, infrastructure: INFRASTRUCTURE.FOOTPATH.id }, 2);
   // Assertion
-  assert.deepEqual(result, new SkillCheck("Athletics", "Stamina", 7));
+  assert.deepEqual(result, new SkillCheck("Survival", "Perception", 5));
 });
 
 [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].forEach((terrain, index) =>

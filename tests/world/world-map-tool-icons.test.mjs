@@ -12,9 +12,15 @@ function createButton() {
   const button = {
     ownerDocument: {
       createElement: (tag) => ({
-        tag, style: {}, setAttribute() {},
-        addEventListener: (name, handler) => { events[name] = handler; },
-        replaceWith: (text) => { icons[0] = text; },
+        tag,
+        style: {},
+        setAttribute() {},
+        addEventListener: (name, handler) => {
+          events[name] = handler;
+        },
+        replaceWith: (text) => {
+          icons[0] = text;
+        },
       }),
       createTextNode: (text) => text,
     },
@@ -28,10 +34,10 @@ test("base tool icons resolve metadata control mappings", () => {
   const { button, icons } = createButton();
 
   // Execution
-  setToolIcon(button, TERRAIN.CLIFF);
+  setToolIcon(button, TERRAIN.HILLS);
 
   // Assertion
-  assert.equal(icons[0].src, BASE_LAYER_CONTROL_IMAGES.find(({ value }) => value === TERRAIN.CLIFF).image);
+  assert.equal(icons[0].src, BASE_LAYER_CONTROL_IMAGES.find(({ value }) => value === TERRAIN.HILLS).image);
 });
 
 test("resource tool icons use resource presentation assets", () => {
@@ -73,7 +79,7 @@ test("failed tool images log their path and show an error", (t) => {
   // Setup
   const { button, icons, events } = createButton();
   const logging = t.mock.method(console, "error", () => {});
-  setToolIcon(button, TERRAIN.CLIFF);
+  setToolIcon(button, TERRAIN.HILLS);
   const path = icons[0].src;
 
   // Execution

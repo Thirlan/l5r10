@@ -7,6 +7,7 @@ const canvas = document.querySelector("#mapCanvas");
 if (canvas) {
   const map = new WorldMapGrid("#mapCanvas", Number.parseInt(canvas.dataset.gridSize, 10));
   bindMapControls(map);
+  const elevationInput = document.querySelector("#elevationInput");
 
   document.querySelectorAll("[data-tool-layer]").forEach((button) => {
     const layer = button.dataset.toolLayer;
@@ -14,23 +15,34 @@ if (canvas) {
     let value = null;
     if (layer === "erase") {
       value = key || null;
-    } else if (layer !== "text") {
+    } else if (layer !== "text" && layer !== "elevation") {
       const catalog = layers[layer === "resourceLevel" ? "RESOURCE_LEVEL" : layer.toUpperCase()];
       const metadata = catalog?.[key];
       if (!metadata) throw new TypeError(`Unknown map tool: ${layer}.${key}`);
       value = metadata.value ?? metadata.id;
       setToolIcon(button, metadata);
     }
-    button.addEventListener("click", () => {
+    const select = () => {
+      if (layer === "elevation") {
+        value = elevationInput.valueAsNumber;
+        elevationInput.setCustomValidity(Number.isSafeInteger(value) ? "" : "Enter a whole number of metres.");
+        if (!elevationInput.reportValidity()) {
+          map.currentLayer = null;
+          return;
+        }
+      }
       map.selectTool(layer, value, layer);
       document.querySelectorAll(".tool-button.active").forEach((active) => active.classList.remove("active"));
       button.classList.add("active");
-    });
+    };
+    button.addEventListener("click", select);
+    if (layer === "elevation") {
+      elevationInput.addEventListener("input", () => {
+        if (button.classList.contains("active")) select();
+      });
+    }
   });
 
-  document.querySelectorAll("[data-cliff-direction]").forEach((input) => {
-    input.addEventListener("change", () => map.setCliffDirection(input.dataset.cliffDirection, input.checked));
-  });
   document.querySelectorAll("[data-river-direction]").forEach((input) => {
     input.addEventListener("change", () => map.setRiverDirection(input.dataset.riverDirection, input.checked));
   });

@@ -6,10 +6,14 @@ Glossary for coding terms used in this project
 |SkillCheck|An immutable object that defines a skill or raw-trait check and its target number.|
 |MapDragToPan|A class that pans the map when the user drags it with the left mouse button. It works only when the Pan map tool is selected.|
 |Map tool|The selected action for a click on the world map viewer: path finding, measure distance, or pan.|
-|MapModel|The in-memory model of the saved map tiles and the map header for the 3D map. It holds the header, one catalog ID array for each layer, river and cliff direction masks, and lists of settlements, resources, and labels.|
+|MapModel|The in-memory model of the saved map tiles and header. It holds catalog ID arrays, metre elevations, river direction masks, and lists of settlements, resources, and labels.|
+|Elevation layer|The whole-number height of a map tile in metres above sea level. A missing value means 1 m. The file omits that default.|
+|Cliff edge|A drop of at least 75 m between two of the eight neighboring tiles. Two water tiles cannot form a cliff edge.|
+|Elevation gradient|The overlay colors from deep blue below sea level to red at 1000 m. The default elevation has no color.|
+|Ocean depth|A negative elevation for ocean or coastal water. Depth is 20 m per eight-neighbor step from land, with a 4000 m limit.|
 |Direction mask|An 8-bit number made from saved direction flags. Bit 0 is north, then the bits go clockwise to bit 7, northwest.|
 |Land bounds|The smallest cell rectangle that holds all land cells of the map.|
-|HeightField|The one global height sampler of the 3D map. It holds a height for each lattice point, so that all terrain chunks share the same edge heights.|
+|HeightField|The global 3D height sampler. It converts metre elevations to five-mile world units. All terrain chunks share its edge heights and normals.|
 |Lattice point|One vertex position of the terrain surface. Each map cell has a fixed number of lattice steps on each side (the subdivisions).|
 |River segment|A line from a river cell center to a cell edge, a cell corner, or a water cell center. The height field carves river channels along these lines.|
 |Chunk range|The rectangle of map cells that one terrain chunk mesh covers. The end column and the end row are not in the range.|

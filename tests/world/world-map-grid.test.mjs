@@ -9,9 +9,16 @@ const SAVED_DATE = new Date(2026, 9, 27);
 
 function createBuilder() {
   return Object.assign(Object.create(WorldMapGrid.prototype), {
-    grid: {}, gridSize: 16, mapHeader: createMapHeader({ columns: 5, rows: 5 }, SAVED_DATE), currentLayer: "terrain", currentValue: null, brushSize: 1,
-    cliffDirections: { 0: 0 }, riverDirections: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
-    applyZoom() {}, draw() {}, getGridCell: () => ({ x: 0, y: 0 }),
+    grid: {},
+    gridSize: 16,
+    mapHeader: createMapHeader({ columns: 5, rows: 5 }, SAVED_DATE),
+    currentLayer: "terrain",
+    currentValue: null,
+    brushSize: 1,
+    riverDirections: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
+    applyZoom() {},
+    draw() {},
+    getGridCell: () => ({ x: 0, y: 0 }),
   });
 }
 
@@ -153,7 +160,7 @@ test("a large brush at the top-left corner paints only tiles from 0", () => {
 test("builder numeric export and import preserve cell data", () => {
   // Setup
   const builder = createBuilder();
-  builder.grid = { "0,0": { terrain: TERRAIN.CLIFF.id, resourceLevel: RESOURCE_LEVEL.LOW.value } };
+  builder.grid = { "0,0": { terrain: TERRAIN.FLAT.id, elevation: 100, resourceLevel: RESOURCE_LEVEL.LOW.value } };
   const imported = createBuilder();
 
   // Execution
@@ -225,7 +232,12 @@ test("builder imports of the old format without a header are rejected", (t) => {
 test("builder clan boundaries use presentation border and fill colors", (t) => {
   // Setup
   const original = Object.getOwnPropertyDescriptor(globalThis, "Path2D");
-  globalThis.Path2D = class { rect() {} moveTo() {} lineTo() {} closePath() {} };
+  globalThis.Path2D = class {
+    rect() {}
+    moveTo() {}
+    lineTo() {}
+    closePath() {}
+  };
   // Tear down
   t.after(() => {
     if (original) Object.defineProperty(globalThis, "Path2D", original);
@@ -237,8 +249,12 @@ test("builder clan boundaries use presentation border and fill colors", (t) => {
   builder.grid = { "0,0": { clan: CLAN.CRANE.id } };
   const strokes = [];
   builder.ctx = {
-    save() {}, restore() {}, clip() {},
-    stroke() { strokes.push(this.strokeStyle); },
+    save() {},
+    restore() {},
+    clip() {},
+    stroke() {
+      strokes.push(this.strokeStyle);
+    },
   };
   const colors = getClanColors(CLAN.CRANE);
 
@@ -264,7 +280,10 @@ test("river painting requires a direction and saves an independent copy", () => 
   assert.deepEqual(imported.grid, builder.grid);
 });
 
-for (const [layer, value] of [["river", 0], ["erase", "river"]]) {
+for (const [layer, value] of [
+  ["river", 0],
+  ["erase", "river"],
+]) {
   test(`${layer} removes river direction data`, () => {
     const builder = createBuilder();
     builder.grid["0,0"] = { river: 1, "river direction": { 0: 1 }, terrain: 1 };
@@ -273,3 +292,45 @@ for (const [layer, value] of [["river", 0], ["erase", "river"]]) {
     assert.deepEqual(builder.grid["0,0"], { terrain: 1 });
   });
 }
+
+[-100, 0, 1250].forEach((elevation) => {
+  test(`builder paints elevation ${elevation} without changing other layers`, () => {
+    const builder = createBuilder();
+    builder.grid["0,0"] = { terrain: TERRAIN.HILLS.id };
+    builder.selectTool("elevation", elevation);
+    builder.paintAt({});
+    assert.deepEqual(builder.grid["0,0"], { terrain: TERRAIN.HILLS.id, elevation });
+    assert.equal(builder.getActiveOverlayLayer(), "elevation");
+  });
+});
+
+test("painting one metre and erasing elevation both restore the sparse default", () => {
+  const builder = createBuilder();
+  [
+    ["elevation", 1],
+    ["erase", "elevation"],
+  ].forEach(([layer, value]) => {
+    builder.grid["0,0"] = { elevation: -100, terrain: TERRAIN.HILLS.id };
+    builder.selectTool(layer, value);
+    builder.paintAt({});
+    assert.deepEqual(builder.grid["0,0"], { terrain: TERRAIN.HILLS.id });
+  });
+});
+
+test("invalid elevation selections do not replace the current tool", () => {
+  const builder = createBuilder();
+  builder.selectTool("elevation", 0);
+  ["1", 1.5, NaN, Infinity].forEach((value) => {
+    assert.throws(() => builder.selectTool("elevation", value), /Invalid tool selection/);
+    assert.equal(builder.currentValue, 0);
+  });
+});
+
+test("elevation brushes stay within map bounds", () => {
+  const builder = createBuilder();
+  builder.brushSize = 3;
+  builder.selectTool("elevation", -50);
+  builder.paintAt({});
+  assert.deepEqual(Object.keys(builder.grid).sort(), ["0,0", "0,1", "1,0", "1,1"]);
+  Object.values(builder.grid).forEach((cell) => assert.equal(cell.elevation, -50));
+});

@@ -5,9 +5,10 @@
  * - "?water=simple" uses a plain see-through material, for slow devices.
  * - The terrain is below the water level only in lakes, seas, and river channels, so the plane shows only there.
  */
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
 /** Height of the water plane. It is a little below 0, so that the plane does not flicker on the shoreline. */
-export const WATER_LEVEL = -0.01;
+export const WATER_LEVEL = -0.01 / METERS_PER_TILE;
 
 /** Sine waves for the bump texture: [x cycles, y cycles, amplitude, phase]. Whole cycles make the texture repeat without seams. */
 const BUMP_WAVES = Object.freeze([

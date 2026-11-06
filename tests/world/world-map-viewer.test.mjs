@@ -8,7 +8,9 @@ import { getClanColors } from "../../docs/scripts/clan-colors.js";
 test("viewer initialization reports and propagates loading failures", async (t) => {
   // Setup
   const error = new Error("Map data unavailable");
-  t.mock.method(WorldMapViewer.prototype, "loadBaseLayerImages", async () => { throw error; });
+  t.mock.method(WorldMapViewer.prototype, "loadBaseLayerImages", async () => {
+    throw error;
+  });
   const logging = t.mock.method(console, "error", () => {});
   const viewer = Object.create(WorldMapViewer.prototype);
 
@@ -26,7 +28,9 @@ test("viewer initializes travel papers from metadata before loading assets", asy
   viewer.canvas = { dataset: {} };
   viewer.render = () => {};
   let paperAtAssetLoad;
-  viewer.loadBaseLayerImages = async () => { paperAtAssetLoad = viewer.travelPapers[CLAN.CRAB.name]; };
+  viewer.loadBaseLayerImages = async () => {
+    paperAtAssetLoad = viewer.travelPapers[CLAN.CRAB.name];
+  };
 
   // Execution
   await viewer.initialize();
@@ -179,7 +183,11 @@ test("viewer map tool enables panning only for the pan tool", () => {
 test("viewer measure uses two clicks and restarts on the third", () => {
   // Setup
   const viewer = Object.create(WorldMapViewer.prototype);
-  const cells = [{ x: 0, y: 0 }, { x: 3, y: 4 }, { x: 7, y: 7 }];
+  const cells = [
+    { x: 0, y: 0 },
+    { x: 3, y: 4 },
+    { x: 7, y: 7 },
+  ];
   Object.assign(viewer, { measurePoints: [], render() {}, updateMeasureDisplay() {}, getGridCell: () => cells.shift() });
 
   // Execution
@@ -201,7 +209,10 @@ test("viewer measure display uses miles by default and km when selected", (t) =>
   globalThis.document = { getElementById: () => el };
   t.after(() => (globalThis.document = previous));
   const viewer = Object.create(WorldMapViewer.prototype);
-  viewer.measurePoints = [{ x: 0, y: 0 }, { x: 3, y: 4 }];
+  viewer.measurePoints = [
+    { x: 0, y: 0 },
+    { x: 3, y: 4 },
+  ];
 
   // Execution
   viewer.updateMeasureDisplay();
@@ -212,4 +223,50 @@ test("viewer measure display uses miles by default and km when selected", (t) =>
   assert.equal(miles, "Distance: 25 miles (5.0 tiles: 3 across, 4 down)");
   assert.equal(el.textContent, "Distance: 40 km (5.0 tiles: 3 across, 4 down)");
   assert.throws(() => viewer.setDistanceUnit("leagues"), /Unknown distance unit/);
+});
+
+test("viewer routes use saved elevations for restrictions and crossing costs", (t) => {
+  const previous = Object.getOwnPropertyDescriptor(globalThis, "TravelEventEngine");
+  globalThis.TravelEventEngine = class {};
+  t.after(() => {
+    if (previous) Object.defineProperty(globalThis, "TravelEventEngine", previous);
+    else delete globalThis.TravelEventEngine;
+  });
+  const viewer = Object.assign(Object.create(WorldMapViewer.prototype), {
+    grid: { "0,0": {}, "1,0": { elevation: 100 }, "2,0": {} },
+    terrainCosts: { flat: { cost: 100, costRoad: 100, skill: "", tn: null, tnRoad: null, zeni: 0, zeniRoad: 0, prob: 1, probRoad: 1 } },
+    skillConfig: { swim: { allowed: false } },
+    startCell: { x: 0, y: 0 },
+    waypoints: [{ x: 2, y: 0 }],
+    render() {},
+    updateResultDisplay() {},
+  });
+  viewer.computePath();
+  assert.equal(viewer.pathResult.failed, true);
+  Object.values(viewer.grid).forEach((cell) => {
+    cell.infrastructure = INFRASTRUCTURE.ROAD.id;
+  });
+  viewer.computePath();
+  assert.equal(viewer.pathResult.path.length, 3);
+  assert.equal(viewer.pathResult.totalMinutes, 250);
+});
+
+test("viewer renders elevation overlays before cliff edges", () => {
+  const calls = [];
+  const viewer = Object.assign(Object.create(WorldMapViewer.prototype), {
+    mapWidth: 16,
+    zoom: 1,
+    canvas: { width: 16, height: 16 },
+    drawOrder: [],
+    ctx: { setTransform() {}, clearRect() {}, scale() {} },
+    isLayerVisible: (layer) => layer === "elevation",
+    drawBaseTiles: () => calls.push("base"),
+    drawOverlayLayers: (layers) => calls.push(layers),
+    drawCliffEdges: () => calls.push("cliffs"),
+    drawGrid() {},
+    drawMeasureLine() {},
+    updateRiverFlow() {},
+  });
+  viewer.render();
+  assert.deepEqual(calls, ["base", ["elevation"], "cliffs"]);
 });

@@ -4,7 +4,9 @@
  * Missing layers use the same defaults as the 2D map: flat, temperate, and no vegetation.
  */
 import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/world-map-file.js";
-import { CLAN, CLIMATE, INFRASTRUCTURE, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/world-map-layers.js";
+import { CLAN, CLIMATE, INFRASTRUCTURE, isWaterTerrain, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/world-map-layers.js";
+import { DEFAULT_ELEVATION, getCliffEdges, getElevation } from "../../scripts/world/world-map-elevation.js";
+export { isWaterTerrain } from "../../scripts/world/world-map-layers.js";
 
 /** Saved cell fields that hold one catalog ID, with their layer and default value. */
 const ID_FIELDS = Object.freeze([
@@ -17,17 +19,6 @@ const ID_FIELDS = Object.freeze([
   ["settlement", LAYERS.SETTLEMENT, SETTLEMENT.NONE],
   ["resource", LAYERS.RESOURCE, RESOURCE.NONE],
 ]);
-
-const WATER_TERRAIN_IDS = new Set([TERRAIN.WATER.id, TERRAIN.COASTAL_WATER.id, TERRAIN.OCEAN.id]);
-
-/**
- * Tells if a terrain ID is water (water, coastal water, or ocean).
- * @param {number} terrainId Saved terrain ID.
- * @returns {boolean} True for water terrain.
- */
-export function isWaterTerrain(terrainId) {
-  return WATER_TERRAIN_IDS.has(terrainId);
-}
 
 /**
  * Converts saved direction flags ({"0": 0|1, ... "7": 0|1}) to a bit mask. Bit 0 is north, then clockwise.
@@ -66,10 +57,12 @@ export class MapModel {
     this.#ids = new Map(ID_FIELDS.map(([field, , fallback]) => [field, new Uint8Array(count).fill(fallback.id)]));
     this.#saved = new Array(count);
     this.riverMask = new Uint8Array(count);
-    this.cliffMask = new Uint8Array(count);
+    this.elevations = new Float64Array(count).fill(DEFAULT_ELEVATION);
     this.unknownValues = 0;
     this.outsideCells = 0;
     Object.entries(grid).forEach(([key, cell]) => this.#readCell(key, cell));
+    const bounds = { maxX: this.columns - 1, maxY: this.rows - 1 };
+    this.cliffCount = this.elevations.reduce((total, _, index) => total + Number(getCliffEdges(grid, index % this.columns, Math.floor(index / this.columns), bounds).length > 0), 0);
     this.settlements = this.#collect("settlement", (x, y, saved) => ({ x, y, settlement: this.valueAt("settlement", x, y), clan: this.valueAt("clan", x, y), englishName: saved.englishName ?? "", rokuganiName: saved.rokuganiName ?? "" }));
     this.resources = this.#collect("resource", (x, y) => ({ x, y, resource: this.valueAt("resource", x, y) }));
     this.labels = this.#savedCells()
@@ -114,6 +107,7 @@ export class MapModel {
    * @returns {import("../../scripts/world/world-map-layers.js").LayerValue} Resolved catalog value.
    */
   valueAt(field, x, y) {
+    if (field === LAYERS.ELEVATION.id) return LAYERS.ELEVATION.getValue(this.elevations[this.index(x, y)]);
     const layer = ID_FIELDS.find(([name]) => name === field)[1];
     return layer.getValue(this.ids(field)[this.index(x, y)]);
   }
@@ -146,7 +140,7 @@ export class MapModel {
       unknown: this.unknownValues,
       water: total("terrain", isWaterTerrain),
       rivers: total("river", (id) => id !== RIVER.NONE.id),
-      cliffs: total("terrain", (id) => id === TERRAIN.CLIFF.id),
+      cliffs: this.cliffCount,
       vegetation: total("vegetation", (id) => id !== VEGETATION.NONE.id),
       infrastructure: total("infrastructure", (id) => id !== INFRASTRUCTURE.NONE.id),
       settlements: this.settlements.length,
@@ -170,7 +164,7 @@ export class MapModel {
       else this.unknownValues += 1;
     });
     this.riverMask[index] = directionMask(cell["river direction"]);
-    this.cliffMask[index] = directionMask(cell["cliff direction"]);
+    this.elevations[index] = getElevation(cell);
   }
 
   #savedCells() {

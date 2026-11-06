@@ -11,17 +11,18 @@ import { ROAD_STYLES, buildRoadSegments } from "./road-paths.js";
 import { cellSurface } from "./surface-layers.js";
 import { HeightField } from "./terrain-height.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
 export const TREES_PER_CELL = 6;
 /** Lowest surface height for a tree. River banks and shores are below it. */
-export const TREE_MIN_HEIGHT = 0.06;
+export const TREE_MIN_HEIGHT = 0.06 / METERS_PER_TILE;
 /** Lowest normal height (cosine of the slope) for a tree. The terrain shader starts to show rock below 0.8. */
 export const TREE_MIN_NORMAL = 0.75;
 /** Distance from the road edge to the tree trunk. */
 export const ROAD_MARGIN = 0.1;
 /** Radius of the clearing around a settlement at its cell center. */
 export const SETTLEMENT_CLEARING = 0.35;
-const SNOW_MARGIN = 0.2;
+const SNOW_MARGIN = 200 / METERS_PER_TILE;
 const CELL_INSET = 0.08;
 
 export const TREE_KINDS = Object.freeze({ CONIFER: "conifer", BROADLEAF: "broadleaf" });

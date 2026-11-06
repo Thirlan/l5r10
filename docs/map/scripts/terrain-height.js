@@ -5,10 +5,12 @@
  * Every chunk mesh copies its part of this lattice, so adjacent chunks get equal positions and normals.
  *
  * Height model:
- * - Each cell has a sign (+1 land, -1 water), a level (a height or a depth), and a roughness.
+ * - Saved elevation supplies height in metres. One world unit is five miles (8046.72 m).
+ * - Each cell has a sign, an absolute height, and surface roughness in metres.
  * - The sampler blends the values of the four nearest cell centers with smoothstep weights.
  *   Height = sign × level, so the shoreline (height 0) is on the cell edge between land and water.
- * - A saved cliff direction puts the full height change across that cell edge into one lattice step on the low side.
+ * - Elevation drops of at least 75 m use one lattice step on the low side. Water-to-water changes stay smooth.
+ * - Water at the default elevation uses a 1 m display bed below sea level.
  * - Land gets ridged value noise, scaled by the blended roughness.
  * - River channels are carved to RIVER_BED, below the water plane at height 0.
  * - A seal pass then walks along each river segment. Where the surface is not below RIVER_SEAL, it lowers the
@@ -17,15 +19,16 @@
 import { TERRAIN } from "../../scripts/world/world-map-layers.js";
 import { MapModel, isWaterTerrain } from "./map-data.js";
 import { buildRiverSegments } from "./river-paths.js";
+import { DEFAULT_ELEVATION, getCliffDifference } from "../../scripts/world/world-map-elevation.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
 export const SUBDIVISIONS = 4;
-export const RIVER_BED = -0.12;
+export const RIVER_BED = -0.12 / METERS_PER_TILE;
 export const RIVER_INNER_WIDTH = 0.12;
 export const RIVER_OUTER_WIDTH = 0.36;
 /** Highest surface height that the seal pass accepts on a river segment. */
-export const RIVER_SEAL = -0.04;
+export const RIVER_SEAL = -0.04 / METERS_PER_TILE;
 const SEAL_SAMPLES_PER_STEP = 4;
-const CLIFF_SHARPNESS = 0.12;
 const NOISE_OCTAVES = Object.freeze([
   [0.45, 0.55],
   [0.9, 0.3],
@@ -33,19 +36,18 @@ const NOISE_OCTAVES = Object.freeze([
 ]);
 
 const TERRAIN_SHAPES = new Map([
-  [TERRAIN.FLAT.id, { level: 0.12, roughness: 0.1 }],
-  [TERRAIN.HILLS.id, { level: 0.42, roughness: 0.45 }],
-  [TERRAIN.MOUNTAINS.id, { level: 0.95, roughness: 1.3 }],
-  [TERRAIN.WATER.id, { level: 0.25, roughness: 0 }],
-  [TERRAIN.COASTAL_WATER.id, { level: 0.3, roughness: 0 }],
-  [TERRAIN.OCEAN.id, { level: 0.7, roughness: 0 }],
-  [TERRAIN.WETLANDS.id, { level: 0.04, roughness: 0.02 }],
-  [TERRAIN.CLIFF.id, { level: 0.6, roughness: 0.12 }],
+  [TERRAIN.FLAT.id, { roughness: 0.1 }],
+  [TERRAIN.HILLS.id, { roughness: 0.45 }],
+  [TERRAIN.MOUNTAINS.id, { roughness: 1.3 }],
+  [TERRAIN.WATER.id, { roughness: 0 }],
+  [TERRAIN.COASTAL_WATER.id, { roughness: 0 }],
+  [TERRAIN.OCEAN.id, { roughness: 0 }],
+  [TERRAIN.WETLANDS.id, { roughness: 0.02 }],
 ]);
 
 /**
  * @param {number} terrainId Saved terrain ID.
- * @returns {{level: number, roughness: number}} Height level (or water depth) and noise roughness.
+ * @returns {{roughness: number}} Surface noise roughness in metres.
  */
 export function terrainShape(terrainId) {
   const shape = TERRAIN_SHAPES.get(terrainId);
@@ -144,10 +146,13 @@ export class HeightField {
   #cellValues() {
     const terrain = this.model.ids("terrain");
     const shapes = [...terrain].map((id) => terrainShape(id));
+    const saved = Array.from(terrain, (id, index) => ({ terrain: id, elevation: this.model.elevations[index] }));
+    const heights = saved.map(({ terrain, elevation }) => (isWaterTerrain(terrain) && elevation === DEFAULT_ELEVATION ? -1 : elevation) / METERS_PER_TILE);
     return {
-      sign: Float32Array.from(terrain, (id) => (isWaterTerrain(id) ? -1 : 1)),
-      level: Float32Array.from(shapes, (shape) => shape.level),
-      roughness: Float32Array.from(shapes, (shape) => shape.roughness),
+      saved,
+      sign: Float32Array.from(heights, (height) => Math.sign(height)),
+      level: Float32Array.from(heights, (height) => Math.abs(height)),
+      roughness: Float32Array.from(shapes, (shape) => shape.roughness / METERS_PER_TILE),
     };
   }
 
@@ -158,20 +163,17 @@ export class HeightField {
   }
 
   /**
-   * Blend weight across the edge between two cells. A cliff flag puts the full drop into one lattice step on the low side.
+   * Blend weight across two cells. An elevation cliff puts the drop into one lattice step on the low side.
    * @param {number} ratio Position from the first cell center (0) to the second cell center (1).
    * @param {number} first Index of the first cell (west or north).
    * @param {number} second Index of the second cell (east or south).
-   * @param {number} direction Direction from the first cell to the second cell (2 = east, 4 = south).
    * @returns {number} Weight of the second cell.
    */
-  #edgeWeight(ratio, first, second, direction) {
-    const dropsToSecond = ((this.model.cliffMask[first] >> direction) & 1) === 1;
-    const dropsToFirst = ((this.model.cliffMask[second] >> ((direction + 4) % 8)) & 1) === 1;
-    const step = 1 / this.subdivisions;
-    if (dropsToSecond && dropsToFirst) return smoothstep(0.5 - CLIFF_SHARPNESS, 0.5 + CLIFF_SHARPNESS, ratio);
-    if (dropsToSecond) return smoothstep(0.5, 0.5 + step, ratio);
-    if (dropsToFirst) return smoothstep(0.5 - step, 0.5, ratio);
+  #edgeWeight(ratio, first, second) {
+    if (getCliffDifference(this.cells.saved[first], this.cells.saved[second])) {
+      const step = 1 / this.subdivisions;
+      return this.cells.saved[first].elevation > this.cells.saved[second].elevation ? smoothstep(0.5, 0.5 + step, ratio) : smoothstep(0.5 - step, 0.5, ratio);
+    }
     return smoothstep(0, 1, ratio);
   }
 
@@ -181,10 +183,10 @@ export class HeightField {
     const x = Math.floor(centerX);
     const y = Math.floor(centerY);
     const [topLeft, topRight, bottomLeft, bottomRight] = [this.#cellIndex(x, y), this.#cellIndex(x + 1, y), this.#cellIndex(x, y + 1), this.#cellIndex(x + 1, y + 1)];
-    const weightTop = this.#edgeWeight(centerX - x, topLeft, topRight, 2);
-    const weightBottom = this.#edgeWeight(centerX - x, bottomLeft, bottomRight, 2);
-    const hasCliff = (first, second) => (this.model.cliffMask[first] | this.model.cliffMask[second]) !== 0;
-    const weightY = hasCliff(topLeft, bottomLeft) || !hasCliff(topRight, bottomRight) ? this.#edgeWeight(centerY - y, topLeft, bottomLeft, 4) : this.#edgeWeight(centerY - y, topRight, bottomRight, 4);
+    const weightTop = this.#edgeWeight(centerX - x, topLeft, topRight);
+    const weightBottom = this.#edgeWeight(centerX - x, bottomLeft, bottomRight);
+    const hasCliff = (first, second) => getCliffDifference(this.cells.saved[first], this.cells.saved[second]) > 0;
+    const weightY = hasCliff(topLeft, bottomLeft) || !hasCliff(topRight, bottomRight) ? this.#edgeWeight(centerY - y, topLeft, bottomLeft) : this.#edgeWeight(centerY - y, topRight, bottomRight);
     const blend = (values) => lerp(lerp(values[topLeft], values[topRight], weightTop), lerp(values[bottomLeft], values[bottomRight], weightBottom), weightY);
     const sign = blend(this.cells.sign);
     const noise = Math.max(0, sign) * blend(this.cells.roughness) * ridgedNoise(column / this.subdivisions, row / this.subdivisions) ** 1.5;

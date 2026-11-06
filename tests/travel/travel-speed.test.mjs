@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { BASE_SPEED_KMPH, getTravelSpeed } from "../../docs/scripts/travel/travel-speed.js";
 import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../../docs/scripts/world/world-map-layers.js";
+import { getCliffDifference } from "../../docs/scripts/world/world-map-elevation.js";
 
 const cases = [
   ["hills", ["foot", "hills"], 4],
@@ -17,8 +18,10 @@ const cases = [
   ["road bridge", ["caravan", "flat", "temperate", "none", "river", "road"], 4],
   ["footpath bridge", ["horse", "flat", "temperate", "none", "river", "footpath"], 7],
   ["inland bridge", ["army", "water", "temperate", "none", "none", "road"], 4],
-  ["road on cliff", ["horse", "cliff", "temperate", "none", "none", "road"], 5.6],
-  ["footpath on cliff", ["foot", "cliff", "temperate", "none", "none", "footpath"], 2.5],
+  ["road across elevation cliff", ["horse", "flat", "temperate", "none", "none", "road", false, 75], 5.6],
+  ["footpath across elevation cliff", ["foot", "flat", "temperate", "none", "none", "footpath", false, 75], 2.5],
+  ["below cliff threshold", ["foot", "flat", "temperate", "none", "none", "none", false, 74], 5],
+  ["cliff without path", ["foot", "flat", "temperate", "none", "none", "none", false, 75], -1],
   ["ship on land", ["ship"], -1],
   ["boat on land", ["river boat"], -1],
   ["ship in lake", ["ship", "water"], 9],
@@ -35,8 +38,8 @@ const cases = [
   ["ship footbridge blocked", ["ship", "flat", "temperate", "none", "river", "footpath"], -1],
   ["lake ship bridge blocked", ["ship", "water", "temperate", "none", "none", "road"], -1],
   ["boat bridge clearance", ["river boat", "water", "temperate", "none", "none", "road"], 5.85],
-  ["river waterfall", ["river boat", "cliff", "temperate", "none", "river"], -1],
-  ["mounted cliff path", ["horse", "cliff", "temperate", "none", "none", "footpath"], -1],
+  ["river waterfall", ["river boat", "flat", "temperate", "none", "river", "none", false, 75], -1],
+  ["mounted cliff path", ["horse", "flat", "temperate", "none", "none", "footpath", false, 100], -1],
   ["river on ocean tile", ["ship", "ocean", "temperate", "none", "river"], -1],
   ["forest on water", ["ship", "water", "temperate", "vegetation"], -1],
   ["port on land", ["ship", "flat", "temperate", "none", "none", "large port"], -1],
@@ -58,21 +61,35 @@ const cases = [
 ];
 Object.entries(BASE_SPEED_KMPH).forEach(([mode, speed]) => {
   const terrain = mode === "ship" || mode === "river boat" ? "water" : "flat";
-  ["temperate", "desert", "waste", "shadowland"].forEach((climate) =>
-    cases.push([`${mode} ideal ${climate}`, [mode, terrain, climate], speed]));
+  ["temperate", "desert", "waste", "shadowland"].forEach((climate) => cases.push([`${mode} ideal ${climate}`, [mode, terrain, climate], speed]));
   if (terrain === "flat") {
-    ["water", "coastal water", "ocean", "cliff"].forEach((blocked) =>
-      cases.push([`${mode} blocked ${blocked}`, [mode, blocked], -1]));
+    ["water", "coastal water", "ocean"].forEach((blocked) => cases.push([`${mode} blocked ${blocked}`, [mode, blocked], -1]));
+    cases.push([`${mode} blocked cliff`, [mode, "flat", "temperate", "none", "none", "none", false, 75], -1]);
     cases.push([`${mode} road cap`, [mode, "flat", "temperate", "none", "none", "road"], speed]);
   }
 });
 
-cases.forEach(([name, inputs, expected]) => test(name, () => {
-  // Setup
-  const args = ["foot", "flat", "temperate", "none", "none", "none", false];
-  inputs.forEach((value, index) => { args[index] = value; });
-  // Execution
-  const actual = getTravelSpeed(...args);
-  // Assertion
-  assert.ok(Number.isFinite(actual) && Math.abs(actual - expected) < 1e-10, `${actual} != ${expected}`);
-}));
+cases.forEach(([name, inputs, expected]) =>
+  test(name, () => {
+    // Setup
+    const args = ["foot", "flat", "temperate", "none", "none", "none", false];
+    inputs.forEach((value, index) => {
+      args[index] = value;
+    });
+    // Execution
+    const actual = getTravelSpeed(...args);
+    // Assertion
+    assert.ok(Number.isFinite(actual) && Math.abs(actual - expected) < 1e-10, `${actual} != ${expected}`);
+  }),
+);
+
+test("water depth changes do not restrict sailing", () => {
+  const difference = getCliffDifference({ terrain: TERRAIN.COASTAL_WATER.id, elevation: -20 }, { terrain: TERRAIN.OCEAN.id, elevation: -4000 });
+  assert.equal(getTravelSpeed("ship", "ocean", "temperate", "none", "none", "none", false, difference), 9);
+});
+
+test("invalid cliff differences are reported explicitly", () => {
+  [-1, 1.5, "75", NaN].forEach((difference) => {
+    assert.throws(() => getTravelSpeed("foot", 0, 0, 0, 0, 0, false, difference), /Cliff difference/);
+  });
+});

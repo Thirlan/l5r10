@@ -20,7 +20,7 @@ test("climate roles use the texture sets from the user mapping", () => {
   assert.deepEqual(cellSurface(CLIMATE.TEMPERATE.id, TERRAIN.FLAT.id), { primary: layerIndex("grass_ground"), rock: layerIndex("marble_cliff_05"), snowLine: 0 });
   assert.equal(cellSurface(CLIMATE.TEMPERATE.id, TERRAIN.HILLS.id).primary, layerIndex("rocky_terrain_02"));
   assert.equal(cellSurface(CLIMATE.DESERT.id, TERRAIN.HILLS.id).primary, layerIndex("marble_cliff_02"));
-  assert.equal(cellSurface(CLIMATE.WASTE.id, TERRAIN.CLIFF.id).primary, layerIndex("rock_boulder_dry"));
+  assert.equal(cellSurface(CLIMATE.WASTE.id, TERRAIN.MOUNTAINS.id).primary, layerIndex("rock_boulder_dry"));
   assert.equal(cellSurface(CLIMATE.SHADOWLAND.id, TERRAIN.MOUNTAINS.id).primary, layerIndex("dark_rock"));
   assert.equal(cellSurface(CLIMATE.TROPICAL.id, TERRAIN.FLAT.id).primary, layerIndex("leafy_grass"));
 });

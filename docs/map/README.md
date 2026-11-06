@@ -61,12 +61,31 @@ The map file is one JSON object. It has a header, then the tiles:
 - `world-map-file.js` in `docs/scripts/world/` reads and writes this format. The 2D pages and the 3D page share it.
 - `createMapModel(data)` takes the size from `maxX` and `maxY`. The `MapModel` keeps the header in `model.header`.
 - The old format has no header, so the loaders reject it.
-- Each layer has one `Uint8Array` of catalog IDs, in row order (`index = y * columns + x`).
-- Missing layers use the 2D defaults: flat, temperate, no vegetation.
+- Each catalog layer has one `Uint8Array` of IDs, in row order (`index = y * columns + x`).
+- Elevation uses a `Float64Array` to keep signed integer metres without truncation.
+- Missing layers use the 2D defaults: flat, temperate, no vegetation, and elevation 1 m.
+- The map file omits elevation when it is 1 m. Zero and negative elevations are kept.
 - Saved numbers resolve with `LAYERS.<LAYER>.getValue(number)`. Unknown numbers keep the default and are counted.
-- River and cliff direction flags become 8-bit direction masks. Bit 0 is north, then clockwise.
+- River direction flags become 8-bit direction masks. Bit 0 is north, then clockwise.
+- Cliff edges come from elevation drops of at least 75 m across eight neighbors. Water-to-water changes do not form cliffs.
+- The cliff count is the number of tiles with a downward cliff edge. The old cliff terrain and direction fields are not used.
 - Tiles outside `maxX` and `maxY` are counted and skipped. The loaders do not remove them. The map builder does not create them.
 - The page shows a debug readout. It starts with the name, the version, the update date, and the seed. Then it shows the counts and the land bounds.
+
+### Elevation migration
+
+The elevation migration is complete. The saved map contains cliff elevations and sea depths.
+The one-time tools and their tests were removed after validation.
+
+- The map header was kept, with a new save date.
+- Original cliff tiles became flat terrain at 100 m. Front land is 1 m; rear land starts at 100 m.
+- Rear slopes drop by 10 m per tile. They stop at water, front land, or the map boundary.
+- Original cliffs take priority, then front land, then rear slopes. Overlapping rear slopes use the higher value.
+- Sea depth is `-(distance * 20)` metres, limited to `-4000`. Distance uses eight neighboring tiles.
+- Water within three tiles of land is no deeper than 60 m. This also meets the 200 m island-chain limit.
+- Inland water is unchanged. The migration created no tiles outside the map.
+- Cliff TN is `10 + 5 * floor((difference - 75) / 25)`. Roads bypass the check; footpaths bypass it only on foot.
+- Both cells must have a suitable bypass. The viewer keeps the existing restriction against unassisted cliff travel.
 
 ## Terrain surface (PR 3)
 
@@ -74,9 +93,13 @@ The terrain is one continuous surface. It is made from chunk meshes that use one
 
 - `scripts/terrain-height.js` makes the `HeightField`. Each cell has 4 lattice steps on each side (`SUBDIVISIONS`).
 - The height at a lattice point blends the 4 nearest cell centers with smoothstep weights.
-- Each terrain has a level and a roughness. Ridged noise adds relief to hills and mountains.
-- Water cells have a negative level. The shoreline is at height 0 on the edge between land and water.
-- A saved cliff direction puts the full height change into one lattice step on the low side of that edge.
+- Elevation sets the height. Divide metres by 8046.72 to get world units, with no vertical exaggeration.
+- Terrain supplies small surface roughness in metres. It does not set a base height.
+- Negative elevations are below sea level. Water at the default elevation uses a 1 m display bed.
+  This keeps inland water visible without changing its saved elevation.
+- Opposite height signs put the shoreline at height 0 on the cell edge.
+- A cliff drop puts the full height change into one lattice step on the low side. Underwater slopes stay smooth.
+- Water, river beds, road clearances, and tree height limits use the same metre conversion.
 - `scripts/river-paths.js` makes river segments with the same connection rule as the 2D map.
   The height field carves a channel below height 0 along each segment.
 - A seal pass walks along each river segment after the carve. Where the surface is above `RIVER_SEAL`,
@@ -110,6 +133,7 @@ The terrain is one continuous surface. It is made from chunk meshes that use one
 | Shadowland | brown_mud_03 | default | dark_rock | — |
 
 - The default set is moon_dusted_01. Wetlands and every role without a set use it.
+- Snow lines are 1550 m in temperate mountains and 1200 m in polar mountains. The texture stores 10 m steps.
 - road_damaged (footpaths) and pavement_04 (roads) are in the same arrays, for PR 5.
 - brown_mud_03 has no roughness map. Its roughness is a constant.
 

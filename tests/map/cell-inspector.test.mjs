@@ -4,6 +4,7 @@ import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATIO
 import { cellAtWorld, describeCell } from "../../docs/map/scripts/cell-inspector.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
 
 const SIZE = Object.freeze({ columns: 4, rows: 3 });
 
@@ -12,6 +13,7 @@ function inspectorModel() {
   const grid = {
     "1,1": {
       terrain: TERRAIN.HILLS.id,
+      elevation: 100,
       climate: CLIMATE.DESERT.id,
       vegetation: VEGETATION.PRESENT.id,
       infrastructure: INFRASTRUCTURE.ROAD.id,
@@ -81,8 +83,9 @@ test("the description has the coordinates, the height, each layer value, and the
   // Assertion
   assert.deepEqual(rows, [
     ["Cell", "1, 1"],
-    ["Height", field.sample(1.5, 1.5).toFixed(2)],
+    ["Height", `${(field.sample(1.5, 1.5) * METERS_PER_TILE).toFixed(2)} m`],
     ["Terrain", "hills"],
+    ["Elevation", "100 m"],
     ["Climate", "desert"],
     ["Vegetation", "Vegetation"],
     ["River", "none"],
@@ -103,8 +106,9 @@ test("a settlement without a name and an empty cell show only the settlement typ
   // Assertion
   assert.deepEqual(village.at(-1), ["Settlement", "Village"]);
   assert.deepEqual(empty.at(-1), ["Settlement", "none"]);
-  assert.deepEqual(empty.slice(2, 4), [
+  assert.deepEqual(empty.slice(2, 5), [
     ["Terrain", "flat"],
+    ["Elevation", "1 m"],
     ["Climate", "temperate"],
   ]);
 });

@@ -4,6 +4,7 @@ import test from "node:test";
 
 const scripts = new URL("../docs/scripts/", import.meta.url);
 const mapScripts = new URL("../docs/map/scripts/", import.meta.url);
+const toolScripts = new URL("../tools/", import.meta.url);
 
 test("local script imports resolve after moving world and travel modules", () => {
   // Setup
@@ -67,7 +68,13 @@ test("module tests mirror the script subfolders", () => {
   files.forEach((file) => {
     const modulePath = file.replace(/\.test\.mjs$/, ".js");
     const isMapTest = modulePath.startsWith("map/") || modulePath.startsWith("map\\");
-    const scriptUrl = isMapTest ? new URL(modulePath.slice(4), mapScripts) : new URL(modulePath, scripts);
+    const isToolTest = modulePath.startsWith("tools/") || modulePath.startsWith("tools\\");
+    let scriptUrl = new URL(modulePath, scripts);
+    if (isMapTest) {
+      scriptUrl = new URL(modulePath.slice(4), mapScripts);
+    } else if (isToolTest) {
+      scriptUrl = new URL(file.slice(6).replace(/\.test\.mjs$/, ".mjs"), toolScripts);
+    }
     assert.ok(existsSync(scriptUrl), `${file} must match its script folder`);
   });
 });

@@ -1,22 +1,11 @@
-import { RIVER, TERRAIN } from "./world-map-layers.js";
+import { NEIGHBOR_OFFSETS, RIVER, TERRAIN } from "./world-map-layers.js";
 import { getWaterColor, SAND_BANK_COLOR } from "./world-map-img-base-layers.js";
 
 const STRIPE_COLORS = [SAND_BANK_COLOR, getWaterColor(TERRAIN.WATER), SAND_BANK_COLOR];
 const STRIPE_OFFSETS = [-1, 0, 1];
 const STRIPE_WIDTHS = [0.3, 2.7, 0.3];
 const RIVER_DIRECTIONS = ["east", "south", "west", "north"];
-export const RIVER_OFFSETS = Object.freeze(
-  [
-    ["north", 0, -1],
-    ["northeast", 1, -1],
-    ["east", 1, 0],
-    ["southeast", 1, 1],
-    ["south", 0, 1],
-    ["southwest", -1, 1],
-    ["west", -1, 0],
-    ["northwest", -1, -1],
-  ].map((offset) => Object.freeze(offset)),
-);
+export const RIVER_OFFSETS = Object.freeze(["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"].map((name, direction) => Object.freeze([name, ...NEIGHBOR_OFFSETS[direction]])));
 
 export const RIVER_CONTROL_IMAGES = Object.freeze(Object.entries(RIVER).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_river_${key.toLowerCase()}.webp` })));
 

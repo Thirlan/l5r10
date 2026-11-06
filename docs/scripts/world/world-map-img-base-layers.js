@@ -66,7 +66,15 @@ export function drawWaterEdges(ctx, x, y, gridSize, terrain, neighbors, riverCon
   ctx.restore();
 }
 
-export const BASE_LAYER_IMAGES = Object.freeze([[TERRAIN.FLAT, "../img/map/terrain_flat.webp"], [TERRAIN.HILLS, "../img/map/terrain_hills.webp"], [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"], [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"], [VEGETATION.PRESENT, "../img/map/vegetation.webp"], ...["bottom", "corner", "slope", "diagonal", "inward"].map((name) => [name, `../img/map/cliff_${name}.webp`])].map(([value, image]) => Object.freeze({ value, image })));
+export const BASE_LAYER_IMAGES = Object.freeze(
+  [
+    [TERRAIN.FLAT, "../img/map/terrain_flat.webp"],
+    [TERRAIN.HILLS, "../img/map/terrain_hills.webp"],
+    [TERRAIN.MOUNTAINS, "../img/map/terrain_mountains.webp"],
+    [TERRAIN.WETLANDS, "../img/map/terrain_wetlands.webp"],
+    [VEGETATION.PRESENT, "../img/map/vegetation.webp"],
+  ].map(([value, image]) => Object.freeze({ value, image })),
+);
 
 const imagePaths = new Map(BASE_LAYER_IMAGES.map(({ value, image }) => [value, image]));
 
@@ -92,7 +100,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   const left = x * gridSize;
   const top = y * gridSize;
   const terrainColor = getWaterColor(terrain);
-  const terrainImage = terrainColor ? null : getLoadedImage(terrain === TERRAIN.CLIFF ? TERRAIN.FLAT : terrain, images);
+  const terrainImage = terrainColor ? null : getLoadedImage(terrain, images);
   const vegetationImage = vegetation === VEGETATION.PRESENT ? getLoadedImage(vegetation, images) : null;
 
   ctx.save();
@@ -114,53 +122,39 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
  * @param {number} y Cell row.
  * @param {number} gridSize Cell size in pixels.
  * @param {number} zoom Map scale.
- * @param {Record<number, number|string>|undefined|null} directions Saved cliff direction flags.
- * @param {Map<string, HTMLImageElement>} images Loaded images by asset path.
- * @param {Object<number, Record<number, number|string>>} [neighbors] Adjacent cliff direction flags.
+ * @param {number[]} edges Directions of elevation drops, clockwise from north.
  * @returns {void}
  */
-export function drawCliffEdges(ctx, x, y, gridSize, zoom, directions, images, neighbors = {}) {
+export function drawCliffEdges(ctx, x, y, gridSize, zoom, edges) {
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0 || !Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Cliff drawing needs a canvas context, valid cell dimensions, and positive zoom.");
   }
-  const has = (flags, direction) => Number(flags?.[direction % 8]) === 1;
-  const selected = Array.from({ length: 8 }, (_, index) => has(directions, index));
-  const inward = [0, 1, 2, 3].map((rotation) => {
-    const bottom = (4 + rotation * 2) % 8;
-    const diagonal = (bottom + 1) % 8;
-    return has(neighbors[(bottom + 2) % 8], diagonal) && has(neighbors[bottom], diagonal);
-  });
-  if (!selected.some(Boolean) && !inward.some(Boolean)) return;
-
-  const size = gridSize / 3;
-  const draw = (name, column, row, rotation, mirror = false) => {
-    const image = getLoadedImage(name, images);
-    ctx.save();
-    ctx.translate((x + 0.5) * gridSize, (y + 0.5) * gridSize);
-    ctx.rotate((rotation * Math.PI) / 2);
-    ctx.translate((column - 1) * size, (row - 1) * size);
-    if (mirror) ctx.scale(-1, 1);
-    ctx.drawImage(image, -size / 2, -size / 2, size, size);
-    ctx.restore();
-  };
+  if (!Array.isArray(edges) || edges.some((direction) => !Number.isInteger(direction) || direction < 0 || direction > 7)) {
+    throw new TypeError("Cliff edges need directions from zero to seven.");
+  }
+  if (!edges.length) return;
+  const segments = [
+    [0, 0, 1, 0],
+    [0.75, 0, 1, 0.25],
+    [1, 0, 1, 1],
+    [1, 0.75, 0.75, 1],
+    [1, 1, 0, 1],
+    [0.25, 1, 0, 0.75],
+    [0, 1, 0, 0],
+    [0, 0.25, 0.25, 0],
+  ];
   ctx.save();
-  ctx.imageSmoothingEnabled = false;
-  [0, 1, 2, 3].forEach((rotation) => {
-    const bottom = (4 + rotation * 2) % 8;
-    const left = (bottom + 2) % 8;
-    const right = (bottom + 6) % 8;
-    if (selected[bottom]) {
-      draw("bottom", 1, 2, rotation);
-      if (!selected[left]) draw(has(neighbors[left], bottom) ? "bottom" : "slope", 0, 2, rotation, true);
-      draw(selected[right] ? "corner" : has(neighbors[right], bottom) ? "bottom" : "slope", 2, 2, rotation);
-    }
-    const diagonal = (bottom + 1) % 8;
-    if (inward[rotation]) {
-      draw("inward", 0, 2, rotation);
-    } else if (selected[diagonal] && !(selected[bottom] && selected[left])) {
-      [0, 1, 2].forEach((index) => draw("diagonal", index, index, rotation));
-    }
+  ctx.beginPath();
+  edges.forEach((direction) => {
+    if (direction % 2 && edges.includes(direction - 1) && edges.includes((direction + 1) % 8)) return;
+    const [startX, startY, endX, endY] = segments[direction];
+    ctx.moveTo((x + startX) * gridSize, (y + startY) * gridSize);
+    ctx.lineTo((x + endX) * gridSize, (y + endY) * gridSize);
   });
+  ctx.strokeStyle = "#4B3525";
+  ctx.lineWidth = Math.max(1 / zoom, gridSize / 8);
+  ctx.lineCap = "square";
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -182,7 +176,6 @@ export const BASE_LAYER_CONTROL_IMAGES = Object.freeze(
     [TERRAIN.COASTAL_WATER, "../img/map/control_coastal_water.webp"],
     [TERRAIN.OCEAN, "../img/map/control_ocean.webp"],
     [TERRAIN.WETLANDS, "../img/map/control_wetlands.webp"],
-    [TERRAIN.CLIFF, "../img/map/control_cliff.webp"],
     [CLIMATE.TEMPERATE, "../img/map/control_temperate.webp"],
     [CLIMATE.TROPICAL, "../img/map/control_tropical.webp"],
     [CLIMATE.DESERT, "../img/map/control_desert.webp"],

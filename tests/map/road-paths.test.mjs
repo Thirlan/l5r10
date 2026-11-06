@@ -5,6 +5,7 @@ import { INFRASTRUCTURE, RIVER, TERRAIN } from "../../docs/scripts/world/world-m
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { BRIDGE_DECK, ROAD_STYLES, addRibbon, buildRoadGeometry, buildRoadSegments, roadBase, roadJunctions } from "../../docs/map/scripts/road-paths.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
 
 const ROAD = INFRASTRUCTURE.ROAD.id;
 const FOOTPATH = INFRASTRUCTURE.FOOTPATH.id;
@@ -129,5 +130,13 @@ test("every road triangle of the live map stays above the surface", () => {
 
   // Assertion
   assert.equal(groups.length, 42);
-  assert.ok(clearance > 0.015, `lowest clearance ${clearance}`);
+  assert.ok(clearance * METERS_PER_TILE > 0.015, `lowest clearance ${clearance * METERS_PER_TILE} m`);
+});
+
+test("roads follow one-metre land instead of floating above the physical terrain", () => {
+  const field = new HeightField(roadModel(), { carveRivers: false });
+  assert.equal(roadBase(field, 1.5, 1.5), field.sample(1.5, 1.5));
+  const groups = [...buildRoadGeometry(field, 2).values()];
+  const highest = Math.max(...groups.flatMap((group) => group.positions.filter((_, index) => index % 3 === 1)));
+  assert.ok(highest * METERS_PER_TILE < 1.2);
 });

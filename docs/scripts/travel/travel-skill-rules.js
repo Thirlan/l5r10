@@ -2,6 +2,7 @@ import { INFRASTRUCTURE, LAYERS, TERRAIN } from "../world/world-map-layers.js";
 import { BASE_SPEED_KMPH } from "./travel-speed.js";
 import { RIVER_OFFSETS } from "../world/world-map-img-river.js";
 import { SkillCheck } from "../skill-check.js";
+import { getElevation } from "../world/world-map-elevation.js";
 import { CLIMATE_MODIFIER, WATER_CLIMATE_MODIFIER, VEGETATION_MODIFIER, INFRASTRUCTURE_MODIFIER, RIVER_AGAINST_CURRENT_MODIFIER } from "./terrain-skill-check-tn-modifiers.js";
 
 const CELL_LAYERS = ["terrain", "climate", "vegetation", "river", "infrastructure", "clan"];
@@ -31,14 +32,15 @@ export function validateTravelInput(mode, cell, direction) {
     }
     result[layer] = value;
   });
+  result.elevation = getElevation(cell);
   if (isWater(result) && (result.vegetation !== 0 || result.river !== 0)) {
     throw new TypeError("Water cannot have vegetation or a river.");
   }
 
   // Active barriers require at least one saved direction.
-  ["river direction", "cliff direction"].forEach((layer) => {
+  ["river direction"].forEach((layer) => {
     const flags = result[layer];
-    const required = layer === "river direction" ? result.river !== 0 : result.terrain === TERRAIN.CLIFF.id;
+    const required = result.river !== 0;
     if (flags === undefined && !required) {
       return;
     }
@@ -129,16 +131,15 @@ export function bypassesCrossing(mode, cell, feature) {
 /**
  * @param {string} mode Validated transport name.
  * @param {object} cell Validated cell supplying environmental modifiers.
- * @param {string} feature River or cliff.
  * @param {boolean} isAgainstCurrent True for upstream river travel.
  * @returns {SkillCheck} One physical crossing check.
  */
-export function crossingCheck(mode, cell, feature, isAgainstCurrent) {
+export function crossingCheck(mode, cell, isAgainstCurrent) {
   // Compute crossing difficulty before selecting the skill and trait.
-  const sailing = feature === "river" && isBoat(mode);
-  const baseTN = feature === "river" ? 5 + RIVER_AGAINST_CURRENT_MODIFIER[isAgainstCurrent] : 9;
+  const sailing = isBoat(mode);
+  const baseTN = 5 + RIVER_AGAINST_CURRENT_MODIFIER[isAgainstCurrent];
   const infrastructure = sailing ? 0 : infrastructureModifier(cell);
-  const tn = Math.max(5, baseTN + environmentModifier(cell, feature === "river") + infrastructure);
+  const tn = Math.max(5, baseTN + environmentModifier(cell, true) + infrastructure);
 
   const skill = sailing ? "Sailing" : "Athletics";
   const trait = sailing ? "Intelligence" : "Strength";
@@ -148,24 +149,17 @@ export function crossingCheck(mode, cell, feature, isAgainstCurrent) {
 /**
  * @param {object} cell Validated cell.
  * @param {number} direction Movement direction.
- * @param {string} feature River or cliff.
- * @returns {boolean} True when movement crosses the saved feature.
+ * @returns {boolean} True when movement crosses the saved river.
  */
-export function crossesWithinCell(cell, direction, feature) {
+export function crossesWithinCell(cell, direction) {
   const [, movementX, movementY] = RIVER_OFFSETS[direction];
 
-  // Compare movement with each active flow direction or cliff normal.
-  return Object.entries(cell[`${feature} direction`] ?? {}).some(([index, enabled]) => {
+  return Object.entries(cell["river direction"] ?? {}).some(([index, enabled]) => {
     if (enabled !== 1) {
       return false;
     }
 
     const [, featureX, featureY] = RIVER_OFFSETS[Number(index)];
-    if (feature === "river") {
-      return movementX * featureY !== movementY * featureX;
-    }
-
-    const normalMovement = movementX * featureX + movementY * featureY;
-    return Number(index) % 2 === 0 ? normalMovement > 0 : normalMovement !== 0;
+    return movementX * featureY !== movementY * featureX;
   });
 }

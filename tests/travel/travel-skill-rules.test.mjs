@@ -9,7 +9,7 @@ test("missing layers use map defaults without changing the input", () => {
   // Execution
   const result = validateTravelInput("foot", cell, 0);
   // Assertion
-  assert.deepEqual(result, { terrain: 0, climate: 0, vegetation: 0, river: 0, infrastructure: 0, clan: 0 });
+  assert.deepEqual(result, { terrain: 0, climate: 0, vegetation: 0, river: 0, infrastructure: 0, clan: 0, elevation: 1 });
   assert.deepEqual(cell, {});
 });
 
@@ -28,7 +28,8 @@ test("missing layers use map defaults without changing the input", () => {
   ["water vegetation", "foot", { terrain: TERRAIN.WATER.id, vegetation: 1 }, 0],
   ["water river", "foot", { terrain: TERRAIN.WATER.id, river: 1 }, 0],
   ["missing river flow", "foot", { river: 1 }, 0],
-  ["missing cliff normal", "foot", { terrain: TERRAIN.CLIFF.id }, 0],
+  ["fractional elevation", "foot", { elevation: 1.5 }, 0],
+  ["string elevation", "foot", { elevation: "100" }, 0],
   ["empty active flags", "foot", { river: 1, "river direction": {} }, 0],
   ["null flags", "foot", { "river direction": null }, 0],
   ["array flags", "foot", { "river direction": [] }, 0],
@@ -46,26 +47,15 @@ Array.from({ length: 8 }, (_, direction) => direction).forEach((direction) =>
     // Setup
     const cell = { "river direction": { [direction]: 1, [(direction + 1) % 8]: 0 } };
     // Assertion
-    assert.equal(crossesWithinCell(cell, direction, "river"), false);
-    assert.equal(crossesWithinCell(cell, (direction + 4) % 8, "river"), false);
-    assert.equal(crossesWithinCell(cell, (direction + 2) % 8, "river"), true);
-  }),
-);
-
-[1, 3, 5, 7].forEach((normal) =>
-  test(`diagonal cliff normal ${normal} distinguishes walking alongside`, () => {
-    // Setup
-    const cell = { "cliff direction": { [normal]: 1 } };
-    // Assertion
-    assert.equal(crossesWithinCell(cell, normal, "cliff"), true);
-    assert.equal(crossesWithinCell(cell, (normal + 4) % 8, "cliff"), true);
-    assert.equal(crossesWithinCell(cell, (normal + 2) % 8, "cliff"), false);
+    assert.equal(crossesWithinCell(cell, direction), false);
+    assert.equal(crossesWithinCell(cell, (direction + 4) % 8), false);
+    assert.equal(crossesWithinCell(cell, (direction + 2) % 8), true);
   }),
 );
 
 test("no direction flags means no internal crossing", () => {
   // Assertion
-  assert.equal(crossesWithinCell({}, 0, "river"), false);
+  assert.equal(crossesWithinCell({}, 0), false);
 });
 
 [

@@ -1,4 +1,7 @@
 import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "../world/world-map-layers.js";
+import { getCliffDifference } from "../world/world-map-elevation.js";
+import { bypassesCrossing } from "./travel-skill-rules.js";
+import { getTravelSpeed } from "./travel-speed.js";
 
 const MODE_FOOT = "foot";
 const MODE_RIVER_BOAT = "river boat";
@@ -21,11 +24,12 @@ const RIVER_WATER_NAME = TERRAIN.WATER.name[0].toUpperCase() + TERRAIN.WATER.nam
 const WATER_TERRAINS = new Set([TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN].flatMap(({ name }) => [name, name.replace(/\b\w/g, (letter) => letter.toUpperCase())]));
 
 // Mode-aware A* + trip simulator. Consumes a small map-query interface so it stays UI-agnostic.
-// Config: { getTerrain, getTileData, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }
+// Config: { getTerrain, getTileData, getCell, getClan, skillConfig, travelPapers, avoidClans, includeRisk, includeMoney }
 export class L5RPathing {
-  constructor({ getTerrain, getTileData, getInfrastructure = () => null, getClan = () => null, skillConfig, travelPapers = {}, avoidClans = {}, includeRisk = false, includeMoney = false }) {
+  constructor({ getTerrain, getTileData, getCell = () => ({}), getInfrastructure = () => null, getClan = () => null, skillConfig, travelPapers = {}, avoidClans = {}, includeRisk = false, includeMoney = false }) {
     this.getTerrain = getTerrain;
     this.getTileData = getTileData;
+    this.getCell = getCell;
     this.getInfrastructure = getInfrastructure;
     this.getClan = getClan;
     this.skillConfig = skillConfig;
@@ -62,6 +66,17 @@ export class L5RPathing {
     if (!fromT || !toT) return null;
     const toData = this.getTileData(to.x, to.y, toMode);
     if (!toData || toData.cost === null) return null;
+    const fromCell = this.getCell(from.x, from.y);
+    const toCell = this.getCell(to.x, to.y);
+    const cliffDifference = getCliffDifference(fromCell, toCell);
+    let cliffCostRatio = 1;
+    if (cliffDifference) {
+      if (fromMode !== MODE_FOOT || toMode !== MODE_FOOT || !bypassesCrossing(toMode, fromCell, "cliff") || !bypassesCrossing(toMode, toCell, "cliff")) return null;
+      const speedInputs = [toMode, toCell.terrain ?? 0, toCell.climate ?? 0, toCell.vegetation ?? 0, toCell.river ?? 0, toCell.infrastructure ?? 0];
+      const cliffSpeed = getTravelSpeed(...speedInputs, false, cliffDifference);
+      if (cliffSpeed < 0) return null;
+      cliffCostRatio = getTravelSpeed(...speedInputs) / cliffSpeed;
+    }
 
     const toWater = WATER_TERRAINS.has(toT);
     const fromInfrastructure = this.getInfrastructure(from.x, from.y);
@@ -80,7 +95,7 @@ export class L5RPathing {
     const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan] ? { skills: ["sneak", "forgery"], tn: 20, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 } : null;
     const transition = (checks = []) => ({
       toMode,
-      cost: toData.cost,
+      cost: toData.cost * cliffCostRatio,
       zeni: toData.zeni ?? 0,
       checks: [...checks, ...(territorialCheck ? [territorialCheck] : [])],
       avoidPenalty: clan && this.avoidClans[clan] ? AVOID_CLAN_PENALTY : 0,

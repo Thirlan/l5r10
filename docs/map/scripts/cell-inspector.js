@@ -3,11 +3,13 @@
  * The cell comes from the picked world position, so it does not depend on the chunk size or the mesh vertices.
  */
 import { SETTLEMENT } from "../../scripts/world/world-map-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 
 /** Smallest time between two hover picks, in milliseconds. */
 const HOVER_INTERVAL = 80;
 const LAYER_ROWS = Object.freeze([
   ["Terrain", "terrain"],
+  ["Elevation", "elevation"],
   ["Climate", "climate"],
   ["Vegetation", "vegetation"],
   ["River", "river"],
@@ -48,7 +50,7 @@ export function describeCell(field, x, y) {
   const saved = model.savedCell(x, y);
   const names = [saved.englishName, saved.rokuganiName].filter(Boolean).join(" / ");
   const settlementText = settlement === SETTLEMENT.NONE ? settlement.name : [settlement.name, names].filter(Boolean).join(": ");
-  return [["Cell", `${x}, ${y}`], ["Height", field.sample(x + 0.5, y + 0.5).toFixed(2)], ...LAYER_ROWS.map(([title, layer]) => [title, model.valueAt(layer, x, y).name]), ["Settlement", settlementText]];
+  return [["Cell", `${x}, ${y}`], ["Height", `${(field.sample(x + 0.5, y + 0.5) * METERS_PER_TILE).toFixed(2)} m`], ...LAYER_ROWS.map(([title, layer]) => [title, model.valueAt(layer, x, y).name]), ["Settlement", settlementText]];
 }
 
 /**

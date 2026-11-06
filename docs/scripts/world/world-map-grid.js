@@ -1,6 +1,7 @@
 import { WorldMapRenderer } from "./world-map-common.js";
 import { isInsideMap, readMapFile, stringifyMapFile } from "./world-map-file.js";
 import { LAYERS, TERRAIN } from "./world-map-layers.js";
+import { DEFAULT_ELEVATION, getElevation } from "./world-map-elevation.js";
 import { getClanColors } from "../clan-colors.js";
 
 const DEFAULT_GRID_SIZE = 16;
@@ -14,7 +15,6 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.fontSize = 14;
     this.brushSize = 1;
     this.isDrawing = false;
-    this.cliffDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
     this.riverDirections = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
 
     this.setupEventListeners();
@@ -92,9 +92,6 @@ export class WorldMapGrid extends WorldMapRenderer {
 
   paintAt(event) {
     if (!this.currentLayer) return;
-    const cliffId = TERRAIN.CLIFF.id;
-    const paintingCliffTerrain = this.currentLayer === LAYERS.TERRAIN.id && this.currentValue === cliffId;
-    if (paintingCliffTerrain && !Object.values(this.cliffDirections).some((direction) => direction === 1)) return;
     if (this.currentLayer === "river" && this.currentValue && !Object.values(this.riverDirections).some((direction) => direction === 1)) return;
     const { x, y } = this.getGridCell(event);
     if (!isInsideMap(this.mapHeader, x, y)) return;
@@ -121,9 +118,8 @@ export class WorldMapGrid extends WorldMapRenderer {
         } else {
           const layerToErase = this.currentValue;
           const cell = this.grid[cellKey];
-          if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(layerToErase)) {
+          if (["terrain", "elevation", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(layerToErase)) {
             delete cell[layerToErase];
-            if (layerToErase === "terrain") delete cell["cliff direction"];
             if (layerToErase === "river") delete cell["river direction"];
           } else if (layerToErase === "infrastructure") {
             delete cell.infrastructure;
@@ -143,24 +139,17 @@ export class WorldMapGrid extends WorldMapRenderer {
         const cell = this.ensureCell(cellKey);
         const valId = this.currentValue;
 
-        if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
+        if (this.currentLayer === LAYERS.ELEVATION.id) {
+          const elevation = getElevation({ elevation: valId });
+          if (elevation === DEFAULT_ELEVATION) delete cell.elevation;
+          else cell.elevation = elevation;
+        } else if (["terrain", "climate", "vegetation", "river", "animal", "spirit", "shadowland", "crime", "resourceLevel"].includes(this.currentLayer)) {
           if (valId || this.currentLayer === LAYERS.TERRAIN.id || this.currentLayer === LAYERS.CLIMATE.id) {
             cell[this.currentLayer] = valId;
           } else delete cell[this.currentLayer];
           if (this.currentLayer === "river") {
             if (valId) cell["river direction"] = { ...this.riverDirections };
             else delete cell["river direction"];
-          }
-          if (this.currentLayer === "terrain") {
-            if (valId === cliffId) {
-              if (Object.values(this.cliffDirections).some((direction) => direction === 1)) {
-                cell["cliff direction"] = { ...this.cliffDirections };
-              } else {
-                delete cell["cliff direction"];
-              }
-            } else {
-              delete cell["cliff direction"];
-            }
           }
         } else if (this.currentLayer === "infrastructure") {
           cell.infrastructure = valId;
@@ -220,25 +209,6 @@ export class WorldMapGrid extends WorldMapRenderer {
     this.draw();
   }
 
-  setCliffDirection(direction, enabled) {
-    if (direction === "all") {
-      for (const index of Object.keys(this.cliffDirections)) {
-        this.cliffDirections[index] = enabled ? 1 : 0;
-      }
-      document.querySelectorAll("[data-cliff-direction]:not(#cliffDirectionAll)").forEach((checkbox) => {
-        checkbox.checked = enabled;
-      });
-    } else if (Object.hasOwn(this.cliffDirections, direction)) {
-      this.cliffDirections[direction] = enabled ? 1 : 0;
-    } else {
-      return;
-    }
-
-    const allDirections = Object.values(this.cliffDirections).every((value) => value === 1);
-    const allCheckbox = document.getElementById("cliffDirectionAll");
-    if (allCheckbox) allCheckbox.checked = allDirections;
-  }
-
   setRiverDirection(direction, enabled) {
     if (Object.hasOwn(this.riverDirections, direction)) {
       this.riverDirections[direction] = enabled ? 1 : 0;
@@ -283,7 +253,6 @@ export class WorldMapGrid extends WorldMapRenderer {
     ctx.scale(this.zoom, this.zoom);
 
     this.drawBaseTiles();
-    this.drawCliffEdges();
 
     // Render remaining layers
     for (const layerName of this.drawOrder) {
@@ -299,6 +268,7 @@ export class WorldMapGrid extends WorldMapRenderer {
       this.drawOverlayLayer(activeOverlay);
     }
 
+    this.drawCliffEdges();
     this.drawGrid();
     if (this.drawOrder.includes("text")) this.drawTextLayer();
     this.updateRiverFlow();
@@ -349,7 +319,7 @@ export class WorldMapGrid extends WorldMapRenderer {
   }
 
   getActiveOverlayLayer() {
-    const overlayLayers = ["animal", "spirit", "shadowland", "crime", "resourceLevel"];
+    const overlayLayers = ["elevation", "animal", "spirit", "shadowland", "crime", "resourceLevel"];
     if (overlayLayers.includes(this.currentLayer)) {
       return this.currentLayer;
     }

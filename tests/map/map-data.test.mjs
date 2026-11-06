@@ -177,3 +177,17 @@ test("the map readout starts with the name, version, update date, and seed", () 
   assert.equal(firstLine, "Rokugan 900 IC, version 0.9.0, updated 2026/10/27, seed 846894882.");
   assert.match(secondLine, /^Loaded 6 cells \(3 × 2\)/);
 });
+
+test("the map model retains signed elevations outside the catalog ID range", () => {
+  const model = new MapModel({ "0,0": { elevation: -4000 }, "1,0": { elevation: 1000 }, "2,0": { elevation: 0 } }, SIZE);
+  assert.deepEqual([...model.elevations], [-4000, 1000, 0, 1, 1, 1]);
+  assert.equal(model.valueAt("elevation", 1, 0).name, "1000 m");
+  assert.throws(() => new MapModel({ "0,0": { elevation: 0.5 } }, SIZE), /Elevation/);
+});
+
+test("cliff counts come from elevation drops rather than terrain IDs", () => {
+  const land = new MapModel({ "0,0": { elevation: 76 } }, { columns: 2, rows: 1 });
+  const water = new MapModel({ "0,0": { terrain: TERRAIN.WATER.id }, "1,0": { terrain: TERRAIN.OCEAN.id, elevation: -4000 } }, { columns: 2, rows: 1 });
+  assert.equal(land.counts().cliffs, 1);
+  assert.equal(water.counts().cliffs, 0);
+});

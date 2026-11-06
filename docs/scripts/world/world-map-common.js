@@ -11,8 +11,10 @@ import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
 import { getCrimeColor, drawCrimeCue } from "./world-map-img-crime.js";
 import { getResourceLevelColor, drawResourceLevelCue } from "./world-map-img-resource-level.js";
+import { DEFAULT_ELEVATION, drawElevationCue, getCliffEdges, getElevationColor } from "./world-map-elevation.js";
 
 const OVERLAY_PRESENTATION = new Map([
+  [LAYERS.ELEVATION, { getColor: (value) => getElevationColor(value?.id), drawCue: drawElevationCue }],
   [LAYERS.ANIMAL, { getColor: getAnimalColor, drawCue: drawAnimalCue }],
   [LAYERS.SPIRIT, { getColor: getSpiritColor, drawCue: drawSpiritCue }],
   [LAYERS.SHADOWLAND, { getColor: getShadowlandColor, drawCue: drawShadowlandCue }],
@@ -199,22 +201,11 @@ export class WorldMapRenderer {
   }
 
   drawCliffEdges() {
-    if (this.baseLayersLoading) return;
-    for (const [key, cell] of Object.entries(this.grid)) {
+    const size = this.mapHeader ? getMapSize(this.mapHeader) : null;
+    const keys = size ? Array.from({ length: size.columns * size.rows }, (_, index) => this.getCellKey(index % size.columns, Math.floor(index / size.columns))) : Object.keys(this.grid);
+    for (const key of keys) {
       const [x, y] = key.split(",").map(Number);
-      const neighbors = Object.fromEntries(
-        [
-          [0, -1],
-          [1, -1],
-          [1, 0],
-          [1, 1],
-          [0, 1],
-          [-1, 1],
-          [-1, 0],
-          [-1, -1],
-        ].map(([dx, dy], index) => [index, this.grid[this.getCellKey(x + dx, y + dy)]?.["cliff direction"]]),
-      );
-      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, cell["cliff direction"], this.baseLayerImages, neighbors);
+      drawCliffEdges(this.ctx, x, y, this.gridSize, this.zoom, getCliffEdges(this.grid, x, y, this.mapHeader));
     }
   }
 
@@ -496,7 +487,7 @@ export class WorldMapRenderer {
     const layer = Object.values(LAYERS).find((definition) => definition.id === layerName);
     const presentation = OVERLAY_PRESENTATION.get(layer);
     if (!presentation) throw new TypeError(`Unknown overlay layer: ${layerName}`);
-    return presentation.getColor(layer.getValue(val ?? 0));
+    return presentation.getColor(layer.getValue(val ?? (layer === LAYERS.ELEVATION ? DEFAULT_ELEVATION : 0)));
   }
 
   drawOverlayLayers(layerNames) {

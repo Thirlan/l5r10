@@ -9,8 +9,8 @@ import { HeightField, RIVER_SEAL } from "../../docs/map/scripts/terrain-height.j
 function mixedField() {
   const grid = {
     "0,0": { terrain: TERRAIN.MOUNTAINS.id },
-    "1,1": { terrain: TERRAIN.CLIFF.id, "cliff direction": { 2: 1 } },
-    "2,1": { terrain: TERRAIN.COASTAL_WATER.id },
+    "1,1": { elevation: 100 },
+    "2,1": { terrain: TERRAIN.COASTAL_WATER.id, elevation: -20 },
     "1,2": { river: RIVER.PRESENT.id, "river direction": { 4: 1 }, climate: CLIMATE.DESERT.id },
     "1,3": { river: RIVER.PRESENT.id, "river direction": {} },
     "3,3": { terrain: TERRAIN.HILLS.id },

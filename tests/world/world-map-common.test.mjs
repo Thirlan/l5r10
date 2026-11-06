@@ -8,10 +8,20 @@ import { getClanColors } from "../../docs/scripts/clan-colors.js";
 import { getSettlementAsset, NEUTRAL_SETTLEMENT_COLORS } from "../../docs/scripts/world/world-map-img-settlements.js";
 import { BASE_LAYER_IMAGES } from "../../docs/scripts/world/world-map-img-base-layers.js";
 import { getResourceImage } from "../../docs/scripts/world/world-map-img-resources.js";
+import { getElevationColor } from "../../docs/scripts/world/world-map-elevation.js";
 
 function createRenderer() {
   return Object.assign(Object.create(WorldMapRenderer.prototype), { grid: {}, gridSize: 16, zoom: 1 });
 }
+
+test("elevation overlays preserve zero and hide only the default height", () => {
+  const renderer = createRenderer();
+  assert.equal(renderer.overlayColor("elevation"), null);
+  assert.equal(renderer.overlayColor("elevation", 1), null);
+  [-100, 0, 1000].forEach((elevation) => {
+    assert.equal(renderer.overlayColor("elevation", elevation), getElevationColor(elevation));
+  });
+});
 
 function installImage(t, image) {
   const original = Object.getOwnPropertyDescriptor(globalThis, "Image");
@@ -174,7 +184,11 @@ test("settlement asset drawing uses presentation lookup and clan colors", () => 
   const tinted = { width: 24, height: 18 };
   renderer.tintedIconCache = { [[asset, color, 24, 18].join(":")]: tinted };
   let result;
-  renderer.ctx = { drawImage: (...args) => { result = args; } };
+  renderer.ctx = {
+    drawImage: (...args) => {
+      result = args;
+    },
+  };
   renderer.settlementImage = (path) => {
     assert.equal(path, asset);
     return source;
@@ -206,7 +220,10 @@ test("base asset loading failures report the image path and propagate", async (t
   // Setup
   const renderer = createRenderer();
   class FailedImage {
-    set src(path) { this.path = path; this.onerror(); }
+    set src(path) {
+      this.path = path;
+      this.onerror();
+    }
   }
   installImage(t, FailedImage);
   const logging = t.mock.method(console, "error", () => {});
@@ -225,10 +242,15 @@ test("base asset loading caches images without requesting tile JSON", async (t) 
   class LoadedImage {
     complete = true;
     naturalWidth = 32;
-    set src(path) { this.path = path; this.onload(); }
+    set src(path) {
+      this.path = path;
+      this.onload();
+    }
   }
   installImage(t, LoadedImage);
-  const requests = t.mock.method(globalThis, "fetch", async () => { throw new Error("Unexpected JSON request"); });
+  const requests = t.mock.method(globalThis, "fetch", async () => {
+    throw new Error("Unexpected JSON request");
+  });
 
   // Execution
   await renderer.loadBaseLayerImages();
@@ -242,8 +264,7 @@ test("base rendering defaults cells with missing base values", () => {
   // Setup
   const renderer = createRenderer();
   renderer.grid = { "0,0": {} };
-  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ image }) =>
-    [image, { complete: true, naturalWidth: 32 }]));
+  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ image }) => [image, { complete: true, naturalWidth: 32 }]));
   const imagesDrawn = [];
   renderer.ctx = { save() {}, restore() {}, fillRect() {}, drawImage: (image) => imagesDrawn.push(image) };
 
@@ -286,50 +307,60 @@ test("base rendering waits while its images are loading", () => {
   assert.deepEqual(calls, []);
 });
 
-test("renderer delegates saved cliff directions without requiring cliff terrain", () => {
+test("renderer draws a cliff only on the high side of an elevation edge", () => {
   // Setup
   const renderer = createRenderer();
   renderer.gridSize = 32;
-  renderer.grid = { "2,3": { terrain: TERRAIN.FLAT.id, "cliff direction": { 0: 1 } } };
-  const sprites = [];
-  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ image }) =>
-    [image, { complete: true, naturalWidth: 16 }]));
+  renderer.grid = { "2,3": { elevation: 100 }, "2,2": {} };
+  const lines = [];
   renderer.ctx = {
-    save() {}, restore() {}, translate() {}, rotate() {}, scale() {},
-    drawImage: (...args) => sprites.push(args),
+    save() {},
+    restore() {},
+    beginPath() {},
+    stroke() {},
+    moveTo: (...point) => lines.push(point),
+    lineTo: (...point) => lines.push(point),
   };
 
   // Execution
   renderer.drawCliffEdges();
 
   // Assertion
-  assert.equal(sprites.length, 3);
+  assert.deepEqual(lines, [
+    [64, 96],
+    [96, 96],
+  ]);
 });
 
-test("renderer adds an inward sprite on a flat cell between neighboring bottom-left cliffs", () => {
+test("renderer includes unpainted land beside a deep cell without drawing outside the map", () => {
   // Setup
   const renderer = createRenderer();
-  renderer.grid = Object.fromEntries(["0,0", "-1,0", "0,1"].map((key) =>
-    [key, { terrain: TERRAIN.CLIFF.id, "cliff direction": { 5: 1 } }]));
-  renderer.grid["0,0"] = { terrain: TERRAIN.FLAT.id };
-  const sprites = [];
-  renderer.baseLayerImages = new Map(BASE_LAYER_IMAGES.map(({ value, image }) =>
-    [image, { value, complete: true, naturalWidth: 16 }]));
+  renderer.mapHeader = createMapHeader({ columns: 2, rows: 1 });
+  renderer.grid = { "0,0": { terrain: TERRAIN.OCEAN.id, elevation: -100 } };
+  const lines = [];
   renderer.ctx = {
-    save() {}, restore() {}, translate() {}, rotate() {},
-    drawImage: (image) => sprites.push(image.value),
+    save() {},
+    restore() {},
+    beginPath() {},
+    stroke() {},
+    moveTo: (...point) => lines.push(point),
+    lineTo: (...point) => lines.push(point),
   };
   // Execution
   renderer.drawCliffEdges();
   // Assertion
-  assert.deepEqual(sprites, ["inward", ...Array(6).fill("diagonal")]);
+  assert.deepEqual(lines, [
+    [16, 16],
+    [16, 0],
+  ]);
 });
 
-test("cliff rendering waits while sprite images load", () => {
+test("cliff rendering needs no images and excludes water-to-water changes", () => {
   // Setup
   const renderer = createRenderer();
-  renderer.grid = { "0,0": { "cliff direction": { 4: 1 } } };
+  renderer.grid = { "0,0": { terrain: TERRAIN.WATER.id }, "1,0": { terrain: TERRAIN.OCEAN.id, elevation: -4000 } };
   renderer.baseLayersLoading = true;
+  renderer.ctx = {};
   // Execution
   const draw = () => renderer.drawCliffEdges();
   // Assertion
@@ -343,8 +374,13 @@ function createConnectionRenderer(grid) {
   let start;
   renderer.grid = grid;
   renderer.ctx = {
-    save() {}, restore() {}, beginPath() {}, stroke() {},
-    moveTo: (...args) => { start = args; },
+    save() {},
+    restore() {},
+    beginPath() {},
+    stroke() {},
+    moveTo: (...args) => {
+      start = args;
+    },
     lineTo: (...end) => strokes.push({ start, end }),
     fillText: (...args) => markers.push(args),
   };
@@ -356,7 +392,10 @@ test("renderer resolves resource metadata and delegates the loaded image", () =>
   const renderer = createRenderer();
   const source = { complete: true, naturalWidth: 32 };
   const paths = [];
-  renderer.settlementImage = (path) => { paths.push(path); return source; };
+  renderer.settlementImage = (path) => {
+    paths.push(path);
+    return source;
+  };
   const calls = [];
   renderer.ctx = { drawImage: (...args) => calls.push(args) };
 
@@ -402,8 +441,14 @@ function recordVillagePalette(cell) {
   const renderer = createRenderer();
   let palette;
   renderer.ctx = {
-    save() {}, restore() {}, beginPath() {}, arc() {}, stroke() {},
-    fill() { palette = { fill: this.fillStyle, border: this.strokeStyle }; },
+    save() {},
+    restore() {},
+    beginPath() {},
+    arc() {},
+    stroke() {},
+    fill() {
+      palette = { fill: this.fillStyle, border: this.strokeStyle };
+    },
   };
   renderer.drawSettlementMarker(0, 0, { settlement: SETTLEMENT.VILLAGE.id, ...cell });
   return palette;
@@ -436,7 +481,8 @@ test("settlement procedural drawing uses its clan presentation palette", () => {
 test("renderer draws an isolated river when neighboring values are none", () => {
   // Setup
   const { renderer, strokes } = createConnectionRenderer({
-    "0,0": { river: RIVER.PRESENT.id }, "1,0": { river: RIVER.NONE.id },
+    "0,0": { river: RIVER.PRESENT.id },
+    "1,0": { river: RIVER.NONE.id },
   });
 
   // Execution
@@ -455,7 +501,8 @@ test("renderer draws an isolated river when neighboring values are none", () => 
   test(`renderer draws a river connection to its ${direction} neighbor once`, () => {
     // Setup
     const { renderer, strokes } = createConnectionRenderer({
-      "0,0": { river: RIVER.PRESENT.id }, [neighborKey]: { river: RIVER.PRESENT.id },
+      "0,0": { river: RIVER.PRESENT.id },
+      [neighborKey]: { river: RIVER.PRESENT.id },
     });
 
     // Execution
@@ -470,7 +517,8 @@ test("renderer draws an isolated river when neighboring values are none", () => 
 test("renderer does not treat a diagonal river neighbor as connected", () => {
   // Setup
   const { renderer, strokes } = createConnectionRenderer({
-    "0,0": { river: RIVER.PRESENT.id }, "1,1": { river: RIVER.PRESENT.id },
+    "0,0": { river: RIVER.PRESENT.id },
+    "1,1": { river: RIVER.PRESENT.id },
   });
 
   // Execution
@@ -502,9 +550,16 @@ test("renderer matches river mouth colors to neighboring water terrain", () => {
   };
   const colors = [];
   renderer.ctx = {
-    save() {}, restore() {}, beginPath() {}, moveTo() {}, lineTo() {}, closePath() {},
+    save() {},
+    restore() {},
+    beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    closePath() {},
     stroke() {},
-    fill() { colors.push(this.fillStyle); },
+    fill() {
+      colors.push(this.fillStyle);
+    },
   };
 
   // Execution
@@ -567,7 +622,8 @@ test("renderer preserves infrastructure connections across water", () => {
   test(`renderer delegates ${port.name} as a marker without outgoing road lines`, () => {
     // Setup
     const { renderer, strokes, markers } = createConnectionRenderer({
-      "0,0": { infrastructure: port.id }, "1,0": { infrastructure: INFRASTRUCTURE.ROAD.id },
+      "0,0": { infrastructure: port.id },
+      "1,0": { infrastructure: INFRASTRUCTURE.ROAD.id },
     });
 
     // Execution
@@ -579,91 +635,104 @@ test("renderer preserves infrastructure connections across water", () => {
   });
 });
 
-    test("multiple overlays occupy equal bands in the requested order", () => {
-      // Setup
-      const renderer = createRenderer();
-      renderer.grid = { "2,3": { animal: 1, spirit: 2, crime: 3 } };
-      const bands = [];
-      renderer.fillCellSegment = (x, y, _color, start, width) => bands.push([x, y, start, width]);
-      renderer.drawOverlayCueSegment = () => {};
+test("multiple overlays occupy equal bands in the requested order", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "2,3": { elevation: 0, animal: 1, spirit: 2, crime: 3 } };
+  const bands = [];
+  renderer.fillCellSegment = (x, y, _color, start, width) => bands.push([x, y, start, width]);
+  renderer.drawOverlayCueSegment = () => {};
 
-      // Execution
-      renderer.drawOverlayLayers(["animal", "spirit", "crime"]);
+  // Execution
+  renderer.drawOverlayLayers(["elevation", "animal", "spirit", "crime"]);
 
-      // Assertion
-      assert.deepEqual(bands, [[2, 3, 0, 1 / 3], [2, 3, 1 / 3, 1 / 3], [2, 3, 2 / 3, 1 / 3]]);
-    });
+  // Assertion
+  assert.deepEqual(bands, [
+    [2, 3, 0, 1 / 4],
+    [2, 3, 1 / 4, 1 / 4],
+    [2, 3, 2 / 4, 1 / 4],
+    [2, 3, 3 / 4, 1 / 4],
+  ]);
+});
 
-    test("none-valued overlays do not take a band from an active overlay", () => {
-      // Setup
-      const renderer = createRenderer();
-      renderer.grid = { "0,0": { animal: 0, spirit: 1 } };
-      const cues = [];
-      renderer.fillCell = () => {};
-      renderer.drawOverlayCueSegment = (_x, _y, layer, _color, start, width) => cues.push([layer, start, width]);
+test("none-valued overlays do not take a band from an active overlay", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "0,0": { animal: 0, spirit: 1 } };
+  const cues = [];
+  renderer.fillCell = () => {};
+  renderer.drawOverlayCueSegment = (_x, _y, layer, _color, start, width) => cues.push([layer, start, width]);
 
-      // Execution
-      renderer.drawOverlayLayers(["animal", "spirit", "crime"]);
+  // Execution
+  renderer.drawOverlayLayers(["animal", "spirit", "crime"]);
 
-      // Assertion
-      assert.deepEqual(cues, [["spirit", 0, 1]]);
-    });
+  // Assertion
+  assert.deepEqual(cues, [["spirit", 0, 1]]);
+});
 
-    test("unrequested overlays do not render", () => {
-      // Setup
-      const renderer = createRenderer();
-      renderer.grid = { "0,0": { animal: 1, crime: 1 } };
-      const cues = [];
-      renderer.fillCell = () => {};
-      renderer.drawOverlayCueSegment = (_x, _y, layer) => cues.push(layer);
+test("unrequested overlays do not render", () => {
+  // Setup
+  const renderer = createRenderer();
+  renderer.grid = { "0,0": { animal: 1, crime: 1 } };
+  const cues = [];
+  renderer.fillCell = () => {};
+  renderer.drawOverlayCueSegment = (_x, _y, layer) => cues.push(layer);
 
-      // Execution
-      renderer.drawOverlayLayers(["animal"]);
+  // Execution
+  renderer.drawOverlayLayers(["animal"]);
 
-      // Assertion
-      assert.deepEqual(cues, ["animal"]);
-    });
+  // Assertion
+  assert.deepEqual(cues, ["animal"]);
+});
 
-    [
-      ["animal", 1, 0],
-      ["spirit", 0, 1],
-      ["shadowland", 0, 1],
-      ["crime", 0, 1],
-      ["resourceLevel", 0, 2],
-    ].forEach(([layer, arcs, lines]) => {
-      test(`${layer} cue delegation keeps band clipping and contrast`, () => {
-        // Setup
-        const renderer = createRenderer();
-        const calls = [];
-        renderer.ctx = {
-          save() {}, restore() {}, beginPath() {},
-          rect: (...args) => calls.push(["rect", ...args]),
-          clip: () => calls.push(["clip"]),
-          arc: () => calls.push(["arc"]),
-          moveTo() {}, lineTo: () => calls.push(["line"]),
-          fill() { calls.push(["color", this.fillStyle]); },
-          stroke() { calls.push(["color", this.strokeStyle]); },
-        };
-        const color = "rgba(128, 0, 128, 0.75)";
+[
+  ["elevation", 0, 3],
+  ["animal", 1, 0],
+  ["spirit", 0, 1],
+  ["shadowland", 0, 1],
+  ["crime", 0, 1],
+  ["resourceLevel", 0, 2],
+].forEach(([layer, arcs, lines]) => {
+  test(`${layer} cue delegation keeps band clipping and contrast`, () => {
+    // Setup
+    const renderer = createRenderer();
+    const calls = [];
+    renderer.ctx = {
+      save() {},
+      restore() {},
+      beginPath() {},
+      rect: (...args) => calls.push(["rect", ...args]),
+      clip: () => calls.push(["clip"]),
+      arc: () => calls.push(["arc"]),
+      moveTo() {},
+      lineTo: () => calls.push(["line"]),
+      fill() {
+        calls.push(["color", this.fillStyle]);
+      },
+      stroke() {
+        calls.push(["color", this.strokeStyle]);
+      },
+    };
+    const color = "rgba(128, 0, 128, 0.75)";
 
-        // Execution
-        renderer.drawOverlayCueSegment(2, 3, layer, color, 0.5, 0.5);
+    // Execution
+    renderer.drawOverlayCueSegment(2, 3, layer, color, 0.5, 0.5);
 
-        // Assertion
-        assert.deepEqual(calls.slice(0, 2), [["rect", 40, 48, 8, 16], ["clip"]]);
-        assert.equal(calls.filter(([name]) => name === "arc").length, arcs);
-        assert.equal(calls.filter(([name]) => name === "line").length, lines);
-        assert.deepEqual(calls.at(-1), ["color", renderer.overlayCueColor(color)]);
-      });
-    });
+    // Assertion
+    assert.deepEqual(calls.slice(0, 2), [["rect", 40, 48, 8, 16], ["clip"]]);
+    assert.equal(calls.filter(([name]) => name === "arc").length, arcs);
+    assert.equal(calls.filter(([name]) => name === "line").length, lines);
+    assert.deepEqual(calls.at(-1), ["color", renderer.overlayCueColor(color)]);
+  });
+});
 
-    test("cue delegation rejects unknown overlay layers", () => {
-      // Setup
-      const renderer = createRenderer();
+test("cue delegation rejects unknown overlay layers", () => {
+  // Setup
+  const renderer = createRenderer();
 
-      // Execution
-      const draw = () => renderer.drawOverlayCueSegment(0, 0, "terrain", "#000000", 0, 1);
+  // Execution
+  const draw = () => renderer.drawOverlayCueSegment(0, 0, "terrain", "#000000", 0, 1);
 
-      // Assertion
-      assert.throws(draw, /Unknown overlay layer/);
-    });
+  // Assertion
+  assert.throws(draw, /Unknown overlay layer/);
+});

@@ -4,10 +4,10 @@ import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "./wo
 import { L5RPathing, MINUTES_PER_DAY } from "../travel/pathing.js";
 import { getClanColors } from "../clan-colors.js";
 import { MapDragToPan } from "./world-map-pan.js";
+import { KM_PER_MILE, MILES_PER_TILE } from "./world-map-scale.js";
+export { KM_PER_MILE, MILES_PER_TILE } from "./world-map-scale.js";
 
 const VIEWER_GRID_SIZE = 16;
-export const MILES_PER_TILE = 5;
-export const KM_PER_MILE = 1.609344;
 export const DISTANCE_UNITS = Object.freeze({ miles: 1, km: KM_PER_MILE });
 export const MAP_TOOLS = Object.freeze(["route", "measure", "pan"]);
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
@@ -35,6 +35,7 @@ export class WorldMapViewer extends WorldMapRenderer {
       shadowland: false,
       crime: false,
       resourceLevel: false,
+      elevation: false,
     };
     this.routePreferences = { includeRisk: false, includeMoney: false };
     this.skillConfig = TravelEventEngine.defaultSkillConfig();
@@ -332,6 +333,7 @@ export class WorldMapViewer extends WorldMapRenderer {
     const pather = new L5RPathing({
       getTerrain: (x, y) => this.cellTerrain(x, y),
       getTileData: (x, y, mode) => this.tileData(x, y, mode),
+      getCell: (x, y) => this.cellData(x, y),
       getInfrastructure: (x, y) => this.cellInfrastructure(x, y),
       getClan: (x, y) => this.cellClan(x, y),
       skillConfig: this.skillConfig,
@@ -379,7 +381,6 @@ export class WorldMapViewer extends WorldMapRenderer {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.scale(this.zoom, this.zoom);
     this.drawBaseTiles();
-    this.drawCliffEdges();
 
     // Draw remaining layers
     for (const layerName of this.drawOrder) {
@@ -391,9 +392,10 @@ export class WorldMapViewer extends WorldMapRenderer {
       else if (layerName === "clan") this.drawClanLayer();
     }
 
-    const activeOverlays = ["animal", "spirit", "shadowland", "crime", "resourceLevel"].filter((layerName) => this.isLayerVisible(layerName));
+    const activeOverlays = ["elevation", "animal", "spirit", "shadowland", "crime", "resourceLevel"].filter((layerName) => this.isLayerVisible(layerName));
     this.drawOverlayLayers(activeOverlays);
 
+    this.drawCliffEdges();
     this.drawGrid();
 
     if (this.pathResult && this.pathResult.path.length) {

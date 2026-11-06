@@ -12,6 +12,7 @@
  */
 import { SUN_DIRECTION } from "./map-3d-scene.js";
 import { TERRAIN } from "../../scripts/world/world-map-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
 import { CLAN_SLOTS, clanPalette, packClanIds } from "./clan-regions.js";
 import { SNOW_LAYER, SNOW_LINE_UNITS, WATER_CLASS, packCellIds } from "./surface-layers.js";
 
@@ -83,7 +84,8 @@ varying vec3 vWorldNormal;
 const int SLOTS = 6;
 const float HEIGHT_BLEND = 0.35;
 const float HEIGHT_DEPTH = 0.15;
-const float WATER_DEPTH = 0.35;
+const float WATER_DEPTH = ${350 / METERS_PER_TILE};
+const float SNOW_BLEND = ${120 / METERS_PER_TILE};
 int slotLayer[SLOTS];
 float slotWeight[SLOTS];
 
@@ -156,7 +158,7 @@ void main(void) {
     vec2 axis = mix(1.0 - ratio, ratio, vec2(offset));
     float weight = axis.x * axis.y;
     float snowLine = ids.b / snowLineUnits;
-    float snow = ids.b > 0.0 ? smoothstep(snowLine - 0.12, snowLine + 0.12, vWorldPosition.y) * smoothstep(0.35, 0.6, normal.y) : 0.0;
+    float snow = ids.b > 0.0 ? smoothstep(snowLine - SNOW_BLEND, snowLine + SNOW_BLEND, vWorldPosition.y) * smoothstep(0.35, 0.6, normal.y) : 0.0;
     addLayer(int(ids.r), weight * (1.0 - rock) * (1.0 - snow));
     addLayer(int(ids.g), weight * rock * (1.0 - snow));
     addLayer(snowLayer, weight * snow);
