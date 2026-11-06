@@ -2,6 +2,8 @@ import { isWaterTerrain, NEIGHBOR_OFFSETS } from "./world-map-layers.js";
 
 export const DEFAULT_ELEVATION = 1;
 export const CLIFF_HEIGHT = 75;
+// Conservative width of a digit or minus sign, relative to the font size.
+const LABEL_CHARACTER_WIDTH = 0.6;
 const COLOR_STOPS = [
   [-4000, [0, 0, 90]],
   [0, [0, 100, 200]],
@@ -87,14 +89,17 @@ export function drawElevationCue(ctx, left, top, width, height, color, elevation
   if (!ctx || ![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0 || typeof color !== "string" || !Number.isSafeInteger(elevation)) {
     throw new TypeError("Elevation label needs a canvas context, dimensions, color, and integer elevation.");
   }
+  const text = String(elevation);
+  // Size the font instead of using maxWidth to avoid canvas text corruption on large maps.
+  const fontSize = Math.min(height * 0.65, (width * 0.9) / (text.length * LABEL_CHARACTER_WIDTH));
   ctx.save();
-  ctx.font = `${height * 0.65}px sans-serif`;
+  ctx.font = `${fontSize}px sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.lineWidth = height * 0.08;
+  ctx.lineWidth = fontSize * 0.12;
   ctx.strokeStyle = color.includes("255") ? "#111111" : "#ffffff";
   ctx.fillStyle = color;
-  const label = [String(elevation), left + width / 2, top + height / 2, width * 0.9];
+  const label = [text, left + width / 2, top + height / 2];
   ctx.strokeText(...label);
   ctx.fillText(...label);
   ctx.restore();

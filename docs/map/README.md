@@ -90,6 +90,7 @@ The one-time tools and their tests were removed after validation.
 ### 2D elevation editing
 
 - Both 2D maps show elevation numbers instead of triangle cues. The colors are unchanged.
+- Long numbers use a smaller font instead of canvas text compression. This prevents partial overlays and misplaced text in Chromium.
 - Default tiles show `1` without a color fill when the elevation overlay is visible.
 - **Set** writes the entered elevation. **Delta** adds the signed amount to each selected tile.
 - Each Delta stroke changes a tile once, including overlapping brush areas. A new click starts another stroke.

@@ -81,16 +81,22 @@ test("elevation cue rejects invalid dimensions and colors", () => {
   assert.throws(() => drawElevationCue(null, 0, 0, 16, 16, "#000000"), TypeError);
   assert.throws(() => drawElevationCue({}, 0, 0, 0, 16, "#000000"), TypeError);
   assert.throws(() => drawElevationCue({}, 0, 0, 16, 16, null), TypeError);
+  assert.throws(() => drawElevationCue({}, 0, 0, 16, 16, "#000000", 0.5), /integer elevation/);
 });
 
-[-100, 0, 1, 8000].forEach((elevation) => {
-  test(`elevation label prints ${elevation} inside its band`, () => {
-    const calls = [];
-    const ctx = { save() {}, restore() {}, strokeText() {}, fillText: (...args) => calls.push(args) };
+[-100, 0, 1, 8000, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER].forEach((elevation) => {
+  test(`elevation label prints ${elevation} inside its band without text compression`, () => {
+    const strokes = [];
+    const fills = [];
+    const ctx = { save() {}, restore() {}, strokeText: (...args) => strokes.push(args), fillText: (...args) => fills.push(args) };
     drawElevationCue(ctx, 10, 20, 8, 16, "#000000", elevation);
-    assert.deepEqual(calls, [[String(elevation), 14, 28, 7.2]]);
+    assert.deepEqual(strokes, [[String(elevation), 14, 28]]);
+    assert.deepEqual(fills, strokes);
+    const fontSize = Number.parseFloat(ctx.font);
+    assert.ok(fontSize > 0 && fontSize <= 16 * 0.65);
+    assert.ok(String(elevation).length * 0.6 * fontSize <= 8 * 0.9 + 1e-9);
+    assert.equal(ctx.lineWidth, fontSize * 0.12);
     assert.equal(ctx.textAlign, "center");
     assert.equal(ctx.textBaseline, "middle");
-    assert.throws(() => drawElevationCue(ctx, 0, 0, 16, 16, "#000000", 0.5), /integer elevation/);
   });
 });
