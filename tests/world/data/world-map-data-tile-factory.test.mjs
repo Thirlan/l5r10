@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-tile.js";
+import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
 import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-layers.js";
 
 test("a tile without a saved cell has the default values of all layers", () => {
   // Execution
-  const tile = new WorldMapTile(3, 4);
+  const tile = createWorldMapTile(3, 4);
 
   // Assertion
   assert.equal(tile.x, 3);
@@ -51,7 +51,7 @@ test("a tile resolves the saved values of all layers", () => {
   };
 
   // Execution
-  const tile = new WorldMapTile(0, 0, cell);
+  const tile = createWorldMapTile(0, 0, cell);
 
   // Assertion
   assert.equal(tile.terrain, TERRAIN.HILLS);
@@ -76,9 +76,9 @@ test("a tile resolves the saved values of all layers", () => {
 
 test("a tile reads all saved label forms", () => {
   // Execution
-  const plain = new WorldMapTile(0, 0, { text: "Lake" }).label;
-  const english = new WorldMapTile(0, 0, { text: { englishText: "Sorrow's Path", rokuganiText: "", fontSize: 8 } }).label;
-  const both = new WorldMapTile(0, 0, { text: { englishText: "Path", rokuganiText: "Michi" } }).label;
+  const plain = createWorldMapTile(0, 0, { text: "Lake" }).label;
+  const english = createWorldMapTile(0, 0, { text: { englishText: "Sorrow's Path", rokuganiText: "", fontSize: 8 } }).label;
+  const both = createWorldMapTile(0, 0, { text: { englishText: "Path", rokuganiText: "Michi" } }).label;
 
   // Assertion
   assert.deepEqual(plain, { englishText: "Lake", rokuganiText: "Lake", fontSize: null });
@@ -86,21 +86,22 @@ test("a tile reads all saved label forms", () => {
   assert.deepEqual(both, { englishText: "Path", rokuganiText: "Michi", fontSize: null });
 });
 
-test("a tile is read-only", () => {
+test("a tile is a read-only plain object", () => {
   // Setup
-  const tile = new WorldMapTile(0, 0, { "river direction": { 0: 1 } });
+  const tile = createWorldMapTile(0, 0, { "river direction": { 0: 1 } });
 
   // Assertion
+  assert.equal(Object.getPrototypeOf(tile), Object.prototype);
   assert.ok(Object.isFrozen(tile));
   assert.ok(Object.isFrozen(tile.riverDirections));
 });
 
 test("a tile rejects unknown layer values and bad cells", () => {
   // Assertion
-  assert.throws(() => new WorldMapTile(1, 2, { terrain: 99 }), /1,2 has an unknown terrain value/);
-  assert.throws(() => new WorldMapTile(0, 0, { elevation: 1.5 }), TypeError);
-  assert.throws(() => new WorldMapTile(0, 0, { englishName: 7 }), TypeError);
-  assert.throws(() => new WorldMapTile(0, 0, { text: { fontSize: 8 } }), TypeError);
-  assert.throws(() => new WorldMapTile(0, 0, []), TypeError);
-  assert.throws(() => new WorldMapTile(0.5, 0), TypeError);
+  assert.throws(() => createWorldMapTile(1, 2, { terrain: 99 }), /1,2 has an unknown terrain value/);
+  assert.throws(() => createWorldMapTile(0, 0, { elevation: 1.5 }), TypeError);
+  assert.throws(() => createWorldMapTile(0, 0, { englishName: 7 }), TypeError);
+  assert.throws(() => createWorldMapTile(0, 0, { text: { fontSize: 8 } }), TypeError);
+  assert.throws(() => createWorldMapTile(0, 0, []), TypeError);
+  assert.throws(() => createWorldMapTile(0.5, 0), TypeError);
 });

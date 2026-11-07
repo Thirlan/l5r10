@@ -10,7 +10,7 @@
  * grid.getGrid9(10, 20)[0][1]; // The tile north of 10,20.
  */
 import { getMapSize, isInsideMap, readMapFile } from "./world-map-file.js";
-import { WorldMapTile } from "./world-map-tile.js";
+import { createWorldMapTile } from "./world-map-data-tile-factory.js";
 
 export class WorldMapDataGrid {
   #tiles;
@@ -32,7 +32,7 @@ export class WorldMapDataGrid {
     this.rows = rows;
     this.#tiles = new Array(columns * rows);
     for (let y = 0; y < rows; y += 1) {
-      for (let x = 0; x < columns; x += 1) this.#tiles[y * columns + x] = new WorldMapTile(x, y, tiles[`${x},${y}`]);
+      for (let x = 0; x < columns; x += 1) this.#tiles[y * columns + x] = createWorldMapTile(x, y, tiles[`${x},${y}`]);
     }
     Object.freeze(this);
   }
@@ -49,7 +49,7 @@ export class WorldMapDataGrid {
   /**
    * @param {number} x Tile column.
    * @param {number} y Tile row.
-   * @returns {WorldMapTile|null} The tile at x,y, or null if x,y is outside the map.
+   * @returns {import("./world-map-tile.js").WorldMapTile|null} The tile at x,y, or null if x,y is outside the map.
    */
   get(x, y) {
     // Validation
@@ -64,7 +64,7 @@ export class WorldMapDataGrid {
    * Index [1][1] is the center, [0][1] is north, and [1][2] is east.
    * @param {number} x Column of the center tile.
    * @param {number} y Row of the center tile.
-   * @returns {(WorldMapTile|null)[][]} Three rows of three tiles. A tile outside the map is null.
+   * @returns {(import("./world-map-tile.js").WorldMapTile|null)[][]} Three rows of three tiles. A tile outside the map is null.
    */
   getGrid9(x, y) {
     // Validation
