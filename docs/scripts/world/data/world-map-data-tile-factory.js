@@ -11,6 +11,7 @@
 import { getElevation } from "./world-map-elevation.js";
 import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, LAYERS, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "./world-map-layers.js";
 import { RIVER_OFFSETS } from "./world-map-data.const.js";
+import { WorldMapTile } from "./world-map-tile.js";
 
 /** Tile properties that hold one catalog value: [property and saved field, layer, default value]. */
 const CATALOG_FIELDS = Object.freeze([
@@ -48,13 +49,13 @@ function readLabel(cell, x, y) {
     throw new TypeError(`The tile ${x},${y} label needs a text and an optional positive font size.`);
   }
   const [text, englishText, rokuganiText] = texts;
-  return Object.freeze({ englishText: englishText || text || rokuganiText, rokuganiText: rokuganiText || text || englishText, fontSize });
+  return { englishText: englishText || text || rokuganiText, rokuganiText: rokuganiText || text || englishText, fontSize };
 }
 
 function readRiverDirections(cell, x, y) {
   const flags = cell["river direction"] ?? {};
   if (typeof flags !== "object" || Array.isArray(flags)) throw new TypeError(`The tile ${x},${y} river directions must be an object.`);
-  return Object.freeze(RIVER_OFFSETS.map((_, direction) => flags[direction] === 1));
+  return RIVER_OFFSETS.map((_, direction) => flags[direction] === 1);
 }
 
 /**
@@ -81,7 +82,7 @@ export function createWorldMapTile(x, y, cell = {}) {
   );
 
   // Output
-  return Object.freeze({
+  return new WorldMapTile({
     x,
     y,
     ...catalogValues,
