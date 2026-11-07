@@ -6,7 +6,7 @@
  * - The labels use the same billboard material as the markers.
  *   A settlement label grows with its marker, so they do not overlap.
  */
-import { getSettlementLabelSize } from "../../scripts/world/world-map-img-settlements.js";
+import { getSettlementLabelSize } from "../../scripts/world/draw/world-map-img-settlements.js";
 import { MARKER_STYLES, billboardGeometry } from "./marker-layout.js";
 
 /** Atlas pixels for each 2D map pixel. */

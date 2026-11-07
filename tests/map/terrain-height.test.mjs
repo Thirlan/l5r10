@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
+import { RIVER, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField, RIVER_BED, RIVER_SEAL, SUBDIVISIONS, ridgedNoise, terrainShape } from "../../docs/map/scripts/terrain-height.js";
-import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
-import { createMapHeader } from "../../docs/scripts/world/world-map-file.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-scale.js";
+import { createMapHeader } from "../../docs/scripts/world/data/world-map-file.js";
 
 const river = (flags) => ({ river: RIVER.PRESENT.id, "river direction": flags });
 

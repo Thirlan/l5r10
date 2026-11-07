@@ -2,7 +2,7 @@
  * Placeholder port markers for the 3D world map: a small dock that points to the nearest water neighbor.
  * The live map has no ports yet, so the markers are simple. A later PR can replace them with models.
  */
-import { INFRASTRUCTURE } from "../../scripts/world/world-map-layers.js";
+import { INFRASTRUCTURE } from "../../scripts/world/data/world-map-layers.js";
 import { BRIDGE_DECK } from "./road-paths.js";
 import { HeightField } from "./terrain-height.js";
 import { chunkIndexAt } from "./terrain-chunks.js";

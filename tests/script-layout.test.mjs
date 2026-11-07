@@ -35,11 +35,11 @@ test("local script imports resolve after moving world and travel modules", () =>
     const references = [...html.matchAll(/(?:src|data-travel-costs)="([^"]+)"/g)].map(([, reference]) => reference).filter((reference) => reference.startsWith("../scripts/"));
 
     // Assertion
-    assert.ok(references.some((reference) => reference.includes("/world/world-map-")));
+    assert.ok(references.some((reference) => reference.includes("/world/draw/world-map-")));
     references.forEach((reference) => assert.ok(existsSync(new URL(reference, source)), reference));
     if (page === "world_map.html") {
-      assert.ok(references.includes("../scripts/travel/travel_lookup.csv"));
-      assert.ok(references.includes("../scripts/travel/travel-event-engine.js"));
+      assert.ok(references.includes("../scripts/world/game-rules/travel_lookup.csv"));
+      assert.ok(references.includes("../scripts/world/game-rules/travel-event-engine.js"));
     }
   }),
 );
@@ -54,9 +54,13 @@ test("moved files no longer occupy the flat scripts folder", () => {
     false,
   );
   assert.equal(files.includes("travel-time.js"), false);
-  assert.ok(existsSync(new URL("travel/travel-speed.js", scripts)));
-  assert.ok(existsSync(new URL("travel/travel_lookup.csv", scripts)));
-  assert.ok(existsSync(new URL("world/world-map-layers.js", scripts)));
+  assert.equal(files.includes("travel"), false);
+  assert.equal(files.includes("clan-colors.js"), false);
+  assert.deepEqual(readdirSync(new URL("world/", scripts)).sort(), ["data", "draw", "game-rules"]);
+  assert.ok(existsSync(new URL("world/game-rules/travel-speed.js", scripts)));
+  assert.ok(existsSync(new URL("world/game-rules/travel_lookup.csv", scripts)));
+  assert.ok(existsSync(new URL("world/data/world-map-layers.js", scripts)));
+  assert.ok(existsSync(new URL("world/data/clan-colors.js", scripts)));
 });
 
 test("module tests mirror the script subfolders", () => {

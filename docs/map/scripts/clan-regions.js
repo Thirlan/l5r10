@@ -2,8 +2,8 @@
  * Clan regions for the 3D world map. The terrain shader tints each clan cell with the clan fill color
  * and draws the clan border color where the next cell has a different clan, as on the 2D map.
  */
-import { getClanColors } from "../../scripts/clan-colors.js";
-import { CLAN } from "../../scripts/world/world-map-layers.js";
+import { getClanColors } from "../../scripts/world/data/clan-colors.js";
+import { CLAN } from "../../scripts/world/data/world-map-layers.js";
 
 /** Number of clan palette entries. Clan IDs go from 0 (no clan) to CLAN_SLOTS - 1. */
 export const CLAN_SLOTS = Math.max(...Object.values(CLAN).map((clan) => clan.id)) + 1;

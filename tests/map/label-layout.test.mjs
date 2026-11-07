@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLAN, SETTLEMENT } from "../../docs/scripts/world/world-map-layers.js";
+import { CLAN, SETTLEMENT } from "../../docs/scripts/world/data/world-map-layers.js";
 import { LABEL_PADDING, LABEL_SCALE, labelAtlasLayout, labelGeometry, labelText, mapLabels, settlementLabels } from "../../docs/map/scripts/label-layout.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { MARKER_STYLES } from "../../docs/map/scripts/marker-layout.js";

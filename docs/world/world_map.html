@@ -38,7 +38,7 @@
       </fieldset>
 
       <div class="map-grid-container">
-        <canvas id="mapCanvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json" data-travel-costs="../scripts/travel/travel_lookup.csv" data-grid-size="16"></canvas>
+        <canvas id="mapCanvas" data-map-columns="135" data-map-rows="196" data-map-data="../data/world-map-grid.json" data-travel-costs="../scripts/world/game-rules/travel_lookup.csv" data-grid-size="16"></canvas>
       </div>
 
       <div class="viewer-controls">
@@ -152,8 +152,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../scripts/currency.js"></script>
     <script src="../scripts/dice.js"></script>
-    <script src="../scripts/travel/travel-event-engine.js"></script>
-    <script type="module" src="../scripts/world/world-map-viewer-page.js"></script>
+    <script src="../scripts/world/game-rules/travel-event-engine.js"></script>
+    <script type="module" src="../scripts/world/draw/world-map-viewer-page.js"></script>
     <script>
       $(function () {
         $("nav").load("/l5r10/navbar.html");

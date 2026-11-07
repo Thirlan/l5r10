@@ -11,8 +11,8 @@
  *   The border band has a minimum width in screen pixels, so it shows on the whole-map view.
  */
 import { SUN_DIRECTION } from "./map-3d-scene.js";
-import { TERRAIN } from "../../scripts/world/world-map-layers.js";
-import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
+import { TERRAIN } from "../../scripts/world/data/world-map-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
 import { CLAN_SLOTS, clanPalette, packClanIds } from "./clan-regions.js";
 import { SNOW_LAYER, SNOW_LINE_UNITS, WATER_CLASS, packCellIds } from "./surface-layers.js";
 

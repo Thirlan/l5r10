@@ -6,12 +6,12 @@
  * - The climate and terrain of the cell select the tree kind (conifer or broadleaf) and the canopy color.
  * - Coordinates are in cell units: x goes east, y goes south.
  */
-import { CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/world-map-layers.js";
+import { CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-layers.js";
 import { ROAD_STYLES, buildRoadSegments } from "./road-paths.js";
 import { cellSurface } from "./surface-layers.js";
 import { HeightField } from "./terrain-height.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
-import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
 
 export const TREES_PER_CELL = 6;
 /** Lowest surface height for a tree. River banks and shores are below it. */

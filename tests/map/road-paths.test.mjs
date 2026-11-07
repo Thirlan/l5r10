@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { INFRASTRUCTURE, RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
+import { INFRASTRUCTURE, RIVER, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { BRIDGE_DECK, ROAD_STYLES, addRibbon, buildRoadGeometry, buildRoadSegments, roadBase, roadJunctions } from "../../docs/map/scripts/road-paths.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
-import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-scale.js";
 
 const ROAD = INFRASTRUCTURE.ROAD.id;
 const FOOTPATH = INFRASTRUCTURE.FOOTPATH.id;

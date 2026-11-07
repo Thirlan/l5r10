@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { INFRASTRUCTURE, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
+import { INFRASTRUCTURE, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { PORT_SCALES, portPlacements } from "../../docs/map/scripts/port-meshes.js";
 import { BRIDGE_DECK } from "../../docs/map/scripts/road-paths.js";

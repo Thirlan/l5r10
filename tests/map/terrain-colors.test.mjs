@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLIMATE, RIVER, TERRAIN } from "../../docs/scripts/world/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { hexToRgb, terrainVertexColors } from "../../docs/map/scripts/terrain-colors.js";
 import { HeightField, SUBDIVISIONS } from "../../docs/map/scripts/terrain-height.js";
