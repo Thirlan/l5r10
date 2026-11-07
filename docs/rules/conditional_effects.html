@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Conditional Effects</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+    <main>
+      <h1>Conditional Effects</h1>
+      <p>Conditional Effects are temporary states that modify a character's rolls, attributes, skills and Armor TN. They can be caused by environmental factors, combat conditions, or magical effects.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Effect</th>
+            <th>Description</th>
+            <th>Mechanical Penalty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="blind">Blind</td>
+            <td>The character cannot see their target (darkness, a hood, sand thrown in the eyes).</td>
+            <td>
+              <ul>
+                <li>-15 TR to ranged attack</li>
+                <li>-5 TR to melee attack</li>
+                <li>For ATN, instead of adding (5 x Reflexes) + 5, you add Reflexes + 5</li>
+                <li>-2 to your Move Rating</li>
+                <li>Any attempt at a Move Action requires an Athletics / Agility Roll (TN 20) or you are knocked Prone</li>
+                <li>You may not make Perception rolls unless the GM judges that you can use senses other than sight for the roll</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="cover">Cover</td>
+            <td>A character can benefit from cover only when an attack or other effect originates on the opposite side of something that blocks at least half their body.</td>
+            <td>
+              <ul>
+                <li>-3 TR to -5 TR to incoming attack rolls, according to GM discretion</li>
+                <li></li>
+              </ul>
+              Certain spells that function like projectiles may suffer the Cover penalty to the Spellcasting Roll, according to GM discretion.
+            </td>
+          </tr>
+          <tr>
+            <td id="dazed">Dazed</td>
+            <td>A sharp blow or shock has rattled the character.</td>
+            <td>-5 TR to all rolls until the start of their next Turn.</td>
+          </tr>
+          <tr>
+            <td id="deafened">Deafened</td>
+            <td>The character cannot hear (due to loud noise, magical effect, or being naturally deaf).</td>
+            <td>
+              <ul>
+                <li>-5 TR to all rolls involving hearing</li>
+                <li>Cannot make Perception rolls that rely on hearing</li>
+                <li>-5 TR to social skill rolls</li>
+                <li>-5 TR to spell casting rolls</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="entangled">Entangled</td>
+            <td>Bound by rope, net, vines, or similar.</td>
+            <td>
+              <ul>
+                <li>Cannot take move actions</li>
+                <li>-10 TR to all physical rolls until freed.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="fatigued">Fatigued</td>
+            <td>Exhausted from sustained effort, lack of sleep, food or water.</td>
+            <td>
+              <ul>
+                <li>-5 TR to all rolls</li>
+                <li>Recovers with a full night's rest, or food and water.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="flanking">Flanking</td>
+            <td>A character gains this benefit when they have an active ally on the opposite side of an enemy and within melee range.</td>
+            <td>+5 TR to the total of melee Attack Rolls against the flanked enemy.</td>
+          </tr>
+          <tr>
+            <td id="grappled">Grappled</td>
+            <td>Locked in a grapple with at least one opponent (see <a href="#grappling">Grappling</a>).</td>
+            <td>
+              <ul>
+                <li>Many not take move actions</li>
+                <li>
+                  May only take:
+                  <ul>
+                    <li>Grappling actions</li>
+                    <li>Free Actions</li>
+                  </ul>
+                </li>
+                <li>-10 grapple penalty to ATN</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="mounted">Mounted / Higher</td>
+            <td>The character is on a horse or otherwise at a meaningful height advantage over their target.</td>
+            <td>Attackers <em>below</em> the character suffer -3 TR to attack them in melee.</td>
+          </tr>
+          <tr>
+            <td id="prone">Prone</td>
+            <td>The character is on the ground.</td>
+            <td>
+              <ul>
+                <li>-5 TR to attack rolls made by the prone character</li>
+                <li>+5 TR to melee attacks against them</li>
+                <li>-5 TR to ranged attacks against them</li>
+                <li>Standing up is a Simple Action</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="poor-visibility">Poor Visibility</td>
+            <td>A character trying to act in near darkness, fog, smoke, and similar situations where visibility is poor.</td>
+            <td>
+              <ul>
+                <li>-5 TR to all ranged attack rolls</li>
+                <li>-5 TR to all Perception-based rolls</li>
+                <li>Certain spells that function like projectiles may suffer the Poor Visibility penalty to the Spellcasting Roll, according to GM discretion.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="stunned">Stunned</td>
+            <td>Completely incapacitated for a brief moment by a particularly nasty effect.</td>
+            <td>
+              <ul>
+                <li>Cannot take any Actions until the start of their next Turn</li>
+                <li>-10 to Armor TN</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="flight">Flight</td>
+            <td>The character can fly.</td>
+            <td>
+              <ul>
+                <li>Ignores difficult terrain if they can fly over it.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td id="immobilized">Immobilized</td>
+            <td>The character is unable to move.</td>
+            <td>
+              <ul>
+                <li>The character cannot take any Move Actions.</li>
+                <li>The character cannot take any actions that would involve their feet.</li>
+                <li>-10 to ATN</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
+</html>
