@@ -10,6 +10,7 @@
     "format:check": "prettier --check .",
     "typecheck:world-map-tile": "tsc --allowJs --noEmit --strict --target es2022 --module nodenext docs/scripts/world/data/world-map-data-tile.js tests/world/data/world-map-data-tile.types.mjs",
     "typecheck:world-map-header": "tsc --allowJs --noEmit --strict --target es2022 --module nodenext docs/scripts/world/data/world-map-data-header.js tests/world/data/world-map-data-header.types.mjs",
+    "typecheck:world-map-grid": "tsc --allowJs --noEmit --strict --target es2022 --module nodenext docs/scripts/world/data/world-map-data-grid.js docs/scripts/world/data/world-map-data-grid-read-only.js tests/world/data/world-map-data-grid.types.mjs",
     "test": "node --test \"tests/**/*.test.mjs\""
   },
   "devDependencies": {

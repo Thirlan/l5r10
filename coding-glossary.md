@@ -57,13 +57,16 @@ Glossary for coding terms used in this project
 |Frame statistics overlay|The overlay of the 3D page that the `?stats=1` option shows: frame rate, CPU frame time, draw calls, active meshes, triangles, and texture memory.|
 |Map file|The saved JSON file of the world map (`world-map-grid.json`). It has the map header first, then the tiles.|
 |Map header|The seven fields of the map file before the tiles: name, summary, seed, maxX, maxY, version, and lastUpdated. Other header fields are rejected. maxX and maxY are the highest tile indexes, so the map has maxX + 1 columns and maxY + 1 rows.|
-|MapHeader|The read-only header POJO in world-map-data-header.js. Its constructor validates and sets exactly the seven map header attributes. WorldMapDataGrid holds it as its header attribute.|
+|MapHeader|The writable header class in world-map-data-header.js. Its constructor validates and sets exactly the seven map header attributes.|
+|MapHeaderReadOnly|The read-only header POJO in world-map-data-header-read-only.js. It uses the MapHeader constructor, copies its values, and freezes the instance.|
 |Tiles|The saved cells of the map file, keyed by "x,y". The code calls the same object the grid.|
 |Const file|A world script file named world-map-<folder>.const.js. It holds fixed values that do not change with game design, for example kilometres per mile.|
 |Config file|A world script file named world-map-<folder>.config.js. It holds game and display settings that a designer can change, for example miles per map tile, travel speeds, and colors.|
-|WorldMapDataGrid|A read-only class made from the map file. It composes a MapHeader POJO and one WorldMapDataTile for each coordinate from 0,0 to maxX,maxY. The tile factory makes the tiles. Saved cells outside these bounds are not used.|
-|WorldMapDataTile|The data-only, read-only class of a map tile. The class also defines its JSDoc instance type. Its constructor in world-map-data-tile.js sets typed attributes and freezes the instance. It shares frozen catalog values and copies and freezes the river flags and label.|
+|WorldMapDataGrid|A grid made from the map file with writable MapHeader and WorldMapDataTile values. It creates default tiles for missing coordinates and ignores saved cells outside its bounds. Grid dimensions are fixed at construction. Build a new grid to change its size.|
+|WorldMapDataGridReadOnly|An independent read-only grid in world-map-data-grid-read-only.js. It shares loading and queries with the writable grid. Its header, tiles, nested values, and private tile array are frozen. Query results have readonly JSDoc types.|
+|WorldMapDataTile|The data-only, writable class of a map tile in world-map-data-tile.js. It shares frozen catalog values. It copies river flags and labels so they can be edited without changing the input.|
+|WorldMapDataTileReadOnly|The read-only tile POJO in world-map-data-tile-read-only.js. It uses the writable tile constructor and freezes the copied tile, river flags, and label. Its readonly JSDoc type is derived from WorldMapDataTile.|
 |POJO|Plain Old JavaScript Object. In this project, a POJO is a data-only, read-only JavaScript class with a constructor. It defines no other instance methods. Its attributes use precise readonly JSDoc types. Its instances and nested data are frozen. This is a project-specific definition.|
-|World map tile factory|The module world-map-data-tile-factory.js. Its createWorldMapTile function validates a saved cell and supplies defaults for missing layers. It calls the WorldMapDataTile constructor to make each POJO.|
+|World map tile factory|The module world-map-data-tile-factory.js. Its createWorldMapTile function validates a saved cell and supplies defaults for missing layers. It returns a writable WorldMapDataTile.|
 |Grid9|The 3x3 tiles around a center tile, as three rows of three tiles. Index [1][1] is the center. A tile outside the map is null.|
 |Map label|The text of a tile on the map. A WorldMapDataTile gives it as englishText, rokuganiText, and fontSize. A missing language text uses the other text.|

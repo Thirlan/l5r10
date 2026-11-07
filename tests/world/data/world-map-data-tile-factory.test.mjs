@@ -87,7 +87,7 @@ test("a tile reads all saved label forms", () => {
   assert.deepEqual(both, { englishText: "Path", rokuganiText: "Michi", fontSize: null });
 });
 
-test("a tile is a read-only data-only class instance", () => {
+test("a tile is a writable data-only class instance", () => {
   // Setup
   const tile = createWorldMapTile(0, 0, { "river direction": { 0: 1 } });
 
@@ -95,8 +95,8 @@ test("a tile is a read-only data-only class instance", () => {
   assert.ok(tile instanceof WorldMapDataTile);
   assert.equal(Object.getPrototypeOf(tile), WorldMapDataTile.prototype);
   assert.deepEqual(Object.getOwnPropertyNames(WorldMapDataTile.prototype), ["constructor"]);
-  assert.ok(Object.isFrozen(tile));
-  assert.ok(Object.isFrozen(tile.riverDirections));
+  assert.equal(Object.isFrozen(tile), false);
+  assert.equal(Object.isFrozen(tile.riverDirections), false);
 });
 
 test("a tile rejects unknown layer values and bad cells", () => {
@@ -109,15 +109,17 @@ test("a tile rejects unknown layer values and bad cells", () => {
   assert.throws(() => createWorldMapTile(0.5, 0), TypeError);
 });
 
-test("a tile and all its nested values reject mutation", () => {
+test("a writable tile allows edits but keeps catalog values frozen", () => {
   const tile = createWorldMapTile(3, 4, { text: "Lake" });
 
-  Object.values(tile).forEach((value) => {
-    if (value !== null && typeof value === "object") assert.ok(Object.isFrozen(value));
-  });
-  assert.throws(() => {
-    tile.x = 9;
-  }, TypeError);
+  tile.elevation = 9;
+  tile.terrain = TERRAIN.HILLS;
+  tile.riverDirections[0] = true;
+  tile.label.englishText = "Changed";
+  assert.equal(tile.elevation, 9);
+  assert.equal(tile.terrain, TERRAIN.HILLS);
+  assert.equal(tile.riverDirections[0], true);
+  assert.equal(tile.label.englishText, "Changed");
   assert.throws(() => {
     tile.terrain.id = 9;
   }, TypeError);
@@ -127,22 +129,10 @@ test("a tile and all its nested values reject mutation", () => {
   assert.throws(() => {
     tile.settlement.englishType = "Changed";
   }, TypeError);
-  assert.throws(() => {
-    tile.riverDirections[0] = true;
-  }, TypeError);
-  assert.throws(() => {
-    tile.label.englishText = "Changed";
-  }, TypeError);
-  assert.throws(() => {
-    tile.extra = true;
-  }, TypeError);
-  assert.throws(() => {
-    delete tile.elevation;
-  }, TypeError);
   assert.equal(Object.getPrototypeOf(tile), WorldMapDataTile.prototype);
   Object.values(Object.getOwnPropertyDescriptors(tile)).forEach((descriptor) => {
-    assert.equal(descriptor.writable, false);
-    assert.equal(descriptor.configurable, false);
+    assert.equal(descriptor.writable, true);
+    assert.equal(descriptor.configurable, true);
   });
   assert.ok(Object.values(tile).every((value) => typeof value !== "function"));
 });

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
+import { WorldMapDataGrid as WritableGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
+import { WorldMapDataGridReadOnly } from "../../../docs/scripts/world/data/world-map-data-grid-read-only.js";
 import { CLAN, SETTLEMENT, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { WorldMapDataTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 import { MapHeader } from "../../../docs/scripts/world/data/world-map-data-header.js";
@@ -12,7 +13,13 @@ function createMapFile(tiles = {}) {
   return { name: "Test map", summary: "", seed: 1, maxX: 2, maxY: 1, version: "0.1.0", lastUpdated: "2026/11/07", tiles };
 }
 
-test("the grid makes a tile for each coordinate of the map", () => {
+function testGrid(name, run) {
+  for (const Grid of [WritableGrid, WorldMapDataGridReadOnly]) {
+    test(`${Grid.name}: ${name}`, () => run(Grid));
+  }
+}
+
+testGrid("the grid makes a tile for each coordinate of the map", (WorldMapDataGrid) => {
   // Execution
   const grid = new WorldMapDataGrid(createMapFile({ "1,1": { terrain: 3 } }));
 
@@ -28,7 +35,7 @@ test("the grid makes a tile for each coordinate of the map", () => {
   assert.deepEqual([grid.get(2, 0).x, grid.get(2, 0).y], [2, 0]);
 });
 
-test("get returns null outside the map and rejects coordinates that are not integers", () => {
+testGrid("get returns null outside the map and rejects coordinates that are not integers", (WorldMapDataGrid) => {
   // Setup
   const grid = new WorldMapDataGrid(createMapFile());
 
@@ -43,7 +50,7 @@ test("get returns null outside the map and rejects coordinates that are not inte
   assert.throws(() => grid.get("1", 0), TypeError);
 });
 
-test("the grid ignores saved cells outside maxX and maxY", () => {
+testGrid("the grid ignores saved cells outside maxX and maxY", (WorldMapDataGrid) => {
   // Execution
   const grid = new WorldMapDataGrid(createMapFile({ "5,5": { terrain: 3 } }));
 
@@ -51,7 +58,7 @@ test("the grid ignores saved cells outside maxX and maxY", () => {
   assert.equal(grid.get(5, 5), null);
 });
 
-test("the grid reads JSON text and rejects a bad header", () => {
+testGrid("the grid reads JSON text and rejects a bad header", (WorldMapDataGrid) => {
   // Execution
   const grid = new WorldMapDataGrid(JSON.stringify(createMapFile({ "0,0": { clan: 2 } })));
 
@@ -60,7 +67,7 @@ test("the grid reads JSON text and rejects a bad header", () => {
   assert.throws(() => new WorldMapDataGrid({ ...createMapFile(), maxX: -1 }), TypeError);
 });
 
-test("getGrid9 returns rows of tiles centered on x,y", () => {
+testGrid("getGrid9 returns rows of tiles centered on x,y", (WorldMapDataGrid) => {
   // Setup
   const grid = new WorldMapDataGrid({ ...createMapFile(), maxY: 2 });
 
@@ -78,7 +85,7 @@ test("getGrid9 returns rows of tiles centered on x,y", () => {
   );
 });
 
-test("getGrid9 uses null for tiles outside the map", () => {
+testGrid("getGrid9 uses null for tiles outside the map", (WorldMapDataGrid) => {
   // Setup
   const grid = new WorldMapDataGrid(createMapFile());
 
@@ -97,7 +104,7 @@ test("getGrid9 uses null for tiles outside the map", () => {
   assert.throws(() => grid.getGrid9(0, Number.NaN), TypeError);
 });
 
-test("the saved world map loads into a grid", () => {
+testGrid("the saved world map loads into a grid", (WorldMapDataGrid) => {
   // Setup
   const data = JSON.parse(readFileSync(MAP_FILE_URL, "utf8"));
 
@@ -112,4 +119,25 @@ test("the saved world map loads into a grid", () => {
   assert.equal(grid.get(82, 85).label.englishText, "Fukou Lake");
   assert.equal(grid.get(20, 11).label.rokuganiText, "Sorrow's Path");
   assert.equal(grid.get(data.maxX, data.maxY).y, data.maxY);
+});
+test("a writable grid exposes editable header and tile data", () => {
+  const grid = new WritableGrid(createMapFile({ "0,0": { text: "Lake" } }));
+  grid.header.name = "Changed";
+  grid.get(0, 0).terrain = TERRAIN.HILLS;
+  grid.get(0, 0).riverDirections[0] = true;
+  grid.get(0, 0).label.englishText = "Changed";
+  assert.equal(grid.header.name, "Changed");
+  assert.equal(grid.getGrid9(0, 0)[1][1].terrain, TERRAIN.HILLS);
+  assert.equal(grid.get(0, 0).riverDirections[0], true);
+  assert.equal(grid.get(0, 0).label.englishText, "Changed");
+});
+
+test("grid dimensions remain fixed until a new grid is constructed", () => {
+  const grid = new WritableGrid(createMapFile());
+  grid.header.maxX = 0;
+  assert.equal(grid.columns, 3);
+  assert.equal(grid.isInside(2, 0), true);
+  const resized = new WritableGrid({ ...grid.header, tiles: {} });
+  assert.equal(resized.columns, 1);
+  assert.equal(resized.get(2, 0), null);
 });

@@ -1,12 +1,12 @@
 // @ts-check
 
 /**
- * A data-only, read-only POJO, as defined in the project coding glossary.
+ * A data-only, writable tile. Catalog objects stay shared and frozen.
  */
 export class WorldMapDataTile {
   /**
    * Sets the attributes from validated tile values.
-   * Catalog values must be frozen. River flags and the label are copied and frozen.
+   * Catalog values must be frozen. River flags and the label are copied.
    * @param {object} values Validated tile values.
    * @param {number} values.x Tile column.
    * @param {number} values.y Tile row.
@@ -27,7 +27,7 @@ export class WorldMapDataTile {
    * @param {readonly [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]} values.riverDirections Outgoing flags, north first, then clockwise.
    * @param {string} values.englishName English name of the settlement, or an empty text.
    * @param {string} values.rokuganiName Rokugani name of the settlement, or an empty text.
-   * @param {Readonly<{englishText: string, rokuganiText: string, fontSize: number|null}>|null} values.label Map label, or null. A null fontSize uses the renderer default.
+   * @param {{englishText: string, rokuganiText: string, fontSize: number|null}|null} values.label Map label, or null. A null fontSize uses the renderer default.
    */
   constructor(values) {
     // Validation
@@ -38,51 +38,26 @@ export class WorldMapDataTile {
     }
 
     // Initialization
-    /** @readonly */
     this.x = values.x;
-    /** @readonly */
     this.y = values.y;
-    /** @readonly */
     this.terrain = values.terrain;
-    /** @readonly */
     this.climate = values.climate;
-    /** @readonly */
     this.vegetation = values.vegetation;
-    /** @readonly */
     this.river = values.river;
-    /** @readonly */
     this.infrastructure = values.infrastructure;
-    /** @readonly */
     this.clan = values.clan;
-    /** @readonly */
     this.settlement = values.settlement;
-    /** @readonly */
     this.resource = values.resource;
-    /** @readonly */
     this.resourceLevel = values.resourceLevel;
-    /** @readonly */
     this.animal = values.animal;
-    /** @readonly */
     this.spirit = values.spirit;
-    /** @readonly */
     this.shadowland = values.shadowland;
-    /** @readonly */
     this.crime = values.crime;
-    /** @readonly */
     this.elevation = values.elevation;
-    /**
-     * @readonly
-     * @type {readonly [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]}
-     */
-    this.riverDirections = Object.freeze([...values.riverDirections]);
-    /** @readonly */
+    /** @type {[boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]} */
+    this.riverDirections = [...values.riverDirections];
     this.englishName = values.englishName;
-    /** @readonly */
     this.rokuganiName = values.rokuganiName;
-    /** @readonly */
-    this.label = values.label === null ? null : Object.freeze({ ...values.label });
-
-    // Output
-    Object.freeze(this);
+    this.label = values.label === null ? null : { ...values.label };
   }
 }

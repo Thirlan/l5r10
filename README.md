@@ -19,6 +19,7 @@ npm install
 | `npm test`             | Run the unit tests.                             |
 | `npm run typecheck:world-map-tile` | Check tile construction and readonly JSDoc types. |
 | `npm run typecheck:world-map-header` | Check header construction, composition, and readonly types. |
+| `npm run typecheck:world-map-grid` | Check writable grid data and readonly query results. |
 
 To format one file, use `npx prettier --write <file>`.
 

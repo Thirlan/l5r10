@@ -1,17 +1,21 @@
 // @ts-check
 // Compile this file only. The invalid operations test the type contract.
 import { MapHeader, validateMapHeader } from "../../../docs/scripts/world/data/world-map-data-header.js";
-import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
+import { MapHeaderReadOnly } from "../../../docs/scripts/world/data/world-map-data-header-read-only.js";
+import { WorldMapDataGridReadOnly } from "../../../docs/scripts/world/data/world-map-data-grid-read-only.js";
 
 const data = { name: "Map", summary: "", seed: 1, maxX: 2, maxY: 1, version: "1", lastUpdated: "2026/11/07" };
-const header = new MapHeader(data);
-const grid = new WorldMapDataGrid({ ...data, tiles: {} });
+const writable = new MapHeader(data);
+writable.name = "Changed";
+writable.seed = 2;
+const header = new MapHeaderReadOnly(writable);
+const grid = new WorldMapDataGridReadOnly({ ...data, tiles: {} });
 /** @type {unknown} */
 const unknownHeader = data;
 validateMapHeader(unknownHeader);
 /** @type {number} */
 const validatedSeed = unknownHeader.seed;
-/** @type {MapHeader} */
+/** @type {MapHeaderReadOnly} */
 const composed = grid.header;
 new MapHeader({ ...header, name: composed.name, seed: composed.seed + validatedSeed });
 

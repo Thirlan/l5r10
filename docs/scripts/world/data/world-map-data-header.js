@@ -56,7 +56,7 @@ export function validateMapHeader(header) {
   });
 }
 
-/** The data-only, read-only POJO of a map header. */
+/** The data-only, writable class of a map header. */
 export class MapHeader {
   /**
    * Validates and sets the seven declared attributes.
@@ -67,22 +67,12 @@ export class MapHeader {
     validateMapHeader(data);
 
     // Initialization
-    /** @readonly */
     this.name = data.name;
-    /** @readonly */
     this.summary = data.summary;
-    /** @readonly */
     this.seed = data.seed;
-    /** @readonly */
     this.maxX = data.maxX;
-    /** @readonly */
     this.maxY = data.maxY;
-    /** @readonly */
     this.version = data.version;
-    /** @readonly */
     this.lastUpdated = data.lastUpdated;
-
-    // Output
-    Object.freeze(this);
   }
 }

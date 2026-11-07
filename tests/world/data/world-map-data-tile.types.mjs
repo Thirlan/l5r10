@@ -3,9 +3,16 @@
 
 import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
 import { WorldMapDataTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
+import { WorldMapDataTileReadOnly } from "../../../docs/scripts/world/data/world-map-data-tile-read-only.js";
 
-/** @type {WorldMapDataTile} */
-const tile = new WorldMapDataTile(createWorldMapTile(0, 0));
+const writable = new WorldMapDataTile(createWorldMapTile(0, 0, { text: "Lake" }));
+writable.x = 1;
+writable.elevation = 75;
+writable.terrain = { id: 1, name: "hills" };
+writable.riverDirections[0] = true;
+if (writable.label !== null) writable.label.englishText = "Changed";
+/** @type {WorldMapDataTileReadOnly} */
+const tile = new WorldMapDataTileReadOnly(writable);
 
 /** @type {number} */
 const terrainId = tile.terrain.id;

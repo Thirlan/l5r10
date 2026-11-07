@@ -65,7 +65,7 @@ function readRiverDirections(cell, x, y) {
  * @param {number} x Tile column.
  * @param {number} y Tile row.
  * @param {Object} [cell] Saved cell of the map file. A missing cell has the default values of all layers.
- * @returns {import("./world-map-data-tile.js").WorldMapDataTile} A read-only tile.
+ * @returns {import("./world-map-data-tile.js").WorldMapDataTile} A writable tile.
  */
 export function createWorldMapTile(x, y, cell = {}) {
   // Validation

@@ -7,17 +7,16 @@ import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-dat
 const DATA = createMapHeader({ columns: 3, rows: 2 }, new Date(2026, 10, 7));
 const HEADER_FIELDS = ["name", "summary", "seed", "maxX", "maxY", "version", "lastUpdated"];
 
-test("a header POJO has all declared values and only a constructor", () => {
+test("a writable header has all declared values and only a constructor", () => {
   const header = new MapHeader(DATA);
   assert.deepEqual(Object.keys(header), HEADER_FIELDS);
   assert.deepEqual({ ...header }, DATA);
   assert.deepEqual(Object.getOwnPropertyNames(MapHeader.prototype), ["constructor"]);
-  assert.ok(Object.isFrozen(header));
-  Object.keys(DATA).forEach((field) =>
-    assert.throws(() => {
-      header[field] = null;
-    }, TypeError),
-  );
+  header.name = "Changed";
+  header.seed = 2;
+  assert.equal(header.name, "Changed");
+  assert.equal(header.seed, 2);
+  assert.equal(DATA.name, "Untitled map");
 });
 
 test("grid composition keeps exactly the declared header fields", () => {
@@ -25,9 +24,9 @@ test("grid composition keeps exactly the declared header fields", () => {
   assert.ok(grid.header instanceof MapHeader);
   assert.deepEqual(Object.keys(grid.header), HEADER_FIELDS);
   assert.deepEqual({ ...grid.header }, DATA);
-  assert.throws(() => {
-    grid.header = new MapHeader(DATA);
-  }, TypeError);
+  grid.header.summary = "Changed";
+  assert.equal(grid.header.summary, "Changed");
+  grid.header.summary = DATA.summary;
   const saved = JSON.parse(stringifyMapFile(grid.header, {}, new Date(2026, 10, 7)));
   assert.deepEqual(readMapFile(saved).header, DATA);
 });

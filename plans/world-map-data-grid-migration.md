@@ -1,10 +1,11 @@
 # World map data grid migration
 
-Status: Header composition is implemented. The read-only consumer migration is planned.
+Status: Writable and read-only models are implemented. Viewer and editor migration is deferred.
 
 ## Goal
 
-Use [WorldMapDataGrid](../docs/scripts/world/data/world-map-data-grid.js) for map queries in the viewer and game rules.
+Use [WorldMapDataGridReadOnly](../docs/scripts/world/data/world-map-data-grid-read-only.js) for map queries in the viewer and game rules.
+Use [WorldMapDataGrid](../docs/scripts/world/data/world-map-data-grid.js) for the later editor migration.
 Remove repeated catalog lookups, default values, coordinate keys, and neighbor searches from those consumers.
 Keep travel results and presentation behavior unchanged for valid map files.
 
@@ -13,12 +14,14 @@ Keep travel results and presentation behavior unchanged for valid map files.
 - Migrate the read-only viewer and game-rule consumers first.
 - Do not migrate shared drawing, the editor, or the 3D map in this phase.
 - A project POJO is a data-only, read-only class with a constructor.
-- Keep [MapHeader](../docs/scripts/world/data/world-map-data-header.js) composed as `grid.header`.
+- Compose the matching writable or read-only header as `grid.header`.
 - Keep only the seven declared header fields.
 - Reject unknown header fields during construction, loading, and saving.
-- Keep [WorldMapDataTile](../docs/scripts/world/data/world-map-data-tile.js) instances and catalog values read-only.
-- The later editor phase will support grid tile replacement, not mutation of tile attributes.
-- The grid collection may then change while existing tile and header POJOs remain read-only.
+- Use [WorldMapDataTileReadOnly](../docs/scripts/world/data/world-map-data-tile-read-only.js) for viewer snapshots.
+- The later editor phase may directly edit writable tile attributes, river flags, and labels.
+- Keep catalog objects frozen in both versions.
+- Keep grid dimensions fixed until a new grid is constructed.
+- See [the model plan](world-map-read-only-models.md) for shared constructors, snapshot types, and tests.
 - Keep current sparse-cell routing behavior until a separate behavior change is approved.
 - Keep current travel costs, target numbers, modes, checks, route tie-breaking, and event output.
 - Keep numeric lookup APIs that do not retrieve map cells.
@@ -80,7 +83,7 @@ Status: Implemented in the current worktree.
 
 Acceptance:
 - Create [world-map-data-header.js](../docs/scripts/world/data/world-map-data-header.js) with the `MapHeader` constructor.
-- Define all seven header attributes as read-only.
+- Define all seven header attributes once, with writable and read-only versions.
 - Reject header fields that are not declared.
 - Compose the class into `WorldMapDataGrid.header`.
 - Keep [map-file helpers](../docs/scripts/world/data/world-map-data-file.js) on the raw `MapHeaderData` representation.
@@ -203,7 +206,7 @@ Acceptance:
 ## Later editor phase
 
 Plan this phase separately after the read-only consumers are migrated.
-Add grid tile-replacement operations while keeping each POJO immutable.
-Define travel-cache and drawing invalidation for replacements.
-Decide header replacement and map resizing separately; do not mutate header attributes.
+Use writable grid tiles for editing, and read-only snapshots for viewing.
+Define travel-cache and drawing invalidation for tile edits.
+Rebuild the grid for map resizing. Header text and other metadata may be edited directly.
 The shared renderer and 3D map need separate migration and performance acceptance tests.
