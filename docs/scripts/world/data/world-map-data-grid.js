@@ -11,6 +11,7 @@
  */
 import { getMapSize, isInsideMap, readMapFile } from "./world-map-file.js";
 import { createWorldMapTile } from "./world-map-data-tile-factory.js";
+import { MapHeader } from "./world-map-data-header.js";
 
 export class WorldMapDataGrid {
   #tiles;
@@ -23,9 +24,9 @@ export class WorldMapDataGrid {
     const { header, tiles } = readMapFile(typeof data === "string" ? JSON.parse(data) : data);
 
     // Computation
-    /** @type {Readonly<import("./world-map-file.js").MapHeader>} Header of the map file. */
-    this.header = Object.freeze({ ...header });
-    const { columns, rows } = getMapSize(header);
+    /** @readonly Header POJO, with all saved header fields. */
+    this.header = new MapHeader(header);
+    const { columns, rows } = getMapSize(this.header);
     /** @type {number} Number of tile columns (maxX + 1). */
     this.columns = columns;
     /** @type {number} Number of tile rows (maxY + 1). */

@@ -3,47 +3,17 @@
  * The file is one JSON object. Its header has these fields: name, summary, seed, maxX, maxY, version, and lastUpdated.
  * The field "tiles" comes after the header. It holds the saved cells, keyed by "x,y".
  * The fields maxX and maxY are the highest tile indexes. The map has maxX + 1 columns and maxY + 1 rows.
- * The header can have more fields. The code keeps them.
+ * The header has exactly these seven fields. Other header fields are rejected.
  * Tile elevation is an integer in metres. A missing value means 1 m.
  */
 import { getElevation } from "./world-map-elevation.js";
 import { DEFAULT_ELEVATION, NEW_MAP_NAME, NEW_MAP_VERSION } from "./world-map-data.config.js";
-import { DATE_PATTERN } from "./world-map-data.const.js";
+import { isTileIndex, validateMapHeader } from "./world-map-data-header.js";
 
-/**
- * @typedef {Object} MapHeader
- * @property {string} name Name of the map.
- * @property {string} summary Short description of the map.
- * @property {number} seed Seed number for repeatable 3D terrain shapes.
- * @property {number} maxX Highest tile column index.
- * @property {number} maxY Highest tile row index.
- * @property {string} version Version of the map, for example "0.9.0".
- * @property {string} lastUpdated Date of the last save, as YYYY/MM/DD.
- */
+/** @typedef {import("./world-map-data-header.js").MapHeaderData} MapHeaderData */
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-
-function isTileIndex(value) {
-  return Number.isSafeInteger(value) && value >= 0;
-}
-
-/** Header fields in file order. Each has a test for the value and a description for the error message. */
-const HEADER_FIELDS = Object.freeze([
-  ["name", (value) => typeof value === "string", "a text"],
-  ["summary", (value) => typeof value === "string", "a text"],
-  ["seed", Number.isSafeInteger, "a whole number"],
-  ["maxX", isTileIndex, "a whole number of 0 or more"],
-  ["maxY", isTileIndex, "a whole number of 0 or more"],
-  ["version", (value) => typeof value === "string" && value.length > 0, "a text that is not empty"],
-  ["lastUpdated", (value) => typeof value === "string" && DATE_PATTERN.test(value), "a date like 2026/10/27"],
-]);
-
-function validateHeader(header) {
-  HEADER_FIELDS.forEach(([field, isValid, expected]) => {
-    if (!isValid(header[field])) throw new TypeError(`The map header field "${field}" must be ${expected}.`);
-  });
 }
 
 /**
@@ -65,7 +35,7 @@ export function formatMapDate(date) {
  * Makes the header of a new map. The name and the version are placeholders, and the seed is 0.
  * @param {{columns: number, rows: number}} size Map size in tiles.
  * @param {Date} [now] Date for lastUpdated.
- * @returns {MapHeader} A new header.
+ * @returns {MapHeaderData} A new header.
  */
 export function createMapHeader(size, now = new Date()) {
   // Validation
@@ -78,7 +48,7 @@ export function createMapHeader(size, now = new Date()) {
 }
 
 /**
- * @param {MapHeader} header Map header.
+ * @param {MapHeaderData} header Map header.
  * @returns {{columns: number, rows: number}} Map size in tiles.
  */
 export function getMapSize(header) {
@@ -90,7 +60,7 @@ export function getMapSize(header) {
 }
 
 /**
- * @param {MapHeader} header Map header.
+ * @param {MapHeaderData} header Map header.
  * @param {number} x Tile column.
  * @param {number} y Tile row.
  * @returns {boolean} True if the tile is from 0 to maxX and from 0 to maxY.
@@ -107,14 +77,14 @@ export function isInsideMap(header, x, y) {
  * Checks the header of a parsed map file and splits the file into the header and the tiles.
  * It does not check the tiles against maxX and maxY.
  * @param {unknown} data The parsed JSON of a map file.
- * @returns {{header: MapHeader, tiles: Object<string, Object>}} The header and the tiles.
+ * @returns {{header: MapHeaderData, tiles: Object<string, Object>}} The header and the tiles.
  */
 export function readMapFile(data) {
   // Validation
   if (!isPlainObject(data)) throw new TypeError("The map file must be an object.");
   const { tiles, ...header } = data;
   if (!isPlainObject(tiles)) throw new TypeError('The map file needs a "tiles" object after the header.');
-  validateHeader(header);
+  validateMapHeader(header);
   Object.values(tiles).forEach((cell) => getElevation(cell));
 
   // Output
@@ -123,7 +93,7 @@ export function readMapFile(data) {
 
 /**
  * Makes the text of a map file. The text sets lastUpdated to the date of now.
- * @param {MapHeader} header Map header.
+ * @param {MapHeaderData} header Map header.
  * @param {Object<string, Object>} tiles Saved cells, keyed by "x,y".
  * @param {Date} [now] Date for lastUpdated.
  * @returns {string} JSON text with 2 spaces of indent. The tiles come after the header.
@@ -131,7 +101,9 @@ export function readMapFile(data) {
 export function stringifyMapFile(header, tiles, now = new Date()) {
   // Validation
   if (!isPlainObject(header)) throw new TypeError("The map header must be an object.");
-  const mapFile = { ...header, lastUpdated: formatMapDate(now), tiles };
+  const updatedHeader = { ...header, lastUpdated: formatMapDate(now) };
+  validateMapHeader(updatedHeader);
+  const mapFile = { ...updatedHeader, tiles };
   readMapFile(mapFile);
 
   // Output

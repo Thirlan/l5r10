@@ -141,6 +141,12 @@ test("a map model rejects a header that is not an object", () => {
   assert.throws(create, /header must be an object/);
 });
 
+test("a map model rejects undeclared header fields", () => {
+  const header = { ...createMapHeader(SIZE), author: "Unknown" };
+  assert.throws(() => new MapModel({}, SIZE, header), /unknown field "author"/);
+  assert.throws(() => createMapModel({ ...header, tiles: {} }), /unknown field "author"/);
+});
+
 test("the map model loader reads the map file from the URL", async (t) => {
   // Setup
   const header = createMapHeader({ columns: 3, rows: 2 });

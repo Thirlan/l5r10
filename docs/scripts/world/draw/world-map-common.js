@@ -1,5 +1,6 @@
 import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "../data/world-map-layers.js";
 import { createMapHeader, getMapSize } from "../data/world-map-file.js";
+import { validateMapHeader } from "../data/world-map-data-header.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "../data/clan-colors.js";
 import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize } from "./world-map-img-settlements.js";
@@ -128,11 +129,12 @@ export class WorldMapRenderer {
    * Replaces the map with a map file, and sets the map size from maxX and maxY in the file header.
    * The caller must call applyZoom afterward, to resize the canvas and repaint.
    * The current map stays when the tiles are not valid.
-   * @param {{header: import("../data/world-map-file.js").MapHeader, tiles: Object<string, Object>}} mapFile Result of readMapFile.
+   * @param {{header: import("../data/world-map-file.js").MapHeaderData, tiles: Object<string, Object>}} mapFile Result of readMapFile.
    * @returns {void}
    */
   loadMapFile(mapFile) {
     // Validation
+    validateMapHeader(mapFile.header);
     this.validateGridData(mapFile.tiles);
 
     // Computation

@@ -18,6 +18,7 @@ npm install
 | `npm run format:check` | Show the files that Prettier will change.       |
 | `npm test`             | Run the unit tests.                             |
 | `npm run typecheck:world-map-tile` | Check tile construction and readonly JSDoc types. |
+| `npm run typecheck:world-map-header` | Check header construction, composition, and readonly types. |
 
 To format one file, use `npx prettier --write <file>`.
 

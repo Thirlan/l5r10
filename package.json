@@ -9,6 +9,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck:world-map-tile": "tsc --allowJs --noEmit --strict --target es2022 --module nodenext docs/scripts/world/data/world-map-tile.js tests/world/data/world-map-tile.types.mjs",
+    "typecheck:world-map-header": "tsc --allowJs --noEmit --strict --target es2022 --module nodenext docs/scripts/world/data/world-map-data-header.js tests/world/data/world-map-data-header.types.mjs",
     "test": "node --test \"tests/**/*.test.mjs\""
   },
   "devDependencies": {

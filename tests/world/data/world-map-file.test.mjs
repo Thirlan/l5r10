@@ -105,12 +105,10 @@ test("reading a map file gives the header and the tiles", () => {
   assert.deepEqual(mapFile, { header: createHeader(), tiles });
 });
 
-test("reading a map file keeps header fields that the code does not know", () => {
-  // Execution
-  const { header } = readMapFile({ ...createHeader(), author: "Thirlan", tiles: {} });
-
-  // Assertion
-  assert.equal(header.author, "Thirlan");
+test("reading a map file rejects undeclared header fields", () => {
+  assert.throws(() => readMapFile({ ...createHeader(), author: "Unknown", tiles: {} }), /unknown field "author"/);
+  assert.throws(() => readMapFile({ ...createHeader(), tiles: {}, notes: {} }), /unknown field "notes"/);
+  assert.throws(() => readMapFile({ ...createHeader(), ["__proto__"]: {}, tiles: {} }), /unknown field "__proto__"/);
 });
 
 test("reading a map file does not check the tiles against maxX and maxY", () => {
@@ -211,6 +209,18 @@ test("the map file text rejects a header without a name", () => {
 
   // Assertion
   assert.throws(stringify, /header field "name"/);
+});
+
+test("the map file text rejects undeclared header fields", () => {
+  assert.throws(() => stringifyMapFile({ ...createHeader(), author: "Unknown" }, {}), /unknown field "author"/);
+  assert.throws(() => stringifyMapFile({ ...createHeader(), tiles: {} }, {}), /unknown field "tiles"/);
+});
+
+test("saving replaces an invalid old update date with the new date", () => {
+  const header = { ...createHeader(), lastUpdated: "outdated" };
+  const saved = JSON.parse(stringifyMapFile(header, {}, new Date(2026, 9, 28)));
+  assert.equal(saved.lastUpdated, "2026/10/28");
+  assert.equal(header.lastUpdated, "outdated");
 });
 
 test("the saved map file passes the map file check", () => {

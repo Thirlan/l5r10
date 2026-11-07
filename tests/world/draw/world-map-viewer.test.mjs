@@ -81,6 +81,19 @@ test("invalid viewer map imports report failure without replacing the current ma
   assert.equal(viewer.grid, original);
 });
 
+test("viewer imports reject unknown header fields without replacing the current map", async (t) => {
+  const viewer = Object.create(WorldMapViewer.prototype);
+  const original = { "0,0": {} };
+  const header = createMapHeader({ columns: 3, rows: 2 });
+  Object.assign(viewer, { grid: original, mapHeader: header });
+  const invalidFile = { ...header, author: "Unknown", tiles: {} };
+  t.mock.method(globalThis, "fetch", async () => ({ ok: true, json: async () => invalidFile }));
+
+  await assert.rejects(viewer.loadMap("map.json"), /unknown field "author"/);
+  assert.equal(viewer.grid, original);
+  assert.equal(viewer.mapHeader, header);
+});
+
 test("viewer map imports reject the old format without a header", async (t) => {
   // Setup
   const viewer = Object.create(WorldMapViewer.prototype);

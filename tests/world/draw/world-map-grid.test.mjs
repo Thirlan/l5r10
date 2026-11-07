@@ -218,6 +218,19 @@ test("invalid builder imports report errors and retain the current map", (t) => 
   assert.equal(logging.mock.calls.length, 1);
 });
 
+test("builder imports reject unknown header fields and retain the current map", (t) => {
+  const builder = createBuilder();
+  const original = { "0,0": { terrain: TERRAIN.FLAT.id } };
+  const header = builder.mapHeader;
+  builder.grid = original;
+  const logging = t.mock.method(console, "error", () => {});
+
+  assert.equal(builder.loadFromJSON(JSON.stringify({ ...header, author: "Unknown", tiles: {} })), false);
+  assert.equal(builder.grid, original);
+  assert.equal(builder.mapHeader, header);
+  assert.match(logging.mock.calls[0].arguments[1].message, /unknown field "author"/);
+});
+
 test("builder imports of the old format without a header are rejected", (t) => {
   // Setup
   const builder = createBuilder();

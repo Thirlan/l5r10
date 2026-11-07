@@ -4,6 +4,7 @@
  * Missing layers use the same defaults as the 2D map: flat, temperate, and no vegetation.
  */
 import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/data/world-map-file.js";
+import { validateMapHeader } from "../../scripts/world/data/world-map-data-header.js";
 import { CLAN, CLIMATE, INFRASTRUCTURE, isWaterTerrain, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-layers.js";
 import { getCliffEdges, getElevation } from "../../scripts/world/data/world-map-elevation.js";
 export { isWaterTerrain } from "../../scripts/world/data/world-map-layers.js";
@@ -40,7 +41,7 @@ export class MapModel {
   /**
    * @param {Object<string, Object>} grid Saved cells keyed by "x,y" (the tiles of the map file).
    * @param {{columns: number, rows: number}} size Map size in cells.
-   * @param {import("../../scripts/world/data/world-map-file.js").MapHeader} [header] Header of the map file. A new map header is the default.
+   * @param {import("../../scripts/world/data/world-map-file.js").MapHeaderData} [header] Header of the map file. A new map header is the default.
    */
   constructor(grid, size, header) {
     // Validation
@@ -48,7 +49,7 @@ export class MapModel {
     if (!size || !Number.isInteger(size.columns) || !Number.isInteger(size.rows) || size.columns <= 0 || size.rows <= 0) {
       throw new TypeError("The map size needs positive integer columns and rows.");
     }
-    if (header !== undefined && (!header || typeof header !== "object" || Array.isArray(header))) throw new TypeError("The map header must be an object.");
+    if (header !== undefined) validateMapHeader(header);
 
     // Computation
     this.header = Object.freeze({ ...(header ?? createMapHeader(size)) });

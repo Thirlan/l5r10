@@ -56,11 +56,12 @@ Glossary for coding terms used in this project
 |Pinned cell|An inspected cell that stays in the cell inspector after a click, until the next click releases it.|
 |Frame statistics overlay|The overlay of the 3D page that the `?stats=1` option shows: frame rate, CPU frame time, draw calls, active meshes, triangles, and texture memory.|
 |Map file|The saved JSON file of the world map (`world-map-grid.json`). It has the map header first, then the tiles.|
-|Map header|The fields of the map file before the tiles: name, summary, seed, maxX, maxY, version, and lastUpdated. maxX and maxY are the highest tile indexes, so the map has maxX + 1 columns and maxY + 1 rows.|
+|Map header|The seven fields of the map file before the tiles: name, summary, seed, maxX, maxY, version, and lastUpdated. Other header fields are rejected. maxX and maxY are the highest tile indexes, so the map has maxX + 1 columns and maxY + 1 rows.|
+|MapHeader|The read-only header POJO in world-map-data-header.js. Its constructor validates and sets exactly the seven map header attributes. WorldMapDataGrid holds it as its header attribute.|
 |Tiles|The saved cells of the map file, keyed by "x,y". The code calls the same object the grid.|
 |Const file|A world script file named world-map-<folder>.const.js. It holds fixed values that do not change with game design, for example kilometres per mile.|
 |Config file|A world script file named world-map-<folder>.config.js. It holds game and display settings that a designer can change, for example miles per map tile, travel speeds, and colors.|
-|WorldMapDataGrid|A read-only class made from the map file. It holds one WorldMapTile, made by the world map tile factory, for each coordinate from 0,0 to maxX,maxY. Saved cells outside these bounds are not used.|
+|WorldMapDataGrid|A read-only class made from the map file. It composes a MapHeader POJO and one WorldMapTile for each coordinate from 0,0 to maxX,maxY. The tile factory makes the tiles. Saved cells outside these bounds are not used.|
 |WorldMapTile|The data-only, read-only class of a map tile. Its constructor in world-map-tile.js sets typed attributes and freezes the instance. It shares frozen catalog values and copies and freezes the river flags and label.|
 |POJO|Plain Old JavaScript Object. In this project, a POJO is a data-only, read-only JavaScript class with a constructor. It defines no other instance methods. Its attributes use precise readonly JSDoc types. Its instances and nested data are frozen. This is a project-specific definition.|
 |World map tile factory|The module world-map-data-tile-factory.js. Its createWorldMapTile function validates a saved cell and supplies defaults for missing layers. It calls the WorldMapTile constructor to make each POJO.|

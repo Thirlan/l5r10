@@ -4,6 +4,7 @@ import test from "node:test";
 import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
 import { CLAN, SETTLEMENT, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
 import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-tile.js";
+import { MapHeader } from "../../../docs/scripts/world/data/world-map-data-header.js";
 
 const MAP_FILE_URL = new URL("../../../docs/data/world-map-grid.json", import.meta.url);
 
@@ -19,6 +20,7 @@ test("the grid makes a tile for each coordinate of the map", () => {
   assert.equal(grid.columns, 3);
   assert.equal(grid.rows, 2);
   assert.equal(grid.header.name, "Test map");
+  assert.ok(grid.header instanceof MapHeader);
   assert.equal(grid.get(1, 1).terrain, TERRAIN.WATER);
   assert.ok(grid.get(1, 1) instanceof WorldMapTile);
   assert.ok(grid.get(2, 0) instanceof WorldMapTile);

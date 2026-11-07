@@ -142,6 +142,19 @@ test("loading a map file with an invalid tile keeps the current map", () => {
   assert.deepEqual([renderer.mapWidth, renderer.mapHeight], [80, 80]);
 });
 
+test("loading a map file with an unknown header field keeps the current map", () => {
+  const renderer = createRenderer();
+  const currentHeader = createMapHeader({ columns: 5, rows: 5 });
+  const currentGrid = { "0,0": {} };
+  Object.assign(renderer, { mapHeader: currentHeader, grid: currentGrid, mapWidth: 80, mapHeight: 80 });
+  const header = { ...createMapHeader({ columns: 3, rows: 2 }), author: "Unknown" };
+
+  assert.throws(() => renderer.loadMapFile({ header, tiles: {} }), /unknown field "author"/);
+  assert.equal(renderer.mapHeader, currentHeader);
+  assert.equal(renderer.grid, currentGrid);
+  assert.deepEqual([renderer.mapWidth, renderer.mapHeight], [80, 80]);
+});
+
 test("absent overlay values do not produce a color", () => {
   // Setup
   const renderer = createRenderer();
