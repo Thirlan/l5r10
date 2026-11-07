@@ -3,7 +3,7 @@ import test from "node:test";
 import { Beast } from "../../../docs/scripts/world/game-rules/beast.js";
 import { BeastSelection } from "../../../docs/scripts/world/game-rules/beast-selection.js";
 import { SkillCheck } from "../../../docs/scripts/skill-check.js";
-import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 const beastData = {
   name: "Test Beast",

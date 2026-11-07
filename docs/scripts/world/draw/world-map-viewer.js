@@ -1,6 +1,6 @@
 import { WorldMapRenderer } from "./world-map-common.js";
-import { readMapFile } from "../data/world-map-file.js";
-import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "../data/world-map-layers.js";
+import { readMapFile } from "../data/world-map-data-file.js";
+import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "../data/world-map-data-layers.js";
 import { L5RPathing } from "../game-rules/pathing.js";
 import { getClanColors } from "../data/clan-colors.js";
 import { MapDragToPan } from "./world-map-pan.js";

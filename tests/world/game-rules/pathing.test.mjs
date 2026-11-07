@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { L5RPathing } from "../../../docs/scripts/world/game-rules/pathing.js";
-import { TERRAIN, INFRASTRUCTURE, SETTLEMENT, CLAN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { TERRAIN, INFRASTRUCTURE, SETTLEMENT, CLAN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 function createPather(terrain, infrastructure = null) {
   return Object.assign(Object.create(L5RPathing.prototype), {

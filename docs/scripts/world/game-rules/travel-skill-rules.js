@@ -1,6 +1,6 @@
-import { INFRASTRUCTURE, LAYERS, TERRAIN } from "../data/world-map-layers.js";
+import { INFRASTRUCTURE, LAYERS, TERRAIN } from "../data/world-map-data-layers.js";
 import { SkillCheck } from "../../skill-check.js";
-import { getElevation } from "../data/world-map-elevation.js";
+import { getElevation } from "../data/world-map-data-elevation.js";
 import { BASE_SPEED_KMPH, BASE_TN, MIN_TN, CLIMATE_MODIFIER, WATER_CLIMATE_MODIFIER, VEGETATION_MODIFIER, INFRASTRUCTURE_MODIFIER, RIVER_AGAINST_CURRENT_MODIFIER } from "./world-map-game-rules.config.js";
 import { RIVER_OFFSETS } from "../data/world-map-data.const.js";
 

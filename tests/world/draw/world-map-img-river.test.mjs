@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame } from "../../../docs/scripts/world/draw/world-map-img-river.js";
-import { TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { RIVER_OFFSETS } from "../../../docs/scripts/world/data/world-map-data.const.js";
 
 function draw(neighbors) {

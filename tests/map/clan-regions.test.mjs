@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { getClanColors } from "../../docs/scripts/world/data/clan-colors.js";
-import { CLAN } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLAN } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { CLAN_SLOTS, clanPalette, createClanLayer, hexToRgb, packClanIds } from "../../docs/map/scripts/clan-regions.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 

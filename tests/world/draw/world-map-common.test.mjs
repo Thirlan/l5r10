@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapRenderer } from "../../../docs/scripts/world/draw/world-map-common.js";
-import { createMapHeader } from "../../../docs/scripts/world/data/world-map-file.js";
-import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE, RESOURCE } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { createMapHeader } from "../../../docs/scripts/world/data/world-map-data-file.js";
+import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN, SETTLEMENT, RIVER, INFRASTRUCTURE, RESOURCE } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { getResourceLevelColor } from "../../../docs/scripts/world/draw/world-map-img-resource-level.js";
 import { getClanColors } from "../../../docs/scripts/world/data/clan-colors.js";
 import { getSettlementAsset } from "../../../docs/scripts/world/draw/world-map-img-settlements.js";

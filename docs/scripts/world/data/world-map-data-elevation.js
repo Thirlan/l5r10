@@ -1,4 +1,4 @@
-import { isWaterTerrain } from "./world-map-layers.js";
+import { isWaterTerrain } from "./world-map-data-layers.js";
 import { NEIGHBOR_OFFSETS } from "./world-map-data.const.js";
 import { CLIFF_HEIGHT, DEFAULT_ELEVATION } from "./world-map-data.config.js";
 

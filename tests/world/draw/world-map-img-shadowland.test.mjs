@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { SHADOWLAND, SPIRIT } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { SHADOWLAND, SPIRIT } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { drawShadowlandCue, getShadowlandColor } from "../../../docs/scripts/world/draw/world-map-img-shadowland.js";
 
 test("shadowland color lookup returns no color for the none value", () => {

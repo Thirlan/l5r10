@@ -1,4 +1,4 @@
-import { getCliffDifference } from "../data/world-map-elevation.js";
+import { getCliffDifference } from "../data/world-map-data-elevation.js";
 import { SkillCheck } from "../../skill-check.js";
 import { bypassesCrossing, validateTravelInput, validateTravelNeighbors } from "./travel-skill-rules.js";
 import { CLIFF_HEIGHT } from "../data/world-map-data.config.js";

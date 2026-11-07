@@ -1,6 +1,6 @@
 import { BeastSelection } from "./beast-selection.js";
 import { BEASTIARY } from "./beastiary.js";
-import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-data-layers.js";
 import { ENCOUNTER_TYPES } from "./world-map-game-rules.const.js";
 import { ENCOUNTER_CHANCES } from "./world-map-game-rules.config.js";
 

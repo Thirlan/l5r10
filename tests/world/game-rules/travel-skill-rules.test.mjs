@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { crossesWithinCell, environmentModifier, infrastructureModifier, validateTravelInput } from "../../../docs/scripts/world/game-rules/travel-skill-rules.js";
-import { INFRASTRUCTURE, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { INFRASTRUCTURE, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 test("missing layers use map defaults without changing the input", () => {
   // Setup

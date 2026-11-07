@@ -1,5 +1,5 @@
-import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "../data/world-map-layers.js";
-import { createMapHeader, getMapSize } from "../data/world-map-file.js";
+import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "../data/world-map-data-layers.js";
+import { createMapHeader, getMapSize } from "../data/world-map-data-file.js";
 import { validateMapHeader } from "../data/world-map-data-header.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "../data/clan-colors.js";
@@ -12,7 +12,7 @@ import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
 import { getCrimeColor, drawCrimeCue } from "./world-map-img-crime.js";
 import { getResourceLevelColor, drawResourceLevelCue } from "./world-map-img-resource-level.js";
-import { getCliffEdges, getElevation } from "../data/world-map-elevation.js";
+import { getCliffEdges, getElevation } from "../data/world-map-data-elevation.js";
 import { drawElevationCue, getElevationColor } from "./world-map-img-elevation.js";
 import { NEIGHBOR_OFFSETS, RIVER_OFFSETS } from "../data/world-map-data.const.js";
 import { NEUTRAL_SETTLEMENT_COLORS, DEFAULT_ZOOM, GRID_SIZE, MAX_ZOOM, MIN_ZOOM, RIVER_FLOW_FRAME_MS, ZOOM_STEP } from "./world-map-draw.config.js";
@@ -129,7 +129,7 @@ export class WorldMapRenderer {
    * Replaces the map with a map file, and sets the map size from maxX and maxY in the file header.
    * The caller must call applyZoom afterward, to resize the canvas and repaint.
    * The current map stays when the tiles are not valid.
-   * @param {{header: import("../data/world-map-file.js").MapHeaderData, tiles: Object<string, Object>}} mapFile Result of readMapFile.
+   * @param {{header: import("../data/world-map-data-file.js").MapHeaderData, tiles: Object<string, Object>}} mapFile Result of readMapFile.
    * @returns {void}
    */
   loadMapFile(mapFile) {

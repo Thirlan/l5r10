@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { MapHeader } from "../../../docs/scripts/world/data/world-map-data-header.js";
-import { createMapHeader, readMapFile, stringifyMapFile } from "../../../docs/scripts/world/data/world-map-file.js";
+import { createMapHeader, readMapFile, stringifyMapFile } from "../../../docs/scripts/world/data/world-map-data-file.js";
 import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
 
 const DATA = createMapHeader({ columns: 3, rows: 2 }, new Date(2026, 10, 7));

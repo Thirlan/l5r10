@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { createMapHeader, readMapFile } from "../../docs/scripts/world/data/world-map-file.js";
-import { CLAN, CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-layers.js";
+import { createMapHeader, readMapFile } from "../../docs/scripts/world/data/world-map-data-file.js";
+import { CLAN, CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { MapModel, createMapModel, describeMapModel, directionMask, isWaterTerrain, loadMapModel } from "../../docs/map/scripts/map-data.js";
 
 const SIZE = { columns: 3, rows: 2 };

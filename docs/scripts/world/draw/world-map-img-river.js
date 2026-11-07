@@ -1,4 +1,4 @@
-import { RIVER, TERRAIN } from "../data/world-map-layers.js";
+import { RIVER, TERRAIN } from "../data/world-map-data-layers.js";
 import { getWaterColor } from "./world-map-img-base-layers.js";
 import { RIVER_OFFSETS } from "../data/world-map-data.const.js";
 import { RIVER_DIRECTIONS, RIVER_STRIPE_OFFSETS } from "./world-map-draw.const.js";
@@ -14,7 +14,7 @@ export const RIVER_CONTROL_IMAGES = Object.freeze(Object.entries(RIVER).map(([ke
  * @param {number} y Cell row.
  * @param {number} gridSize Cell size in pixels.
  * @param {Object<string, boolean>} neighbors River connections.
- * @param {Object<string, import("../data/world-map-layers.js").LayerValue|null>} [water] Adjacent water terrain.
+ * @param {Object<string, import("../data/world-map-data-layers.js").LayerValue|null>} [water] Adjacent water terrain.
  * @param {Object<string, number>} [directions] Saved flow directions.
  * @returns {void}
  */

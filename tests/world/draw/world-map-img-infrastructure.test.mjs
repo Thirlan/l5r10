@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { drawInfrastructure } from "../../../docs/scripts/world/draw/world-map-img-infrastructure.js";
 
 function recordInfrastructureDrawing(value, changes = {}) {

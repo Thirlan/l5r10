@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getSkillAndTN } from "../../../docs/scripts/world/game-rules/terrain-skill-check.js";
 import { SkillCheck } from "../../../docs/scripts/skill-check.js";
-import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 // Setup
 const river = { river: 1, "river direction": { 0: 1 } };

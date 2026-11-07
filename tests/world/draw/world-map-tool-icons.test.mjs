@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { setToolIcon } from "../../../docs/scripts/world/draw/world-map-tool-icons.js";
-import { CLAN, RESOURCE, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLAN, RESOURCE, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { getClanColors } from "../../../docs/scripts/world/data/clan-colors.js";
 import { getResourceImage } from "../../../docs/scripts/world/draw/world-map-img-resources.js";
 import { BASE_LAYER_CONTROL_IMAGES } from "../../../docs/scripts/world/draw/world-map-img-base-layers.js";

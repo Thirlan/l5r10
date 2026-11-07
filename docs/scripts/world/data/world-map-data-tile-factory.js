@@ -1,17 +1,17 @@
 /**
- * The factory of world map tiles (see world-map-tile.js).
+ * The factory of world map tiles (see world-map-data-tile.js).
  * It owns the translation of a saved cell of the map file into a tile.
- * Layer values become catalog objects from world-map-layers.js, for example TERRAIN.FLAT or ANIMAL.HIGH.
+ * Layer values become catalog objects from world-map-data-layers.js, for example TERRAIN.FLAT or ANIMAL.HIGH.
  * A missing layer uses its default value: the "none" value, flat terrain, temperate climate, or level 0.
  *
  * Usage
  * const tile = createWorldMapTile(10, 20, mapFile.tiles["10,20"]);
  * tile.terrain.name;
  */
-import { getElevation } from "./world-map-elevation.js";
-import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, LAYERS, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "./world-map-layers.js";
+import { getElevation } from "./world-map-data-elevation.js";
+import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, LAYERS, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "./world-map-data-layers.js";
 import { RIVER_OFFSETS } from "./world-map-data.const.js";
-import { WorldMapTile } from "./world-map-tile.js";
+import { WorldMapTile } from "./world-map-data-tile.js";
 
 /** Tile properties that hold one catalog value: [property and saved field, layer, default value]. */
 const CATALOG_FIELDS = Object.freeze([
@@ -65,7 +65,7 @@ function readRiverDirections(cell, x, y) {
  * @param {number} x Tile column.
  * @param {number} y Tile row.
  * @param {Object} [cell] Saved cell of the map file. A missing cell has the default values of all layers.
- * @returns {import("./world-map-tile.js").WorldMapTile} A read-only tile.
+ * @returns {import("./world-map-data-tile.js").WorldMapTile} A read-only tile.
  */
 export function createWorldMapTile(x, y, cell = {}) {
   // Validation

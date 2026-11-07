@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { ANIMAL, SPIRIT } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { ANIMAL, SPIRIT } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { drawAnimalCue, getAnimalColor } from "../../../docs/scripts/world/draw/world-map-img-animal.js";
 
 test("animal color lookup returns no color for the none value", () => {

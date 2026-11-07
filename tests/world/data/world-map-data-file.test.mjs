@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { createMapHeader, formatMapDate, getMapSize, isInsideMap, readMapFile, stringifyMapFile } from "../../../docs/scripts/world/data/world-map-file.js";
+import { createMapHeader, formatMapDate, getMapSize, isInsideMap, readMapFile, stringifyMapFile } from "../../../docs/scripts/world/data/world-map-data-file.js";
 
 const MAP_FILE_URL = new URL("../../../docs/data/world-map-grid.json", import.meta.url);
 

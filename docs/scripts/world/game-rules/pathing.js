@@ -1,5 +1,5 @@
-import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "../data/world-map-layers.js";
-import { getCliffDifference } from "../data/world-map-elevation.js";
+import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "../data/world-map-data-layers.js";
+import { getCliffDifference } from "../data/world-map-data-elevation.js";
 import { bypassesCrossing } from "./travel-skill-rules.js";
 import { getTravelSpeed } from "./travel-speed.js";
 import { DIAGONAL_COST_MULTIPLIER, MINUTES_PER_DAY, MODE_FOOT, MODE_RIVER_BOAT, MODE_SHIP, MODE_SWIM } from "./world-map-game-rules.const.js";

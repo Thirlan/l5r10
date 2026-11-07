@@ -4,7 +4,7 @@ Status: Complete. PRs 1–30 are complete.
 
 ## Goal
 
-Replace the retired layer JSON with class-based [JavaScript definitions](../docs/scripts/world/world-map-layers.js).
+Replace the retired layer JSON with class-based [JavaScript definitions](../docs/scripts/world/data/world-map-data-layers.js).
 Replace cryptic layer IDs and comparisons with named constants.
 Separate layer identity from images, colors, and drawing code.
 Use a direct migration without backward-compatibility code.
@@ -19,7 +19,7 @@ Use a direct migration without backward-compatibility code.
 - Severity colors run from yellow to purple. Resource Level uses the reverse sequence.
 - Use `rgba(255, 255, 0, 0.55)` for Low severity and High Resource Level.
 
-- Use [world-map-layers.js](../docs/scripts/world/world-map-layers.js) for layer identity and value definitions.
+- Use [world-map-data-layers.js](../docs/scripts/world/data/world-map-data-layers.js) for layer identity and value definitions.
 - Named constants return metadata instances, not numeric IDs.
 - `TERRAIN.FLAT.id` returns `0`. `TERRAIN.FLAT.name` returns `"flat"`.
 - Keep images and colors outside these metadata instances.
@@ -48,7 +48,7 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 
 | File | Current responsibility |
 |---|---|
-| [world-map-layers.js](../docs/scripts/world/world-map-layers.js) | Defines 13 immutable metadata catalogs. Resolves numeric saved values. Contains no presentation settings. |
+| [world-map-data-layers.js](../docs/scripts/world/data/world-map-data-layers.js) | Defines 13 immutable metadata catalogs. Resolves numeric saved values. Contains no presentation settings. |
 | [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js) | Defines climate and water colors, separate terrain and vegetation images, and cliff drawing. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Defines clan border and fill palettes. |
 | [world-map-common.js](../docs/scripts/world/world-map-common.js) | Loads images and validates numeric cells. Delegates feature drawing to presentation modules. |
@@ -62,7 +62,7 @@ The request also repeated the JSON image-map path. The JavaScript base-layer mod
 
 ### Script use
 
-Import identity catalogs from [world-map-layers.js](../docs/scripts/world/world-map-layers.js).
+Import identity catalogs from [world-map-data-layers.js](../docs/scripts/world/data/world-map-data-layers.js).
 Use `.id` for identity values and `.value` for ordered overlays.
 Resolve saved numbers with `LAYERS.<LAYER>.getValue(number)`. Use `.name` for display text.
 Keep metadata separate from image URLs, colors, and geometry.
@@ -94,7 +94,7 @@ Unrelated travel modules and numeric resource-output mappings remain unchanged.
 
 ### Identity classes and constants
 
-Create these classes in [world-map-layers.js](../docs/scripts/world/world-map-layers.js):
+Create these classes in [world-map-data-layers.js](../docs/scripts/world/data/world-map-data-layers.js):
 
 | Class | Responsibility |
 |---|---|

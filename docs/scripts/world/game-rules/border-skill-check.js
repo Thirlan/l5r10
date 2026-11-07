@@ -1,4 +1,4 @@
-import { INFRASTRUCTURE, LAYERS } from "../data/world-map-layers.js";
+import { INFRASTRUCTURE, LAYERS } from "../data/world-map-data-layers.js";
 import { SkillCheck } from "../../skill-check.js";
 import { BORDER_TN } from "./world-map-game-rules.config.js";
 

@@ -3,7 +3,7 @@
  * The colors come from the base presentation module: the climate control images and getWaterColor().
  * The page uses these vertex colors until the PBR textures load, and when WebGL2 is not available.
  */
-import { CLIMATE, TERRAIN } from "../../scripts/world/data/world-map-layers.js";
+import { CLIMATE, TERRAIN } from "../../scripts/world/data/world-map-data-layers.js";
 import { BASE_LAYER_CONTROL_IMAGES, getWaterColor } from "../../scripts/world/draw/world-map-img-base-layers.js";
 import { isWaterTerrain } from "./map-data.js";
 import { HeightField } from "./terrain-height.js";

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { getTravelSpeed } from "../../../docs/scripts/world/game-rules/travel-speed.js";
-import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-layers.js";
-import { getCliffDifference } from "../../../docs/scripts/world/data/world-map-elevation.js";
+import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-data-layers.js";
+import { getCliffDifference } from "../../../docs/scripts/world/data/world-map-data-elevation.js";
 import { BASE_SPEED_KMPH } from "../../../docs/scripts/world/game-rules/world-map-game-rules.config.js";
 
 const cases = [

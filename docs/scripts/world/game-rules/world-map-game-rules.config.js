@@ -1,4 +1,4 @@
-import { CLIMATE, INFRASTRUCTURE, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
+import { CLIMATE, INFRASTRUCTURE, TERRAIN, VEGETATION } from "../data/world-map-data-layers.js";
 
 // Travel speed
 

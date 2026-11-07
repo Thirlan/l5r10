@@ -1,4 +1,4 @@
-import { ANIMAL } from "../data/world-map-layers.js";
+import { ANIMAL } from "../data/world-map-data-layers.js";
 import { ANIMAL_COLORS } from "./world-map-draw.config.js";
 
 export const ANIMAL_CONTROL_IMAGES = Object.freeze(Object.entries(ANIMAL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_animal_${key.toLowerCase()}.webp` })));

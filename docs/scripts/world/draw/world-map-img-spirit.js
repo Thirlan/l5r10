@@ -1,4 +1,4 @@
-import { SPIRIT } from "../data/world-map-layers.js";
+import { SPIRIT } from "../data/world-map-data-layers.js";
 import { SPIRIT_COLORS } from "./world-map-draw.config.js";
 
 export const SPIRIT_CONTROL_IMAGES = Object.freeze(Object.entries(SPIRIT).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_spirit_${key.toLowerCase()}.webp` })));

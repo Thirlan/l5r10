@@ -1,4 +1,4 @@
-import { SHADOWLAND } from "../data/world-map-layers.js";
+import { SHADOWLAND } from "../data/world-map-data-layers.js";
 import { SHADOWLAND_COLORS } from "./world-map-draw.config.js";
 
 export const SHADOWLAND_CONTROL_IMAGES = Object.freeze(Object.entries(SHADOWLAND).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_shadowland_${key.toLowerCase()}.webp` })));

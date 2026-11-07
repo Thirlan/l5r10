@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLAN, SETTLEMENT } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLAN, SETTLEMENT } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { drawSettlementAsset, drawSettlementMarker, drawCircularSettlement, drawSquareSettlement } from "../../../docs/scripts/world/draw/world-map-img-settlements.js";
 
 function createContext() {

@@ -6,7 +6,7 @@
  * - The climate and terrain of the cell select the tree kind (conifer or broadleaf) and the canopy color.
  * - Coordinates are in cell units: x goes east, y goes south.
  */
-import { CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-layers.js";
+import { CLIMATE, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-data-layers.js";
 import { ROAD_STYLES, buildRoadSegments } from "./road-paths.js";
 import { cellSurface } from "./surface-layers.js";
 import { HeightField } from "./terrain-height.js";

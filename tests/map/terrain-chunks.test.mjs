@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { CLIMATE, RIVER, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { chunkIndexAt, chunkRanges, chunkVertexData } from "../../docs/map/scripts/terrain-chunks.js";
 import { HeightField, RIVER_SEAL } from "../../docs/map/scripts/terrain-height.js";

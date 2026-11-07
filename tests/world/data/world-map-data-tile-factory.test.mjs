@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
-import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-layers.js";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-tile.js";
+import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-data-layers.js";
+import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 
 test("a tile without a saved cell has the default values of all layers", () => {
   // Execution

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapViewer } from "../../../docs/scripts/world/draw/world-map-viewer.js";
-import { createMapHeader } from "../../../docs/scripts/world/data/world-map-file.js";
-import { CLAN, TERRAIN, CLIMATE, VEGETATION, INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { createMapHeader } from "../../../docs/scripts/world/data/world-map-data-file.js";
+import { CLAN, TERRAIN, CLIMATE, VEGETATION, INFRASTRUCTURE } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { getClanColors } from "../../../docs/scripts/world/data/clan-colors.js";
 
 test("viewer initialization reports and propagates loading failures", async (t) => {

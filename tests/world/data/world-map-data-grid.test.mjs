@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { WorldMapDataGrid } from "../../../docs/scripts/world/data/world-map-data-grid.js";
-import { CLAN, SETTLEMENT, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-tile.js";
+import { CLAN, SETTLEMENT, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
+import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 import { MapHeader } from "../../../docs/scripts/world/data/world-map-data-header.js";
 
 const MAP_FILE_URL = new URL("../../../docs/data/world-map-grid.json", import.meta.url);

@@ -62,7 +62,7 @@ Glossary for coding terms used in this project
 |Const file|A world script file named world-map-<folder>.const.js. It holds fixed values that do not change with game design, for example kilometres per mile.|
 |Config file|A world script file named world-map-<folder>.config.js. It holds game and display settings that a designer can change, for example miles per map tile, travel speeds, and colors.|
 |WorldMapDataGrid|A read-only class made from the map file. It composes a MapHeader POJO and one WorldMapTile for each coordinate from 0,0 to maxX,maxY. The tile factory makes the tiles. Saved cells outside these bounds are not used.|
-|WorldMapTile|The data-only, read-only class of a map tile. Its constructor in world-map-tile.js sets typed attributes and freezes the instance. It shares frozen catalog values and copies and freezes the river flags and label.|
+|WorldMapTile|The data-only, read-only class of a map tile. Its constructor in world-map-data-tile.js sets typed attributes and freezes the instance. It shares frozen catalog values and copies and freezes the river flags and label.|
 |POJO|Plain Old JavaScript Object. In this project, a POJO is a data-only, read-only JavaScript class with a constructor. It defines no other instance methods. Its attributes use precise readonly JSDoc types. Its instances and nested data are frozen. This is a project-specific definition.|
 |World map tile factory|The module world-map-data-tile-factory.js. Its createWorldMapTile function validates a saved cell and supplies defaults for missing layers. It calls the WorldMapTile constructor to make each POJO.|
 |Grid9|The 3x3 tiles around a center tile, as three rows of three tiles. Index [1][1] is the center. A tile outside the map is null.|

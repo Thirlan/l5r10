@@ -59,7 +59,10 @@ test("moved files no longer occupy the flat scripts folder", () => {
   assert.deepEqual(readdirSync(new URL("world/", scripts)).sort(), ["data", "draw", "game-rules"]);
   assert.ok(existsSync(new URL("world/game-rules/travel-speed.js", scripts)));
   assert.ok(existsSync(new URL("world/game-rules/travel_lookup.csv", scripts)));
-  assert.ok(existsSync(new URL("world/data/world-map-layers.js", scripts)));
+  ["tile", "file", "layers", "elevation"].forEach((module) => {
+    assert.ok(existsSync(new URL(`world/data/world-map-data-${module}.js`, scripts)));
+    assert.equal(existsSync(new URL(`world/data/world-map-${module}.js`, scripts)), false);
+  });
   assert.ok(existsSync(new URL("world/data/clan-colors.js", scripts)));
   ["data", "draw", "game-rules"].forEach((folder) => {
     assert.ok(existsSync(new URL(`world/${folder}/world-map-${folder}.const.js`, scripts)), `${folder} const file`);

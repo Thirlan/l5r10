@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { cellAtWorld, describeCell } from "../../docs/map/scripts/cell-inspector.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";

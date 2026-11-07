@@ -1,7 +1,7 @@
 import { WorldMapRenderer } from "./world-map-common.js";
-import { isInsideMap, readMapFile, stringifyMapFile } from "../data/world-map-file.js";
-import { LAYERS, TERRAIN } from "../data/world-map-layers.js";
-import { getElevation } from "../data/world-map-elevation.js";
+import { isInsideMap, readMapFile, stringifyMapFile } from "../data/world-map-data-file.js";
+import { LAYERS, TERRAIN } from "../data/world-map-data-layers.js";
+import { getElevation } from "../data/world-map-data-elevation.js";
 import { getClanColors } from "../data/clan-colors.js";
 import { DEFAULT_ELEVATION } from "../data/world-map-data.config.js";
 import { BUILDER_START_ZOOM, GRID_SIZE } from "./world-map-draw.config.js";

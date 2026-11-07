@@ -17,10 +17,10 @@
  * - A seal pass then walks along each river segment. Where the surface is not below RIVER_SEAL, it lowers the
  *   four corners of that lattice quad to RIVER_BED. Steep terrain can otherwise lift a channel above the water.
  */
-import { TERRAIN } from "../../scripts/world/data/world-map-layers.js";
+import { TERRAIN } from "../../scripts/world/data/world-map-data-layers.js";
 import { MapModel, isWaterTerrain } from "./map-data.js";
 import { buildRiverSegments } from "./river-paths.js";
-import { getCliffDifference } from "../../scripts/world/data/world-map-elevation.js";
+import { getCliffDifference } from "../../scripts/world/data/world-map-data-elevation.js";
 import { NEIGHBOR_OFFSETS } from "../../scripts/world/data/world-map-data.const.js";
 import { DEFAULT_ELEVATION, METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 

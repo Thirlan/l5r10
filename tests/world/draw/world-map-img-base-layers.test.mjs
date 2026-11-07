@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLIMATE, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "../../../docs/scripts/world/draw/world-map-img-base-layers.js";
 
 function createDrawing() {

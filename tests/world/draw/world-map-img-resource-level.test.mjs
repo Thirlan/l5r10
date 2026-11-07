@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { RESOURCE_LEVEL, SPIRIT } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { RESOURCE_LEVEL, SPIRIT } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { drawResourceLevelCue, getResourceLevelColor } from "../../../docs/scripts/world/draw/world-map-img-resource-level.js";
 
 test("resource level color lookup returns no color for the none value", () => {

@@ -1,4 +1,4 @@
-import { CLAN, RESOURCE } from "../data/world-map-layers.js";
+import { CLAN, RESOURCE } from "../data/world-map-data-layers.js";
 import { getClanColors } from "../data/clan-colors.js";
 import { BASE_LAYER_CONTROL_IMAGES } from "./world-map-img-base-layers.js";
 import { RIVER_CONTROL_IMAGES } from "./world-map-img-river.js";
@@ -15,7 +15,7 @@ const controlImages = new Map([...BASE_LAYER_CONTROL_IMAGES, ...RIVER_CONTROL_IM
 
 /**
  * @param {HTMLButtonElement} button Tool button.
- * @param {import("../data/world-map-layers.js").LayerValue|import("../data/world-map-layers.js").LevelValue} value Tool metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue|import("../data/world-map-data-layers.js").LevelValue} value Tool metadata.
  * @returns {void}
  */
 export function setToolIcon(button, value) {

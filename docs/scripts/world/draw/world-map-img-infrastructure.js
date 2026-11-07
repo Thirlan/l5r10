@@ -1,11 +1,11 @@
-import { INFRASTRUCTURE } from "../data/world-map-layers.js";
+import { INFRASTRUCTURE } from "../data/world-map-data-layers.js";
 import { ROAD_DIRECTIONS } from "./world-map-draw.const.js";
 import { INFRASTRUCTURE_STYLES } from "./world-map-draw.config.js";
 
 export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze(Object.entries(INFRASTRUCTURE).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_infrastructure_${key.toLowerCase()}.webp` })));
 
 /**
- * @param {import("../data/world-map-layers.js").LayerValue} value Infrastructure metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} value Infrastructure metadata.
  * @returns {{color: string, lineWidth?: number, marker?: string}|undefined} Drawing style.
  */
 export function getInfrastructureStyle(value) {
@@ -20,7 +20,7 @@ export function getInfrastructureStyle(value) {
  * @param {number} x Cell column.
  * @param {number} y Cell row.
  * @param {number} gridSize Cell size in pixels.
- * @param {import("../data/world-map-layers.js").LayerValue} value Infrastructure metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} value Infrastructure metadata.
  * @param {{east: boolean, south: boolean, southeast: boolean, northeast: boolean}} neighbors Forward connections.
  * @returns {void}
  */

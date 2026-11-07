@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WorldMapGrid } from "../../../docs/scripts/world/draw/world-map-grid.js";
-import { createMapHeader } from "../../../docs/scripts/world/data/world-map-file.js";
-import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { createMapHeader } from "../../../docs/scripts/world/data/world-map-data-file.js";
+import { TERRAIN, CLIMATE, VEGETATION, RESOURCE_LEVEL, CLAN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { getClanColors } from "../../../docs/scripts/world/data/clan-colors.js";
 
 const SAVED_DATE = new Date(2026, 9, 27);

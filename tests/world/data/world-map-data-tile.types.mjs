@@ -2,7 +2,7 @@
 // Compile this file only. The invalid operations test the type contract.
 
 import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-tile.js";
+import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 
 const tile = new WorldMapTile(createWorldMapTile(0, 0));
 

@@ -1,10 +1,10 @@
-import { RESOURCE_LEVEL } from "../data/world-map-layers.js";
+import { RESOURCE_LEVEL } from "../data/world-map-data-layers.js";
 import { RESOURCE_LEVEL_COLORS } from "./world-map-draw.config.js";
 
 export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze(Object.entries(RESOURCE_LEVEL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_resource_level_${key.toLowerCase()}.webp` })));
 
 /**
- * @param {import("../data/world-map-layers.js").LevelValue} value Resource level metadata.
+ * @param {import("../data/world-map-data-layers.js").LevelValue} value Resource level metadata.
  * @returns {string|null} Overlay color, or null for None.
  */
 export function getResourceLevelColor(value) {

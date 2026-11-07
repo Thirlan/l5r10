@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { CLIMATE, INFRASTRUCTURE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, INFRASTRUCTURE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
 import { ROAD_STYLES } from "../../docs/map/scripts/road-paths.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";

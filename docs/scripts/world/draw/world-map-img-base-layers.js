@@ -1,8 +1,8 @@
-import { CLIMATE, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
+import { CLIMATE, TERRAIN, VEGETATION } from "../data/world-map-data-layers.js";
 import { CLIMATE_COLORS, SAND_BANK_COLOR, WATER_COLORS } from "./world-map-draw.config.js";
 
 /**
- * @param {import("../data/world-map-layers.js").LayerValue} terrain Terrain metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} terrain Terrain metadata.
  * @returns {string|undefined} Water color, if the terrain is water.
  */
 export function getWaterColor(terrain) {
@@ -14,8 +14,8 @@ export function getWaterColor(terrain) {
  * @param {number} x Cell column.
  * @param {number} y Cell row.
  * @param {number} gridSize Cell size in pixels.
- * @param {import("../data/world-map-layers.js").LayerValue} terrain Terrain metadata.
- * @param {Object<string, import("../data/world-map-layers.js").LayerValue|null>} neighbors Adjacent terrain.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} terrain Terrain metadata.
+ * @param {Object<string, import("../data/world-map-data-layers.js").LayerValue|null>} neighbors Adjacent terrain.
  * @param {Object<string, boolean>} [riverConnections] Adjacent river connections.
  * @returns {void}
  */
@@ -73,9 +73,9 @@ const imagePaths = new Map(BASE_LAYER_IMAGES.map(({ value, image }) => [value, i
  * @param {number} x Cell column.
  * @param {number} y Cell row.
  * @param {number} gridSize Cell size in pixels.
- * @param {import("../data/world-map-layers.js").LayerValue} terrain Terrain metadata.
- * @param {import("../data/world-map-layers.js").LayerValue} climate Climate metadata.
- * @param {import("../data/world-map-layers.js").LayerValue} vegetation Vegetation metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} terrain Terrain metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} climate Climate metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} vegetation Vegetation metadata.
  * @param {Map<string, HTMLImageElement>} images Loaded images by asset path.
  * @returns {void}
  */

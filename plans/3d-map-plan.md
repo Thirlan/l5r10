@@ -40,7 +40,7 @@ to a 2D `<canvas>`. The 3D POC consumes the same inputs:
 | File | Role | Reused how |
 | --- | --- | --- |
 | `docs/data/world-map-grid.json` | The map itself. A header (`name`, `summary`, `seed`, `maxX`, `maxY`, `version`, `lastUpdated`) and a `tiles` object keyed by `"x,y"`; each cell has optional `terrain`, `climate`, `vegetation`, `river`, `infrastructure`, `settlement`, `resource`, `clan`, `text`, and overlay layers. | Source of every tile the 3D scene renders. |
-| [world-map-layers.js](../docs/scripts/world/world-map-layers.js) | Immutable layer definitions and identity or ordered-value catalogs. | Resolve numeric cell values to metadata. Derive elevation from terrain constants. |
+| [world-map-data-layers.js](../docs/scripts/world/data/world-map-data-layers.js) | Immutable layer definitions and identity or ordered-value catalogs. | Resolve numeric cell values to metadata. Derive elevation from terrain constants. |
 | [world-map-img-base-layers.js](../docs/scripts/world/world-map-img-base-layers.js) | Separate climate colors, water colors, transparent terrain images, and vegetation images. | Reference for surface appearance, not a per-cell mesh material. |
 | [clan-colors.js](../docs/scripts/clan-colors.js) | Clan border and fill palettes. | Resolve territory colors from clan metadata. |
 | [world-map-img-settlements.js](../docs/scripts/world/world-map-img-settlements.js) and [world-map-img-resources.js](../docs/scripts/world/world-map-img-resources.js) | Marker presentation. | Reuse asset mappings; procedural settlements need an explicit 3D presentation choice. |

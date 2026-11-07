@@ -1,4 +1,4 @@
-import { RESOURCE } from "../data/world-map-layers.js";
+import { RESOURCE } from "../data/world-map-data-layers.js";
 import { RESOURCE_MARKER_SIZE } from "./world-map-draw.config.js";
 
 const resourceImageEntries = [
@@ -47,7 +47,7 @@ const resourceImageMap = new Map(resourceImageEntries);
 export const RESOURCE_IMAGES = Object.freeze(resourceImageEntries.map(([resource, image]) => Object.freeze({ resource, image })));
 
 /**
- * @param {import("../data/world-map-layers.js").LayerValue} resource Resource metadata.
+ * @param {import("../data/world-map-data-layers.js").LayerValue} resource Resource metadata.
  * @returns {string|undefined} Resource asset path.
  */
 export function getResourceImage(resource) {

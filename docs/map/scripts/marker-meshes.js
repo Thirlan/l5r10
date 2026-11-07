@@ -3,7 +3,7 @@
  * The icons come from the 2D map drawing functions, so the 3D markers look like the 2D markers.
  */
 import { getClanColors } from "../../scripts/world/data/clan-colors.js";
-import { CLAN } from "../../scripts/world/data/world-map-layers.js";
+import { CLAN } from "../../scripts/world/data/world-map-data-layers.js";
 import { getResourceImage } from "../../scripts/world/draw/world-map-img-resources.js";
 import { drawSettlementMarker, getSettlementAsset } from "../../scripts/world/draw/world-map-img-settlements.js";
 import { ICON_PIXELS, MARKER_STYLES, iconAtlasLayout, markerGeometry, resourceMarkers, settlementMarkers } from "./marker-layout.js";

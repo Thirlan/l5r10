@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { BEASTIARY } from "../../../docs/scripts/world/game-rules/beastiary.js";
-import { CLIMATE, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 test("BEASTIARY is frozen and contains unique names", () => {
   assert.equal(Object.isFrozen(BEASTIARY), true);

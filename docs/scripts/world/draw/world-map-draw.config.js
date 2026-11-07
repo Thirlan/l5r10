@@ -1,4 +1,4 @@
-import { ANIMAL, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE_LEVEL, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN } from "../data/world-map-layers.js";
+import { ANIMAL, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE_LEVEL, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN } from "../data/world-map-data-layers.js";
 
 /** Size of one map tile in canvas pixels. */
 export const GRID_SIZE = 16;

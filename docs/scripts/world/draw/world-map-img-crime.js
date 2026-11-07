@@ -1,4 +1,4 @@
-import { CRIME } from "../data/world-map-layers.js";
+import { CRIME } from "../data/world-map-data-layers.js";
 import { CRIME_COLORS } from "./world-map-draw.config.js";
 
 export const CRIME_CONTROL_IMAGES = Object.freeze(Object.entries(CRIME).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_crime_${key.toLowerCase()}.webp` })));

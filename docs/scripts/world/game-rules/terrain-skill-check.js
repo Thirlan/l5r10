@@ -1,4 +1,4 @@
-import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "../data/world-map-layers.js";
+import { CLIMATE, INFRASTRUCTURE, TERRAIN } from "../data/world-map-data-layers.js";
 import { SkillCheck } from "../../skill-check.js";
 import { environmentModifier, infrastructureModifier, isBoat, isWater, validateTravelInput } from "./travel-skill-rules.js";
 import { BASE_TN, MIN_TN, RIVER_AGAINST_CURRENT_MODIFIER, TERRAIN_MODIFIER } from "./world-map-game-rules.config.js";

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { LayerDefinition, LayerValue, LevelValue, SettlementValue } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { LayerDefinition, LayerValue, LevelValue, SettlementValue } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 test("layer values reject non-integer IDs", () => {
   // Setup

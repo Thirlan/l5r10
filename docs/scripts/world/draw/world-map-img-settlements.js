@@ -1,4 +1,4 @@
-import { SETTLEMENT } from "../data/world-map-layers.js";
+import { SETTLEMENT } from "../data/world-map-data-layers.js";
 import { DEFAULT_SETTLEMENT_LABEL_SIZE, NEUTRAL_SETTLEMENT_COLORS, SETTLEMENT_LABEL_SIZE_ENTRIES } from "./world-map-draw.config.js";
 
 const settlementAssetEntries = [

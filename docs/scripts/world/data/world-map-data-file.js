@@ -6,7 +6,7 @@
  * The header has exactly these seven fields. Other header fields are rejected.
  * Tile elevation is an integer in metres. A missing value means 1 m.
  */
-import { getElevation } from "./world-map-elevation.js";
+import { getElevation } from "./world-map-data-elevation.js";
 import { DEFAULT_ELEVATION, NEW_MAP_NAME, NEW_MAP_VERSION } from "./world-map-data.config.js";
 import { isTileIndex, validateMapHeader } from "./world-map-data-header.js";
 

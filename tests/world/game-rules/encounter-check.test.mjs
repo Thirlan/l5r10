@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { BeastiaryLookUpTable, getLookUpTable, rollEncounter } from "../../../docs/scripts/world/game-rules/encounter-check.js";
 import { BEASTIARY } from "../../../docs/scripts/world/game-rules/beastiary.js";
-import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 import { ENCOUNTER_CHANCES } from "../../../docs/scripts/world/game-rules/world-map-game-rules.config.js";
 
 const MAP_CELL = [TERRAIN.FLAT.id, CLIMATE.TEMPERATE.id, VEGETATION.NONE.id, RIVER.NONE.id];

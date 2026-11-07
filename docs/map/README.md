@@ -58,7 +58,7 @@ The map file is one JSON object. It has a header, then the tiles:
 | `lastUpdated` | The date of the last save, as `YYYY/MM/DD`. The map builder sets it on each save. |
 | `tiles` | The saved cells, keyed by `"x,y"`. |
 
-- `world-map-file.js` in `docs/scripts/world/data/` reads and writes this format. The 2D pages and the 3D page share it.
+- `world-map-data-file.js` in `docs/scripts/world/data/` reads and writes this format. The 2D pages and the 3D page share it.
 - `createMapModel(data)` takes the size from `maxX` and `maxY`. The `MapModel` keeps the header in `model.header`.
 - The old format has no header, so the loaders reject it.
 - Each catalog layer has one `Uint8Array` of IDs, in row order (`index = y * columns + x`).
@@ -356,7 +356,7 @@ Triangles in one pass of the full map:
 
 | Reused from `docs/scripts/` | Rebuilt for 3D in `docs/map/scripts/` |
 | --- | --- |
-| Map file format (`world-map-file.js`), map data (`world-map-grid.json`), and the layer catalogs (`world-map-layers.js`) | Height field, terrain chunks, and the terrain shader |
+| Map file format (`world-map-data-file.js`), map data (`world-map-grid.json`), and the layer catalogs (`world-map-data-layers.js`) | Height field, terrain chunks, and the terrain shader |
 | Clan colors (`clan-colors.js`) | Clan regions in the terrain shader |
 | Settlement marker drawing, resource images, and label sizes | Billboard material, marker atlases, and label atlas |
 | River offsets (`world-map-img-river.js`) and water colors | River channels, water surface, roads, trees, and ports |

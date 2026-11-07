@@ -39,7 +39,7 @@ Add an `elevation` layer. Remove the `CLIFF` terrain. A cliff exists wherever tw
 
 ## PRs (each 200 lines or fewer)
 
-1. `world-map-layers.js`: add `ELEVATION` layer. Add `world-map-elevation.js` with the color gradient and `getCliffEdges(grid, x, y)`. Tests.
+1. `world-map-data-layers.js`: add `ELEVATION` layer. Add `world-map-data-elevation.js` with the color gradient and `getCliffEdges(grid, x, y)`. Tests.
 2. Builder: elevation number input, paint and erase in `world-map-grid.js`, `build_map.html`. Tests.
 3. Viewer: elevation overlay checkbox and color render. Update map file read and write.
 4. Render cliffs from elevation differences. Replace `drawCliffEdges`. Update `world-map-img-base-layers.js` and tests.

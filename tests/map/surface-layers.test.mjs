@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import test from "node:test";
-import { CLIMATE, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLIMATE, TERRAIN } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { DEFAULT_LAYER, SNOW_LAYER, TEXTURE_SETS, WATER_CLASS, cellSurface, layerIndex, packCellIds } from "../../docs/map/scripts/surface-layers.js";
 

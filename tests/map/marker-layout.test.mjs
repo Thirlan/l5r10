@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLAN, RESOURCE, SETTLEMENT, TERRAIN } from "../../docs/scripts/world/data/world-map-layers.js";
+import { CLAN, RESOURCE, SETTLEMENT, TERRAIN } from "../../docs/scripts/world/data/world-map-data-layers.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { ICON_PIXELS, MARKER_STYLES, iconAtlasLayout, markerGeometry, resourceMarkers, settlementMarkers } from "../../docs/map/scripts/marker-layout.js";
 import { BRIDGE_DECK } from "../../docs/map/scripts/road-paths.js";

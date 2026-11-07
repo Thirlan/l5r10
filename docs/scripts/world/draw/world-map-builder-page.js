@@ -1,6 +1,6 @@
 import { WorldMapGrid } from "./world-map-grid.js";
 import { bindMapControls } from "./world-map-controls.js";
-import * as layers from "../data/world-map-layers.js";
+import * as layers from "../data/world-map-data-layers.js";
 import { setToolIcon } from "./world-map-tool-icons.js";
 
 const canvas = document.querySelector("#mapCanvas");

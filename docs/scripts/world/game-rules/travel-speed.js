@@ -1,4 +1,4 @@
-import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../data/world-map-layers.js";
+import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../data/world-map-data-layers.js";
 import { CLIFF_HEIGHT } from "../data/world-map-data.config.js";
 import { BASE_SPEED_KMPH, CLIMATE_PENALTY, INFRASTRUCTURE_BONUS, SPEED_MULTIPLIER_LIMITS, SPEED_PENALTY, TERRAIN_PENALTY, WITH_CURRENT_BONUS } from "./world-map-game-rules.config.js";
 

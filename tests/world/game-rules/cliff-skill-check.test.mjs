@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getSkillAndTN } from "../../../docs/scripts/world/game-rules/cliff-skill-check.js";
 import { SkillCheck } from "../../../docs/scripts/skill-check.js";
-import { TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { TERRAIN } from "../../../docs/scripts/world/data/world-map-data-layers.js";
 
 function neighbors(destination, direction = 0) {
   const cells = Array.from({ length: 8 }, () => ({}));

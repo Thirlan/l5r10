@@ -1,6 +1,6 @@
 import { Beast } from "./beast.js";
 import { SkillCheck } from "../../skill-check.js";
-import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
+import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-data-layers.js";
 
 export const BEASTIARY = Object.freeze([
   new Beast({
