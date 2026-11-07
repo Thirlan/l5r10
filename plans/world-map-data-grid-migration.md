@@ -16,7 +16,7 @@ Keep travel results and presentation behavior unchanged for valid map files.
 - Keep [MapHeader](../docs/scripts/world/data/world-map-data-header.js) composed as `grid.header`.
 - Keep only the seven declared header fields.
 - Reject unknown header fields during construction, loading, and saving.
-- Keep [WorldMapTile](../docs/scripts/world/data/world-map-data-tile.js) instances and catalog values read-only.
+- Keep [WorldMapDataTile](../docs/scripts/world/data/world-map-data-tile.js) instances and catalog values read-only.
 - The later editor phase will support grid tile replacement, not mutation of tile attributes.
 - The grid collection may then change while existing tile and header POJOs remain read-only.
 - Keep current sparse-cell routing behavior until a separate behavior change is approved.

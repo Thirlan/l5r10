@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
 import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "../../../docs/scripts/world/data/world-map-data-layers.js";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
+import { WorldMapDataTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 
 test("a tile without a saved cell has the default values of all layers", () => {
   // Execution
@@ -92,9 +92,9 @@ test("a tile is a read-only data-only class instance", () => {
   const tile = createWorldMapTile(0, 0, { "river direction": { 0: 1 } });
 
   // Assertion
-  assert.ok(tile instanceof WorldMapTile);
-  assert.equal(Object.getPrototypeOf(tile), WorldMapTile.prototype);
-  assert.deepEqual(Object.getOwnPropertyNames(WorldMapTile.prototype), ["constructor"]);
+  assert.ok(tile instanceof WorldMapDataTile);
+  assert.equal(Object.getPrototypeOf(tile), WorldMapDataTile.prototype);
+  assert.deepEqual(Object.getOwnPropertyNames(WorldMapDataTile.prototype), ["constructor"]);
   assert.ok(Object.isFrozen(tile));
   assert.ok(Object.isFrozen(tile.riverDirections));
 });
@@ -139,7 +139,7 @@ test("a tile and all its nested values reject mutation", () => {
   assert.throws(() => {
     delete tile.elevation;
   }, TypeError);
-  assert.equal(Object.getPrototypeOf(tile), WorldMapTile.prototype);
+  assert.equal(Object.getPrototypeOf(tile), WorldMapDataTile.prototype);
   Object.values(Object.getOwnPropertyDescriptors(tile)).forEach((descriptor) => {
     assert.equal(descriptor.writable, false);
     assert.equal(descriptor.configurable, false);
@@ -152,7 +152,7 @@ test("tile construction copies mutable tile data and preserves catalog identity"
   const riverDirections = [...original.riverDirections];
   const label = { ...original.label };
   const values = { ...original, riverDirections, label };
-  const tile = new WorldMapTile(values);
+  const tile = new WorldMapDataTile(values);
 
   assert.deepEqual(Object.keys(tile), Object.keys(values));
   assert.equal(JSON.stringify(tile), JSON.stringify(values));
@@ -160,10 +160,10 @@ test("tile construction copies mutable tile data and preserves catalog identity"
   riverDirections[0] = true;
   label.englishText = "Changed";
   assert.equal(tile.x, 0);
-  assert.ok(tile instanceof WorldMapTile);
+  assert.ok(tile instanceof WorldMapDataTile);
   assert.equal(tile.riverDirections[0], false);
   assert.equal(tile.label.englishText, "Lake");
   assert.equal(tile.terrain, TERRAIN.FLAT);
   assert.equal(tile.settlement, SETTLEMENT.NONE);
-  assert.throws(() => new WorldMapTile({ ...original, terrain: { id: 0, name: "flat" } }), /frozen catalog values/);
+  assert.throws(() => new WorldMapDataTile({ ...original, terrain: { id: 0, name: "flat" } }), /frozen catalog values/);
 });

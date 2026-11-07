@@ -2,9 +2,10 @@
 // Compile this file only. The invalid operations test the type contract.
 
 import { createWorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile-factory.js";
-import { WorldMapTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
+import { WorldMapDataTile } from "../../../docs/scripts/world/data/world-map-data-tile.js";
 
-const tile = new WorldMapTile(createWorldMapTile(0, 0));
+/** @type {WorldMapDataTile} */
+const tile = new WorldMapDataTile(createWorldMapTile(0, 0));
 
 /** @type {number} */
 const terrainId = tile.terrain.id;
@@ -12,18 +13,18 @@ const terrainId = tile.terrain.id;
 const crimeLevel = tile.crime.value;
 /** @type {string} */
 const settlementType = tile.settlement.rokuganiType;
-new WorldMapTile({ ...tile, x: terrainId + crimeLevel, englishName: settlementType });
+new WorldMapDataTile({ ...tile, x: terrainId + crimeLevel, englishName: settlementType });
 
 // @ts-expect-error Coordinates must be numbers.
-new WorldMapTile({ ...tile, x: "0" });
+new WorldMapDataTile({ ...tile, x: "0" });
 // @ts-expect-error A tile needs all its fields.
-new WorldMapTile({ x: 0, y: 0 });
+new WorldMapDataTile({ x: 0, y: 0 });
 // @ts-expect-error A tile has exactly eight river flags.
-new WorldMapTile({ ...tile, riverDirections: [false] });
+new WorldMapDataTile({ ...tile, riverDirections: [false] });
 // @ts-expect-error Catalog IDs must be numbers.
-new WorldMapTile({ ...tile, terrain: { id: "0", name: "flat" } });
+new WorldMapDataTile({ ...tile, terrain: { id: "0", name: "flat" } });
 // @ts-expect-error A class must be called with new.
-WorldMapTile(tile);
+WorldMapDataTile(tile);
 // @ts-expect-error Tile properties are read-only.
 tile.x = 1;
 // @ts-expect-error Catalog attributes cannot be reassigned.
@@ -41,7 +42,7 @@ tile.extra = true;
 if (tile.label !== null) {
   /** @type {number|null} */
   const fontSize = tile.label.fontSize;
-  new WorldMapTile({ ...tile, label: { ...tile.label, fontSize } });
+  new WorldMapDataTile({ ...tile, label: { ...tile.label, fontSize } });
   // @ts-expect-error Label properties are read-only.
   tile.label.englishText = "Changed";
 }

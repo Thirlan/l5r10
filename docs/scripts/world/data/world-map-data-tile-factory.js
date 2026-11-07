@@ -11,7 +11,7 @@
 import { getElevation } from "./world-map-data-elevation.js";
 import { ANIMAL, CLAN, CLIMATE, CRIME, INFRASTRUCTURE, LAYERS, RESOURCE, RESOURCE_LEVEL, RIVER, SETTLEMENT, SHADOWLAND, SPIRIT, TERRAIN, VEGETATION } from "./world-map-data-layers.js";
 import { RIVER_OFFSETS } from "./world-map-data.const.js";
-import { WorldMapTile } from "./world-map-data-tile.js";
+import { WorldMapDataTile } from "./world-map-data-tile.js";
 
 /** Tile properties that hold one catalog value: [property and saved field, layer, default value]. */
 const CATALOG_FIELDS = Object.freeze([
@@ -65,7 +65,7 @@ function readRiverDirections(cell, x, y) {
  * @param {number} x Tile column.
  * @param {number} y Tile row.
  * @param {Object} [cell] Saved cell of the map file. A missing cell has the default values of all layers.
- * @returns {import("./world-map-data-tile.js").WorldMapTile} A read-only tile.
+ * @returns {import("./world-map-data-tile.js").WorldMapDataTile} A read-only tile.
  */
 export function createWorldMapTile(x, y, cell = {}) {
   // Validation
@@ -82,7 +82,7 @@ export function createWorldMapTile(x, y, cell = {}) {
   );
 
   // Output
-  return new WorldMapTile({
+  return new WorldMapDataTile({
     x,
     y,
     ...catalogValues,

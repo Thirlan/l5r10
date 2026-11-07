@@ -1,6 +1,6 @@
 /**
  * The world map as JavaScript objects.
- * It reads the map file (docs/data/world-map-grid.json) and makes one WorldMapTile for each coordinate of the map.
+ * It reads the map file (docs/data/world-map-grid.json) and makes one WorldMapDataTile for each coordinate of the map.
  * Coordinates without a saved cell get a tile with the default values of all layers.
  * Saved cells outside maxX and maxY are not used.
  *
@@ -50,7 +50,7 @@ export class WorldMapDataGrid {
   /**
    * @param {number} x Tile column.
    * @param {number} y Tile row.
-   * @returns {import("./world-map-data-tile.js").WorldMapTile|null} The tile at x,y, or null if x,y is outside the map.
+   * @returns {import("./world-map-data-tile.js").WorldMapDataTile|null} The tile at x,y, or null if x,y is outside the map.
    */
   get(x, y) {
     // Validation
@@ -65,7 +65,7 @@ export class WorldMapDataGrid {
    * Index [1][1] is the center, [0][1] is north, and [1][2] is east.
    * @param {number} x Column of the center tile.
    * @param {number} y Row of the center tile.
-   * @returns {(import("./world-map-data-tile.js").WorldMapTile|null)[][]} Three rows of three tiles. A tile outside the map is null.
+   * @returns {(import("./world-map-data-tile.js").WorldMapDataTile|null)[][]} Three rows of three tiles. A tile outside the map is null.
    */
   getGrid9(x, y) {
     // Validation

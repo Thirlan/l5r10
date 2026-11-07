@@ -1,41 +1,33 @@
 // @ts-check
 
 /**
- * The values of one tile. Catalog values are shared, frozen metadata objects.
- * The map tile factory validates saved cells and supplies these values.
- *
- * @typedef {object} WorldMapTileData
- * @property {number} x Tile column.
- * @property {number} y Tile row.
- * @property {Readonly<{id: number, name: string}>} terrain Terrain catalog value.
- * @property {Readonly<{id: number, name: string}>} climate Climate catalog value.
- * @property {Readonly<{id: number, name: string}>} vegetation Vegetation catalog value.
- * @property {Readonly<{id: number, name: string}>} river River catalog value.
- * @property {Readonly<{id: number, name: string}>} infrastructure Infrastructure catalog value.
- * @property {Readonly<{id: number, name: string}>} clan Clan catalog value.
- * @property {Readonly<{id: number, name: string, englishType: string, rokuganiType: string}>} settlement Settlement catalog value.
- * @property {Readonly<{id: number, name: string}>} resource Resource catalog value.
- * @property {Readonly<{value: number, name: string}>} resourceLevel Resource level catalog value.
- * @property {Readonly<{value: number, name: string}>} animal Animal level catalog value.
- * @property {Readonly<{value: number, name: string}>} spirit Spirit level catalog value.
- * @property {Readonly<{value: number, name: string}>} shadowland Shadowland level catalog value.
- * @property {Readonly<{value: number, name: string}>} crime Crime level catalog value.
- * @property {number} elevation Elevation in whole metres.
- * @property {readonly [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]} riverDirections Outgoing flags, north first, then clockwise.
- * @property {string} englishName English name of the settlement, or an empty text.
- * @property {string} rokuganiName Rokugani name of the settlement, or an empty text.
- * @property {Readonly<{englishText: string, rokuganiText: string, fontSize: number|null}>|null} label Map label, or null. A null fontSize uses the renderer default.
- */
-
-/**
  * A data-only, read-only POJO, as defined in the project coding glossary.
- * @implements {Readonly<WorldMapTileData>}
  */
-export class WorldMapTile {
+export class WorldMapDataTile {
   /**
    * Sets the attributes from validated tile values.
    * Catalog values must be frozen. River flags and the label are copied and frozen.
-   * @param {Readonly<WorldMapTileData>} values Validated tile values.
+   * @param {object} values Validated tile values.
+   * @param {number} values.x Tile column.
+   * @param {number} values.y Tile row.
+   * @param {Readonly<{id: number, name: string}>} values.terrain Terrain catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.climate Climate catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.vegetation Vegetation catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.river River catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.infrastructure Infrastructure catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.clan Clan catalog value.
+   * @param {Readonly<{id: number, name: string, englishType: string, rokuganiType: string}>} values.settlement Settlement catalog value.
+   * @param {Readonly<{id: number, name: string}>} values.resource Resource catalog value.
+   * @param {Readonly<{value: number, name: string}>} values.resourceLevel Resource level catalog value.
+   * @param {Readonly<{value: number, name: string}>} values.animal Animal level catalog value.
+   * @param {Readonly<{value: number, name: string}>} values.spirit Spirit level catalog value.
+   * @param {Readonly<{value: number, name: string}>} values.shadowland Shadowland level catalog value.
+   * @param {Readonly<{value: number, name: string}>} values.crime Crime level catalog value.
+   * @param {number} values.elevation Elevation in whole metres.
+   * @param {readonly [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]} values.riverDirections Outgoing flags, north first, then clockwise.
+   * @param {string} values.englishName English name of the settlement, or an empty text.
+   * @param {string} values.rokuganiName Rokugani name of the settlement, or an empty text.
+   * @param {Readonly<{englishText: string, rokuganiText: string, fontSize: number|null}>|null} values.label Map label, or null. A null fontSize uses the renderer default.
    */
   constructor(values) {
     // Validation
@@ -80,7 +72,7 @@ export class WorldMapTile {
     this.elevation = values.elevation;
     /**
      * @readonly
-     * @type {WorldMapTileData["riverDirections"]}
+     * @type {readonly [boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean]}
      */
     this.riverDirections = Object.freeze([...values.riverDirections]);
     /** @readonly */
