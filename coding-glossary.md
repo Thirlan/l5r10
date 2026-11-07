@@ -60,3 +60,7 @@ Glossary for coding terms used in this project
 |Tiles|The saved cells of the map file, keyed by "x,y". The code calls the same object the grid.|
 |Const file|A world script file named world-map-<folder>.const.js. It holds fixed values that do not change with game design, for example kilometres per mile.|
 |Config file|A world script file named world-map-<folder>.config.js. It holds game and display settings that a designer can change, for example miles per map tile, travel speeds, and colors.|
+|WorldMapDataGrid|A read-only class made from the map file. It holds one WorldMapTile for each coordinate from 0,0 to maxX,maxY. Saved cells outside these bounds are not used.|
+|WorldMapTile|A read-only object with the values of all layers of one map tile. Catalog layers hold catalog objects (for example TERRAIN.FLAT). Missing layers use their default values.|
+|Grid9|The 3x3 tiles around a center tile, as three rows of three tiles. Index [1][1] is the center. A tile outside the map is null.|
+|Map label|The text of a tile on the map. A WorldMapTile gives it as englishText, rokuganiText, and fontSize. A missing language text uses the other text.|
