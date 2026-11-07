@@ -4,8 +4,8 @@ import { readFileSync } from "node:fs";
 import { WATER_LEVEL, waterBumpPixels, waterVertexData, createWaterSurface } from "../../docs/map/scripts/water-surface.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
 import { MapModel, createMapModel } from "../../docs/map/scripts/map-data.js";
-import { TERRAIN, RIVER } from "../../docs/scripts/world/world-map-layers.js";
-import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
+import { TERRAIN, RIVER } from "../../docs/scripts/world/data/world-map-layers.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-data.config.js";
 
 const SIZE = 32;
 const pixelAt = (pixels, x, y) => [...pixels.subarray((y * SIZE + x) * 4, (y * SIZE + x) * 4 + 4)];

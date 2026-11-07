@@ -3,10 +3,11 @@
  * It loads the saved map file of the 2D map and resolves the saved numbers with the canonical catalogs.
  * Missing layers use the same defaults as the 2D map: flat, temperate, and no vegetation.
  */
-import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/world-map-file.js";
-import { CLAN, CLIMATE, INFRASTRUCTURE, isWaterTerrain, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/world-map-layers.js";
-import { DEFAULT_ELEVATION, getCliffEdges, getElevation } from "../../scripts/world/world-map-elevation.js";
-export { isWaterTerrain } from "../../scripts/world/world-map-layers.js";
+import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/data/world-map-file.js";
+import { CLAN, CLIMATE, INFRASTRUCTURE, isWaterTerrain, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-layers.js";
+import { getCliffEdges, getElevation } from "../../scripts/world/data/world-map-elevation.js";
+export { isWaterTerrain } from "../../scripts/world/data/world-map-layers.js";
+import { DEFAULT_ELEVATION } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Saved cell fields that hold one catalog ID, with their layer and default value. */
 const ID_FIELDS = Object.freeze([
@@ -39,7 +40,7 @@ export class MapModel {
   /**
    * @param {Object<string, Object>} grid Saved cells keyed by "x,y" (the tiles of the map file).
    * @param {{columns: number, rows: number}} size Map size in cells.
-   * @param {import("../../scripts/world/world-map-file.js").MapHeader} [header] Header of the map file. A new map header is the default.
+   * @param {import("../../scripts/world/data/world-map-file.js").MapHeader} [header] Header of the map file. A new map header is the default.
    */
   constructor(grid, size, header) {
     // Validation
@@ -104,7 +105,7 @@ export class MapModel {
    * @param {string} field Saved field name, for example "terrain".
    * @param {number} x Column.
    * @param {number} y Row.
-   * @returns {import("../../scripts/world/world-map-layers.js").LayerValue} Resolved catalog value.
+   * @returns {import("../../scripts/world/data/world-map-layers.js").LayerValue} Resolved catalog value.
    */
   valueAt(field, x, y) {
     if (field === LAYERS.ELEVATION.id) return LAYERS.ELEVATION.getValue(this.elevations[this.index(x, y)]);

@@ -58,7 +58,7 @@ The map file is one JSON object. It has a header, then the tiles:
 | `lastUpdated` | The date of the last save, as `YYYY/MM/DD`. The map builder sets it on each save. |
 | `tiles` | The saved cells, keyed by `"x,y"`. |
 
-- `world-map-file.js` in `docs/scripts/world/` reads and writes this format. The 2D pages and the 3D page share it.
+- `world-map-file.js` in `docs/scripts/world/data/` reads and writes this format. The 2D pages and the 3D page share it.
 - `createMapModel(data)` takes the size from `maxX` and `maxY`. The `MapModel` keeps the header in `model.header`.
 - The old format has no header, so the loaders reject it.
 - Each catalog layer has one `Uint8Array` of IDs, in row order (`index = y * columns + x`).
@@ -265,7 +265,7 @@ Without WebGL2, the page keeps the vertex colors and shows a message.
 ### Clan regions
 
 - `scripts/clan-regions.js` packs one clan ID for each cell into a NEAREST texture, and the fill and border colors of each clan into a palette.
-  The colors come from `scripts/clan-colors.js`, as on the 2D map.
+  The colors come from `scripts/world/data/clan-colors.js`, as on the 2D map.
 - The terrain shader:
   - tints each clan cell with the clan fill color (alpha 0.15, as on the 2D map);
   - draws the clan border color in a band where the next cell (also diagonal) has a different clan, with a thin dark line on the edge;

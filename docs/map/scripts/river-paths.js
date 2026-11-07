@@ -4,9 +4,9 @@
  * saved direction flag toward the other, and a river mouth opens into a cardinal water neighbor.
  * Coordinates are in cell units: x goes east, y goes south, and the cell center is at (x + 0.5, y + 0.5).
  */
-import { RIVER } from "../../scripts/world/world-map-layers.js";
-import { RIVER_OFFSETS } from "../../scripts/world/world-map-img-river.js";
+import { RIVER } from "../../scripts/world/data/world-map-layers.js";
 import { MapModel } from "./map-data.js";
+import { RIVER_OFFSETS } from "../../scripts/world/data/world-map-data.const.js";
 
 /**
  * Tells if two river cells connect in a direction.

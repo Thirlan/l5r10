@@ -2,12 +2,13 @@
  * Settlement and resource marker meshes for the 3D world map.
  * The icons come from the 2D map drawing functions, so the 3D markers look like the 2D markers.
  */
-import { getClanColors } from "../../scripts/clan-colors.js";
-import { CLAN } from "../../scripts/world/world-map-layers.js";
-import { getResourceImage } from "../../scripts/world/world-map-img-resources.js";
-import { NEUTRAL_SETTLEMENT_COLORS, drawSettlementMarker, getSettlementAsset } from "../../scripts/world/world-map-img-settlements.js";
+import { getClanColors } from "../../scripts/world/data/clan-colors.js";
+import { CLAN } from "../../scripts/world/data/world-map-layers.js";
+import { getResourceImage } from "../../scripts/world/draw/world-map-img-resources.js";
+import { drawSettlementMarker, getSettlementAsset } from "../../scripts/world/draw/world-map-img-settlements.js";
 import { ICON_PIXELS, MARKER_STYLES, iconAtlasLayout, markerGeometry, resourceMarkers, settlementMarkers } from "./marker-layout.js";
 import { createMarkerMaterial } from "./marker-material.js";
+import { NEUTRAL_SETTLEMENT_COLORS } from "../../scripts/world/draw/world-map-draw.config.js";
 
 /** Size of one 2D map cell in pixels. The 2D icons are drawn for this cell size. */
 const MAP_CELL_PIXELS = 16;

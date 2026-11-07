@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/world-map-layers.js";
+import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATION } from "../../docs/scripts/world/data/world-map-layers.js";
 import { cellAtWorld, describeCell } from "../../docs/map/scripts/cell-inspector.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
-import { METERS_PER_TILE } from "../../docs/scripts/world/world-map-scale.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-data.config.js";
 
 const SIZE = Object.freeze({ columns: 4, rows: 3 });
 

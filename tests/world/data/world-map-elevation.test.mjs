@@ -1,0 +1,68 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { getCliffDifference, getCliffEdges, getElevation } from "../../../docs/scripts/world/data/world-map-elevation.js";
+import { LAYERS, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { NEIGHBOR_OFFSETS } from "../../../docs/scripts/world/data/world-map-data.const.js";
+
+test("missing elevation is one metre without changing the saved cell", () => {
+  const cell = {};
+  assert.equal(getElevation(cell), 1);
+  assert.deepEqual(cell, {});
+});
+
+[-4000, -1, 0, 1, 1000, 5000].forEach((elevation) => {
+  test(`elevation ${elevation} remains a numeric value`, () => {
+    assert.equal(getElevation({ elevation }), elevation);
+    assert.equal(LAYERS.ELEVATION.getValue(elevation).id, elevation);
+  });
+});
+
+["100", 1.5, null, undefined, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1].forEach((elevation) => {
+  test(`invalid elevation ${String(elevation)} is rejected`, () => {
+    assert.throws(() => getElevation({ elevation }), TypeError);
+    assert.equal(LAYERS.ELEVATION.getValue(elevation), undefined);
+  });
+});
+
+test("cliff height uses the inclusive 75 metre boundary in both directions", () => {
+  assert.equal(getCliffDifference({}, { elevation: 75 }), 0);
+  assert.equal(getCliffDifference({}, { elevation: 76 }), 75);
+  assert.equal(getCliffDifference({ elevation: 76 }, {}), 75);
+  assert.equal(getCliffDifference({ elevation: 0 }, { elevation: -75 }), 75);
+});
+
+test("cliff edges include all eight directions only on the high side", () => {
+  const grid = { "0,0": { elevation: 100 } };
+  NEIGHBOR_OFFSETS.forEach(([x, y]) => {
+    grid[`${x},${y}`] = {};
+  });
+  assert.deepEqual(getCliffEdges(grid, 0, 0), [0, 1, 2, 3, 4, 5, 6, 7]);
+  NEIGHBOR_OFFSETS.forEach(([x, y]) => assert.deepEqual(getCliffEdges(grid, x, y), []));
+});
+
+test("missing neighbors do not create cliffs outside the saved grid", () => {
+  assert.deepEqual(getCliffEdges({ "0,0": { elevation: 100 } }, 0, 0), []);
+  assert.deepEqual(getCliffEdges({}, 0, 0), []);
+});
+
+test("bounded grids treat unpainted cells as one metre but exclude outside neighbors", () => {
+  const grid = { "0,0": { elevation: 100 } };
+  assert.deepEqual(getCliffEdges(grid, 0, 0, { maxX: 1, maxY: 0 }), [2]);
+  assert.deepEqual(getCliffEdges(grid, -1, 0, { maxX: 1, maxY: 0 }), []);
+});
+
+test("water pairs cannot form cliffs but sea cliffs remain", () => {
+  const water = [TERRAIN.WATER.id, TERRAIN.COASTAL_WATER.id, TERRAIN.OCEAN.id];
+  water.forEach((terrain) => {
+    water.forEach((neighborTerrain) => {
+      assert.equal(getCliffDifference({ terrain, elevation: -4000 }, { terrain: neighborTerrain, elevation: -20 }), 0);
+    });
+    assert.equal(getCliffDifference({ terrain, elevation: -75 }, { elevation: 0 }), 75);
+  });
+});
+
+test("invalid cells and grid coordinates are rejected", () => {
+  [null, [], 2].forEach((cell) => assert.throws(() => getElevation(cell), TypeError));
+  assert.throws(() => getCliffEdges(null, 0, 0), TypeError);
+  assert.throws(() => getCliffEdges({}, 0.5, 0), TypeError);
+});

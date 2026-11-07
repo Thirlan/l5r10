@@ -8,10 +8,10 @@
  *   So the terrain does not come through the ribbon between two vertices.
  * - Coordinates are in cell units: x goes east, y goes south, and the cell center is at (x + 0.5, y + 0.5).
  */
-import { INFRASTRUCTURE } from "../../scripts/world/world-map-layers.js";
+import { INFRASTRUCTURE } from "../../scripts/world/data/world-map-layers.js";
 import { MapModel } from "./map-data.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
-import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Forward links of the 2D infrastructure layer: east, south, southeast, northeast. */
 const FORWARD_LINKS = Object.freeze([

@@ -5,8 +5,8 @@
  * texture arrays. Each climate gives a layer for the flat, hills, rock, and
  * snow roles. A role without a layer uses the default layer (moon_dusted_01).
  */
-import { CLIMATE, TERRAIN } from "../../scripts/world/world-map-layers.js";
-import { METERS_PER_TILE } from "../../scripts/world/world-map-scale.js";
+import { CLIMATE, TERRAIN } from "../../scripts/world/data/world-map-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 /** One byte step is 10 metres. The shader converts it to world units. */
 export const SNOW_LINE_UNITS = METERS_PER_TILE / 10;
