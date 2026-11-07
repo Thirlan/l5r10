@@ -1,12 +1,5 @@
 import { RESOURCE_LEVEL } from "../data/world-map-layers.js";
-
-const colors = new Map([
-  [RESOURCE_LEVEL.VERY_LOW, "rgba(128, 0, 128, 0.75)"],
-  [RESOURCE_LEVEL.LOW, "rgba(255, 0, 0, 0.65)"],
-  [RESOURCE_LEVEL.MEDIUM, "rgba(255, 165, 0, 0.55)"],
-  [RESOURCE_LEVEL.HIGH, "rgba(255, 255, 0, 0.55)"],
-  [RESOURCE_LEVEL.VERY_HIGH, "rgba(255, 255, 0, 0.45)"],
-]);
+import { RESOURCE_LEVEL_COLORS } from "./world-map-draw.config.js";
 
 export const RESOURCE_LEVEL_CONTROL_IMAGES = Object.freeze(Object.entries(RESOURCE_LEVEL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_resource_level_${key.toLowerCase()}.webp` })));
 
@@ -18,7 +11,7 @@ export function getResourceLevelColor(value) {
   if (!Object.values(RESOURCE_LEVEL).includes(value)) {
     throw new TypeError("Resource level color lookup requires a resource level metadata value.");
   }
-  return colors.get(value) || null;
+  return RESOURCE_LEVEL_COLORS.get(value) || null;
 }
 
 /**

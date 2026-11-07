@@ -1,7 +1,6 @@
-import { isWaterTerrain, NEIGHBOR_OFFSETS } from "./world-map-layers.js";
-
-export const DEFAULT_ELEVATION = 1;
-export const CLIFF_HEIGHT = 75;
+import { isWaterTerrain } from "./world-map-layers.js";
+import { NEIGHBOR_OFFSETS } from "./world-map-data.const.js";
+import { CLIFF_HEIGHT, DEFAULT_ELEVATION } from "./world-map-data.config.js";
 
 /**
  * @param {object} cell Saved map cell.

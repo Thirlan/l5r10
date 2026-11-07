@@ -39,7 +39,7 @@ To format and lint only the site pages and `docs/scripts`, run `tools/format-and
 | [docs/img/](docs/img/) | Website images and map assets. |
 | [docs/data/](docs/data/) | Structured game and map data. |
 | [docs/scripts/](docs/scripts/) | Shared website JavaScript. |
-| [docs/scripts/world/](docs/scripts/world/) | World map logic, in three subfolders. |
+| [docs/scripts/world/](docs/scripts/world/) | World map logic, in three subfolders. Each subfolder has a `world-map-<folder>.const.js` file for fixed values and a `world-map-<folder>.config.js` file for game and display settings. |
 | [docs/scripts/world/data/](docs/scripts/world/data/) | Raw map data: layers, map file, elevation, scale, and clan colors. |
 | [docs/scripts/world/draw/](docs/scripts/world/draw/) | 2D map drawing for the map builder and the map viewer. |
 | [docs/scripts/world/game-rules/](docs/scripts/world/game-rules/) | RPG rules: travel, skill checks, routes, encounters, and the beastiary. |

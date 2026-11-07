@@ -1,12 +1,5 @@
 import { CRIME } from "../data/world-map-layers.js";
-
-const colors = new Map([
-  [CRIME.VERY_LOW, "rgba(255, 255, 0, 0.45)"],
-  [CRIME.LOW, "rgba(255, 255, 0, 0.55)"],
-  [CRIME.MEDIUM, "rgba(255, 165, 0, 0.55)"],
-  [CRIME.HIGH, "rgba(255, 0, 0, 0.65)"],
-  [CRIME.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
-]);
+import { CRIME_COLORS } from "./world-map-draw.config.js";
 
 export const CRIME_CONTROL_IMAGES = Object.freeze(Object.entries(CRIME).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_crime_${key.toLowerCase()}.webp` })));
 
@@ -14,7 +7,7 @@ export function getCrimeColor(value) {
   if (!Object.values(CRIME).includes(value)) {
     throw new TypeError("Crime color lookup requires a crime metadata value.");
   }
-  return colors.get(value) || null;
+  return CRIME_COLORS.get(value) || null;
 }
 
 export function drawCrimeCue(ctx, left, top, width, height, color, lineWidth = 1) {

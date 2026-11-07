@@ -1,14 +1,6 @@
-import { DEFAULT_ELEVATION } from "../data/world-map-elevation.js";
-
-// Conservative width of a digit or minus sign, relative to the font size.
-const LABEL_CHARACTER_WIDTH = 0.6;
-const COLOR_STOPS = [
-  [-4000, [0, 0, 90]],
-  [0, [0, 100, 200]],
-  [250, [70, 180, 80]],
-  [500, [255, 215, 0]],
-  [1000, [220, 0, 0]],
-];
+import { DEFAULT_ELEVATION } from "../data/world-map-data.config.js";
+import { LABEL_CHARACTER_WIDTH } from "./world-map-draw.const.js";
+import { ELEVATION_COLOR_STOPS } from "./world-map-draw.config.js";
 
 /**
  * @param {number} elevation Elevation in whole metres.
@@ -18,9 +10,9 @@ export function getElevationColor(elevation) {
   if (!Number.isSafeInteger(elevation)) throw new TypeError("Elevation color needs a safe integer in metres.");
   if (elevation === DEFAULT_ELEVATION) return null;
   const height = Math.min(1000, Math.max(-4000, elevation));
-  const upper = COLOR_STOPS.findIndex(([stop]) => stop >= height);
-  const [end, endColor] = COLOR_STOPS[upper];
-  const [start, startColor] = COLOR_STOPS[Math.max(0, upper - 1)];
+  const upper = ELEVATION_COLOR_STOPS.findIndex(([stop]) => stop >= height);
+  const [end, endColor] = ELEVATION_COLOR_STOPS[upper];
+  const [start, startColor] = ELEVATION_COLOR_STOPS[Math.max(0, upper - 1)];
   const ratio = end === start ? 0 : (height - start) / (end - start);
   return `rgb(${startColor.map((channel, index) => Math.round(channel + (endColor[index] - channel) * ratio)).join(", ")})`;
 }

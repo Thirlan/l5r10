@@ -1,11 +1,10 @@
-import { NEIGHBOR_OFFSETS, RIVER, TERRAIN } from "../data/world-map-layers.js";
-import { getWaterColor, SAND_BANK_COLOR } from "./world-map-img-base-layers.js";
+import { RIVER, TERRAIN } from "../data/world-map-layers.js";
+import { getWaterColor } from "./world-map-img-base-layers.js";
+import { RIVER_OFFSETS } from "../data/world-map-data.const.js";
+import { RIVER_DIRECTIONS, RIVER_STRIPE_OFFSETS } from "./world-map-draw.const.js";
+import { RIVER_STRIPE_WIDTHS, SAND_BANK_COLOR } from "./world-map-draw.config.js";
 
 const STRIPE_COLORS = [SAND_BANK_COLOR, getWaterColor(TERRAIN.WATER), SAND_BANK_COLOR];
-const STRIPE_OFFSETS = [-1, 0, 1];
-const STRIPE_WIDTHS = [0.3, 2.7, 0.3];
-const RIVER_DIRECTIONS = ["east", "south", "west", "north"];
-export const RIVER_OFFSETS = Object.freeze(["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"].map((name, direction) => Object.freeze([name, ...NEIGHBOR_OFFSETS[direction]])));
 
 export const RIVER_CONTROL_IMAGES = Object.freeze(Object.entries(RIVER).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_river_${key.toLowerCase()}.webp` })));
 
@@ -29,7 +28,7 @@ export function drawRiver(ctx, x, y, gridSize, neighbors, water = {}, directions
 
   const centerX = x * gridSize + gridSize / 2;
   const centerY = y * gridSize + gridSize / 2;
-  const stripeSpacing = (STRIPE_WIDTHS[1] + STRIPE_WIDTHS[0]) / 2;
+  const stripeSpacing = (RIVER_STRIPE_WIDTHS[1] + RIVER_STRIPE_WIDTHS[0]) / 2;
   const connected = RIVER_DIRECTIONS.some((direction) => neighbors[direction]);
 
   ctx.save();
@@ -83,10 +82,10 @@ function drawRiverStripes(ctx, centerX, centerY, length, dx, dy, spacing, startD
   const normalX = -dy;
   const normalY = dx;
   STRIPE_COLORS.forEach((color, index) => {
-    const offset = STRIPE_OFFSETS[index] * spacing;
+    const offset = RIVER_STRIPE_OFFSETS[index] * spacing;
     ctx.beginPath();
     ctx.strokeStyle = color;
-    ctx.lineWidth = STRIPE_WIDTHS[index];
+    ctx.lineWidth = RIVER_STRIPE_WIDTHS[index];
     ctx.moveTo(centerX + dx * startDistance + normalX * offset, centerY + dy * startDistance + normalY * offset);
     ctx.lineTo(centerX + dx * (startDistance + length) + normalX * offset, centerY + dy * (startDistance + length) + normalY * offset);
     ctx.stroke();

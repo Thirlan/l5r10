@@ -1,5 +1,6 @@
 import { INFRASTRUCTURE, LAYERS } from "../data/world-map-layers.js";
 import { SkillCheck } from "../../skill-check.js";
+import { BORDER_TN } from "./world-map-game-rules.config.js";
 
 function validateBorderCell(cell) {
   if (!cell || typeof cell !== "object" || Array.isArray(cell)) {
@@ -34,7 +35,7 @@ export function getSkillAndTN(cell, destination) {
   const crossesClanBorder = cell.clan !== destination.clan;
   const hasContinuousRoad = cell.infrastructure === INFRASTRUCTURE.ROAD.id && destination.infrastructure === INFRASTRUCTURE.ROAD.id;
   if (crossesClanBorder && hasContinuousRoad) {
-    return [new SkillCheck("Forgery", "Intelligence", 20), new SkillCheck("Stealth", "Agility", 20)];
+    return [new SkillCheck("Forgery", "Intelligence", BORDER_TN), new SkillCheck("Stealth", "Agility", BORDER_TN)];
   }
   return null;
 }

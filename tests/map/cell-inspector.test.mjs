@@ -4,7 +4,7 @@ import { CLAN, CLIMATE, INFRASTRUCTURE, RESOURCE, SETTLEMENT, TERRAIN, VEGETATIO
 import { cellAtWorld, describeCell } from "../../docs/map/scripts/cell-inspector.js";
 import { MapModel } from "../../docs/map/scripts/map-data.js";
 import { HeightField } from "../../docs/map/scripts/terrain-height.js";
-import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-scale.js";
+import { METERS_PER_TILE } from "../../docs/scripts/world/data/world-map-data.config.js";
 
 const SIZE = Object.freeze({ columns: 4, rows: 3 });
 

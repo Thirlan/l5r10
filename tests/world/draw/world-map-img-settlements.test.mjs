@@ -1,12 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { CLAN, SETTLEMENT } from "../../../docs/scripts/world/data/world-map-layers.js";
-import {
-  drawSettlementAsset,
-  drawSettlementMarker,
-  drawCircularSettlement,
-  drawSquareSettlement,
-} from "../../../docs/scripts/world/draw/world-map-img-settlements.js";
+import { drawSettlementAsset, drawSettlementMarker, drawCircularSettlement, drawSquareSettlement } from "../../../docs/scripts/world/draw/world-map-img-settlements.js";
 
 function createContext() {
   const calls = { arcs: 0, fills: 0, outlines: 0, lines: 0, text: 0, images: 0 };
@@ -17,13 +12,27 @@ function createContext() {
     closePath() {},
     fill() {},
     stroke() {},
-    moveTo() { calls.lines += 1; },
-    lineTo() { calls.lines += 1; },
-    arc() { calls.arcs += 1; },
-    fillRect() { calls.fills += 1; },
-    strokeRect() { calls.outlines += 1; },
-    fillText() { calls.text += 1; },
-    drawImage() { calls.images += 1; },
+    moveTo() {
+      calls.lines += 1;
+    },
+    lineTo() {
+      calls.lines += 1;
+    },
+    arc() {
+      calls.arcs += 1;
+    },
+    fillRect() {
+      calls.fills += 1;
+    },
+    strokeRect() {
+      calls.outlines += 1;
+    },
+    fillText() {
+      calls.text += 1;
+    },
+    drawImage() {
+      calls.images += 1;
+    },
   };
   return { context, calls };
 }

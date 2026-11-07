@@ -1,11 +1,4 @@
-const SKILLS = [
-  ["survival", "Survival"],
-  ["sailing", "Sailing"],
-  ["investigate", "Investigation"],
-  ["swim", "Swim"],
-  ["sneak", "Sneak"],
-  ["forgery", "Forgery"],
-];
+import { TRAVEL_SKILLS } from "../game-rules/world-map-game-rules.const.js";
 
 function appendInput(row, type, value, label) {
   const cell = document.createElement("td");
@@ -25,7 +18,7 @@ function appendInput(row, type, value, label) {
  */
 export function bindViewerSkills(map) {
   const tbody = document.querySelector("#skillRows");
-  SKILLS.forEach(([key, label]) => {
+  TRAVEL_SKILLS.forEach(([key, label]) => {
     const config = map.skillConfig[key];
     const row = document.createElement("tr");
     const heading = document.createElement("td");

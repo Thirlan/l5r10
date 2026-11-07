@@ -1,10 +1,9 @@
 import { BeastSelection } from "./beast-selection.js";
 import { BEASTIARY } from "./beastiary.js";
 import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
+import { ENCOUNTER_TYPES } from "./world-map-game-rules.const.js";
+import { ENCOUNTER_CHANCES } from "./world-map-game-rules.config.js";
 
-export const ENCOUNTER_CHANCES = Object.freeze([0.00001, 0.0001, 0.001, 0.01, 0.1, 0.33]);
-
-const ENCOUNTER_TYPES = Object.freeze(["criminal", "animal", "spirit", "shadowland"]);
 const MAP_CATALOGS = Object.freeze({
   terrain: TERRAIN,
   climate: CLIMATE,

@@ -1,7 +1,7 @@
 import { CLIMATE, RIVER, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
 import { SkillCheck } from "../../skill-check.js";
+import { ENCOUNTER_TYPES } from "./world-map-game-rules.const.js";
 
-const ENCOUNTER_TYPES = new Set(["spirit", "shadowland", "animal", "criminal"]);
 const VALID_IDS = Object.freeze({
   terrain: new Set(Object.values(TERRAIN).map(({ id }) => id)),
   climate: new Set(Object.values(CLIMATE).map(({ id }) => id)),
@@ -21,7 +21,7 @@ export class Beast {
       throw new TypeError("Beast data must be an object.");
     }
     const { name, encounterType, rank, weight, encounterDescription } = data;
-    if (typeof name !== "string" || name.trim().length === 0 || !ENCOUNTER_TYPES.has(encounterType) || !Number.isInteger(rank) || rank < 1 || rank > 5 || !Number.isInteger(weight) || weight < 1 || weight > 100 || typeof encounterDescription !== "string" || !/^[^\n.!?]+[.!?]$/.test(encounterDescription.trim())) {
+    if (typeof name !== "string" || name.trim().length === 0 || !ENCOUNTER_TYPES.includes(encounterType) || !Number.isInteger(rank) || rank < 1 || rank > 5 || !Number.isInteger(weight) || weight < 1 || weight > 100 || typeof encounterDescription !== "string" || !/^[^\n.!?]+[.!?]$/.test(encounterDescription.trim())) {
       throw new TypeError("Beast identity, rank, weight, and description are invalid.");
     }
 

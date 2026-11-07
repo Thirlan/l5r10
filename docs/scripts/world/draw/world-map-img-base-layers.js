@@ -1,26 +1,12 @@
 import { CLIMATE, TERRAIN, VEGETATION } from "../data/world-map-layers.js";
-
-const climateColors = new Map([
-  [CLIMATE.TEMPERATE, "#2E5A44"],
-  [CLIMATE.TROPICAL, "#7FFF00"],
-  [CLIMATE.DESERT, "#F4A460"],
-  [CLIMATE.POLAR, "#8B5A2B"],
-  [CLIMATE.WASTE, "#4A4A4A"],
-  [CLIMATE.SHADOWLAND, "#1A590F"],
-]);
-const waterColors = new Map([
-  [TERRAIN.WATER, "#1E90FF"],
-  [TERRAIN.COASTAL_WATER, "#4169E1"],
-  [TERRAIN.OCEAN, "#00008B"],
-]);
-export const SAND_BANK_COLOR = "#F4A460";
+import { CLIMATE_COLORS, SAND_BANK_COLOR, WATER_COLORS } from "./world-map-draw.config.js";
 
 /**
  * @param {import("../data/world-map-layers.js").LayerValue} terrain Terrain metadata.
  * @returns {string|undefined} Water color, if the terrain is water.
  */
 export function getWaterColor(terrain) {
-  return waterColors.get(terrain);
+  return WATER_COLORS.get(terrain);
 }
 
 /**
@@ -97,7 +83,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   if (!ctx || !Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(gridSize) || gridSize <= 0) {
     throw new TypeError("Base-layer drawing needs a canvas context and valid cell dimensions.");
   }
-  if (!Object.values(TERRAIN).includes(terrain) || !climateColors.has(climate) || !Object.values(VEGETATION).includes(vegetation)) {
+  if (!Object.values(TERRAIN).includes(terrain) || !CLIMATE_COLORS.has(climate) || !Object.values(VEGETATION).includes(vegetation)) {
     throw new TypeError("Base-layer drawing needs terrain, climate, and vegetation metadata.");
   }
 
@@ -108,7 +94,7 @@ export function drawBaseLayers(ctx, x, y, gridSize, terrain, climate, vegetation
   const vegetationImage = vegetation === VEGETATION.PRESENT ? getLoadedImage(vegetation, images) : null;
 
   ctx.save();
-  ctx.fillStyle = climateColors.get(climate);
+  ctx.fillStyle = CLIMATE_COLORS.get(climate);
   ctx.fillRect(left, top, gridSize, gridSize);
   if (terrainColor) {
     ctx.fillStyle = terrainColor;

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { getCliffDifference, getCliffEdges, getElevation } from "../../../docs/scripts/world/data/world-map-elevation.js";
-import { LAYERS, NEIGHBOR_OFFSETS, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { LAYERS, TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { NEIGHBOR_OFFSETS } from "../../../docs/scripts/world/data/world-map-data.const.js";
 
 test("missing elevation is one metre without changing the saved cell", () => {
   const cell = {};

@@ -6,7 +6,9 @@
  * The header can have more fields. The code keeps them.
  * Tile elevation is an integer in metres. A missing value means 1 m.
  */
-import { DEFAULT_ELEVATION, getElevation } from "./world-map-elevation.js";
+import { getElevation } from "./world-map-elevation.js";
+import { DEFAULT_ELEVATION, NEW_MAP_NAME, NEW_MAP_VERSION } from "./world-map-data.config.js";
+import { DATE_PATTERN } from "./world-map-data.const.js";
 
 /**
  * @typedef {Object} MapHeader
@@ -18,10 +20,6 @@ import { DEFAULT_ELEVATION, getElevation } from "./world-map-elevation.js";
  * @property {string} version Version of the map, for example "0.9.0".
  * @property {string} lastUpdated Date of the last save, as YYYY/MM/DD.
  */
-
-const DATE_PATTERN = /^\d{4}\/\d{2}\/\d{2}$/;
-const NEW_MAP_NAME = "Untitled map";
-const NEW_MAP_VERSION = "0.1.0";
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);

@@ -1,15 +1,14 @@
 import { WorldMapRenderer } from "./world-map-common.js";
 import { readMapFile } from "../data/world-map-file.js";
 import { LAYERS, CLAN, TERRAIN, VEGETATION, CLIMATE, INFRASTRUCTURE } from "../data/world-map-layers.js";
-import { L5RPathing, MINUTES_PER_DAY } from "../game-rules/pathing.js";
+import { L5RPathing } from "../game-rules/pathing.js";
 import { getClanColors } from "../data/clan-colors.js";
 import { MapDragToPan } from "./world-map-pan.js";
-import { KM_PER_MILE, MILES_PER_TILE } from "../data/world-map-scale.js";
-export { KM_PER_MILE, MILES_PER_TILE } from "../data/world-map-scale.js";
+import { MINUTES_PER_DAY } from "../game-rules/world-map-game-rules.const.js";
+import { MILES_PER_TILE } from "../data/world-map-data.config.js";
+import { DISTANCE_UNITS, MAP_TOOLS } from "./world-map-draw.const.js";
+import { GRID_SIZE, VIEWER_START_ZOOM } from "./world-map-draw.config.js";
 
-const VIEWER_GRID_SIZE = 16;
-export const DISTANCE_UNITS = Object.freeze({ miles: 1, km: KM_PER_MILE });
-export const MAP_TOOLS = Object.freeze(["route", "measure", "pan"]);
 const WATER_TERRAINS_SET = new Set([TERRAIN.WATER.name, TERRAIN.COASTAL_WATER.name, TERRAIN.OCEAN.name]);
 
 function numOrNull(val) {
@@ -19,8 +18,8 @@ function numOrNull(val) {
 }
 
 export class WorldMapViewer extends WorldMapRenderer {
-  constructor(canvasSelector, gridSize = VIEWER_GRID_SIZE) {
-    super(canvasSelector, gridSize, { zoom: 0.55 });
+  constructor(canvasSelector, gridSize = GRID_SIZE) {
+    super(canvasSelector, gridSize, { zoom: VIEWER_START_ZOOM });
 
     this.terrainCosts = {};
     this.layerVisibility = {

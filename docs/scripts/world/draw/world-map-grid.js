@@ -1,14 +1,14 @@
 import { WorldMapRenderer } from "./world-map-common.js";
 import { isInsideMap, readMapFile, stringifyMapFile } from "../data/world-map-file.js";
 import { LAYERS, TERRAIN } from "../data/world-map-layers.js";
-import { DEFAULT_ELEVATION, getElevation } from "../data/world-map-elevation.js";
+import { getElevation } from "../data/world-map-elevation.js";
 import { getClanColors } from "../data/clan-colors.js";
-
-const DEFAULT_GRID_SIZE = 16;
+import { DEFAULT_ELEVATION } from "../data/world-map-data.config.js";
+import { BUILDER_START_ZOOM, GRID_SIZE } from "./world-map-draw.config.js";
 
 export class WorldMapGrid extends WorldMapRenderer {
-  constructor(canvasSelector, gridSize = DEFAULT_GRID_SIZE) {
-    super(canvasSelector, gridSize, { zoom: 0.35 });
+  constructor(canvasSelector, gridSize = GRID_SIZE) {
+    super(canvasSelector, gridSize, { zoom: BUILDER_START_ZOOM });
 
     this.currentLayer = LAYERS.TERRAIN.id;
     this.currentValue = TERRAIN.FLAT.id;

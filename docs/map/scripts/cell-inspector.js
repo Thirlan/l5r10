@@ -3,7 +3,7 @@
  * The cell comes from the picked world position, so it does not depend on the chunk size or the mesh vertices.
  */
 import { SETTLEMENT } from "../../scripts/world/data/world-map-layers.js";
-import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Smallest time between two hover picks, in milliseconds. */
 const HOVER_INTERVAL = 80;

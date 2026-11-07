@@ -12,9 +12,9 @@
  */
 import { SUN_DIRECTION } from "./map-3d-scene.js";
 import { TERRAIN } from "../../scripts/world/data/world-map-layers.js";
-import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
 import { CLAN_SLOTS, clanPalette, packClanIds } from "./clan-regions.js";
 import { SNOW_LAYER, SNOW_LINE_UNITS, WATER_CLASS, packCellIds } from "./surface-layers.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 const WATER_CLASS_TERRAINS = new Map([
   [WATER_CLASS.LAKE, TERRAIN.WATER.id],

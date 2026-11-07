@@ -1,12 +1,5 @@
 import { ANIMAL } from "../data/world-map-layers.js";
-
-const colors = new Map([
-  [ANIMAL.VERY_LOW, "rgba(255, 255, 0, 0.45)"],
-  [ANIMAL.LOW, "rgba(255, 255, 0, 0.55)"],
-  [ANIMAL.MEDIUM, "rgba(255, 165, 0, 0.55)"],
-  [ANIMAL.HIGH, "rgba(255, 0, 0, 0.65)"],
-  [ANIMAL.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
-]);
+import { ANIMAL_COLORS } from "./world-map-draw.config.js";
 
 export const ANIMAL_CONTROL_IMAGES = Object.freeze(Object.entries(ANIMAL).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_animal_${key.toLowerCase()}.webp` })));
 
@@ -14,7 +7,7 @@ export function getAnimalColor(value) {
   if (!Object.values(ANIMAL).includes(value)) {
     throw new TypeError("Animal color lookup requires an animal metadata value.");
   }
-  return colors.get(value) || null;
+  return ANIMAL_COLORS.get(value) || null;
 }
 
 export function drawAnimalCue(ctx, left, top, width, height, color) {

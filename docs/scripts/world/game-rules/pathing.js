@@ -2,22 +2,8 @@ import { TERRAIN, INFRASTRUCTURE, SETTLEMENT } from "../data/world-map-layers.js
 import { getCliffDifference } from "../data/world-map-elevation.js";
 import { bypassesCrossing } from "./travel-skill-rules.js";
 import { getTravelSpeed } from "./travel-speed.js";
-
-const MODE_FOOT = "foot";
-const MODE_RIVER_BOAT = "river boat";
-const MODE_SHIP = "ship";
-const MODE_SWIM = "swim";
-
-const MISHAP_PENALTY_MIN = 1440;
-const DEATH_PENALTY = 10000;
-const NO_TRAVEL_PAPERS_PENALTY = 10000;
-const AVOID_CLAN_PENALTY = 1000;
-const BOAT_BOARDING_MIN = 300;
-const DIAGONAL_COST_MULTIPLIER = 1.41;
-
-const DAY_START_MIN = 8 * 60;
-const DAY_END_MIN = 18 * 60;
-export const MINUTES_PER_DAY = 24 * 60;
+import { DIAGONAL_COST_MULTIPLIER, MINUTES_PER_DAY, MODE_FOOT, MODE_RIVER_BOAT, MODE_SHIP, MODE_SWIM } from "./world-map-game-rules.const.js";
+import { AVOID_CLAN_PENALTY, BOAT_BOARDING_MIN, BORDER_TN, DAY_END_MIN, DAY_START_MIN, DEATH_PENALTY, MISHAP_PENALTY_MIN, NO_TRAVEL_PAPERS_PENALTY } from "./world-map-game-rules.config.js";
 
 // Keep the existing title-case travel inputs until a separate travel behavior change.
 const RIVER_WATER_NAME = TERRAIN.WATER.name[0].toUpperCase() + TERRAIN.WATER.name.slice(1);
@@ -92,7 +78,7 @@ export class L5RPathing {
     const clan = this.getClan(to.x, to.y);
     const crossedClanBorderOnRoad = this.getClan(from.x, from.y) !== clan && toData.hasRoad;
     const enteredClanCity = toT === SETTLEMENT.CITY.name;
-    const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan] ? { skills: ["sneak", "forgery"], tn: 20, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 } : null;
+    const territorialCheck = clan && (crossedClanBorderOnRoad || enteredClanCity) && !this.travelPapers[clan] ? { skills: ["sneak", "forgery"], tn: BORDER_TN, timePenalty: 0, riskPenalty: NO_TRAVEL_PAPERS_PENALTY, probability: 1 } : null;
     const transition = (checks = []) => ({
       toMode,
       cost: toData.cost * cliffCostRatio,

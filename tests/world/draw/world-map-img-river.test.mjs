@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame, RIVER_OFFSETS } from "../../../docs/scripts/world/draw/world-map-img-river.js";
+import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame } from "../../../docs/scripts/world/draw/world-map-img-river.js";
 import { TERRAIN } from "../../../docs/scripts/world/data/world-map-layers.js";
+import { RIVER_OFFSETS } from "../../../docs/scripts/world/data/world-map-data.const.js";
 
 function draw(neighbors) {
   const strokes = [];
@@ -10,8 +11,12 @@ function draw(neighbors) {
     save() {},
     restore() {},
     beginPath() {},
-    moveTo(x, y) { start = [x, y]; },
-    lineTo(x, y) { strokes.push([start, [x, y]]); },
+    moveTo(x, y) {
+      start = [x, y];
+    },
+    lineTo(x, y) {
+      strokes.push([start, [x, y]]);
+    },
     stroke() {},
   };
   drawRiver(context, 1, 2, 16, neighbors);
@@ -91,11 +96,16 @@ for (const [direction, [name, dx, dy]] of RIVER_OFFSETS.entries()) {
   test(`selected river direction ${name} reaches the cell boundary`, () => {
     const strokes = [];
     const context = {
-      save() {}, restore() {}, beginPath() {}, moveTo() {}, stroke() {},
-      lineTo(x, y) { strokes.push([x, y]); },
+      save() {},
+      restore() {},
+      beginPath() {},
+      moveTo() {},
+      stroke() {},
+      lineTo(x, y) {
+        strokes.push([x, y]);
+      },
     };
-    drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-      {}, { [direction]: 1 });
+    drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false }, {}, { [direction]: 1 });
     assert.equal(strokes.length, 3);
     assert.deepEqual(strokes[1], [8 + dx * 8, 8 + dy * 8]);
   });
@@ -107,35 +117,83 @@ test("adjacent water fills cardinal triangles with the adjacent terrain color", 
   let vertices;
   let outlinePath;
   const context = {
-    save() {}, restore() {}, beginPath() { vertices = []; outlinePath = []; },
-    moveTo(x, y) { vertices.push([x, y]); outlinePath.push([x, y]); },
-    lineTo(x, y) { vertices.push([x, y]); outlinePath.push([x, y]); },
-    closePath() {}, fill() { triangles.push({ color: this.fillStyle, vertices }); },
-    stroke() { outlines.push({ color: this.strokeStyle, width: this.lineWidth, vertices: [...outlinePath] }); },
+    save() {},
+    restore() {},
+    beginPath() {
+      vertices = [];
+      outlinePath = [];
+    },
+    moveTo(x, y) {
+      vertices.push([x, y]);
+      outlinePath.push([x, y]);
+    },
+    lineTo(x, y) {
+      vertices.push([x, y]);
+      outlinePath.push([x, y]);
+    },
+    closePath() {},
+    fill() {
+      triangles.push({ color: this.fillStyle, vertices });
+    },
+    stroke() {
+      outlines.push({ color: this.strokeStyle, width: this.lineWidth, vertices: [...outlinePath] });
+    },
   };
-  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-    { north: TERRAIN.WATER, east: TERRAIN.COASTAL_WATER,
-      south: TERRAIN.WATER, west: TERRAIN.COASTAL_WATER }, {});
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false }, { north: TERRAIN.WATER, east: TERRAIN.COASTAL_WATER, south: TERRAIN.WATER, west: TERRAIN.COASTAL_WATER }, {});
   assert.equal(triangles.length, 4);
-  assert.deepEqual(triangles[0], { color: "#1E90FF", vertices: [[8, 8], [16, 0], [0, 0]] });
-  assert.deepEqual(triangles.map(({ color }) => color), ["#1E90FF", "#4169E1", "#1E90FF", "#4169E1"]);
-  assert.deepEqual(triangles[1].vertices, [[8, 8], [16, 16], [16, 0]]);
-  assert.deepEqual(triangles[2].vertices, [[8, 8], [0, 16], [16, 16]]);
-  assert.deepEqual(triangles[3].vertices, [[8, 8], [0, 0], [0, 16]]);
+  assert.deepEqual(triangles[0], {
+    color: "#1E90FF",
+    vertices: [
+      [8, 8],
+      [16, 0],
+      [0, 0],
+    ],
+  });
+  assert.deepEqual(
+    triangles.map(({ color }) => color),
+    ["#1E90FF", "#4169E1", "#1E90FF", "#4169E1"],
+  );
+  assert.deepEqual(triangles[1].vertices, [
+    [8, 8],
+    [16, 16],
+    [16, 0],
+  ]);
+  assert.deepEqual(triangles[2].vertices, [
+    [8, 8],
+    [0, 16],
+    [16, 16],
+  ]);
+  assert.deepEqual(triangles[3].vertices, [
+    [8, 8],
+    [0, 0],
+    [0, 16],
+  ]);
   assert.equal(outlines.length, 4);
   assert.ok(outlines.every(({ color, width }) => color === "#F4A460" && width === 0.3));
-  assert.deepEqual(outlines[0].vertices, [[8, 8], [16, 0], [8, 8], [0, 0]]);
+  assert.deepEqual(outlines[0].vertices, [
+    [8, 8],
+    [16, 0],
+    [8, 8],
+    [0, 0],
+  ]);
   assert.ok(outlines.every(({ vertices }) => vertices.length === 4));
 });
 
 test("river-to-ocean triangles use the ocean color", () => {
   const colors = [];
   const context = {
-    save() {}, restore() {}, beginPath() {}, moveTo() {}, lineTo() {}, closePath() {},
-    fill() { colors.push(this.fillStyle); }, stroke() {},
+    save() {},
+    restore() {},
+    beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    closePath() {},
+    fill() {
+      colors.push(this.fillStyle);
+    },
+    stroke() {},
   };
-  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-    { north: TERRAIN.OCEAN }, {});
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false }, { north: TERRAIN.OCEAN }, {});
   assert.deepEqual(colors, ["#00008B"]);
 });
 
@@ -147,22 +205,36 @@ for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]) {
       const strokes = [];
       let fills = 0;
       const context = {
-        save() {}, restore() {}, beginPath() {}, moveTo() {}, closePath() {},
-        lineTo(x, y) { this.end = [x, y]; },
-        stroke() { strokes.push({ end: this.end, color: this.strokeStyle, width: this.lineWidth }); },
-        fill() { fills++; },
+        save() {},
+        restore() {},
+        beginPath() {},
+        moveTo() {},
+        closePath() {},
+        lineTo(x, y) {
+          this.end = [x, y];
+        },
+        stroke() {
+          strokes.push({ end: this.end, color: this.strokeStyle, width: this.lineWidth });
+        },
+        fill() {
+          fills++;
+        },
       };
 
       // Execution
-      drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-        { [name]: terrain }, { [index]: 1 });
+      drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false }, { [name]: terrain }, { [index]: 1 });
 
       // Assertion
       assert.equal(fills, 0);
       assert.equal(strokes.length, 3);
       assert.deepEqual(strokes[1], { end: [8 + dx * 8, 8 + dy * 8], color: "#1E90FF", width: 2.7 });
-      assert.deepEqual(strokes.filter((_, i) => i !== 1).map(({ color, width }) => [color, width]),
-        [["#F4A460", 0.3], ["#F4A460", 0.3]]);
+      assert.deepEqual(
+        strokes.filter((_, i) => i !== 1).map(({ color, width }) => [color, width]),
+        [
+          ["#F4A460", 0.3],
+          ["#F4A460", 0.3],
+        ],
+      );
     });
   }
 }
@@ -170,11 +242,16 @@ for (const terrain of [TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]) {
 test("unselected diagonal water does not create a connection", () => {
   // Setup
   let paths = 0;
-  const context = { save() {}, restore() {}, beginPath() { paths++; } };
+  const context = {
+    save() {},
+    restore() {},
+    beginPath() {
+      paths++;
+    },
+  };
 
   // Execution
-  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false },
-    { northeast: TERRAIN.WATER }, {});
+  drawRiver(context, 0, 0, 16, { east: false, south: false, west: false, north: false }, { northeast: TERRAIN.WATER }, {});
 
   // Assertion
   assert.equal(paths, 0);
@@ -199,7 +276,11 @@ test("river flow paths go from the incoming edge through the center to the outgo
 test("river flow frame draws one pixel per path and loops", () => {
   // Setup
   const pixels = [];
-  const context = { fillRect(x, y, width, height) { pixels.push([x, y, width, height]); } };
+  const context = {
+    fillRect(x, y, width, height) {
+      pixels.push([x, y, width, height]);
+    },
+  };
   const paths = [{ points: [0, 8, 8, 8, 16, 8], length: 16 }];
 
   // Execution
@@ -208,6 +289,10 @@ test("river flow frame draws one pixel per path and loops", () => {
   drawRiverFlowFrame(context, paths, 10, 1);
 
   // Assertion
-  assert.deepEqual(pixels, [[3, 8, 1, 1], [3, 8, 1, 1], [10, 8, 1, 1]]);
+  assert.deepEqual(pixels, [
+    [3, 8, 1, 1],
+    [3, 8, 1, 1],
+    [10, 8, 1, 1],
+  ]);
   assert.equal(context.fillStyle, "#FFFFFF");
 });

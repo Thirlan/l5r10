@@ -11,7 +11,7 @@
 import { INFRASTRUCTURE } from "../../scripts/world/data/world-map-layers.js";
 import { MapModel } from "./map-data.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
-import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Forward links of the 2D infrastructure layer: east, south, southeast, northeast. */
 const FORWARD_LINKS = Object.freeze([

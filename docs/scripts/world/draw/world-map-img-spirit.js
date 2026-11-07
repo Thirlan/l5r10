@@ -1,12 +1,5 @@
 import { SPIRIT } from "../data/world-map-layers.js";
-
-const colors = new Map([
-  [SPIRIT.VERY_LOW, "rgba(255, 255, 0, 0.45)"],
-  [SPIRIT.LOW, "rgba(255, 255, 0, 0.55)"],
-  [SPIRIT.MEDIUM, "rgba(255, 165, 0, 0.55)"],
-  [SPIRIT.HIGH, "rgba(255, 0, 0, 0.65)"],
-  [SPIRIT.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
-]);
+import { SPIRIT_COLORS } from "./world-map-draw.config.js";
 
 export const SPIRIT_CONTROL_IMAGES = Object.freeze(Object.entries(SPIRIT).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_spirit_${key.toLowerCase()}.webp` })));
 
@@ -14,7 +7,7 @@ export function getSpiritColor(value) {
   if (!Object.values(SPIRIT).includes(value)) {
     throw new TypeError("Spirit color lookup requires a spirit metadata value.");
   }
-  return colors.get(value) || null;
+  return SPIRIT_COLORS.get(value) || null;
 }
 
 export function drawSpiritCue(ctx, left, top, width, height, color, lineWidth = 1) {

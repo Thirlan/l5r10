@@ -5,8 +5,9 @@
  */
 import { createMapHeader, getMapSize, readMapFile } from "../../scripts/world/data/world-map-file.js";
 import { CLAN, CLIMATE, INFRASTRUCTURE, isWaterTerrain, LAYERS, RESOURCE, RIVER, SETTLEMENT, TERRAIN, VEGETATION } from "../../scripts/world/data/world-map-layers.js";
-import { DEFAULT_ELEVATION, getCliffEdges, getElevation } from "../../scripts/world/data/world-map-elevation.js";
+import { getCliffEdges, getElevation } from "../../scripts/world/data/world-map-elevation.js";
 export { isWaterTerrain } from "../../scripts/world/data/world-map-layers.js";
+import { DEFAULT_ELEVATION } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Saved cell fields that hold one catalog ID, with their layer and default value. */
 const ID_FIELDS = Object.freeze([

@@ -1,9 +1,8 @@
 import { INFRASTRUCTURE, LAYERS, TERRAIN } from "../data/world-map-layers.js";
-import { BASE_SPEED_KMPH } from "./travel-speed.js";
-import { RIVER_OFFSETS } from "../draw/world-map-img-river.js";
 import { SkillCheck } from "../../skill-check.js";
 import { getElevation } from "../data/world-map-elevation.js";
-import { CLIMATE_MODIFIER, WATER_CLIMATE_MODIFIER, VEGETATION_MODIFIER, INFRASTRUCTURE_MODIFIER, RIVER_AGAINST_CURRENT_MODIFIER } from "./terrain-skill-check-tn-modifiers.js";
+import { BASE_SPEED_KMPH, BASE_TN, MIN_TN, CLIMATE_MODIFIER, WATER_CLIMATE_MODIFIER, VEGETATION_MODIFIER, INFRASTRUCTURE_MODIFIER, RIVER_AGAINST_CURRENT_MODIFIER } from "./world-map-game-rules.config.js";
+import { RIVER_OFFSETS } from "../data/world-map-data.const.js";
 
 const CELL_LAYERS = ["terrain", "climate", "vegetation", "river", "infrastructure", "clan"];
 
@@ -137,9 +136,9 @@ export function bypassesCrossing(mode, cell, feature) {
 export function crossingCheck(mode, cell, isAgainstCurrent) {
   // Compute crossing difficulty before selecting the skill and trait.
   const sailing = isBoat(mode);
-  const baseTN = 5 + RIVER_AGAINST_CURRENT_MODIFIER[isAgainstCurrent];
+  const baseTN = BASE_TN + RIVER_AGAINST_CURRENT_MODIFIER[isAgainstCurrent];
   const infrastructure = sailing ? 0 : infrastructureModifier(cell);
-  const tn = Math.max(5, baseTN + environmentModifier(cell, true) + infrastructure);
+  const tn = Math.max(MIN_TN, baseTN + environmentModifier(cell, true) + infrastructure);
 
   const skill = sailing ? "Sailing" : "Athletics";
   const trait = sailing ? "Intelligence" : "Strength";

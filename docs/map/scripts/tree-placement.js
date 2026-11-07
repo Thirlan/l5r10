@@ -11,7 +11,7 @@ import { ROAD_STYLES, buildRoadSegments } from "./road-paths.js";
 import { cellSurface } from "./surface-layers.js";
 import { HeightField } from "./terrain-height.js";
 import { chunkIndexAt } from "./terrain-chunks.js";
-import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 export const TREES_PER_CELL = 6;
 /** Lowest surface height for a tree. River banks and shores are below it. */

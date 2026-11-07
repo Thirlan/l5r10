@@ -1,4 +1,5 @@
 import { RESOURCE } from "../data/world-map-layers.js";
+import { RESOURCE_MARKER_SIZE } from "./world-map-draw.config.js";
 
 const resourceImageEntries = [
   [RESOURCE.IRON_MINE, "../img/map/iron_mine.webp"],
@@ -44,7 +45,6 @@ const resourceImageEntries = [
 
 const resourceImageMap = new Map(resourceImageEntries);
 export const RESOURCE_IMAGES = Object.freeze(resourceImageEntries.map(([resource, image]) => Object.freeze({ resource, image })));
-export const RESOURCE_MARKER_SIZE = 12;
 
 /**
  * @param {import("../data/world-map-layers.js").LayerValue} resource Resource metadata.

@@ -1,18 +1,21 @@
-import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER, NEIGHBOR_OFFSETS } from "../data/world-map-layers.js";
+import { LAYERS, TERRAIN, CLIMATE, VEGETATION, CLAN, RIVER } from "../data/world-map-layers.js";
 import { createMapHeader, getMapSize } from "../data/world-map-file.js";
 import { BASE_LAYER_IMAGES, drawBaseLayers, drawCliffEdges, drawWaterEdges } from "./world-map-img-base-layers.js";
 import { getClanColors } from "../data/clan-colors.js";
-import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize, NEUTRAL_SETTLEMENT_COLORS } from "./world-map-img-settlements.js";
+import { drawSettlementMarker, getSettlementAsset, getSettlementLabelSize } from "./world-map-img-settlements.js";
 import { drawResourceMarker, getResourceImage } from "./world-map-img-resources.js";
 import { drawInfrastructure } from "./world-map-img-infrastructure.js";
-import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame, RIVER_OFFSETS } from "./world-map-img-river.js";
+import { buildRiverFlowPaths, drawRiver, drawRiverFlowFrame } from "./world-map-img-river.js";
 import { getAnimalColor, drawAnimalCue } from "./world-map-img-animal.js";
 import { getSpiritColor, drawSpiritCue } from "./world-map-img-spirit.js";
 import { getShadowlandColor, drawShadowlandCue } from "./world-map-img-shadowland.js";
 import { getCrimeColor, drawCrimeCue } from "./world-map-img-crime.js";
 import { getResourceLevelColor, drawResourceLevelCue } from "./world-map-img-resource-level.js";
-import { DEFAULT_ELEVATION, getCliffEdges, getElevation, CLIFF_HEIGHT } from "../data/world-map-elevation.js";
+import { getCliffEdges, getElevation } from "../data/world-map-elevation.js";
 import { drawElevationCue, getElevationColor } from "./world-map-img-elevation.js";
+import { NEIGHBOR_OFFSETS, RIVER_OFFSETS } from "../data/world-map-data.const.js";
+import { NEUTRAL_SETTLEMENT_COLORS, DEFAULT_ZOOM, GRID_SIZE, MAX_ZOOM, MIN_ZOOM, RIVER_FLOW_FRAME_MS, ZOOM_STEP } from "./world-map-draw.config.js";
+import { DEFAULT_ELEVATION, CLIFF_HEIGHT } from "../data/world-map-data.config.js";
 
 const OVERLAY_PRESENTATION = new Map([
   [LAYERS.ELEVATION, { getColor: (value) => getElevationColor(value?.id), drawCue: drawElevationCue }],
@@ -22,24 +25,22 @@ const OVERLAY_PRESENTATION = new Map([
   [LAYERS.CRIME, { getColor: getCrimeColor, drawCue: drawCrimeCue }],
   [LAYERS.RESOURCE_LEVEL, { getColor: getResourceLevelColor, drawCue: drawResourceLevelCue }],
 ]);
-const MAP_DEFAULT_GRID_SIZE = 16;
-const RIVER_FLOW_FRAME_MS = 120;
 
 // Shared rendering logic for the map builder (WorldMapGrid) and the read-only
 // map viewer (WorldMapViewer). Subclasses provide their own repaint entry point
 // via redraw(), plus builder- or viewer-specific behaviour (painting, routing).
 export class WorldMapRenderer {
-  constructor(canvasSelector, gridSize = MAP_DEFAULT_GRID_SIZE, { zoom = 0.5 } = {}) {
+  constructor(canvasSelector, gridSize = GRID_SIZE, { zoom = DEFAULT_ZOOM } = {}) {
     this.canvas = document.querySelector(canvasSelector);
     this.ctx = this.canvas.getContext("2d");
-    this.gridSize = Number.isFinite(gridSize) && gridSize > 0 ? gridSize : MAP_DEFAULT_GRID_SIZE;
+    this.gridSize = Number.isFinite(gridSize) && gridSize > 0 ? gridSize : GRID_SIZE;
     const columns = Number(this.canvas.dataset.mapColumns);
     const rows = Number(this.canvas.dataset.mapRows);
     this.mapWidth = columns * this.gridSize;
     this.mapHeight = rows * this.gridSize;
     this.zoom = zoom;
-    this.minZoom = 0.55;
-    this.maxZoom = 4;
+    this.minZoom = MIN_ZOOM;
+    this.maxZoom = MAX_ZOOM;
 
     this.drawOrder = [LAYERS.TERRAIN.id, LAYERS.VEGETATION.id, LAYERS.RIVER.id, LAYERS.INFRASTRUCTURE.id, LAYERS.SETTLEMENT.id, LAYERS.RESOURCE.id, LAYERS.CLAN.id, "text"];
 
@@ -148,10 +149,10 @@ export class WorldMapRenderer {
   }
 
   zoomIn() {
-    this.setZoom(this.zoom * 1.25);
+    this.setZoom(this.zoom * ZOOM_STEP);
   }
   zoomOut() {
-    this.setZoom(this.zoom / 1.25);
+    this.setZoom(this.zoom / ZOOM_STEP);
   }
   resetZoom() {
     this.setZoom(1);

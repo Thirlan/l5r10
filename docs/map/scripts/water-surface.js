@@ -5,8 +5,8 @@
  * - "?water=simple" uses a plain see-through material, for slow devices.
  * - Dry terrain has no water triangles beneath it. This prevents depth collisions at physical map scale.
  */
-import { METERS_PER_TILE } from "../../scripts/world/data/world-map-scale.js";
 import { HeightField } from "./terrain-height.js";
+import { METERS_PER_TILE } from "../../scripts/world/data/world-map-data.config.js";
 
 /** Water level in tile units, one centimetre below sea level. */
 export const WATER_LEVEL = -0.01 / METERS_PER_TILE;

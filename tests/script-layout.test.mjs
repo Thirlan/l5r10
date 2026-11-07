@@ -61,6 +61,10 @@ test("moved files no longer occupy the flat scripts folder", () => {
   assert.ok(existsSync(new URL("world/game-rules/travel_lookup.csv", scripts)));
   assert.ok(existsSync(new URL("world/data/world-map-layers.js", scripts)));
   assert.ok(existsSync(new URL("world/data/clan-colors.js", scripts)));
+  ["data", "draw", "game-rules"].forEach((folder) => {
+    assert.ok(existsSync(new URL(`world/${folder}/world-map-${folder}.const.js`, scripts)), `${folder} const file`);
+    assert.ok(existsSync(new URL(`world/${folder}/world-map-${folder}.config.js`, scripts)), `${folder} config file`);
+  });
 });
 
 test("module tests mirror the script subfolders", () => {

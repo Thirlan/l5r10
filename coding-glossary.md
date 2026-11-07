@@ -58,3 +58,5 @@ Glossary for coding terms used in this project
 |Map file|The saved JSON file of the world map (`world-map-grid.json`). It has the map header first, then the tiles.|
 |Map header|The fields of the map file before the tiles: name, summary, seed, maxX, maxY, version, and lastUpdated. maxX and maxY are the highest tile indexes, so the map has maxX + 1 columns and maxY + 1 rows.|
 |Tiles|The saved cells of the map file, keyed by "x,y". The code calls the same object the grid.|
+|Const file|A world script file named world-map-<folder>.const.js. It holds fixed values that do not change with game design, for example kilometres per mile.|
+|Config file|A world script file named world-map-<folder>.config.js. It holds game and display settings that a designer can change, for example miles per map tile, travel speeds, and colors.|

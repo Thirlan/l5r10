@@ -120,19 +120,6 @@ class ElevationLayerDefinition extends LayerDefinition {
   }
 }
 
-export const NEIGHBOR_OFFSETS = Object.freeze(
-  [
-    [0, -1],
-    [1, -1],
-    [1, 0],
-    [1, 1],
-    [0, 1],
-    [-1, 1],
-    [-1, 0],
-    [-1, -1],
-  ].map((offset) => Object.freeze(offset)),
-);
-
 export const TERRAIN = createValues([
   ["FLAT", 0, "flat"],
   ["HILLS", 1, "hills"],

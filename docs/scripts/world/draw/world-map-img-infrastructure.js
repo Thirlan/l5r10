@@ -1,13 +1,6 @@
 import { INFRASTRUCTURE } from "../data/world-map-layers.js";
-
-const infrastructureStyles = new Map([
-  [INFRASTRUCTURE.ROAD, { color: "#5C3A1E", lineWidth: 3 }],
-  [INFRASTRUCTURE.FOOTPATH, { color: "#A97443", lineWidth: 1.5 }],
-  [INFRASTRUCTURE.SMALL_PORT, { color: "#D2B48C", marker: "p" }],
-  [INFRASTRUCTURE.LARGE_PORT, { color: "#8B4513", marker: "P" }],
-]);
-const ROAD_DIRECTIONS = ["east", "south", "southeast", "northeast"];
-for (const style of infrastructureStyles.values()) Object.freeze(style);
+import { ROAD_DIRECTIONS } from "./world-map-draw.const.js";
+import { INFRASTRUCTURE_STYLES } from "./world-map-draw.config.js";
 
 export const INFRASTRUCTURE_CONTROL_IMAGES = Object.freeze(Object.entries(INFRASTRUCTURE).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_infrastructure_${key.toLowerCase()}.webp` })));
 
@@ -19,7 +12,7 @@ export function getInfrastructureStyle(value) {
   if (!Object.values(INFRASTRUCTURE).includes(value)) {
     throw new TypeError("Infrastructure style lookup needs an infrastructure metadata value.");
   }
-  return infrastructureStyles.get(value);
+  return INFRASTRUCTURE_STYLES.get(value);
 }
 
 /**

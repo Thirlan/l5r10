@@ -1,4 +1,5 @@
 import { SETTLEMENT } from "../data/world-map-layers.js";
+import { DEFAULT_SETTLEMENT_LABEL_SIZE, NEUTRAL_SETTLEMENT_COLORS, SETTLEMENT_LABEL_SIZE_ENTRIES } from "./world-map-draw.config.js";
 
 const settlementAssetEntries = [
   [SETTLEMENT.SMALL_SHRINE, "../img/map/shrine.png"],
@@ -10,7 +11,6 @@ const settlementAssetMap = new Map(settlementAssetEntries);
 
 export const SETTLEMENT_ASSETS = Object.freeze(settlementAssetEntries.map(([settlement, image]) => Object.freeze({ settlement, image })));
 export const SETTLEMENT_CONTROL_IMAGES = Object.freeze(Object.entries(SETTLEMENT).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_settlement_${key.toLowerCase()}.webp` })));
-export const NEUTRAL_SETTLEMENT_COLORS = Object.freeze({ border: "#444444", fill: "#DDDDDD" });
 
 export function getSettlementAsset(settlement) {
   if (!Object.values(SETTLEMENT).includes(settlement)) {
@@ -111,31 +111,15 @@ export function drawSquareSettlement(ctx, settlement, centerX, centerY, zoom, cl
   return true;
 }
 
-const settlementLabelEntries = [
-  [SETTLEMENT.VILLAGE, 6],
-  [SETTLEMENT.CITY, 8],
-  [SETTLEMENT.CAPITAL, 10],
-  [SETTLEMENT.FORTIFICATION, 6],
-  [SETTLEMENT.CASTLE, 8],
-  [SETTLEMENT.KYUDEN, 10],
-  [SETTLEMENT.SMALL_SHRINE, 6],
-  [SETTLEMENT.LARGE_SHRINE, 8],
-  [SETTLEMENT.VILLAGE_RUINS, 6],
-  [SETTLEMENT.CASTLE_RUINS, 8],
-  [SETTLEMENT.ACADEMY, 6],
-  [SETTLEMENT.WATCHTOWER, 6],
-  [SETTLEMENT.SMALL_TEMPLE, 6],
-  [SETTLEMENT.LARGE_TEMPLE, 8],
-];
-const settlementLabelSizeMap = new Map(settlementLabelEntries);
+const settlementLabelSizeMap = new Map(SETTLEMENT_LABEL_SIZE_ENTRIES);
 
-export const SETTLEMENT_LABEL_SIZES = Object.freeze(settlementLabelEntries.map(([settlement, size]) => Object.freeze({ settlement, size })));
+export const SETTLEMENT_LABEL_SIZES = Object.freeze(SETTLEMENT_LABEL_SIZE_ENTRIES.map(([settlement, size]) => Object.freeze({ settlement, size })));
 
 export function getSettlementLabelSize(settlement) {
   if (!Object.values(SETTLEMENT).includes(settlement)) {
     throw new TypeError("Settlement label lookup requires a settlement metadata value.");
   }
-  return settlementLabelSizeMap.get(settlement) || 6;
+  return settlementLabelSizeMap.get(settlement) || DEFAULT_SETTLEMENT_LABEL_SIZE;
 }
 
 export function drawShrine(ctx, source, centerX, centerY, color, scale, tintedIconCache) {

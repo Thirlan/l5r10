@@ -1,6 +1,8 @@
-import { CLIFF_HEIGHT, getCliffDifference } from "../data/world-map-elevation.js";
+import { getCliffDifference } from "../data/world-map-elevation.js";
 import { SkillCheck } from "../../skill-check.js";
 import { bypassesCrossing, validateTravelInput, validateTravelNeighbors } from "./travel-skill-rules.js";
+import { CLIFF_HEIGHT } from "../data/world-map-data.config.js";
+import { CLIFF_BASE_TN, CLIFF_TN_STEP, CLIFF_TN_STEP_HEIGHT } from "./world-map-game-rules.config.js";
 
 /**
  * Describe the elevation crossing between the current cell and the destination.
@@ -18,5 +20,5 @@ export function getSkillAndTN(mode, cell, neighbors, direction) {
   const destination = neighbors[direction];
   const difference = getCliffDifference(cell, destination);
   if (!difference || (bypassesCrossing(mode, cell, "cliff") && bypassesCrossing(mode, destination, "cliff"))) return [];
-  return [new SkillCheck("Athletics", "Strength", 10 + 5 * Math.floor((difference - CLIFF_HEIGHT) / 25))];
+  return [new SkillCheck("Athletics", "Strength", CLIFF_BASE_TN + CLIFF_TN_STEP * Math.floor((difference - CLIFF_HEIGHT) / CLIFF_TN_STEP_HEIGHT))];
 }

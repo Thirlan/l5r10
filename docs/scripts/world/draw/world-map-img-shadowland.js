@@ -1,12 +1,5 @@
 import { SHADOWLAND } from "../data/world-map-layers.js";
-
-const colors = new Map([
-  [SHADOWLAND.VERY_LOW, "rgba(255, 255, 0, 0.45)"],
-  [SHADOWLAND.LOW, "rgba(255, 255, 0, 0.55)"],
-  [SHADOWLAND.MEDIUM, "rgba(255, 165, 0, 0.55)"],
-  [SHADOWLAND.HIGH, "rgba(255, 0, 0, 0.65)"],
-  [SHADOWLAND.VERY_HIGH, "rgba(128, 0, 128, 0.75)"],
-]);
+import { SHADOWLAND_COLORS } from "./world-map-draw.config.js";
 
 export const SHADOWLAND_CONTROL_IMAGES = Object.freeze(Object.entries(SHADOWLAND).map(([key, value]) => Object.freeze({ value, image: `../img/map/control_shadowland_${key.toLowerCase()}.webp` })));
 
@@ -14,7 +7,7 @@ export function getShadowlandColor(value) {
   if (!Object.values(SHADOWLAND).includes(value)) {
     throw new TypeError("Shadowland color lookup requires a shadowland metadata value.");
   }
-  return colors.get(value) || null;
+  return SHADOWLAND_COLORS.get(value) || null;
 }
 
 export function drawShadowlandCue(ctx, left, top, width, height, color, lineWidth = 1) {

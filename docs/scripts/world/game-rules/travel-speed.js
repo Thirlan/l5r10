@@ -1,35 +1,9 @@
 import { TERRAIN, CLIMATE, VEGETATION, RIVER, INFRASTRUCTURE } from "../data/world-map-layers.js";
-import { CLIFF_HEIGHT } from "../data/world-map-elevation.js";
+import { CLIFF_HEIGHT } from "../data/world-map-data.config.js";
+import { BASE_SPEED_KMPH, CLIMATE_PENALTY, INFRASTRUCTURE_BONUS, SPEED_MULTIPLIER_LIMITS, SPEED_PENALTY, TERRAIN_PENALTY, WITH_CURRENT_BONUS } from "./world-map-game-rules.config.js";
 
-// Moving speeds, not daily averages. These estimates exclude rest and survival checks.
-// Horse uses a walk; caravan includes loaded carts; ship assumes favorable wind.
-export const BASE_SPEED_KMPH = Object.freeze({
-  foot: 5,
-  horse: 7,
-  caravan: 4,
-  army: 4,
-  "river boat": 6.5,
-  ship: 9,
-});
 const MODE_NAMES = Object.keys(BASE_SPEED_KMPH);
 const WATER_TERRAINS = new Set([TERRAIN.WATER, TERRAIN.COASTAL_WATER, TERRAIN.OCEAN]);
-const TERRAIN_PENALTY = {
-  [TERRAIN.FLAT.id]: 0,
-  [TERRAIN.HILLS.id]: 0.2,
-  [TERRAIN.MOUNTAINS.id]: 0.5,
-  [TERRAIN.WETLANDS.id]: 0.35,
-};
-const CLIMATE_PENALTY = {
-  [CLIMATE.TROPICAL.id]: { land: -0.1 },
-  [CLIMATE.POLAR.id]: { land: -0.2, water: -0.35 },
-};
-const INFRASTRUCTURE_BONUS = {
-  [INFRASTRUCTURE.NONE.id]: 0,
-  [INFRASTRUCTURE.ROAD.id]: 0.5,
-  [INFRASTRUCTURE.FOOTPATH.id]: 0.2,
-  [INFRASTRUCTURE.SMALL_PORT.id]: 0,
-  [INFRASTRUCTURE.LARGE_PORT.id]: 0,
-};
 
 function getLayerValue(value, catalog) {
   return Object.values(catalog).find(({ id, name }) => id === value || id === value?.id || (typeof value === "string" && name.toLowerCase() === value.trim().toLowerCase()));
@@ -78,17 +52,17 @@ export function getTravelSpeed(mode, terrain, climate, vegetation, river, infras
     const underBridge = hasBridge && (onRiver || terrain === TERRAIN.WATER);
     if (mode === "ship" && underBridge) return -1.0;
     adjustment += CLIMATE_PENALTY[climate.id]?.water ?? 0;
-    if (mode === "ship" && onRiver) adjustment -= 0.3;
-    if (mode === "river boat" && terrain === TERRAIN.COASTAL_WATER) adjustment -= 0.25;
-    if (underBridge) adjustment -= 0.1;
-    if (onRiver) adjustment += isAgainstCurrent ? -0.25 : 0.1;
+    if (mode === "ship" && onRiver) adjustment -= SPEED_PENALTY.shipOnRiver;
+    if (mode === "river boat" && terrain === TERRAIN.COASTAL_WATER) adjustment -= SPEED_PENALTY.riverBoatOnCoastalWater;
+    if (underBridge) adjustment -= SPEED_PENALTY.underBridge;
+    if (onRiver) adjustment += isAgainstCurrent ? -SPEED_PENALTY.againstCurrent : WITH_CURRENT_BONUS;
   } else {
     if (onWater && !(terrain === TERRAIN.WATER && infrastructure === INFRASTRUCTURE.ROAD)) return -1.0;
-    adjustment -= Math.max(hasCliff ? 0.7 : 0, onWater ? 0 : TERRAIN_PENALTY[terrain.id]);
+    adjustment -= Math.max(hasCliff ? SPEED_PENALTY.cliff : 0, onWater ? 0 : TERRAIN_PENALTY[terrain.id]);
     adjustment += CLIMATE_PENALTY[climate.id]?.land ?? 0;
-    if (vegetation !== VEGETATION.NONE) adjustment -= 0.2;
-    if (onRiver && !hasBridge) adjustment -= 0.25;
+    if (vegetation !== VEGETATION.NONE) adjustment -= SPEED_PENALTY.vegetation;
+    if (onRiver && !hasBridge) adjustment -= SPEED_PENALTY.riverWithoutBridge;
     adjustment += INFRASTRUCTURE_BONUS[infrastructure.id];
   }
-  return BASE_SPEED_KMPH[mode] * Math.max(0.1, Math.min(1, 1 + adjustment));
+  return BASE_SPEED_KMPH[mode] * Math.max(SPEED_MULTIPLIER_LIMITS.min, Math.min(SPEED_MULTIPLIER_LIMITS.max, 1 + adjustment));
 }
