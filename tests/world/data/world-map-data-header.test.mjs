@@ -39,3 +39,10 @@ test("header construction rejects undeclared fields and invalid values", () => {
   assert.throws(() => new MapHeader(null), /header must be an object/);
   assert.throws(() => new WorldMapDataGrid({ ...DATA, notes: {}, tiles: {} }), /unknown field "notes"/);
 });
+
+test("header construction rejects inherited or non-enumerable required fields", () => {
+  const inherited = Object.create(DATA);
+  const hidden = Object.defineProperty({ ...DATA }, "name", { enumerable: false });
+  assert.throws(() => new MapHeader(inherited), /header field "name"/);
+  assert.throws(() => new MapHeader(hidden), /header field "name"/);
+});

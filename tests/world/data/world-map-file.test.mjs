@@ -216,6 +216,19 @@ test("the map file text rejects undeclared header fields", () => {
   assert.throws(() => stringifyMapFile({ ...createHeader(), tiles: {} }, {}), /unknown field "tiles"/);
 });
 
+test("reading and saving reject non-enumerable and symbol header fields", () => {
+  for (const [field, enumerable] of [
+    ["author", false],
+    [Symbol("author"), false],
+    [Symbol("author"), true],
+  ]) {
+    const header = Object.defineProperty(createHeader(), field, { value: "Unknown", enumerable });
+    const mapFile = Object.defineProperty({ ...createHeader(), tiles: {} }, field, { value: "Unknown", enumerable });
+    assert.throws(() => stringifyMapFile(header, {}), /unknown field/);
+    assert.throws(() => readMapFile(mapFile), /unknown field/);
+  }
+});
+
 test("saving replaces an invalid old update date with the new date", () => {
   const header = { ...createHeader(), lastUpdated: "outdated" };
   const saved = JSON.parse(stringifyMapFile(header, {}, new Date(2026, 9, 28)));

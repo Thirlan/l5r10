@@ -47,6 +47,9 @@ export function validateMapHeader(header) {
     throw new TypeError(`The map header has an unknown field "${String(unknownField)}".`);
   }
   HEADER_FIELDS.forEach(([field, isValid, expected]) => {
+    if (!Object.prototype.propertyIsEnumerable.call(header, field)) {
+      throw new TypeError(`The map header field "${field}" must be an enumerable own property.`);
+    }
     if (!isValid(Reflect.get(header, field))) {
       throw new TypeError(`The map header field "${field}" must be ${expected}.`);
     }

@@ -82,13 +82,17 @@ export function isInsideMap(header, x, y) {
 export function readMapFile(data) {
   // Validation
   if (!isPlainObject(data)) throw new TypeError("The map file must be an object.");
-  const { tiles, ...header } = data;
+  const { tiles } = data;
+  // Keep hidden fields for the header check.
+  const properties = Object.getOwnPropertyDescriptors(data);
+  delete properties.tiles;
+  const header = Object.defineProperties({}, properties);
   if (!isPlainObject(tiles)) throw new TypeError('The map file needs a "tiles" object after the header.');
   validateMapHeader(header);
   Object.values(tiles).forEach((cell) => getElevation(cell));
 
   // Output
-  return { header, tiles };
+  return { header: { ...header }, tiles };
 }
 
 /**
@@ -101,7 +105,8 @@ export function readMapFile(data) {
 export function stringifyMapFile(header, tiles, now = new Date()) {
   // Validation
   if (!isPlainObject(header)) throw new TypeError("The map header must be an object.");
-  const updatedHeader = { ...header, lastUpdated: formatMapDate(now) };
+  // Keep hidden fields for the header check.
+  const updatedHeader = Object.defineProperties({}, { ...Object.getOwnPropertyDescriptors(header), lastUpdated: { value: formatMapDate(now), enumerable: true, writable: true, configurable: true } });
   validateMapHeader(updatedHeader);
   const mapFile = { ...updatedHeader, tiles };
   readMapFile(mapFile);
