@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Monsters</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+    <main>
+      <h1>Monsters</h1>
+      <h2>Game play</h2>
+      <p>This section details the rules for monsters. It is important to note that a monster counts as a fully playable character that follows the rules of the game, including taking actions, rolling dice, using skills, and being subject to damage and other effects.</p>
+
+      <h3>Experience points</h3>
+      <p>Monsters do not generally gain experience points and as such cannot purchase new skills or increase traits beyond the ones they have. GMs may of course relax this rule at their discretion.</p>
+
+      <h3>Wound Ranks</h3>
+      <p>Monsters follow a simpler wound rank system than characters for the purpose of minimizing book keeping for the GM.</p>
+      <ul>
+        <li>There are only 4 ranks: Healthy, Hurt, Crippled and Dead</li>
+        <li>Healthy, Hurt and Crippled are all 5x their Earth Ring</li>
+      </ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Penalty</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Healthy</td>
+            <td>&mdash;</td>
+            <td>The Monster is unharmed or only superficially marked.</td>
+          </tr>
+          <tr>
+            <td>Hurt</td>
+            <td>-10 to all rolls</td>
+            <td>Significant injuries; the Monster is starting to stumble.</td>
+          </tr>
+          <tr>
+            <td>Crippled</td>
+            <td>-20 to all rolls</td>
+            <td>The Monster can barely fight on.</td>
+          </tr>
+          <tr>
+            <td>Dead</td>
+            <td>&mdash;</td>
+            <td>The Monster is no longer able to act and is effectively dead.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example</h3>
+      <p>A wolf has Earth 2 which would give it the following wound rank table:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Penalty</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Healthy</td>
+            <td>&mdash;</td>
+            <td>10 and below</td>
+          </tr>
+          <tr>
+            <td>Hurt</td>
+            <td>-10</td>
+            <td>11 to 20</td>
+          </tr>
+          <tr>
+            <td>Crippled</td>
+            <td>-20</td>
+            <td>21 to 30</td>
+          </tr>
+          <tr>
+            <td>Dead</td>
+            <td>&mdash;</td>
+            <td>31+</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </main>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
+</html>
