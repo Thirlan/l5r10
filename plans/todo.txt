@@ -2,10 +2,6 @@
 Historic Effects on Character Options
 Because this is the 10th century in the setting, certain character options are different.
 
-- Horses in Combat (page 322): Steering a mount’s movements for the turn is a Free Action, regardless of which actions
-the mount itself actually spends on movement. Further clarification, a rider can still use the Full Defense stance while
-benefiting from a mount’s full movement potential.
-
 New Combat Conditional Effects
 - Impure: A shugenja who has disappointed the spirits is considered impure until he earns their forgiveness. He cannot
 add his School Rank or any Affinity to Spell Casting Rolls and those dice will not Explode. Shugenja who cast any maho
