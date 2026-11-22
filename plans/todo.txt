@@ -2,11 +2,6 @@
 Historic Effects on Character Options
 Because this is the 10th century in the setting, certain character options are different.
 
-New Combat Conditional Effects
-- Impure: A shugenja who has disappointed the spirits is considered impure until he earns their forgiveness. He cannot
-add his School Rank or any Affinity to Spell Casting Rolls and those dice will not Explode. Shugenja who cast any maho
-spells can draw on the kansen instead of normal elemental kami and are immune to this condition.
-
 New NPC Technique: Peasant Vengeance
 This is not so much a school technique as a crude tactic that has been passed on by peasant renegades to give them a
 fighting chance against their samurai oppressors. It is mostly reserved for NPCs, but a ronin might pick it up under some
