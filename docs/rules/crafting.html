@@ -15,8 +15,390 @@
     <main>
       <h1>Crafting</h1>
 
-      <h2>Traps</h2>
-      <p>todo</p>
+      <h2 id="traps">Traps</h2>
+      <p>Use the Craft: Trap skill to make a trap.</p>
+
+      <h3>Building Traps</h3>
+      <p>You can build a trap in any location that makes sense, unless the trap description prevents it. For example, you can build a trap in a house or in the wilderness.</p>
+      <p>Some locations make a trap more difficult to build and conceal. The GM can increase the material cost and the craft time for these locations.</p>
+
+      <h3>Triggering Traps</h3>
+      <p>A trap triggers in one of two ways:</p>
+      <ul>
+        <li>Automatic: the trap triggers when a person goes into its area.</li>
+        <li>Manual: a person triggers the trap from a maximum of 10 ft away.</li>
+      </ul>
+      <p>When a person goes into the trap area, that person makes an Investigate (Notice) roll. The base TN is 15. The crafter can increase this TN with Raises.</p>
+      <p>If the roll succeeds:</p>
+      <ul>
+        <li>An automatic trap does not trigger immediately.</li>
+        <li>For a manual trap, the person who controls the trap is revealed, even if they are hidden or around a corner. The rope shows their position.</li>
+        <li>The person can move 5 ft in any direction if they have a Move Action. If not, they stay in the trap area.</li>
+      </ul>
+      <p>If the roll fails:</p>
+      <ul>
+        <li>The person who controls a manual trap can trigger it.</li>
+        <li>An automatic trap triggers immediately.</li>
+        <li>The damage and effects of the trap hit automatically. Armor still reduces the damage.</li>
+      </ul>
+      <p>When a group goes into a trap area outside of combat rounds:</p>
+      <ul>
+        <li>Each person in the group rolls, in the order that the group selects.</li>
+        <li>The rolls stop when one person succeeds, or when the number of people is more than the trap capacity.</li>
+        <li>The trap capacity is 1 person for each 5x5 ft square. For example, a 10x10 ft trap holds 4 people.</li>
+        <li>All people whose roll failed are caught in the trap.</li>
+      </ul>
+
+      <h3>Detection Trap</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>A simple trip wire. It makes a sound, or it silently shows that a person went through it.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Trap, TN 10</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>10 minutes to make and set up at one location on the battlemap</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>1 bu of small material</td>
+          </tr>
+          <tr>
+            <td>Trap Dimensions</td>
+            <td>5x1 ft</td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>One of these effects:
+              <ul>
+                <li>A bell rings. People can hear it from a maximum of 100 ft away.</li>
+                <li>A quiet sign shows that a person triggered the trap. You can examine the trap later.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Automatic</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>
+              <ul>
+                <li>1 Raise: decrease the craft time by 5 minutes (minimum 5 minutes).</li>
+                <li>1 Raise: increase the Investigate (Notice) TN by 5.</li>
+                <li>1 Raise: increase the length by 5 ft (10x1, 15x1, and so on).</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Stun Trap</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>Nets, trip wires, or large swinging objects that cause concussions.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Trap, TN 15</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>30 minutes</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>1 koku of small material</td>
+          </tr>
+          <tr>
+            <td>Trap Dimensions</td>
+            <td>5x5 ft</td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>All people in the area are <a href="./conditional_effects.html#stunned">Stunned</a>.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Manual</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>
+              <ul>
+                <li>1 Raise: decrease the craft time by 5 minutes (minimum 5 minutes).</li>
+                <li>1 Raise: increase the Investigate (Notice) TN by 5.</li>
+                <li>2 Raises: increase the size by 5 ft (10x10, 15x15, and so on).</li>
+                <li>1 Raise: the trap triggers automatically.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Damage Trap</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>Spike pits, arrows, darts, or large falling objects.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Trap, TN 20</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>60 minutes</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>2 koku of large material</td>
+          </tr>
+          <tr>
+            <td>Trap Dimensions</td>
+            <td>5x5 ft</td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>All people in the area take 2k2 damage.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Manual</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>
+              <ul>
+                <li>1 Raise: decrease the craft time by 5 minutes (minimum 5 minutes).</li>
+                <li>1 Raise: increase the Investigate (Notice) TN by 5.</li>
+                <li>2 Raises: increase the size by 5 ft (10x10, 15x15, and so on).</li>
+                <li>1 Raise: the trap triggers automatically.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Damage Trap - Wilderness Spike Pit</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>A hole with spikes at the bottom. Leaves cover the hole.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Trap, TN 15</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>3 hours</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>
+              <ul>
+                <li>No material cost.</li>
+                <li>You can only build it in a forested wilderness.</li>
+                <li>You cannot use it with explosives.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Trap Dimensions</td>
+            <td>5x5 ft</td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>All people in the area take 2k2 damage.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Manual</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>
+              <ul>
+                <li>1 Raise: increase the Investigate (Notice) TN by 5.</li>
+                <li>2 Raises: increase the size by 5 ft (10x10, 15x15, and so on).</li>
+                <li>1 Raise: the trap triggers automatically.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="explosives">Explosives</h2>
+      <p><strong>Top secret.</strong> Use the Craft: Explosives skill to make explosives.</p>
+      <ul>
+        <li>If gaijin pepper in any form goes to a person who is not a Harrier, only seppuku can atone for the loss.</li>
+        <li>Harriers must get back or destroy lost explosives, at any cost.</li>
+        <li>Some recipes have usage restrictions. A superior must approve their use.</li>
+      </ul>
+
+      <h3>Gaijin Pepper</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>The raw form of gaijin pepper. The materials are usually sent raw to hide the transport. Harriers then assemble them.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Explosives, TN 20</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>
+              <ul>
+                <li>2 koku of special material. The material fits in a large sack.</li>
+                <li>A mortar and pestle, and basic weighing tools.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Produces</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>1 Raise: produce 1 more.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Bamboo Bomb</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>A hand-held explosive in a bamboo tube.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Explosives, TN 15</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>4 Gaijin Pepper</td>
+          </tr>
+          <tr>
+            <td>Produces</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>2 Raises: produce 1 more.</td>
+          </tr>
+          <tr>
+            <td>Use</td>
+            <td>
+              <ul>
+                <li>Light the timed fuse and throw the bomb. All people in a 10x10 ft template take 3k2 damage and are <a href="./conditional_effects.html#dazed">Dazed</a>.</li>
+                <li>In a <a href="#traps">Damage Trap</a>: decrease the craft TN by 5 and the craft time by 40 minutes. The damage becomes 3k2 plus Dazed. The template becomes 10x10 ft and Raises cannot change it.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Bamboo Flashbang</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>A hand-held flashbang in a bamboo tube.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Explosives, TN 15</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>2 Gaijin Pepper</td>
+          </tr>
+          <tr>
+            <td>Produces</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>2 Raises: produce 1 more.</td>
+          </tr>
+          <tr>
+            <td>Use</td>
+            <td>
+              <ul>
+                <li>Light the flashbang and throw it. All people in a 20x20 ft template are <a href="./conditional_effects.html#stunned">Stunned</a>.</li>
+                <li>In a <a href="#traps">Stun Trap</a>: decrease the craft TN by 5 and the craft time by 10 minutes. The template becomes 20x20 ft and Raises cannot change it.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Demolition Bundle</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td>A bundle of explosives. It destroys storehouses, bridges, walls, and castle gates.</td>
+          </tr>
+          <tr>
+            <td>Skill</td>
+            <td>Craft: Explosives, TN 15</td>
+          </tr>
+          <tr>
+            <td>Craft Time</td>
+            <td>1 day</td>
+          </tr>
+          <tr>
+            <td>Material Cost &amp; Requirements</td>
+            <td>10 Bamboo Bombs</td>
+          </tr>
+          <tr>
+            <td>Produces</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Raises</td>
+            <td>1 Raise: decrease the craft time by 2 hours.</td>
+          </tr>
+          <tr>
+            <td>Use</td>
+            <td>
+              <ul>
+                <li>A superior must approve the use.</li>
+                <li>The timed fuse can be a maximum of 2 minutes.</li>
+                <li>All people in a 60x60 ft template take 10k10 damage and are <a href="./conditional_effects.html#stunned">Stunned</a>. Structures in the template are fully destroyed.</li>
+                <li>In a <a href="#traps">Damage Trap</a>: decrease the craft TN by 5 and the craft time by 40 minutes. The damage becomes 10k10 plus Stunned. The template becomes 60x60 ft and Raises cannot change it.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <h2>Poisons</h2>
       <p>Honorable samurai do not use poison. Criminals, assassins, and ninja use it to disable or kill a target without risk to themselves. Generals, duelists, and important courtiers are frequent targets.</p>
