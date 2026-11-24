@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Shop</title>
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/shop.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar"></nav>
+    </header>
+    <main>
+      <h1>Shop</h1>
+      <p id="shop-error"></p>
+      <form id="shop-form">
+        <fieldset>
+          <legend>Place</legend>
+          <label for="shop-clan">Clan</label>
+          <select id="shop-clan"></select>
+          <label for="shop-settlement">Settlement</label>
+          <select id="shop-settlement"></select>
+          <label for="shop-settlement-type">Settlement type</label>
+          <select id="shop-settlement-type"></select>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your money</legend>
+          <label for="shop-money-koku">Koku</label> <input type="number" id="shop-money-koku" value="0" min="0" step="1" /> <label for="shop-money-bu">Bu</label> <input type="number" id="shop-money-bu" value="0" min="0" step="1" /> <label for="shop-money-zeni">Zeni</label> <input type="number" id="shop-money-zeni" value="0" min="0" step="1" />
+        </fieldset>
+
+        <button type="submit">Update</button>
+
+        <section id="shop-summary" aria-live="polite">
+          <h2>Summary</h2>
+          <dl>
+            <dt>Total cost</dt>
+            <dd id="shop-total"></dd>
+            <dt>Money you have</dt>
+            <dd id="shop-have"></dd>
+            <dt>Remaining</dt>
+            <dd id="shop-remaining"></dd>
+          </dl>
+        </section>
+
+        <table id="shop-table">
+          <caption>
+            Items. Grey items are not for sale here.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Koku</th>
+              <th scope="col">Bu</th>
+              <th scope="col">Zeni</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">High quality</th>
+            </tr>
+          </thead>
+          <tbody id="shop-body"></tbody>
+        </table>
+
+        <section>
+          <h2>Chosen items</h2>
+          <label for="shop-purchase-list">Your list</label>
+          <textarea id="shop-purchase-list" readonly></textarea>
+        </section>
+
+        <section>
+          <h2>Sell items</h2>
+          <p>Write one item on each line. Examples: "2 Kimono", "Sandals x3", "Mask hq".</p>
+          <label for="shop-sell-input">Items to sell</label>
+          <textarea id="shop-sell-input"></textarea>
+          <ul id="shop-sell-output"></ul>
+          <p>Merchants pay: <strong id="shop-sell-total"></strong></p>
+        </section>
+      </form>
+    </main>
+    <footer>
+      <p>Legend of the Five Rings - 10th Century</p>
+    </footer>
+    <script defer type="module" src="../scripts/shop/shop-page.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("nav").load("/l5r10/navbar.html");
+      });
+    </script>
+  </body>
+</html>

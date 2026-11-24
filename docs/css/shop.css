@@ -1,0 +1,51 @@
+#shop-form fieldset {
+  margin-bottom: 16px;
+}
+
+#shop-form label {
+  margin-right: 12px;
+}
+
+#shop-form input[type="number"] {
+  width: 5em;
+}
+
+#shop-summary dd {
+  margin: 0 0 4px 0;
+  font-weight: bold;
+}
+
+#shop-remaining.over-budget {
+  color: #b00020;
+}
+
+#shop-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#shop-table th,
+#shop-table td {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+#shop-table tbody th {
+  background: #f0e6d2;
+}
+
+#shop-table tr.unavailable {
+  color: #999;
+  background: #eee;
+}
+
+#shop-purchase-list,
+#shop-sell-input {
+  width: 100%;
+  min-height: 8em;
+}
+
+#shop-error {
+  color: #b00020;
+}

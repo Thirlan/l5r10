@@ -1,0 +1,56 @@
+{
+  "name": "Shop rules",
+  "summary": "Placeholder rules. They change price and availability from the clan, settlement and settlement type. Tune the numbers here.",
+  "version": 1,
+  "zeniPerBu": 10,
+  "zeniPerKoku": 50,
+  "highQualityMultiplier": 3,
+  "highQualityMinRank": 2,
+  "sellRatio": 0.5,
+  "clans": [
+    { "id": "crab", "name": "Crab" },
+    { "id": "crane", "name": "Crane" },
+    { "id": "dragon", "name": "Dragon" },
+    { "id": "lion", "name": "Lion" },
+    { "id": "phoenix", "name": "Phoenix" },
+    { "id": "scorpion", "name": "Scorpion" },
+    { "id": "unicorn", "name": "Unicorn" }
+  ],
+  "settlements": [
+    { "id": "village", "name": "Village", "rank": 1, "priceMultiplier": 1.2 },
+    { "id": "city", "name": "City", "rank": 2, "priceMultiplier": 1 },
+    { "id": "capital", "name": "Capital", "rank": 3, "priceMultiplier": 1.1 }
+  ],
+  "settlementTypes": [
+    { "id": "normal", "name": "Normal", "rank": 0, "priceMultiplier": 1, "sellRatio": 0.5 },
+    { "id": "merchant", "name": "Merchant", "rank": 1, "priceMultiplier": 0.9, "sellRatio": 0.6 },
+    {
+      "id": "artisan",
+      "name": "Artisan",
+      "rank": 0,
+      "priceMultiplier": 1,
+      "sellRatio": 0.5,
+      "categoryMultipliers": {
+        "Clothing & Accessories": 0.8,
+        "Writing & Books": 0.8,
+        "Personal & Luxury": 0.8
+      }
+    },
+    {
+      "id": "smith",
+      "name": "Smith",
+      "rank": 0,
+      "priceMultiplier": 1,
+      "sellRatio": 0.5,
+      "categoryMultipliers": {
+        "Tools & Craft": 0.8,
+        "Containers & Storage": 0.9
+      }
+    }
+  ],
+  "clanCategoryMultipliers": {
+    "unicorn": { "Mounts & Transport": 0.8, "Travel & Shelter": 0.9 },
+    "crane": { "Personal & Luxury": 0.9, "Clothing & Accessories": 0.9 },
+    "crab": { "Tools & Craft": 0.9 }
+  }
+}
