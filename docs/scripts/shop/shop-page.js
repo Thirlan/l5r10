@@ -149,7 +149,6 @@ function refresh() {
 function renderSummary(totalZeni, purchased) {
   const haveZeni = toZeni(readMoney(), rules);
   document.querySelector("#shop-total").textContent = formatMoney(totalZeni);
-  document.querySelector("#shop-have").textContent = formatMoney(haveZeni);
   const remaining = document.querySelector("#shop-remaining");
   remaining.textContent = formatMoney(haveZeni - totalZeni);
   remaining.classList.toggle("over-budget", haveZeni - totalZeni < 0);
