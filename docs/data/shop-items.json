@@ -1,0 +1,279 @@
+{
+  "name": "Shop items",
+  "summary": "Core book equipment. All prices are in zeni (1 bu = 10 zeni, 1 koku = 50 zeni). zeni is the lowest price. zeniMax is the top of a price range. note explains the price unit.",
+  "version": 1,
+  "categories": [
+    "Containers & Storage",
+    "Food & Drink",
+    "Clothing & Accessories",
+    "Tools & Craft",
+    "Writing & Books",
+    "Games & Leisure",
+    "Travel & Shelter",
+    "Lighting & Fire",
+    "Personal & Luxury",
+    "Mounts & Transport"
+  ],
+  "items": [
+    { "id": "backpack", "name": "Backpack", "category": "Containers & Storage", "zeni": 3 },
+    { "id": "baskets", "name": "Baskets", "category": "Containers & Storage", "zeni": 1, "zeniMax": 5 },
+    { "id": "bottle-empty", "name": "Bottle, Empty", "category": "Containers & Storage", "zeni": 1 },
+    { "id": "bucket", "name": "Bucket", "category": "Containers & Storage", "zeni": 1 },
+    { "id": "chest-wood", "name": "Chest (wood)", "category": "Containers & Storage", "zeni": 20 },
+    {
+      "id": "chest-metal",
+      "name": "Chest (metal)",
+      "category": "Containers & Storage",
+      "zeni": 80,
+      "minSettlement": "city"
+    },
+    { "id": "coin-purse", "name": "Coin Purse", "category": "Containers & Storage", "zeni": 3 },
+    { "id": "furoshiki-sack", "name": "Furoshiki Sack", "category": "Containers & Storage", "zeni": 1 },
+    { "id": "kubi-bukuro", "name": "Kubi Bukuro", "category": "Containers & Storage", "zeni": 2 },
+    { "id": "obi-pouch", "name": "Obi Pouch", "category": "Containers & Storage", "zeni": 25 },
+    { "id": "quiver", "name": "Quiver", "category": "Containers & Storage", "zeni": 20 },
+    { "id": "pot-iron", "name": "Pot, Iron", "category": "Containers & Storage", "zeni": 15 },
+
+    { "id": "bottle-sake", "name": "Bottle of Sake", "category": "Food & Drink", "zeni": 10 },
+    { "id": "bottle-shochu", "name": "Bottle of Shochu", "category": "Food & Drink", "zeni": 20 },
+    { "id": "sake-cup", "name": "Sake Cup", "category": "Food & Drink", "zeni": 10 },
+    { "id": "chopsticks", "name": "Chopsticks", "category": "Food & Drink", "zeni": 1 },
+    {
+      "id": "spices",
+      "name": "Spices",
+      "category": "Food & Drink",
+      "zeni": 10,
+      "zeniMax": 50,
+      "note": "per small bottle"
+    },
+    { "id": "sweets", "name": "Sweets", "category": "Food & Drink", "zeni": 10, "note": "for 4 servings" },
+    {
+      "id": "traveling-rations",
+      "name": "Traveling Rations",
+      "category": "Food & Drink",
+      "zeni": 5,
+      "note": "per meal"
+    },
+    { "id": "tea-set", "name": "Tea Set", "category": "Food & Drink", "zeni": 50 },
+
+    { "id": "cap-courtier", "name": "Cap, Courtier's", "category": "Clothing & Accessories", "zeni": 20 },
+    {
+      "id": "fan-courtier",
+      "name": "Fan, Courtier's",
+      "category": "Clothing & Accessories",
+      "zeni": 40,
+      "note": "and up"
+    },
+    { "id": "hakama", "name": "Hakama", "category": "Clothing & Accessories", "zeni": 75 },
+    { "id": "haori", "name": "Haori", "category": "Clothing & Accessories", "zeni": 25 },
+    { "id": "kataginu", "name": "Kataginu", "category": "Clothing & Accessories", "zeni": 40 },
+    {
+      "id": "kimono",
+      "name": "Kimono",
+      "category": "Clothing & Accessories",
+      "zeni": 10,
+      "note": "and up. Comes with obi"
+    },
+    { "id": "mask", "name": "Mask", "category": "Clothing & Accessories", "zeni": 30 },
+    { "id": "netsuke", "name": "Netsuke", "category": "Clothing & Accessories", "zeni": 10 },
+    { "id": "sandals", "name": "Sandals", "category": "Clothing & Accessories", "zeni": 50 },
+    { "id": "snow-shoes", "name": "Snow Shoes", "category": "Clothing & Accessories", "zeni": 20 },
+    { "id": "traveling-cloak", "name": "Traveling Cloak", "category": "Clothing & Accessories", "zeni": 75 },
+    {
+      "id": "straw-hat",
+      "name": "Wide-brimmed Straw Hat",
+      "category": "Clothing & Accessories",
+      "zeni": 1
+    },
+    { "id": "wig", "name": "Wig", "category": "Clothing & Accessories", "zeni": 10 },
+    {
+      "id": "cloth-silk-bolt",
+      "name": "Cloth, Silk Bolt",
+      "category": "Clothing & Accessories",
+      "zeni": 100,
+      "minSettlement": "city"
+    },
+
+    {
+      "id": "blacksmith-hammer",
+      "name": "Blacksmith's Hammer",
+      "category": "Tools & Craft",
+      "zeni": 30,
+      "minSettlement": "city",
+      "settlementTypes": ["smith", "merchant"]
+    },
+    { "id": "bowyer-kit", "name": "Bowyer's Kit", "category": "Tools & Craft", "zeni": 20 },
+    { "id": "fishing-kit", "name": "Fishing Kit", "category": "Tools & Craft", "zeni": 10 },
+    { "id": "grapple-hook", "name": "Grapple Hook", "category": "Tools & Craft", "zeni": 10 },
+    {
+      "id": "medicine-kit",
+      "name": "Medicine Kit",
+      "category": "Tools & Craft",
+      "zeni": 10,
+      "note": "and up. 10 uses"
+    },
+    { "id": "mortar-pestle", "name": "Mortar & Pestle", "category": "Tools & Craft", "zeni": 20 },
+    {
+      "id": "rope",
+      "name": "Rope",
+      "category": "Tools & Craft",
+      "zeni": 5,
+      "note": "per foot of reasonable quality"
+    },
+    { "id": "shovel", "name": "Shovel", "category": "Tools & Craft", "zeni": 5 },
+    { "id": "small-knife", "name": "Small Knife", "category": "Tools & Craft", "zeni": 5 },
+    {
+      "id": "tattoo-needles",
+      "name": "Tattoo Needles",
+      "category": "Tools & Craft",
+      "zeni": 10,
+      "note": "per set"
+    },
+    { "id": "whetstone", "name": "Whetstone", "category": "Tools & Craft", "zeni": 1 },
+    { "id": "walking-stick", "name": "Walking Stick", "category": "Tools & Craft", "zeni": 1 },
+
+    {
+      "id": "books-scrolls",
+      "name": "Books and Scrolls",
+      "category": "Writing & Books",
+      "zeni": 10,
+      "zeniMax": 100
+    },
+    { "id": "paper", "name": "Paper", "category": "Writing & Books", "zeni": 10, "note": "per 5 sheets" },
+    {
+      "id": "parchment-charcoal",
+      "name": "Parchment & Charcoal",
+      "category": "Writing & Books",
+      "zeni": 3,
+      "note": "for 10 of each"
+    },
+    { "id": "personal-seal", "name": "Personal Seal or Chop", "category": "Writing & Books", "zeni": 40 },
+    {
+      "id": "pillow-book",
+      "name": "Pillow Book",
+      "category": "Writing & Books",
+      "zeni": 3,
+      "zeniMax": 50
+    },
+    { "id": "writing-box", "name": "Writing Box", "category": "Writing & Books", "zeni": 10 },
+
+    { "id": "ball-kemari", "name": "Ball, Kemari", "category": "Games & Leisure", "zeni": 5 },
+    { "id": "dice-cup", "name": "Dice and Dice Cup", "category": "Games & Leisure", "zeni": 25 },
+    { "id": "divination-kit", "name": "Divination Kit", "category": "Games & Leisure", "zeni": 10 },
+    {
+      "id": "games-traveling",
+      "name": "Games, Traveling",
+      "category": "Games & Leisure",
+      "zeni": 10,
+      "note": "and up"
+    },
+    { "id": "kiseru", "name": "Kiseru", "category": "Games & Leisure", "zeni": 3 },
+    { "id": "lucky-cricket", "name": "Lucky Cricket", "category": "Games & Leisure", "zeni": 40 },
+    {
+      "id": "musical-instruments",
+      "name": "Musical Instruments",
+      "category": "Games & Leisure",
+      "zeni": 10,
+      "zeniMax": 50
+    },
+
+    { "id": "blanket", "name": "Blanket", "category": "Travel & Shelter", "zeni": 10 },
+    { "id": "tatami-mat", "name": "Tatami Mat", "category": "Travel & Shelter", "zeni": 2 },
+    { "id": "small-folding-stool", "name": "Small Folding Stool", "category": "Travel & Shelter", "zeni": 30 },
+    { "id": "tent-small", "name": "Tent, Small", "category": "Travel & Shelter", "zeni": 50 },
+    {
+      "id": "tent-yurt",
+      "name": "Tent, Yurt",
+      "category": "Travel & Shelter",
+      "zeni": 500,
+      "clans": ["unicorn"]
+    },
+    {
+      "id": "tent-chomchog",
+      "name": "Tent, Chomchog",
+      "category": "Travel & Shelter",
+      "zeni": 1000,
+      "clans": ["unicorn"]
+    },
+    { "id": "umbrella", "name": "Umbrella", "category": "Travel & Shelter", "zeni": 20 },
+    { "id": "small-back-banner", "name": "Small Back Banner", "category": "Travel & Shelter", "zeni": 50 },
+
+    { "id": "brazier", "name": "Brazier", "category": "Lighting & Fire", "zeni": 10 },
+    { "id": "candle", "name": "Candle", "category": "Lighting & Fire", "zeni": 10 },
+    { "id": "flint-steel", "name": "Flint and Steel", "category": "Lighting & Fire", "zeni": 1 },
+    { "id": "lantern-paper", "name": "Lantern (paper)", "category": "Lighting & Fire", "zeni": 10 },
+    { "id": "lantern-metal", "name": "Lantern (metal)", "category": "Lighting & Fire", "zeni": 40 },
+    {
+      "id": "lantern-oil",
+      "name": "Lantern Oil",
+      "category": "Lighting & Fire",
+      "zeni": 3,
+      "note": "per flask. 2 hours of oil"
+    },
+
+    { "id": "bottle-dye", "name": "Bottle of Bleach/Dye", "category": "Personal & Luxury", "zeni": 10 },
+    { "id": "daisho-stand", "name": "Daisho Stand", "category": "Personal & Luxury", "zeni": 50 },
+    {
+      "id": "finger-of-jade",
+      "name": "Finger of Jade",
+      "category": "Personal & Luxury",
+      "zeni": 50,
+      "minSettlement": "capital",
+      "note": "if it can be found at all"
+    },
+    { "id": "makeup-kit", "name": "Makeup Kit", "category": "Personal & Luxury", "zeni": 50 },
+    {
+      "id": "mirrors",
+      "name": "Mirrors",
+      "category": "Personal & Luxury",
+      "zeni": 30,
+      "zeniMax": 100
+    },
+    {
+      "id": "perfume",
+      "name": "Perfume",
+      "category": "Personal & Luxury",
+      "zeni": 20,
+      "note": "per small bottle"
+    },
+    { "id": "pet", "name": "Pet", "category": "Personal & Luxury", "zeni": 50, "note": "incapable of combat" },
+    { "id": "small-painting", "name": "Small Painting or Sculpture", "category": "Personal & Luxury", "zeni": 30 },
+    {
+      "id": "small-statue",
+      "name": "Small Statue of Fortune/Ancestor",
+      "category": "Personal & Luxury",
+      "zeni": 50
+    },
+    {
+      "id": "war-paint",
+      "name": "War Paint, Vial",
+      "category": "Personal & Luxury",
+      "zeni": 30,
+      "clans": ["crab", "unicorn", "lion"]
+    },
+
+    {
+      "id": "palanquin",
+      "name": "Palanquin",
+      "category": "Mounts & Transport",
+      "zeni": 500,
+      "minSettlement": "city"
+    },
+    { "id": "rokugani-pony", "name": "Rokugani Pony", "category": "Mounts & Transport", "zeni": 1250 },
+    {
+      "id": "gaijin-riding-horse",
+      "name": "Gaijin Riding Horse",
+      "category": "Mounts & Transport",
+      "zeni": 3750,
+      "minSettlement": "city"
+    },
+    {
+      "id": "utaku-war-horse",
+      "name": "Utaku War Horse",
+      "category": "Mounts & Transport",
+      "zeni": 12500,
+      "clans": ["unicorn"],
+      "note": "minimum price"
+    }
+  ]
+}
